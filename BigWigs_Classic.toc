@@ -1,0 +1,13 @@
+## Interface: 50100
+
+## Title: Big Wigs [|cffeda55fClassic|r]
+## Notes: A collection of Big Wigs modules from the Classic era.
+
+## LoadOnDemand: 1
+## Dependencies: BigWigs
+
+## X-Category: Raid
+## X-BigWigs-LoadOn-ZoneId: 696
+
+modules.xml
+

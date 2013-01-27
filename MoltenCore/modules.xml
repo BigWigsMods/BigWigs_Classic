@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+<Script file="Lucifron.lua"/>
+<Script file="BaronGeddon.lua"/>
+<Script file="Gehennas.lua"/>
+<Script file="Magmadar.lua"/>
+<Script file="Majordomo.lua"/>
+<Script file="Ragnaros.lua"/>
+<Script file="Shazzrah.lua"/>
+<Script file="Sulfuron.lua"/>
+<Script file="Garr.lua"/>
+
+</Ui>
+
