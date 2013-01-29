@@ -12,9 +12,9 @@ end
 
 L = BigWigs:NewBossLocale("Ragnaros", "deDE")
 if L then
-	L.knockback_trigger = "^SPÜRT DIE FLAMMEN"
-	L.submerge_trigger = "^KOMMT HERBEI, MEINE DIENER"
-	L.engage_trigger = "^NUN ZU EUCH, INSEKTEN"
+	L.knockback_trigger = "SPÜRT DIE FLAMMEN"
+	L.submerge_trigger = "KOMMT HERBEI, MEINE DIENER"
+	L.engage_trigger = "NUN ZU EUCH, INSEKTEN"
 
 	L.knockback = "Knockback"
 	L.knockback_desc = "Warnt, wenn Ragnaros seinen AoE Knockback wirkt."

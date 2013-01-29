@@ -12,9 +12,9 @@ end
 
 L = BigWigs:NewBossLocale("Ragnaros", "frFR")
 if L then
-	L.knockback_trigger = "^GOÛTEZ "
-	L.submerge_trigger = "^VENEZ, MES SERVITEURS"
-	L.engage_trigger = "^ET MAINTENANT"
+	L.knockback_trigger = "GOÛTEZ "
+	L.submerge_trigger = "VENEZ, MES SERVITEURS"
+	L.engage_trigger = "ET MAINTENANT"
 
 	L.knockback = "Projection de zone"
 	L.knockback_desc = "Préviens de l'arrivée des Projections de zone."

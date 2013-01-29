@@ -12,9 +12,9 @@ end
 
 L = BigWigs:NewBossLocale("Ragnaros", "zhCN")
 if L then
-	L.knockback_trigger = "^尝尝萨弗隆的火焰吧"
-	L.submerge_trigger = "^出现吧，我的奴仆"
-	L.engage_trigger = "^现在轮到你们了"
+	L.knockback_trigger = "尝尝萨弗隆的火焰吧"
+	L.submerge_trigger = "出现吧，我的奴仆"
+	L.engage_trigger = "现在轮到你们了"
 
 	L.knockback = "群体击退警报"
 	L.knockback_desc = "拉格纳罗斯施放群体击退发出警报"

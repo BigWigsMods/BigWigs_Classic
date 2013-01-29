@@ -20,9 +20,9 @@ local handle = nil
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.engage_trigger = "^NOW FOR YOU,"
-	L.knockback_trigger = "^TASTE"
-	L.submerge_trigger = "^COME FORTH,"
+	L.engage_trigger = "NOW FOR YOU,"
+	L.knockback_trigger = "TASTE"
+	L.submerge_trigger = "COME FORTH,"
 
 	L.knockback = "Knockback"
 	L.knockback_desc = "Warn for Wrath of Ragnaros' knockback."
