@@ -49,10 +49,9 @@ function mod:OnBossEnable()
 	self:Yell("Engage", L["engage_trigger"])
 	self:Yell("Knockback", L["knockback_trigger"])
 	self:Yell("Submerge", L["submerge_trigger"])
-	self:Log("UNIT_DIED", "UNIT_DIED")
 
  	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Death("Win", 11502)
+	self:Death("Deaths", 11502, 12143)
 end
 
 local function scheduleEmerge()
@@ -84,14 +83,16 @@ function mod:Submerge()
 	handle = self:ScheduleTimer(scheduleEmerge, 90)
 end
  
-function mod:UNIT_DIED(numericId)
-	if numericId == 12143 then
+function mod:Deaths(args)
+	if args.mobId == 12143 then
 		sonsdead = sonsdead + 1
+		if sonsdead == 8 then
+			self:CancelTimer(handle)
+			self:StopBar(L["emerge_bar"])
+			scheduleEmerge()
+		end
+	else
+		self:Win()
  	end
-	if sonsdead == 8 then
-		self:CancelTimer(handle)
-		self:StopBar(L["emerge_bar"])
-		scheduleEmerge()
-	end
 end
 
