@@ -64,6 +64,7 @@ end
 
 function mod:OnEngage()
 	sonsdead = 0
+	handle = nil
 end
 
 --------------------------------------------------------------------------------
@@ -77,7 +78,7 @@ end
  
 function mod:Submerge()
 	sonsdead = 0 -- reset counter
-	self:SendMessage("BigWigs_StopBar", self, L["knockback_bar"])
+	self:StopBar(L["knockback_bar"])
 	self:Message("submerge", L["submerge_message"], "Attention")
 	self:Bar("emerge", L["emerge_bar"], 90, 17731)
 	handle = self:ScheduleTimer(scheduleEmerge, 90)
@@ -88,8 +89,8 @@ function mod:UNIT_DIED(numericId)
 		sonsdead = sonsdead + 1
  	end
 	if sonsdead == 8 then
-		self:CancelTimer(handle, true)
-		self:SendMessage("BigWigs_StopBar", self, L["emerge_bar"])
+		self:CancelTimer(handle)
+		self:StopBar(L["emerge_bar"])
 		scheduleEmerge()
 	end
 end

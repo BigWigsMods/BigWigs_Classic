@@ -22,7 +22,7 @@ end
 -- Event Handlers
 --
 
-function mod:Pulse(_, spellId, _, _, spellName)
-	self:Bar(spellId, spellName, 18, spellId)
+function mod:Pulse(args)
+	self:Bar(args.spellId, args.spellName, 18, args.spellId)
 end
 

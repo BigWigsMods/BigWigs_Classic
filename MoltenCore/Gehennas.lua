@@ -2,21 +2,10 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Gehennas", 696)
+local mod, CL = BigWigs:NewBoss("Gehennas", 696)
 if not mod then return end
 mod:RegisterEnableMob(12259)
 mod.toggleOptions = {19716, {19717, "FLASHSHAKE"}, "bosskill"}
-
---------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	L.curse_warning = "Curse in 5sec"
-	L.fire_you = "Rain of Fire on YOU!"
-end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -34,16 +23,16 @@ end
 -- Event Handlers
 --
 
-function mod:Curse(_, spellId, _, _, spellName)
-	self:Bar(spellId, spellName, 30, spellId)
-	self:Message(spellId, spellName, "Urgent", spellId)
-	self:DelayedMessage(spellId, 25, L["curse_warning"], "Attention")
+function mod:Curse(args)
+	self:Bar(args.spellId, args.spellName, 30, args.spellId)
+	self:Message(args.spellId, args.spellName, "Urgent", args.spellId)
+	self:DelayedMessage(args.spellId, 25, CL["custom_sec"]:format(args.spellName, 5), "Attention")
 end
 
-function mod:Fire(player, spellId)
-	if UnitIsUnit(player, "player") then
-		self:FlashShake(spellId)
-		self:LocalMessage(spellId, L["fire_you"], "Personal", spellId, "Alarm")
+function mod:Fire(args)
+	if UnitIsUnit(args.destName, "player") then
+		self:FlashShake(args.spellId)
+		self:LocalMessage(args.spellId, CL["you"]:format(args.spellName), "Personal", args.spellId, "Alarm")
 	end
 end
 

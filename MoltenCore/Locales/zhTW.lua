@@ -1,14 +1,6 @@
 
-local L = BigWigs:NewBossLocale("Gehennas", "zhTW")
+local L = BigWigs:NewBossLocale("Lucifron", "zhTW")
 if L then
-	L.curse_warning = "群體詛咒 5 秒後發動！"
-	L.fire_you = "你受到火焰之雨!"
-end
-
-L = BigWigs:NewBossLocale("Lucifron", "zhTW")
-if L then
-	L.curse_warn = "群體詛咒 5 秒後發動！"
-	L.doom_warn = "末日降臨 5 秒後發動！"
 	L.mc_bar = "控制: %s"
 end
 

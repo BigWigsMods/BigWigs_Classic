@@ -1,14 +1,6 @@
 
-local L = BigWigs:NewBossLocale("Gehennas", "frFR")
+local L = BigWigs:NewBossLocale("Lucifron", "frFR")
 if L then
-	L.curse_warning = "5 sec. avant Malédiction de Gehennas !"
-	L.fire_you = "Pluie de feu sur VOUS !"
-end
-
-L = BigWigs:NewBossLocale("Lucifron", "frFR")
-if L then
-	L.curse_warn = "5 sec. avant Malédiction de Lucifron !"
-	L.doom_warn = "5 sec. avant Malédiction imminente !"
 	L.mc_bar = "CM : %s"
 end
 

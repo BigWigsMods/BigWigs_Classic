@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Baron Geddon", 696)
 if not mod then return end
 mod:RegisterEnableMob(12056)
-mod.toggleOptions = {{20475, "FLASHSHAKE", "ICON"}, 19695, 20478, "proximity", "bosskill"}
+mod.toggleOptions = {{20475, "FLASHSHAKE", "ICON", "PROXIMITY"}, 19695, 20478, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -24,26 +24,26 @@ end
 -- Event Handlers
 --
 
-function mod:Bomb(player, spellId, _, _, spellName)
-	if UnitIsUnit(player, "player") then
-		self:LocalMessage(spellId, spellName, "Personal", spellId, "Alarm")
-		self:FlashShake(spellId)
-		self:OpenProximity(9)
-		self:ScheduleTimer(self.CloseProximity, 9, self)
+function mod:Bomb(args)
+	if UnitIsUnit(args.destName, "player") then
+		self:LocalMessage(args.spellId, args.spellName, "Personal", args.spellId, "Alarm")
+		self:FlashShake(args.spellId)
+		self:OpenProximity(9, args.spellId)
+		self:ScheduleTimer(self.CloseProximity, 9, self, args.spellId)
 	else
-		self:TargetMessage(spellId, spellName, player, "Attention", spellId)
+		self:TargetMessage(args.spellId, args.spellName, args.destName, "Attention", args.spellId)
 	end
-	self:PrimaryIcon(spellId, player)
-	self:Bar(spellId, spellName..": "..player, 8, spellId)
+	self:PrimaryIcon(args.spellId, args.destName)
+	self:TargetBar(args.spellId, args.spellName, args.destName, 8, args.spellId)
 end
 
-function mod:Inferno(_, spellId, _, _, spellName)
-	self:Message(spellId, spellName, "Important", spellId, "Long")
-	self:Bar(spellId, spellName, 8, spellId)
+function mod:Inferno(args)
+	self:Message(args.spellId, args.spellName, "Important", args.spellId, "Long")
+	self:Bar(args.spellId, args.spellName, 8, args.spellId)
 end
 
-function mod:Service(_, spellId, _, _, spellName)
-	self:Bar(spellId, spellName, 8, spellId)
-	self:Message(spellId, spellName, "Urgent", spellId)
+function mod:Service(args)
+	self:Bar(args.spellId, args.spellName, 8, args.spellId)
+	self:Message(args.spellId, args.spellName, "Urgent", args.spellId)
 end
 

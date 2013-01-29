@@ -1,14 +1,6 @@
 
-local L = BigWigs:NewBossLocale("Gehennas", "ruRU")
+local L = BigWigs:NewBossLocale("Lucifron", "ruRU")
 if L then
-	L.curse_warning = "5 секунд до проклятия Гееннаса!!"
-	L.fire_you = "Дождь Огня на Вас!!"
-end
-
-L = BigWigs:NewBossLocale("Lucifron", "ruRU")
-if L then
-	L.curse_warn = "5 секунд до проклятия Люцифрона!"
-	L.doom_warn = "5 секунд до надвигающегося рока!"
 	L.mc_bar = "КР: %s"
 end
 

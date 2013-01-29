@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Lucifron", 696)
+local mod, CL = BigWigs:NewBoss("Lucifron", 696)
 if not mod then return end
 mod:RegisterEnableMob(12118)
 mod.toggleOptions = {19702, 19703, {20604, "ICON"}, "bosskill"}
@@ -13,8 +13,6 @@ mod.toggleOptions = {19702, 19703, {20604, "ICON"}, "bosskill"}
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.curse_warn = "Lucifron's Curse in 5sec!"
-	L.doom_warn = "Impending Doom in 5sec"
 	L.mc_bar = "MC: %s"
 end
 L = mod:GetLocale()
@@ -36,21 +34,21 @@ end
 -- Event Handlers
 --
 
-function mod:Doom(_, spellId, _, _, spellName)
-	self:Bar(spellId, spellName, 20, spellId)
-	self:Message(spellId, spellName, "Important", spellId)
-	self:DelayedMessage(spellId, 15, L["doom_warn"], "Urgent")
+function mod:Doom(args)
+	self:Bar(args.spellId, args.spellName, 20, args.spellId)
+	self:Message(args.spellId, args.spellName, "Important", args.spellId)
+	self:DelayedMessage(args.spellId, 15, CL["custom_sec"]:format(args.spellName, 5), "Urgent")
 end
 
-function mod:Curse(_, spellId, _, _, spellName)
-	self:Bar(spellId, spellName, 20, spellId)
-	self:Message(spellId, spellName, "Attention", spellId)
-	self:DelayedMessage(spellId, 15, L["curse_warn"], "Positive")
+function mod:Curse(args)
+	self:Bar(args.spellId, args.spellName, 20, args.spellId)
+	self:Message(args.spellId, args.spellName, "Attention", args.spellId)
+	self:DelayedMessage(args.spellId, 15, CL["custom_sec"]:format(args.spellName, 5), "Positive")
 end
 
-function mod:MindControl(player, spellId, _, _, spellName)
-	self:Bar(spellId, L["mc_bar"]:format(player), 15, spellId)
-	self:TargetMessage(spellId, spellName, player, "Attention", spellId)
-	self:PrimaryIcon(spellId, player)
+function mod:MindControl(args)
+	self:Bar(args.spellId, L["mc_bar"]:format(args.destName), 15, spellId)
+	self:TargetMessage(args.spellId, args.spellName, args.destName, "Attention", args.spellId)
+	self:PrimaryIcon(args.spellId, args.destName)
 end
 

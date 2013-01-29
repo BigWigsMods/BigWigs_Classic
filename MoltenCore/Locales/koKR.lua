@@ -1,14 +1,6 @@
 
-local L = BigWigs:NewBossLocale("Gehennas", "koKR")
+local L = BigWigs:NewBossLocale("Lucifron", "koKR")
 if L then
-	L.curse_warning = "5초후 게헨나스의 저주!"
-	L.fire_you = "당신은 불의 비!"
-end
-
-L = BigWigs:NewBossLocale("Lucifron", "koKR")
-if L then
-	L.curse_warn = "5초후 루시프론의 저주!"
-	L.doom_warn = "5초후 파멸의 예언!"
 	L.mc_bar = "정배: %s"
 end
 

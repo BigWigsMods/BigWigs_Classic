@@ -39,15 +39,15 @@ end
 -- Event Handlers
 --
 
-function mod:MagicReflection(_, spellId, _, _, spellName)
-	self:Bar(20619, spellName, 10, spellId)
-	self:Message(20619, spellName, "Important", spellId)
-	self:DelayedMessage(20619, 25, L["warn"], "Urgent")
+function mod:MagicReflection(args)
+	self:Bar(args.spellId, args.spellName, 10, args.spellId)
+	self:Message(args.spellId, args.spellName, "Important", args.spellId)
+	self:DelayedMessage(args.spellId, 25, L["warn"], "Urgent")
 end
 
-function mod:DamageShield(_, spellId, _, _, spellName)
-	self:Bar(21075, spellName, 10, spellId)
-	self:Message(21075, spellName, "Important", spellId)
-	self:DelayedMessage(21075, 25, L["warn"], "Urgent")
+function mod:DamageShield(args)
+	self:Bar(args.spellId, args.spellName, 10, args.spellId)
+	self:Message(args.spellId, args.spellName, "Important", args.spellId)
+	self:DelayedMessage(args.spellId, 25, L["warn"], "Urgent")
 end
 

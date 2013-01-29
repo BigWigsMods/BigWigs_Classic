@@ -23,13 +23,13 @@ end
 -- Event Handlers
 --
 
-function mod:Fear(_, spellId, _, _, spellName)
-	self:Bar(spellId, spellName, 30, spellId)
-	self:Message(spellId, spellName, "Positive", spellId)
+function mod:Fear(args)
+	self:Bar(args.spellId, args.spellName, 30, args.spellId)
+	self:Message(args.spellId, args.spellName, "Positive", args.spellId)
 end
 
-function mod:Frenzy(_, spellId, _, _, spellName)
-	self:Bar(spellId, spellName, 8, spellId)
-	self:Message(spellId, spellName, "Attention", spellId)
+function mod:Frenzy(args)
+	self:Bar(args.spellId, args.spellName, 8, args.spellId)
+	self:Message(args.spellId, args.spellName, "Attention", args.spellId)
 end
 

@@ -24,12 +24,12 @@ end
 -- Event Handlers
 --
 
-function mod:Blink(_, spellId, _, _, spellName)
-	self:Bar(23138, spellName, 45, spellId)
-	self:Message(23138, spellName, "Important", spellId)
+function mod:Blink(args)
+	self:Bar(args.spellId, args.spellName, 45, args.spellId)
+	self:Message(args.spellId, args.spellName, "Important", args.spellId)
 end
  
-function mod:SelfBuff(_, spellId, _, _, spellName)
-	self:Message(19714, spellName, "Attention", spellId)
+function mod:SelfBuff(args)
+	self:Message(args.spellId, args.spellName, "Attention", args.spellId)
 end
 
