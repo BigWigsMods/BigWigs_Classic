@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Ragnaros", 696)
+local mod, CL = BigWigs:NewBoss("Ragnaros", 696)
 if not mod then return end
 mod:RegisterEnableMob(11502)
 mod.toggleOptions = {"submerge", "emerge", 20566, "bosskill"}
@@ -55,7 +55,7 @@ end
 function mod:OnEngage()
 	sonsdead = 0
 	handle = nil
-	self:Bar("submerge", L["submerge_bar"], 185, 20565)
+	self:Bar("submerge", L["submerge_bar"], 185, "misc_arrowdown")
 	self:Message("submerge", CL["custom_min"]:format(L["submerge"], 3), "Attention")
 	self:DelayedMessage("submerge", 65, CL["custom_min"]:format(L["submerge"], 2), "Attention")
 	self:DelayedMessage("submerge", 125, CL["custom_min"]:format(L["submerge"], 1), "Attention")
@@ -75,24 +75,24 @@ end
 
 local function scheduleEmerge()
 	sonsdead = 10 -- Block this firing again if sons are killed after he emerges
-	mod:Message("emerge", L["emerge_message"], "Attention")
-	mod:Bar("submerge", L["submerge_bar"], 180, 20565)
+	mod:Message("emerge", L["emerge_message"], "Attention", "misc_arrowlup", "Long")
+	mod:Bar("submerge", L["submerge_bar"], 180, "misc_arrowdown")
 	mod:DelayedMessage("submerge", 60, CL["custom_min"]:format(L["submerge"], 2), "Attention")
 	mod:DelayedMessage("submerge", 120, CL["custom_min"]:format(L["submerge"], 1), "Attention")
 	mod:DelayedMessage("submerge", 150, CL["custom_sec"]:format(L["submerge"], 30), "Attention")
-	mod:DelayedMessage("submerge", 170, CL["custom_sec"]:format(L["submerge"], 10), "Urgent")
-	mod:DelayedMessage("submerge", 175, CL["custom_sec"]:format(L["submerge"], 5), "Urgent")
+	mod:DelayedMessage("submerge", 170, CL["custom_sec"]:format(L["submerge"], 10), "Urgent", "Alarm")
+	mod:DelayedMessage("submerge", 175, CL["custom_sec"]:format(L["submerge"], 5), "Urgent", "Alarm")
 end
 
 function mod:Submerge()
 	sonsdead = 0 -- reset counter
 	self:StopBar(L["knockback_bar"])
-	self:Message("submerge", L["submerge_message"], "Attention")
-	self:Bar("emerge", L["emerge_bar"], 90, 17731)
+	self:Message("submerge", L["submerge_message"], "Attention", "misc_arrowdown", "Long")
+	self:Bar("emerge", L["emerge_bar"], 90, "misc_arrowlup")
 	self:DelayedMessage("emerge", 30, CL["custom_sec"]:format(L["emerge"], 60), "Attention")
 	self:DelayedMessage("emerge", 60, CL["custom_sec"]:format(L["emerge"], 30), "Attention")
-	self:DelayedMessage("emerge", 80, CL["custom_sec"]:format(L["emerge"], 10), "Urgent")
-	self:DelayedMessage("emerge", 85, CL["custom_sec"]:format(L["emerge"], 5), "Urgent")
+	self:DelayedMessage("emerge", 80, CL["custom_sec"]:format(L["emerge"], 10), "Urgent", "Alarm")
+	self:DelayedMessage("emerge", 85, CL["custom_sec"]:format(L["emerge"], 5), "Urgent", "Alarm")
 	handle = self:ScheduleTimer(scheduleEmerge, 90)
 end
 
