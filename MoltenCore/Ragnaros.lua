@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Ragnaros", 696)
 if not mod then return end
 mod:RegisterEnableMob(11502)
-mod.toggleOptions = {"submerge", "emerge", "knockback", "bosskill"}
+mod.toggleOptions = {"submerge", "emerge", 20566, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -21,11 +21,8 @@ local handle = nil
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.engage_trigger = "NOW FOR YOU,"
-	L.knockback_trigger = "TASTE"
 	L.submerge_trigger = "COME FORTH,"
 
-	L.knockback = "Knockback"
-	L.knockback_desc = "Warn for Wrath of Ragnaros' knockback."
 	L.knockback_message = "Knockback!"
 	L.knockback_bar = "Knockback"
 
@@ -47,48 +44,71 @@ L = mod:GetLocale()
 
 function mod:OnBossEnable()
 	self:Yell("Engage", L["engage_trigger"])
-	self:Yell("Knockback", L["knockback_trigger"])
 	self:Yell("Submerge", L["submerge_trigger"])
+
+	self:Log("SPELL_CAST_SUCCESS", "Knockback", 20566)
 
  	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Deaths", 11502, 12143)
 end
 
-local function scheduleEmerge()
-	sonsdead = 0 -- reset counter
-	mod:SendMessage("BigWigs_StopBar", self, L["emerge_bar"])
-	mod:Message("emerge", L["emerge_message"], "Attention")
-	mod:Bar("submerge", L["submerge_bar"], 180, 20565)
-end
-
 function mod:OnEngage()
 	sonsdead = 0
 	handle = nil
+	self:Bar("submerge", L["submerge_bar"], 185, 20565)
+	self:Message("submerge", CL["custom_min"]:format(L["submerge"], 3), "Attention")
+	self:DelayedMessage("submerge", 65, CL["custom_min"]:format(L["submerge"], 2), "Attention")
+	self:DelayedMessage("submerge", 125, CL["custom_min"]:format(L["submerge"], 1), "Attention")
+	self:DelayedMessage("submerge", 155, CL["custom_sec"]:format(L["submerge"], 30), "Attention")
+	self:DelayedMessage("submerge", 175, CL["custom_sec"]:format(L["submerge"], 10), "Urgent")
+	self:DelayedMessage("submerge", 180, CL["custom_sec"]:format(L["submerge"], 5), "Urgent")
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Knockback()
-	self:Message("knockback", L["knockback_message"], "Important", 20566)
-	self:Bar("knockback", L["knockback_bar"], 28, 20566)
+function mod:Knockback(args)
+	self:Message(args.spellId, L["knockback_message"], "Important", args.spellId)
+	self:Bar(args.spellId, L["knockback_bar"], 28, args.spellId)
 end
- 
+
+local function scheduleEmerge()
+	sonsdead = 10 -- Block this firing again if sons are killed after he emerges
+	mod:Message("emerge", L["emerge_message"], "Attention")
+	mod:Bar("submerge", L["submerge_bar"], 180, 20565)
+	mod:DelayedMessage("submerge", 60, CL["custom_min"]:format(L["submerge"], 2), "Attention")
+	mod:DelayedMessage("submerge", 120, CL["custom_min"]:format(L["submerge"], 1), "Attention")
+	mod:DelayedMessage("submerge", 150, CL["custom_sec"]:format(L["submerge"], 30), "Attention")
+	mod:DelayedMessage("submerge", 170, CL["custom_sec"]:format(L["submerge"], 10), "Urgent")
+	mod:DelayedMessage("submerge", 175, CL["custom_sec"]:format(L["submerge"], 5), "Urgent")
+end
+
 function mod:Submerge()
 	sonsdead = 0 -- reset counter
 	self:StopBar(L["knockback_bar"])
 	self:Message("submerge", L["submerge_message"], "Attention")
 	self:Bar("emerge", L["emerge_bar"], 90, 17731)
+	self:DelayedMessage("emerge", 30, CL["custom_sec"]:format(L["emerge"], 60), "Attention")
+	self:DelayedMessage("emerge", 60, CL["custom_sec"]:format(L["emerge"], 30), "Attention")
+	self:DelayedMessage("emerge", 80, CL["custom_sec"]:format(L["emerge"], 10), "Urgent")
+	self:DelayedMessage("emerge", 85, CL["custom_sec"]:format(L["emerge"], 5), "Urgent")
 	handle = self:ScheduleTimer(scheduleEmerge, 90)
 end
- 
+
 function mod:Deaths(args)
 	if args.mobId == 12143 then
 		sonsdead = sonsdead + 1
+		if sonsdead < 9 then
+			self:Message("emerge", CL["add_killed"]:format(sonsdead, 8), "Positive")
+		end
 		if sonsdead == 8 then
 			self:CancelTimer(handle)
 			self:StopBar(L["emerge_bar"])
+			self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 60))
+			self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 30))
+			self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 10))
+			self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 5))
 			scheduleEmerge()
 		end
 	else

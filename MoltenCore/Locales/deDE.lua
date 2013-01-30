@@ -7,17 +7,14 @@ end
 L = BigWigs:NewBossLocale("Majordomo Executus", "deDE")
 if L then
 	L.disabletrigger = "Haltet ein, Sterbliche"
-	L.warn = "Magie in 5 sek!"
+	--L.power_next = "Next Power"
 end
 
 L = BigWigs:NewBossLocale("Ragnaros", "deDE")
 if L then
-	L.knockback_trigger = "SPÜRT DIE FLAMMEN"
 	L.submerge_trigger = "KOMMT HERBEI, MEINE DIENER"
 	L.engage_trigger = "NUN ZU EUCH, INSEKTEN"
 
-	L.knockback = "Knockback"
-	L.knockback_desc = "Warnt, wenn Ragnaros seinen AoE Knockback wirkt."
 	L.knockback_message = "Knockback!"
 	L.knockback_bar = "Knockback"
 

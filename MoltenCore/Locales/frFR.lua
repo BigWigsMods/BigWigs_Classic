@@ -7,17 +7,14 @@ end
 L = BigWigs:NewBossLocale("Majordomo Executus", "frFR")
 if L then
 	L.disabletrigger = "Impossible ! Arrêtez votre attaque, mortels... Je me rends ! Je me rends !"
-	L.warn = "5 sec. avant Bouclier/Renvoi !"
+	--L.power_next = "Next Power"
 end
 
 L = BigWigs:NewBossLocale("Ragnaros", "frFR")
 if L then
-	L.knockback_trigger = "GOÛTEZ "
 	L.submerge_trigger = "VENEZ, MES SERVITEURS"
 	L.engage_trigger = "ET MAINTENANT"
 
-	L.knockback = "Projection de zone"
-	L.knockback_desc = "Préviens de l'arrivée des Projections de zone."
 	L.knockback_message = "Projection de zone !"
 	L.knockback_bar = "Projection de zone"
 

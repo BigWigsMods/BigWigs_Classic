@@ -7,17 +7,14 @@ end
 L = BigWigs:NewBossLocale("Majordomo Executus", "koKR")
 if L then
 	L.disabletrigger = "이럴 수가! 그만! 제발 그만! 내가 졌다! 내가 졌어!"
-	L.warn = "5초후 버프!"
+	--L.power_next = "Next Power"
 end
 
 L = BigWigs:NewBossLocale("Ragnaros", "koKR")
 if L then
-	L.knockback_trigger = "설퍼론의 유황"
 	L.submerge_trigger = "나의 종들아"
 	L.engage_trigger = "이제 너희"
 
-	L.knockback = "튕겨냄 경고"
-	L.knockback_desc = "라그나로스의 튕겨냄 경고"
 	L.knockback_message = "광역 튕겨냄!"
 	L.knockback_bar = "광역 튕겨냄"
 

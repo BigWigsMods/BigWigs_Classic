@@ -7,17 +7,14 @@ end
 L = BigWigs:NewBossLocale("Majordomo Executus", "zhTW")
 if L then
 	L.disabletrigger = "不……不可能！等一下……我投降！我投降！"
-	L.warn = "5秒後施放效果！"
+	--L.power_next = "Next Power"
 end
 
 L = BigWigs:NewBossLocale("Ragnaros", "zhTW")
 if L then
-	L.knockback_trigger = "感受薩弗隆的烈焰吧！"
 	L.submerge_trigger = "出現吧，我的奴僕"
 	L.engage_trigger = "現在輪到你們了"
 
-	L.knockback = "群體擊退警報"
-	L.knockback_desc = "當拉格納羅斯發動擊退技能時發出警報"
 	L.knockback_message = "群體擊退！"
 	L.knockback_bar = "群體擊退"
 

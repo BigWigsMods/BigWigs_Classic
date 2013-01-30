@@ -7,17 +7,14 @@ end
 L = BigWigs:NewBossLocale("Majordomo Executus", "ruRU")
 if L then
 	L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
-	L.warn = "Сила Мажордомо увеличится через 5 секунд!"
+	--L.power_next = "Next Power"
 end
 
 L = BigWigs:NewBossLocale("Ragnaros", "ruRU")
 if L then
-	L.knockback_trigger = "ИСПЫТАЙТЕ"
 	L.submerge_trigger = "ПРИБЫВАЙТЕ ЕЩЕ"
 	L.engage_trigger = "Тогда получите ещё!"
 
-	L.knockback = "Сбивание с ног"
-	L.knockback_desc = "Предупреждать о сбивании с ног"
 	L.knockback_message = "Сбивание с ног!"
 	L.knockback_bar = "Массовое cбивание с ног"
 

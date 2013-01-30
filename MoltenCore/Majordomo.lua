@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Majordomo Executus", 696)
+local mod, CL = BigWigs:NewBoss("Majordomo Executus", 696)
 if not mod then return end
 mod:RegisterEnableMob(12018, 11663, 11664)
 mod.toggleOptions = {20619, 21075, "bosskill"}
@@ -14,7 +14,7 @@ mod.toggleOptions = {20619, 21075, "bosskill"}
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
-	L.warn = "5 seconds until powers!"
+	L.power_next = "Next Power"
 end
 L = mod:GetLocale()
 
@@ -42,12 +42,14 @@ end
 function mod:MagicReflection(args)
 	self:Bar(args.spellId, args.spellName, 10, args.spellId)
 	self:Message(args.spellId, args.spellName, "Important", args.spellId)
-	self:DelayedMessage(args.spellId, 25, L["warn"], "Urgent")
+	self:Bar(args.spellId, L["power_next"], 30, "ability_warlock_improvedsoulleech")
+	self:DelayedMessage(args.spellId, 25, CL["custom_sec"]:format(L["power_next"], 5), "Urgent")
 end
 
 function mod:DamageShield(args)
 	self:Bar(args.spellId, args.spellName, 10, args.spellId)
 	self:Message(args.spellId, args.spellName, "Important", args.spellId)
-	self:DelayedMessage(args.spellId, 25, L["warn"], "Urgent")
+	self:Bar(args.spellId, L["power_next"], 30, "ability_warlock_improvedsoulleech")
+	self:DelayedMessage(args.spellId, 25, CL["custom_sec"]:format(L["power_next"], 5), "Urgent")
 end
 

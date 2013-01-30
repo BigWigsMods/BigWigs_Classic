@@ -7,17 +7,14 @@ end
 L = BigWigs:NewBossLocale("Majordomo Executus", "itIT")
 if L then
 	--L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
-	--L.warn = "5 seconds until powers!"
+	--L.power_next = "Next Power"
 end
 
 L = BigWigs:NewBossLocale("Ragnaros", "itIT")
 if L then
 	--L.engage_trigger = "NOW FOR YOU,"
-	--L.knockback_trigger = "TASTE"
 	--L.submerge_trigger = "COME FORTH,"
 
-	--L.knockback = "Knockback"
-	--L.knockback_desc = "Warn for Wrath of Ragnaros' knockback."
 	--L.knockback_message = "Knockback!"
 	--L.knockback_bar = "Knockback"
 
