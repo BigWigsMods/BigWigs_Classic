@@ -47,7 +47,7 @@ function mod:Curse(args)
 end
 
 function mod:MindControl(args)
-	self:Bar(args.spellId, L["mc_bar"]:format(args.destName), 15, spellId)
+	self:Bar(args.spellId, L["mc_bar"]:format(args.destName), 15, args.spellId)
 	self:TargetMessage(args.spellId, args.spellName, args.destName, "Attention", args.spellId)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
