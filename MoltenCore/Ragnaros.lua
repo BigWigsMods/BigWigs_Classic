@@ -1,4 +1,4 @@
-﻿--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Module declaration
 --
 
@@ -49,7 +49,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Knockback", 20566)
 
  	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Death("Deaths", 11502, 12143)
+	self:Death("Win", 11502)
+	self:Death("SonDeaths", 12143)
 end
 
 function mod:OnEngage()
@@ -96,23 +97,19 @@ function mod:Submerge()
 	handle = self:ScheduleTimer(scheduleEmerge, 90)
 end
 
-function mod:Deaths(args)
-	if args.mobId == 12143 then
-		sonsdead = sonsdead + 1
-		if sonsdead < 9 then
-			self:Message("emerge", CL["add_killed"]:format(sonsdead, 8), "Positive")
-		end
-		if sonsdead == 8 then
-			self:CancelTimer(handle)
-			self:StopBar(L["emerge_bar"])
-			self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 60))
-			self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 30))
-			self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 10))
-			self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 5))
-			scheduleEmerge()
-		end
-	else
-		self:Win()
- 	end
+function mod:SonDeaths()
+	sonsdead = sonsdead + 1
+	if sonsdead < 9 then
+		self:Message("emerge", CL["add_killed"]:format(sonsdead, 8), "Positive")
+	end
+	if sonsdead == 8 then
+		self:CancelTimer(handle)
+		self:StopBar(L["emerge_bar"])
+		self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 60))
+		self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 30))
+		self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 10))
+		self:CancelDelayedMessage(CL["custom_sec"]:format(L["emerge"], 5))
+		scheduleEmerge()
+	end
 end
 
