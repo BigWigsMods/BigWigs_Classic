@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Baron Geddon", 696)
 if not mod then return end
 mod:RegisterEnableMob(12056)
-mod.toggleOptions = {{20475, "FLASHSHAKE", "ICON", "PROXIMITY"}, 19695, 20478, "bosskill"}
+mod.toggleOptions = {{20475, "FLASH", "ICON", "PROXIMITY"}, 19695, 20478, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -27,7 +27,7 @@ end
 function mod:Bomb(args)
 	if UnitIsUnit(args.destName, "player") then
 		self:LocalMessage(args.spellId, args.spellName, "Personal", args.spellId, "Alarm")
-		self:FlashShake(args.spellId)
+		self:Flash(args.spellId)
 		self:OpenProximity(9, args.spellId)
 		self:ScheduleTimer(self.CloseProximity, 9, self, args.spellId)
 	else

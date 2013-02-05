@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Gehennas", 696)
 if not mod then return end
 mod:RegisterEnableMob(12259)
-mod.toggleOptions = {19716, {19717, "FLASHSHAKE"}, "bosskill"}
+mod.toggleOptions = {19716, {19717, "FLASH"}, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -31,7 +31,7 @@ end
 
 function mod:Fire(args)
 	if UnitIsUnit(args.destName, "player") then
-		self:FlashShake(args.spellId)
+		self:Flash(args.spellId)
 		self:LocalMessage(args.spellId, CL["you"]:format(args.spellName), "Personal", args.spellId, "Alarm")
 	end
 end
