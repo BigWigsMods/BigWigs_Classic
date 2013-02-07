@@ -19,7 +19,7 @@ function mod:OnBossEnable()
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 12098)
  end
- 
+
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
@@ -28,9 +28,16 @@ function mod:Inspire(args)
 	self:Bar(args.spellId, args.spellName, 10, args.spellId)
 	self:Message(args.spellId, args.spellName, "Attention", args.spellId)
 end
- 
-function mod:SulfuronHeal(args)
-	self:Bar(args.spellId, args.spellName, 2, args.spellId)
-	self:Message(args.spellId, args.spellName, "Important", args.spellId)
+
+do
+	local prev = 0
+	function mod:SulfuronHeal(args)
+		local t = GetTime()
+		if t - prev > 1 then
+			prev = t
+			self:Bar(args.spellId, args.spellName, 2, args.spellId)
+			self:Message(args.spellId, args.spellName, "Important", args.spellId)
+		end
+	end
 end
 
