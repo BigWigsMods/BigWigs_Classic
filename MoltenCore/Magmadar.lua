@@ -24,12 +24,12 @@ end
 --
 
 function mod:Fear(args)
-	self:Bar(args.spellId, args.spellName, 30, args.spellId)
-	self:Message(args.spellId, args.spellName, "Positive", args.spellId)
+	self:Bar(args.spellId, 30)
+	self:Message(args.spellId, "Positive")
 end
 
 function mod:Frenzy(args)
-	self:Bar(args.spellId, args.spellName, 8, args.spellId)
-	self:Message(args.spellId, args.spellName, "Attention", args.spellId)
+	self:Bar(args.spellId, 8)
+	self:Message(args.spellId, "Attention", "Info")
 end
 

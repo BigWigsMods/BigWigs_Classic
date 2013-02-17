@@ -24,15 +24,15 @@ end
 --
 
 function mod:Curse(args)
-	self:Bar(args.spellId, args.spellName, 30, args.spellId)
-	self:Message(args.spellId, args.spellName, "Urgent", args.spellId)
-	self:DelayedMessage(args.spellId, 25, CL["custom_sec"]:format(args.spellName, 5), "Attention")
+	self:Bar(args.spellId, 30)
+	self:Message(args.spellId, "Urgent")
+	self:DelayedMessage(args.spellId, 25, "Attention", nil, CL.custom_sec:format(args.spellName, 5))
 end
 
 function mod:Fire(args)
 	if UnitIsUnit(args.destName, "player") then
 		self:Flash(args.spellId)
-		self:LocalMessage(args.spellId, CL["you"]:format(args.spellName), "Personal", args.spellId, "Alarm")
+		self:LocalMessage(args.spellId, "Personal", "Alarm", CL.you:format(args.spellName))
 	end
 end
 

@@ -28,7 +28,7 @@ function mod:OnBossEnable()
 
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Yell("Win", L["disabletrigger"])
+	self:Yell("Win", L.disabletrigger)
 end
 
 function mod:VerifyEnable(unit)
@@ -40,16 +40,16 @@ end
 --
 
 function mod:MagicReflection(args)
-	self:Bar(args.spellId, args.spellName, 10, args.spellId)
-	self:Message(args.spellId, args.spellName, "Important", args.spellId)
-	self:Bar(args.spellId, L["power_next"], 30, "ability_warlock_improvedsoulleech")
-	self:DelayedMessage(args.spellId, 25, CL["custom_sec"]:format(L["power_next"], 5), "Urgent")
+	self:Bar(args.spellId, 10)
+	self:Message(args.spellId, "Important", "Info")
+	self:Bar(args.spellId, 30, L.power_next, "ability_warlock_improvedsoulleech")
+	self:DelayedMessage(args.spellId, 25, "Urgent", nil, CL.custom_sec:format(L.power_next, 5))
 end
 
 function mod:DamageShield(args)
-	self:Bar(args.spellId, args.spellName, 10, args.spellId)
-	self:Message(args.spellId, args.spellName, "Important", args.spellId)
-	self:Bar(args.spellId, L["power_next"], 30, "ability_warlock_improvedsoulleech")
-	self:DelayedMessage(args.spellId, 25, CL["custom_sec"]:format(L["power_next"], 5), "Urgent")
+	self:Bar(args.spellId, 10)
+	self:Message(args.spellId, "Important", "Info")
+	self:Bar(args.spellId, 30, L.power_next, "ability_warlock_improvedsoulleech")
+	self:DelayedMessage(args.spellId, 25, "Urgent", nil, CL.custom_sec:format(L.power_next, 5))
 end
 

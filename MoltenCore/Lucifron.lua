@@ -35,20 +35,20 @@ end
 --
 
 function mod:Doom(args)
-	self:Bar(args.spellId, args.spellName, 20, args.spellId)
-	self:Message(args.spellId, args.spellName, "Important", args.spellId)
-	self:DelayedMessage(args.spellId, 15, CL["custom_sec"]:format(args.spellName, 5), "Urgent")
+	self:Bar(args.spellId, 20)
+	self:Message(args.spellId, "Important")
+	self:DelayedMessage(args.spellId, 15, "Urgent", nil, CL.custom_sec:format(args.spellName, 5))
 end
 
 function mod:Curse(args)
-	self:Bar(args.spellId, args.spellName, 20, args.spellId)
-	self:Message(args.spellId, args.spellName, "Attention", args.spellId)
-	self:DelayedMessage(args.spellId, 15, CL["custom_sec"]:format(args.spellName, 5), "Positive")
+	self:Bar(args.spellId, 20)
+	self:Message(args.spellId, "Attention")
+	self:DelayedMessage(args.spellId, 15, "Positive", nil, CL.custom_sec:format(args.spellName, 5))
 end
 
 function mod:MindControl(args)
-	self:Bar(args.spellId, L["mc_bar"]:format(args.destName), 15, args.spellId)
-	self:TargetMessage(args.spellId, args.spellName, args.destName, "Attention", args.spellId)
+	self:Bar(args.spellId, 15, L.mc_bar:format(args.destName))
+	self:TargetMessage(args.spellId, args.destName, "Attention")
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 

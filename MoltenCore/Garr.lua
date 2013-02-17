@@ -23,6 +23,6 @@ end
 --
 
 function mod:Pulse(args)
-	self:Bar(args.spellId, args.spellName, 18, args.spellId)
+	self:Bar(args.spellId, 18)
 end
 

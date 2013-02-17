@@ -25,8 +25,8 @@ function mod:OnBossEnable()
 --
 
 function mod:Inspire(args)
-	self:Bar(args.spellId, args.spellName, 10, args.spellId)
-	self:Message(args.spellId, args.spellName, "Attention", args.spellId)
+	self:Bar(args.spellId, 10)
+	self:Message(args.spellId, "Attention")
 end
 
 do
@@ -35,8 +35,8 @@ do
 		local t = GetTime()
 		if t - prev > 1 then
 			prev = t
-			self:Bar(args.spellId, args.spellName, 2, args.spellId)
-			self:Message(args.spellId, args.spellName, "Important", args.spellId)
+			self:Bar(args.spellId, 2)
+			self:Message(args.spellId, "Important")
 		end
 	end
 end

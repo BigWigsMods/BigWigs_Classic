@@ -25,11 +25,11 @@ end
 --
 
 function mod:Blink(args)
-	self:Bar(args.spellId, args.spellName, 45, args.spellId)
-	self:Message(args.spellId, args.spellName, "Important", args.spellId)
+	self:Bar(args.spellId, 45)
+	self:Message(args.spellId, "Important")
 end
 
 function mod:SelfBuff(args)
-	self:Message(args.spellId, args.spellName, "Attention", args.spellId)
+	self:Message(args.spellId, "Attention", "Alarm")
 end
 

@@ -26,24 +26,23 @@ end
 
 function mod:Bomb(args)
 	if UnitIsUnit(args.destName, "player") then
-		self:LocalMessage(args.spellId, args.spellName, "Personal", args.spellId, "Alarm")
 		self:Flash(args.spellId)
 		self:OpenProximity(9, args.spellId)
-		self:ScheduleTimer(self.CloseProximity, 9, self, args.spellId)
+		self:ScheduleTimer("CloseProximity", 8.5, args.spellId)
 	else
-		self:TargetMessage(args.spellId, args.spellName, args.destName, "Attention", args.spellId)
+		self:TargetMessage(args.spellId, args.destName, "Personal", "Alarm")
 	end
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetBar(args.spellId, args.spellName, args.destName, 8, args.spellId)
+	self:TargetBar(args.spellId, 8, args.destName)
 end
 
 function mod:Inferno(args)
-	self:Message(args.spellId, args.spellName, "Important", args.spellId, "Long")
-	self:Bar(args.spellId, args.spellName, 8, args.spellId)
+	self:Message(args.spellId, "Important", "Long")
+	self:Bar(args.spellId, 8)
 end
 
 function mod:Service(args)
-	self:Bar(args.spellId, args.spellName, 8, args.spellId)
-	self:Message(args.spellId, args.spellName, "Urgent", args.spellId)
+	self:Bar(args.spellId, 8)
+	self:Message(args.spellId, "Urgent")
 end
 
