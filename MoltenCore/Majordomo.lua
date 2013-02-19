@@ -43,13 +43,13 @@ function mod:MagicReflection(args)
 	self:Bar(args.spellId, 10)
 	self:Message(args.spellId, "Important", "Info")
 	self:Bar(args.spellId, 30, L.power_next, "ability_warlock_improvedsoulleech")
-	self:DelayedMessage(args.spellId, 25, "Urgent", nil, CL.custom_sec:format(L.power_next, 5))
+	self:DelayedMessage(args.spellId, 25, "Urgent", CL.custom_sec:format(L.power_next, 5))
 end
 
 function mod:DamageShield(args)
 	self:Bar(args.spellId, 10)
 	self:Message(args.spellId, "Important", "Info")
 	self:Bar(args.spellId, 30, L.power_next, "ability_warlock_improvedsoulleech")
-	self:DelayedMessage(args.spellId, 25, "Urgent", nil, CL.custom_sec:format(L.power_next, 5))
+	self:DelayedMessage(args.spellId, 25, "Urgent", CL.custom_sec:format(L.power_next, 5))
 end
 

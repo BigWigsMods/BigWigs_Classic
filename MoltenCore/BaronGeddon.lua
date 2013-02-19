@@ -27,7 +27,7 @@ end
 function mod:Bomb(args)
 	if UnitIsUnit(args.destName, "player") then
 		self:Flash(args.spellId)
-		self:OpenProximity(9, args.spellId)
+		self:OpenProximity(args.spellId, 9)
 		self:ScheduleTimer("CloseProximity", 8.5, args.spellId)
 	else
 		self:TargetMessage(args.spellId, args.destName, "Personal", "Alarm")

@@ -26,13 +26,13 @@ end
 function mod:Curse(args)
 	self:Bar(args.spellId, 30)
 	self:Message(args.spellId, "Urgent")
-	self:DelayedMessage(args.spellId, 25, "Attention", nil, CL.custom_sec:format(args.spellName, 5))
+	self:DelayedMessage(args.spellId, 25, "Attention", CL.custom_sec:format(args.spellName, 5))
 end
 
 function mod:Fire(args)
 	if UnitIsUnit(args.destName, "player") then
 		self:Flash(args.spellId)
-		self:LocalMessage(args.spellId, "Personal", "Alarm", CL.you:format(args.spellName))
+		self:Message(args.spellId, "Personal", "Alarm", CL.you:format(args.spellName))
 	end
 end
 

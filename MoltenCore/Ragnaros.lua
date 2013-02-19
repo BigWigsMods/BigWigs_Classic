@@ -58,11 +58,11 @@ function mod:OnEngage()
 	handle = nil
 	self:Bar("submerge", 185, L.submerge_bar, "misc_arrowdown")
 	self:Message("submerge", "Attention", nil, CL.custom_min:format(L.submerge, 3))
-	self:DelayedMessage("submerge", 65, "Attention", nil, CL.custom_min:format(L.submerge, 2))
-	self:DelayedMessage("submerge", 125, "Attention", nil, CL.custom_min:format(L.submerge, 1))
-	self:DelayedMessage("submerge", 155, "Attention", nil, CL.custom_sec:format(L.submerge, 30))
-	self:DelayedMessage("submerge", 175, "Urgent", "Alarm", CL.custom_sec:format(L.submerge, 10))
-	self:DelayedMessage("submerge", 180, "Urgent", "Alarm", CL.custom_sec:format(L.submerge, 5))
+	self:DelayedMessage("submerge", 65, "Attention", CL.custom_min:format(L.submerge, 2))
+	self:DelayedMessage("submerge", 125, "Attention", CL.custom_min:format(L.submerge, 1))
+	self:DelayedMessage("submerge", 155, "Attention", CL.custom_sec:format(L.submerge, 30))
+	self:DelayedMessage("submerge", 175, "Urgent", CL.custom_sec:format(L.submerge, 10), false, "Alarm")
+	self:DelayedMessage("submerge", 180, "Urgent", CL.custom_sec:format(L.submerge, 5), false, "Alarm")
 end
 
 --------------------------------------------------------------------------------
@@ -78,11 +78,11 @@ local function scheduleEmerge()
 	sonsdead = 10 -- Block this firing again if sons are killed after he emerges
 	mod:Message("emerge", "Attention", "Long", L.emerge_message, "misc_arrowlup")
 	mod:Bar("submerge", 180, L.submerge_bar, "misc_arrowdown")
-	mod:DelayedMessage("submerge", 60, "Attention", nil, CL.custom_min:format(L.submerge, 2))
-	mod:DelayedMessage("submerge", 120, "Attention", nil, CL.custom_min:format(L.submerge, 1))
-	mod:DelayedMessage("submerge", 150, "Attention", nil, CL.custom_sec:format(L.submerge, 30))
-	mod:DelayedMessage("submerge", 170, "Urgent", "Alarm", CL.custom_sec:format(L.submerge, 10))
-	mod:DelayedMessage("submerge", 175, "Urgent", "Alarm", CL.custom_sec:format(L.submerge, 5))
+	mod:DelayedMessage("submerge", 60, "Attention", CL.custom_min:format(L.submerge, 2))
+	mod:DelayedMessage("submerge", 120, "Attention", CL.custom_min:format(L.submerge, 1))
+	mod:DelayedMessage("submerge", 150, "Attention", CL.custom_sec:format(L.submerge, 30))
+	mod:DelayedMessage("submerge", 170, "Urgent", CL.custom_sec:format(L.submerge, 10), false, "Alarm")
+	mod:DelayedMessage("submerge", 175, "Urgent", CL.custom_sec:format(L.submerge, 5), false, "Alarm")
 end
 
 function mod:Submerge()
@@ -90,10 +90,10 @@ function mod:Submerge()
 	self:StopBar(L.knockback_bar)
 	self:Message("submerge", "Attention", "Long", L.submerge_message, "misc_arrowdown")
 	self:Bar("emerge", 90, L.emerge_bar, "misc_arrowlup")
-	self:DelayedMessage("emerge", 30, "Attention", nil, CL.custom_sec:format(L.emerge, 60))
-	self:DelayedMessage("emerge", 60, "Attention", nil, CL.custom_sec:format(L.emerge, 30))
-	self:DelayedMessage("emerge", 80, "Urgent", "Alarm", CL.custom_sec:format(L.emerge, 10))
-	self:DelayedMessage("emerge", 85, "Urgent", "Alarm", CL.custom_sec:format(L.emerge, 5))
+	self:DelayedMessage("emerge", 30, "Attention", CL.custom_sec:format(L.emerge, 60))
+	self:DelayedMessage("emerge", 60, "Attention", CL.custom_sec:format(L.emerge, 30))
+	self:DelayedMessage("emerge", 80, "Urgent", CL.custom_sec:format(L.emerge, 10), false, "Alarm")
+	self:DelayedMessage("emerge", 85, "Urgent", CL.custom_sec:format(L.emerge, 5), false, "Alarm")
 	handle = self:ScheduleTimer(scheduleEmerge, 90)
 end
 
