@@ -6,18 +6,10 @@ if L then
 	L.start_soon = "몹 소환 5초전!"
 	L.start_mob = "몹 소환"
 
-	L.mc = "정신 지배"
-	L.mc_desc = "플레이어가 정신 지배 되었을 때 경고"
-	L.mindcontrol_trigger = "자! ([^%s]+), 이제부터 나를 섬겨라!"
-	L.mindcontrol_message = "<<%s>> 정신 지배 되었습니다."
-
 	L.eggs = "알 개수 알림 미사용"
 	L.eggs_desc = "남은 알 개수 알림 미사용"
-	L.egg_message = "%d/30 알을 파괴하였습니다."
+	L.eggs_message = "%d/30 알을 파괴하였습니다."
 
-	L.phase = "단계"
-	L.phase_desc = "단계 1 과 2 알림"
-	L.phase2_trigger = "Razorgore the Untamed's Warming Flames heals Razorgore the Untamed for .*." -- CHECK
 	L.phase2_message = "모든 알이 파괴되었습니다, 서슬송곳니가 풀려납니다." -- CHECK
 end
 
