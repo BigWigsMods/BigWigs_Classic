@@ -13,37 +13,60 @@ if L then
 	L.phase2_message = "已摧毀所有龍蛋"
 end
 
-L = BigWigs:NewBossLocale("Flamegor", "zhTW")
-if L then
-	
-end
-
-L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "zhTW")
-if L then
-	
-end
-
 L = BigWigs:NewBossLocale("Nefarian", "zhTW")
 if L then
-	
-end
+	L.landing_soon_trigger = "幹得好，我的手下。"
+	L.landing_trigger = "燃燒吧！你這個"
+	L.zerg_trigger = "^不可能"
 
-L = BigWigs:NewBossLocale("Firemaw", "zhTW")
-if L then
-	
-end
+	L.triggershamans = "^薩滿，讓我看看"
+	L.triggerdruid = "^德魯伊和你們愚蠢的變形。讓我們看看什麼會發生吧!"
+	L.triggerwarlock = "^術士，不要隨便去玩那些你不理解的法術。看看會發生什麼吧?"
+	L.triggerpriest = "^牧師！如果你要繼續這麼治療的話，那我們來玩點有趣的東西!"
+	L.triggerhunter = "^獵人和你那討厭的豌豆射擊!"
+	L.triggerwarrior = "^戰士，我知道你應該比較抗打!讓我們來見識一下吧!"
+	L.triggerrogue = "^盜賊?不要躲了，面對我吧!"
+	L.triggerpaladin = "^聖騎士……聽說你有無數條命。讓我看看到底是怎麼樣的吧。"
+	L.triggermage = "^還有法師？你應該小心使用你的魔法……"
+	L.triggerdeathknight = "^死亡騎士們…來這。"
+	--L.triggermonk = "Monks,"
 
-L = BigWigs:NewBossLocale("Ebonroc", "zhTW")
-if L then
-	
+	L.landing_soon_warning = "10秒後降落！"
+	L.landing_warning = "奈法利安已降落！"
+	L.zerg_warning = "龍獸出現！"
+	L.fear_warning = "群體恐懼 - 2 秒後發動"
+	L.fear_soon_warning = "群體恐懼 - 5 秒後發動"
+	L.shadowflame_warning = "暗影烈焰發動！"
+	L.classcall_warning = "5 秒後開始點名！"
+
+	L.warnshaman = "薩滿 - 圖騰湧現"
+	L.warndruid = "德魯伊 - 強制貓形態，無法治療和解詛咒"
+	L.warnwarlock = "術士 - 地獄火出現，DPS職業盡快將其消滅"
+	L.warnpriest = "牧師 - 停止治療，靜等 25 秒"
+	L.warnhunter = "獵人 - 遠程武器損壞"
+	L.warnwarrior = "戰士 - 強制狂暴姿態，加大對MT的治療量"
+	L.warnrogue = "盜賊 - 被傳送和麻痺"
+	L.warnpaladin = "聖騎士 - BOSS受到保護祝福，物理攻擊無效"
+	L.warnmage = "法師 - 變形術發動，注意解除"
+	L.warndeathknight = "死亡騎士 - 集體死亡之握"
+
+	L.classcall_bar = "職業點名"
+	L.fear_bar = "可能恐懼"
+
+	L.shadowflame = "暗影烈焰警報"
+	L.shadowflame_desc = "當奈法利安施放暗影烈焰時發出警報"
+
+	L.fear = "恐懼警報"
+	L.fear_desc = "當奈法利安施放群體恐懼時發出警報"
+
+	L.classcall = "職業點名警報"
+	L.classcall_desc = "當奈法利安進行職業點名時發出警報"
+
+	L.otherwarn = "其他警報"
+	L.otherwarn_desc = "降落及龍獸出現時發出警報"
 end
 
 L = BigWigs:NewBossLocale("Chromaggus", "zhTW")
-if L then
-	
-end
-
-L = BigWigs:NewBossLocale("Broodlord Lashlayer", "zhTW")
 if L then
 	
 end
