@@ -20,13 +20,8 @@ if L then
 	L.zerg_trigger = "Unm\195\182glich! Erhebt euch"
 
 	L.triggershamans = "Schamane, zeigt mir was"
-	L.triggerdruid = "Druiden und ihre l\195\164cherliche"
 	L.triggerwarlock = "Hexenmeister, Ihr solltet nicht mit Magie"
-	L.triggerpriest = "Priester! Wenn Ihr weiterhin"
 	L.triggerhunter = "J\195\164ger und ihre l\195\164stigen"
-	L.triggerwarrior = "Krieger, Ich bin mir sicher"
-	L.triggerrogue = "Schurken%? Kommt aus den Schatten"
-	L.triggerpaladin = "Paladine"
 	L.triggermage = "Auch Magier%? Ihr solltet vorsichtiger"
 	L.triggerdeathknight = "Todesritter"
 	--L.triggermonk = "Monks,"
@@ -34,9 +29,6 @@ if L then
 	L.landing_soon_warning = "Nefarian landet in 10 Sekunden!"
 	L.landing_warning = "Nefarian ist gelandet!"
 	L.zerg_warning = "Diener herbeigerufen!"
-	L.fear_warning = "AoE Furcht in 2 Sekunden!"
-	L.fear_soon_warning = "M\195\182gliche AoE Furcht in ~5 sec"
-	L.shadowflame_warning = "Schattenflamme!"
 	L.classcall_warning = "Klassenruf in K\195\188rze!"
 
 	L.warnshaman = "Schamanen - Totems!"
@@ -50,13 +42,6 @@ if L then
 	L.warnmage = "Magier - Verwandlung!"
 
 	L.classcall_bar = "Klassenruf"
-	L.fear_bar = "M\195\182gliche AoE Furcht"
-
-	L.shadowflame = "Schattenflamme"
-	L.shadowflame_desc = "Warnung, wenn Nefarian Schattenflamme wirkt."
-
-	L.fear = "Furcht"
-	L.fear_desc = "Warnung, wenn Nefarian AoE Furcht wirkt."
 
 	L.classcall = "Klassenruf"
 	L.classcall_desc = "Warnung vor Klassenrufen."

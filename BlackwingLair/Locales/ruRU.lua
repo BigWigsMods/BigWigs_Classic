@@ -20,13 +20,8 @@ if L then
 	L.zerg_trigger = "Невозможно!"
 
 	L.triggershamans = "Шаманы! Покажитесь мне!"
-	L.triggerdruid = "Друиды, и ваш глупец!"
 	L.triggerwarlock = "Варлоки, вы должны играть!"
-	L.triggerpriest = "Присты! If you're going to keep"
 	L.triggerhunter = "Охотники и ваше раздражение"
-	L.triggerwarrior = "Войны, Я знаю что вы можете бить сильнее!"
-	L.triggerrogue = "Разбойники%? Перестаньте скрываться"
-	L.triggerpaladin = "Паладины"
 	L.triggermage = "Маги так же%?"
 	L.triggerdeathknight = "Рыцари смерти! Сюда!"
 	--L.triggermonk = "Monks,"
@@ -34,9 +29,6 @@ if L then
 	L.landing_soon_warning = "Нефариан приземлится через 10 секунд!"
 	L.landing_warning = "Нефариан ПРИЗЕМЛЯЕТСЯ!"
 	L.zerg_warning = "НАЧИНАЕТСЯ ЗЕРГ!"
-	L.fear_warning = "СТРАХ ЧЕРЕЗ 2 СЕКУНДЫ!"
-	L.fear_soon_warning = "ВОЗМОЖНО СТРАХ ЧЕРЕЗ 5 СЕКУНД"
-	L.shadowflame_warning = "Появляется теневое пламя!!"
 	L.classcall_warning = "Начинается классовый вызов!"
 
 	L.warnshaman = "Шаманы - ставьте тотемы!"
@@ -50,13 +42,6 @@ if L then
 	L.warnmage = "Маги - используйте превращение!"
 
 	L.classcall_bar = "Классовый вызов"
-	L.fear_bar = "Возможный страх"
-
-	L.shadowflame = "Теневое пламя"
-	L.shadowflame_desc = "Предупреждать о теневом пламени."
-
-	L.fear = "Массовый страх"
-	L.fear_desc = "предупреждать о касте массового страха Нефарианом."
 
 	L.classcall = "Классовый вызов"
 	L.classcall_desc = "Предупреждать о классовом вызове."

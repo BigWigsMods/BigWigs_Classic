@@ -20,13 +20,8 @@ if L then
 	L.zerg_trigger = "말도 안 돼! 일어나라!"
 
 	L.triggershamans = "주술사"
-	L.triggerdruid = "드루이드 녀석, 그 바보"
 	L.triggerwarlock = "흑마법사여, 네가 이해하지도 못하는"
-	L.triggerpriest = "사제야, 그렇게 치유를"
 	L.triggerhunter = "그 장난감"
-	L.triggerwarrior = "전사들이로군, 네가 그보다 더 강하게 내려 칠 수"
-	L.triggerrogue = "도적들인가?"
-	L.triggerpaladin = "성기사여"
 	L.triggermage = "네가 마법사냐?"
 	--L.triggerdeathknight = "Deathknight "
 	--L.triggermonk = "Monks,"
@@ -34,9 +29,6 @@ if L then
 	L.landing_soon_warning = "네파리안이 10초 후 착지합니다!"
 	L.landing_warning = "네파리안이 착지했습니다!"
 	L.zerg_warning = "해골 등장!"
-	L.fear_warning = "2초 후 공포!"
-	L.fear_soon_warning = "약 5초내 공포!"
-	L.shadowflame_warning = "암흑의 불길 주의!"
 	L.classcall_warning = "곧 직업이 지목됩니다!"
 
 	L.warnshaman = "주술사 - 토템 파괴!"
@@ -50,13 +42,6 @@ if L then
 	L.warnmage = "마법사 - 변이!"
 
 	L.classcall_bar = "직업 지목"
-	L.fear_bar = "공포 가능"
-
-	L.shadowflame = "암흑의 불길 경고"
-	L.shadowflame_desc = "암흑의 불길에 대한 경고"
-
-	L.fear = "공포 경고"
-	L.fear_desc = "네파리안이 공포 시전시 경고"
 
 	L.classcall = "직업 지목 경고"
 	L.classcall_desc = "직업 지목에 대한 경고"

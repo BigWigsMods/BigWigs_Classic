@@ -20,13 +20,8 @@ if L then
 	L.zerg_trigger = "C'est impossible ! Relevez%-vous, serviteurs !"
 
 	L.triggershamans = "Chamans, montrez moi"
-	L.triggerdruid = "Les druides et leur stupides"
 	L.triggerwarlock = "Démonistes, vous ne devriez pas jouer"
-	L.triggerpriest = "Prêtres ! Si vous continuez"
 	L.triggerhunter = "Ah, les chasseurs et les stupides"
-	L.triggerwarrior = "Guerriers, je sais que vous pouvez frapper plus fort"
-	L.triggerrogue = "Voleurs, arrêtez de vous cacher"
-	L.triggerpaladin = "Les paladins"
 	L.triggermage = "Les mages aussi"
 	L.triggerdeathknight = "Chevalier de la mort"
 	--L.triggermonk = "Monks,"
@@ -34,9 +29,6 @@ if L then
 	L.landing_soon_warning = "Nefarian atterit dans 10 sec. !"
 	L.landing_warning = "Nefarian atterit !"
 	L.zerg_warning = "Zerg imminent !"
-	L.fear_warning = "Peur dans 2 sec. !"
-	L.fear_soon_warning = "Peur probable dans ~5 sec."
-	L.shadowflame_warning = "Arrivée de la Flamme d'ombre !"
 	L.classcall_warning = "Arrivée de l'appel des classes !"
 
 	L.warnshaman = "Chamans - Totems posés !"
@@ -50,13 +42,6 @@ if L then
 	L.warnmage = "Mages - Arrivée des métamorphoses !"
 
 	L.classcall_bar = "Appel des classes"
-	L.fear_bar = "Peur probable"
-
-	L.shadowflame = "Flamme d'ombre"
-	L.shadowflame_desc = "Préviens de l'arrivée de la Flamme d'ombre."
-
-	L.fear = "Peur"
-	L.fear_desc = "Préviens quand Nefarian incante sa peur de zone."
 
 	L.classcall = "Appel de classe"
 	L.classcall_desc = "Préviens de l'arrivée des appels de classe."

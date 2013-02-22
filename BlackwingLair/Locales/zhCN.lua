@@ -20,13 +20,8 @@ if L then
 	L.zerg_trigger = "^不可能"
 
 	L.triggershamans = "^萨满祭司"
-	L.triggerdruid = "^德鲁伊"
 	L.triggerwarlock = "^术士"
-	L.triggerpriest = "^牧师"
 	L.triggerhunter = "^猎人"
-	L.triggerwarrior = "^战士"
-	L.triggerrogue = "^盗贼"
-	L.triggerpaladin = "^圣骑士"
 	L.triggermage = "^你们也是法师"
 	L.triggerdeathknight = "^死亡骑士"
 	--L.triggermonk = "Monks,"
@@ -34,9 +29,6 @@ if L then
 	L.landing_soon_warning = "奈法利安将在10秒后降落！"
 	L.landing_warning = "奈法利安已降落！"
 	L.zerg_warning = "骨龙群出现！"
-	L.fear_warning = "2秒后发动群体恐惧！"
-	L.fear_soon_warning = "~5秒后可能发动群体恐惧"
-	L.shadowflame_warning = "暗影烈焰发动！牧师给MT加盾！"
 	L.classcall_warning = "职业点名！"
 
 	L.warnshaman = "萨满祭司 - 图腾涌现！"
@@ -51,13 +43,6 @@ if L then
 	L.warndeathknight = "死亡骑士 - 群体死亡之握！"
 
 	L.classcall_bar = "职业点名"
-	L.fear_bar = "可能恐惧"
-
-	L.shadowflame = "暗影烈焰警报"
-	L.shadowflame_desc = "暗影烈焰警报"
-
-	L.fear = "恐惧警报"
-	L.fear_desc = "恐惧警报"
 
 	L.classcall = "职业点名警报"
 	L.classcall_desc = "职业点名警报"
