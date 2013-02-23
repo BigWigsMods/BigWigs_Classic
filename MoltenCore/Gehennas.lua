@@ -30,7 +30,7 @@ function mod:Curse(args)
 end
 
 function mod:Fire(args)
-	if UnitIsUnit(args.destName, "player") then
+	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 		self:Message(args.spellId, "Personal", "Alarm", CL.you:format(args.spellName))
 	end

@@ -51,21 +51,21 @@ end
 L = mod:GetLocale()
 
 local warnpairs = {
-	[L["triggershamans"]] = {L["warnshaman"], true},
-	[L["triggerwarlock"]] = {L["warnwarlock"], true},
-	[L["triggerhunter"]] = {L["warnhunter"], true},
-	[L["triggermage"]] = {L["warnmage"], true},
-	[L["triggerdeathknight"]] = {L["warndeathknight"], true},
-	[L["landing_soon_trigger"]] = {L["landing_soon_warning"]},
-	[L["landing_trigger"]] = {L["landing_warning"]},
-	[L["zerg_trigger"]] = {L["zerg_warning"]},
+	[L.triggershamans] = {L.warnshaman, true},
+	[L.triggerwarlock] = {L.warnwarlock, true},
+	[L.triggerhunter] = {L.warnhunter, true},
+	[L.triggermage] = {L.warnmage, true},
+	[L.triggerdeathknight] = {L.warndeathknight, true},
+	[L.landing_soon_trigger] = {L.landing_soon_warning},
+	[L.landing_trigger] = {L.landing_warning},
+	[L.zerg_trigger] = {L.zerg_warning},
 }
 local warnTable = {
-	[23414] = L["warnrogue"],
-	[23398] = L["warndruid"],
-	[23397] = L["warnwarrior"],
-	[23401] = L["warnpriest"],
-	[23418] = L["warnpaladin"],
+	[23414] = L.warnrogue,
+	[23398] = L.warndruid,
+	[23397] = L.warnwarrior,
+	[23401] = L.warnpriest,
+	[23418] = L.warnpaladin,
 }
 
 --------------------------------------------------------------------------------
@@ -106,23 +106,23 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Bar("classcall", 30, L["classcall_bar"], "Spell_Shadow_Charm")
-			self:DelayedMessage("classcall", 27, "Positive", L["classcall_warning"])
+			self:Bar("classcall", 30, L.classcall_bar, "Spell_Shadow_Charm")
+			self:DelayedMessage("classcall", 27, "Positive", L.classcall_warning)
 			self:Message("classcall", "Important", nil, warnTable[args.spellId], "Spell_Shadow_Charm")
 		end
 	end
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
-	if msg:find(L["landing_soon_trigger"]) then
-		self:Bar("otherwarn", 10, L["landing_warning"], "INV_Misc_Head_Dragon_Black")
+	if msg:find(L.landing_soon_trigger) then
+		self:Bar("otherwarn", 10, L.landing_warning, "INV_Misc_Head_Dragon_Black")
 		return
 	end
 	for i,v in pairs(warnpairs) do
 		if msg:find(i) then
 			if v[2] then
-				self:Bar("classcall", 30, L["classcall_bar"], "Spell_Shadow_Charm")
-				self:DelayedMessage("classcall", 27, "Positive", L["classcall_warning"])
+				self:Bar("classcall", 30, L.classcall_bar, "Spell_Shadow_Charm")
+				self:DelayedMessage("classcall", 27, "Positive", L.classcall_warning)
 				self:Message("classcall", "Important", nil, v[1], "Spell_Shadow_Charm")
 			else
 				self:Message("otherwarn", "Important", nil, v[1], false) end
