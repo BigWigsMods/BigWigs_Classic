@@ -23,8 +23,8 @@ if L then
 	L.triggerwarlock = "흑마법사여, 네가 이해하지도 못하는"
 	L.triggerhunter = "그 장난감"
 	L.triggermage = "네가 마법사냐?"
-	--L.triggerdeathknight = "Deathknight "
-	--L.triggermonk = "Monks,"
+	--L.triggerdeathknight = "Death Knights"
+	--L.triggermonk = "Monks"
 
 	L.landing_soon_warning = "네파리안이 10초 후 착지합니다!"
 	L.landing_warning = "네파리안이 착지했습니다!"
@@ -40,6 +40,8 @@ if L then
 	L.warnrogue = "도적 - 강제 소환!"
 	L.warnpaladin = "성기사 - 강제 보축 사용!"
 	L.warnmage = "마법사 - 변이!"
+	--L.warndeathknight = "Death Knights - Death Grip"
+	--L.warnmonk = "Monks - Stuck Rolling"
 
 	L.classcall_bar = "직업 지목"
 

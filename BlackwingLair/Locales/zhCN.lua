@@ -24,7 +24,7 @@ if L then
 	L.triggerhunter = "^猎人"
 	L.triggermage = "^你们也是法师"
 	L.triggerdeathknight = "^死亡骑士"
-	--L.triggermonk = "Monks,"
+	--L.triggermonk = "Monks"
 
 	L.landing_soon_warning = "奈法利安将在10秒后降落！"
 	L.landing_warning = "奈法利安已降落！"
@@ -41,6 +41,7 @@ if L then
 	L.warnpaladin = "圣骑士 - BOSS受到保护祝福，物理攻击无效！"
 	L.warnmage = "法师 - 变形术发动，注意解除！"
 	L.warndeathknight = "死亡骑士 - 群体死亡之握！"
+	--L.warnmonk = "Monks - Stuck Rolling"
 
 	L.classcall_bar = "职业点名"
 

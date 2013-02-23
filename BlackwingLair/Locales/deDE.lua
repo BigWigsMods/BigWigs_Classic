@@ -24,7 +24,7 @@ if L then
 	L.triggerhunter = "J\195\164ger und ihre l\195\164stigen"
 	L.triggermage = "Auch Magier%? Ihr solltet vorsichtiger"
 	L.triggerdeathknight = "Todesritter"
-	--L.triggermonk = "Monks,"
+	--L.triggermonk = "Monks"
 
 	L.landing_soon_warning = "Nefarian landet in 10 Sekunden!"
 	L.landing_warning = "Nefarian ist gelandet!"
@@ -40,6 +40,8 @@ if L then
 	L.warnrogue = "Schurken - Teleportiert und festgewurzelt!"
 	L.warnpaladin = "Paladine - Segen des Schutzes!"
 	L.warnmage = "Magier - Verwandlung!"
+	--L.warndeathknight = "Death Knights - Death Grip"
+	--L.warnmonk = "Monks - Stuck Rolling"
 
 	L.classcall_bar = "Klassenruf"
 

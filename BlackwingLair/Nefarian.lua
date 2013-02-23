@@ -17,12 +17,12 @@ if L then
 	L.landing_trigger = "BURN! You wretches"
 	L.zerg_trigger = "Impossible! Rise my"
 
-	L.triggershamans = "Shamans, show me"
-	L.triggerwarlock = "Warlocks, you shouldn't be playing"
-	L.triggerhunter = "Hunters and your annoying"
-	L.triggermage = "Mages too%?"
-	L.triggerdeathknight = "Deathknight "
-	L.triggermonk = "Monks,"
+	L.triggershamans = "Shamans"
+	L.triggerwarlock = "Warlocks"
+	L.triggerhunter = "Hunters"
+	L.triggermage = "Mages"
+	L.triggerdeathknight = "Death Knights"
+	L.triggermonk = "Monks"
 
 	L.landing_soon_warning = "Nefarian landing in 10 seconds!"
 	L.landing_warning = "Nefarian is landing!"
@@ -38,7 +38,8 @@ if L then
 	L.warnrogue = "Rogues - Ported and rooted!"
 	L.warnpaladin = "Paladins - Blessing of Protection!"
 	L.warnmage = "Mages - Incoming polymorphs!"
-	L.warndeathknight = "Deathknight - "
+	L.warndeathknight = "Death Knights - Death Grip"
+	L.warnmonk = "Monks - Stuck Rolling"
 
 	L.classcall_bar = "Class call"
 
@@ -56,6 +57,7 @@ local warnpairs = {
 	[L.triggerhunter] = {L.warnhunter, true},
 	[L.triggermage] = {L.warnmage, true},
 	[L.triggerdeathknight] = {L.warndeathknight, true},
+	[L.triggermonk] = {L.warnmonk, true},
 	[L.landing_soon_trigger] = {L.landing_soon_warning},
 	[L.landing_trigger] = {L.landing_warning},
 	[L.zerg_trigger] = {L.zerg_warning},

@@ -24,7 +24,7 @@ if L then
 	L.triggerhunter = "^獵人和你那討厭的豌豆射擊!"
 	L.triggermage = "^還有法師？你應該小心使用你的魔法……"
 	L.triggerdeathknight = "^死亡騎士們…來這。"
-	--L.triggermonk = "Monks,"
+	--L.triggermonk = "Monks"
 
 	L.landing_soon_warning = "10秒後降落！"
 	L.landing_warning = "奈法利安已降落！"
@@ -41,6 +41,7 @@ if L then
 	L.warnpaladin = "聖騎士 - BOSS受到保護祝福，物理攻擊無效"
 	L.warnmage = "法師 - 變形術發動，注意解除"
 	L.warndeathknight = "死亡騎士 - 集體死亡之握"
+	--L.warnmonk = "Monks - Stuck Rolling"
 
 	L.classcall_bar = "職業點名"
 

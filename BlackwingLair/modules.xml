@@ -5,7 +5,7 @@
 <Script file="Ebonroc.lua"/>
 <Script file="Firemaw.lua"/>
 <Script file="Flamegor.lua"/>
-<!--<Script file="Nefarian.lua"/>-->
+<Script file="Nefarian.lua"/>
 <Script file="Vaelastrasz.lua"/>
 <Script file="Broodlord.lua"/>
 <Script file="Razorgore.lua"/>
