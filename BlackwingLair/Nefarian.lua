@@ -127,7 +127,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 				self:DelayedMessage("classcall", 27, "Positive", L.classcall_warning)
 				self:Message("classcall", "Important", nil, v[1], "Spell_Shadow_Charm")
 			else
-				self:Message("otherwarn", "Important", nil, v[1], false) end
+				self:Message("otherwarn", "Important", nil, v[1], false)
 			end
 			return
 		end
