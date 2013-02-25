@@ -17,10 +17,6 @@ function mod:OnBossEnable()
 	self:Death("Win", 13020)
 end
 
-function mod:OnEngage()
-
-end
-
 --------------------------------------------------------------------------------
 -- Event Handlers
 --

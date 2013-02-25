@@ -8,16 +8,6 @@ mod:RegisterEnableMob(14601)
 mod.toggleOptions = {23339, 22539, {23340, "ICON"}, "bosskill"}
 
 --------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	
-end
-L = mod:GetLocale()
-
---------------------------------------------------------------------------------
 -- Initialization
 --
 
@@ -53,12 +43,12 @@ end
 
 function mod:Curse(args)
 	self:TargetMessage(args.spellId, args.destName, "Attention")
-	self:TargetBar(args.spellId, 8, args.destName)
+	self:TargetBar(args.spellId, 8, args.destName, 107905, args.spellId) -- Shadow
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 
 function mod:CurseRemoved(args)
-	self:StopBar(args.spellId, args.destName)
+	self:StopBar(107905, args.destName) -- Shadow
 	self:PrimaryIcon(args.spellId)
 end
 

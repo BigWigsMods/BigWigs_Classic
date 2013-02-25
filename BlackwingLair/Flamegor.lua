@@ -8,16 +8,6 @@ mod:RegisterEnableMob(11981)
 mod.toggleOptions = {23339, 22539, 23342, "bosskill"}
 
 --------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	
-end
-L = mod:GetLocale()
-
---------------------------------------------------------------------------------
 -- Initialization
 --
 

@@ -8,16 +8,6 @@ mod:RegisterEnableMob(12017)
 mod.toggleOptions = {{40220, "ICON"}, "bosskill"}
 
 --------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	
-end
-L = mod:GetLocale()
-
---------------------------------------------------------------------------------
 -- Initialization
 --
 
