@@ -13,7 +13,7 @@ if L then
 	L.phase2_message = "Alle Eier zerst\195\182rt!"
 end
 
-L = BigWigs:NewBossLocale("Nefarian", "deDE")
+L = BigWigs:NewBossLocale("Nefarian ", "deDE")
 if L then
 	L.landing_soon_trigger = "Sehr gut, meine Diener"
 	L.landing_trigger = "BRENNT! Ihr Elenden!"

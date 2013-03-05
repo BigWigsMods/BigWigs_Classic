@@ -13,7 +13,7 @@ if L then
 	L.phase2_message = "所有龙蛋摧毁"
 end
 
-L = BigWigs:NewBossLocale("Nefarian", "zhCN")
+L = BigWigs:NewBossLocale("Nefarian ", "zhCN")
 if L then
 	L.landing_soon_trigger = "干得好，我的手下。"
 	L.landing_trigger = "燃烧吧！你这个"

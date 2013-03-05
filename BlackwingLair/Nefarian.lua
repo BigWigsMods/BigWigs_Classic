@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Nefarian", 755)
+local mod, CL = BigWigs:NewBoss("Nefarian ", 755)
 if not mod then return end
 mod:RegisterEnableMob(11583, 10162) -- Nefarian, Lord Victor Nefarius
 mod.toggleOptions = {22539, 22686, "classcall", "otherwarn", "bosskill"}

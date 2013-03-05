@@ -13,7 +13,7 @@ if L then
 	L.phase2_message = "Все яйца уничтоже, Бритвосметр повержен!"
 end
 
-L = BigWigs:NewBossLocale("Nefarian", "ruRU")
+L = BigWigs:NewBossLocale("Nefarian ", "ruRU")
 if L then
 	L.landing_soon_trigger = "Отличная работа мои миньёны!"
 	L.landing_trigger = "СЖЕЧЬ! Вы обречены!"

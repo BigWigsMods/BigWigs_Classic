@@ -13,7 +13,7 @@ if L then
 	L.phase2_message = "모든 알이 파괴되었습니다, 서슬송곳니가 풀려납니다." -- CHECK
 end
 
-L = BigWigs:NewBossLocale("Nefarian", "koKR")
+L = BigWigs:NewBossLocale("Nefarian ", "koKR")
 if L then
 	L.landing_soon_trigger = "적들의 사기가 떨어지고 있다"
 	L.landing_trigger = "불타라! 활활!"

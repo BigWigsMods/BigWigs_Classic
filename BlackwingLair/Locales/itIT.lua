@@ -4,7 +4,7 @@ if L then
 	
 end
 
-L = BigWigs:NewBossLocale("Nefarian", "itIT")
+L = BigWigs:NewBossLocale("Nefarian ", "itIT")
 if L then
 	
 end

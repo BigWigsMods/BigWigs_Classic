@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ragnaros", 696)
+local mod, CL = BigWigs:NewBoss("Ragnaros ", 696)
 if not mod then return end
 mod:RegisterEnableMob(11502)
 mod.toggleOptions = {"submerge", "emerge", 20566, "bosskill"}

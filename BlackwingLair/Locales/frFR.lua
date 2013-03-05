@@ -13,7 +13,7 @@ if L then
 	L.phase2_message = "Tous les œufs ont été détruits !"
 end
 
-L = BigWigs:NewBossLocale("Nefarian", "frFR")
+L = BigWigs:NewBossLocale("Nefarian ", "frFR")
 if L then
 	L.landing_soon_trigger = "Beau travail"
 	L.landing_trigger = "BRÛLEZ, misérables"
