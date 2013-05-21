@@ -1,4 +1,4 @@
-## Interface: 50200
+## Interface: 50300
 
 ## Title: Big Wigs [|cffeda55fClassic|r]
 ## Notes: A collection of Big Wigs modules from the Classic era.
