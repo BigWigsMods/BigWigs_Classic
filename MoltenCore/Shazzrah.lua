@@ -8,6 +8,17 @@ mod:RegisterEnableMob(12264)
 mod.toggleOptions = {19714, 23138, "bosskill"}
 
 --------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:NewLocale("enUS", true)
+if L then
+	L.bossName = "Shazzrah"
+end
+L = mod:GetLocale()
+mod.displayName = L.bossName
+
+--------------------------------------------------------------------------------
 -- Initialization
 --
 

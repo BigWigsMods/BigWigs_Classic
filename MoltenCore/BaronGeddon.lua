@@ -8,6 +8,17 @@ mod:RegisterEnableMob(12056)
 mod.toggleOptions = {{20475, "FLASH", "ICON", "PROXIMITY"}, 19695, 20478, "bosskill"}
 
 --------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:NewLocale("enUS", true)
+if L then
+	L.bossName = "Baron Geddon"
+end
+L = mod:GetLocale()
+mod.displayName = L.bossName
+
+--------------------------------------------------------------------------------
 -- Initialization
 --
 

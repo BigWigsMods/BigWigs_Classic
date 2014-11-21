@@ -8,6 +8,17 @@ mod:RegisterEnableMob(12098)
 mod.toggleOptions = {19779, 19775, "bosskill"}
 
 --------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:NewLocale("enUS", true)
+if L then
+	L.bossName = "Sulfuron Harbinger"
+end
+L = mod:GetLocale()
+mod.displayName = L.bossName
+
+--------------------------------------------------------------------------------
 -- Initialization
 --
 

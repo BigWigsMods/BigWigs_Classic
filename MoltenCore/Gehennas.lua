@@ -8,6 +8,17 @@ mod:RegisterEnableMob(12259)
 mod.toggleOptions = {19716, {19717, "FLASH"}, "bosskill"}
 
 --------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:NewLocale("enUS", true)
+if L then
+	L.bossName = "Gehennas"
+end
+L = mod:GetLocale()
+mod.displayName = L.bossName
+
+--------------------------------------------------------------------------------
 -- Initialization
 --
 
