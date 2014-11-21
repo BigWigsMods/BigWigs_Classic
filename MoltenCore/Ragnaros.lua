@@ -115,10 +115,10 @@ function mod:SonDeaths()
 end
 
 function mod:UNIT_TARGETABLE_CHANGED(_, unit)
-	if not UnitCanAttack("player", unit) then
-		self:Submerge()
-	else
+	if UnitCanAttack("player", unit) then
 		self:Emerge()
+	else
+		self:Submerge()
 	end
 end
 
