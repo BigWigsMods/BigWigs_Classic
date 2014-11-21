@@ -1,17 +1,58 @@
-
 local L = BigWigs:NewBossLocale("Lucifron", "zhCN")
+if not L then return end
 if L then
+	--L.bossName = "Lucifron"
+
 	L.mc_bar = "控制: %s"
+end
+
+L = BigWigs:NewBossLocale("Magmadar", "zhCN")
+if L then
+	--L.bossName = "Magmadar"
+end
+
+L = BigWigs:NewBossLocale("Gehennas", "zhCN")
+if L then
+	--L.bossName = "Gehennas"
+end
+
+L = BigWigs:NewBossLocale("Garr", "zhCN")
+if L then
+	--L.bossName = "Garr"
+end
+
+L = BigWigs:NewBossLocale("Baron Geddon", "zhCN")
+if L then
+	--L.bossName = "Baron Geddon"
+end
+
+L = BigWigs:NewBossLocale("Shazzrah", "zhCN")
+if L then
+	--L.bossName = "Shazzrah"
+end
+
+L = BigWigs:NewBossLocale("Sulfuron Harbinger", "zhCN")
+if L then
+	--L.bossName = "Sulfuron Harbinger"
+end
+
+L = BigWigs:NewBossLocale("Golemagg the Incinerator", "zhCN")
+if L then
+	--L.bossName = "Golemagg the Incinerator"
 end
 
 L = BigWigs:NewBossLocale("Majordomo Executus", "zhCN")
 if L then
+	--L.bossName = "Majordomo Executus"
+
 	L.disabletrigger = "不可能！等一下"
 	--L.power_next = "Next Power"
 end
 
 L = BigWigs:NewBossLocale("Ragnaros ", "zhCN")
 if L then
+	--L.bossName = "Ragnaros"
+
 	L.submerge_trigger = "出现吧，我的奴仆"
 	L.engage_trigger = "现在轮到你们了"
 
