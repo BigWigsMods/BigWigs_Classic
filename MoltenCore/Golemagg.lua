@@ -1,0 +1,34 @@
+--------------------------------------------------------------------------------
+-- Module declaration
+--
+
+local mod = BigWigs:NewBoss("Golemagg the Incinerator", 696)
+if not mod then return end
+mod:RegisterEnableMob(11988)
+mod.toggleOptions = {"bosskill"}
+
+--------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:NewLocale("enUS", true)
+if L then
+	L.bossName = "Golemagg the Incinerator"
+end
+L = mod:GetLocale()
+mod.displayName = L.bossName
+
+--------------------------------------------------------------------------------
+-- Initialization
+--
+
+function mod:OnBossEnable()
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
+	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
+	self:Death("Win", 11988)
+ end
+
+--------------------------------------------------------------------------------
+-- Event Handlers
+--
+
