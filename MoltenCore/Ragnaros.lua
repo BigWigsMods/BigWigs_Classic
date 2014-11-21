@@ -1,3 +1,4 @@
+
 --------------------------------------------------------------------------------
 -- Module declaration
 --
@@ -6,17 +7,6 @@ local mod, CL = BigWigs:NewBoss("Ragnaros ", 696) -- Space is intentional to pre
 if not mod then return end
 mod:RegisterEnableMob(11502)
 mod.toggleOptions = {"submerge", "emerge", 20566, "bosskill"}
-
---------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	L.bossName = "Ragnaros"
-end
-L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -31,6 +21,8 @@ local handle = nil
 
 local L = mod:NewLocale("enUS", true)
 if L then
+	L.bossName = "Ragnaros"
+
 	L.engage_trigger = "NOW FOR YOU,"
 	L.submerge_trigger = "COME FORTH,"
 
@@ -48,6 +40,7 @@ if L then
 	L.emerge_bar = "Emerge"
 end
 L = mod:GetLocale()
+mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

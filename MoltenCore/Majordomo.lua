@@ -1,3 +1,4 @@
+
 --------------------------------------------------------------------------------
 -- Module declaration
 --
@@ -14,20 +15,12 @@ mod.toggleOptions = {20619, 21075, "bosskill"}
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.bossName = "Majordomo Executus"
-end
-L = mod:GetLocale()
-mod.displayName = L.bossName
 
---------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
 	L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
 	L.power_next = "Next Power"
 end
 L = mod:GetLocale()
+mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

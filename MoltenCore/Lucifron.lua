@@ -1,3 +1,4 @@
+
 --------------------------------------------------------------------------------
 -- Module declaration
 --
@@ -14,19 +15,11 @@ mod.toggleOptions = {19702, 19703, {20604, "ICON"}, "bosskill"}
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.bossName = "Lucifron"
-end
-L = mod:GetLocale()
-mod.displayName = L.bossName
 
---------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
 	L.mc_bar = "MC: %s"
 end
 L = mod:GetLocale()
+mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization
