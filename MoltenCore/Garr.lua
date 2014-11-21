@@ -14,6 +14,7 @@ mod.toggleOptions = {19492, "bosskill"}
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Pulse", 19492)
 
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 12057)
 end

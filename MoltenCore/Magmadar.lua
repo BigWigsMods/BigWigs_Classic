@@ -15,6 +15,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Fear", 19408)
 	self:Log("SPELL_CAST_SUCCESS", "Frenzy", 19451)
 
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 11982)
 end

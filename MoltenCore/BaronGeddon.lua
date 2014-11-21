@@ -16,6 +16,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Inferno", 19695)
 	self:Log("SPELL_CAST_SUCCESS", "Service", 20478)
 
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 12056)
 end

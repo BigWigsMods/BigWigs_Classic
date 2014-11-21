@@ -26,6 +26,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Curse", 19703)
 	self:Log("SPELL_AURA_APPLIED", "MindControl", 20604)
 
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 12118)
 end
