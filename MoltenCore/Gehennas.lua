@@ -24,11 +24,11 @@ mod.displayName = L.bossName
 --
 
 function mod:OnBossEnable()
+	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
+
 	self:Log("SPELL_CAST_SUCCESS", "Curse", 19716)
 	self:Log("SPELL_AURA_APPLIED", "Fire", 19717)
 
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 12259)
 end
 

@@ -26,26 +26,31 @@ mod.displayName = L.bossName
 --
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "Doom", 19702)
-	self:Log("SPELL_CAST_SUCCESS", "Curse", 19703)
+	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
+
+	self:Log("SPELL_CAST_SUCCESS", "ImpendingDoom", 19702)
+	self:Log("SPELL_CAST_SUCCESS", "LucifronsCurse", 19703)
 	self:Log("SPELL_AURA_APPLIED", "MindControl", 20604)
 
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 12118)
+end
+
+function mod:OnEngage()
+	self:Bar(19703, 11) -- Lucifron's Curse
+	self:Bar(19702, 13) -- Impending Doom
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Doom(args)
-	self:Bar(args.spellId, 20)
+function mod:ImpendingDoom(args)
+	self:CDBar(args.spellId, 20)
 	self:Message(args.spellId, "Important")
-	self:DelayedMessage(args.spellId, 15, "Urgent", CL.custom_sec:format(args.spellName, 5))
+	self:DelayedMessage(args.spellId, 15, "Urgent", CL.soon:format(args.spellName))
 end
 
-function mod:Curse(args)
+function mod:LucifronsCurse(args)
 	self:Bar(args.spellId, 20)
 	self:Message(args.spellId, "Attention")
 	self:DelayedMessage(args.spellId, 15, "Positive", CL.custom_sec:format(args.spellName, 5))

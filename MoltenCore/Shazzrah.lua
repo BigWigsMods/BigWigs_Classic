@@ -6,7 +6,7 @@
 local mod = BigWigs:NewBoss("Shazzrah", 696)
 if not mod then return end
 mod:RegisterEnableMob(12264)
-mod.toggleOptions = {19714, 23138, "bosskill"}
+mod.toggleOptions = {19714, 23138, 19715, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -24,12 +24,17 @@ mod.displayName = L.bossName
 --
 
 function mod:OnBossEnable()
+	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
+
 	self:Log("SPELL_CAST_SUCCESS", "Blink", 23138)
 	self:Log("SPELL_CAST_SUCCESS", "SelfBuff", 19714)
+	self:Log("SPELL_CAST_SUCCESS", "Counterspell", 19715)
 
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 12264)
+end
+
+function mod:OnEngage()
+	self:Bar(19715, 10.7) -- Counterspell
 end
 
 --------------------------------------------------------------------------------
@@ -42,6 +47,11 @@ function mod:Blink(args)
 end
 
 function mod:SelfBuff(args)
-	self:Message(args.spellId, "Attention", "Alarm")
+	self:Message(args.spellId, "Urgent", "Alarm")
+end
+
+function mod:Counterspell(args)
+	self:CDBar(args.spellId, 15) -- 15-19
+	self:Message(args.spellId, "Attention", "Info")
 end
 

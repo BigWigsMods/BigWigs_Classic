@@ -6,7 +6,7 @@
 local mod = BigWigs:NewBoss("Baron Geddon", 696)
 if not mod then return end
 mod:RegisterEnableMob(12056)
-mod.toggleOptions = {{20475, "FLASH", "ICON", "PROXIMITY"}, 19695, 20478, "bosskill"}
+mod.toggleOptions = {{20475, "FLASH", "ICON", "PROXIMITY", "SAY"}, 19695, 20478, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -24,12 +24,13 @@ mod.displayName = L.bossName
 --
 
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "Bomb", 20475)
+	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
+
+	self:Log("SPELL_AURA_APPLIED", "LivingBomb", 20475)
+	self:Log("SPELL_AURA_REMOVED", "LivingBombRemoved", 20475)
 	self:Log("SPELL_CAST_SUCCESS", "Inferno", 19695)
 	self:Log("SPELL_CAST_SUCCESS", "Service", 20478)
 
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 12056)
 end
 
@@ -41,12 +42,17 @@ function mod:Bomb(args)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 		self:OpenProximity(args.spellId, 9)
-		self:ScheduleTimer("CloseProximity", 8.5, args.spellId)
+		self:Say(args.spellId)
 	else
-		self:TargetMessage(args.spellId, args.destName, "Personal", "Alarm")
+		self:OpenProximity(args.spellId, 9, args.destName)
 	end
+	self:TargetMessage(args.spellId, args.destName, "Personal", "Alarm")
 	self:PrimaryIcon(args.spellId, args.destName)
 	self:TargetBar(args.spellId, 8, args.destName)
+end
+
+function mod:LivingBombRemoved(args)
+	self:CloseProximity(args.spellId)
 end
 
 function mod:Inferno(args)
