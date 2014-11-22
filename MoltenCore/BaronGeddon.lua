@@ -38,7 +38,7 @@ end
 -- Event Handlers
 --
 
-function mod:Bomb(args)
+function mod:LivingBomb(args)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 		self:OpenProximity(args.spellId, 9)
