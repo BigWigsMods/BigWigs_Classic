@@ -6,7 +6,7 @@
 local mod = BigWigs:NewBoss("Baron Geddon", 696)
 if not mod then return end
 mod:RegisterEnableMob(12056)
-mod.toggleOptions = {{20475, "FLASH", "ICON", "PROXIMITY", "SAY"}, 19695, 20478, "bosskill"}
+mod.toggleOptions = {{20475, "FLASH", "ICON", "PROXIMITY", "SAY"}, 19695, {20478, "EMPHASIZE"}, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -29,7 +29,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "LivingBomb", 20475)
 	self:Log("SPELL_AURA_REMOVED", "LivingBombRemoved", 20475)
 	self:Log("SPELL_CAST_SUCCESS", "Inferno", 19695)
-	self:Log("SPELL_CAST_SUCCESS", "Service", 20478)
+	self:Log("SPELL_CAST_SUCCESS", "Armageddon", 20478)
 
 	self:Death("Win", 12056)
 end
@@ -60,7 +60,7 @@ function mod:Inferno(args)
 	self:Bar(args.spellId, 8)
 end
 
-function mod:Service(args)
+function mod:Armageddon(args)
 	self:Bar(args.spellId, 8)
 	self:Message(args.spellId, "Urgent")
 end
