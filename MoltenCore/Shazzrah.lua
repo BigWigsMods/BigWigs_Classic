@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Shazzrah", 696)
+local mod, CL = BigWigs:NewBoss("Shazzrah", 696)
 if not mod then return end
 mod:RegisterEnableMob(12264)
 mod.toggleOptions = {19714, 23138, 19715, "bosskill"}
@@ -27,7 +27,7 @@ function mod:OnBossEnable()
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 
 	self:Log("SPELL_CAST_SUCCESS", "Blink", 23138)
-	self:Log("SPELL_CAST_SUCCESS", "SelfBuff", 19714)
+	self:Log("SPELL_CAST_SUCCESS", "MagicGrounding", 19714)
 	self:Log("SPELL_CAST_SUCCESS", "Counterspell", 19715)
 
 	self:Death("Win", 12264)
@@ -46,8 +46,9 @@ function mod:Blink(args)
 	self:Message(args.spellId, "Important")
 end
 
-function mod:SelfBuff(args)
-	self:Message(args.spellId, "Urgent", "Alarm")
+function mod:MagicGrounding(args)
+	-- Self buff
+	self:Message(args.spellId, "Urgent", self:Dispeller("magic", true) and "Alarm", CL.onboss:format(args.spellName))
 end
 
 function mod:Counterspell(args)
