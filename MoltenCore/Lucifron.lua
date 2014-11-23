@@ -47,13 +47,11 @@ end
 function mod:ImpendingDoom(args)
 	self:CDBar(args.spellId, 20)
 	self:Message(args.spellId, "Important")
-	self:DelayedMessage(args.spellId, 15, "Urgent", CL.soon:format(args.spellName))
 end
 
 function mod:LucifronsCurse(args)
 	self:Bar(args.spellId, 20)
 	self:Message(args.spellId, "Attention")
-	self:DelayedMessage(args.spellId, 15, "Positive", CL.custom_sec:format(args.spellName, 5))
 end
 
 function mod:MindControl(args)
