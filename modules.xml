@@ -1,11 +1,11 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
-<Include file="MoltenCore\locales.xml"/>
 <Include file="MoltenCore\modules.xml"/>
+<Include file="MoltenCore\locales.xml"/>
 
-<Include file="BlackwingLair\locales.xml"/>
 <Include file="BlackwingLair\modules.xml"/>
+<Include file="BlackwingLair\locales.xml"/>
 
 </Ui>
 
