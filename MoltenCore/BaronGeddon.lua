@@ -6,7 +6,7 @@
 local mod = BigWigs:NewBoss("Baron Geddon", 696)
 if not mod then return end
 mod:RegisterEnableMob(12056)
-mod.toggleOptions = {{20475, "FLASH", "ICON", "PROXIMITY", "SAY"}, 19695, {20478, "EMPHASIZE"}, "bosskill"}
+mod.toggleOptions = {{20475, "FLASH", "ICON", "PROXIMITY", "SAY"}, 19695, 20478, "bosskill"}
 
 --------------------------------------------------------------------------------
 -- Localization
