@@ -30,11 +30,13 @@ if L then
 
 	L.submerge = "Submerge"
 	L.submerge_desc = "Warn for Ragnaros' submerge."
+	L.submerge_icon = "misc_arrowdown"
 	L.submerge_message = "Ragnaros down for 90 sec!"
 	L.submerge_bar = "Submerge"
 
 	L.emerge = "Emerge"
 	L.emerge_desc = "Warn for Ragnaros' emerge."
+	L.emerge_icon = "misc_arrowlup"
 	L.emerge_message = "Ragnaros emerged, 3 mins until submerge!"
 	L.emerge_bar = "Emerge"
 end
@@ -53,7 +55,7 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_CAST_SUCCESS", "Knockback", 20566)
 
- 	self:RegisterEvent("UNIT_TARGETABLE_CHANGED")
+ 	self:RegisterUnitEvent("UNIT_TARGETABLE_CHANGED", nil, "boss1")
 	self:Death("Win", 11502)
 	self:Death("SonDeaths", 12143)
 end
@@ -114,7 +116,7 @@ function mod:SonDeaths()
 	end
 end
 
-function mod:UNIT_TARGETABLE_CHANGED(_, unit)
+function mod:UNIT_TARGETABLE_CHANGED(unit)
 	if UnitCanAttack("player", unit) then
 		self:Emerge()
 	else

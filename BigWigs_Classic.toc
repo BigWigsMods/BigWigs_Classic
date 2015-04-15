@@ -9,7 +9,7 @@
 ## Dependencies: BigWigs
 
 ## X-Category: Raid
-## X-BigWigs-LoadOn-ZoneId: 696, 755
+## X-BigWigs-LoadOn-ZoneId: 696, 755, 766, 717
 
 modules.xml
 

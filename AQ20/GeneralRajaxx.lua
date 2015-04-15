@@ -1,43 +1,100 @@
-﻿------------------------------
---      Are you local?      --
-------------------------------
+﻿
+--------------------------------------------------------------------------------
+-- Module declaration
+--
 
-local boss = BB["General Rajaxx"]
-local andorov = BB["Lieutenant General Andorov"]
-local L = AceLibrary("AceLocale-2.2"):new("BigWigs"..boss)
+local mod = BigWigs:NewBoss("General Rajaxx", 717)
+if not mod then return end
+mod:RegisterEnableMob(15341, 15471) -- General Rajaxx, Lieutenant General Andorov
+
 local rajdead
 
-----------------------------
---      Localization      --
-----------------------------
+--------------------------------------------------------------------------------
+-- Localization
+--
 
-L:RegisterTranslations("enUS", function() return {
-	cmd = "Rajaxx",
+local L = mod:NewLocale("enUS", true)
+if L then
+	L.bossName = "General Rajaxx"
 
-	wave = "Waves",
-	wave_desc = "Warn for incoming waves.",
+	L.wave = "Waves"
+	L.wave_desc = "Warn for incoming waves."
 
-	trigger1 = "Kill first, ask questions later... Incoming!",
-	trigger2 = "?????",  -- There is no callout for wave 2 ><
-	trigger3 = "The time of our retribution is at hand! Let darkness reign in the hearts of our enemies!",
-	trigger4 = "No longer will we wait behind barred doors and walls of stone! No longer will our vengeance be denied! The dragons themselves will tremble before our wrath!\013\n",
-	trigger5 = "Fear is for the enemy! Fear and death!",
-	trigger6 = "Staghelm will whimper and beg for his life, just as his whelp of a son did! One thousand years of injustice will end this day!\013\n",
-	trigger7 = "Fandral! Your time has come! Go and hide in the Emerald Dream and pray we never find you!\013\n",
-	trigger8 = "Impudent fool! I will kill you myself!",
-	trigger9 = "Remember, Rajaxx, when I said I'd kill you last?",
+	L.trigger1 = "Kill first, ask questions later... Incoming!"
+	L.trigger2 = "?????"  -- There is no callout for wave 2 ><
+	L.trigger3 = "The time of our retribution is at hand! Let darkness reign in the hearts of our enemies!"
+	L.trigger4 = "No longer will we wait behind barred doors and walls of stone! No longer will our vengeance be denied! The dragons themselves will tremble before our wrath!\013\n"
+	L.trigger5 = "Fear is for the enemy! Fear and death!"
+	L.trigger6 = "Staghelm will whimper and beg for his life, just as his whelp of a son did! One thousand years of injustice will end this day!\013\n"
+	L.trigger7 = "Fandral! Your time has come! Go and hide in the Emerald Dream and pray we never find you!\013\n"
+	L.trigger8 = "Impudent fool! I will kill you myself!"
+	L.trigger9 = "Remember, Rajaxx, when I said I'd kill you last?"
 
-	warn1 = "Wave 1/8",
-	warn2 = "Wave 2/8",
-	warn3 = "Wave 3/8",
-	warn4 = "Wave 4/8",
-	warn5 = "Wave 5/8",
-	warn6 = "Wave 6/8",
-	warn7 = "Wave 7/8",
-	warn8 = "Incoming General Rajaxx",
-	warn9 = "Wave 1/8", -- trigger for starting the event by pulling the first wave instead of talking to andorov
-} end )
+	L.warn1 = "Wave 1/8"
+	L.warn2 = "Wave 2/8"
+	L.warn3 = "Wave 3/8"
+	L.warn4 = "Wave 4/8"
+	L.warn5 = "Wave 5/8"
+	L.warn6 = "Wave 6/8"
+	L.warn7 = "Wave 7/8"
+	L.warn8 = "Incoming General Rajaxx"
+	L.warn9 = "Wave 1/8" -- trigger for starting the event by pulling the first wave instead of talking to andorov
+end
+L = mod:GetLocale()
+mod.displayName = L.bossName
 
+--------------------------------------------------------------------------------
+-- Initialization
+--
+
+function mod:GetOptions()
+	return {
+		"wave",
+		25471, -- Attack Order
+		8269, -- Frenzy
+	}
+end
+
+function mod:VerifyEnable()
+	return not rajdead
+end
+
+function mod:OnBossEnable()
+	self:Log("SPELL_AURA_APPLIED", "AttackOrder", 25471)
+	self:Log("SPELL_AURA_APPLIED", "Frenzy", 8269)
+
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+
+	self:Death("Win", 15341)
+end
+
+function mod:OnWin()
+	rajdead = true
+end
+
+--------------------------------------------------------------------------------
+-- Event Handlers
+--
+
+function mod:AttackOrder(args)
+	self:TargetMessage(args.spellId, args.destName, "Attention")
+	self:TargetBar(args.spellId, 10, args.destName)
+end
+
+function mod:Frenzy(args)
+	self:Message(args.spellId, "Important")
+end
+
+function mod:CHAT_MSG_MONSTER_YELL(event, msg)
+	for i = 1, 9 do
+		if msg == L["trigger"..i] then
+			self:Message("wave", "Urgent", nil, L["warn"..i], false)
+			break
+		end
+	end
+end
+
+--[[
 L:RegisterTranslations("frFR", function() return {
 	wave = "Vagues",
 	wave_desc = "Préviens de l'arrivée des vagues.",
@@ -187,47 +244,5 @@ L:RegisterTranslations("ruRU", function() return {
 	warn8 = "Наступает Генерал Раджах",
 	warn9 = "Волна 1/8", -- trigger for starting the event by pulling the first wave instead of talking to andorov
 } end )
-
-----------------------------------
---      Module Declaration      --
-----------------------------------
-
-local mod = BigWigs:NewModule(boss)
-mod.zonename = BZ["Ruins of Ahn'Qiraj"]
-mod.enabletrigger = {andorov, boss}
-mod.toggleOptions = {"wave", "bosskill"}
-mod.revision = tonumber(("$Revision: 150 $"):sub(12, -3))
-
-------------------------------
---      Initialization      --
-------------------------------
-
-function mod:OnEnable()
-	self:AddCombatListener("UNIT_DIED", "Deaths")
-
-	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
-	self.warnsets = {}
-	for i=1,9 do self.warnsets[L["trigger"..i]] = L["warn"..i] end
-end
-
-------------------------------
---      Event Handlers      --
-------------------------------
-
-function mod:Deaths(unit)
-	if unit == boss then
-		self:GenericBossDeath(unit)
-		rajdead = true
-	end
-end
-
-function mod:VerifyEnable(unit)
-	return not rajdead
-end
-
-function mod:CHAT_MSG_MONSTER_YELL(msg)
-	if self.db.profile.wave and msg and self.warnsets[msg] then
-		self:Message(self.warnsets[msg], "Urgent")
-	end
-end
+]]
 

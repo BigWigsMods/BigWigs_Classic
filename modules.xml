@@ -7,5 +7,9 @@
 <Include file="BlackwingLair\modules.xml"/>
 <Include file="BlackwingLair\locales.xml"/>
 
+<Include file="AQ20\modules.xml"/>
+
+<Include file="AQ40\modules.xml"/>
+
 </Ui>
 

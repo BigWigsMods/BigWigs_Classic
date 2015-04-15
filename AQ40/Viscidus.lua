@@ -1,16 +1,120 @@
-------------------------------
---      Are you local?      --
-------------------------------
 
-local boss = BB["Viscidus"]
-local L = AceLibrary("AceLocale-2.2"):new("BigWigs"..boss)
-local L2 = AceLibrary("AceLocale-2.2"):new("BigWigsCommonWords")
-local prior = nil
+--------------------------------------------------------------------------------
+-- Module declaration
+--
 
-----------------------------
---      Localization      --
-----------------------------
+local mod, CL = BigWigs:NewBoss("Viscidus", 766)
+if not mod then return end
+mod:RegisterEnableMob(15299)
 
+local swingCount = -1
+
+--------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:NewLocale("enUS", true)
+if L then
+	L.bossName = "Viscidus"
+
+	L.freeze = "Freezing States"
+	L.freeze_desc = "Warn for the different frozen states."
+	L.freeze_icon = 11836 -- spell_frost_glacier / Freeze Solid
+	L.freeze_trigger1 = "%s begins to slow!"
+	L.freeze_trigger2 = "%s is freezing up!"
+	L.freeze_trigger3 = "%s is frozen solid!"
+	L.freeze_trigger4 = "%s begins to crack!"
+	L.freeze_trigger5 = "%s looks ready to shatter!"
+	L.freeze_warn1 = "First freeze phase!"
+	L.freeze_warn2 = "Second freeze phase!"
+	L.freeze_warn3 = "Viscidus is frozen!"
+	L.freeze_warn4 = "Cracking up - little more now!"
+	L.freeze_warn5 = "Cracking up - almost there!"
+	L.freeze_warn_hits = "%d melee attacks - %d more to go"
+end
+L = mod:GetLocale()
+mod.displayName = L.bossName
+
+--------------------------------------------------------------------------------
+-- Initialization
+--
+
+function mod:GetOptions()
+	return {
+		"freeze",
+		25991, -- Poison Bolt Volley
+		25989, -- Toxin
+	}
+end
+
+function mod:OnBossEnable()
+	self:Log("SPELL_CAST_SUCCESS", "PoisonBoltVolley", 25991)
+	self:Log("SPELL_PERIODIC_DAMAGE", "ToxinDamage", 25989)
+	self:Log("SPELL_PERIODIC_MISSED", "ToxinDamage", 25989)
+	self:Log("SPELL_AURA_APPLIED", "ToxinDamage", 25989)
+
+	self:Log("SWING_DAMAGE", "SwingDamage", "*")
+
+	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
+
+	self:Death("Win", 15299)
+end
+
+--------------------------------------------------------------------------------
+-- Event Handlers
+--
+
+function mod:PoisonBoltVolley(args)
+	swingCount = -1
+	self:Message(args.spellId, "Attention")
+	self:CDBar(args.spellId, 10)
+end
+
+do
+	local prev = 0
+	function mod:ToxinDamage(args)
+		local t = GetTime()
+		if t-prev > 2 and self:Me(args.destGUID) then
+			prev = t
+			self:Message(args.spellId, "Personal", "Alarm", CL.underyou:format(args.spellName))
+		end
+	end
+end
+
+function mod:SwingDamage(args)
+	if swingCount == -1 then return end
+
+	if self:MobId(args.destGUID) == 15299 then
+		swingCount = swingCount + 1
+		self:Message("freeze", "Positive", nil, tostring(swingCount), L.freeze_icon)
+		if swingCount == 10 then
+			self:Message("freeze", "Positive", nil, L.freeze_warn_hits:format(10, 20), L.freeze_icon)
+		elseif swingCount == 20 then
+			self:Message("freeze", "Positive", nil, L.freeze_warn_hits:format(20, 10), L.freeze_icon)
+		elseif swingCount == 25 then
+			self:Message("freeze", "Positive", nil, L.freeze_warn_hits:format(25, 5), L.freeze_icon)
+		end
+	end
+end
+
+function mod:CHAT_MSG_MONSTER_EMOTE(event, msg)
+	if msg == L.freeze_trigger1 then
+		self:Message("freeze", "Neutral", nil, L.freeze_warn1, L.freeze_icon)
+	elseif msg == L.freeze_trigger2 then
+		self:Message("freeze", "Neutral", nil, L.freeze_warn2, L.freeze_icon)
+	elseif msg == L.freeze_trigger3 then
+		swingCount = 0
+		self:Message("freeze", "Important", nil, L.freeze_warn3, L.freeze_icon)
+		self:Bar("freeze", 30, L.freeze_warn3, L.freeze_icon)
+	elseif msg == L.freeze_trigger4 then
+		self:Message("freeze", "Urgent", nil, L.freeze_warn4, L.freeze_icon)
+	elseif msg == L.freeze_trigger5 then
+		self:Message("freeze", "Important", nil, L.freeze_warn5, L.freeze_icon)
+	end
+end
+
+
+--[[
 L:RegisterTranslations("enUS", function() return {
 	cmd = "Viscidus",
 
@@ -32,18 +136,7 @@ L:RegisterTranslations("enUS", function() return {
 	whisper = "Whisper Others",
 	whisper_desc = "Whisper others that are standing in a toxin cloud.",
 
-	freeze = "Freezing States",
-	freeze_desc = "Warn for the different frozen states.",
-	freeze_trigger1 = "%s begins to slow!",
-	freeze_trigger2 = "%s is freezing up!",
-	freeze_trigger3 = "%s is frozen solid!",
-	freeze_trigger4 = "%s begins to crack!",
-	freeze_trigger5 = "%s looks ready to shatter!",
-	freeze_warn1 = "First freeze phase!",
-	freeze_warn2 = "Second freeze phase!",
-	freeze_warn3 = "Viscidus is frozen!",
-	freeze_warn4 = "Cracking up - little more now!",
-	freeze_warn5 = "Cracking up - almost there!",
+
 
 	toxin_trigger = "^([^%s]+) ([^%s]+) afflicted by Toxin.$",
 } end )
@@ -245,67 +338,5 @@ L:RegisterTranslations("ruRU", function() return {
 
 	toxin_trigger = "^([^%s]+) ([^%s]+) поражён токсинами.$",
 } end )
+]]
 
-----------------------------------
---      Module Declaration      --
-----------------------------------
-
-local mod = BigWigs:NewModule(boss)
-mod.zonename = BZ["Ahn'Qiraj"]
-mod.enabletrigger = boss
-mod.toggleOptions = {"freeze", "volley", "toxinyou", "toxinother", "whisper", "bosskill"}
-mod.revision = tonumber(("$Revision: 328 $"):sub(12, -3))
-
-------------------------------
---      Initialization      --
-------------------------------
-
-function mod:OnEnable()
-	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
-	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_SELF_DAMAGE", "CheckVis")
-	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_FRIENDLYPLAYER_DAMAGE", "CheckVis")
-	self:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_PARTY_DAMAGE", "CheckVis")
-	self:AddCombatListener("UNIT_DIED", "GenericBossDeath")
-end
-
-------------------------------
---      Event Handlers      --
-------------------------------
-
-function mod:CheckVis(msg)
-	if not prior and self.db.profile.volley and msg:find(L["volley_trigger"]) then
-		self:Message(L["volley_message"], "Urgent")
-		self:DelayedMessage(7, L["volley_warning"], "Urgent")
-		self:Bar(L["volley_bar"], 10, "Spell_Nature_CorrosiveBreath")
-		prior = true
-		self:ScheduleEvent("BWViscNilPrior", function() prior = nil end, 7, self)
-	end
-
-	local pl, ty = select(3, msg:find(L["toxin_trigger"]))
-	if pl and ty then
-		if self.db.profile.toxinyou and pl == L2["you"] and ty == L2["are"] then
-			self:Message(L["toxin_you"], "Personal", true)
-			self:Message(UnitName("player") .. L["toxin_other"], "Important", nil, nil, true)
-		elseif self.db.profile.toxinother then
-			self:Message(pl .. L["toxin_other"], "Important")
-			if self.db.profile.whisper then
-				self:Whisper(pl, L["toxin_you"])
-			end
-		end
-	end
-end
-
-function mod:CHAT_MSG_MONSTER_EMOTE(msg)
-	if not self.db.profile.freeze then return end
-	if msg == L["freeze_trigger1"] then
-		self:Message(L["freeze_warn1"], "Atention")
-	elseif msg == L["freeze_trigger2"] then
-		self:Message(L["freeze_warn2"], "Urgent")
-	elseif msg == L["freeze_trigger3"] then
-		self:Message(L["freeze_warn3"], "Important")
-	elseif msg == L["freeze_trigger4"] then
-		self:Message(L["freeze_warn4"], "Urgent")
-	elseif msg == L["freeze_trigger5"] then
-		self:Message(L["freeze_warn5"], "Important")
-	end
-end

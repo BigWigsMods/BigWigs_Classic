@@ -1,14 +1,75 @@
-﻿------------------------------
---      Are you local?      --
-------------------------------
+﻿
+--------------------------------------------------------------------------------
+-- Module declaration
+--
 
-local boss = BB["Ossirian the Unscarred"]
-local L = AceLibrary("AceLocale-2.2"):new("BigWigs"..boss)
+local mod, CL = BigWigs:NewBoss("Ossirian the Unscarred", 717)
+if not mod then return end
+mod:RegisterEnableMob(15339)
 
-----------------------------
---      Localization      --
-----------------------------
+--------------------------------------------------------------------------------
+-- Localization
+--
 
+local L = mod:NewLocale("enUS", true)
+if L then
+	L.bossName = "Ossirian the Unscarred"
+
+	L.debuff = "Weakness"
+	L.debuff_desc = "Warn for various weakness types."
+end
+L = mod:GetLocale()
+mod.displayName = L.bossName
+
+--------------------------------------------------------------------------------
+-- Initialization
+--
+
+function mod:GetOptions()
+	return {
+		"debuff",
+		25176, -- Strength of Ossirian
+	}
+end
+
+function mod:OnBossEnable()
+	self:Log("SPELL_AURA_APPLIED", "Weakness", 25181, 25177, 25178, 25180, 25183)
+	self:Log("SPELL_AURA_REMOVED", "WeaknessRemoved", 25181, 25177, 25178, 25180, 25183)
+	self:Log("SPELL_AURA_APPLIED", "StrengthOfOssirian", 25176)
+
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
+
+	self:Death("Win", 15339)
+end
+
+function mod:OnEngage()
+	self:StartWipeCheck()
+	self:Message(25176, "Important") -- Strength of Ossirian
+end
+
+--------------------------------------------------------------------------------
+-- Event Handlers
+--
+
+function mod:Weakness(args)
+	self:Message("debuff", "Attention", "Info", args.spellId)
+	self:Bar("debuff", 45, args.spellId)
+
+	self:DelayedMessage(25176, 30, "Attention", CL.custom_sec:format(self:SpellName(25176), 15))
+	self:DelayedMessage(25176, 35, "Urgent", CL.custom_sec:format(self:SpellName(25176), 10))
+	self:DelayedMessage(25176, 40, "Important", CL.custom_sec:format(self:SpellName(25176), 5))
+	self:Bar(25176, 45)
+end
+
+function mod:WeaknessRemoved(args)
+	self:Message("debuff", "Attention", nil, CL.over:format(args.spellName), args.spellId)
+end
+
+function mod:StrengthOfOssirian(args)
+	self:Message(args.spellId, "Important")
+end
+
+--[[
 L:RegisterTranslations("enUS", function() return {
 	cmd = "Ossirian",
 
@@ -94,52 +155,5 @@ L:RegisterTranslations("ruRU", function() return {
 	supremedelaywarn = "Божественный режим через %d секунд!",
 	bartext = "Божественный режим",
 } end )
-
-----------------------------------
---      Module Declaration      --
-----------------------------------
-
-local mod = BigWigs:NewModule(boss)
-mod.zonename = BZ["Ruins of Ahn'Qiraj"]
-mod.enabletrigger = boss
-mod.toggleOptions = {"supreme", "debuff", "bosskill"}
-mod.revision = tonumber(("$Revision: 150 $"):sub(12, -3))
-
-------------------------------
---      Initialization      --
-------------------------------
-
-function mod:OnEnable()
-	self:AddCombatListener("SPELL_AURA_APPLIED", "Weakness", 25181, 25177, 25178, 25180, 25183)
-	self:AddCombatListener("SPELL_AURA_APPLIED", "Supreme", 25176)
-	self:AddCombatListener("UNIT_DIED", "GenericBossDeath")
-end
-
-------------------------------
---      Event Handlers      --
-------------------------------
-
-function mod:Weakness(_, spellID, _, _, name)
-	if self.db.profile.debuff then
-		self:IfMessage(name, "Important", spellID)
-	end
-
-	self:CancelScheduledEvent("BWOssiSupreme1")
-	self:CancelScheduledEvent("BWOssiSupreme2")
-	self:CancelScheduledEvent("BWOssiSupreme3")
-	self:TriggerEvent("BigWigs_StopBar", self, L["bartext"])
-
-	if self.db.profile.supreme then
-		self:ScheduleEvent("BWOssiSupreme1", "BigWigs_Message", 30, L["supremedelaywarn"]:format(15), "Attention")
-		self:ScheduleEvent("BWOssiSupreme2", "BigWigs_Message", 35, L["supremedelaywarn"]:format(10), "Urgent")
-		self:ScheduleEvent("BWOssiSupreme3", "BigWigs_Message", 40, L["supremedelaywarn"]:format(5), "Important")
-		self:Bar(L["bartext"], 45, 25176)
-	end
-end
-
-function mod:Supreme()
-	if self.db.profile.supreme then
-		self:IfMessage(L["supremewarn"], "Attention", 25176)
-	end
-end
+]]
 

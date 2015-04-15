@@ -1,10 +1,11 @@
-------------------------------
---      Are you local?      --
-------------------------------
 
-local eyeofcthun = BB["Eye of C'Thun"]
-local cthun = BB["C'Thun"]
-local L = AceLibrary("AceLocale-2.2"):new("BigWigs" .. cthun)
+--------------------------------------------------------------------------------
+-- Module declaration
+--
+
+local mod, CL = BigWigs:NewBoss("C'Thun", 766)
+if not mod then return end
+mod:RegisterEnableMob(15727, 15589) -- C'Thun, Eye of C'Thun
 
 local timeP1Tentacle = 45      -- tentacle timers for phase 1
 local timeP1TentacleStart = 45 -- delay for first tentacles from engage onwards
@@ -23,11 +24,279 @@ local phase2started = nil
 local firstGlare = nil
 local firstWarning = nil
 local target = nil
-local tentacletime = timeP1Tentacle
+local tentacletime = timeP1TentacleStart
 
-----------------------------
---      Localization      --
-----------------------------
+local timerTentacles = nil
+local timerDarkGlare = nil
+local timerGroupWarning = nil
+local timerCheckTarget = nil
+
+--------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:NewLocale("enUS", true)
+if L then
+	L.bossName = "C'Thun"
+
+	L.tentacle = 61619
+	L.tentacle_desc = "Warn for Tentacles"
+	L.tentacle_icon = 61619 -- inv_misc_monstertail_06 / Tentacles
+
+	L.giant = "Giant Eye Alert"
+	L.giant_desc = "Warn for Giant Eyes"
+
+	L.weakened = "Weakened Alert"
+	L.weakened_desc = "Warn for Weakened State"
+	L.weakened_icon = 160149 -- ability_rogue_findweakness / Weak
+
+	L.weakenedtrigger = "%s is weakened!"
+
+	L.weakened_msg = "C'Thun is weakened for 45 sec"
+	L.invulnerable2 = "Party ends in 5 seconds"
+	L.invulnerable1 = "Party over - C'Thun invulnerable"
+
+	L.giant3 = "Giant Eye - 10 sec"
+	L.giant2 = "Giant Eye - 5 sec"
+	L.giant1 = "Giant Eye - Poke it!"
+
+	L.startwarn = "C'Thun engaged! - 45 sec until Dark Glare and Eyes"
+
+	L.tentacleParty = "Tentacle party!"
+	L.barWeakened = "C'Thun is weakened!"
+	L.barGiant = "Giant Eye!"
+
+	L.groupwarning = "Dark Glare on group %s (%s)"
+	L.phase2starting = "The Eye is dead! Body incoming!"
+end
+L = mod:GetLocale()
+mod.displayName = L.bossName
+
+--------------------------------------------------------------------------------
+-- Initialization
+--
+
+function mod:GetOptions()
+	return {
+		"tentacle",
+		26029,
+		"giant",
+		"weakened",
+		"stages",
+		"proximity",
+	}
+end
+
+function mod:OnBossEnable()
+	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
+
+	self:Death("EyeKilled", 15589)
+	self:Death("Win", 15727)
+
+	self:AddSyncListener("CThunP2Start", 10)
+	self:AddSyncListener("CThunWeakened", 10)
+end
+
+function mod:OnEngage()
+	target = nil
+	gianteye = nil
+	cthunstarted = nil
+	firstGlare = true
+	firstWarning = true
+	phase2started = nil
+	tentacletime = timeP1Tentacle
+
+	self:StartWipeCheck()
+
+	self:Message("stages", "Attention", nil, L.startwarn, false)
+
+	self:Bar("tentacle", timeP1TentacleStart, L.tentacleParty, L.tentacle_icon) -- Tentacle party
+	self:DelayedMessage("tentacle", timeP1TentacleStart - 5, "Urgent", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
+	self:DelayedMessage("tentacle", timeP1TentacleStart, "Important", L.tentacleParty, L.tentacle_icon) -- Tentacle party
+
+	self:Bar(26029, timeP1GlareStart) -- Dark Glare
+	self:DelayedMessage(26029, timeP1GlareStart - 5, "Urgent", CL.custom_sec:format(self:SpellName(26029), 5)) -- Dark Glare in 5 sec
+	self:DelayedMessage(26029, timeP1GlareStart, "Important", 26029, 26029) -- Dark Glare
+
+	timerTentacles = self:ScheduleTimer("StartTentacles", timeP1TentacleStart)
+	timerDarkGlare = self:ScheduleTimer("DarkGlare", timeP1GlareStart)
+	timerGroupWarning = self:ScheduleTimer("GroupWarning", timeP1GlareStart - 3)
+	timerCheckTarget = self:ScheduleRepeatingTimer("CheckTarget", timeTarget)
+
+	self:OpenProximity("proximity", 10)
+end
+
+--------------------------------------------------------------------------------
+-- Event Handlers
+--
+
+function mod:CHAT_MSG_MONSTER_EMOTE(event, msg)
+	if msg == L["weakenedtrigger"] then
+		self:Sync("CThunWeakened")
+	end
+end
+
+function mod:EyeKilled()
+	self:Sync("CThunP2Start")
+end
+
+function mod:OnSync(sync, rest, nick)
+	if sync == "CThunP2Start" then
+		self:CThunP2Start()
+	elseif sync == "CThunWeakened" then
+		self:CThunWeakened()
+	end
+end
+
+function mod:CThunP2Start()
+	if not phase2started then
+		phase2started = true
+		self:StopWipeCheck()
+		self:ScheduleTimer("StartWipeCheck", 10)
+		tentacletime = timeP2Tentacle
+
+		self:Message("stages", "Neutral", nil, L["phase2starting"], false)
+
+		self:StopBar(L.tentacleParty)
+
+		local darkGlare = self:SpellName(26029)
+		self:StopBar(darkGlare) -- Dark Glare
+		self:StopBar(CL.cast:format(darkGlare)) -- Cast: Dark Glare
+		self:CancelDelayedMessage(darkGlare) -- Dark Glare
+		self:CancelDelayedMessage(CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
+		self:CancelDelayedMessage(CL.over:format(darkGlare)) -- Dark Glare Over
+
+		-- cancel the repeaters
+		self:CancelTimer(timerTentacles)
+		self:CancelTimer(timerDarkGlare)
+		self:CancelTimer(timerGroupWarning)
+		self:CancelTimer(timerCheckTarget)
+
+		self:DelayedMessage("tentacle", timeP2Tentacle + timeP2Offset -.1, "Important", L.tentacleParty, L.tentacle_icon) -- Tentacle party
+		self:DelayedMessage("tentacle", timeP2Tentacle + timeP2Offset - 5, "Urgent", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
+		self:Bar("tentacle", timeP2Tentacle + timeP2Offset, L.tentacleParty, L.tentacle_icon) -- Tentacle party
+
+		self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset -.1, "Important", L["giant1"], "Ability_EyeOfTheOwl")
+		self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 5, "Urgent", L["giant2"])
+		self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 10, "Attention", L["giant3"])
+		self:Bar("giant", timeP2Tentacle + timeP2Offset, L["barGiant"], "Ability_EyeOfTheOwl")
+
+		timerTentacles = self:ScheduleTimer("StartTentacles", timeP2Tentacle + timeP2Offset)
+	end
+end
+
+function mod:CThunWeakened()
+	self:Message("weakened", "Positive", nil, L.weakened_msg, L.weakened_icon)
+	self:Bar("weakened", timeWeakened, L["barWeakened"], L.weakened_icon)
+	self:DelayedMessage("weakened", timeWeakened - 5, "Urgent", L["invulnerable2"])
+	self:DelayedMessage("weakened", timeWeakened, "Important", L["invulnerable1"])
+
+	-- cancel tentacle timers
+	self:CancelDelayedMessage(L.tentacleParty) -- Tentacle party
+	self:CancelDelayedMessage(CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
+
+	self:CancelDelayedMessage(L["giant1"])
+	self:CancelDelayedMessage(L["giant2"])
+	self:CancelDelayedMessage(L["giant3"])
+
+	self:StopBar(L.tentacleParty)
+	self:StopBar(L["barGiant"])
+
+	-- flipflop the giant eye flag
+	gianteye = not gianteye
+
+	self:CancelTimer(timerTentacles)
+	self:ScheduleTimer("OutOfWeaken", timeReschedule)
+end
+
+--------------------------------------------------------------------------------
+-- Utility Functions
+--
+
+function mod:OutOfWeaken()
+	self:StartTentacles()
+	-- Also fires up a big claw here, but we don't warn for them?
+end
+
+function mod:StartTentacles()
+	self:Tentacles()
+	timerTentacles = self:ScheduleRepeatingTimer("Tentacles", tentacletime)
+end
+
+function mod:CheckTarget()
+	local newtarget = nil
+	local unit = self:GetUnitIdByGUID(15589) -- Eye of C'Thun
+	if unit then
+		local unitTarget = unit.."target"
+		local guid = UnitGUID(unitTarget)
+		if guid then
+			target = guid
+		end
+	end
+end
+
+function mod:GroupWarning()
+	if target then
+		for unit in self:IterateGroup() do
+			local guid = UnitGUID(unit)
+			if target == guid then
+				local name = self:UnitName(unit)
+				if not IsInRaid() then
+					self:Message(26029, "Important", nil, L["groupwarning"]:format(1, name), 26029)
+				else
+					for i = 1, GetNumRaidMembers() do
+						local n, _, group = GetRaidRosterInfo(i)
+						if name == n then
+							self:Message(26029, "Important", nil, L["groupwarning"]:format(group, name), 26029)
+							break
+						end
+					end
+				end
+				break
+			end
+		end
+	end
+	if firstWarning then
+		firstWarning = nil
+		self:CancelTimer(timerGroupWarning)
+		timerGroupWarning = self:ScheduleRepeatingTimer("GroupWarning", timeP1Glare)
+	end
+end
+
+function mod:Tentacles()
+	if phase2started then
+		if gianteye then
+			gianteye = nil
+			self:Bar("giant", tentacletime, L["barGiant"], "Ability_EyeOfTheOwl")
+			self:DelayedMessage("giant", tentacletime -.1, "Important", L["giant1"])
+			self:DelayedMessage("giant", tentacletime - 5, "Urgent", L["giant2"])
+			self:DelayedMessage("giant", tentacletime - 10, "Attention", L["giant3"])
+		else
+			gianteye = true
+		end
+	end
+	self:Bar("tentacle", tentacletime, L.tentacleParty, L.tentacle_icon) -- Tentacle party
+	self:DelayedMessage("tentacle", tentacletime -.1, "Important", L.tentacleParty, L.tentacle_icon) -- Tentacle party
+	self:DelayedMessage("tentacle", tentacletime -5, "Urgent", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
+end
+
+function mod:DarkGlare()
+	local glareId = 26029
+	local darkGlare = self:SpellName(glareId)
+	self:Bar(glareId, timeP1GlareDuration, CL.cast:format(darkGlare)) -- Cast: Dark Glare
+	self:Bar(glareId, timeP1Glare) -- Dark Glare
+	self:DelayedMessage(glareId, timeP1Glare - .1, "Important", darkGlare, glareId) -- Dark Glare
+	self:DelayedMessage(glareId, timeP1Glare - 5, "Urgent", CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
+	self:DelayedMessage(glareId, timeP1GlareDuration, "Important", CL.over:format(darkGlare)) -- Dark Glare Over
+	if firstGlare then
+		firstGlare = nil
+		self:CancelTimer(timerDarkGlare)
+		timerDarkGlare = self:ScheduleRepeatingTimer("DarkGlare", timeP1Glare)
+	end
+end
+
+--[[
 
 L:RegisterTranslations("enUS", function() return {
 	cmd = "Cthun",
@@ -59,7 +328,7 @@ L:RegisterTranslations("enUS", function() return {
 	norape2		= "Tentacles in 5sec!",
 
 
-	weakened		= "C'Thun is weakened for 45 sec",
+	weakened_msg		= "C'Thun is weakened for 45 sec",
 	invulnerable2	= "Party ends in 5 seconds",
 	invulnerable1	= "Party over - C'Thun invulnerable",
 
@@ -73,7 +342,7 @@ L:RegisterTranslations("enUS", function() return {
 	glare1		= "Dark glare!",
 
 	barTentacle	= "Tentacle rape party!",
-	barNoRape	= "Tentacle party!",
+	tentacleParty	= "Tentacle party!",
 	barWeakened	= "C'Thun is weakened!",
 	barGlare	= "Dark glare!",
 	barGiant	= "Giant Eye!",
@@ -111,7 +380,7 @@ L:RegisterTranslations("deDE", function() return {
 	norape1		= "Tentacle Party! - What's that in your pants?", -- ?
 	norape2		= "Tentacle Party! - 5 sec", -- ?
 
-	weakened		= "C'Thun ist geschw\195\164cht f\195\188r 45 Sekunden",
+	weakened_msg		= "C'Thun ist geschw\195\164cht f\195\188r 45 Sekunden",
 	invulnerable2	= "C'Thun unverwundbar in 5 Sekunden",
 	invulnerable1	= "C'Thun ist unverwundbar!",
 
@@ -125,7 +394,7 @@ L:RegisterTranslations("deDE", function() return {
 	glare1		= "Dunkles Starren - BEWEGUNG!",
 
 	barTentacle	= "Tentacle rape party!", -- ?
-	barNoRape	= "Tentacle party!", -- ?
+	tentacleParty	= "Tentacle party!", -- ?
 	barWeakened	= "C'Thun ist geschw\195\164cht!",
 	barGlare	= "Dunkles Starren",
 	barGiant	= "Riesiges Auge", -- ?
@@ -163,7 +432,7 @@ L:RegisterTranslations("koKR", function() return {
 	norape1		= "작은 눈달린 촉수 등장 - 처리~~(마반,스턴)!",
 	norape2		= "작은 눈달린 촉수 - 5초전!",
 
-	weakened		= "쑨이 약화되었습니다 - 45초간 최대 공격!",
+	weakened_msg		= "쑨이 약화되었습니다 - 45초간 최대 공격!",
 	invulnerable2	= "쑨 약화 종료 5초전!",
 	invulnerable1	= "쑨 공격 불가 상태로 전환!",
 
@@ -177,7 +446,7 @@ L:RegisterTranslations("koKR", function() return {
 	glare1		= "암흑의 주시 - 눈촉수 처리하면서 이동!",
 
 	barTentacle	= "눈달린 촉수!",
-	barNoRape	= "작은 눈달린 촉수!",
+	tentacleParty	= "작은 눈달린 촉수!",
 	barWeakened	= "쑨 약화!",
 	barGlare	= "암흑의 주시!",
 	barGiant	= "거대한 눈!",
@@ -219,7 +488,7 @@ L:RegisterTranslations("zhCN", function() return {
 	norape1		= "巨眼、巨爪触须出现！",
 	norape2		= "5秒后眼球巨眼、巨爪触须！",
 
-	weakened		= "克苏恩被削弱45秒！DPS全力输出伤害！",
+	weakened_msg		= "克苏恩被削弱45秒！DPS全力输出伤害！",
 	invulnerable2	= "削弱状态还有5秒结束",
 	invulnerable1	= "削弱状态结束 - 停止攻击克苏恩！",
 
@@ -233,7 +502,7 @@ L:RegisterTranslations("zhCN", function() return {
 	glare1		= "红光发动！",
 
 	barTentacle	= "眼球触须！",
-	barNoRape	= "巨眼、巨爪触须！",
+	tentacleParty	= "巨眼、巨爪触须！",
 	barWeakened	= "克苏恩被削弱了！",
 	barGlare	= "黑暗闪耀！",
 	barGiant	= "巨眼！",
@@ -271,7 +540,7 @@ L:RegisterTranslations("zhTW", function() return {
 	norape1		= "巨眼、巨爪觸鬚出現！",
 	norape2		= "5秒後巨眼、巨爪觸鬚出現！",
 
-	weakened		= "克蘇恩被削弱了 - 45秒內全力輸出傷害！",
+	weakened_msg		= "克蘇恩被削弱了 - 45秒內全力輸出傷害！",
 	invulnerable2	= "削弱狀態還有5秒結束",
 	invulnerable1	= "削弱狀態結束 - 停止攻擊克蘇恩！",
 
@@ -285,7 +554,7 @@ L:RegisterTranslations("zhTW", function() return {
 	glare1		= "黑暗閃耀發動 - 跑位！",
 
 	barTentacle	= "眼球觸鬚！",
-	barNoRape	= "巨眼、巨爪觸鬚！",
+	tentacleParty	= "巨眼、巨爪觸鬚！",
 	barWeakened	= "克蘇恩虛弱！",
 	barGlare	= "黑暗閃耀！",
 	barGiant	= "巨眼！",
@@ -327,7 +596,7 @@ L:RegisterTranslations("frFR", function() return {
 	norape2		= "Tentacules dans 5 sec. !",
 
 
-	weakened		= "C'Thun est affaibli pendant 45 sec.",
+	weakened_msg		= "C'Thun est affaibli pendant 45 sec.",
 	invulnerable2	= "Fin de l'affaiblissement dans 5 sec.",
 	invulnerable1	= "Fin de l'affaiblissement - C'Thun invulnérable",
 
@@ -341,7 +610,7 @@ L:RegisterTranslations("frFR", function() return {
 	glare1		= "Sombre regard !",
 
 	barTentacle = "Viol des tentacules",
-	barNoRape = "Fête des tentacules",
+	tentacleParty = "Fête des tentacules",
 	barWeakened = "C'Thun affaibli",
 	barGlare = "Sombre regard",
 	barGiant = "Oeil géant",
@@ -383,7 +652,7 @@ L:RegisterTranslations("ruRU", function() return {
 	norape2		= "Щупальца появятся через 5 секунд!",
 
 
-	weakened		= "К'Тун ослаблен на 45 секунд",
+	weakened_msg		= "К'Тун ослаблен на 45 секунд",
 	invulnerable2	= "Вечеринка кончится через 5 секунд",
 	invulnerable1	= "Вечеринка закончена - К'Тун неуязвим",
 
@@ -397,7 +666,7 @@ L:RegisterTranslations("ruRU", function() return {
 	glare1		= "Свирепый взгляд!",
 
 	barTentacle	= "Щупальца связывают группу!",
-	barNoRape	= "Связали группУ!",
+	tentacleParty	= "Связали группУ!",
 	barWeakened	= "К'Тун ослаблен!",
 	barGlare	= "Свирепый взгляд!",
 	barGiant	= "Гигантский глаз!",
@@ -410,266 +679,5 @@ L:RegisterTranslations("ruRU", function() return {
 	positions2	= "Свирепый взгляд кончится через 5 секунд",
 	phase2starting	= "Глаз повержен! Появляется тело!",
 } end )
+]]
 
-----------------------------------
---      Module Declaration      --
-----------------------------------
-
-local mod = BigWigs:NewModule(cthun)
-mod.zonename = BZ["Ahn'Qiraj"]
-mod.enabletrigger = { eyeofcthun, cthun }
-mod.toggleOptions = { "rape", -1, "tentacle", "glare", "group", -1, "giant", "weakened", "bosskill" }
-mod.revision = tonumber(string.sub("$Revision: 328 $", 12, -3))
-
-------------------------------
---      Initialization      --
-------------------------------
-
-function mod:OnEnable()
-	target = nil
-	gianteye = nil
-	cthunstarted = nil
-	firstGlare = nil
-	firstWarning = nil
-	phase2started = nil
-
-	tentacletime = timeP1Tentacle
-
-	-- register events
-	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
-	self:AddCombatListener("UNIT_DIED", "Deaths")
-	self:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_PARTY_DAMAGE") -- engage of Eye of C'Thun
-	self:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_CREATURE_DAMAGE", "CHAT_MSG_SPELL_CREATURE_VS_PARTY_DAMAGE") -- engage of Eye of C'Thun
-	-- Not sure about this, since we get out of combat between the phases.
-	--self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-
-	self:RegisterEvent("BigWigs_RecvSync")
-
-	self:TriggerEvent("BigWigs_ThrottleSync", "CThunStart", 10)
-	self:TriggerEvent("BigWigs_ThrottleSync", "CThunP2Start", 10)
-	self:TriggerEvent("BigWigs_ThrottleSync", "CThunWeakened", 10)
-end
-
-----------------------
---  Event Handlers  --
-----------------------
-
-function mod:CHAT_MSG_MONSTER_EMOTE( arg1 )
-	if arg1 == L["weakenedtrigger"] then self:Sync("CThunWeakened") end
-end
-
-function mod:CHAT_MSG_SPELL_CREATURE_VS_PARTY_DAMAGE( arg1 )
-	if not cthunstarted and arg1 and arg1:find(L["eyebeam"]) then self:Sync("CThunStart") end
-end
-
-function mod:Deaths(unit)
-	if unit == eyeofcthun then
-		self:Sync("CThunP2Start")
-	elseif unit == cthun then
-		self:GenericBossDeath(cthun)
-	end
-end
-
-function mod:BigWigs_RecvSync( sync )
-	if sync == "CThunStart" then
-		self:CThunStart()
-	elseif sync == "CThunP2Start" then
-		self:CThunP2Start()
-	elseif sync == "CThunWeakened" then
-		self:CThunWeakened()
-	end
-end
-
------------------------
---   Sync Handlers   --
------------------------
-
-function mod:CThunStart()
-	if not cthunstarted then
-		cthunstarted = true
-
-		self:UnregisterEvent("CHAT_MSG_SPELL_CREATURE_VS_PARTY_DAMAGE")
-		self:UnregisterEvent("CHAT_MSG_SPELL_CREATURE_VS_CREATURE_DAMAGE")
-
-		self:Message(L["startwarn"], "Attention")
-
-		if self.db.profile.tentacle then
-			self:Bar(self.db.profile.rape and L["barTentacle"] or L["barNoRape"], timeP1TentacleStart, "Spell_Nature_CallStorm")
-			self:ScheduleEvent("bwcthuntentacle2", "BigWigs_Message", timeP1TentacleStart - 5, self.db.profile.rape and L["tentacle2"] or L["norape2"], "Urgent" )
-			self:ScheduleEvent("bwcthuntentacle1", "BigWigs_Message", timeP1TentacleStart, self.db.profile.rape and L["tentacle1"] or L["norape1"], "Important" )
-		end
-
-		if self.db.profile.glare then
-			self:Bar(L["barGlare"], timeP1GlareStart, "Spell_Shadow_ShadowBolt")
-			self:ScheduleEvent("bwcthunglare2", "BigWigs_Message", timeP1GlareStart - 5, L["glare2"], "Urgent" )
-			self:ScheduleEvent("bwcthunglare1", "BigWigs_Message", timeP1GlareStart, L["glare1"], "Important" )
-		end
-
-		firstGlare = true
-		firstWarning = true
-
-		self:ScheduleEvent("bwcthuntentaclesstart", self.StartTentacleRape, timeP1TentacleStart, self )
-		self:ScheduleEvent("bwcthundarkglarestart", self.DarkGlare, timeP1GlareStart, self )
-		self:ScheduleEvent("bwcthungroupwarningstart", self.GroupWarning, timeP1GlareStart - 3, self )
-		self:ScheduleRepeatingEvent("bwcthuntarget", self.CheckTarget, timeTarget, self )
-	end
-end
-
-function mod:CThunP2Start()
-	if not phase2started then
-		phase2started = true
-		tentacletime = timeP2Tentacle
-
-		self:Message(L["phase2starting"], "Bosskill")
-
-		self:TriggerEvent("BigWigs_StopBar", self, L["barGlare"] )
-		self:TriggerEvent("BigWigs_StopBar", self, L["barTentacle"] )
-		self:TriggerEvent("BigWigs_StopBar", self, L["barNoRape"] )
-		self:TriggerEvent("BigWigs_StopBar", self, L["barGreenBeam"] )
-
-		self:CancelScheduledEvent("bwcthuntentacle2")
-		self:CancelScheduledEvent("bwcthuntentacle1")
-
-		self:CancelScheduledEvent("bwcthunglare2")
-		self:CancelScheduledEvent("bwcthunglare1")
-
-		self:CancelScheduledEvent("bwcthunpositions2")
-		self:CancelScheduledEvent("bwcthunpositions1")
-
-		-- cancel the repeaters
-		self:CancelScheduledEvent("bwcthuntentacles")
-		self:CancelScheduledEvent("bwcthundarkglare")
-		self:CancelScheduledEvent("bwcthungroupwarning")
-		self:CancelScheduledEvent("bwcthuntarget")
-
-		if self.db.profile.tentacle then
-			self:ScheduleEvent("bwcthuntentacle1", "BigWigs_Message", timeP2Tentacle + timeP2Offset -.1, self.db.profile.rape and L["tentacle1"] or L["norape1"], "Important")
-			self:ScheduleEvent("bwcthuntentacle2", "BigWigs_Message", timeP2Tentacle + timeP2Offset - 5, self.db.profile.rape and L["tentacle2"] or L["norape2"], "Urgent")
-			self:Bar(self.db.profile.rape and L["barTentacle"] or L["barNoRape"], timeP2Tentacle + timeP2Offset, "Spell_Nature_CallStorm")
-		end
-
-		if self.db.profile.giant then
-			self:ScheduleEvent("bwcthungiant1", "BigWigs_Message", timeP2Tentacle + timeP2Offset -.1, L["giant1"], "Important")
-			self:ScheduleEvent("bwcthungiant2", "BigWigs_Message", timeP2Tentacle + timeP2Offset - 5, L["giant2"], "Urgent")
-			self:Bar(L["barGiant"], timeP2Tentacle + timeP2Offset, "Ability_EyeOfTheOwl")
-		end
-
-		self:ScheduleEvent("bwcthunstarttentacles", self.StartTentacleRape, timeP2Tentacle + timeP2Offset, self )
-	end
-
-end
-
-function mod:CThunWeakened()
-	if self.db.profile.weakened then
-		self:Message(L["weakened"], "Positive" )
-		self:Bar(L["barWeakened"], timeWeakened, "INV_ValentinesCandy")
-		self:ScheduleEvent("bwcthunweaken2", "BigWigs_Message", timeWeakened - 5, L["invulnerable2"], "Urgent")
-		self:ScheduleEvent("bwcthunweaken1", "BigWigs_Message", timeWeakened, L["invulnerable1"], "Important" )
-	end
-
-	-- cancel tentacle timers
-	self:CancelScheduledEvent("bwcthuntentacle1")
-	self:CancelScheduledEvent("bwcthuntentacle2")
-
-	self:CancelScheduledEvent("bwcthungiant1")
-	self:CancelScheduledEvent("bwcthungiant2")
-	self:CancelScheduledEvent("bwcthungiant3")
-
-	self:TriggerEvent("BigWigs_StopBar", self, L["barTentacle"])
-	self:TriggerEvent("BigWigs_stopBar", self, L["barNoRape"])
-	self:TriggerEvent("BigWigs_StopBar", self, L["barGiant"])
-
-	-- flipflop the giant eye flag
-	gianteye = not gianteye
-
-	self:CancelScheduledEvent("bwcthuntentacles")
-	self:ScheduleEvent("bwcthunstarttentacles", self.OutOfWeaken, timeReschedule, self )
-end
-
------------------------
--- Utility Functions --
------------------------
-
-function mod:OutOfWeaken()
-	self:StartTentacleRape()
-	-- Also fires up a big claw here, but we don't warn for them?
-end
-
-function mod:StartTentacleRape()
-	self:TentacleRape()
-	self:ScheduleRepeatingEvent("bwcthuntentacles", self.TentacleRape, tentacletime, self )
-end
-
-function mod:CheckTarget()
-	local i
-	local newtarget = nil
-	if( UnitName("playertarget") == eyeofcthun ) then
-		newtarget = UnitName("playertargettarget")
-	else
-		for i = 1, GetNumRaidMembers(), 1 do
-			if UnitName("Raid"..i.."target") == eyeofcthun then
-				newtarget = UnitName("Raid"..i.."targettarget")
-				break
-			end
-		end
-	end
-	if( newtarget ) then
-		target = newtarget
-	end
-end
-
-function mod:GroupWarning()
-	if target then
-		local i, name, group
-		for i = 1, GetNumRaidMembers(), 1 do
-			name, _, group, _, _, _, _, _ = GetRaidRosterInfo(i)
-			if name == target then break end
-		end
-		if self.db.profile.group then
-			self:Message(string.format( L["groupwarning"], group, target), "Important")
-			self:Whisper(target, L["glarewarning"])
-		end
-	end
-	if firstWarning then
-		self:CancelScheduledEvent("bwcthungroupwarning")
-		self:ScheduleRepeatingEvent("bwcthungroupwarning", self.GroupWarning, timeP1Glare, self )
-		firstWarning = nil
-	end
-end
-
-function mod:TentacleRape()
-	if phase2started then
-		if gianteye then
-			gianteye = nil
-			if self.db.profile.giant then
-				self:Bar(L["barGiant"], tentacletime, "Ability_EyeOfTheOwl")
-				self:ScheduleEvent("bwcthungiant1", "BigWigs_Message", tentacletime -.1, L["giant1"], "Important")
-				self:ScheduleEvent("bwcthungiant2", "BigWigs_Message", tentacletime - 5, L["giant2"], "Urgent")
-				self:ScheduleEvent("bwcthungiant3", "BigWigs_Message", tentacletime - 10, L["giant3"], "Attention")
-			end
-		else
-			gianteye = true
-		end
-	end
-	if self.db.profile.tentacle then
-		self:Bar(self.db.profile.rape and L["barTentacle"] or L["barNoRape"], tentacletime, "Spell_Nature_CallStorm")
-		self:ScheduleEvent("bwcthuntentacle1", "BigWigs_Message", tentacletime -.1, self.db.profile.rape and L["tentacle1"] or L["norape1"], "Important")
-		self:ScheduleEvent("bwcthuntentacle2", "BigWigs_Message", tentacletime -5, self.db.profile.rape and L["tentacle2"] or L["norape2"], "Urgent")
-	end
-end
-
-function mod:DarkGlare()
-	if self.db.profile.glare then
-		self:Bar(L["barGreenBeam"], timeP1GlareDuration, "Spell_Nature_CallStorm")
-		self:Bar(L["barGlare"], timeP1Glare, "Spell_Shadow_ShadowBolt")
-		self:ScheduleEvent("bwcthunglare1", "BigWigs_Message", timeP1Glare - .1, L["glare1"], "Important")
-		self:ScheduleEvent("bwcthunglare2", "BigWigs_Message", timeP1Glare - 5, L["glare2"], "Urgent")
-		self:ScheduleEvent("bwcthunpositions1", "BigWigs_Message", timeP1GlareDuration, L["positions1"], "Important")
-		self:ScheduleEvent("bwcthunpositions2", "BigWigs_Message", timeP1GlareDuration - 5, L["positions2"], "Urgent")
-	end
-	if firstGlare then
-		self:CancelScheduledEvent("bwcthundarkglare")
-		self:ScheduleRepeatingEvent("bwcthundarkglare", self.DarkGlare, timeP1Glare, self )
-		firstGlare = nil
-	end
-end
