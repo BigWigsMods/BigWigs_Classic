@@ -8,6 +8,7 @@ if not mod then return end
 mod:RegisterEnableMob(15299)
 
 local swingCount = -1
+local frostCount = 0
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -28,9 +29,10 @@ if L then
 	L.freeze_warn1 = "First freeze phase!"
 	L.freeze_warn2 = "Second freeze phase!"
 	L.freeze_warn3 = "Viscidus is frozen!"
-	L.freeze_warn4 = "Cracking up - little more now!"
+	L.freeze_warn4 = "Cracking up - keep going!"
 	L.freeze_warn5 = "Cracking up - almost there!"
-	L.freeze_warn_hits = "%d melee attacks - %d more to go"
+	L.freeze_warn_melee = "%d melee attacks - %d more to go"
+	L.freeze_warn_frost = "%d frost attacks - %d more to go"
 end
 L = mod:GetLocale()
 mod.displayName = L.bossName
@@ -49,15 +51,24 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "PoisonBoltVolley", 25991)
+
 	self:Log("SPELL_PERIODIC_DAMAGE", "ToxinDamage", 25989)
 	self:Log("SPELL_PERIODIC_MISSED", "ToxinDamage", 25989)
 	self:Log("SPELL_AURA_APPLIED", "ToxinDamage", 25989)
 
-	self:Log("SWING_DAMAGE", "SwingDamage", "*")
-
+	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
 
 	self:Death("Win", 15299)
+end
+
+function mod:OnEngage()
+	self:StartWipeCheck()
+end
+
+function mod:OnWipe()
+	frostCount = 0 -- We might pull with a frost ability, so don't reset on engage
 end
 
 --------------------------------------------------------------------------------
@@ -81,18 +92,16 @@ do
 	end
 end
 
-function mod:SwingDamage(args)
-	if swingCount == -1 then return end
-
-	if self:MobId(args.destGUID) == 15299 then
+function mod:COMBAT_LOG_EVENT_UNFILTERED(_,_,event,_,_,_,_,_,destGUID,_,_,_,_,_,school)
+	if event == "SPELL_DAMAGE" and school == 0x10 and self:MobId(destGUID) == 15299 then -- 0x10 is Frost
+		frostCount = frostCount + 1
+		if frostCount < 20 and frostCount % 3 == 0 then
+			self:Message("freeze", "Positive", nil, L.freeze_warn_frost:format(frostCount, 20-frostCount), L.freeze_icon)
+		end
+	elseif event == "SWING_DAMAGE" and swingCount ~= -1 and self:MobId(destGUID) == 15299 then
 		swingCount = swingCount + 1
-		self:Message("freeze", "Positive", nil, tostring(swingCount), L.freeze_icon)
-		if swingCount == 10 then
-			self:Message("freeze", "Positive", nil, L.freeze_warn_hits:format(10, 20), L.freeze_icon)
-		elseif swingCount == 20 then
-			self:Message("freeze", "Positive", nil, L.freeze_warn_hits:format(20, 10), L.freeze_icon)
-		elseif swingCount == 25 then
-			self:Message("freeze", "Positive", nil, L.freeze_warn_hits:format(25, 5), L.freeze_icon)
+		if swingCount < 30 and swingCount % 3 == 0 then
+			self:Message("freeze", "Positive", nil, L.freeze_warn_melee:format(swingCount, 30-swingCount), L.freeze_icon)
 		end
 	end
 end
@@ -106,6 +115,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(event, msg)
 		swingCount = 0
 		self:Message("freeze", "Important", nil, L.freeze_warn3, L.freeze_icon)
 		self:Bar("freeze", 30, L.freeze_warn3, L.freeze_icon)
+		self:ScheduleTimer("OnWipe", 27) -- Reset the frostCount
 	elseif msg == L.freeze_trigger4 then
 		self:Message("freeze", "Urgent", nil, L.freeze_warn4, L.freeze_icon)
 	elseif msg == L.freeze_trigger5 then
