@@ -177,10 +177,11 @@ function mod:CThunP2Start()
 		self:DelayedMessage("tentacle", timeP2Tentacle + timeP2Offset - 5, "Urgent", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
 		self:Bar("tentacle", timeP2Tentacle + timeP2Offset, L.tentacleParty, L.tentacle_icon) -- Tentacle party
 
-		self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset -.1, "Important", L["giant1"], "Ability_EyeOfTheOwl")
-		self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 5, "Urgent", L["giant2"])
-		self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 10, "Attention", L["giant3"])
-		self:Bar("giant", timeP2Tentacle + timeP2Offset, L["barGiant"], "Ability_EyeOfTheOwl")
+		-- Giant eye warnings seem off now, possibly changed or broken by Blizz
+		--self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset -.1, "Important", L["giant1"], "Ability_EyeOfTheOwl")
+		--self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 5, "Urgent", L["giant2"])
+		--self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 10, "Attention", L["giant3"])
+		--self:Bar("giant", timeP2Tentacle + timeP2Offset, L["barGiant"], "Ability_EyeOfTheOwl")
 
 		timerTentacles = self:ScheduleTimer("StartTentacles", timeP2Tentacle + timeP2Offset)
 	end
@@ -195,16 +196,14 @@ function mod:CThunWeakened()
 	-- cancel tentacle timers
 	self:CancelDelayedMessage(L.tentacleParty) -- Tentacle party
 	self:CancelDelayedMessage(CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
-
-	self:CancelDelayedMessage(L["giant1"])
-	self:CancelDelayedMessage(L["giant2"])
-	self:CancelDelayedMessage(L["giant3"])
-
 	self:StopBar(L.tentacleParty)
-	self:StopBar(L["barGiant"])
 
+	--self:CancelDelayedMessage(L["giant1"])
+	--self:CancelDelayedMessage(L["giant2"])
+	--self:CancelDelayedMessage(L["giant3"])
+	--self:StopBar(L["barGiant"])
 	-- flipflop the giant eye flag
-	gianteye = not gianteye
+	--gianteye = not gianteye
 
 	self:CancelTimer(timerTentacles)
 	self:ScheduleTimer("OutOfWeaken", timeReschedule)
@@ -245,7 +244,7 @@ function mod:GroupWarning()
 				if not IsInRaid() then
 					self:Message(26029, "Important", nil, L["groupwarning"]:format(1, name), 26029)
 				else
-					for i = 1, GetNumRaidMembers() do
+					for i = 1, GetNumGroupMembers() do
 						local n, _, group = GetRaidRosterInfo(i)
 						if name == n then
 							self:Message(26029, "Important", nil, L["groupwarning"]:format(group, name), 26029)
@@ -266,15 +265,15 @@ end
 
 function mod:Tentacles()
 	if phase2started then
-		if gianteye then
-			gianteye = nil
-			self:Bar("giant", tentacletime, L["barGiant"], "Ability_EyeOfTheOwl")
-			self:DelayedMessage("giant", tentacletime -.1, "Important", L["giant1"])
-			self:DelayedMessage("giant", tentacletime - 5, "Urgent", L["giant2"])
-			self:DelayedMessage("giant", tentacletime - 10, "Attention", L["giant3"])
-		else
-			gianteye = true
-		end
+		--if gianteye then
+		--	gianteye = nil
+		--	self:Bar("giant", tentacletime, L["barGiant"], "Ability_EyeOfTheOwl")
+		--	self:DelayedMessage("giant", tentacletime -.1, "Important", L["giant1"])
+		--	self:DelayedMessage("giant", tentacletime - 5, "Urgent", L["giant2"])
+		--	self:DelayedMessage("giant", tentacletime - 10, "Attention", L["giant3"])
+		--else
+		--	gianteye = true
+		--end
 	end
 	self:Bar("tentacle", tentacletime, L.tentacleParty, L.tentacle_icon) -- Tentacle party
 	self:DelayedMessage("tentacle", tentacletime -.1, "Important", L.tentacleParty, L.tentacle_icon) -- Tentacle party
