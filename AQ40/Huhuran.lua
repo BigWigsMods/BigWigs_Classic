@@ -77,16 +77,12 @@ function mod:BerserkApplied(args)
 	-- Cancel Berserk
 	local berserk, format = self:SpellName(26662), string.format
 	self:StopBar(berserk)
+	self:CancelDelayedMessage(format(CL.custom_min, berserk, 2))
 	self:CancelDelayedMessage(format(CL.custom_min, berserk, 1))
 	self:CancelDelayedMessage(format(CL.custom_sec, berserk, 30))
 	self:CancelDelayedMessage(format(CL.custom_sec, berserk, 10))
 	self:CancelDelayedMessage(format(CL.custom_sec, berserk, 5))
 	self:CancelDelayedMessage(format(CL.custom_end, self.displayName, berserk))
-
-	local half = seconds / 2
-	local m = half % 60
-	local halfMin = (half - m) / 60
-	self:CancelDelayedMessage(format(CL.custom_min, berserk, halfMin))
 
 	self:Message("berserk", "Urgent", nil, "30% - ".. args.spellName)
 end
@@ -100,4 +96,3 @@ function mod:UNIT_HEALTH_FREQUENT(unit)
 		end
 	end
 end
-
