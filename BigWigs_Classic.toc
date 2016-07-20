@@ -1,4 +1,4 @@
-## Interface: 60200
+## Interface: 70000
 
 ## Title: Big Wigs [|cffeda55fClassic|r]
 ## Title-zhCN: Big Wigs [|cffeda55f经典旧世|r]
