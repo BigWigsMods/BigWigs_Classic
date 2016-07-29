@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Broodlord Lashlayer", 755)
 if not mod then return end
 mod:RegisterEnableMob(12017)
-mod.toggleOptions = {{40220, "ICON"}, "bosskill"}
+mod.toggleOptions = {{40220, "ICON"}}
 
 --------------------------------------------------------------------------------
 -- Initialization

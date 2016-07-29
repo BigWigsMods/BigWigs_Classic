@@ -6,7 +6,7 @@
 local mod, CL = BigWigs:NewBoss("Ragnaros ", 696) -- Space is intentional to prevent conflict with Ragnaros from Firelands
 if not mod then return end
 mod:RegisterEnableMob(11502)
-mod.toggleOptions = {"submerge", "emerge", 20566, "bosskill"}
+mod.toggleOptions = {"submerge", "emerge", 20566}
 
 --------------------------------------------------------------------------------
 -- Locals

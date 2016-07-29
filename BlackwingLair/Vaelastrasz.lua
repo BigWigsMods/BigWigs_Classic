@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Vaelastrasz the Corrupt", 755)
 if not mod then return end
 mod:RegisterEnableMob(13020)
-mod.toggleOptions = {{18173, "ICON"}, "bosskill"}
+mod.toggleOptions = {{18173, "ICON"}}
 
 --------------------------------------------------------------------------------
 -- Initialization

@@ -6,7 +6,7 @@
 local mod = BigWigs:NewBoss("Sulfuron Harbinger", 696)
 if not mod then return end
 mod:RegisterEnableMob(12098)
-mod.toggleOptions = {19779, 19775, "bosskill"}
+mod.toggleOptions = {19779, 19775}
 
 --------------------------------------------------------------------------------
 -- Localization

@@ -6,7 +6,7 @@
 local mod, CL = BigWigs:NewBoss("Shazzrah", 696)
 if not mod then return end
 mod:RegisterEnableMob(12264)
-mod.toggleOptions = {19714, 23138, 19715, "bosskill"}
+mod.toggleOptions = {19714, 23138, 19715}
 
 --------------------------------------------------------------------------------
 -- Localization

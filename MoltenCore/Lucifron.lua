@@ -6,7 +6,7 @@
 local mod, CL = BigWigs:NewBoss("Lucifron", 696)
 if not mod then return end
 mod:RegisterEnableMob(12118)
-mod.toggleOptions = {19702, 19703, {20604, "ICON"}, "bosskill"}
+mod.toggleOptions = {19702, 19703, {20604, "ICON"}}
 
 --------------------------------------------------------------------------------
 -- Localization

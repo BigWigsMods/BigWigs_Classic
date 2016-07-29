@@ -180,7 +180,7 @@ L:RegisterTranslations("frFR", function() return {
 local mod = BigWigs:NewModule(boss)
 mod.zonename = BZ["Blackwing Lair"]
 mod.enabletrigger = boss
-mod.toggleOptions = {"enrage", "frenzy", "breath", "vulnerability", "bosskill"}
+mod.toggleOptions = {"enrage", "frenzy", "breath", "vulnerability"}
 mod.revision = tonumber(("$Revision: 226 $"):sub(12, -3))
 
 ------------------------------

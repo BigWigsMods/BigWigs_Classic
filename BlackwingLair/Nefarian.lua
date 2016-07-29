@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Nefarian ", 755) -- Space is intentional to prevent conflict with Nefarian from BWD
 if not mod then return end
 mod:RegisterEnableMob(11583, 10162) -- Nefarian, Lord Victor Nefarius
-mod.toggleOptions = {22539, 22686, "classcall", "otherwarn", "bosskill"}
+mod.toggleOptions = {22539, 22686, "classcall", "otherwarn"}
 
 --------------------------------------------------------------------------------
 -- Localization

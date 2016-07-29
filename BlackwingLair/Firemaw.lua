@@ -5,7 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Firemaw", 755)
 if not mod then return end
 mod:RegisterEnableMob(11983)
-mod.toggleOptions = {23339, 22539, "bosskill"}
+mod.toggleOptions = {23339, 22539}
 
 --------------------------------------------------------------------------------
 -- Initialization

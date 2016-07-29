@@ -5,7 +5,7 @@
 local mod = BigWigs:NewBoss("Razorgore the Untamed", 755)
 if not mod then return end
 mod:RegisterEnableMob(12435, 12557) -- Razorgore, Grethok the Controller
-mod.toggleOptions = {14515, {23023, "ICON"}, "eggs", "stages", "bosskill"}
+mod.toggleOptions = {14515, {23023, "ICON"}, "eggs", "stages"}
 
 local eggs = 0
 

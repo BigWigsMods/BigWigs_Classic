@@ -6,7 +6,7 @@
 local mod, CL = BigWigs:NewBoss("Gehennas", 696)
 if not mod then return end
 mod:RegisterEnableMob(12259)
-mod.toggleOptions = {19716, {19717, "FLASH"}, "bosskill"}
+mod.toggleOptions = {19716, {19717, "FLASH"}}
 
 --------------------------------------------------------------------------------
 -- Localization
