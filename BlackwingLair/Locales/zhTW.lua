@@ -2,12 +2,12 @@ local L = BigWigs:NewBossLocale("Razorgore the Untamed", "zhTW")
 if not L then return end
 if L then
 	L.start_trigger = "入侵者"
-	L.start_message = "狂野的拉佐格爾進入戰鬥！"
+	L.start_message = "狂野的拉佐格爾進入戰鬥！45秒後小怪出現！"
 	L.start_soon = "5 秒後小兵出現！"
 	L.start_mob = "小兵出現"
 
-	L.eggs = "取消龍蛋計數"
-	L.eggs_desc = "取消剩餘龍蛋計數 - 該功能還在改善中。。。"
+	L.eggs = "龍蛋計數"
+	L.eggs_desc = "已摧毀龍蛋計數。"
 	L.eggs_message = "已摧毀 %d/30 個龍蛋！"
 
 	L.phase2_message = "已摧毀所有龍蛋"
@@ -24,7 +24,7 @@ if L then
 	L.triggerhunter = "^獵人和你那討厭的豌豆射擊!"
 	L.triggermage = "^還有法師？你應該小心使用你的魔法……"
 	L.triggerdeathknight = "^死亡騎士們…來這。"
-	--L.triggermonk = "Monks"
+	L.triggermonk = "武僧"
 
 	L.landing_soon_warning = "10秒後降落！"
 	L.landing_warning = "奈法利安已降落！"
@@ -40,8 +40,8 @@ if L then
 	L.warnrogue = "盜賊 - 被傳送和麻痺"
 	L.warnpaladin = "聖騎士 - BOSS受到保護祝福，物理攻擊無效"
 	L.warnmage = "法師 - 變形術發動，注意解除"
-	L.warndeathknight = "死亡騎士 - 集體死亡之握"
-	--L.warnmonk = "Monks - Stuck Rolling"
+	L.warndeathknight = "死亡騎士 - 死亡之握"
+	L.warnmonk = "武僧 - 翻滾"
 
 	L.classcall_bar = "職業點名"
 
