@@ -3,20 +3,9 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Buru the Gorger", 717)
+local mod = BigWigs:NewBoss("Buru the Gorger", 717, 1540)
 if not mod then return end
 mod:RegisterEnableMob(15370)
-
---------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	L.bossName = "Buru the Gorger"
-end
-L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

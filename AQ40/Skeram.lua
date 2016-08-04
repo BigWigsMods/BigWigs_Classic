@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Prophet Skeram", 766)
+local mod, CL = BigWigs:NewBoss("The Prophet Skeram", 766, 1543)
 if not mod then return end
 mod:RegisterEnableMob(15263)
 
@@ -16,13 +16,10 @@ local lastMC = nil
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "The Prophet Skeram"
-
 	L.images = 747 -- Summon Images
 	L.images_icon = 127876 -- spell_warlock_demonsoul / Summon Images
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

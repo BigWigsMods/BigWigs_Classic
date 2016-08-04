@@ -3,22 +3,11 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Bug Trio", 766)
+local mod, CL = BigWigs:NewBoss("The Bug Trio", 766, 1547)
 if not mod then return end
 mod:RegisterEnableMob(15543, 15544, 15511) -- Princess Yauj, Vem, Lord Kri
 
 local deaths = 0
-
---------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	L.bossName = "The Bug Trio"
-end
-L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

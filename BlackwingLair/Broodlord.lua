@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Broodlord Lashlayer", 755)
+local mod = BigWigs:NewBoss("Broodlord Lashlayer", 755, 1531)
 if not mod then return end
 mod:RegisterEnableMob(12017)
 mod.toggleOptions = {{40220, "ICON"}}

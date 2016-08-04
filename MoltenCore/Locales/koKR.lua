@@ -1,58 +1,17 @@
 local L = BigWigs:NewBossLocale("Lucifron", "koKR")
 if not L then return end
 if L then
-	--L.bossName = "Lucifron"
-
 	L.mc_bar = "정배: %s"
-end
-
-L = BigWigs:NewBossLocale("Magmadar", "koKR")
-if L then
-	--L.bossName = "Magmadar"
-end
-
-L = BigWigs:NewBossLocale("Gehennas", "koKR")
-if L then
-	--L.bossName = "Gehennas"
-end
-
-L = BigWigs:NewBossLocale("Garr", "koKR")
-if L then
-	--L.bossName = "Garr"
-end
-
-L = BigWigs:NewBossLocale("Baron Geddon", "koKR")
-if L then
-	--L.bossName = "Baron Geddon"
-end
-
-L = BigWigs:NewBossLocale("Shazzrah", "koKR")
-if L then
-	--L.bossName = "Shazzrah"
-end
-
-L = BigWigs:NewBossLocale("Sulfuron Harbinger", "koKR")
-if L then
-	--L.bossName = "Sulfuron Harbinger"
-end
-
-L = BigWigs:NewBossLocale("Golemagg the Incinerator", "koKR")
-if L then
-	--L.bossName = "Golemagg the Incinerator"
 end
 
 L = BigWigs:NewBossLocale("Majordomo Executus", "koKR")
 if L then
-	--L.bossName = "Majordomo Executus"
-
 	L.disabletrigger = "이럴 수가! 그만! 제발 그만! 내가 졌다! 내가 졌어!"
 	--L.power_next = "Next Power"
 end
 
 L = BigWigs:NewBossLocale("Ragnaros ", "koKR")
 if L then
-	--L.bossName = "Ragnaros"
-
 	L.submerge_trigger = "나의 종들아"
 	L.engage_trigger = "이제 너희"
 

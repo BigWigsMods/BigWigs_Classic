@@ -3,20 +3,9 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Fankriss the Unyielding", 766)
+local mod = BigWigs:NewBoss("Fankriss the Unyielding", 766, 1545)
 if not mod then return end
 mod:RegisterEnableMob(15510)
-
---------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	L.bossName = "Fankriss the Unyielding"
-end
-L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

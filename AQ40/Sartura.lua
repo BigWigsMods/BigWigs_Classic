@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Battleguard Sartura", 766)
+local mod, CL = BigWigs:NewBoss("Battleguard Sartura", 766, 1544)
 if not mod then return end
 mod:RegisterEnableMob(15516, 15984) -- Battleguard Sartura, Sartura's Royal Guard
 
@@ -15,11 +15,9 @@ local addsLeft = 3
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "Battleguard Sartura"
 	L.engage_trigger = "sacred grounds" -- You will be judged for defiling these sacred grounds!  The laws of the Ancients will not be challenged!  Trespassers will be annihilated!\r\n
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

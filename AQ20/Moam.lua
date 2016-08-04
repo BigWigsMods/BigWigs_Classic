@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Moam", 717)
+local mod, CL = BigWigs:NewBoss("Moam", 717, 1539)
 if not mod then return end
 mod:RegisterEnableMob(15340)
 
@@ -13,12 +13,9 @@ mod:RegisterEnableMob(15340)
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "Moam"
-
 	L.starttrigger = "%s senses your fear."
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

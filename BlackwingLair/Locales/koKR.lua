@@ -52,7 +52,7 @@ if L then
 	L.otherwarn_desc = "착지와 소환에 대한 경고"
 end
 
-L = BigWigs:NewBossLocale("Chromaggus", "koKR")
+--L = BigWigs:NewBossLocale("Chromaggus", "koKR")
 if L then
 	
 end

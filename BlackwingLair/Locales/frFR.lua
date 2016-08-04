@@ -52,7 +52,7 @@ if L then
 	L.otherwarn_desc = "Préviens quand les Zergs arrivent et quand Nefarian atterit."
 end
 
-L = BigWigs:NewBossLocale("Chromaggus", "frFR")
+--L = BigWigs:NewBossLocale("Chromaggus", "frFR")
 if L then
 	
 end

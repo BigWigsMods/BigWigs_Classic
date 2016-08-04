@@ -52,7 +52,7 @@ if L then
 	L.otherwarn_desc = "降落与骨龙群出现时发出警报"
 end
 
-L = BigWigs:NewBossLocale("Chromaggus", "zhCN")
+--L = BigWigs:NewBossLocale("Chromaggus", "zhCN")
 if L then
 	
 end

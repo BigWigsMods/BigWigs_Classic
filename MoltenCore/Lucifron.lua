@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Lucifron", 696)
+local mod, CL = BigWigs:NewBoss("Lucifron", 696, 1519)
 if not mod then return end
 mod:RegisterEnableMob(12118)
 mod.toggleOptions = {19702, 19703, {20604, "ICON"}}
@@ -14,12 +14,9 @@ mod.toggleOptions = {19702, 19703, {20604, "ICON"}}
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "Lucifron"
-
 	L.mc_bar = "MC: %s"
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

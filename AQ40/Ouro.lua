@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ouro", 766)
+local mod, CL = BigWigs:NewBoss("Ouro", 766, 1550)
 if not mod then return end
 mod:RegisterEnableMob(15517)
 
@@ -13,8 +13,6 @@ mod:RegisterEnableMob(15517)
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "Ouro"
-
 	L.engage_message = "Ouro engaged! Possible Submerge in 90sec!"
 	L.possible_submerge_bar = "Possible submerge"
 
@@ -34,7 +32,6 @@ if L then
 	L.scarabbar = "Scarabs despawn"
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

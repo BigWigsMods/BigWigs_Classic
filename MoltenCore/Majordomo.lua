@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Majordomo Executus", 696)
+local mod, CL = BigWigs:NewBoss("Majordomo Executus", 696, 1527)
 if not mod then return end
 mod:RegisterEnableMob(12018, 11663, 11664)
 mod.toggleOptions = {20619, 21075}
@@ -14,13 +14,10 @@ mod.toggleOptions = {20619, 21075}
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "Majordomo Executus"
-
 	L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
 	L.power_next = "Next Power"
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

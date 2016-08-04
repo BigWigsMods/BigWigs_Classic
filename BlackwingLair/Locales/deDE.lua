@@ -52,7 +52,7 @@ if L then
 	L.otherwarn_desc = "Warnung, wenn Nefarian landet und seine Diener ruft."
 end
 
-L = BigWigs:NewBossLocale("Chromaggus", "deDE")
+--L = BigWigs:NewBossLocale("Chromaggus", "deDE")
 if L then
 	
 end

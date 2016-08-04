@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Viscidus", 766)
+local mod, CL = BigWigs:NewBoss("Viscidus", 766, 1548)
 if not mod then return end
 mod:RegisterEnableMob(15299)
 
@@ -16,8 +16,6 @@ local frostCount = 0
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "Viscidus"
-
 	L.freeze = "Freezing States"
 	L.freeze_desc = "Warn for the different frozen states."
 	L.freeze_icon = 11836 -- spell_frost_glacier / Freeze Solid
@@ -35,7 +33,6 @@ if L then
 	L.freeze_warn_frost = "%d frost attacks - %d more to go"
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

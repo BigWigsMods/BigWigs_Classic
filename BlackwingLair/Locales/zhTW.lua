@@ -52,7 +52,7 @@ if L then
 	L.otherwarn_desc = "降落及龍獸出現時發出警報"
 end
 
-L = BigWigs:NewBossLocale("Chromaggus", "zhTW")
+--L = BigWigs:NewBossLocale("Chromaggus", "zhTW")
 if L then
 	
 end

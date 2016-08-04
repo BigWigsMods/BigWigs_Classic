@@ -51,7 +51,7 @@ if L then
 	L.otherwarn_desc = "Предупреждать об опасности приземления и зерга."
 end
 
-L = BigWigs:NewBossLocale("Chromaggus", "ruRU")
+--L = BigWigs:NewBossLocale("Chromaggus", "ruRU")
 if L then
 	
 end

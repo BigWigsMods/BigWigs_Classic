@@ -2,7 +2,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ebonroc", 755)
+local mod, CL = BigWigs:NewBoss("Ebonroc", 755, 1533)
 if not mod then return end
 mod:RegisterEnableMob(14601)
 mod.toggleOptions = {23339, 22539, {23340, "ICON"}}

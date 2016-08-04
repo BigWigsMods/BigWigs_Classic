@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("C'Thun", 766)
+local mod, CL = BigWigs:NewBoss("C'Thun", 766, 1551)
 if not mod then return end
 mod:RegisterEnableMob(15727, 15589) -- C'Thun, Eye of C'Thun
 
@@ -37,8 +37,6 @@ local timerCheckTarget = nil
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "C'Thun"
-
 	L.tentacle = 61619
 	L.tentacle_desc = "Warn for Tentacles"
 	L.tentacle_icon = 61619 -- inv_misc_monstertail_06 / Tentacles
@@ -70,7 +68,6 @@ if L then
 	L.phase2starting = "The Eye is dead! Body incoming!"
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

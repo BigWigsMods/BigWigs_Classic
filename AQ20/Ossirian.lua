@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ossirian the Unscarred", 717)
+local mod, CL = BigWigs:NewBoss("Ossirian the Unscarred", 717, 1542)
 if not mod then return end
 mod:RegisterEnableMob(15339)
 
@@ -13,13 +13,10 @@ mod:RegisterEnableMob(15339)
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "Ossirian the Unscarred"
-
 	L.debuff = "Weakness"
 	L.debuff_desc = "Warn for various weakness types."
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

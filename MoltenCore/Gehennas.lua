@@ -3,21 +3,10 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Gehennas", 696)
+local mod, CL = BigWigs:NewBoss("Gehennas", 696, 1521)
 if not mod then return end
 mod:RegisterEnableMob(12259)
 mod.toggleOptions = {19716, {19717, "FLASH"}}
-
---------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale("enUS", true)
-if L then
-	L.bossName = "Gehennas"
-end
-L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization

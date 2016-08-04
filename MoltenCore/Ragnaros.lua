@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ragnaros ", 696) -- Space is intentional to prevent conflict with Ragnaros from Firelands
+local mod, CL = BigWigs:NewBoss("Ragnaros ", 696, 1528) -- Space is intentional to prevent conflict with Ragnaros from Firelands
 if not mod then return end
 mod:RegisterEnableMob(11502)
 mod.toggleOptions = {"submerge", "emerge", 20566}
@@ -20,8 +20,6 @@ local sonsdead = 0
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bossName = "Ragnaros"
-
 	L.engage_trigger = "NOW FOR YOU,"
 	L.submerge_trigger = "COME FORTH,"
 
@@ -41,7 +39,6 @@ if L then
 	L.emerge_bar = "Emerge"
 end
 L = mod:GetLocale()
-mod.displayName = L.bossName
 
 --------------------------------------------------------------------------------
 -- Initialization
