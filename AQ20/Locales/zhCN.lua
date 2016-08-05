@@ -1,13 +1,13 @@
 local L = BigWigs:NewBossLocale("Moam", "zhCN")
 if not L then return end
 if L then
-	--L.starttrigger = "%s senses your fear."
+	L.starttrigger = "%s察觉到了你的恐惧。"
 end
 
 L = BigWigs:NewBossLocale("Ossirian the Unscarred", "zhCN")
 if L then
-	--L.debuff = "Weakness"
-	--L.debuff_desc = "Warn for various weakness types."
+	L.debuff = "虚弱"
+	L.debuff_desc = "当各种虚弱类型时发出警报。"
 end
 
 L = BigWigs:NewBossLocale("General Rajaxx", "zhCN")
@@ -38,6 +38,5 @@ end
 
 L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "zhCN")
 if L then
-	--L.guardian = "Anubisath Guardian"
+	L.guardian = "阿努比萨斯守卫者"
 end
-
