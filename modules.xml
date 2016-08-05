@@ -8,8 +8,10 @@
 <Include file="BlackwingLair\locales.xml"/>
 
 <Include file="AQ20\modules.xml"/>
+<Include file="AQ20\locales.xml"/>
 
 <Include file="AQ40\modules.xml"/>
+<Include file="AQ40\locales.xml"/>
 
 </Ui>
 

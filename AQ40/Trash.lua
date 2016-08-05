@@ -21,7 +21,7 @@ if L then
 	L.crawler = "Vekniss Hive Crawler"
 
 	L.guard = 17430 -- Summon Anubisath Swarmguard
-	L.guard_icon = 36034 -- ability_hunter_pet_wasp / Speed of the Swarm
+	L.guard_icon = 36034 -- ability_hunter_pet_wasp / Firefly
 
 	L.warrior = 17431 -- Summon Anubisath Warrior
 	L.warrior_icon = 12294 -- ability_warrior_savageblow / Mortal Strike
