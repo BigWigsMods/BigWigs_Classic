@@ -16,7 +16,7 @@ if L then
 	--L.wave_desc = "Warn for incoming waves."
 
 	--L.trigger1 = "Kill first, ask questions later... Incoming!"
-	--L.trigger2 = "?????"  -- There is no callout for wave 2 ><
+	--L.trigger2 = "?????" -- There is no callout for wave 2 ><
 	--L.trigger3 = "The time of our retribution is at hand! Let darkness reign in the hearts of our enemies!"
 	--L.trigger4 = "No longer will we wait behind barred doors and walls of stone! No longer will our vengeance be denied! The dragons themselves will tremble before our wrath!\013\n"
 	--L.trigger5 = "Fear is for the enemy! Fear and death!"
