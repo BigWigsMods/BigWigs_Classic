@@ -6,8 +6,8 @@ end
 
 L = BigWigs:NewBossLocale("Ossirian the Unscarred", "koKR")
 if L then
-	--L.debuff = "Weakness"
-	--L.debuff_desc = "Warn for various weakness types."
+	L.debuff = "약화마법 경고"
+	L.debuff_desc = "약화마법에 대한 경고"
 end
 
 L = BigWigs:NewBossLocale("General Rajaxx", "koKR")

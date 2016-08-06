@@ -1,13 +1,13 @@
 local L = BigWigs:NewBossLocale("Moam", "frFR")
 if not L then return end
 if L then
-	--L.starttrigger = "%s senses your fear."
+	L.starttrigger = "%s sent votre peur."
 end
 
 L = BigWigs:NewBossLocale("Ossirian the Unscarred", "frFR")
 if L then
-	--L.debuff = "Weakness"
-	--L.debuff_desc = "Warn for various weakness types."
+	L.debuff = "Affaiblissements"
+	L.debuff_desc = "Préviens quand Ossirian est affaibli face à certaines écoles de magie."
 end
 
 L = BigWigs:NewBossLocale("General Rajaxx", "frFR")

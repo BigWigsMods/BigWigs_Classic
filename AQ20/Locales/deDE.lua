@@ -1,7 +1,7 @@
 local L = BigWigs:NewBossLocale("Moam", "deDE")
 if not L then return end
 if L then
-	--L.starttrigger = "%s senses your fear."
+	L.starttrigger = "%s sp\195\188rt Eure Angst."
 end
 
 L = BigWigs:NewBossLocale("Ossirian the Unscarred", "deDE")
