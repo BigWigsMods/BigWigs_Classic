@@ -41,6 +41,7 @@ if L then
 	L.warnpaladin = "Паладины - улучшайте защиту!"
 	L.warnmage = "Маги - используйте превращение!"
 	--L.warnmonk = "Monks - Stuck Rolling"
+	--L.warndemonhunter "Demon Hunters - Blinded"
 
 	L.classcall_bar = "Классовый вызов"
 

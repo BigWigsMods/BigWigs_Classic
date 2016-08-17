@@ -42,6 +42,7 @@ if L then
 	L.warnmage = "Mages - Arrivée des métamorphoses !"
 	--L.warndeathknight = "Death Knights - Death Grip"
 	--L.warnmonk = "Monks - Stuck Rolling"
+	--L.warndemonhunter "Demon Hunters - Blinded"
 
 	L.classcall_bar = "Appel des classes"
 

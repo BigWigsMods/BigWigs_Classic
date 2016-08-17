@@ -40,6 +40,7 @@ if L then
 	L.warnmage = "Mages - Incoming polymorphs!"
 	L.warndeathknight = "Death Knights - Death Grip"
 	L.warnmonk = "Monks - Stuck Rolling"
+	L.warndemonhunter "Demon Hunters - Blinded"
 
 	L.classcall_bar = "Class call"
 
@@ -68,6 +69,7 @@ local warnTable = {
 	[23397] = L.warnwarrior,
 	[23401] = L.warnpriest,
 	[23418] = L.warnpaladin,
+	[204813] = L.warndemonhunter,
 }
 
 --------------------------------------------------------------------------------
@@ -78,8 +80,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Fear", 22686)
 	self:Log("SPELL_CAST_START", "ShadowFlame", 22539)
 
-	-- Rogue, Druid, Warrior, Priest, Paladin
-	self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 23397, 23401, 23418)
+	-- Rogue, Druid, Warrior, Priest, Paladin, Demon Hunter
+	self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 23397, 23401, 23418, 204813)
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 

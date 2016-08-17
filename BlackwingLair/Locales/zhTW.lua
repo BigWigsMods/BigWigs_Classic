@@ -42,6 +42,7 @@ if L then
 	L.warnmage = "法師 - 變形術發動，注意解除"
 	L.warndeathknight = "死亡騎士 - 死亡之握"
 	L.warnmonk = "武僧 - 翻滾"
+	--L.warndemonhunter "Demon Hunters - Blinded"
 
 	L.classcall_bar = "職業點名"
 
