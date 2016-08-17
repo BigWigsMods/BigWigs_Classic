@@ -83,34 +83,3 @@ function mod:AddDies()
 	self:Message("stages", "Positive", nil, CL.add_remaining:format(addsLeft), false)
 end
 
---[[
-L:RegisterTranslations("enUS", function() return {
-	start_trigger = "defiling these sacred grounds",
-} end )
-
-L:RegisterTranslations("frFR", function() return {
-	start_trigger = "Vous serez jugés pour avoir profané ces lieux sacrés ! On ne défie pas les lois des Anciens ! Les intrus seront anéantis !",
-} end )
-
-L:RegisterTranslations("deDE", function() return {
-	start_trigger = "Ihr habt heiligen Boden entweiht",
-} end )
-
-
-L:RegisterTranslations("zhCN", function() return {
-	start_trigger = "你们玷污了这片神圣的土地，会因此受到惩罚的！上古之神的律法不容藐视！入侵者要付出生命的代价！",--我宣判你死刑
-} end )
-
-L:RegisterTranslations("zhTW", function() return {
-	start_trigger = "玷汙這些神聖之地",
-} end )
-
-L:RegisterTranslations("koKR", function() return {
-	start_trigger = "성스러운 땅을 더럽힌 죗값을 받게 되리라. 고대의 법률은 거스를 수 없다! 침입자들을 처단하라!",
-} end )
-
-L:RegisterTranslations("ruRU", function() return {
-	start_trigger = "Загрязняются эти священные земли",
-} end )
-]]
-

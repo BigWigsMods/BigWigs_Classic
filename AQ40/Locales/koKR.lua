@@ -1,18 +1,18 @@
 local L = BigWigs:NewBossLocale("Battleguard Sartura", "koKR")
 if not L then return end
 if L then
-	--L.engage_trigger = "sacred grounds" -- You will be judged for defiling these sacred grounds!  The laws of the Ancients will not be challenged!  Trespassers will be annihilated!\r\n
+	L.engage_trigger = "성스러운 땅을 더럽힌 죗값을 받게 되리라. 고대의 법률은 거스를 수 없다! 침입자들을 처단하라!" -- You will be judged for defiling these sacred grounds!  The laws of the Ancients will not be challenged!  Trespassers will be annihilated!\r\n
 end
 
 L = BigWigs:NewBossLocale("Viscidus", "koKR")
 if L then
 	--L.freeze = "Freezing States"
 	--L.freeze_desc = "Warn for the different frozen states."
-	--L.freeze_trigger1 = "%s begins to slow!"
-	--L.freeze_trigger2 = "%s is freezing up!"
-	--L.freeze_trigger3 = "%s is frozen solid!"
-	--L.freeze_trigger4 = "%s begins to crack!"
-	--L.freeze_trigger5 = "%s looks ready to shatter!"
+	L.freeze_trigger1 = "%s|1이;가; 느려지기 시작했습니다!"	-- CHECK
+	L.freeze_trigger2 = "%s|1이;가; 얼어붙고 있습니다!"	-- CHECK
+	L.freeze_trigger3 = "%s|1이;가; 단단하게 얼었습니다!"	-- CHECK
+	L.freeze_trigger4 = "%s|1이;가; 분해되기 시작합니다!"	-- CHECK
+	L.freeze_trigger5 = "%s|1이;가; 부서질 것 같습니다!"	-- CHECK
 	--L.freeze_warn1 = "First freeze phase!"
 	--L.freeze_warn2 = "Second freeze phase!"
 	--L.freeze_warn3 = "Viscidus is frozen!"
@@ -57,7 +57,7 @@ if L then
 
 	--L.weakened = "Weakened Alert"
 	--L.weakened_desc = "Warn for Weakened State"
-	--L.weakenedtrigger = "%s is weakened!"
+	L.weakenedtrigger = "%s|1이;가; 약해집니다!"
 
 	--L.weakened_msg = "C'Thun is weakened for 45 sec"
 	--L.invulnerable2 = "Party ends in 5 seconds"
