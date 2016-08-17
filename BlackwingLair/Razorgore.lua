@@ -22,7 +22,7 @@ if L then
 
 	L.eggs = "Count Eggs"
 	L.eggs_desc = "Count the destroyed eggs."
-	L.eggs_icon = 19873
+	L.eggs_icon = 115254 -- inv_egg_03 / Lay Egg / icon 132834
 	L.eggs_message = "%d/30 eggs destroyed!"
 
 	L.phase2_message = "All eggs destroyed, Razorgore loose!"
@@ -34,13 +34,12 @@ L = mod:GetLocale()
 --
 
 function mod:OnBossEnable()
-	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "EggKill", "pet", "target", "focus")
 	self:Log("SPELL_AURA_APPLIED", "DominateMind", 14515)
 	self:Log("SPELL_AURA_APPLIED", "Conflagration", 23023)
 	self:Log("SPELL_AURA_REMOVED", "ConflagrationOver", 23023)
 	self:Log("SPELL_CAST_SUCCESS", "Phase2", 23040)
+	self:Log("SPELL_CAST_SUCCESS", "DestroyEgg", 19873)
 	self:Yell("Engage", L.start_trigger)
-	self:AddSyncListener("EggKill")
 end
 
 function mod:OnEngage()
@@ -58,20 +57,10 @@ function mod:DominateMind(args)
 	self:TargetMessage(args.spellId, args.destName, "Important", "Alert")
 end
 
-do
-	function mod:OnSync(sync)
-		if sync == "EggKill" then
-			eggs = eggs + 1
-			if eggs < 30 then
-				self:Message("eggs", "Positive", nil, L.eggs_message:format(eggs), 19873)
-			end
-		end
-	end
-
-	function mod:EggKill(_, _, _, _, spellId)
-		if spellId == 19873 then
-			self:Sync("EggKill")
-		end
+function mod:DestroyEgg()
+	eggs = eggs + 1
+	if eggs < 30 then
+		self:Message("eggs", "Positive", nil, L.eggs_message:format(eggs), L.eggs_icon)
 	end
 end
 
