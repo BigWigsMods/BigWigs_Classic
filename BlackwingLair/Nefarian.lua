@@ -19,9 +19,9 @@ if L then
 
 	L.triggershamans = "Shamans"
 	L.triggerwarlock = "Warlocks"
-	L.triggerhunter = "Hunters"
+	L.triggerhunter = "Hunters" -- Hunters and your annoying pea-shooters!
 	L.triggermage = "Mages"
-	L.triggerdeathknight = "Death Knights"
+	L.triggerdeathknight = "Death Knights" -- Death Knights... get over here!
 	L.triggermonk = "Monks"
 
 	L.landing_soon_warning = "Nefarian landing in 10 seconds!"
@@ -55,9 +55,9 @@ L = mod:GetLocale()
 local warnpairs = {
 	[L.triggershamans] = {L.warnshaman, true},
 	[L.triggerwarlock] = {L.warnwarlock, true},
-	[L.triggerhunter] = {L.warnhunter, true},
+	[L.triggerhunter] = {L.warnhunter, true}, -- No event
 	[L.triggermage] = {L.warnmage, true},
-	[L.triggerdeathknight] = {L.warndeathknight, true},
+	[L.triggerdeathknight] = {L.warndeathknight, true}, -- No event
 	[L.triggermonk] = {L.warnmonk, true},
 	[L.landing_soon_trigger] = {L.landing_soon_warning},
 	[L.landing_trigger] = {L.landing_warning},
