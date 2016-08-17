@@ -1,14 +1,17 @@
 ## Interface: 70000
 
-## Title: Big Wigs [|cffeda55fClassic|r]
-## Title-zhCN: Big Wigs [|cffeda55f经典旧世|r]
-## Notes: A collection of Big Wigs modules from the Classic era.
-## Notes-zhCN: Big Wigs 经典旧世模块。
+## Title: BigWigs [|cffeda55fClassic|r]
+## Title-zhCN: BigWigs [|cffeda55f经典旧世|r]
+## Notes: A collection of BigWigs modules from the Classic era.
+## Notes-zhCN: BigWigs 经典旧世模块。
 
 ## LoadOnDemand: 1
 ## Dependencies: BigWigs
 
 ## X-Category: Raid
+## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
+## X-Curse-Project-ID: bigwigs_classic
+## X-WoWI-ID: 22095
 ## X-BigWigs-LoadOn-ZoneId: 696, 755, 766, 717
 
 modules.xml
