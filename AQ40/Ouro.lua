@@ -211,8 +211,8 @@ L:RegisterTranslations("deDE", function() return {
 	sweep = "Feger",
 	sweep_desc = "Warnung, wenn Ouro Feger wirkt.",
 
-	sandblast = "Sandsto\195\159",
-	sandblast_desc = "Warnung, wenn Ouro Sandsto\195\159 wirkt.",
+	sandblast = "Sandstoß",
+	sandblast_desc = "Warnung, wenn Ouro Sandstoß wirkt.",
 
 	emerge = "Auftauchen",
 	emerge_desc = "Warnung, wenn Ouro auftaucht.",
@@ -232,9 +232,9 @@ L:RegisterTranslations("deDE", function() return {
 	sweepbartext = "Feger",
 
 	sandblasttrigger = "Ouro begins to perform Sand Blast", -- ?
-	sandblastannounce = "Sandsto\195\159 in K\195\188rze!",
-	sandblastwarn = "5 Sekunden bis Sandsto\195\159!",
-	sandblastbartext = "Sandsto\195\159",
+	sandblastannounce = "Sandstoß in Kürze!",
+	sandblastwarn = "5 Sekunden bis Sandstoß!",
+	sandblastbartext = "Sandstoß",
 
 	engage_message = "Ouro engaged! Possible Submerge in 90sec!",
 	possible_submerge_bar = "Possible submerge",
@@ -255,7 +255,7 @@ L:RegisterTranslations("deDE", function() return {
 
 	berserktrigger = "%s goes into a berserker rage!",
 	berserkannounce = "Berserk - Berserk!",
-	berserksoonwarn = "Berserkerwut in K\195\188rze - Bereit machen!",
+	berserksoonwarn = "Berserkerwut in Kürze - Bereit machen!",
 } end )
 
 L:RegisterTranslations("koKR", function() return {

@@ -365,10 +365,10 @@ L:RegisterTranslations("deDE", function() return {
 	giant = "Riesiges Auge",
 	giant_desc = "Riesiges Auge", -- ?
 
-	weakened = "Geschw\195\164cht",
-	weakened_desc = "Warnung, wenn C'Thun geschw\195\164cht ist.",
+	weakened = "Geschwächt",
+	weakened_desc = "Warnung, wenn C'Thun geschwächt ist.",
 
-	weakenedtrigger = "%s ist geschw\195\164cht!",
+	weakenedtrigger = "%s ist geschwächt!",
 
 	tentacle1	= "Tentacle Rape Party - Pleasure!", -- ?
 	tentacle2	= "Tentacle Rape Party - 5 sec", -- ?
@@ -376,7 +376,7 @@ L:RegisterTranslations("deDE", function() return {
 	norape1		= "Tentacle Party! - What's that in your pants?", -- ?
 	norape2		= "Tentacle Party! - 5 sec", -- ?
 
-	weakened_msg		= "C'Thun ist geschw\195\164cht f\195\188r 45 Sekunden",
+	weakened_msg		= "C'Thun ist geschwächt für 45 Sekunden",
 	invulnerable2	= "C'Thun unverwundbar in 5 Sekunden",
 	invulnerable1	= "C'Thun ist unverwundbar!",
 
@@ -391,7 +391,7 @@ L:RegisterTranslations("deDE", function() return {
 
 	barTentacle	= "Tentacle rape party!", -- ?
 	tentacleParty	= "Tentacle party!", -- ?
-	barWeakened	= "C'Thun ist geschw\195\164cht!",
+	barWeakened	= "C'Thun ist geschwächt!",
 	barGlare	= "Dunkles Starren",
 	barGiant	= "Riesiges Auge", -- ?
 	barGreenBeam	= "Green Beam!", -- ?
