@@ -44,8 +44,8 @@ end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esES") or BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esMX")
 if L then
-	--L.defender = "Anubisath Defender"
-	--L.crawler = "Vekniss Hive Crawler"
+	L.defender = "Defensor Anubisath"
+	L.crawler = "Reptador de la colmena Vekniss"
 end
 
 L = BigWigs:NewBossLocale("C'Thun", "esES") or BigWigs:NewBossLocale("C'Thun", "esMX")

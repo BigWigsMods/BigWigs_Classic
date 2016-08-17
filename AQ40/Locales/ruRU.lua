@@ -10,7 +10,7 @@ if L then
 	--L.freeze_desc = "Warn for the different frozen states."
 	L.freeze_trigger1 = "%s замедлен!!"
 	L.freeze_trigger2 = "%s заморожен!"
-	L.freeze_trigger3 = "%s заморожен!\ тело!"
+	--L.freeze_trigger3 = "%s заморожен!\ тело!"
 	L.freeze_trigger4 = "%s Начинает трескаться!"
 	L.freeze_trigger5 = "%s Скоро разобьётся на части!!"
 	--L.freeze_warn1 = "First freeze phase!"
@@ -44,8 +44,8 @@ end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "ruRU")
 if L then
-	--L.defender = "Anubisath Defender"
-	--L.crawler = "Vekniss Hive Crawler"
+	L.defender = "Анубисат-защитник"
+	L.crawler = "Векнисский ядохвост"
 end
 
 L = BigWigs:NewBossLocale("C'Thun", "ruRU")

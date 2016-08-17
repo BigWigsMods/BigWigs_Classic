@@ -44,8 +44,8 @@ end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "itIT")
 if L then
-	--L.defender = "Anubisath Defender"
-	--L.crawler = "Vekniss Hive Crawler"
+	L.defender = "Difensore Anubisath"
+	L.crawler = "Scorpione dell'Alveare Vekniss"
 end
 
 L = BigWigs:NewBossLocale("C'Thun", "itIT")
