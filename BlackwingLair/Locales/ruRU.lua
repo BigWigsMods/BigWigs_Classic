@@ -13,6 +13,15 @@ if L then
 	L.phase2_message = "Все яйца уничтоже, Бритвосметр повержен!"
 end
 
+L = BigWigs:NewBossLocale("Chromaggus", "ruRU")
+if L then
+	L.breath = "Дыхание"
+	L.breath_desc = "Сообщать о дыхании."
+
+	--L.debuffs_message = "3/5 debuffs, carefull!"
+	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+end
+
 L = BigWigs:NewBossLocale("Nefarian ", "ruRU")
 if L then
 	L.landing_soon_trigger = "Отличная работа мои миньёны!"
@@ -41,7 +50,7 @@ if L then
 	L.warnpaladin = "Паладины - улучшайте защиту!"
 	L.warnmage = "Маги - используйте превращение!"
 	--L.warnmonk = "Monks - Stuck Rolling"
-	--L.warndemonhunter "Demon Hunters - Blinded"
+	--L.warndemonhunter = "Demon Hunters - Blinded"
 
 	L.classcall_bar = "Классовый вызов"
 
@@ -50,10 +59,5 @@ if L then
 
 	L.otherwarn = "Приземление и зерг"
 	L.otherwarn_desc = "Предупреждать об опасности приземления и зерга."
-end
-
---L = BigWigs:NewBossLocale("Chromaggus", "ruRU")
-if L then
-	
 end
 

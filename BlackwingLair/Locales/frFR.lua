@@ -13,6 +13,15 @@ if L then
 	L.phase2_message = "Tous les œufs ont été détruits !"
 end
 
+L = BigWigs:NewBossLocale("Chromaggus", "frFR")
+if L then
+	L.breath = "Souffles"
+	L.breath_desc = "Préviens de l'arrivée des souffles."
+
+	--L.debuffs_message = "3/5 debuffs, carefull!"
+	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+end
+
 L = BigWigs:NewBossLocale("Nefarian ", "frFR")
 if L then
 	L.landing_soon_trigger = "Beau travail"
@@ -42,7 +51,7 @@ if L then
 	L.warnmage = "Mages - Arrivée des métamorphoses !"
 	--L.warndeathknight = "Death Knights - Death Grip"
 	--L.warnmonk = "Monks - Stuck Rolling"
-	--L.warndemonhunter "Demon Hunters - Blinded"
+	--L.warndemonhunter = "Demon Hunters - Blinded"
 
 	L.classcall_bar = "Appel des classes"
 
@@ -51,10 +60,5 @@ if L then
 
 	L.otherwarn = "Atterissage et zerg"
 	L.otherwarn_desc = "Préviens quand les Zergs arrivent et quand Nefarian atterit."
-end
-
---L = BigWigs:NewBossLocale("Chromaggus", "frFR")
-if L then
-	
 end
 

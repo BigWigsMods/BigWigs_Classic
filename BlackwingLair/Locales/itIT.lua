@@ -13,6 +13,15 @@ if L then
 	--L.phase2_message = "All eggs destroyed, Razorgore loose!"
 end
 
+L = BigWigs:NewBossLocale("Chromaggus", "itIT")
+if L then
+	--L.breath = "Breaths"
+	--L.breath_desc = "Warn for Breaths."
+
+	--L.debuffs_message = "3/5 debuffs, carefull!"
+	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+end
+
 L = BigWigs:NewBossLocale("Nefarian ", "itIT")
 if L then
 	--L.landing_soon_trigger = "Well done, my minions"
@@ -42,7 +51,7 @@ if L then
 	--L.warnmage = "Mages - Incoming polymorphs!"
 	--L.warndeathknight = "Death Knights - Death Grip"
 	--L.warnmonk = "Monks - Stuck Rolling"
-	--L.warndemonhunter "Demon Hunters - Blinded"
+	--L.warndemonhunter = "Demon Hunters - Blinded"
 
 	--L.classcall_bar = "Class call"
 
@@ -51,10 +60,5 @@ if L then
 
 	--L.otherwarn = "Landing and Zerg"
 	--L.otherwarn_desc = "Landing and Zerg warnings."
-end
-
---L = BigWigs:NewBossLocale("Chromaggus", "itIT")
-if L then
-	
 end
 

@@ -13,6 +13,15 @@ if L then
 	L.phase2_message = "모든 알이 파괴되었습니다, 서슬송곳니가 풀려납니다." -- CHECK
 end
 
+L = BigWigs:NewBossLocale("Chromaggus", "koKR")
+if L then
+	L.breath = "브레스 경고"
+	L.breath_desc = "브레스에 대한 경고"
+
+	--L.debuffs_message = "3/5 debuffs, carefull!"
+	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+end
+
 L = BigWigs:NewBossLocale("Nefarian ", "koKR")
 if L then
 	L.landing_soon_trigger = "적들의 사기가 떨어지고 있다"
@@ -42,7 +51,7 @@ if L then
 	L.warnmage = "마법사 - 변이!"
 	--L.warndeathknight = "Death Knights - Death Grip"
 	--L.warnmonk = "Monks - Stuck Rolling"
-	--L.warndemonhunter "Demon Hunters - Blinded"
+	--L.warndemonhunter = "Demon Hunters - Blinded"
 
 	L.classcall_bar = "직업 지목"
 
@@ -51,10 +60,5 @@ if L then
 
 	L.otherwarn = "기타 경고"
 	L.otherwarn_desc = "착지와 소환에 대한 경고"
-end
-
---L = BigWigs:NewBossLocale("Chromaggus", "koKR")
-if L then
-	
 end
 

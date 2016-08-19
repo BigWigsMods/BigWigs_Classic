@@ -13,6 +13,15 @@ if L then
 	L.phase2_message = "Alle Eier zerstört!"
 end
 
+L = BigWigs:NewBossLocale("Chromaggus", "deDE")
+if L then
+	L.breath = "Atem"
+	L.breath_desc = "Warnung, wenn Chromaggus seinen Atem wirkt."
+
+	--L.debuffs_message = "3/5 debuffs, carefull!"
+	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+end
+
 L = BigWigs:NewBossLocale("Nefarian ", "deDE")
 if L then
 	L.landing_soon_trigger = "Sehr gut, meine Diener"
@@ -42,7 +51,7 @@ if L then
 	L.warnmage = "Magier - Verwandlung!"
 	--L.warndeathknight = "Death Knights - Death Grip"
 	--L.warnmonk = "Monks - Stuck Rolling"
-	--L.warndemonhunter "Demon Hunters - Blinded"
+	--L.warndemonhunter = "Demon Hunters - Blinded"
 
 	L.classcall_bar = "Klassenruf"
 
@@ -51,10 +60,5 @@ if L then
 
 	L.otherwarn = "Anderes"
 	L.otherwarn_desc = "Warnung, wenn Nefarian landet und seine Diener ruft."
-end
-
---L = BigWigs:NewBossLocale("Chromaggus", "deDE")
-if L then
-	
 end
 

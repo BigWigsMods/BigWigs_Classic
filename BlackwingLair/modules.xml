@@ -7,7 +7,7 @@
 <Script file="Firemaw.lua"/>
 <Script file="Ebonroc.lua"/>
 <Script file="Flamegor.lua"/>
-<!--<Script file="Chromaggus.lua"/>-->
+<Script file="Chromaggus.lua"/>
 <Script file="Nefarian.lua"/>
 
 </Ui>

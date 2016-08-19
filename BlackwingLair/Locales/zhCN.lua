@@ -13,6 +13,16 @@ if L then
 	L.phase2_message = "已摧毁所有龙蛋"
 end
 
+L = BigWigs:NewBossLocale("Chromaggus", "zhCN")
+if L then
+	L.breath = "吐息警报"
+	L.breath_desc = "吐息警报"
+
+	L.debuffs = "{23174} （{605}）" -- 多彩变形 （精神控制）
+	--L.debuffs_message = "3/5 debuffs, carefull!"
+	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+end
+
 L = BigWigs:NewBossLocale("Nefarian ", "zhCN")
 if L then
 	L.landing_soon_trigger = "干得好，我的手下。"
@@ -42,7 +52,7 @@ if L then
 	L.warnmage = "法师 - 变形术发动，注意解除！"
 	L.warndeathknight = "死亡骑士 - 死亡之握！"
 	L.warnmonk = "武僧 - 翻滚！"
-	--L.warndemonhunter "Demon Hunters - Blinded"
+	--L.warndemonhunter = "Demon Hunters - Blinded"
 
 	L.classcall_bar = "职业点名"
 
@@ -51,10 +61,5 @@ if L then
 
 	L.otherwarn = "其他警报"
 	L.otherwarn_desc = "降落与骨龙群出现时发出警报"
-end
-
---L = BigWigs:NewBossLocale("Chromaggus", "zhCN")
-if L then
-	
 end
 
