@@ -7,6 +7,7 @@ if not mod then return end
 mod:RegisterEnableMob(14020)
 mod.toggleOptions = {
 	23128, -- Enrage
+	23537, -- Frenzy
 	"breath",
 	"debuffs",
 	--"vulnerability",
@@ -37,13 +38,10 @@ L = mod:GetLocale()
 --
 
 function mod:OnBossEnable()
-	--self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
-	--self:RegisterEvent("UNIT_HEALTH")
-
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
+	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 
 	self:Log("SPELL_AURA_APPLIED", "Enrage", 23128)
+	self:Log("SPELL_AURA_APPLIED", "Frenzy", 23537)
 	self:Log("SPELL_AURA_APPLIED", "Debuffs", 23170, 23154, 23155, 23169, 23153) -- Brood Affliction: Bronze, Black, Red, Green, Blue
 	self:Log("SPELL_AURA_REMOVED", "DebuffsRemoved", 23170, 23154, 23155, 23169, 23153) -- Brood Affliction: Bronze, Black, Red, Green, Blue
 	self:Log("SPELL_CAST_START", "Breath",
@@ -60,6 +58,8 @@ end
 function mod:OnEngage()
 	barcount = 2
 	debuffCount = 0
+	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "FrenzySoon", "boss1")
+
 	local b1 = CL.count:format(self:SpellName(18617), 1) -- Breath (1)
 	local b2 = CL.count:format(self:SpellName(18617), 2) -- Breath (2)
 	self:Bar("breath", 30, b1, 212812) -- INV_Misc_QuestionMark / icon 134400
@@ -73,7 +73,12 @@ end
 --
 
 function mod:Enrage(args)
-	self:TargetMessage(args.spellId, "Attention")
+	self:Message(args.spellId, "Attention")
+end
+
+function mod:Frenzy(args)
+	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
+	self:Message(args.spellId, "Important", nil, "20% - ".. args.spellName)
 end
 
 function mod:Debuffs(args)
@@ -110,18 +115,13 @@ function mod:Breath(args)
 	self:Bar("breath", 60, args.spellId)
 end
 
--- XXX Ancient Hysteria?
---function mod:UNIT_HEALTH(msg)
---	if self.db.profile.enrage and UnitName(msg) == boss then
---		local health = UnitHealth(msg)
---		if health > 20 and health <= 23 and not enraged then
---			if self.db.profile.enrage then self:Message(L["enrage_warning"], "Important") end
---			enraged = true
---		elseif health > 40 and enraged then
---			enraged = nil
---		end
---	end
---end
+function mod:FrenzySoon(unitId)
+	local hp = UnitHealth(unitId) / UnitHealthMax(unitId)
+	if hp < 0.25 then -- Frenzy at 20%
+		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unitId)
+		self:Message(23537, "Neutral", nil, CL.soon:format(self:SpellName(23537)), false)
+	end
+end
 
 --function mod:CHAT_MSG_MONSTER_EMOTE(msg)
 --	if msg == L["vulnerability_trigger"] then
