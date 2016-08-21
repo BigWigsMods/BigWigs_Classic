@@ -18,6 +18,7 @@ if L then
 	L.breath = "吐息警报"
 	L.breath_desc = "吐息警报"
 
+	L.debuffs = "{23174} （{605}）" -- 多彩变形 （统御意志）
 	L.debuffs_message = "3/5 减益，注意！"
 	L.debuffs_warning = "4/5 减益， 5层后将%s！"
 end
