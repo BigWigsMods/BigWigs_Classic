@@ -14,7 +14,7 @@
 ## Notes: A collection of BigWigs modules from the Classic era.
 ## Notes-zhCN: BigWigs 经典旧世模块。
 ## Notes-zhTW: A collection of BigWigs modules from the Classic era.
-## Notes-deDE: A collection of BigWigs modules from the Classic era.
+## Notes-deDE: Eine Sammlung von BigWigs-Modulen aus der Ära Classic.
 ## Notes-frFR: A collection of BigWigs modules from the Classic era.
 ## Notes-itIT: A collection of BigWigs modules from the Classic era.
 ## Notes-koKR: A collection of BigWigs modules from the Classic era.
