@@ -4,7 +4,7 @@
 ## Title-zhCN: BigWigs [|cffeda55f经典旧世|r]
 ## Title-zhTW: BigWigs [|cffeda55fClassic|r]
 ## Title-deDE: BigWigs [|cffeda55fClassic|r]
-## Title-frFR: BigWigs [|cffeda55fClassic|r]
+## Title-frFR: BigWigs [|cffeda55fClassique|r]
 ## Title-itIT: BigWigs [|cffeda55fClassic|r]
 ## Title-koKR: BigWigs [|cffeda55fClassic|r]
 ## Title-ruRU: BigWigs [|cffeda55fClassic|r]
@@ -15,7 +15,7 @@
 ## Notes-zhCN: BigWigs 经典旧世模块。
 ## Notes-zhTW: A collection of BigWigs modules from the Classic era.
 ## Notes-deDE: Eine Sammlung von BigWigs-Modulen aus der Ära Classic.
-## Notes-frFR: A collection of BigWigs modules from the Classic era.
+## Notes-frFR: Une collection de modules BigWigs de l'ère Classique.
 ## Notes-itIT: A collection of BigWigs modules from the Classic era.
 ## Notes-koKR: A collection of BigWigs modules from the Classic era.
 ## Notes-ruRU: A collection of BigWigs modules from the Classic era.
