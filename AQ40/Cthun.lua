@@ -145,12 +145,9 @@ do
 	function mod:BigWigs_BossComm(_, msg)
 		if times[msg] then
 			local t = GetTime()
-			if msg == "CThunP2Start" and t-times[msg] > 5 then
+			if t-times[msg] > 5 then
 				times[msg] = t
-				self:CThunP2Start()
-			elseif msg == "CThunWeakened" and t-times[msg] > 5 then
-				times[msg] = t
-				self:CThunWeakened()
+				self[msg](self)
 			end
 		end
 	end
