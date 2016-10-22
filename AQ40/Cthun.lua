@@ -91,8 +91,7 @@ function mod:OnBossEnable()
 	self:Death("EyeKilled", 15589)
 	self:Death("Win", 15727)
 
-	self:AddSyncListener("CThunP2Start", 10)
-	self:AddSyncListener("CThunWeakened", 10)
+	self:RegisterMessage("BigWigs_BossComm")
 end
 
 function mod:OnEngage()
@@ -138,11 +137,22 @@ function mod:EyeKilled()
 	self:Sync("CThunP2Start")
 end
 
-function mod:OnSync(sync, rest, nick)
-	if sync == "CThunP2Start" then
-		self:CThunP2Start()
-	elseif sync == "CThunWeakened" then
-		self:CThunWeakened()
+do
+	local times = {
+		["CThunP2Start"] = 0,
+		["CThunWeakened"] = 0,
+	}
+	function mod:BigWigs_BossComm(_, msg)
+		if times[msg] then
+			local t = GetTime()
+			if msg == "CThunP2Start" and t-times[msg] > 5 then
+				times[msg] = t
+				self:CThunP2Start()
+			elseif msg == "CThunWeakened" and t-times[msg] > 5 then
+				times[msg] = t
+				self:CThunWeakened()
+			end
+		end
 	end
 end
 
