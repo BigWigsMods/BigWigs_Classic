@@ -48,8 +48,8 @@ end
 
 function mod:EnrageRemoved(args)
 	if args.extraSpellId == 23342 then
-		self:StopBar(args.extraSpellId)
-		self:Message(args.extraSpellId, "Urgent", nil, CL.removed:format(args.extraSpellName))
+		self:StopBar(23342)
+		self:Message(23342, "Urgent", nil, CL.removed:format(args.extraSpellName))
 	end
 end
 

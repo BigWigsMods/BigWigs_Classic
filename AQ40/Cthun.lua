@@ -285,13 +285,12 @@ function mod:Tentacles()
 end
 
 function mod:DarkGlare()
-	local glareId = 26029
-	local darkGlare = self:SpellName(glareId)
-	self:Bar(glareId, timeP1GlareDuration, CL.cast:format(darkGlare)) -- Cast: Dark Glare
-	self:Bar(glareId, timeP1Glare) -- Dark Glare
-	self:DelayedMessage(glareId, timeP1Glare - .1, "Important", darkGlare, glareId) -- Dark Glare
-	self:DelayedMessage(glareId, timeP1Glare - 5, "Urgent", CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
-	self:DelayedMessage(glareId, timeP1GlareDuration, "Important", CL.over:format(darkGlare)) -- Dark Glare Over
+	self:CastBar(26029, timeP1GlareDuration)
+	self:Bar(26029, timeP1Glare) -- Dark Glare
+	local darkGlare = self:SpellName(26029)
+	self:DelayedMessage(26029, timeP1Glare - .1, "Important", darkGlare, 26029) -- Dark Glare
+	self:DelayedMessage(26029, timeP1Glare - 5, "Urgent", CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
+	self:DelayedMessage(26029, timeP1GlareDuration, "Important", CL.over:format(darkGlare)) -- Dark Glare Over
 	if firstGlare then
 		firstGlare = nil
 		self:CancelTimer(timerDarkGlare)
