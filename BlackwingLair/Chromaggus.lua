@@ -132,33 +132,31 @@ end
 --	end
 --end
 
---[[
-if (GetLocale() == "koKR") or (GetLocale() == "zhCN") then
-	function mod:PlayerDamageEvents(msg)
-		if (not self.vulnerability) then
-			local dmg, school, type = select(4, msg:find(L["vulnerability_test"]))
-			if ( type == L["hit"] or type == L["crit"] ) and tonumber(dmg or "") and school then
-				if (tonumber(dmg) >= 550 and type == L["hit"]) or (tonumber(dmg) >= 1100 and type == L["crit"]) then
-					self.vulnerability = school
-					if self.db.profile.vulnerability then self:Message(format(L["vulnerability_message"], school), "Positive") end
-				end
-			end
-		end
-	end
-else
-	function mod:PlayerDamageEvents(msg)
-		if (not self.vulnerability) then
-			local type, dmg, school = select(3, msg:find(L["vulnerability_test"]))
-			if ( type == L["hit"] or type == L["crit"] ) and tonumber(dmg or "") and school then
-				if (tonumber(dmg) >= 550 and type == L["hit"]) or (tonumber(dmg) >= 1100 and type == L["crit"]) then
-					self.vulnerability = school
-					if self.db.profile.vulnerability then self:Message(format(L["vulnerability_message"], school), "Positive") end
-				end
-			end
-		end
-	end
-end
-]]
+--if (GetLocale() == "koKR") or (GetLocale() == "zhCN") then
+--	function mod:PlayerDamageEvents(msg)
+--		if (not self.vulnerability) then
+--			local dmg, school, type = select(4, msg:find(L["vulnerability_test"]))
+--			if ( type == L["hit"] or type == L["crit"] ) and tonumber(dmg or "") and school then
+--				if (tonumber(dmg) >= 550 and type == L["hit"]) or (tonumber(dmg) >= 1100 and type == L["crit"]) then
+--					self.vulnerability = school
+--					if self.db.profile.vulnerability then self:Message(format(L["vulnerability_message"], school), "Positive") end
+--				end
+--			end
+--		end
+--	end
+--else
+--	function mod:PlayerDamageEvents(msg)
+--		if (not self.vulnerability) then
+--			local type, dmg, school = select(3, msg:find(L["vulnerability_test"]))
+--			if ( type == L["hit"] or type == L["crit"] ) and tonumber(dmg or "") and school then
+--				if (tonumber(dmg) >= 550 and type == L["hit"]) or (tonumber(dmg) >= 1100 and type == L["crit"]) then
+--					self.vulnerability = school
+--					if self.db.profile.vulnerability then self:Message(format(L["vulnerability_message"], school), "Positive") end
+--				end
+--			end
+--		end
+--	end
+--end
 
 --L:RegisterTranslations("enUS", function() return {
 --	vulnerability = "Vulnerability Change",
