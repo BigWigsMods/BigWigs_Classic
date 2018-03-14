@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("C'Thun", 766, 1551)
+local mod, CL = BigWigs:NewBoss("C'Thun", 531, 1551)
 if not mod then return end
 mod:RegisterEnableMob(15727, 15589) -- C'Thun, Eye of C'Thun
 

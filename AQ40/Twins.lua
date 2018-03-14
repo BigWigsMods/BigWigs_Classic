@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Twin Emperors", 766, 1549)
+local mod, CL = BigWigs:NewBoss("The Twin Emperors", 531, 1549)
 if not mod then return end
 mod:RegisterEnableMob(15275, 15276) -- Emperor Vek'nilash, Emperor Vek'lor
 

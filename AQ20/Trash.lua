@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ruins of Ahn'Qiraj Trash", 717)
+local mod, CL = BigWigs:NewBoss("Ruins of Ahn'Qiraj Trash", 509)
 if not mod then return end
 mod.displayName = CL.trash
 mod:RegisterEnableMob(15355) -- Anubisath Guardian

@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Bug Trio", 766, 1547)
+local mod, CL = BigWigs:NewBoss("The Bug Trio", 531, 1547)
 if not mod then return end
 mod:RegisterEnableMob(15543, 15544, 15511) -- Princess Yauj, Vem, Lord Kri
 

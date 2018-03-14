@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Battleguard Sartura", 766, 1544)
+local mod, CL = BigWigs:NewBoss("Battleguard Sartura", 531, 1544)
 if not mod then return end
 mod:RegisterEnableMob(15516, 15984) -- Battleguard Sartura, Sartura's Royal Guard
 

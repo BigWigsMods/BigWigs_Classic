@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ossirian the Unscarred", 717, 1542)
+local mod, CL = BigWigs:NewBoss("Ossirian the Unscarred", 509, 1542)
 if not mod then return end
 mod:RegisterEnableMob(15339)
 

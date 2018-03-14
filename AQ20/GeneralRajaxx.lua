@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("General Rajaxx", 717, 1538)
+local mod = BigWigs:NewBoss("General Rajaxx", 509, 1538)
 if not mod then return end
 mod:RegisterEnableMob(15341, 15471) -- General Rajaxx, Lieutenant General Andorov
 

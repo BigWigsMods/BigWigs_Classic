@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Fankriss the Unyielding", 766, 1545)
+local mod = BigWigs:NewBoss("Fankriss the Unyielding", 531, 1545)
 if not mod then return end
 mod:RegisterEnableMob(15510)
 
