@@ -10,5 +10,6 @@
 <Script file="Chromaggus.lua"/>
 <Script file="Nefarian.lua"/>
 
-</Ui>
+<Include file="Options\options.xml"/>
 
+</Ui>

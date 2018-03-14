@@ -12,5 +12,6 @@
 <Script file="Majordomo.lua"/>
 <Script file="Ragnaros.lua"/>
 
-</Ui>
+<Include file="Options\options.xml"/>
 
+</Ui>
