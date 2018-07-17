@@ -1,9 +1,9 @@
 
 BigWigs:AddColors("Razorgore the Untamed", {
-	[23023] = {"Urgent","Personal"},
-	["stages"] = {"Urgent","Important"},
 	[14515] = {"Important","Personal"},
+	[23023] = {"Personal","Urgent"},
 	["eggs"] = "Positive",
+	["stages"] = {"Important","Urgent"},
 })
 
 BigWigs:AddColors("Vaelastrasz the Corrupt", {
@@ -15,32 +15,32 @@ BigWigs:AddColors("Broodlord Lashlayer", {
 })
 
 BigWigs:AddColors("Firemaw", {
-	[23339] = {"Important","Urgent"},
 	[22539] = "Important",
+	[23339] = {"Important","Urgent"},
 })
 
 BigWigs:AddColors("Ebonroc", {
-	[23339] = {"Important","Urgent"},
 	[22539] = "Important",
+	[23339] = {"Important","Urgent"},
 	[23340] = {"Attention","Personal"},
 })
 
 BigWigs:AddColors("Flamegor", {
-	[23339] = {"Important","Urgent"},
 	[22539] = "Important",
+	[23339] = {"Important","Urgent"},
 	[23342] = "Urgent",
 })
 
 BigWigs:AddColors("Chromaggus", {
-	[23537] = {"Important","Neutral"},
-	["breath"] = {"Positive","Attention","Important"},
 	[23128] = "Attention",
+	[23537] = {"Important","Neutral"},
+	["breath"] = {"Attention","Important","Positive"},
 	["debuffs"] = {"Important","Urgent"},
 })
 
 BigWigs:AddColors("Nefarian ", {
-	["otherwarn"] = "Important",
 	[22539] = "Attention",
-	["classcall"] = {"Positive","Important"},
-	[22686] = {"Urgent","Important"},
+	[22686] = {"Important","Urgent"},
+	["classcall"] = {"Important","Positive"},
+	["otherwarn"] = "Important",
 })

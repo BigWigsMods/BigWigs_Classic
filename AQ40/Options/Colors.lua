@@ -1,71 +1,71 @@
 
 BigWigs:AddColors("The Prophet Skeram", {
 	[785] = {"Attention","Personal"},
-	[26192] = "Urgent",
 	[20449] = "Important",
+	[26192] = "Urgent",
 	["images"] = {"Important","Positive"},
 })
 
 BigWigs:AddColors("The Bug Trio", {
 	[25786] = "Personal",
-	[26580] = {"Important","Urgent"},
 	[25807] = "Urgent",
 	[25812] = "Attention",
+	[26580] = {"Important","Urgent"},
 })
 
 BigWigs:AddColors("Battleguard Sartura", {
-	["stages"] = "Positive",
+	[8269] = {"Attention","Urgent"},
 	[26083] = {"Important","Positive"},
-	[8269] = {"Urgent","Attention"},
+	["stages"] = "Positive",
 })
 
 BigWigs:AddColors("Fankriss the Unyielding", {
-	[25832] = "Urgent",
 	[720] = {"Important","Personal"},
 	[25646] = {"Attention","Personal"},
+	[25832] = "Urgent",
 })
 
 BigWigs:AddColors("Viscidus", {
-	[25991] = "Attention",
 	[25989] = "Personal",
-	["freeze"] = {"Positive","Neutral","Important","Urgent"},
+	[25991] = "Attention",
+	["freeze"] = {"Important","Neutral","Positive","Urgent"},
 })
 
 BigWigs:AddColors("Princess Huhuran", {
 	[26051] = "Attention",
-	["berserk"] = {"Urgent","Important"},
-	[26180] = {"Positive","Important","Personal"},
+	[26180] = {"Important","Personal","Positive"},
+	["berserk"] = {"Important","Urgent"},
 })
 
 BigWigs:AddColors("The Twin Emperors", {
-	[7393] = "Important",
+	[800] = {"Attention","Important","Urgent"},
 	[802] = "Neutral",
+	[7393] = "Important",
 	[26607] = "Personal",
-	[800] = {"Urgent","Important","Attention"},
 })
 
 BigWigs:AddColors("Ouro", {
-	[26103] = "Important",
-	[26615] = {"Urgent","Positive"},
-	["stages"] = {"Attention","Important"},
 	[26102] = {"Attention","Important"},
+	[26103] = "Important",
+	[26615] = {"Positive","Urgent"},
 	["scarab"] = "Important",
+	["stages"] = {"Attention","Important"},
 })
 
 BigWigs:AddColors("C'Thun", {
-	["weakened"] = {"Positive","Urgent","Important"},
-	[26029] = {"Urgent","Important"},
+	[26029] = {"Important","Urgent"},
 	["stages"] = {"Attention","Neutral"},
-	["tentacle"] = {"Urgent","Important"},
+	["tentacle"] = {"Important","Urgent"},
+	["weakened"] = {"Important","Positive","Urgent"},
 })
 
 BigWigs:AddColors("Ahn'Qiraj Trash", {
 	[8269] = "Important",
-	[25698] = "Urgent",
 	[25051] = {"Attention","Personal"},
+	[25698] = "Urgent",
 	[26554] = "Neutral",
-	["warrior"] = "Positive",
 	[26556] = {"Attention","Personal"},
-	["guard"] = "Positive",
 	[26558] = "Neutral",
+	["guard"] = "Positive",
+	["warrior"] = "Positive",
 })

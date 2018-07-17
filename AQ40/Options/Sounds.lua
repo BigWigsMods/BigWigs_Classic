@@ -13,8 +13,8 @@ BigWigs:AddSounds("Battleguard Sartura", {
 })
 
 BigWigs:AddSounds("Fankriss the Unyielding", {
-	[25832] = "Info",
 	[720] = "Alert",
+	[25832] = "Info",
 })
 
 BigWigs:AddSounds("Viscidus", {
@@ -26,9 +26,9 @@ BigWigs:AddSounds("Princess Huhuran", {
 })
 
 BigWigs:AddSounds("The Twin Emperors", {
+	[800] = "Info",
 	[7393] = "Warning",
 	[26607] = "Alarm",
-	[800] = "Info",
 })
 
 BigWigs:AddSounds("Ouro", {

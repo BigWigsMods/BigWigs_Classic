@@ -13,6 +13,6 @@ BigWigs:AddSounds("Chromaggus", {
 })
 
 BigWigs:AddSounds("Nefarian ", {
-	[22686] = "Alert",
 	[22539] = "Alert",
+	[22686] = "Alert",
 })
