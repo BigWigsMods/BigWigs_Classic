@@ -89,16 +89,20 @@ do
 	end
 end
 
-function mod:COMBAT_LOG_EVENT_UNFILTERED(_,_,event,_,_,_,_,_,destGUID,_,_,_,_,_,school)
-	if event == "SPELL_DAMAGE" and school == 0x10 and self:MobId(destGUID) == 15299 then -- 0x10 is Frost
-		frostCount = frostCount + 1
-		if frostCount < 20 and frostCount % 3 == 0 then
-			self:Message("freeze", "Positive", nil, L.freeze_warn_frost:format(frostCount, 20-frostCount), L.freeze_icon)
-		end
-	elseif event == "SWING_DAMAGE" and swingCount ~= -1 and self:MobId(destGUID) == 15299 then
-		swingCount = swingCount + 1
-		if swingCount < 30 and swingCount % 3 == 0 then
-			self:Message("freeze", "Positive", nil, L.freeze_warn_melee:format(swingCount, 30-swingCount), L.freeze_icon)
+do
+	local CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo -- XXX InfoBox?
+	function mod:COMBAT_LOG_EVENT_UNFILTERED()
+		local _,event,_,_,_,_,_,destGUID,_,_,_,_,_,school = CombatLogGetCurrentEventInfo()
+		if event == "SPELL_DAMAGE" and school == 0x10 and self:MobId(destGUID) == 15299 then -- 0x10 is Frost
+			frostCount = frostCount + 1
+			if frostCount < 20 and frostCount % 3 == 0 then
+				self:Message("freeze", "Positive", nil, L.freeze_warn_frost:format(frostCount, 20-frostCount), L.freeze_icon)
+			end
+		elseif event == "SWING_DAMAGE" and swingCount ~= -1 and self:MobId(destGUID) == 15299 then
+			swingCount = swingCount + 1
+			if swingCount < 30 and swingCount % 3 == 0 then
+				self:Message("freeze", "Positive", nil, L.freeze_warn_melee:format(swingCount, 30-swingCount), L.freeze_icon)
+			end
 		end
 	end
 end
