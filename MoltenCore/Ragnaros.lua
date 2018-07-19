@@ -113,7 +113,7 @@ function mod:SonDeaths()
 	end
 end
 
-function mod:UNIT_TARGETABLE_CHANGED(unit)
+function mod:UNIT_TARGETABLE_CHANGED(_, unit)
 	if UnitCanAttack("player", unit) then
 		self:Emerge()
 	else

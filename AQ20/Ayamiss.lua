@@ -53,11 +53,11 @@ function mod:Frenzy(args)
 	self:Message(args.spellId, "Important")
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unit)
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(UnitGUID(unit)) == 15369 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 26 then
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+			self:UnregisterUnitEvent(event, "target", "focus")
 			self:Message(8269, "Positive", nil, CL.soon:format(self:SpellName(8269)), false)
 		end
 	end

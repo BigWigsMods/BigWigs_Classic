@@ -84,14 +84,14 @@ function mod:SummonImages(args)
 	self:Message("images", "Important", "Long", L.images, L.images_icon)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unit)
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(UnitGUID(unit)) == 15263 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if (hp < 82 and splitPhase == 1) or (hp < 57 and splitPhase == 2) or (hp < 32 and splitPhase == 3) then
 			splitPhase = splitPhase + 1
 			self:Message("images", "Positive", nil, CL.soon:format(self:SpellName(L.images)), false)
 			if splitPhase > 3 then
-				self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+				self:UnregisterUnitEvent(event, "target", "focus")
 			end
 		end
 	end

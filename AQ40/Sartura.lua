@@ -68,11 +68,11 @@ function mod:WhirlwindOver(args)
 	self:Message(args.spellId, "Positive", nil, CL.over:format(args.spellName))
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unit)
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(UnitGUID(unit)) == 15516 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 31 then
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+			self:UnregisterUnitEvent(event, "target", "focus")
 			self:Message(8269, "Attention", nil, CL.soon:format(self:SpellName(8269)), false)
 		end
 	end

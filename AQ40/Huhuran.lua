@@ -76,11 +76,11 @@ function mod:BerserkApplied(args)
 	self:Message("berserk", "Urgent", nil, "30% - ".. args.spellName)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unit)
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(UnitGUID(unit)) == 15509 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 36  then
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+			self:UnregisterUnitEvent(event, "target", "focus")
 			self:Message("berserk", "Important", nil, CL.soon:format(self:SpellName(26662)), false)
 		end
 	end
