@@ -27,7 +27,7 @@ function mod:OnBossEnable()
 
 function mod:Inspire(args)
 	self:Bar(args.spellId, 10)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 end
 
 do
@@ -37,7 +37,7 @@ do
 		if t - prev > 1 then
 			prev = t
 			self:Bar(args.spellId, 2)
-			self:Message(args.spellId, "Important")
+			self:Message(args.spellId, "red")
 		end
 	end
 end

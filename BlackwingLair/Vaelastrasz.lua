@@ -22,7 +22,7 @@ end
 --
 
 function mod:Adrenaline(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention", "Alarm")
+	self:TargetMessage(args.spellId, args.destName, "yellow", "Alarm")
 	self:PrimaryIcon(args.spellId, args.destName)
 	self:TargetBar(args.spellId, 20, args.destName, 67729, args.spellId) -- Explode
 end

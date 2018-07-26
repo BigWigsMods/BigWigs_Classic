@@ -32,15 +32,15 @@ end
 --
 
 function mod:MortalWound(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "Attention")
+	self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
 	self:TargetBar(args.spellId, 15, args.destName)
 end
 
 function mod:SummonWorm(args)
-	self:Message(25832, "Urgent", "Info")
+	self:Message(25832, "orange", "Info")
 end
 
 function mod:Entangle(args)
-	self:TargetMessage(720, args.destName, "Important", "Alert", nil, nil, true)
+	self:TargetMessage(720, args.destName, "red", "Alert", nil, nil, true)
 end
 

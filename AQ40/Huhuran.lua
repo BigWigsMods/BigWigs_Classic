@@ -42,7 +42,7 @@ end
 
 function mod:WyvernSting(args)
 	self:CDBar(args.spellId, 25) -- Can randomly be way higher than 25
-	self:DelayedMessage(args.spellId, 23, "Positive", CL.soon:format(args.spellName))
+	self:DelayedMessage(args.spellId, 23, "green", CL.soon:format(args.spellName))
 end
 
 do
@@ -50,13 +50,13 @@ do
 	function mod:WyvernStingApplied(args)
 		stingTbl[#stingTbl+1] = args.destName
 		if #stingTbl == 1 then
-			self:ScheduleTimer("TargetMessage", 1, args.spellId, stingTbl, "Important") -- Can take a while to apply to everyone if very spread out (travel time)
+			self:ScheduleTimer("TargetMessage", 1, args.spellId, stingTbl, "red") -- Can take a while to apply to everyone if very spread out (travel time)
 		end
 	end
 end
 
 function mod:Enrage(args)
-	self:Message(args.spellId, "Attention", self:Dispeller("enrage", true) and "Warning")
+	self:Message(args.spellId, "yellow", self:Dispeller("enrage", true) and "Warning")
 	self:CDBar(args.spellId, 14.5)
 end
 
@@ -73,7 +73,7 @@ function mod:BerserkApplied(args)
 	self:CancelDelayedMessage(format(CL.custom_sec, berserk, 5))
 	self:CancelDelayedMessage(format(CL.custom_end, self.displayName, berserk))
 
-	self:Message("berserk", "Urgent", nil, "30% - ".. args.spellName)
+	self:Message("berserk", "orange", nil, "30% - ".. args.spellName)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
@@ -81,7 +81,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 36  then
 			self:UnregisterUnitEvent(event, "target", "focus")
-			self:Message("berserk", "Important", nil, CL.soon:format(self:SpellName(26662)), false)
+			self:Message("berserk", "red", nil, CL.soon:format(self:SpellName(26662)), false)
 		end
 	end
 end

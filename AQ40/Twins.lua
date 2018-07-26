@@ -38,8 +38,8 @@ end
 function mod:OnEngage()
 	self:StartWipeCheck()
 	self:Berserk(900)
-	self:DelayedMessage(800, 20, "Urgent", CL.custom_sec:format(self:SpellName(800), 10))
-	self:DelayedMessage(800, 25, "Important", CL.custom_sec:format(self:SpellName(800), 5))
+	self:DelayedMessage(800, 20, "orange", CL.custom_sec:format(self:SpellName(800), 10))
+	self:DelayedMessage(800, 25, "red", CL.custom_sec:format(self:SpellName(800), 5))
 	self:Bar(800, 30)
 end
 
@@ -53,9 +53,9 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Attention", "Info")
-			self:DelayedMessage(args.spellId, 20, "Urgent", CL.custom_sec:format(args.spellName, 10))
-			self:DelayedMessage(args.spellId, 25, "Important", CL.custom_sec:format(args.spellName, 5))
+			self:Message(args.spellId, "yellow", "Info")
+			self:DelayedMessage(args.spellId, 20, "orange", CL.custom_sec:format(args.spellName, 10))
+			self:DelayedMessage(args.spellId, 25, "red", CL.custom_sec:format(args.spellName, 5))
 			self:Bar(args.spellId, 30)
 		end
 	end
@@ -67,13 +67,13 @@ do
 		local t = GetTime()
 		if t-prev > 10 then
 			prev = t
-			self:Message(args.spellId, "Important", "Warning", CL.casting:format(args.spellName))
+			self:Message(args.spellId, "red", "Warning", CL.casting:format(args.spellName))
 		end
 	end
 end
 
 function mod:MutateBug(args)
-	self:Message(args.spellId, "Neutral")
+	self:Message(args.spellId, "cyan")
 end
 
 do
@@ -82,7 +82,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) then
 			prev = t
-			self:Message(args.spellId, "Personal", "Alarm", CL.you:format(args.spellName))
+			self:Message(args.spellId, "blue", "Alarm", CL.you:format(args.spellName))
 		end
 	end
 end

@@ -68,7 +68,7 @@ end
 function mod:OnEngage()
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:PossibleSubmerge()
-	self:Message("stages", "Attention", nil, L["engage_message"], false)
+	self:Message("stages", "yellow", nil, L["engage_message"], false)
 end
 
 --------------------------------------------------------------------------------
@@ -76,26 +76,26 @@ end
 --
 
 function mod:PossibleSubmerge()
-	self:DelayedMessage("stages", 75, "Important", L["emergewarn"])
-	self:DelayedMessage("stages", 165, "Important", L["emergewarn2"])
+	self:DelayedMessage("stages", 75, "red", L["emergewarn"])
+	self:DelayedMessage("stages", 165, "red", L["emergewarn2"])
 	self:Bar("stages", 90, L["possible_submerge_bar"], "misc_arrowdown")
 	self:Bar("stages", 180, L["emergebartext"], "misc_arrowdown")
 end
 
 function mod:Sweep(args)
-	self:Message(args.spellId, "Important")
-	self:DelayedMessage(args.spellId, 16, "Important", CL.custom_sec:format(args.spellName, 5))
+	self:Message(args.spellId, "red")
+	self:DelayedMessage(args.spellId, 16, "red", CL.custom_sec:format(args.spellName, 5))
 	self:Bar(args.spellId, 21)
 end
 
 function mod:SandBlast(args)
-	self:Message(args.spellId, "Attention")
-	self:DelayedMessage(args.spellId, 17, "Important", CL.custom_sec:format(args.spellName, 5))
+	self:Message(args.spellId, "yellow")
+	self:DelayedMessage(args.spellId, 17, "red", CL.custom_sec:format(args.spellName, 5))
 	self:Bar(args.spellId, 22)
 end
 
 function mod:BerserkApplied(args)
-	self:Message(args.spellId, "Urgent", "Long", "20% - ".. args.spellName)
+	self:Message(args.spellId, "orange", "Long", "20% - ".. args.spellName)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 	self:CancelDelayedMessage(L["emergewarn"])
 	self:CancelDelayedMessage(L["emergewarn2"])
@@ -113,8 +113,8 @@ function mod:SummonOuroMounds(args) -- Submerge
 	self:StopBar(26103) -- Sweep
 	self:StopBar(26102) -- Sand Blast
 
-	self:Message("stages", "Important", nil, 179624, "misc_arrowdown") -- 179624 = "Submerge"
-	self:DelayedMessage("stages", 25, "Important", CL.custom_sec:format(self:SpellName(54850), 5))
+	self:Message("stages", "red", nil, 179624, "misc_arrowdown") -- 179624 = "Submerge"
+	self:DelayedMessage("stages", 25, "red", CL.custom_sec:format(self:SpellName(54850), 5))
 	self:Bar("stages", 30, 54850, "misc_arrowlup") -- 54850 = "Emerge"
 end
 
@@ -125,19 +125,19 @@ do
 		if t-prev > 5 then
 			prev = t
 
-			self:Message("stages", "Important", nil, 54850, "misc_arrowlup") -- 54850 = "Emerge"
+			self:Message("stages", "red", nil, 54850, "misc_arrowlup") -- 54850 = "Emerge"
 			self:PossibleSubmerge()
 
 			-- Sweep
-			self:DelayedMessage(26103, 16, "Important", CL.custom_sec:format(self:SpellName(26103), 5))
+			self:DelayedMessage(26103, 16, "red", CL.custom_sec:format(self:SpellName(26103), 5))
 			self:Bar(26103, 21)
 
 			-- Sand Blast
-			self:DelayedMessage(26102, 17, "Important", CL.custom_sec:format(self:SpellName(26102), 5))
+			self:DelayedMessage(26102, 17, "red", CL.custom_sec:format(self:SpellName(26102), 5))
 			self:Bar(26102, 22)
 
 			-- Scarab Despawn
-			self:DelayedMessage("scarab", 50, "Important", L["scarabdespawn"])
+			self:DelayedMessage("scarab", 50, "red", L["scarabdespawn"])
 			self:Bar("scarab", 60, L["scarabbar"], L.scarab_icon)
 		end
 	end
@@ -148,7 +148,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 25 then
 			self:UnregisterUnitEvent(event, "target", "focus")
-			self:Message(26615, "Positive", nil, CL.soon:format(self:SpellName(26615)), false)
+			self:Message(26615, "green", nil, CL.soon:format(self:SpellName(26615)), false)
 		end
 	end
 end

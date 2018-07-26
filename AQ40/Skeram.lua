@@ -57,7 +57,7 @@ end
 --
 
 function mod:TrueFulfillment(args) -- Mind control
-	self:TargetMessage(args.spellId, args.destName, "Attention")
+	self:TargetMessage(args.spellId, args.destName, "yellow")
 	self:TargetBar(args.spellId, 20, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 	lastMC = args.destGUID
@@ -72,16 +72,16 @@ end
 
 function mod:Teleport(args)
 	if self:MobId(args.sourceGUID) == 15263 then -- Filter out his images
-		self:Message(20449, "Important")
+		self:Message(20449, "red")
 	end
 end
 
 function mod:ArcaneExplosion(args)
-	self:Message(args.spellId, "Urgent")
+	self:Message(args.spellId, "orange")
 end
 
 function mod:SummonImages(args)
-	self:Message("images", "Important", "Long", L.images, L.images_icon)
+	self:Message("images", "red", "Long", L.images, L.images_icon)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
@@ -89,7 +89,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if (hp < 82 and splitPhase == 1) or (hp < 57 and splitPhase == 2) or (hp < 32 and splitPhase == 3) then
 			splitPhase = splitPhase + 1
-			self:Message("images", "Positive", nil, CL.soon:format(self:SpellName(L.images)), false)
+			self:Message("images", "green", nil, CL.soon:format(self:SpellName(L.images)), false)
 			if splitPhase > 3 then
 				self:UnregisterUnitEvent(event, "target", "focus")
 			end

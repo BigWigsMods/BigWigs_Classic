@@ -41,7 +41,7 @@ end
 
 function mod:OnEngage()
 	self:StartWipeCheck()
-	self:Message(25176, "Important") -- Strength of Ossirian
+	self:Message(25176, "red") -- Strength of Ossirian
 end
 
 --------------------------------------------------------------------------------
@@ -49,20 +49,20 @@ end
 --
 
 function mod:Weakness(args)
-	self:Message("debuff", "Attention", "Info", args.spellId)
+	self:Message("debuff", "yellow", "Info", args.spellId)
 	self:Bar("debuff", 45, args.spellId)
 
-	self:DelayedMessage(25176, 30, "Attention", CL.custom_sec:format(self:SpellName(25176), 15))
-	self:DelayedMessage(25176, 35, "Urgent", CL.custom_sec:format(self:SpellName(25176), 10))
-	self:DelayedMessage(25176, 40, "Important", CL.custom_sec:format(self:SpellName(25176), 5))
+	self:DelayedMessage(25176, 30, "yellow", CL.custom_sec:format(self:SpellName(25176), 15))
+	self:DelayedMessage(25176, 35, "orange", CL.custom_sec:format(self:SpellName(25176), 10))
+	self:DelayedMessage(25176, 40, "red", CL.custom_sec:format(self:SpellName(25176), 5))
 	self:Bar(25176, 45)
 end
 
 function mod:WeaknessRemoved(args)
-	self:Message("debuff", "Attention", nil, CL.over:format(args.spellName), args.spellId)
+	self:Message("debuff", "yellow", nil, CL.over:format(args.spellName), args.spellId)
 end
 
 function mod:StrengthOfOssirian(args)
-	self:Message(args.spellId, "Important")
+	self:Message(args.spellId, "red")
 end
 

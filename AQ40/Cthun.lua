@@ -105,15 +105,15 @@ function mod:OnEngage()
 
 	self:StartWipeCheck()
 
-	self:Message("stages", "Attention", nil, L.startwarn, false)
+	self:Message("stages", "yellow", nil, L.startwarn, false)
 
 	self:Bar("tentacle", timeP1TentacleStart, L.tentacleParty, L.tentacle_icon) -- Tentacle party
-	self:DelayedMessage("tentacle", timeP1TentacleStart - 5, "Urgent", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
-	self:DelayedMessage("tentacle", timeP1TentacleStart, "Important", L.tentacleParty, L.tentacle_icon) -- Tentacle party
+	self:DelayedMessage("tentacle", timeP1TentacleStart - 5, "orange", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
+	self:DelayedMessage("tentacle", timeP1TentacleStart, "red", L.tentacleParty, L.tentacle_icon) -- Tentacle party
 
 	self:Bar(26029, timeP1GlareStart) -- Dark Glare
-	self:DelayedMessage(26029, timeP1GlareStart - 5, "Urgent", CL.custom_sec:format(self:SpellName(26029), 5)) -- Dark Glare in 5 sec
-	self:DelayedMessage(26029, timeP1GlareStart, "Important", 26029, 26029) -- Dark Glare
+	self:DelayedMessage(26029, timeP1GlareStart - 5, "orange", CL.custom_sec:format(self:SpellName(26029), 5)) -- Dark Glare in 5 sec
+	self:DelayedMessage(26029, timeP1GlareStart, "red", 26029, 26029) -- Dark Glare
 
 	timerTentacles = self:ScheduleTimer("StartTentacles", timeP1TentacleStart)
 	timerDarkGlare = self:ScheduleTimer("DarkGlare", timeP1GlareStart)
@@ -160,7 +160,7 @@ function mod:CThunP2Start()
 		self:ScheduleTimer("StartWipeCheck", 10)
 		tentacletime = timeP2Tentacle
 
-		self:Message("stages", "Neutral", nil, L["phase2starting"], false)
+		self:Message("stages", "cyan", nil, L["phase2starting"], false)
 
 		self:StopBar(L.tentacleParty)
 
@@ -177,14 +177,14 @@ function mod:CThunP2Start()
 		self:CancelTimer(timerGroupWarning)
 		self:CancelTimer(timerCheckTarget)
 
-		self:DelayedMessage("tentacle", timeP2Tentacle + timeP2Offset -.1, "Important", L.tentacleParty, L.tentacle_icon) -- Tentacle party
-		self:DelayedMessage("tentacle", timeP2Tentacle + timeP2Offset - 5, "Urgent", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
+		self:DelayedMessage("tentacle", timeP2Tentacle + timeP2Offset -.1, "red", L.tentacleParty, L.tentacle_icon) -- Tentacle party
+		self:DelayedMessage("tentacle", timeP2Tentacle + timeP2Offset - 5, "orange", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
 		self:Bar("tentacle", timeP2Tentacle + timeP2Offset, L.tentacleParty, L.tentacle_icon) -- Tentacle party
 
 		-- Giant eye warnings seem off now, possibly changed or broken by Blizz
-		--self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset -.1, "Important", L["giant1"], "Ability_EyeOfTheOwl")
-		--self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 5, "Urgent", L["giant2"])
-		--self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 10, "Attention", L["giant3"])
+		--self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset -.1, "red", L["giant1"], "Ability_EyeOfTheOwl")
+		--self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 5, "orange", L["giant2"])
+		--self:DelayedMessage("giant", timeP2Tentacle + timeP2Offset - 10, "yellow", L["giant3"])
 		--self:Bar("giant", timeP2Tentacle + timeP2Offset, L["barGiant"], "Ability_EyeOfTheOwl")
 
 		timerTentacles = self:ScheduleTimer("StartTentacles", timeP2Tentacle + timeP2Offset)
@@ -192,10 +192,10 @@ function mod:CThunP2Start()
 end
 
 function mod:CThunWeakened()
-	self:Message("weakened", "Positive", nil, L.weakened_msg, L.weakened_icon)
+	self:Message("weakened", "green", nil, L.weakened_msg, L.weakened_icon)
 	self:Bar("weakened", timeWeakened, L["barWeakened"], L.weakened_icon)
-	self:DelayedMessage("weakened", timeWeakened - 5, "Urgent", L["invulnerable2"])
-	self:DelayedMessage("weakened", timeWeakened, "Important", L["invulnerable1"])
+	self:DelayedMessage("weakened", timeWeakened - 5, "orange", L["invulnerable2"])
+	self:DelayedMessage("weakened", timeWeakened, "red", L["invulnerable1"])
 
 	-- cancel tentacle timers
 	self:CancelDelayedMessage(L.tentacleParty) -- Tentacle party
@@ -246,12 +246,12 @@ function mod:GroupWarning()
 			if target == guid then
 				local name = self:UnitName(unit)
 				if not IsInRaid() then
-					self:Message(26029, "Important", nil, L["groupwarning"]:format(1, name), 26029)
+					self:Message(26029, "red", nil, L["groupwarning"]:format(1, name), 26029)
 				else
 					for i = 1, GetNumGroupMembers() do
 						local n, _, group = GetRaidRosterInfo(i)
 						if name == n then
-							self:Message(26029, "Important", nil, L["groupwarning"]:format(group, name), 26029)
+							self:Message(26029, "red", nil, L["groupwarning"]:format(group, name), 26029)
 							break
 						end
 					end
@@ -272,25 +272,25 @@ function mod:Tentacles()
 		--if gianteye then
 		--	gianteye = nil
 		--	self:Bar("giant", tentacletime, L["barGiant"], "Ability_EyeOfTheOwl")
-		--	self:DelayedMessage("giant", tentacletime -.1, "Important", L["giant1"])
-		--	self:DelayedMessage("giant", tentacletime - 5, "Urgent", L["giant2"])
-		--	self:DelayedMessage("giant", tentacletime - 10, "Attention", L["giant3"])
+		--	self:DelayedMessage("giant", tentacletime -.1, "red", L["giant1"])
+		--	self:DelayedMessage("giant", tentacletime - 5, "orange", L["giant2"])
+		--	self:DelayedMessage("giant", tentacletime - 10, "yellow", L["giant3"])
 		--else
 		--	gianteye = true
 		--end
 	end
 	self:Bar("tentacle", tentacletime, L.tentacleParty, L.tentacle_icon) -- Tentacle party
-	self:DelayedMessage("tentacle", tentacletime -.1, "Important", L.tentacleParty, L.tentacle_icon) -- Tentacle party
-	self:DelayedMessage("tentacle", tentacletime -5, "Urgent", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
+	self:DelayedMessage("tentacle", tentacletime -.1, "red", L.tentacleParty, L.tentacle_icon) -- Tentacle party
+	self:DelayedMessage("tentacle", tentacletime -5, "orange", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
 end
 
 function mod:DarkGlare()
 	self:CastBar(26029, timeP1GlareDuration)
 	self:Bar(26029, timeP1Glare) -- Dark Glare
 	local darkGlare = self:SpellName(26029)
-	self:DelayedMessage(26029, timeP1Glare - .1, "Important", darkGlare, 26029) -- Dark Glare
-	self:DelayedMessage(26029, timeP1Glare - 5, "Urgent", CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
-	self:DelayedMessage(26029, timeP1GlareDuration, "Important", CL.over:format(darkGlare)) -- Dark Glare Over
+	self:DelayedMessage(26029, timeP1Glare - .1, "red", darkGlare, 26029) -- Dark Glare
+	self:DelayedMessage(26029, timeP1Glare - 5, "orange", CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
+	self:DelayedMessage(26029, timeP1GlareDuration, "red", CL.over:format(darkGlare)) -- Dark Glare Over
 	if firstGlare then
 		firstGlare = nil
 		self:CancelTimer(timerDarkGlare)

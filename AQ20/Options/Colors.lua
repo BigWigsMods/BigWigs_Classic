@@ -1,40 +1,40 @@
 
 BigWigs:AddColors("Kurinnaxx", {
-	[25646] = {"Attention","Personal"},
-	[25656] = "Urgent",
-	[26527] = {"Important","Positive"},
+	[25646] = {"yellow","blue"},
+	[25656] = "orange",
+	[26527] = {"red","green"},
 })
 
 BigWigs:AddColors("General Rajaxx", {
-	[8269] = "Important",
-	[25471] = {"Attention","Personal"},
-	["wave"] = "Urgent",
+	[8269] = "red",
+	[25471] = {"yellow","blue"},
+	["wave"] = "orange",
 })
 
 BigWigs:AddColors("Moam", {
-	[25685] = {"Attention","Important","Urgent"},
+	[25685] = {"yellow","red","orange"},
 })
 
 BigWigs:AddColors("Buru the Gorger", {
-	[157168] = {"Attention","Personal"},
+	[157168] = {"yellow","blue"},
 })
 
 BigWigs:AddColors("Ayamiss the Hunter", {
-	[8269] = {"Important","Positive"},
-	[25725] = {"Attention","Personal"},
+	[8269] = {"red","green"},
+	[25725] = {"yellow","blue"},
 })
 
 BigWigs:AddColors("Ossirian the Unscarred", {
-	[25176] = {"Attention","Important","Urgent"},
-	["debuff"] = "Attention",
+	[25176] = {"yellow","red","orange"},
+	["debuff"] = "yellow",
 })
 
 BigWigs:AddColors("Ruins of Ahn'Qiraj Trash", {
-	[8269] = "Important",
-	[8732] = "Neutral",
-	[24340] = "Neutral",
-	[25698] = "Urgent",
-	[26556] = {"Attention","Personal"},
-	["guard"] = "Positive",
-	["warrior"] = "Positive",
+	[8269] = "red",
+	[8732] = "cyan",
+	[24340] = "cyan",
+	[25698] = "orange",
+	[26556] = {"yellow","blue"},
+	["guard"] = "green",
+	["warrior"] = "green",
 })

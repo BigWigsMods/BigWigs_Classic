@@ -74,7 +74,7 @@ end
 
 function mod:PoisonBoltVolley(args)
 	swingCount = -1
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 	self:CDBar(args.spellId, 10)
 end
 
@@ -84,7 +84,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) then
 			prev = t
-			self:Message(args.spellId, "Personal", "Alarm", CL.underyou:format(args.spellName))
+			self:Message(args.spellId, "blue", "Alarm", CL.underyou:format(args.spellName))
 		end
 	end
 end
@@ -96,12 +96,12 @@ do
 		if event == "SPELL_DAMAGE" and school == 0x10 and self:MobId(destGUID) == 15299 then -- 0x10 is Frost
 			frostCount = frostCount + 1
 			if frostCount < 20 and frostCount % 3 == 0 then
-				self:Message("freeze", "Positive", nil, L.freeze_warn_frost:format(frostCount, 20-frostCount), L.freeze_icon)
+				self:Message("freeze", "green", nil, L.freeze_warn_frost:format(frostCount, 20-frostCount), L.freeze_icon)
 			end
 		elseif event == "SWING_DAMAGE" and swingCount ~= -1 and self:MobId(destGUID) == 15299 then
 			swingCount = swingCount + 1
 			if swingCount < 30 and swingCount % 3 == 0 then
-				self:Message("freeze", "Positive", nil, L.freeze_warn_melee:format(swingCount, 30-swingCount), L.freeze_icon)
+				self:Message("freeze", "green", nil, L.freeze_warn_melee:format(swingCount, 30-swingCount), L.freeze_icon)
 			end
 		end
 	end
@@ -109,18 +109,18 @@ end
 
 function mod:CHAT_MSG_MONSTER_EMOTE(event, msg)
 	if msg == L.freeze_trigger1 then
-		self:Message("freeze", "Neutral", nil, L.freeze_warn1, L.freeze_icon)
+		self:Message("freeze", "cyan", nil, L.freeze_warn1, L.freeze_icon)
 	elseif msg == L.freeze_trigger2 then
-		self:Message("freeze", "Neutral", nil, L.freeze_warn2, L.freeze_icon)
+		self:Message("freeze", "cyan", nil, L.freeze_warn2, L.freeze_icon)
 	elseif msg == L.freeze_trigger3 then
 		swingCount = 0
-		self:Message("freeze", "Important", nil, L.freeze_warn3, L.freeze_icon)
+		self:Message("freeze", "red", nil, L.freeze_warn3, L.freeze_icon)
 		self:Bar("freeze", 30, L.freeze_warn3, L.freeze_icon)
 		self:ScheduleTimer("OnWipe", 27) -- Reset the frostCount
 	elseif msg == L.freeze_trigger4 then
-		self:Message("freeze", "Urgent", nil, L.freeze_warn4, L.freeze_icon)
+		self:Message("freeze", "orange", nil, L.freeze_warn4, L.freeze_icon)
 	elseif msg == L.freeze_trigger5 then
-		self:Message("freeze", "Important", nil, L.freeze_warn5, L.freeze_icon)
+		self:Message("freeze", "red", nil, L.freeze_warn5, L.freeze_icon)
 	end
 end
 

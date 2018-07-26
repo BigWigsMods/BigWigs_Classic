@@ -32,17 +32,17 @@ end
 --
 
 function mod:WingBuffet(args)
-	self:Message(args.spellId, "Important")
-	self:DelayedMessage(args.spellId, 27, "Urgent", CL.custom_sec:format(args.spellName, 5))
+	self:Message(args.spellId, "red")
+	self:DelayedMessage(args.spellId, 27, "orange", CL.custom_sec:format(args.spellName, 5))
 	self:Bar(args.spellId, 32)
 end
 
 function mod:ShadowFlame(args)
-	self:Message(args.spellId, "Important")
+	self:Message(args.spellId, "red")
 end
 
 function mod:Curse(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention")
+	self:TargetMessage(args.spellId, args.destName, "yellow")
 	self:TargetBar(args.spellId, 8, args.destName, 107905, args.spellId) -- Shadow
 	self:PrimaryIcon(args.spellId, args.destName)
 end

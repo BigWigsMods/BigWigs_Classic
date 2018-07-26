@@ -93,14 +93,14 @@ end
 --
 
 function mod:Fear(args)
-	self:DelayedMessage(args.spellId, 26, "Urgent", CL.custom_sec:format(args.spellName, 5))
+	self:DelayedMessage(args.spellId, 26, "orange", CL.custom_sec:format(args.spellName, 5))
 	self:CDBar(args.spellId, 32)
-	self:Message(args.spellId, "Important", "Alert")
+	self:Message(args.spellId, "red", "Alert")
 	self:Bar(args.spellId, 1.5, CL.cast:format(args.spellName))
 end
 
 function mod:ShadowFlame(args)
-	self:Message(args.spellId, "Attention", "Alert")
+	self:Message(args.spellId, "yellow", "Alert")
 	self:Bar(args.spellId, 2, CL.cast:format(args.spellName))
 end
 
@@ -111,8 +111,8 @@ do
 		if t-prev > 2 then
 			prev = t
 			self:Bar("classcall", 30, L.classcall_bar, "Spell_Shadow_Charm")
-			self:DelayedMessage("classcall", 27, "Positive", L.classcall_warning)
-			self:Message("classcall", "Important", nil, warnTable[args.spellId], "Spell_Shadow_Charm")
+			self:DelayedMessage("classcall", 27, "green", L.classcall_warning)
+			self:Message("classcall", "red", nil, warnTable[args.spellId], "Spell_Shadow_Charm")
 		end
 	end
 end
@@ -126,10 +126,10 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		if msg:find(i) then
 			if v[2] then
 				self:Bar("classcall", 30, L.classcall_bar, "Spell_Shadow_Charm")
-				self:DelayedMessage("classcall", 27, "Positive", L.classcall_warning)
-				self:Message("classcall", "Important", nil, v[1], "Spell_Shadow_Charm")
+				self:DelayedMessage("classcall", 27, "green", L.classcall_warning)
+				self:Message("classcall", "red", nil, v[1], "Spell_Shadow_Charm")
 			else
-				self:Message("otherwarn", "Important", nil, v[1], false)
+				self:Message("otherwarn", "red", nil, v[1], false)
 			end
 			return
 		end

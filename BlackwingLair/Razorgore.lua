@@ -43,9 +43,9 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Message("stages", "Urgent", nil, L.start_message, false)
+	self:Message("stages", "orange", nil, L.start_message, false)
 	self:Bar("stages", 45, L.start_mob, "Spell_Holy_PrayerOfHealing")
-	self:DelayedMessage("stages", 40, "Important", L.start_soon)
+	self:DelayedMessage("stages", 40, "red", L.start_soon)
 	eggs = 0
 end
 
@@ -54,23 +54,23 @@ end
 --
 
 function mod:DominateMind(args)
-	self:TargetMessage(args.spellId, args.destName, "Important", "Alert")
+	self:TargetMessage(args.spellId, args.destName, "red", "Alert")
 end
 
 function mod:DestroyEgg()
 	eggs = eggs + 1
 	if eggs < 30 then
-		self:Message("eggs", "Positive", nil, L.eggs_message:format(eggs), L.eggs_icon)
+		self:Message("eggs", "green", nil, L.eggs_message:format(eggs), L.eggs_icon)
 	end
 end
 
 function mod:Phase2()
-	self:Message("stages", "Important", nil, L.phase2_message, false)
+	self:Message("stages", "red", nil, L.phase2_message, false)
 	self:Death("Win", 12435) -- Register after p2 to prevent false positives
 end
 
 function mod:Conflagration(args)
-	self:TargetMessage(args.spellId, args.destName, "Urgent", "Info")
+	self:TargetMessage(args.spellId, args.destName, "orange", "Info")
 	self:TargetBar(args.spellId, 10, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end

@@ -43,17 +43,17 @@ end
 
 function mod:ImpendingDoom(args)
 	self:CDBar(args.spellId, 20)
-	self:Message(args.spellId, "Important")
+	self:Message(args.spellId, "red")
 end
 
 function mod:LucifronsCurse(args)
 	self:Bar(args.spellId, 20)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 end
 
 function mod:MindControl(args)
 	self:Bar(args.spellId, 15, L.mc_bar:format(args.destName))
-	self:TargetMessage(args.spellId, args.destName, "Attention")
+	self:TargetMessage(args.spellId, args.destName, "yellow")
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 

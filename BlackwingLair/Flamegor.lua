@@ -32,24 +32,24 @@ end
 --
 
 function mod:WingBuffet(args)
-	self:Message(args.spellId, "Important")
-	self:DelayedMessage(args.spellId, 27, "Urgent", CL.custom_sec:format(args.spellName, 5))
+	self:Message(args.spellId, "red")
+	self:DelayedMessage(args.spellId, 27, "orange", CL.custom_sec:format(args.spellName, 5))
 	self:Bar(args.spellId, 32)
 end
 
 function mod:ShadowFlame(args)
-	self:Message(args.spellId, "Important")
+	self:Message(args.spellId, "red")
 end
 
 function mod:Enrage(args)
-	self:Message(args.spellId, "Urgent")
+	self:Message(args.spellId, "orange")
 	self:Bar(args.spellId, 10)
 end
 
 function mod:EnrageRemoved(args)
 	if args.extraSpellId == 23342 then
 		self:StopBar(23342)
-		self:Message(23342, "Urgent", nil, CL.removed:format(args.extraSpellName))
+		self:Message(23342, "orange", nil, CL.removed:format(args.extraSpellName))
 	end
 end
 

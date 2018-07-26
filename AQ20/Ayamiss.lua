@@ -38,7 +38,7 @@ end
 --
 
 function mod:Paralyze(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention")
+	self:TargetMessage(args.spellId, args.destName, "yellow")
 	self:TargetBar(args.spellId, 10, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end
@@ -50,7 +50,7 @@ end
 
 function mod:Frenzy(args)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
-	self:Message(args.spellId, "Important")
+	self:Message(args.spellId, "red")
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
@@ -58,7 +58,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 26 then
 			self:UnregisterUnitEvent(event, "target", "focus")
-			self:Message(8269, "Positive", nil, CL.soon:format(self:SpellName(8269)), false)
+			self:Message(8269, "green", nil, CL.soon:format(self:SpellName(8269)), false)
 		end
 	end
 end

@@ -50,11 +50,11 @@ end
 -- or just warnings at certain mana levels.
 
 function mod:Energize(args)
-	self:Message(args.spellId, "Attention")
-	self:DelayedMessage(args.spellId, 30, "Attention", CL.custom_sec:format(L.bossName, 60))
-	self:DelayedMessage(args.spellId, 60, "Attention", CL.custom_sec:format(L.bossName, 30))
-	self:DelayedMessage(args.spellId, 75, "Urgent", CL.custom_sec:format(L.bossName, 15))
-	self:DelayedMessage(args.spellId, 85, "Important", CL.custom_sec:format(L.bossName, 5))
+	self:Message(args.spellId, "yellow")
+	self:DelayedMessage(args.spellId, 30, "yellow", CL.custom_sec:format(L.bossName, 60))
+	self:DelayedMessage(args.spellId, 60, "yellow", CL.custom_sec:format(L.bossName, 30))
+	self:DelayedMessage(args.spellId, 75, "orange", CL.custom_sec:format(L.bossName, 15))
+	self:DelayedMessage(args.spellId, 85, "red", CL.custom_sec:format(L.bossName, 5))
 	self:Bar(args.spellId, 90, L.bossName)
 end
 
@@ -65,11 +65,11 @@ function mod:EnergizeRemoved(args)
 	self:CancelDelayedMessage(CL.custom_sec:format(L.bossName, 5))
 	self:StopBar(L.bossName)
 
-	self:Message(args.spellId, "Attention", nil, L.bossName)
-	self:DelayedMessage(args.spellId, 30, "Attention", CL.custom_sec:format(args.spellName, 60))
-	self:DelayedMessage(args.spellId, 60, "Attention", CL.custom_sec:format(args.spellName, 30))
-	self:DelayedMessage(args.spellId, 75, "Urgent", CL.custom_sec:format(args.spellName, 15))
-	self:DelayedMessage(args.spellId, 85, "Important", CL.custom_sec:format(args.spellName, 5))
+	self:Message(args.spellId, "yellow", nil, L.bossName)
+	self:DelayedMessage(args.spellId, 30, "yellow", CL.custom_sec:format(args.spellName, 60))
+	self:DelayedMessage(args.spellId, 60, "yellow", CL.custom_sec:format(args.spellName, 30))
+	self:DelayedMessage(args.spellId, 75, "orange", CL.custom_sec:format(args.spellName, 15))
+	self:DelayedMessage(args.spellId, 85, "red", CL.custom_sec:format(args.spellName, 5))
 	self:Bar(args.spellId, 90)
 end
 
@@ -78,11 +78,11 @@ function mod:CHAT_MSG_MONSTER_EMOTE(event, msg)
 		self:StartWipeCheck()
 
 		local spell = self:SpellName(25685)
-		self:Message(25685, "Attention", nil, CL.custom_sec:format(spell, 90), false)
-		self:DelayedMessage(25685, 30, "Attention", CL.custom_sec:format(spell, 60))
-		self:DelayedMessage(25685, 60, "Attention", CL.custom_sec:format(spell, 30))
-		self:DelayedMessage(25685, 75, "Urgent", CL.custom_sec:format(spell, 15))
-		self:DelayedMessage(25685, 85, "Important", CL.custom_sec:format(spell, 5))
+		self:Message(25685, "yellow", nil, CL.custom_sec:format(spell, 90), false)
+		self:DelayedMessage(25685, 30, "yellow", CL.custom_sec:format(spell, 60))
+		self:DelayedMessage(25685, 60, "yellow", CL.custom_sec:format(spell, 30))
+		self:DelayedMessage(25685, 75, "orange", CL.custom_sec:format(spell, 15))
+		self:DelayedMessage(25685, 85, "red", CL.custom_sec:format(spell, 5))
 		self:Bar(25685, 90)
 	end
 end

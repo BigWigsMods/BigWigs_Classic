@@ -80,7 +80,7 @@ end
 --[[ Anubisath Defender ]]--
 
 function mod:Plague(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention")
+	self:TargetMessage(args.spellId, args.destName, "yellow")
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId)
 		self:TargetBar(args.spellId, 40, args.destName)
@@ -96,11 +96,11 @@ function mod:PlagueRemoved(args)
 end
 
 function mod:Frenzy(args)
-	self:Message(args.spellId, "Important", "Long")
+	self:Message(args.spellId, "red", "Long")
 end
 
 function mod:Explode(args)
-	self:Message(args.spellId, "Urgent", "Alert", CL.casting:format(args.spellName))
+	self:Message(args.spellId, "orange", "Alert", CL.casting:format(args.spellName))
 	self:Bar(args.spellId, 6) -- Duration is 7s but it expires after 6s
 	self:Flash(args.spellId)
 end
@@ -111,7 +111,7 @@ do
 		local t = GetTime()
 		if t-prev > 12 then
 			prev = t
-			self:Message(args.spellId, "Neutral")
+			self:Message(args.spellId, "cyan")
 		end
 	end
 end
@@ -122,23 +122,23 @@ do
 		local t = GetTime()
 		if t-prev > 12 then
 			prev = t
-			self:Message(args.spellId, "Neutral")
+			self:Message(args.spellId, "cyan")
 		end
 	end
 end
 
 function mod:SummonAnubisathSwarmguard(args)
-	self:Message("guard", "Positive", nil, args.spellName, L.guard_icon)
+	self:Message("guard", "green", nil, args.spellName, L.guard_icon)
 end
 
 function mod:SummonAnubisathWarrior(args)
-	self:Message("warrior", "Positive", nil, args.spellName, L.warrior_icon)
+	self:Message("warrior", "green", nil, args.spellName, L.warrior_icon)
 end
 
 --[[ Vekniss Hive Crawler ]]--
 
 function mod:SunderArmor(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "Attention")
+	self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
 	self:TargetBar(args.spellId, 20, args.destName)
 end
 

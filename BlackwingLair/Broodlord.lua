@@ -27,7 +27,7 @@ end
 --
 
 function mod:MortalStrike(args)
-	self:TargetMessage(40220, args.destName, "Attention")
+	self:TargetMessage(40220, args.destName, "yellow")
 	self:PrimaryIcon(40220, args.destName)
 	self:TargetBar(40220, 5, args.destName)
 end

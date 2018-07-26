@@ -56,16 +56,16 @@ end
 
 function mod:Frenzy(args)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
-	self:Message(args.spellId, "Urgent", "Long", "25% - ".. args.spellName)
+	self:Message(args.spellId, "orange", "Long", "25% - ".. args.spellName)
 end
 
 function mod:Whirlwind(args)
-	self:Message(args.spellId, "Important", "Alert")
+	self:Message(args.spellId, "red", "Alert")
 	self:Bar(args.spellId, 15)
 end
 
 function mod:WhirlwindOver(args)
-	self:Message(args.spellId, "Positive", nil, CL.over:format(args.spellName))
+	self:Message(args.spellId, "green", nil, CL.over:format(args.spellName))
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
@@ -73,13 +73,13 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 31 then
 			self:UnregisterUnitEvent(event, "target", "focus")
-			self:Message(8269, "Attention", nil, CL.soon:format(self:SpellName(8269)), false)
+			self:Message(8269, "yellow", nil, CL.soon:format(self:SpellName(8269)), false)
 		end
 	end
 end
 
 function mod:AddDies()
 	addsLeft = addsLeft - 1
-	self:Message("stages", "Positive", nil, CL.add_remaining:format(addsLeft), false)
+	self:Message("stages", "green", nil, CL.add_remaining:format(addsLeft), false)
 end
 
