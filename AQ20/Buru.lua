@@ -28,7 +28,7 @@ end
 --
 
 function mod:CHAT_MSG_MONSTER_EMOTE(_, _, unit, _, _, player)
-	if unit == L.bossName then
+	if unit == mod.displayName then
 		self:TargetMessage(157168, player, "yellow")
 		self:PrimaryIcon(157168, player)
 	end
