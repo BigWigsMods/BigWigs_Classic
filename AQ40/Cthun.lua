@@ -18,8 +18,6 @@ local timeReschedule = 60      -- delay from the moment of weakening for timers 
 local timeTarget = 0.2         -- delay for target change checking on Eye of C'Thun
 local timeWeakened = 45        -- duration of a weaken
 
-local gianteye = nil
-local cthunstarted = nil
 local phase2started = nil
 local firstGlare = nil
 local firstWarning = nil
@@ -96,8 +94,6 @@ end
 
 function mod:OnEngage()
 	target = nil
-	gianteye = nil
-	cthunstarted = nil
 	firstGlare = true
 	firstWarning = true
 	phase2started = nil
@@ -127,7 +123,7 @@ end
 -- Event Handlers
 --
 
-function mod:CHAT_MSG_MONSTER_EMOTE(event, msg)
+function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 	if msg == L["weakenedtrigger"] then
 		self:Sync("CThunWeakened")
 	end
@@ -228,7 +224,6 @@ function mod:StartTentacles()
 end
 
 function mod:CheckTarget()
-	local newtarget = nil
 	local unit = self:GetUnitIdByGUID(15589) -- Eye of C'Thun
 	if unit then
 		local unitTarget = unit.."target"

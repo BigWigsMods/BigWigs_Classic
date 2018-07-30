@@ -107,7 +107,7 @@ do
 	end
 end
 
-function mod:CHAT_MSG_MONSTER_EMOTE(event, msg)
+function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 	if msg == L.freeze_trigger1 then
 		self:Message("freeze", "cyan", nil, L.freeze_warn1, L.freeze_icon)
 	elseif msg == L.freeze_trigger2 then

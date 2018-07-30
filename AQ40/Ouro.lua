@@ -103,7 +103,7 @@ function mod:BerserkApplied(args)
 	self:StopBar(L["emergebartext"])
 end
 
-function mod:SummonOuroMounds(args) -- Submerge
+function mod:SummonOuroMounds() -- Submerge
 	self:CancelDelayedMessage(L["emergewarn"])
 	self:CancelDelayedMessage(L["emergewarn2"])
 	self:CancelDelayedMessage(CL.custom_sec:format(self:SpellName(26103), 5)) -- Sweep

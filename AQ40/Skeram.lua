@@ -80,7 +80,7 @@ function mod:ArcaneExplosion(args)
 	self:Message(args.spellId, "orange")
 end
 
-function mod:SummonImages(args)
+function mod:SummonImages()
 	self:Message("images", "red", "Long", L.images, L.images_icon)
 end
 

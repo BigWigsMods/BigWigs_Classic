@@ -36,7 +36,7 @@ function mod:MortalWound(args)
 	self:TargetBar(args.spellId, 15, args.destName)
 end
 
-function mod:SummonWorm(args)
+function mod:SummonWorm()
 	self:Message(25832, "orange", "Info")
 end
 

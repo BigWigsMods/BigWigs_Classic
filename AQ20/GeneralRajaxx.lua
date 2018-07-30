@@ -82,7 +82,7 @@ function mod:Frenzy(args)
 	self:Message(args.spellId, "red")
 end
 
-function mod:CHAT_MSG_MONSTER_YELL(event, msg)
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	for i = 1, 9 do
 		if msg == L["trigger"..i] then
 			self:Message("wave", "orange", nil, L["warn"..i], false)

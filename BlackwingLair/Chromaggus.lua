@@ -92,7 +92,7 @@ function mod:Debuffs(args)
 		elseif debuffCount == 4 then
 			self:Message("debuffs", "orange", "Warning", L.debuffs_warning:format(self:SpellName(605)), args.spellId) -- 605 = Mind Control
 		elseif debuffCount == 5 then
-			self:Message("debuffs", "orange", "Warning", L.debuffs:gsub("{(%d-)}", GetSpellInfo), args.spellId)
+			self:Message("debuffs", "orange", "Warning", 605, args.spellId) -- 605 = Mind Control
 		end
 	end
 end

@@ -73,7 +73,7 @@ function mod:EnergizeRemoved(args)
 	self:Bar(args.spellId, 90)
 end
 
-function mod:CHAT_MSG_MONSTER_EMOTE(event, msg)
+function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 	if msg == L.starttrigger then
 		self:StartWipeCheck()
 
