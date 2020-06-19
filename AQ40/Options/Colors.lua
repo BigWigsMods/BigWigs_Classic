@@ -1,70 +1,70 @@
 
 BigWigs:AddColors("The Prophet Skeram", {
-	[785] = {"yellow","blue"},
+	[785] = {"blue","yellow"},
 	[20449] = "red",
 	[26192] = "orange",
-	["images"] = {"red","green"},
+	["images"] = {"green","red"},
 })
 
 BigWigs:AddColors("The Bug Trio", {
 	[25786] = "blue",
 	[25807] = "orange",
 	[25812] = "yellow",
-	[26580] = {"red","orange"},
+	[26580] = {"orange","red"},
 })
 
 BigWigs:AddColors("Battleguard Sartura", {
-	[8269] = {"yellow","orange"},
-	[26083] = {"red","green"},
+	[8269] = {"orange","yellow"},
+	[26083] = {"green","red"},
 	["stages"] = "green",
 })
 
 BigWigs:AddColors("Fankriss the Unyielding", {
-	[720] = {"red","blue"},
-	[25646] = {"yellow","blue"},
+	[720] = {"blue","red"},
+	[25646] = {"blue","yellow"},
 	[25832] = "orange",
 })
 
 BigWigs:AddColors("Viscidus", {
 	[25989] = "blue",
 	[25991] = "yellow",
-	["freeze"] = {"red","cyan","green","orange"},
+	["freeze"] = {"cyan","green","orange","red"},
 })
 
 BigWigs:AddColors("Princess Huhuran", {
 	[26051] = "yellow",
-	[26180] = {"red","blue","green"},
-	["berserk"] = {"red","orange"},
+	[26180] = {"blue","green","red"},
+	["berserk"] = {"orange","red"},
 })
 
 BigWigs:AddColors("The Twin Emperors", {
-	[800] = {"yellow","red","orange"},
+	[800] = {"orange","red","yellow"},
 	[802] = "cyan",
 	[7393] = "red",
 	[26607] = "blue",
 })
 
 BigWigs:AddColors("Ouro", {
-	[26102] = {"yellow","red"},
+	[26102] = {"red","yellow"},
 	[26103] = "red",
 	[26615] = {"green","orange"},
 	["scarab"] = "red",
-	["stages"] = {"yellow","red"},
+	["stages"] = {"red","yellow"},
 })
 
 BigWigs:AddColors("C'Thun", {
-	[26029] = {"red","orange"},
-	["stages"] = {"yellow","cyan"},
-	["tentacle"] = {"red","orange"},
-	["weakened"] = {"red","green","orange"},
+	[26029] = {"orange","red"},
+	["stages"] = {"cyan","yellow"},
+	["tentacle"] = {"orange","red"},
+	["weakened"] = {"green","orange","red"},
 })
 
 BigWigs:AddColors("Ahn'Qiraj Trash", {
 	[8269] = "red",
-	[25051] = {"yellow","blue"},
+	[25051] = {"blue","yellow"},
 	[25698] = "orange",
 	[26554] = "cyan",
-	[26556] = {"yellow","blue"},
+	[26556] = {"blue","yellow"},
 	[26558] = "cyan",
 	["guard"] = "green",
 	["warrior"] = "green",
