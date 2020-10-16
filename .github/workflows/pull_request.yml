@@ -1,0 +1,24 @@
+name: Check PR
+
+on: [pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout addon
+        uses: actions/checkout@v2
+
+      - name: Run luacheck
+        uses: BigWigsMods/actions/luacheck@master
+        with:
+          args: -qo 011
+          config: https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/.luacheckrc
+
+      - name: Lint boss modules
+        if: always()
+        uses: BigWigsMods/actions/gen-options@master
+        with:
+          quiet: true
+          lint: true
