@@ -1,4 +1,4 @@
-## Interface: 80200
+## Interface: 90001
 
 ## Title: BigWigs [|cffeda55fClassic|r]
 ## Title-zhCN: BigWigs [|cffeda55f经典旧世|r]
