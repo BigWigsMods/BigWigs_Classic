@@ -5,7 +5,7 @@
 
 local mod, CL = BigWigs:NewBoss("Ragnaros ", 409, 1528) -- Space is intentional to prevent conflict with Ragnaros from Firelands
 if not mod then return end
-mod:RegisterEnableMob(11502)
+mod:RegisterEnableMob(11502, 12018)
 mod.toggleOptions = {"submerge", "emerge", 20566}
 
 --------------------------------------------------------------------------------
@@ -51,14 +51,23 @@ function mod:OnBossEnable()
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 
 	self:Log("SPELL_CAST_SUCCESS", "Knockback", 20566)
+	self:Log("SPELL_CAST_START", "Warmup", 19774) -- Summon Ragnaros
 
  	self:RegisterUnitEvent("UNIT_TARGETABLE_CHANGED", nil, "boss1")
 	self:Death("Win", 11502)
 	self:Death("SonDeaths", 12143)
+	self:Death("MajordomoDeath", 12018)
+end
+
+function mod:VerifyEnable(unit, mobId)
+	if mobId == 11502 or (mobId == 12018 and not UnitCanAttack(unit, "player")) then
+		return true
+	end
 end
 
 function mod:OnEngage()
 	sonsdead = 0
+	self:CDBar(20566, 27, L.knockback_bar) -- guesstimate for the first wrath
 	self:Bar("submerge", 180, L.submerge_bar, "misc_arrowdown")
 	self:Message("submerge", "yellow", nil, CL.custom_min:format(L.submerge, 3), "misc_arrowdown")
 	self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
@@ -77,8 +86,19 @@ function mod:Knockback(args)
 	self:Bar(args.spellId, 28, L.knockback_bar)
 end
 
+function mod:Warmup()
+	self:Bar("warmup", 73, CL.active, 19774) --"spell_fire_lavaspawn"
+end
+
+function mod:MajordomoDeath()
+	-- it takes exactly 10 seconds for combat to start after Majodromo dies, while
+	-- the time between starting the RP/summon and killing Majordomo varies
+	self:Bar("warmup", 10, CL.active, 19774) --"spell_fire_lavaspawn"
+end
+
 function mod:Emerge()
 	sonsdead = 10 -- Block this firing again if sons are killed after he emerges
+	self:CDBar(20566, 27, L.knockback_bar) -- guesstimate for the first wrath
 	self:Message("emerge", "yellow", "Long", L.emerge_message, "misc_arrowlup")
 	self:Bar("submerge", 180, L.submerge_bar, "misc_arrowdown")
 	self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
