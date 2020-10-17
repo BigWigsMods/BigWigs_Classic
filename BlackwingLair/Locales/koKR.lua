@@ -13,6 +13,11 @@ if L then
 	L.phase2_message = "모든 알이 파괴되었습니다, 서슬송곳니가 풀려납니다." -- CHECK
 end
 
+L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "koKR")
+if L then
+	--L.warmup_trigger = "Too late, friends!"
+end
+
 L = BigWigs:NewBossLocale("Chromaggus", "koKR")
 if L then
 	L.breath = "브레스 경고"

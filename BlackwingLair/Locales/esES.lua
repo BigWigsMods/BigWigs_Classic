@@ -13,6 +13,11 @@ if L then
 	--L.phase2_message = "All eggs destroyed, Razorgore loose!"
 end
 
+L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esES") or BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esMX")
+if L then
+	L.warmup_trigger = "Demasiado tarde, amigos" -- Copied from esES, might be wrong for esMX
+end
+
 L = BigWigs:NewBossLocale("Chromaggus", "esES") or BigWigs:NewBossLocale("Chromaggus", "esMX")
 if L then
 	--L.breath = "Breaths"

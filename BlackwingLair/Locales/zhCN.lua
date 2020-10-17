@@ -13,6 +13,11 @@ if L then
 	L.phase2_message = "已摧毁所有龙蛋"
 end
 
+L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "zhCN")
+if L then
+	--L.warmup_trigger = "Too late, friends!"
+end
+
 L = BigWigs:NewBossLocale("Chromaggus", "zhCN")
 if L then
 	L.breath = "吐息警报"
