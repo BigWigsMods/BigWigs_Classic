@@ -6,7 +6,7 @@
 local mod, CL = BigWigs:NewBoss("Ragnaros ", 409, 1528) -- Space is intentional to prevent conflict with Ragnaros from Firelands
 if not mod then return end
 mod:RegisterEnableMob(11502, 12018)
-mod.toggleOptions = {"submerge", "emerge", 20566}
+mod.toggleOptions = {"submerge", "emerge", "warmup", 20566}
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -86,8 +86,8 @@ function mod:Knockback(args)
 	self:Bar(args.spellId, 28, L.knockback_bar)
 end
 
-function mod:Warmup()
-	self:Bar("warmup", 73, CL.active, 19774) --"spell_fire_lavaspawn"
+function mod:Warmup(args)
+	self:Bar("warmup", 73, CL.active, args.spellId) --"spell_fire_lavaspawn"
 end
 
 function mod:MajordomoDeath()
