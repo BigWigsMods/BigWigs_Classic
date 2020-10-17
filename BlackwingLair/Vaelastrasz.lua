@@ -44,7 +44,7 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.warmup_trigger, nil, true) then
-		self:Bar("warmup", 43, CL.active)
+		self:Bar("warmup", 43, CL.active, "inv_misc_monsterscales_05")
 	end
 end
 
