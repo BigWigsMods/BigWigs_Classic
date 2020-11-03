@@ -39,7 +39,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "ConflagrationOver", 23023)
 	self:Log("SPELL_CAST_SUCCESS", "Phase2", 23040)
 	self:Log("SPELL_CAST_SUCCESS", "DestroyEgg", 19873)
-	self:Yell("Engage", L.start_trigger)
+	self:BossYell("Engage", L.start_trigger)
 end
 
 function mod:OnEngage()

@@ -37,7 +37,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "WhirlwindOver", 26083)
 	self:Log("SPELL_AURA_APPLIED", "Frenzy", 8269)
 
-	self:Yell("Engage", L.engage_trigger)
+	self:BossYell("Engage", L.engage_trigger)
 	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
 
 	self:Death("Win", 15516)

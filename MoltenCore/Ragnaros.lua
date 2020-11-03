@@ -45,8 +45,8 @@ L = mod:GetLocale()
 --
 
 function mod:OnBossEnable()
-	--self:Yell("Engage", L.engage_trigger)
-	--self:Yell("Submerge", L.submerge_trigger)
+	--self:BossYell("Engage", L.engage_trigger)
+	--self:BossYell("Submerge", L.submerge_trigger)
 
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 

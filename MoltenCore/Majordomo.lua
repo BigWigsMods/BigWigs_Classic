@@ -29,7 +29,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "MagicReflection", 20619)
 	self:Log("SPELL_CAST_SUCCESS", "DamageShield", 21075)
 
-	self:Yell("Win", L.disabletrigger)
+	self:BossYell("Win", L.disabletrigger)
 end
 
 function mod:VerifyEnable(unit)
