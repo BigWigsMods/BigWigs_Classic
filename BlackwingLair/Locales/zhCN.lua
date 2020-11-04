@@ -15,7 +15,7 @@ end
 
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "zhCN")
 if L then
-	--L.warmup_trigger = "Too late, friends!"
+	L.warmup_trigger = "太晚了，朋友们！"
 end
 
 L = BigWigs:NewBossLocale("Chromaggus", "zhCN")
