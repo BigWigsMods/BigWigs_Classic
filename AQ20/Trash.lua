@@ -68,7 +68,7 @@ end
 --
 
 function mod:Plague(args)
-	self:TargetMessage(26556, args.destName, "yellow")
+	self:TargetMessageOld(26556, args.destName, "yellow")
 	if self:Me(args.destGUID) then
 		self:Say(26556)
 		self:TargetBar(26556, 40, args.destName)

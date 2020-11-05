@@ -42,7 +42,7 @@ function mod:ShadowFlame(args)
 end
 
 function mod:Curse(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow")
 	self:TargetBar(args.spellId, 8, args.destName, 107905, args.spellId) -- Shadow
 	self:PrimaryIcon(args.spellId, args.destName)
 end

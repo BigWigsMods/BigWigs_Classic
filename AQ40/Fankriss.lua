@@ -41,6 +41,6 @@ function mod:SummonWorm()
 end
 
 function mod:Entangle(args)
-	self:TargetMessage(720, args.destName, "red", "Alert", nil, nil, true)
+	self:TargetMessageOld(720, args.destName, "red", "Alert", nil, nil, true)
 end
 

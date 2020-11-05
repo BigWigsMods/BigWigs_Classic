@@ -80,7 +80,7 @@ end
 --[[ Anubisath Defender ]]--
 
 function mod:Plague(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow")
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId)
 		self:TargetBar(args.spellId, 40, args.destName)

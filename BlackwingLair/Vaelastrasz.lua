@@ -49,7 +49,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 end
 
 function mod:Adrenaline(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow", "Alarm")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Alarm")
 	self:PrimaryIcon(args.spellId, args.destName)
 	self:TargetBar(args.spellId, 20, args.destName, 67729, args.spellId) -- Explode
 end

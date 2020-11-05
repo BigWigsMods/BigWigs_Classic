@@ -35,7 +35,7 @@ function mod:LivingBomb(args)
 	else
 		self:OpenProximity(args.spellId, 9, args.destName)
 	end
-	self:TargetMessage(args.spellId, args.destName, "blue", "Alarm")
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "Alarm")
 	self:PrimaryIcon(args.spellId, args.destName)
 	self:TargetBar(args.spellId, 8, args.destName)
 end

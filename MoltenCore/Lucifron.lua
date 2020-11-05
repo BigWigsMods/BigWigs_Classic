@@ -53,7 +53,7 @@ end
 
 function mod:MindControl(args)
 	self:Bar(args.spellId, 15, L.mc_bar:format(args.destName))
-	self:TargetMessage(args.spellId, args.destName, "yellow")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow")
 	self:PrimaryIcon(args.spellId, args.destName)
 end
 

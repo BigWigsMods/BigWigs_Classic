@@ -57,7 +57,7 @@ end
 --
 
 function mod:TrueFulfillment(args) -- Mind control
-	self:TargetMessage(args.spellId, args.destName, "yellow")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow")
 	self:TargetBar(args.spellId, 20, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 	lastMC = args.destGUID
