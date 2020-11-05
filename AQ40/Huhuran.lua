@@ -50,7 +50,7 @@ do
 	function mod:WyvernStingApplied(args)
 		stingTbl[#stingTbl+1] = args.destName
 		if #stingTbl == 1 then
-			self:ScheduleTimer("TargetMessage", 1, args.spellId, stingTbl, "red") -- Can take a while to apply to everyone if very spread out (travel time)
+			self:ScheduleTimer("TargetMessageOld", 1, args.spellId, stingTbl, "red") -- Can take a while to apply to everyone if very spread out (travel time)
 		end
 	end
 end
