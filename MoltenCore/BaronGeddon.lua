@@ -45,12 +45,12 @@ function mod:LivingBombRemoved(args)
 end
 
 function mod:Inferno(args)
-	self:Message(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "Long")
 	self:Bar(args.spellId, 8)
 end
 
 function mod:Armageddon(args)
 	self:Bar(args.spellId, 8)
-	self:Message(args.spellId, "orange")
+	self:MessageOld(args.spellId, "orange")
 end
 

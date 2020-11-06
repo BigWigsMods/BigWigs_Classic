@@ -43,12 +43,12 @@ end
 
 function mod:ImpendingDoom(args)
 	self:CDBar(args.spellId, 20)
-	self:Message(args.spellId, "red")
+	self:MessageOld(args.spellId, "red")
 end
 
 function mod:LucifronsCurse(args)
 	self:Bar(args.spellId, 20)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 end
 
 function mod:MindControl(args)

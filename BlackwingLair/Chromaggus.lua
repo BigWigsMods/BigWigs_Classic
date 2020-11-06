@@ -76,23 +76,23 @@ end
 --
 
 function mod:Enrage(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 end
 
 function mod:Frenzy(args)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
-	self:Message(args.spellId, "red", nil, "20% - ".. args.spellName)
+	self:MessageOld(args.spellId, "red", nil, "20% - ".. args.spellName)
 end
 
 function mod:Debuffs(args)
 	if self:Me(args.destGUID) then
 		debuffCount = debuffCount + 1
 		if debuffCount == 3 then
-			self:Message("debuffs", "red", "Alarm", L.debuffs_message, args.spellId)
+			self:MessageOld("debuffs", "red", "Alarm", L.debuffs_message, args.spellId)
 		elseif debuffCount == 4 then
-			self:Message("debuffs", "orange", "Warning", L.debuffs_warning:format(self:SpellName(605)), args.spellId) -- 605 = Mind Control
+			self:MessageOld("debuffs", "orange", "Warning", L.debuffs_warning:format(self:SpellName(605)), args.spellId) -- 605 = Mind Control
 		elseif debuffCount == 5 then
-			self:Message("debuffs", "orange", "Warning", 605, args.spellId) -- 605 = Mind Control
+			self:MessageOld("debuffs", "orange", "Warning", 605, args.spellId) -- 605 = Mind Control
 		end
 	end
 end
@@ -113,7 +113,7 @@ function mod:Breath(args)
 	end
 
 	self:Bar("breath", 2, CL.cast:format(args.spellName), args.spellId)
-	self:Message("breath", "yellow", nil, CL.casting:format(args.spellName), args.spellId)
+	self:MessageOld("breath", "yellow", nil, CL.casting:format(args.spellName), args.spellId)
 	self:DelayedMessage("breath", 50, "red", CL.custom_sec:format(args.spellName, 10))
 	self:Bar("breath", 60, args.spellId)
 end
@@ -122,14 +122,14 @@ function mod:FrenzySoon(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId)
 	if hp < 0.25 then -- Frenzy at 20%
 		self:UnregisterUnitEvent(event, unitId)
-		self:Message(23537, "cyan", nil, CL.soon:format(self:SpellName(23537)), false)
+		self:MessageOld(23537, "cyan", nil, CL.soon:format(self:SpellName(23537)), false)
 	end
 end
 
 --function mod:CHAT_MSG_MONSTER_EMOTE(msg)
 --	if msg == L["vulnerability_trigger"] then
 --		if self.db.profile.vulnerability then
---			self:Message(L["vulnerability_warning"], "green")
+--			self:MessageOld(L["vulnerability_warning"], "green")
 --		end
 --		--self:ScheduleEvent("BWChromNilSurv", function() mod.vulnerability = nil end, 2.5)
 --	end
@@ -142,7 +142,7 @@ end
 --			if ( type == L["hit"] or type == L["crit"] ) and tonumber(dmg or "") and school then
 --				if (tonumber(dmg) >= 550 and type == L["hit"]) or (tonumber(dmg) >= 1100 and type == L["crit"]) then
 --					self.vulnerability = school
---					if self.db.profile.vulnerability then self:Message(format(L["vulnerability_message"], school), "green") end
+--					if self.db.profile.vulnerability then self:MessageOld(format(L["vulnerability_message"], school), "green") end
 --				end
 --			end
 --		end
@@ -154,7 +154,7 @@ end
 --			if ( type == L["hit"] or type == L["crit"] ) and tonumber(dmg or "") and school then
 --				if (tonumber(dmg) >= 550 and type == L["hit"]) or (tonumber(dmg) >= 1100 and type == L["crit"]) then
 --					self.vulnerability = school
---					if self.db.profile.vulnerability then self:Message(format(L["vulnerability_message"], school), "green") end
+--					if self.db.profile.vulnerability then self:MessageOld(format(L["vulnerability_message"], school), "green") end
 --				end
 --			end
 --		end

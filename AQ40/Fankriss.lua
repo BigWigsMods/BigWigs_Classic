@@ -37,7 +37,7 @@ function mod:MortalWound(args)
 end
 
 function mod:SummonWorm()
-	self:Message(25832, "orange", "Info")
+	self:MessageOld(25832, "orange", "Info")
 end
 
 function mod:Entangle(args)

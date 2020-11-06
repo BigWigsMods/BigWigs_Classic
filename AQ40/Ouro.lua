@@ -68,7 +68,7 @@ end
 function mod:OnEngage()
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:PossibleSubmerge()
-	self:Message("stages", "yellow", nil, L["engage_message"], false)
+	self:MessageOld("stages", "yellow", nil, L["engage_message"], false)
 end
 
 --------------------------------------------------------------------------------
@@ -83,19 +83,19 @@ function mod:PossibleSubmerge()
 end
 
 function mod:Sweep(args)
-	self:Message(args.spellId, "red")
+	self:MessageOld(args.spellId, "red")
 	self:DelayedMessage(args.spellId, 16, "red", CL.custom_sec:format(args.spellName, 5))
 	self:Bar(args.spellId, 21)
 end
 
 function mod:SandBlast(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 	self:DelayedMessage(args.spellId, 17, "red", CL.custom_sec:format(args.spellName, 5))
 	self:Bar(args.spellId, 22)
 end
 
 function mod:BerserkApplied(args)
-	self:Message(args.spellId, "orange", "Long", "20% - ".. args.spellName)
+	self:MessageOld(args.spellId, "orange", "Long", "20% - ".. args.spellName)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 	self:CancelDelayedMessage(L["emergewarn"])
 	self:CancelDelayedMessage(L["emergewarn2"])
@@ -113,7 +113,7 @@ function mod:SummonOuroMounds() -- Submerge
 	self:StopBar(26103) -- Sweep
 	self:StopBar(26102) -- Sand Blast
 
-	self:Message("stages", "red", nil, 179624, "misc_arrowdown") -- 179624 = "Submerge"
+	self:MessageOld("stages", "red", nil, 179624, "misc_arrowdown") -- 179624 = "Submerge"
 	self:DelayedMessage("stages", 25, "red", CL.custom_sec:format(self:SpellName(54850), 5))
 	self:Bar("stages", 30, 54850, "misc_arrowlup") -- 54850 = "Emerge"
 end
@@ -125,7 +125,7 @@ do
 		if t-prev > 5 then
 			prev = t
 
-			self:Message("stages", "red", nil, 54850, "misc_arrowlup") -- 54850 = "Emerge"
+			self:MessageOld("stages", "red", nil, 54850, "misc_arrowlup") -- 54850 = "Emerge"
 			self:PossibleSubmerge()
 
 			-- Sweep
@@ -148,7 +148,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 25 then
 			self:UnregisterUnitEvent(event, "target", "focus")
-			self:Message(26615, "green", nil, CL.soon:format(self:SpellName(26615)), false)
+			self:MessageOld(26615, "green", nil, CL.soon:format(self:SpellName(26615)), false)
 		end
 	end
 end

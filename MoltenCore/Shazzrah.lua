@@ -32,16 +32,16 @@ end
 
 function mod:Blink(args)
 	self:Bar(args.spellId, 45)
-	self:Message(args.spellId, "red")
+	self:MessageOld(args.spellId, "red")
 end
 
 function mod:MagicGrounding(args)
 	-- Self buff
-	self:Message(args.spellId, "orange", self:Dispeller("magic", true) and "Alarm", CL.onboss:format(args.spellName))
+	self:MessageOld(args.spellId, "orange", self:Dispeller("magic", true) and "Alarm", CL.onboss:format(args.spellName))
 end
 
 function mod:Counterspell(args)
 	self:CDBar(args.spellId, 15) -- 15-19
-	self:Message(args.spellId, "yellow", "Info")
+	self:MessageOld(args.spellId, "yellow", "Info")
 end
 

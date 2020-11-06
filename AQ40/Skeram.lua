@@ -72,16 +72,16 @@ end
 
 function mod:Teleport(args)
 	if self:MobId(args.sourceGUID) == 15263 then -- Filter out his images
-		self:Message(20449, "red")
+		self:MessageOld(20449, "red")
 	end
 end
 
 function mod:ArcaneExplosion(args)
-	self:Message(args.spellId, "orange")
+	self:MessageOld(args.spellId, "orange")
 end
 
 function mod:SummonImages()
-	self:Message("images", "red", "Long", L.images, L.images_icon)
+	self:MessageOld("images", "red", "Long", L.images, L.images_icon)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
@@ -89,7 +89,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if (hp < 82 and splitPhase == 1) or (hp < 57 and splitPhase == 2) or (hp < 32 and splitPhase == 3) then
 			splitPhase = splitPhase + 1
-			self:Message("images", "green", nil, CL.soon:format(self:SpellName(L.images)), false)
+			self:MessageOld("images", "green", nil, CL.soon:format(self:SpellName(L.images)), false)
 			if splitPhase > 3 then
 				self:UnregisterUnitEvent(event, "target", "focus")
 			end

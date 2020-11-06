@@ -41,7 +41,7 @@ end
 
 function mod:OnEngage()
 	self:StartWipeCheck()
-	self:Message(25176, "red") -- Strength of Ossirian
+	self:MessageOld(25176, "red") -- Strength of Ossirian
 end
 
 --------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ end
 --
 
 function mod:Weakness(args)
-	self:Message("debuff", "yellow", "Info", args.spellId)
+	self:MessageOld("debuff", "yellow", "Info", args.spellId)
 	self:Bar("debuff", 45, args.spellId)
 
 	self:DelayedMessage(25176, 30, "yellow", CL.custom_sec:format(self:SpellName(25176), 15))
@@ -59,10 +59,10 @@ function mod:Weakness(args)
 end
 
 function mod:WeaknessRemoved(args)
-	self:Message("debuff", "yellow", nil, CL.over:format(args.spellName), args.spellId)
+	self:MessageOld("debuff", "yellow", nil, CL.over:format(args.spellName), args.spellId)
 end
 
 function mod:StrengthOfOssirian(args)
-	self:Message(args.spellId, "red")
+	self:MessageOld(args.spellId, "red")
 end
 

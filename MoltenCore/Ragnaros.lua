@@ -69,7 +69,7 @@ function mod:OnEngage()
 	sonsdead = 0
 	self:CDBar(20566, 27, L.knockback_bar) -- guesstimate for the first wrath
 	self:Bar("submerge", 180, L.submerge_bar, "misc_arrowdown")
-	self:Message("submerge", "yellow", nil, CL.custom_min:format(L.submerge, 3), "misc_arrowdown")
+	self:MessageOld("submerge", "yellow", nil, CL.custom_min:format(L.submerge, 3), "misc_arrowdown")
 	self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
 	self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
 	self:DelayedMessage("submerge", 150, "yellow", CL.custom_sec:format(L.submerge, 30))
@@ -82,7 +82,7 @@ end
 --
 
 function mod:Knockback(args)
-	self:Message(args.spellId, "red", nil, L.knockback_message)
+	self:MessageOld(args.spellId, "red", nil, L.knockback_message)
 	self:Bar(args.spellId, 28, L.knockback_bar)
 end
 
@@ -99,7 +99,7 @@ end
 function mod:Emerge()
 	sonsdead = 10 -- Block this firing again if sons are killed after he emerges
 	self:CDBar(20566, 27, L.knockback_bar) -- guesstimate for the first wrath
-	self:Message("emerge", "yellow", "Long", L.emerge_message, "misc_arrowlup")
+	self:MessageOld("emerge", "yellow", "Long", L.emerge_message, "misc_arrowlup")
 	self:Bar("submerge", 180, L.submerge_bar, "misc_arrowdown")
 	self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
 	self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
@@ -111,7 +111,7 @@ end
 function mod:Submerge()
 	sonsdead = 0 -- reset counter
 	self:StopBar(L.knockback_bar)
-	self:Message("submerge", "yellow", "Long", L.submerge_message, "misc_arrowdown")
+	self:MessageOld("submerge", "yellow", "Long", L.submerge_message, "misc_arrowdown")
 	self:Bar("emerge", 90, L.emerge_bar, "misc_arrowlup")
 	self:DelayedMessage("emerge", 30, "yellow", CL.custom_sec:format(L.emerge, 60))
 	self:DelayedMessage("emerge", 60, "yellow", CL.custom_sec:format(L.emerge, 30))
@@ -122,7 +122,7 @@ end
 function mod:SonDeaths()
 	sonsdead = sonsdead + 1
 	if sonsdead < 9 then
-		self:Message("emerge", "green", nil, CL.add_killed:format(sonsdead, 8), "spell_fire_elemental_totem")
+		self:MessageOld("emerge", "green", nil, CL.add_killed:format(sonsdead, 8), "spell_fire_elemental_totem")
 	end
 	if sonsdead == 8 then
 		self:StopBar(L.emerge_bar)

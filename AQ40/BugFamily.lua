@@ -46,18 +46,18 @@ end
 --
 
 function mod:GreatHeal(args)
-	self:Message(args.spellId, "orange", nil, CL.casting:format(args.spellName))
+	self:MessageOld(args.spellId, "orange", nil, CL.casting:format(args.spellName))
 	self:Bar(args.spellId, 2, CL.cast:format(args.spellName))
 end
 
 function mod:Fear(args)
 	self:Bar(args.spellId, 20)
-	self:Message(args.spellId, "red")
+	self:MessageOld(args.spellId, "red")
 	self:DelayedMessage(args.spellId, 15, "orange", CL.custom_sec:format(args.spellName, 5))
 end
 
 function mod:ToxicVolley(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 end
 
 do
@@ -66,7 +66,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) then
 			prev = t
-			self:Message(args.spellId, "blue", "Alarm", CL.underyou:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "Alarm", CL.underyou:format(args.spellName))
 		end
 	end
 end

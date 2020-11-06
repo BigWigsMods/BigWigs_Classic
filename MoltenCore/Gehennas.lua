@@ -27,14 +27,14 @@ end
 
 function mod:Curse(args)
 	self:Bar(args.spellId, 30)
-	self:Message(args.spellId, "orange")
+	self:MessageOld(args.spellId, "orange")
 	self:DelayedMessage(args.spellId, 25, "yellow", CL.custom_sec:format(args.spellName, 5))
 end
 
 function mod:Fire(args)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:Message(args.spellId, "blue", "Alarm", CL.you:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "Alarm", CL.you:format(args.spellName))
 	end
 end
 

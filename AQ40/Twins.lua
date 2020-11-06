@@ -53,7 +53,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "yellow", "Info")
+			self:MessageOld(args.spellId, "yellow", "Info")
 			self:DelayedMessage(args.spellId, 20, "orange", CL.custom_sec:format(args.spellName, 10))
 			self:DelayedMessage(args.spellId, 25, "red", CL.custom_sec:format(args.spellName, 5))
 			self:Bar(args.spellId, 30)
@@ -67,13 +67,13 @@ do
 		local t = GetTime()
 		if t-prev > 10 then
 			prev = t
-			self:Message(args.spellId, "red", "Warning", CL.casting:format(args.spellName))
+			self:MessageOld(args.spellId, "red", "Warning", CL.casting:format(args.spellName))
 		end
 	end
 end
 
 function mod:MutateBug(args)
-	self:Message(args.spellId, "cyan")
+	self:MessageOld(args.spellId, "cyan")
 end
 
 do
@@ -82,7 +82,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) then
 			prev = t
-			self:Message(args.spellId, "blue", "Alarm", CL.you:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "Alarm", CL.you:format(args.spellName))
 		end
 	end
 end

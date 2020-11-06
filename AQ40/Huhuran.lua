@@ -56,7 +56,7 @@ do
 end
 
 function mod:Enrage(args)
-	self:Message(args.spellId, "yellow", self:Dispeller("enrage", true) and "Warning")
+	self:MessageOld(args.spellId, "yellow", self:Dispeller("enrage", true) and "Warning")
 	self:CDBar(args.spellId, 14.5)
 end
 
@@ -73,7 +73,7 @@ function mod:BerserkApplied(args)
 	self:CancelDelayedMessage(format(CL.custom_sec, berserk, 5))
 	self:CancelDelayedMessage(format(CL.custom_end, self.displayName, berserk))
 
-	self:Message("berserk", "orange", nil, "30% - ".. args.spellName)
+	self:MessageOld("berserk", "orange", nil, "30% - ".. args.spellName)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
@@ -81,7 +81,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unit)
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 36  then
 			self:UnregisterUnitEvent(event, "target", "focus")
-			self:Message("berserk", "red", nil, CL.soon:format(self:SpellName(26662)), false)
+			self:MessageOld("berserk", "red", nil, CL.soon:format(self:SpellName(26662)), false)
 		end
 	end
 end

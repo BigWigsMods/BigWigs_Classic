@@ -84,11 +84,11 @@ function mod:PlagueRemoved(args)
 end
 
 function mod:Frenzy(args)
-	self:Message(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "Long")
 end
 
 function mod:Explode(args)
-	self:Message(args.spellId, "orange", "Alert", CL.casting:format(args.spellName))
+	self:MessageOld(args.spellId, "orange", "Alert", CL.casting:format(args.spellName))
 	self:Bar(args.spellId, 6) -- Duration is 7s but it expires after 6s
 	self:Flash(args.spellId)
 end
@@ -99,7 +99,7 @@ do
 		local t = GetTime()
 		if t-prev > 12 then
 			prev = t
-			self:Message(args.spellId, "cyan")
+			self:MessageOld(args.spellId, "cyan")
 		end
 	end
 end
@@ -110,16 +110,16 @@ do
 		local t = GetTime()
 		if t-prev > 12 then
 			prev = t
-			self:Message(args.spellId, "cyan")
+			self:MessageOld(args.spellId, "cyan")
 		end
 	end
 end
 
 function mod:SummonAnubisathSwarmguard(args)
-	self:Message("guard", "green", nil, args.spellName, L.guard_icon)
+	self:MessageOld("guard", "green", nil, args.spellName, L.guard_icon)
 end
 
 function mod:SummonAnubisathWarrior(args)
-	self:Message("warrior", "green", nil, args.spellName, L.warrior_icon)
+	self:MessageOld("warrior", "green", nil, args.spellName, L.warrior_icon)
 end
 

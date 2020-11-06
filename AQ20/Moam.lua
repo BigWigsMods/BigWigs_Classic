@@ -50,7 +50,7 @@ end
 -- or just warnings at certain mana levels.
 
 function mod:Energize(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 	self:DelayedMessage(args.spellId, 30, "yellow", CL.custom_sec:format(L.bossName, 60))
 	self:DelayedMessage(args.spellId, 60, "yellow", CL.custom_sec:format(L.bossName, 30))
 	self:DelayedMessage(args.spellId, 75, "orange", CL.custom_sec:format(L.bossName, 15))
@@ -65,7 +65,7 @@ function mod:EnergizeRemoved(args)
 	self:CancelDelayedMessage(CL.custom_sec:format(L.bossName, 5))
 	self:StopBar(L.bossName)
 
-	self:Message(args.spellId, "yellow", nil, L.bossName)
+	self:MessageOld(args.spellId, "yellow", nil, L.bossName)
 	self:DelayedMessage(args.spellId, 30, "yellow", CL.custom_sec:format(args.spellName, 60))
 	self:DelayedMessage(args.spellId, 60, "yellow", CL.custom_sec:format(args.spellName, 30))
 	self:DelayedMessage(args.spellId, 75, "orange", CL.custom_sec:format(args.spellName, 15))
@@ -78,7 +78,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 		self:StartWipeCheck()
 
 		local spell = self:SpellName(25685)
-		self:Message(25685, "yellow", nil, CL.custom_sec:format(spell, 90), false)
+		self:MessageOld(25685, "yellow", nil, CL.custom_sec:format(spell, 90), false)
 		self:DelayedMessage(25685, 30, "yellow", CL.custom_sec:format(spell, 60))
 		self:DelayedMessage(25685, 60, "yellow", CL.custom_sec:format(spell, 30))
 		self:DelayedMessage(25685, 75, "orange", CL.custom_sec:format(spell, 15))

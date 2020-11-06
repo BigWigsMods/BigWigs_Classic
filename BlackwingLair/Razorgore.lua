@@ -43,7 +43,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Message("stages", "orange", nil, L.start_message, false)
+	self:MessageOld("stages", "orange", nil, L.start_message, false)
 	self:Bar("stages", 45, L.start_mob, "Spell_Holy_PrayerOfHealing")
 	self:DelayedMessage("stages", 40, "red", L.start_soon)
 	eggs = 0
@@ -60,12 +60,12 @@ end
 function mod:DestroyEgg()
 	eggs = eggs + 1
 	if eggs < 30 then
-		self:Message("eggs", "green", nil, L.eggs_message:format(eggs), L.eggs_icon)
+		self:MessageOld("eggs", "green", nil, L.eggs_message:format(eggs), L.eggs_icon)
 	end
 end
 
 function mod:Phase2()
-	self:Message("stages", "red", nil, L.phase2_message, false)
+	self:MessageOld("stages", "red", nil, L.phase2_message, false)
 	self:Death("Win", 12435) -- Register after p2 to prevent false positives
 end
 
