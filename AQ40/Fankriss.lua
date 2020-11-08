@@ -37,10 +37,10 @@ function mod:MortalWound(args)
 end
 
 function mod:SummonWorm()
-	self:MessageOld(25832, "orange", "Info")
+	self:MessageOld(25832, "orange", "info")
 end
 
 function mod:Entangle(args)
-	self:TargetMessageOld(720, args.destName, "red", "Alert", nil, nil, true)
+	self:TargetMessageOld(720, args.destName, "red", "alert", nil, nil, true)
 end
 

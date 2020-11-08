@@ -49,7 +49,7 @@ end
 --
 
 function mod:Weakness(args)
-	self:MessageOld("debuff", "yellow", "Info", args.spellId)
+	self:MessageOld("debuff", "yellow", "info", args.spellId)
 	self:Bar("debuff", 45, args.spellId)
 
 	self:DelayedMessage(25176, 30, "yellow", CL.custom_sec:format(self:SpellName(25176), 15))

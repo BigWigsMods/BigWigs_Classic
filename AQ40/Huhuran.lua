@@ -56,7 +56,7 @@ do
 end
 
 function mod:Enrage(args)
-	self:MessageOld(args.spellId, "yellow", self:Dispeller("enrage", true) and "Warning")
+	self:MessageOld(args.spellId, "yellow", self:Dispeller("enrage", true) and "warning")
 	self:CDBar(args.spellId, 14.5)
 end
 

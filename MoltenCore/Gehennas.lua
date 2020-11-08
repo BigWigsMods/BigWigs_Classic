@@ -34,7 +34,7 @@ end
 function mod:Fire(args)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:MessageOld(args.spellId, "blue", "Alarm", CL.you:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "alarm", CL.you:format(args.spellName))
 	end
 end
 

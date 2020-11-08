@@ -95,12 +95,12 @@ end
 function mod:Fear(args)
 	self:DelayedMessage(args.spellId, 26, "orange", CL.custom_sec:format(args.spellName, 5))
 	self:CDBar(args.spellId, 32)
-	self:MessageOld(args.spellId, "red", "Alert")
+	self:MessageOld(args.spellId, "red", "alert")
 	self:Bar(args.spellId, 1.5, CL.cast:format(args.spellName))
 end
 
 function mod:ShadowFlame(args)
-	self:MessageOld(args.spellId, "yellow", "Alert")
+	self:MessageOld(args.spellId, "yellow", "alert")
 	self:Bar(args.spellId, 2, CL.cast:format(args.spellName))
 end
 

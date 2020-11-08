@@ -38,12 +38,12 @@ end
 
 function mod:Enrage(args)
 	self:Bar(args.spellId, 8, CL.cast:format(args.spellName))
-	self:MessageOld(args.spellId, "yellow", "Info")
+	self:MessageOld(args.spellId, "yellow", "info")
 end
 
 function mod:Conflagration(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(args.spellId, "blue", "Alert", CL.underyou:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "alert", CL.underyou:format(args.spellName))
 	end
 end
 

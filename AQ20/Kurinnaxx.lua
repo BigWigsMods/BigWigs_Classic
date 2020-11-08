@@ -44,7 +44,7 @@ function mod:MortalWound(args)
 end
 
 function mod:SandTrap()
-	self:MessageOld(25656, "orange", "Alert")
+	self:MessageOld(25656, "orange", "alert")
 end
 
 function mod:Frenzy(args)

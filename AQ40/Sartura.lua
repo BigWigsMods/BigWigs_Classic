@@ -56,11 +56,11 @@ end
 
 function mod:Frenzy(args)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
-	self:MessageOld(args.spellId, "orange", "Long", "25% - ".. args.spellName)
+	self:MessageOld(args.spellId, "orange", "long", "25% - ".. args.spellName)
 end
 
 function mod:Whirlwind(args)
-	self:MessageOld(args.spellId, "red", "Alert")
+	self:MessageOld(args.spellId, "red", "alert")
 	self:Bar(args.spellId, 15)
 end
 

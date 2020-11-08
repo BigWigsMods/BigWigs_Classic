@@ -96,11 +96,11 @@ function mod:PlagueRemoved(args)
 end
 
 function mod:Frenzy(args)
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 end
 
 function mod:Explode(args)
-	self:MessageOld(args.spellId, "orange", "Alert", CL.casting:format(args.spellName))
+	self:MessageOld(args.spellId, "orange", "alert", CL.casting:format(args.spellName))
 	self:Bar(args.spellId, 6) -- Duration is 7s but it expires after 6s
 	self:Flash(args.spellId)
 end

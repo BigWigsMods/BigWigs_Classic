@@ -54,7 +54,7 @@ end
 --
 
 function mod:DominateMind(args)
-	self:TargetMessageOld(args.spellId, args.destName, "red", "Alert")
+	self:TargetMessageOld(args.spellId, args.destName, "red", "alert")
 end
 
 function mod:DestroyEgg()
@@ -70,7 +70,7 @@ function mod:Phase2()
 end
 
 function mod:Conflagration(args)
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "Info")
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "info")
 	self:TargetBar(args.spellId, 10, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end

@@ -53,7 +53,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "yellow", "Info")
+			self:MessageOld(args.spellId, "yellow", "info")
 			self:DelayedMessage(args.spellId, 20, "orange", CL.custom_sec:format(args.spellName, 10))
 			self:DelayedMessage(args.spellId, 25, "red", CL.custom_sec:format(args.spellName, 5))
 			self:Bar(args.spellId, 30)
@@ -67,7 +67,7 @@ do
 		local t = GetTime()
 		if t-prev > 10 then
 			prev = t
-			self:MessageOld(args.spellId, "red", "Warning", CL.casting:format(args.spellName))
+			self:MessageOld(args.spellId, "red", "warning", CL.casting:format(args.spellName))
 		end
 	end
 end
@@ -82,7 +82,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Alarm", CL.you:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "alarm", CL.you:format(args.spellName))
 		end
 	end
 end

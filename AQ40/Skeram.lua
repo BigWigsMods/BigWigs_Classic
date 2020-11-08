@@ -81,7 +81,7 @@ function mod:ArcaneExplosion(args)
 end
 
 function mod:SummonImages()
-	self:MessageOld("images", "red", "Long", L.images, L.images_icon)
+	self:MessageOld("images", "red", "long", L.images, L.images_icon)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)

@@ -95,7 +95,7 @@ function mod:SandBlast(args)
 end
 
 function mod:BerserkApplied(args)
-	self:MessageOld(args.spellId, "orange", "Long", "20% - ".. args.spellName)
+	self:MessageOld(args.spellId, "orange", "long", "20% - ".. args.spellName)
 	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
 	self:CancelDelayedMessage(L["emergewarn"])
 	self:CancelDelayedMessage(L["emergewarn2"])

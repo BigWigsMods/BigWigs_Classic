@@ -88,11 +88,11 @@ function mod:Debuffs(args)
 	if self:Me(args.destGUID) then
 		debuffCount = debuffCount + 1
 		if debuffCount == 3 then
-			self:MessageOld("debuffs", "red", "Alarm", L.debuffs_message, args.spellId)
+			self:MessageOld("debuffs", "red", "alarm", L.debuffs_message, args.spellId)
 		elseif debuffCount == 4 then
-			self:MessageOld("debuffs", "orange", "Warning", L.debuffs_warning:format(self:SpellName(605)), args.spellId) -- 605 = Mind Control
+			self:MessageOld("debuffs", "orange", "warning", L.debuffs_warning:format(self:SpellName(605)), args.spellId) -- 605 = Mind Control
 		elseif debuffCount == 5 then
-			self:MessageOld("debuffs", "orange", "Warning", 605, args.spellId) -- 605 = Mind Control
+			self:MessageOld("debuffs", "orange", "warning", 605, args.spellId) -- 605 = Mind Control
 		end
 	end
 end
