@@ -7,4 +7,4 @@ A collection of BigWigs modules from the **Classic** era, including:
 * Ruins of Ahn'Qiraj
 
 ## Download
-https://www.curseforge.com/wow/addons/bigwigs_classic
+<https://www.curseforge.com/wow/addons/bigwigs_classic>
