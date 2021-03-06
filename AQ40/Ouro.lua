@@ -60,7 +60,7 @@ function mod:OnBossEnable()
 		self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
 	end
 
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "target", "focus")
 
 	self:Death("Win", 15517)
 end
@@ -96,7 +96,7 @@ end
 
 function mod:BerserkApplied(args)
 	self:MessageOld(args.spellId, "orange", "long", "20% - ".. args.spellName)
-	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+	self:UnregisterUnitEvent("UNIT_HEALTH", "target", "focus")
 	self:CancelDelayedMessage(L["emergewarn"])
 	self:CancelDelayedMessage(L["emergewarn2"])
 	self:StopBar(L["possible_submerge_bar"])
@@ -143,7 +143,7 @@ do
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unit)
+function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15517 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 25 then

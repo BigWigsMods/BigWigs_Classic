@@ -38,7 +38,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Frenzy", 8269)
 
 	self:BossYell("Engage", L.engage_trigger)
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "target", "focus")
 
 	self:Death("Win", 15516)
 	self:Death("AddDies", 15984)
@@ -55,7 +55,7 @@ end
 --
 
 function mod:Frenzy(args)
-	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
+	self:UnregisterUnitEvent("UNIT_HEALTH", "target", "focus")
 	self:MessageOld(args.spellId, "orange", "long", "25% - ".. args.spellName)
 end
 
@@ -68,7 +68,7 @@ function mod:WhirlwindOver(args)
 	self:MessageOld(args.spellId, "green", nil, CL.over:format(args.spellName))
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unit)
+function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15516 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 31 then

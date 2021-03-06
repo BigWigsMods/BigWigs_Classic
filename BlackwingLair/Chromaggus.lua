@@ -61,7 +61,7 @@ end
 function mod:OnEngage()
 	barcount = 2
 	debuffCount = 0
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "FrenzySoon", "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", "FrenzySoon", "boss1")
 
 	local b1 = CL.count:format(self:SpellName(18617), 1) -- Breath (1)
 	local b2 = CL.count:format(self:SpellName(18617), 2) -- Breath (2)
@@ -80,7 +80,7 @@ function mod:Enrage(args)
 end
 
 function mod:Frenzy(args)
-	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
+	self:UnregisterUnitEvent("UNIT_HEALTH", "boss1")
 	self:MessageOld(args.spellId, "red", nil, "20% - ".. args.spellName)
 end
 
