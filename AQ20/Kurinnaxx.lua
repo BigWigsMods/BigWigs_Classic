@@ -53,7 +53,7 @@ function mod:Frenzy(args)
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
-	if self:MobId(UnitGUID(unit)) == 15348 then
+	if self:MobId(self:UnitGUID(unit)) == 15348 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 36 then
 			self:UnregisterUnitEvent(event, "target", "focus")

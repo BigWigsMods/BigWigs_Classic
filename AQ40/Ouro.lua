@@ -144,7 +144,7 @@ do
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
-	if self:MobId(UnitGUID(unit)) == 15517 then
+	if self:MobId(self:UnitGUID(unit)) == 15517 then
 		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 		if hp < 25 then
 			self:UnregisterUnitEvent(event, "target", "focus")
