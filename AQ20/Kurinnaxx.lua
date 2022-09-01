@@ -40,7 +40,7 @@ end
 --
 
 function mod:MortalWound(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow")
 end
 
 function mod:SandTrap()

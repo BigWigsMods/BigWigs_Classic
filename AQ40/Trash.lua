@@ -138,7 +138,7 @@ end
 --[[ Vekniss Hive Crawler ]]--
 
 function mod:SunderArmor(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow")
 	self:TargetBar(args.spellId, 20, args.destName)
 end
 
