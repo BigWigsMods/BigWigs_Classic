@@ -55,7 +55,7 @@ end
 
 function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15369 then
-		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+		local hp = self:GetHealth(unit)
 		if hp < 26 then
 			self:UnregisterUnitEvent(event, "target", "focus")
 			self:MessageOld(8269, "green", nil, CL.soon:format(self:SpellName(8269)), false)

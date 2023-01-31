@@ -86,7 +86,7 @@ end
 
 function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15263 then
-		local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+		local hp = self:GetHealth(unit)
 		if (hp < 82 and splitPhase == 1) or (hp < 57 and splitPhase == 2) or (hp < 32 and splitPhase == 3) then
 			splitPhase = splitPhase + 1
 			self:MessageOld("images", "green", nil, CL.soon:format(self:SpellName(L.images)), false)

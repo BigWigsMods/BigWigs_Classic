@@ -118,10 +118,10 @@ function mod:Breath(args)
 	self:Bar("breath", 60, args.spellId)
 end
 
-function mod:FrenzySoon(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId)
+function mod:FrenzySoon(event, unit)
+	local hp = self:GetHealth(unit)
 	if hp < 0.25 then -- Frenzy at 20%
-		self:UnregisterUnitEvent(event, unitId)
+		self:UnregisterUnitEvent(event, unit)
 		self:MessageOld(23537, "cyan", nil, CL.soon:format(self:SpellName(23537)), false)
 	end
 end
