@@ -53,7 +53,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Knockback", 20566)
 	self:Log("SPELL_CAST_START", "Warmup", 19774) -- Summon Ragnaros
 
- 	self:RegisterUnitEvent("UNIT_TARGETABLE_CHANGED", nil, "boss1")
+	self:RegisterUnitEvent("UNIT_TARGETABLE_CHANGED", nil, "boss1")
 	self:Death("Win", 11502)
 	self:Death("SonDeaths", 12143)
 	self:Death("MajordomoDeath", 12018)

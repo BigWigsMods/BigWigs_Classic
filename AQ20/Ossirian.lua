@@ -11,12 +11,11 @@ mod:RegisterEnableMob(15339)
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.debuff = "Weakness"
 	L.debuff_desc = "Warn for various weakness types."
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization

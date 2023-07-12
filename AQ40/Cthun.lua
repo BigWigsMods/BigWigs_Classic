@@ -74,7 +74,7 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		"tentacle",
-		26029,
+		{26029, "CASTBAR"},
 		"giant",
 		"weakened",
 		"stages",
@@ -263,7 +263,7 @@ function mod:GroupWarning()
 end
 
 function mod:Tentacles()
-	if phase2started then
+	--if phase2started then
 		--if gianteye then
 		--	gianteye = nil
 		--	self:Bar("giant", tentacletime, L["barGiant"], "Ability_EyeOfTheOwl")
@@ -273,7 +273,7 @@ function mod:Tentacles()
 		--else
 		--	gianteye = true
 		--end
-	end
+	--end
 	self:Bar("tentacle", tentacletime, L.tentacleParty, L.tentacle_icon) -- Tentacle party
 	self:DelayedMessage("tentacle", tentacletime -.1, "red", L.tentacleParty, L.tentacle_icon) -- Tentacle party
 	self:DelayedMessage("tentacle", tentacletime -5, "orange", CL.custom_sec:format(self:SpellName(61619), 5)) -- Tentacles in 5 sec
