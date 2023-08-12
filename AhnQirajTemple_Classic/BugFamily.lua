@@ -14,7 +14,7 @@ mod:SetEncounterID(710)
 
 function mod:GetOptions()
 	return {
-		25807, -- Great Heal
+		{25807, "CASTBAR"}, -- Great Heal
 		26580, -- Fear
 		25812, -- Toxic Volley
 		25786, -- Toxic Vapors
