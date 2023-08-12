@@ -1,0 +1,35 @@
+## Interface: 30401
+## Interface-Classic: 11403
+## Interface-BCC: 20504
+
+## Title: BigWigs [|cffeda55fBlackwing Lair|r]
+## Title-deDE: BigWigs [|cffeda55fPechschwingenhort|r]
+## Title-esES: BigWigs [|cffeda55fGuarida de Alanegra|r]
+## Title-esMX: BigWigs [|cffeda55fGuarida de Alanegra|r]
+## Title-frFR: BigWigs [|cffeda55fRepaire de l’Aile noire|r]
+## Title-itIT: BigWigs [|cffeda55fFortezza dell'Ala Nera|r]
+## Title-koKR: BigWigs [|cffeda55f검은날개 둥지|r]
+## Title-ptBR: BigWigs [|cffeda55fCovil Asa Negra|r]
+## Title-ruRU: BigWigs [|cffeda55fЛогово Крыла Тьмы|r]
+## Title-zhCN: BigWigs [|cffeda55f黑翼之巢|r]
+## Title-zhTW: BigWigs [|cffeda55f黑翼之巢|r]
+## Notes: BigWigs Blackwing Lair Modules
+## Notes-deDE: BigWigs Blackwing Lair Modules
+## Notes-esES: BigWigs Blackwing Lair Modules
+## Notes-esMX: BigWigs Blackwing Lair Modules
+## Notes-frFR: BigWigs Blackwing Lair Modules
+## Notes-itIT: BigWigs Blackwing Lair Modules
+## Notes-koKR: BigWigs Blackwing Lair Modules
+## Notes-ptBR: BigWigs Blackwing Lair Modules
+## Notes-ruRU: BigWigs Blackwing Lair Modules
+## Notes-zhCN: BigWigs 黑翼之巢模块。
+## Notes-zhTW: BigWigs Blackwing Lair Modules
+## Version: @project-version@
+
+## LoadOnDemand: 1
+## Dependencies: BigWigs
+
+## X-Category: Raid
+## X-BigWigs-LoadOn-InstanceId: 469
+
+modules.xml
