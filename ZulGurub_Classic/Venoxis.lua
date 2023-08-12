@@ -26,7 +26,7 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		23895, -- Renew
-		23860, -- Holy Fire
+		{23860, "CASTBAR"}, -- Holy Fire
 		23861, -- Poison Cloud
 	}
 end

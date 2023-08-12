@@ -79,7 +79,7 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		"tentacle",
-		26029, -- Dark Glare
+		{26029, "CASTBAR"}, -- Dark Glare
 		"giant",
 		"weakened",
 		"stages",

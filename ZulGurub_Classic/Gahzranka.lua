@@ -25,7 +25,7 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		21099, -- Frost Breath
+		{21099, "CASTBAR"}, -- Frost Breath
 		22421, -- Massive Geyser
 	}
 end

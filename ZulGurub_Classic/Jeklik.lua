@@ -38,7 +38,7 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		"swarm",
-		23954, -- Great Heal
+		{23954, "CASTBAR"}, -- Great Heal
 		26044, -- Mind Flay
 		"bomb",
 	}
