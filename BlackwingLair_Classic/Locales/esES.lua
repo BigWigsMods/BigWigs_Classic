@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Razorgore the Untamed", "esES") or BigWigs:NewBossLocale("Razorgore the Untamed", "esMX")
+local L = BigWigs:NewBossLocale("Razorgore the Untamed", "esES")
 if not L then return end
 if L then
 	--L.start_trigger = "Intruders have breached"
@@ -13,13 +13,13 @@ if L then
 	--L.phase2_message = "All eggs destroyed, Razorgore loose!"
 end
 
-L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esES") or BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esMX")
+L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esES")
 if L then
 	--L.warmup_trigger = "Too late, friends!"
 	--L.warmup_message = "RP started, engaging in ~43s"
 end
 
-L = BigWigs:NewBossLocale("Chromaggus", "esES") or BigWigs:NewBossLocale("Chromaggus", "esMX")
+L = BigWigs:NewBossLocale("Chromaggus", "esES")
 if L then
 	--L.breath = "Breaths"
 	--L.breath_desc = "Warn for Breaths."
@@ -28,7 +28,7 @@ if L then
 	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
 end
 
-L = BigWigs:NewBossLocale("NefarianBWL", "esES") or BigWigs:NewBossLocale("NefarianBWL", "esMX")
+L = BigWigs:NewBossLocale("NefarianBWL", "esES")
 if L then
 	--L.landing_soon_trigger = "Well done, my minions"
 	--L.landing_trigger = "BURN! You wretches"

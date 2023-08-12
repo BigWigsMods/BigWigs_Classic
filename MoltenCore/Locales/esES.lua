@@ -1,16 +1,16 @@
-local L = BigWigs:NewBossLocale("Lucifron", "esES") or BigWigs:NewBossLocale("Lucifron", "esMX")
+local L = BigWigs:NewBossLocale("Lucifron", "esES")
 if not L then return end
 if L then
 	--L.mc_bar = "MC: %s"
 end
 
-L = BigWigs:NewBossLocale("Majordomo Executus", "esES") or BigWigs:NewBossLocale("Majordomo Executus", "esMX")
+L = BigWigs:NewBossLocale("Majordomo Executus", "esES")
 if L then
 	--L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
 	--L.power_next = "Next Power"
 end
 
-L = BigWigs:NewBossLocale("Ragnaros ", "esES") or BigWigs:NewBossLocale("Ragnaros ", "esMX")
+L = BigWigs:NewBossLocale("Ragnaros ", "esES")
 if L then
 	--L.engage_trigger = "NOW FOR YOU,"
 	--L.submerge_trigger = "COME FORTH,"

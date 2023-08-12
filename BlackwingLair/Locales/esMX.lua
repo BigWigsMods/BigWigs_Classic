@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Razorgore the Untamed", "esES")
+local L = BigWigs:NewBossLocale("Razorgore the Untamed", "esMX")
 if not L then return end
 if L then
 	--L.start_trigger = "Intruders have breached"
@@ -13,12 +13,12 @@ if L then
 	--L.phase2_message = "All eggs destroyed, Razorgore loose!"
 end
 
-L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esES")
+L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esMX")
 if L then
 	L.warmup_trigger = "Demasiado tarde, amigos" -- Copied from esES, might be wrong for esMX
 end
 
-L = BigWigs:NewBossLocale("Chromaggus", "esES")
+L = BigWigs:NewBossLocale("Chromaggus", "esMX")
 if L then
 	--L.breath = "Breaths"
 	--L.breath_desc = "Warn for Breaths."
@@ -27,7 +27,7 @@ if L then
 	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
 end
 
-L = BigWigs:NewBossLocale("Nefarian ", "esES")
+L = BigWigs:NewBossLocale("Nefarian ", "esMX")
 if L then
 	--L.landing_soon_trigger = "Well done, my minions"
 	--L.landing_trigger = "BURN! You wretches"

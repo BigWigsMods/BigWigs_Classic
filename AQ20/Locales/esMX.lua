@@ -1,16 +1,16 @@
-local L = BigWigs:NewBossLocale("Moam", "esES")
+local L = BigWigs:NewBossLocale("Moam", "esMX")
 if not L then return end
 if L then
 	--L.starttrigger = "%s senses your fear."
 end
 
-L = BigWigs:NewBossLocale("Ossirian the Unscarred", "esES")
+L = BigWigs:NewBossLocale("Ossirian the Unscarred", "esMX")
 if L then
 	--L.debuff = "Weakness"
 	--L.debuff_desc = "Warn for various weakness types."
 end
 
-L = BigWigs:NewBossLocale("General Rajaxx", "esES")
+L = BigWigs:NewBossLocale("General Rajaxx", "esMX")
 if L then
 	--L.wave = "Waves"
 	--L.wave_desc = "Warn for incoming waves."
@@ -36,7 +36,7 @@ if L then
 	--L.warn9 = "Wave 1/8" -- trigger for starting the event by pulling the first wave instead of talking to andorov
 end
 
-L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "esES")
+L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "esMX")
 if L then
 	--L.guardian = "Anubisath Guardian"
 end

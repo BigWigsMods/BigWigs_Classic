@@ -1,10 +1,10 @@
-local L = BigWigs:NewBossLocale("Battleguard Sartura", "esES")
+local L = BigWigs:NewBossLocale("Battleguard Sartura", "esMX")
 if not L then return end
 if L then
 	--L.engage_trigger = "sacred grounds" -- You will be judged for defiling these sacred grounds!  The laws of the Ancients will not be challenged!  Trespassers will be annihilated!\r\n
 end
 
-L = BigWigs:NewBossLocale("Viscidus", "esES")
+L = BigWigs:NewBossLocale("Viscidus", "esMX")
 if L then
 	--L.freeze = "Freezing States"
 	--L.freeze_desc = "Warn for the different frozen states."
@@ -22,7 +22,7 @@ if L then
 	--L.freeze_warn_frost = "%d frost attacks - %d more to go"
 end
 
-L = BigWigs:NewBossLocale("Ouro", "esES")
+L = BigWigs:NewBossLocale("Ouro", "esMX")
 if L then
 	--L.engage_message = "Ouro engaged! Possible Submerge in 90sec!"
 	--L.possible_submerge_bar = "Possible submerge"
@@ -42,13 +42,13 @@ if L then
 	--L.scarabbar = "Scarabs despawn"
 end
 
-L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esES")
+L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esMX")
 if L then
 	L.defender = "Defensor Anubisath"
 	L.crawler = "Reptador de la colmena Vekniss"
 end
 
-L = BigWigs:NewBossLocale("C'Thun", "esES")
+L = BigWigs:NewBossLocale("C'Thun", "esMX")
 if L then
 	--L.tentacle_desc = "Warn for Tentacles"
 

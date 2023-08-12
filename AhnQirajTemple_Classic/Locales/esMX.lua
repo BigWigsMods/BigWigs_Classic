@@ -1,18 +1,15 @@
-local L = BigWigs:NewBossLocale("Battleguard Sartura", "esES")
+local L = BigWigs:NewBossLocale("Viscidus", "esMX")
 if not L then return end
-if L then
-	--L.engage_trigger = "sacred grounds" -- You will be judged for defiling these sacred grounds!  The laws of the Ancients will not be challenged!  Trespassers will be annihilated!\r\n
-end
-
-L = BigWigs:NewBossLocale("Viscidus", "esES")
 if L then
 	--L.freeze = "Freezing States"
 	--L.freeze_desc = "Warn for the different frozen states."
-	--L.freeze_trigger1 = "%s begins to slow!"
-	--L.freeze_trigger2 = "%s is freezing up!"
-	--L.freeze_trigger3 = "%s is frozen solid!"
-	--L.freeze_trigger4 = "%s begins to crack!"
-	--L.freeze_trigger5 = "%s looks ready to shatter!"
+
+	--L.freeze_trigger1 = "begins to slow!"
+	--L.freeze_trigger2 = "is freezing up!"
+	--L.freeze_trigger3 = "is frozen solid!"
+	--L.freeze_trigger4 = "begins to crack!"
+	--L.freeze_trigger5 = "looks ready to shatter!"
+
 	--L.freeze_warn1 = "First freeze phase!"
 	--L.freeze_warn2 = "Second freeze phase!"
 	--L.freeze_warn3 = "Viscidus is frozen!"
@@ -22,19 +19,17 @@ if L then
 	--L.freeze_warn_frost = "%d frost attacks - %d more to go"
 end
 
-L = BigWigs:NewBossLocale("Ouro", "esES")
+L = BigWigs:NewBossLocale("Ouro", "esMX")
 if L then
 	--L.engage_message = "Ouro engaged! Possible Submerge in 90sec!"
-	--L.possible_submerge_bar = "Possible submerge"
 
-	--L.emergeannounce = "Ouro has emerged!"
+	--L.emerge = "Emerge"
 	--L.emergewarn = "15 sec to possible submerge!"
 	--L.emergewarn2 = "15 sec to Ouro sumberge!"
 	--L.emergebartext = "Ouro submerge"
 
-	--L.submergeannounce = "Ouro has submerged!"
-	--L.submergewarn = "5 seconds until Ouro Emerges!"
-	--L.submergebartext = "Ouro Emerge"
+	--L.submerge = "Submerge"
+	--L.possible_submerge_bar = "Possible submerge"
 
 	--L.scarab = "Scarab Despawn"
 	--L.scarab_desc = "Warn for Scarab Despawn."
@@ -42,14 +37,9 @@ if L then
 	--L.scarabbar = "Scarabs despawn"
 end
 
-L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esES")
+L = BigWigs:NewBossLocale("C'Thun", "esMX")
 if L then
-	L.defender = "Defensor Anubisath"
-	L.crawler = "Reptador de la colmena Vekniss"
-end
-
-L = BigWigs:NewBossLocale("C'Thun", "esES")
-if L then
+	--L.tentacle = "Tentacles"
 	--L.tentacle_desc = "Warn for Tentacles"
 
 	--L.giant = "Giant Eye Alert"
@@ -57,6 +47,7 @@ if L then
 
 	--L.weakened = "Weakened Alert"
 	--L.weakened_desc = "Warn for Weakened State"
+
 	--L.weakenedtrigger = "%s is weakened!"
 
 	--L.weakened_msg = "C'Thun is weakened for 45 sec"
@@ -77,3 +68,10 @@ if L then
 	--L.phase2starting = "The Eye is dead! Body incoming!"
 end
 
+L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esMX")
+if L then
+	L.anubisath = "Anubisath"
+	L.sentinel = "Centinela Anubisath"
+	L.defender = "Defensor Anubisath"
+	L.crawler = "Reptador de la colmena Vekniss"
+end

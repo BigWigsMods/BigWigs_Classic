@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Onyxia", "esES")
+local L = BigWigs:NewBossLocale("Onyxia", "esMX")
 if L then
 	--L.phase = "Phases"
 	--L.phase_desc = "Warn for phase changes."

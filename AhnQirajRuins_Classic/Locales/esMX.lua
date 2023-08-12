@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("General Rajaxx", "esES")
+local L = BigWigs:NewBossLocale("General Rajaxx", "esMX")
 if not L then return end
 if L then
 	--L.wave = "Waves Warnings"
@@ -16,19 +16,19 @@ if L then
 	--L.wave_message = "Wave (%d/8)"
 end
 
-L = BigWigs:NewBossLocale("Buru the Gorger", "esES")
+L = BigWigs:NewBossLocale("Buru the Gorger", "esMX")
 if L then
 	L.fixate = "Fijar"
 	L.fixate_desc = "Se fija en un objetivo e ignora la amenaza de otros atacantes."
 end
 
-L = BigWigs:NewBossLocale("Ossirian the Unscarred", "esES")
+L = BigWigs:NewBossLocale("Ossirian the Unscarred", "esMX")
 if L then
 	L.debuff = "Debilidad"
 	--L.debuff_desc = "Warn for various weakness types."
 end
 
-L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "esES")
+L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "esMX")
 if L then
 	L.guardian = "Guardián Anubisath"
 end

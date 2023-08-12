@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Viscidus", "esES") or BigWigs:NewBossLocale("Viscidus", "esMX")
+local L = BigWigs:NewBossLocale("Viscidus", "esES")
 if not L then return end
 if L then
 	--L.freeze = "Freezing States"
@@ -19,7 +19,7 @@ if L then
 	--L.freeze_warn_frost = "%d frost attacks - %d more to go"
 end
 
-L = BigWigs:NewBossLocale("Ouro", "esES") or BigWigs:NewBossLocale("Ouro", "esMX")
+L = BigWigs:NewBossLocale("Ouro", "esES")
 if L then
 	--L.engage_message = "Ouro engaged! Possible Submerge in 90sec!"
 
@@ -37,7 +37,7 @@ if L then
 	--L.scarabbar = "Scarabs despawn"
 end
 
-L = BigWigs:NewBossLocale("C'Thun", "esES") or BigWigs:NewBossLocale("C'Thun", "esMX")
+L = BigWigs:NewBossLocale("C'Thun", "esES")
 if L then
 	--L.tentacle = "Tentacles"
 	--L.tentacle_desc = "Warn for Tentacles"
@@ -68,7 +68,7 @@ if L then
 	--L.phase2starting = "The Eye is dead! Body incoming!"
 end
 
-L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esES") or BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esMX")
+L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esES")
 if L then
 	L.anubisath = "Anubisath"
 	L.sentinel = "Centinela Anubisath"

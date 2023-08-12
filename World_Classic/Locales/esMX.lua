@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Azuregos", "esES")
+local L = BigWigs:NewBossLocale("Azuregos", "esMX")
 if not L then return end
 if L then
 	L.bossName = "Azuregos"
@@ -9,7 +9,7 @@ if L then
 	--L.teleport_message = "Teleport!"
 end
 
-L = BigWigs:NewBossLocale("Lord Kazzak", "esES")
+L = BigWigs:NewBossLocale("Lord Kazzak", "esMX")
 if L then
 	L.bossName = "Lord Kazzak"
 
@@ -18,28 +18,28 @@ if L then
 	-- L.supreme_mode = "Supreme Mode"
 end
 
-local L = BigWigs:NewBossLocale("Emeriss", "esES")
+local L = BigWigs:NewBossLocale("Emeriss", "esMX")
 if L then
 	L.bossName = "Emeriss"
 
 	-- L.engage_trigger = "Hope is a DISEASE of the soul! This land shall wither and die!"
 end
 
-local L = BigWigs:NewBossLocale("Lethon", "esES")
+local L = BigWigs:NewBossLocale("Lethon", "esMX")
 if L then
 	L.bossName = "Lethon"
 
 	-- L.engage_trigger = "I can sense the SHADOW on your hearts. There can be no rest for the wicked!"
 end
 
-local L = BigWigs:NewBossLocale("Taerar", "esES")
+local L = BigWigs:NewBossLocale("Taerar", "esMX")
 if L then
 	L.bossName = "Taerar"
 
 	-- L.engage_trigger = "Peace is but a fleeting dream! Let the NIGHTMARE reign!"
 end
 
-local L = BigWigs:NewBossLocale("Ysondre", "esES")
+local L = BigWigs:NewBossLocale("Ysondre", "esMX")
 if L then
 	L.bossName = "Ysondre"
 
