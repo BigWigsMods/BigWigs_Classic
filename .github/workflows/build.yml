@@ -12,7 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags') == true || (!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]'))
 
     steps:
       - name: Checkout addon
@@ -32,9 +31,17 @@ jobs:
           mkdir -p Core/Locales
           curl -sS https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/Core/Locales/common.enUS.lua > Core/Locales/common.enUS.lua
 
-      - name: Update option files
+      - name: Update option files for Retail
         if: always()
         uses: BigWigsMods/actions/gen-options@master
+        with:
+          path: BigWigs_Classic_Mainline.toc
+
+      - name: Update option files for Classic
+        if: always()
+        uses: BigWigsMods/actions/gen-options@master
+        with:
+          path: BigWigs_Classic_Vanilla.toc
 
       - name: Package
         uses: BigWigsMods/packager@master
