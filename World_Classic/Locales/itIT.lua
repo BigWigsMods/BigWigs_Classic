@@ -18,28 +18,28 @@ if L then
 	-- L.supreme_mode = "Supreme Mode"
 end
 
-local L = BigWigs:NewBossLocale("Emeriss", "itIT")
+L = BigWigs:NewBossLocale("Emeriss", "itIT")
 if L then
 	L.bossName = "Emeriss"
 
 	-- L.engage_trigger = "Hope is a DISEASE of the soul! This land shall wither and die!"
 end
 
-local L = BigWigs:NewBossLocale("Lethon", "itIT")
+L = BigWigs:NewBossLocale("Lethon", "itIT")
 if L then
 	L.bossName = "Lethon"
 
 	-- L.engage_trigger = "I can sense the SHADOW on your hearts. There can be no rest for the wicked!"
 end
 
-local L = BigWigs:NewBossLocale("Taerar", "itIT")
+L = BigWigs:NewBossLocale("Taerar", "itIT")
 if L then
 	L.bossName = "Taerar"
 
 	-- L.engage_trigger = "Peace is but a fleeting dream! Let the NIGHTMARE reign!"
 end
 
-local L = BigWigs:NewBossLocale("Ysondre", "itIT")
+L = BigWigs:NewBossLocale("Ysondre", "itIT")
 if L then
 	L.bossName = "Ysondre"
 

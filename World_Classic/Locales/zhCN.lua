@@ -18,28 +18,28 @@ if L then
 	L.supreme_mode = "无敌模式"
 end
 
-local L = BigWigs:NewBossLocale("Emeriss", "zhCN")
+L = BigWigs:NewBossLocale("Emeriss", "zhCN")
 if L then
 	L.bossName = "艾莫莉丝"
 
 	L.engage_trigger = "希望是灵魂染上的疾病！这片土地应该枯竭，从此死气腾腾！"
 end
 
-local L = BigWigs:NewBossLocale("Lethon", "zhCN")
+L = BigWigs:NewBossLocale("Lethon", "zhCN")
 if L then
 	L.bossName = "莱索恩"
 
 	L.engage_trigger = "我能感受到你内心的阴影。邪恶的侵蚀永远不会停止！"
 end
 
-local L = BigWigs:NewBossLocale("Taerar", "zhCN")
+L = BigWigs:NewBossLocale("Taerar", "zhCN")
 if L then
 	L.bossName = "泰拉尔"
 
 	L.engage_trigger = "和平不过是短暂的梦想！让梦魇统治整个世界吧！"
 end
 
-local L = BigWigs:NewBossLocale("Ysondre", "zhCN")
+L = BigWigs:NewBossLocale("Ysondre", "zhCN")
 if L then
 	L.bossName = "伊森德雷"
 

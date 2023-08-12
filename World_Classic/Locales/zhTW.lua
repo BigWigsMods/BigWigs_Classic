@@ -18,28 +18,28 @@ if L then
 	L.supreme_mode = "上帝模式"
 end
 
-local L = BigWigs:NewBossLocale("Emeriss", "zhTW")
+L = BigWigs:NewBossLocale("Emeriss", "zhTW")
 if L then
 	L.bossName = "艾莫莉絲"
 
 	-- L.engage_trigger = "Hope is a DISEASE of the soul! This land shall wither and die!"
 end
 
-local L = BigWigs:NewBossLocale("Lethon", "zhTW")
+L = BigWigs:NewBossLocale("Lethon", "zhTW")
 if L then
 	L.bossName = "雷索"
 
 	-- L.engage_trigger = "I can sense the SHADOW on your hearts. There can be no rest for the wicked!"
 end
 
-local L = BigWigs:NewBossLocale("Taerar", "zhTW")
+L = BigWigs:NewBossLocale("Taerar", "zhTW")
 if L then
 	L.bossName = "泰拉爾"
 
 	-- L.engage_trigger = "Peace is but a fleeting dream! Let the NIGHTMARE reign!"
 end
 
-local L = BigWigs:NewBossLocale("Ysondre", "zhTW")
+L = BigWigs:NewBossLocale("Ysondre", "zhTW")
 if L then
 	L.bossName = "伊索德雷"
 

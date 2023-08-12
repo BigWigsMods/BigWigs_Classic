@@ -18,28 +18,28 @@ if L then
 	L.supreme_mode = "무적 모드"
 end
 
-local L = BigWigs:NewBossLocale("Emeriss", "koKR")
+L = BigWigs:NewBossLocale("Emeriss", "koKR")
 if L then
 	L.bossName = "에메리스"
 
 	-- L.engage_trigger = "Hope is a DISEASE of the soul! This land shall wither and die!"
 end
 
-local L = BigWigs:NewBossLocale("Lethon", "koKR")
+L = BigWigs:NewBossLocale("Lethon", "koKR")
 if L then
 	L.bossName = "레손"
 
 	-- L.engage_trigger = "I can sense the SHADOW on your hearts. There can be no rest for the wicked!"
 end
 
-local L = BigWigs:NewBossLocale("Taerar", "koKR")
+L = BigWigs:NewBossLocale("Taerar", "koKR")
 if L then
 	L.bossName = "타에라"
 
 	-- L.engage_trigger = "Peace is but a fleeting dream! Let the NIGHTMARE reign!"
 end
 
-local L = BigWigs:NewBossLocale("Ysondre", "koKR")
+L = BigWigs:NewBossLocale("Ysondre", "koKR")
 if L then
 	L.bossName = "이손드레"
 

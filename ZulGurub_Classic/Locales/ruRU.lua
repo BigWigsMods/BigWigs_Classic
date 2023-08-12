@@ -11,17 +11,17 @@ if L then
 	-- L.bomb_message = "Incoming bomb bats!"
 end
 
-local L = BigWigs:NewBossLocale("High Priest Venoxis", "ruRU")
+L = BigWigs:NewBossLocale("High Priest Venoxis", "ruRU")
 if L then
 	L.bossName = "Верховный жрец Веноксис"
 end
 
-local L = BigWigs:NewBossLocale("High Priestess Mar'li", "ruRU")
+L = BigWigs:NewBossLocale("High Priestess Mar'li", "ruRU")
 if L then
 	L.bossName = "Верховная жрица Мар'ли"
 end
 
-local L = BigWigs:NewBossLocale("High Priest Thekal", "ruRU")
+L = BigWigs:NewBossLocale("High Priest Thekal", "ruRU")
 if L then
 	L.bossName = "Верховный жрец Текал"
 	L.lorkhan = "Ревнитель Лор'Кхан"
@@ -30,36 +30,36 @@ if L then
 	L.tigers_message = "Тигерс на подходе!"
 end
 
-local L = BigWigs:NewBossLocale("High Priestess Arlokk", "ruRU")
+L = BigWigs:NewBossLocale("High Priestess Arlokk", "ruRU")
 if L then
 	L.bossName = "Верховная жрица Арлокк"
 end
 
-local L = BigWigs:NewBossLocale("Hakkar", "ruRU")
+L = BigWigs:NewBossLocale("Hakkar", "ruRU")
 if L then
 	L.bossName = "Хаккар"
 
 	-- L.mc_bar = "MC: %s"
 end
 
-local L = BigWigs:NewBossLocale("Bloodlord Mandokir", "ruRU")
+L = BigWigs:NewBossLocale("Bloodlord Mandokir", "ruRU")
 if L then
 	L.bossName = "Мандокир Повелитель Крови"
 end
 
-local L = BigWigs:NewBossLocale("Jin'do the Hexxer", "ruRU")
+L = BigWigs:NewBossLocale("Jin'do the Hexxer", "ruRU")
 if L then
 	L.bossName = "Проклинатель Джин'до"
 
 	L.brain_wash_message = "Зомбирующего тотема"
 end
 
-local L = BigWigs:NewBossLocale("Gahz'ranka", "ruRU")
+L = BigWigs:NewBossLocale("Gahz'ranka", "ruRU")
 if L then
 	L.bossName = "Газ'ранка"
 end
 
-local L = BigWigs:NewBossLocale("Edge of Madness", "ruRU")
+L = BigWigs:NewBossLocale("Edge of Madness", "ruRU")
 if L then
 	L.bossName = "Грань Безумия"
 	L.grilek = "Гри'лек"

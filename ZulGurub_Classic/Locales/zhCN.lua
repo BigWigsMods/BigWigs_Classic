@@ -11,17 +11,17 @@ if L then
 	L.bomb_message = "炸弹蝙蝠来了！"
 end
 
-local L = BigWigs:NewBossLocale("High Priest Venoxis", "zhCN")
+L = BigWigs:NewBossLocale("High Priest Venoxis", "zhCN")
 if L then
 	L.bossName = "高阶祭司温诺希斯"
 end
 
-local L = BigWigs:NewBossLocale("High Priestess Mar'li", "zhCN")
+L = BigWigs:NewBossLocale("High Priestess Mar'li", "zhCN")
 if L then
 	L.bossName = "高阶祭司玛尔里"
 end
 
-local L = BigWigs:NewBossLocale("High Priest Thekal", "zhCN")
+L = BigWigs:NewBossLocale("High Priest Thekal", "zhCN")
 if L then
 	L.bossName = "高阶祭司塞卡尔"
 	L.lorkhan = "狂热者洛卡恩"
@@ -30,36 +30,36 @@ if L then
 	L.tigers_message = "老虎出现！"
 end
 
-local L = BigWigs:NewBossLocale("High Priestess Arlokk", "zhCN")
+L = BigWigs:NewBossLocale("High Priestess Arlokk", "zhCN")
 if L then
 	L.bossName = "高阶祭司娅尔罗"
 end
 
-local L = BigWigs:NewBossLocale("Hakkar", "zhCN")
+L = BigWigs:NewBossLocale("Hakkar", "zhCN")
 if L then
 	L.bossName = "哈卡"
 
 	L.mc_bar = "控制：%s"
 end
 
-local L = BigWigs:NewBossLocale("Bloodlord Mandokir", "zhCN")
+L = BigWigs:NewBossLocale("Bloodlord Mandokir", "zhCN")
 if L then
 	L.bossName = "血领主曼多基尔"
 end
 
-local L = BigWigs:NewBossLocale("Jin'do the Hexxer", "zhCN")
+L = BigWigs:NewBossLocale("Jin'do the Hexxer", "zhCN")
 if L then
 	L.bossName = "妖术师金度"
 
 	L.brain_wash_message = "洗脑图腾"
 end
 
-local L = BigWigs:NewBossLocale("Gahz'ranka", "zhCN")
+L = BigWigs:NewBossLocale("Gahz'ranka", "zhCN")
 if L then
 	L.bossName = "加兹兰卡"
 end
 
-local L = BigWigs:NewBossLocale("Edge of Madness", "zhCN")
+L = BigWigs:NewBossLocale("Edge of Madness", "zhCN")
 if L then
 	L.bossName = "疯狂之缘"
 	L.grilek = "格里雷克"
