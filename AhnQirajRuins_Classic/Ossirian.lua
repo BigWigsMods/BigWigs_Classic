@@ -24,12 +24,11 @@ local icons = {
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.debuff = "Weakness"
 	L.debuff_desc = "Warn for various weakness types."
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization

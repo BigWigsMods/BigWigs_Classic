@@ -264,7 +264,7 @@ function mod:GroupWarning()
 end
 
 function mod:Tentacles()
-	if phase2started then
+	--if phase2started then
 		--if gianteye then
 		--	gianteye = nil
 		--	self:Bar("giant", tentacletime, L["barGiant"], "Ability_EyeOfTheOwl")
@@ -274,7 +274,7 @@ function mod:Tentacles()
 		--else
 		--	gianteye = true
 		--end
-	end
+	--end
 	self:Bar("tentacle", tentacletime, L.tentacleParty, L.tentacle_icon) -- Tentacle party
 	self:DelayedMessage("tentacle", tentacletime -.1, "red", L.tentacleParty, L.tentacle_icon) -- Tentacle party
 	self:DelayedMessage("tentacle", tentacletime -5, "orange", CL.custom_sec:format(L.tentacle, 5)) -- Tentacles in 5 sec
