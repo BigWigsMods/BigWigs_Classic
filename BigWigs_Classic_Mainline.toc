@@ -33,6 +33,7 @@
 ## X-Website: https://github.com/BigWigsMods/BigWigs_Classic
 ## X-Curse-Project-ID: 50625
 ## X-WoWI-ID: 22095
+## X-Wago-ID: rNkPgm6a
 ## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531
 
 MoltenCore\modules.xml

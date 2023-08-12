@@ -33,6 +33,7 @@
 ## X-Website: https://github.com/BigWigsMods/BigWigs_Classic
 ## X-Curse-Project-ID: 50625
 ## X-WoWI-ID: 22095
+## X-Wago-ID: rNkPgm6a
 ## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531, 533, 309, 249
 ## X-BigWigs-ExtraMenu: -947
 ## X-BigWigs-LoadOn-WorldBoss: -1447, 6109, -1419, 12397, -1440, 14889, -1425, 14888, -1431, 14890, -1444, 14887
