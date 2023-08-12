@@ -36,10 +36,6 @@
 ## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531
 
 MoltenCore\modules.xml
-MoltenCore\locales.xml
 BlackwingLair\modules.xml
-BlackwingLair\locales.xml
 AQ20\modules.xml
-AQ20\locales.xml
 AQ40\modules.xml
-AQ40\locales.xml

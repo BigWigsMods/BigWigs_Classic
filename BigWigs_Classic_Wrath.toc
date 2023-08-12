@@ -36,12 +36,7 @@
 ## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531, 309
 
 MoltenCore_Classic\modules.xml
-MoltenCore_Classic\locales.xml
 BlackwingLair_Classic\modules.xml
-BlackwingLair_Classic\locales.xml
 AhnQirajRuins_Classic\modules.xml
-AhnQirajRuins_Classic\locales.xml
 AhnQirajTemple_Classic\modules.xml
-AhnQirajTemple_Classic\locales.xml
 ZulGurub_Classic\modules.xml
-ZulGurub_Classic\locales.xml

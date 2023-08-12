@@ -38,18 +38,10 @@
 ## X-BigWigs-LoadOn-WorldBoss: -1447, 6109, -1419, 12397, -1440, 14889, -1425, 14888, -1431, 14890, -1444, 14887
 
 MoltenCore_Classic\modules.xml
-MoltenCore_Classic\locales.xml
 BlackwingLair_Classic\modules.xml
-BlackwingLair_Classic\locales.xml
 AhnQirajRuins_Classic\modules.xml
-AhnQirajRuins_Classic\locales.xml
 AhnQirajTemple_Classic\modules.xml
-AhnQirajTemple_Classic\locales.xml
 ZulGurub_Classic\modules.xml
-ZulGurub_Classic\locales.xml
 Naxxramas_Classic\modules.xml
-Naxxramas_Classic\locales.xml
 Onyxia_Classic\modules.xml
-Onyxia_Classic\locales.xml
 World_Classic\modules.xml
-World_Classic\locales.xml

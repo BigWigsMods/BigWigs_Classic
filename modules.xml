@@ -1,17 +1,20 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
+<!--This file isn't actually used for loading, just for the parser-->
 <Include file="MoltenCore\modules.xml"/>
-<Include file="MoltenCore\locales.xml"/>
-
 <Include file="BlackwingLair\modules.xml"/>
-<Include file="BlackwingLair\locales.xml"/>
-
 <Include file="AQ20\modules.xml"/>
-<Include file="AQ20\locales.xml"/>
-
 <Include file="AQ40\modules.xml"/>
-<Include file="AQ40\locales.xml"/>
+
+<!--Classic-->
+<Include file="MoltenCore_Classic\modules.xml"/>
+<Include file="BlackwingLair_Classic\modules.xml"/>
+<Include file="AhnQirajRuins_Classic\modules.xml"/>
+<Include file="AhnQirajTemple_Classic\modules.xml"/>
+<Include file="Naxxramas_Classic\modules.xml"/>
+<Include file="Onyxia_Classic\modules.xml"/>
+<Include file="World_Classic\modules.xml"/>
+<Include file="ZulGurub_Classic\modules.xml"/>
 
 </Ui>
-
