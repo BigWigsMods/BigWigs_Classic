@@ -3,10 +3,9 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("High Priestess Jeklik", 309)
+local mod, CL = BigWigs:NewBoss("High Priestess Jeklik", 309, -785)
 if not mod then return end
 mod:RegisterEnableMob(14517)
-mod:SetAllowWin(true)
 mod:SetEncounterID(785)
 
 --------------------------------------------------------------------------------

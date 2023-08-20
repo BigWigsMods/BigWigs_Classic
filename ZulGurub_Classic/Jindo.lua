@@ -3,10 +3,9 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Jin'do the Hexxer", 309)
+local mod = BigWigs:NewBoss("Jin'do the Hexxer", 309, -792)
 if not mod then return end
 mod:RegisterEnableMob(11380)
-mod:SetAllowWin(true)
 mod:SetEncounterID(792)
 
 --------------------------------------------------------------------------------

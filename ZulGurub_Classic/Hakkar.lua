@@ -4,10 +4,9 @@
 --
 -- TODO Hard mode abilities
 
-local mod, CL = BigWigs:NewBoss("Hakkar", 309)
+local mod, CL = BigWigs:NewBoss("Hakkar", 309, -793)
 if not mod then return end
 mod:RegisterEnableMob(14834)
-mod:SetAllowWin(true)
 mod:SetEncounterID(793)
 
 --------------------------------------------------------------------------------

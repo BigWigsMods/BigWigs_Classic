@@ -3,10 +3,9 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("High Priest Venoxis", 309)
+local mod, CL = BigWigs:NewBoss("High Priest Venoxis", 309, -784)
 if not mod then return end
 mod:RegisterEnableMob(14507)
-mod:SetAllowWin(true)
 mod:SetEncounterID(784)
 
 --------------------------------------------------------------------------------

@@ -3,10 +3,9 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Bloodlord Mandokir", 309)
+local mod = BigWigs:NewBoss("Bloodlord Mandokir", 309, -787)
 if not mod then return end
 mod:RegisterEnableMob(11382, 14988) -- Bloodlord Mandokir, Ohgan
-mod:SetAllowWin(true)
 mod:SetEncounterID(787)
 
 --------------------------------------------------------------------------------
