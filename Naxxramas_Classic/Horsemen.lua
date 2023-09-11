@@ -110,8 +110,9 @@ function mod:Mark(args)
 	if t-prev > 5 then
 		prev = t
 		self:Message("mark", "red", L.markwarn1:format(marks), L.mark_icon)
+		self:StopBar(L.markbar:format(marks))
 		marks = marks + 1
-		self:CDBar("mark", 12.9, L.markbar:format(marks), 28835)
+		self:CDBar("mark", 12.9, L.markbar:format(marks), L.mark_icon)
 		-- self:DelayedMessage("mark", 7.9, "orange", L.markwarn2:format(marks), L.mark_icon) -- every 8s is a bit much imo
 	end
 end
