@@ -52,7 +52,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "ShieldWall", 29061)
 	self:Log("SPELL_AURA_APPLIED", "Exhaustion", 29051)
 
-	self:Log("SPELL_AURA_APPLIED", "MindControl", 10912, true) -- player source
+	self:Log("SPELL_AURA_APPLIED", "MindControl", 10912)
 	self:Death("Deaths", 16803) -- Deathknight Understudy
 end
 

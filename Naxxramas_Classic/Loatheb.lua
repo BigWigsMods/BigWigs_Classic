@@ -55,8 +55,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Doom", 29204)
 	self:Log("SPELL_CAST_SUCCESS", "Decurse", 30281)
 	self:Log("SPELL_CAST_SUCCESS", "Spore", 29234)
-	self:Log("SPELL_AURA_APPLIED", "CorruptedMind", 29185, true)
-	self:Log("SPELL_AURA_REMOVED", "CorruptedMindRemoved", 29185, true)
+	self:Log("SPELL_AURA_APPLIED", "CorruptedMind", 29185)
+	self:Log("SPELL_AURA_REMOVED", "CorruptedMindRemoved", 29185)
 
 	self:Death("Win", 16011)
 end
