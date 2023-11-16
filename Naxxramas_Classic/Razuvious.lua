@@ -108,6 +108,6 @@ function mod:Exhaustion(args)
 	local icon = understudyIcons[args.destGUID]
 	if icon then
 		-- Not much of a point if they aren't marked
-		self:StartBar(29051, 60, icon .. args.spellName)
+		self:Bar(29051, 60, icon .. args.spellName)
 	end
 end

@@ -42,8 +42,8 @@ if L then
 	L.tentacle = "Tentakel"
 	L.tentacle_desc = "Warnungen für Tentakel"
 
-	L.giant = "Riesige Augen"
-	L.giant_desc = "Warnungen für Riesige Augen"
+	--L.giant = "Riesige Augen"
+	--L.giant_desc = "Warnungen für Riesige Augen"
 
 	L.weakened = "Geschwächt"
 	L.weakened_desc = "Warnungen für geschwächten Status"

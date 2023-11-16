@@ -44,8 +44,8 @@ if L then
 	L.tentacle_desc = "Warn for Tentacles"
 	L.tentacle_icon = 26391 -- inv_misc_ahnqirajtrinket_05 / Tentacle Call
 
-	L.giant = "Giant Eye Alert"
-	L.giant_desc = "Warn for Giant Eyes"
+	--L.giant = "Giant Eye Alert"
+	--L.giant_desc = "Warn for Giant Eyes"
 
 	L.weakened = "Weakened Alert"
 	L.weakened_desc = "Warn for Weakened State"

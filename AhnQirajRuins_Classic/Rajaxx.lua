@@ -86,7 +86,7 @@ function mod:AttackOrder(args)
 end
 
 function mod:Frenzy(args)
-	self:Message(25471, "red")
+	self:Message(8269, "red")
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)

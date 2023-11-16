@@ -160,8 +160,8 @@ do
 		local t = GetTime()
 		if t-prev > 9 then
 			prev = t
-			self:Message(25778, "blue")
-			self:Bar(25778, 11)
+			self:Message(25779, "blue")
+			self:Bar(25779, 11)
 		end
 	end
 end

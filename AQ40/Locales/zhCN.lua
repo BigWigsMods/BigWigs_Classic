@@ -52,8 +52,8 @@ L = BigWigs:NewBossLocale("C'Thun", "zhCN")
 if L then
 	L.tentacle_desc = "触须警报"
 
-	L.giant = "巨眼警报"
-	L.giant_desc = "巨眼警报。"
+	--L.giant = "巨眼警报"
+	--L.giant_desc = "巨眼警报。"
 
 	L.weakened = "虚弱警报"
 	L.weakened_desc = "虚弱状态警报。"

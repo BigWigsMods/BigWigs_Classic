@@ -81,8 +81,8 @@ function mod:GreatHealStop(args)
 end
 
 function mod:MindFlay(args)
-	self:Message(23954, "yellow")
-	self:PlaySound(23954, "info")
+	self:Message(26044, "yellow")
+	self:PlaySound(26044, "info")
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)

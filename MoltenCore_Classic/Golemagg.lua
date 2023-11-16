@@ -14,7 +14,7 @@ mod:SetEncounterID(670)
 
 function mod:GetOptions()
 	return {
-		"stages",
+		--"stages",
 	}
 end
 
