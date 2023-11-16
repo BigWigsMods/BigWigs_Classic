@@ -39,8 +39,8 @@ if L then
 	L.tentacle_desc = "Warn for Tentacles"
 	L.tentacle_icon = 61619 -- inv_misc_monstertail_06 / Tentacles
 
-	--L.giant = "Giant Eye Alert"
-	--L.giant_desc = "Warn for Giant Eyes"
+	L.giant = "Giant Eye Alert"
+	L.giant_desc = "Warn for Giant Eyes"
 
 	L.weakened = "Weakened Alert"
 	L.weakened_desc = "Warn for Weakened State"
@@ -75,7 +75,7 @@ function mod:GetOptions()
 	return {
 		"tentacle",
 		{26029, "CASTBAR"},
-		"giant",
+		--"giant",
 		"weakened",
 		"stages",
 		"proximity",
