@@ -1,6 +1,7 @@
 
 BigWigs:AddColors("High Priestess Jeklik", {
-	[23954] = {"green","red","yellow"},
+	[23954] = {"green","red"},
+	[26044] = "yellow",
 	["bomb"] = "orange",
 	["swarm"] = "orange",
 })

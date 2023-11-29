@@ -1,7 +1,7 @@
 
 BigWigs:AddColors("Kurinnaxx", {
-	[25646] = {"blue","yellow"},
-	[25656] = "orange",
+	[25646] = {"blue","purple"},
+	[25656] = {"blue","orange"},
 	[26527] = {"green","red"},
 })
 

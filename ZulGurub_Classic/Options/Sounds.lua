@@ -1,6 +1,7 @@
 
 BigWigs:AddSounds("High Priestess Jeklik", {
-	[23954] = {"info","long"},
+	[23954] = "long",
+	[26044] = "info",
 	["bomb"] = "alarm",
 	["swarm"] = "alarm",
 })

@@ -1,12 +1,13 @@
 
 BigWigs:AddColors("Kurinnaxx", {
 	[25646] = {"blue","purple"},
-	[25656] = "orange",
+	[25656] = {"blue","orange"},
 	[26527] = {"green","red"},
 })
 
 BigWigs:AddColors("General Rajaxx", {
-	[25471] = {"blue","red","yellow"},
+	[8269] = "red",
+	[25471] = {"blue","yellow"},
 	["wave"] = "yellow",
 })
 
