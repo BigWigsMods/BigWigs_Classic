@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 -- Module declaration
 --
@@ -14,8 +13,8 @@ mod:SetEncounterID(718)
 
 function mod:GetOptions()
 	return {
-		{25646, "TANK"}, -- Mortal Wound
-		25656, -- Sand Trap
+		25646, -- Mortal Wound
+		{25656, "SAY"}, -- Sand Trap
 		26527, -- Frenzy
 	}
 end
@@ -27,7 +26,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CREATE", "SandTrap", 25648)
 	self:Log("SPELL_AURA_APPLIED", "Frenzy", 26527)
 
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
+	self:RegisterEvent("UNIT_HEALTH_FREQUENT")
 end
 
 --------------------------------------------------------------------------------
@@ -36,32 +35,35 @@ end
 
 function mod:MortalWound(args)
 	local amount = args.amount or 1
-	self:StackMessageOld(25646, args.destName, amount, "purple")
-	self:TargetBar(25646, 15, args.destName)
-	if amount > 2 then -- warn at 3? 5?
-		self:PlaySound(25646, "warning")
+	self:StackMessage(args.spellId, "purple", args.destName, amount, 5)
+	if amount >= 5 and self:Tank() then
+		self:PlaySound(args.spellId, "warning")
 	end
+	self:TargetBar(args.spellId, 15, args.destName)
 end
 
 function mod:MortalWoundRemoved(args)
-	self:StopBar(25646, args.destName)
+	self:StopBar(args.spellName, args.destName)
 end
 
-function mod:SandTrap()
-	self:Message(25656, "orange")
-	self:PlaySound(25656, "alert")
+function mod:SandTrap(args)
+	self:TargetMessage(25656, "orange", args.sourceName)
+	if self:Me(args.sourceGUID) then
+		self:PlaySound(25656, "alert", nil, args.sourceName)
+		self:Say(25656)
+	end
 end
 
 function mod:Frenzy(args)
-	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus")
-	self:Message(26527, "red", "30% - ", args.spellName)
+	self:UnregisterEvent("UNIT_HEALTH_FREQUENT")
+	self:Message(args.spellId, "red", CL.percent:format(30, args.spellName))
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15348 then
 		local hp = self:GetHealth(unit)
 		if hp < 36 then
-			self:UnregisterUnitEvent(event, "target", "focus")
+			self:UnregisterEvent(event)
 			self:Message(26527, "green", CL.soon:format(self:SpellName(26527)), false)
 		end
 	end

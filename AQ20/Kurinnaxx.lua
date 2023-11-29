@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 -- Module declaration
 --
@@ -14,7 +13,7 @@ mod:RegisterEnableMob(15348)
 function mod:GetOptions()
 	return {
 		25646, -- Mortal Wound
-		25656, -- Sand Trap
+		{25656, "SAY"}, -- Sand Trap
 		26527, -- Frenzy
 	}
 end
@@ -26,7 +25,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Frenzy", 26527)
 
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterUnitEvent("UNIT_HEALTH", nil, "target", "focus")
+	self:RegisterEvent("UNIT_HEALTH")
 
 	self:Death("Win", 15348)
 end
@@ -40,24 +39,37 @@ end
 --
 
 function mod:MortalWound(args)
-	self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow")
+	local amount = args.amount or 1
+	self:StackMessage(args.spellId, "purple", args.destName, amount, 5)
+	if amount >= 5 and self:Tank() then
+		self:PlaySound(args.spellId, "warning")
+	end
+	self:TargetBar(args.spellId, 15, args.destName)
 end
 
-function mod:SandTrap()
-	self:MessageOld(25656, "orange", "alert")
+function mod:MortalWoundRemoved(args)
+	self:StopBar(args.spellName, args.destName)
+end
+
+function mod:SandTrap(args)
+	self:TargetMessage(25656, "orange", args.sourceName)
+	if self:Me(args.sourceGUID) then
+		self:PlaySound(25656, "alert", nil, args.sourceName)
+		self:Say(25656)
+	end
 end
 
 function mod:Frenzy(args)
-	self:UnregisterUnitEvent("UNIT_HEALTH", "target", "focus")
-	self:MessageOld(args.spellId, "red", nil, "30% - ", args.spellName)
+	self:UnregisterEvent("UNIT_HEALTH")
+	self:Message(args.spellId, "red", CL.percent:format(30, args.spellName))
 end
 
 function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15348 then
 		local hp = self:GetHealth(unit)
 		if hp < 36 then
-			self:UnregisterUnitEvent(event, "target", "focus")
-			self:MessageOld(26527, "green", nil, CL.soon:format(self:SpellName(26527)), false)
+			self:UnregisterEvent(event)
+			self:Message(26527, "green", CL.soon:format(self:SpellName(26527)), false)
 		end
 	end
 end
