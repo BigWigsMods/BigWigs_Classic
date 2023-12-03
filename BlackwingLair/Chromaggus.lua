@@ -18,9 +18,6 @@ if L then
 	L.breath = "Breaths"
 	L.breath_desc = "Warn for Breaths."
 
-	L.debuffs = "{23174} ({605})" -- Chromatic Mutation (Mind Control)
-	L.debuffs_desc = 23174
-	L.debuffs_icon = 23174
 	L.debuffs_message = "3/5 debuffs, carefull!"
 	L.debuffs_warning = "4/5 debuffs, %s on 5th!"
 end
@@ -35,8 +32,10 @@ function mod:GetOptions()
 		23128, -- Enrage
 		23537, -- Frenzy
 		"breath",
-		"debuffs",
+		23174, -- Chromatic Mutation
 		--"vulnerability",
+	},nil,{
+		[23174] = 605, -- Chromatic Mutation (Mind Control)
 	}
 end
 
@@ -88,11 +87,11 @@ function mod:Debuffs(args)
 	if self:Me(args.destGUID) then
 		debuffCount = debuffCount + 1
 		if debuffCount == 3 then
-			self:MessageOld("debuffs", "red", "alarm", L.debuffs_message, args.spellId)
+			self:MessageOld(23174, "red", "alarm", L.debuffs_message, args.spellId)
 		elseif debuffCount == 4 then
-			self:MessageOld("debuffs", "orange", "warning", L.debuffs_warning:format(self:SpellName(605)), args.spellId) -- 605 = Mind Control
+			self:MessageOld(23174, "orange", "warning", L.debuffs_warning:format(self:SpellName(605)), args.spellId) -- 605 = Mind Control
 		elseif debuffCount == 5 then
-			self:MessageOld("debuffs", "orange", "warning", 605, args.spellId) -- 605 = Mind Control
+			self:MessageOld(23174, "orange", "warning", 605, args.spellId) -- 605 = Mind Control
 		end
 	end
 end
