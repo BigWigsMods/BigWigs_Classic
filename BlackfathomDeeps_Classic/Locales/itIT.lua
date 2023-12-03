@@ -3,3 +3,8 @@ if not L then return end
 if L then
 	--L.bossName = "Baron Aquanis"
 end
+
+L = BigWigs:NewBossLocale("Ghamoo-ra Discovery", "itIT")
+if L then
+	--L.bossName = "Ghamoo-ra"
+end

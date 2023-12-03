@@ -3,3 +3,8 @@ if not L then return end
 if L then
 	L.bossName = "阿奎尼斯男爵"
 end
+
+L = BigWigs:NewBossLocale("Ghamoo-ra Discovery", "zhCN")
+if L then
+	L.bossName = "加摩拉"
+end
