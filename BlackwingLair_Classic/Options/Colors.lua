@@ -34,9 +34,9 @@ BigWigs:AddColors("Flamegor", {
 
 BigWigs:AddColors("Chromaggus", {
 	[23128] = "yellow",
+	[23174] = {"orange","red"},
 	[23537] = "red",
 	["breath"] = {"green","red","yellow"},
-	["debuffs"] = {"orange","red"},
 })
 
 BigWigs:AddColors("NefarianBWL", {
