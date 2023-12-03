@@ -48,7 +48,7 @@ end
 -- Event Handlers
 --
 
-function mod:DepthCharge(args)
+function mod:DepthChargeApplied(args)
 	if self:Me(args.destGUID) then
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 		self:Say(args.spellId, CL.bomb)
