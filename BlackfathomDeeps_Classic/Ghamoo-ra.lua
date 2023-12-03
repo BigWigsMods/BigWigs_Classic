@@ -53,7 +53,6 @@ function mod:OnBossEnable()
 	self:Death("Win", 201722)
 end
 
-
 function mod:OnEngage()
 	isWeakened = false
 end

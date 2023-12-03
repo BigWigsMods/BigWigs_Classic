@@ -8,3 +8,8 @@ L = BigWigs:NewBossLocale("Ghamoo-ra Discovery", "zhCN")
 if L then
 	L.bossName = "加摩拉"
 end
+
+L = BigWigs:NewBossLocale("Lady Sarevess Discovery", "zhCN")
+if L then
+	L.bossName = "萨利维丝"
+end
