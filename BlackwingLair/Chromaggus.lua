@@ -80,7 +80,7 @@ end
 
 function mod:Frenzy(args)
 	self:UnregisterUnitEvent("UNIT_HEALTH", "boss1")
-	self:MessageOld(args.spellId, "red", nil, "20% - ".. args.spellName)
+	self:MessageOld(args.spellId, "red", nil, CL.percent:format(20, args.spellName))
 end
 
 function mod:Debuffs(args)

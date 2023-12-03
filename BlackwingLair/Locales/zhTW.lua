@@ -23,7 +23,6 @@ if L then
 	L.breath = "吐息警報"
 	L.breath_desc = "當克洛瑪古斯吐息時發出警報"
 
-	L.debuffs = "{23174} （{605}）" -- 炫彩變形 （支配心智）
 	L.debuffs_message = "3/5 減益，注意！"
 	L.debuffs_warning = "4/5 減益， 5層後將%s！"
 end

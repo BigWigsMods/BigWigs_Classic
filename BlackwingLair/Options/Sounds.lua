@@ -21,7 +21,7 @@ BigWigs:AddSounds("Flamegor", {
 })
 
 BigWigs:AddSounds("Chromaggus", {
-	["debuffs"] = {"alarm","warning"},
+	[23174] = {"alarm","warning"},
 })
 
 BigWigs:AddSounds("Nefarian ", {

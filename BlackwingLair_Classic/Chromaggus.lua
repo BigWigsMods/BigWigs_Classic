@@ -13,18 +13,6 @@ mod:SetEncounterID(616)
 
 local barcount = 2
 local debuffCount = 0
-local icons = {
-	[mod:SpellName(23170)] = 23170,
-	[mod:SpellName(23154)] = 23154,
-	[mod:SpellName(23155)] = 23155,
-	[mod:SpellName(23169)] = 23169,
-	[mod:SpellName(23153)] = 23153,
-	[mod:SpellName(23310)] = 23310,
-	[mod:SpellName(23313)] = 23313,
-	[mod:SpellName(23315)] = 23315,
-	[mod:SpellName(23308)] = 23308,
-	[mod:SpellName(23187)] = 23187,
-}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -103,20 +91,20 @@ function mod:Enrage(args)
 end
 
 function mod:Frenzy(args)
-	self:Message(23537, "red", "20% - ".. args.spellName)
+	self:Message(23537, "red", CL.percent:format(20, args.spellName))
 end
 
 function mod:Debuffs(args)
 	if self:Me(args.destGUID) then
 		debuffCount = debuffCount + 1
 		if debuffCount == 3 then
-			self:Message(23174, "red", L.debuffs_message, icons[args.spellName] or false)
+			self:Message(23174, "red", L.debuffs_message, args.spellId)
 			self:PlaySound(23174, "alarm")
 		elseif debuffCount == 4 then
-			self:Message(23174, "orange", L.debuffs_warning:format(self:SpellName(605)), icons[args.spellName] or false) -- 605 = Mind Control
+			self:Message(23174, "orange", L.debuffs_warning:format(self:SpellName(605)), args.spellId) -- 605 = Mind Control
 			self:PlaySound(23174, "warning")
 		elseif debuffCount == 5 then
-			self:Message(23174, "orange", 605, icons[args.spellName] or false) -- 605 = Mind Control
+			self:Message(23174, "orange", 605, args.spellId) -- 605 = Mind Control
 			self:PlaySound(23174, "warning")
 		end
 	end
@@ -137,10 +125,10 @@ function mod:Breath(args)
 		self:StopBar(CL.count:format(self:SpellName(18617), 2)) -- Breath (2)
 	end
 
-	self:Bar("breath", 2, CL.cast:format(args.spellName), icons[args.spellName])
-	self:Message("breath", "yellow", CL.casting:format(args.spellName), icons[args.spellName])
+	self:Bar("breath", 2, CL.cast:format(args.spellName), args.spellId)
+	self:Message("breath", "yellow", CL.casting:format(args.spellName), args.spellId)
 	self:DelayedMessage("breath", 50, "red", CL.custom_sec:format(args.spellName, 10))
-	self:Bar("breath", 60, icons[args.spellName])
+	self:Bar("breath", 60, args.spellId)
 end
 
 --function mod:CHAT_MSG_MONSTER_EMOTE(msg)
