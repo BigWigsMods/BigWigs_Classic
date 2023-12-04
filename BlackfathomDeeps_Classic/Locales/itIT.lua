@@ -13,3 +13,8 @@ L = BigWigs:NewBossLocale("Lady Sarevess Discovery", "itIT")
 if L then
 	--L.bossName = "Lady Sarevess"
 end
+
+L = BigWigs:NewBossLocale("Gelihast Discovery", "itIT")
+if L then
+	--L.bossName = "Gelihast"
+end
