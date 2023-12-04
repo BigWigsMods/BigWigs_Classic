@@ -15,3 +15,9 @@ BigWigs:AddSounds("Lady Sarevess Discovery", {
 	[407653] = "warning",
 	[407791] = "alarm",
 })
+
+BigWigs:AddSounds("Gelihast Discovery", {
+	[411973] = "alert",
+	[412072] = "warning",
+	[412456] = "long",
+})

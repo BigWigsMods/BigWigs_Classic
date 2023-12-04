@@ -16,3 +16,9 @@ BigWigs:AddColors("Lady Sarevess Discovery", {
 	[407653] = {"blue","yellow"},
 	[407791] = {"blue","green","red"},
 })
+
+BigWigs:AddColors("Gelihast Discovery", {
+	[411973] = {"blue","yellow"},
+	[412072] = {"blue","purple"},
+	[412456] = "cyan",
+})
