@@ -71,7 +71,7 @@ do
 		if self:Me(args.destGUID) and args.time - prev > 3 then
 			prev = args.time
 			self:PlaySound(args.spellId, "underyou")
-			self:PersonalMessage(args.spellId)
+			self:PersonalMessage(args.spellId, "aboveyou")
 		end
 	end
 end
