@@ -23,8 +23,10 @@ end
 function mod:GetOptions()
 	return {
 		412072, -- Shadow Strike
-		411973, -- Curse of Blackfathom
+		411956, -- Curse of Blackfathom
 		412456, -- March of the Murlocs
+	},nil,{
+		[411956] = CL.curse, -- Curse of Blackfathom (Curse)
 	}
 end
 
@@ -37,14 +39,14 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "ShadowStrikeApplied", 412072, 412079, 412080)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "ShadowStrikeApplied", 412072, 412079, 412080)
 	self:Log("SPELL_CAST_SUCCESS", "CurseOfBlackfathom", 411973)
-	self:Log("SPELL_AURA_APPLIED", "CurseOfBlackfathomApplied", 411973)
+	self:Log("SPELL_AURA_APPLIED", "CurseOfBlackfathomApplied", 411956)
 	self:Log("SPELL_CAST_SUCCESS", "MarchOfTheMurlocs", 412456)
 
 	self:Death("Win", 204921)
 end
 
 function mod:OnEngage()
-	self:CDBar(411973, 6) -- Curse of Blackfathom
+	self:CDBar(411956, 6, CL.curse) -- Curse of Blackfathom
 end
 
 --------------------------------------------------------------------------------
@@ -65,9 +67,9 @@ end
 
 do
 	local playerList = {}
-	function mod:CurseOfBlackfathom(args)
+	function mod:CurseOfBlackfathom()
 		playerList = {}
-		self:Bar(args.spellId, 11)
+		self:Bar(411956, 11, CL.curse)
 	end
 
 	function mod:CurseOfBlackfathomApplied(args)
@@ -75,7 +77,7 @@ do
 			self:PlaySound(args.spellId, "alert", nil, args.destName)
 		end
 		playerList[#playerList+1] = args.destName
-		self:TargetsMessage(args.spellId, "yellow", playerList, 2)
+		self:TargetsMessage(args.spellId, "yellow", playerList, 2, CL.curse)
 	end
 end
 
@@ -88,7 +90,7 @@ do
 			self:PlaySound(args.spellId, "long")
 			self:Bar(args.spellId, 30)
 			self:StopBar(412072) -- Shadow Strike
-			self:StopBar(411973) -- Curse of Blackfathom
+			self:StopBar(CL.curse) -- Curse of Blackfathom
 		end
 	end
 end
