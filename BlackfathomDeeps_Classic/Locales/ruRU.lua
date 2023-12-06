@@ -18,3 +18,10 @@ L = BigWigs:NewBossLocale("Gelihast Discovery", "ruRU")
 if L then
 	L.bossName = "Гелихаст"
 end
+
+L = BigWigs:NewBossLocale("Lorgus Jett Discovery", "ruRU")
+if L then
+	L.bossName = "Лоргус Джетт"
+	L.priestess = "Жрица прилива из Непроглядной Пучины"
+	--L.murloc = "Blackfathom Murloc"
+end
