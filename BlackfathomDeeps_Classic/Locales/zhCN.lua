@@ -30,3 +30,8 @@ L = BigWigs:NewBossLocale("Twilight Lord Kelris Discovery", "zhCN")
 if L then
 	L.bossName = "梦游者克尔里斯"
 end
+
+L = BigWigs:NewBossLocale("Aku'mai Discovery", "zhCN")
+if L then
+	L.bossName = "阿库麦尔"
+end

@@ -7,7 +7,7 @@
 <Script file="Gelihast.lua"/>
 <Script file="LorgusJett.lua"/>
 <Script file="TwilightLordKelris.lua"/>
-<!--<Script file="Akumai.lua"/>-->
+<Script file="Akumai.lua"/>
 
 <Include file="Locales\locales.xml"/>
 <Include file="Options\options.xml"/>
