@@ -66,7 +66,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Bar(419649, 27, self:SpellName(419649), "inv_misc_head_murloc_01") -- Spawn Murloc
+	self:CDBar(419649, 27, self:SpellName(419649), "inv_misc_head_murloc_01") -- Spawn Murloc
 end
 
 --------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ end
 
 function mod:SpawnMurloc(args)
 	self:Message(args.spellId, "cyan", args.spellName, "inv_misc_head_murloc_01")
-	self:Bar(args.spellId, 27, args.spellName, "inv_misc_head_murloc_01")
+	self:CDBar(args.spellId, 27, args.spellName, "inv_misc_head_murloc_01")
 end
 
 function mod:Heal(args)
@@ -92,6 +92,7 @@ function mod:HealInterrupted(args)
 end
 
 function mod:CorruptedWindfuryTotem(args)
+	self:StopBar(419649) -- Spawn Murloc
 	self:Message(args.spellId, "yellow")
 	self:PlaySound(args.spellId, "alert")
 	self:Bar(414763, 9.7) -- Corrupted Lightning Shield Totem
