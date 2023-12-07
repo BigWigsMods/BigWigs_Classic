@@ -28,6 +28,8 @@ function mod:GetOptions()
 		425265, -- Shadowy Chains
 		"stages",
 		426489, -- Manifesting Dreams
+	},nil,{
+		[425460] = CL.you_die, -- Dream Eater (You die)
 	}
 end
 
@@ -72,15 +74,15 @@ end
 
 function mod:DreamEaterApplied(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, false, CL.custom_sec:format(args.spellName, 15))
+		self:PersonalMessage(args.spellId, false, CL.you_die_sec:format(15))
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
-		self:Bar(args.spellId, 15)
+		self:Bar(args.spellId, 15, CL.you_die)
 	end
 end
 
 function mod:DreamEaterRemoved(args)
 	if self:Me(args.destGUID) then
-		self:StopBar(args.spellName)
+		self:StopBar(CL.you_die)
 	end
 end
 
