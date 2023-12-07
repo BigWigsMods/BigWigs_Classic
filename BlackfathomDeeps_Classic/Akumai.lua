@@ -64,7 +64,7 @@ end
 --
 
 function mod:CorrosiveBlastOrVoidBlast(args)
-	self:Message(args.spellId, "red", CL.breath)
+	self:Message(args.spellId, "red", CL.incoming:format(CL.breath))
 	self:Bar(args.spellId, 21, CL.breath)
 	self:CastBar(args.spellId, 3, CL.breath)
 	self:PlaySound(args.spellId, "warning")

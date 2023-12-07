@@ -24,7 +24,7 @@ end
 function mod:GetOptions()
 	return {
 		423135, -- Sleep
-		{425460, "COUNTDOWN"}, -- Dream Eater
+		{425460, "COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Dream Eater
 		425265, -- Shadowy Chains
 		"stages",
 		426489, -- Manifesting Dreams
@@ -72,7 +72,7 @@ end
 
 function mod:DreamEaterApplied(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId)
+		self:PersonalMessage(args.spellId, false, CL.custom_sec:format(args.spellName, 15))
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 		self:Bar(args.spellId, 15)
 	end
