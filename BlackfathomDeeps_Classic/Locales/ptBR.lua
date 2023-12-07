@@ -25,3 +25,8 @@ if L then
 	L.priestess = "Sacerdotisa da Maré das Profundezas Negras"
 	--L.murloc = "Blackfathom Murloc"
 end
+
+L = BigWigs:NewBossLocale("Twilight Lord Kelris Discovery", "ptBR")
+if L then
+	L.bossName = "Senhor do Crepúsculo Kelris"
+end

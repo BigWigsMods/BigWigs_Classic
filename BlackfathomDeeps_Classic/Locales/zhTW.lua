@@ -25,3 +25,8 @@ if L then
 	--L.priestess = "Blackfathom Tide Priestess"
 	--L.murloc = "Blackfathom Murloc"
 end
+
+L = BigWigs:NewBossLocale("Twilight Lord Kelris Discovery", "zhTW")
+if L then
+	--L.bossName = "Twilight Lord Kelris"
+end
