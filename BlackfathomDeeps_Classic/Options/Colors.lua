@@ -18,7 +18,31 @@ BigWigs:AddColors("Lady Sarevess Discovery", {
 })
 
 BigWigs:AddColors("Gelihast Discovery", {
-	[411973] = {"blue","yellow"},
+	[411956] = {"blue","yellow"},
 	[412072] = {"blue","purple"},
 	[412456] = "cyan",
+})
+
+BigWigs:AddColors("Lorgus Jett Discovery", {
+	[22883] = {"green","orange"},
+	[414691] = "yellow",
+	[414763] = "red",
+	[419636] = "orange",
+	[419649] = "cyan",
+})
+
+BigWigs:AddColors("Twilight Lord Kelris Discovery", {
+	[423135] = {"blue","yellow"},
+	[425265] = {"blue","green","orange","red"},
+	[425460] = "blue",
+	[426489] = {"blue","cyan"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddColors("Aku'mai Discovery", {
+	[427625] = {"blue","green"},
+	[428482] = {"blue","green"},
+	[429168] = "red",
+	[429356] = "red",
+	["stages"] = "cyan",
 })
