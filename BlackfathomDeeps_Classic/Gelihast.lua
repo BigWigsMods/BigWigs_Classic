@@ -77,7 +77,7 @@ do
 			self:PlaySound(args.spellId, "alert", nil, args.destName)
 		end
 		playerList[#playerList+1] = args.destName
-		self:TargetsMessage(args.spellId, "yellow", playerList, 2, CL.curse)
+		self:TargetsMessage(args.spellId, "yellow", playerList, nil, CL.curse)
 	end
 end
 
