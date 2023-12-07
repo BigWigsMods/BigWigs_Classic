@@ -95,12 +95,12 @@ function mod:FreezingArrowInterrupted(args)
 end
 
 function mod:FreezingArrowApplied(args)
-	if self:Player(args.destFlags) then
+	if self:Player(args.destFlags) then -- Players
 		self:TargetMessage(367741, "red", args.destName, self:SpellName(367741)) -- Frozen Solid
 		if self:Dispeller("magic", nil, 367741) then
 			self:PlaySound(367741, "alarm")
 		end
-	else -- Also applies to the Blackfathom Elites
+	elseif self:Hostile(args.destFlags) then -- Also applies to the Blackfathom Elites (hostile only to filter player pets)
 		self:TargetMessage(367741, "green", args.destName, self:SpellName(367741)) -- Frozen Solid
 	end
 end
