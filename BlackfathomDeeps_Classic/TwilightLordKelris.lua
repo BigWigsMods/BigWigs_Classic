@@ -39,6 +39,7 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "SleepApplied", 423135)
+	self:Log("SPELL_AURA_REMOVED", "SleepRemoved", 423135)
 	self:Log("SPELL_AURA_APPLIED", "DreamEaterApplied", 425460)
 	self:Log("SPELL_AURA_REMOVED", "DreamEaterRemoved", 425460)
 	self:Log("SPELL_CAST_START", "ShadowyChainsStart", 425265) -- Stage 1
@@ -54,6 +55,7 @@ end
 
 function mod:OnEngage()
 	self:SetStage(1)
+	self:CDBar(423135, 8.5) -- Sleep
 end
 
 --------------------------------------------------------------------------------
@@ -66,9 +68,17 @@ do
 		if args.time - prev > 5 then
 			prev = args.time
 			playerList = {}
+			self:StopBar(423135) -- Sleep
 		end
 		playerList[#playerList+1] = args.destName
 		self:TargetsMessage(args.spellId, "yellow", playerList, 2)
+	end
+
+	function mod:SleepRemoved(args)
+		playerList[#playerList] = nil
+		if #playerList == 0 then
+			self:Bar(args.spellId, 10)
+		end
 	end
 end
 
@@ -88,6 +98,7 @@ end
 
 function mod:ShadowyChainsStart(args) -- First stage only
 	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
+	self:Bar(args.spellId, 11.3) -- 11.3-16.2, varies depending on what's interrupted?
 	if self:Interrupter() then
 		self:PlaySound(args.spellId, "alert")
 	end
@@ -101,8 +112,11 @@ end
 
 do
 	local playerList = {}
-	function mod:ShadowyChainsSuccess()
+	function mod:ShadowyChainsSuccess(args)
 		playerList = {}
+		if args.spellId == 426494 then -- Stage 2 (cast cannot be interrupted so we warn on success instead of start)
+			self:CDBar(425265, 9.7)
+		end
 	end
 
 	function mod:ShadowyChainsApplied(args)
@@ -117,6 +131,8 @@ end
 
 function mod:MindBlast(args) -- For lack of a better stage 2 indicator
 	self:RemoveLog("SPELL_CAST_START", args.spellId)
+	self:StopBar(423135) -- Sleep
+	self:StopBar(425265) -- Shadowy Chains
 	self:SetStage(2)
 	self:Message("stages", "cyan", CL.stage:format(2), false)
 	self:PlaySound("stages", "long")
