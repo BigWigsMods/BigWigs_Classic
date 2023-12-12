@@ -38,7 +38,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "ForkedLightningApplied", 407653)
 	self:Log("SPELL_AURA_REMOVED", "ForkedLightningRemoved", 407653)
 	self:Log("SPELL_CAST_START", "FreezingArrow", 407568)
-	self:Log("SPELL_INTERRUPT", "FreezingArrowInterrupted", "*")
 	self:Log("SPELL_AURA_APPLIED", "FreezingArrowApplied", 407546)
 
 	self:Log("SPELL_AURA_APPLIED", "FreezingArrowUnderYou", 407548)
@@ -82,16 +81,8 @@ end
 
 function mod:FreezingArrow(args)
 	self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
-	if self:Interrupter() then
-		self:PlaySound(args.spellId, "alert")
-	end
+	self:PlaySound(args.spellId, "alert")
 	self:Bar(args.spellId, 24)
-end
-
-function mod:FreezingArrowInterrupted(args)
-	if args.extraSpellId == 407568 then
-		self:Message(407568, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
-	end
 end
 
 function mod:FreezingArrowApplied(args)
