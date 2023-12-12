@@ -51,7 +51,7 @@ end
 function mod:DepthChargeApplied(args)
 	if self:Me(args.destGUID) then
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
-		self:Say(args.spellId, CL.bomb)
+		self:Say(args.spellId, CL.bomb, nil, "Bomb")
 		self:SayCountdown(args.spellId, 8)
 	end
 	self:PrimaryIcon(args.spellId, args.destName)
