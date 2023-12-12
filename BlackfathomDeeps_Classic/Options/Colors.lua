@@ -12,7 +12,7 @@ BigWigs:AddColors("Ghamoo-ra Discovery", {
 
 BigWigs:AddColors("Lady Sarevess Discovery", {
 	[367741] = {"blue","green","red"},
-	[407568] = {"blue","green","orange"},
+	[407568] = {"blue","orange"},
 	[407653] = {"blue","yellow"},
 	[407791] = {"blue","green","red"},
 })
