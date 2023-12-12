@@ -68,7 +68,7 @@ do
 		if args.time - prev > 5 then
 			prev = args.time
 			playerList = {}
-			self:StopBar(423135) -- Sleep
+			self:StopBar(args.spellName) -- Sleep
 		end
 		playerList[#playerList+1] = args.destName
 		self:TargetsMessage(args.spellId, "yellow", playerList, 2)
