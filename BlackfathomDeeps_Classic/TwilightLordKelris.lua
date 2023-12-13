@@ -98,7 +98,7 @@ end
 
 function mod:ShadowyChainsStart(args) -- First stage only
 	self:Message(args.spellId, "red", CL.casting:format(args.spellName))
-	self:Bar(args.spellId, 11.3) -- 11.3-16.2, varies depending on what's interrupted?
+	self:CDBar(args.spellId, 11.3) -- 11.3-16.2, varies depending on what's interrupted?
 	if self:Interrupter() then
 		self:PlaySound(args.spellId, "alert")
 	end
