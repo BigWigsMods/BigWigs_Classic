@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Lorgus Jett Discovery", 48, -2710)
 if not mod then return end
 mod:RegisterEnableMob(207356) -- Lorgus Jett Season of Discovery
 mod:SetEncounterID(2710)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -29,6 +30,7 @@ function mod:GetOptions()
 	return {
 		419649, -- Spawn Murloc
 		22883, -- Heal
+		"stages",
 		414691, -- Corrupted Windfury Totem
 		windfuryTotemMarker,
 		414763, -- Corrupted Lightning Shield Totem
@@ -38,7 +40,7 @@ function mod:GetOptions()
 	},{
 		[419649] = L.murloc,
 		[22883] = L.priestess,
-		[414691] = L.bossName,
+		["stages"] = L.bossName,
 	}
 end
 
@@ -52,7 +54,11 @@ function mod:OnBossEnable()
 
 	-- Priestess
 	self:Log("SPELL_CAST_START", "Heal", 22883)
+	self:Log("SPELL_CAST_SUCCESS", "HealSuccess", 22883)
 	self:Log("SPELL_INTERRUPT", "HealInterrupted", "*")
+	self:Death("Priest1Death", 207358)
+	self:Death("Priest2Death", 207359)
+	self:Death("Priest3Death", 207367)
 
 	-- Lorgus Jett
 	self:Log("SPELL_CAST_SUCCESS", "CorruptedWindfuryTotem", 414691)
@@ -66,6 +72,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
+	self:SetStage(1)
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:CDBar(419649, 27, self:SpellName(419649), "inv_misc_head_murloc_01") -- Spawn Murloc
 end
 
@@ -80,15 +88,36 @@ end
 
 function mod:Heal(args)
 	self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
+	self:CDBar(args.spellId, 11.3) -- 11.3-14.6+ with some oddballs as low as 8.1
 	if self:Interrupter() then
 		self:PlaySound(args.spellId, "alert")
 	end
+end
+
+function mod:HealSuccess(args)
+	self:CDBar(args.spellId, 11.1) -- Failure to interrupt seems to reset it
 end
 
 function mod:HealInterrupted(args)
 	if args.extraSpellId == 22883 then
 		self:Message(22883, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
+end
+
+function mod:Priest1Death()
+	self:Message("stages", "cyan", CL.mob_remaining:format(L.priestess, 2), false)
+	self:StopBar(22883) -- Heal
+end
+
+function mod:Priest2Death()
+	self:Message("stages", "cyan", CL.mob_remaining:format(L.priestess, 1), false)
+	self:StopBar(22883) -- Heal
+end
+
+function mod:Priest3Death()
+	self:SetStage(2)
+	self:Message("stages", "cyan", CL.stage:format(2), false)
+	self:StopBar(22883) -- Heal
 end
 
 function mod:CorruptedWindfuryTotem(args)
