@@ -47,6 +47,9 @@ function mod:GetOptions()
 		"wave",
 		25471, -- Attack Order
 		8269, -- Frenzy
+		25599, -- Thundercrash
+	},nil,{
+		[25599] = CL.knockback, -- Thundercrash (Knockback)
 	}
 end
 
@@ -68,6 +71,7 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "AttackOrder", 25471)
 	self:Log("SPELL_AURA_APPLIED", "Frenzy", 8269)
+	self:Log("SPELL_CAST_SUCCESS", "Thundercrash", 25599)
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 end
@@ -87,6 +91,11 @@ end
 
 function mod:Frenzy(args)
 	self:Message(8269, "red")
+end
+
+function mod:Thundercrash(args)
+	self:Message(25599, "orange", CL.knockback)
+	self:CDBar(25599, 21, CL.knockback)
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)

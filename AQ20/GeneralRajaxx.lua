@@ -3,7 +3,7 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("General Rajaxx", 509, 1538)
+local mod, CL = BigWigs:NewBoss("General Rajaxx", 509, 1538)
 if not mod then return end
 mod:RegisterEnableMob(15341, 15471) -- General Rajaxx, Lieutenant General Andorov
 
@@ -49,6 +49,9 @@ function mod:GetOptions()
 		"wave",
 		25471, -- Attack Order
 		8269, -- Frenzy
+		25599, -- Thundercrash
+	},nil,{
+		[25599] = CL.knockback, -- Thundercrash (Knockback)
 	}
 end
 
@@ -59,6 +62,7 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "AttackOrder", 25471)
 	self:Log("SPELL_AURA_APPLIED", "Frenzy", 8269)
+	self:Log("SPELL_CAST_SUCCESS", "Thundercrash", 25599)
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 
@@ -80,6 +84,11 @@ end
 
 function mod:Frenzy(args)
 	self:MessageOld(args.spellId, "red")
+end
+
+function mod:Thundercrash(args)
+	self:Message(args.spellId, "orange", CL.knockback)
+	self:CDBar(args.spellId, 21, CL.knockback)
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
