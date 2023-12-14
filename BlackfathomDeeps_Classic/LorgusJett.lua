@@ -118,10 +118,10 @@ function mod:Priest3Death()
 	self:SetStage(2)
 	self:Message("stages", "cyan", CL.stage:format(2), false)
 	self:StopBar(22883) -- Heal
+	self:StopBar(419649) -- Spawn Murloc
 end
 
 function mod:CorruptedWindfuryTotem(args)
-	self:StopBar(419649) -- Spawn Murloc
 	self:Message(args.spellId, "yellow")
 	self:PlaySound(args.spellId, "alert")
 	self:Bar(414763, 9.7) -- Corrupted Lightning Shield Totem
