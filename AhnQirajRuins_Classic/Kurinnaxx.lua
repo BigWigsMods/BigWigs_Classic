@@ -14,7 +14,7 @@ mod:SetEncounterID(718)
 function mod:GetOptions()
 	return {
 		25646, -- Mortal Wound
-		{25656, "SAY"}, -- Sand Trap
+		{25656, "SAY", "ME_ONLY_EMPHASIZE"}, -- Sand Trap
 		26527, -- Frenzy
 	}
 end
