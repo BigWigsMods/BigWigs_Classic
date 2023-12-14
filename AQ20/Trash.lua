@@ -30,11 +30,11 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		{26556, "PROXIMITY", "SAY"}, -- Plague. Use this id as it has a description unlike 22997
+		{26556, "SAY", "ME_ONLY_EMPHASIZE"}, -- Plague (Fake proxy spell as 22997 has no description)
 		8269, -- Frenzy
 		8732, -- Thunderclap
 		24340, -- Meteor
-		{25698, "FLASH"}, -- Explode
+		{25698, "EMPHASIZE"}, -- Explode
 		"guard",
 		"warrior",
 	}, {
@@ -72,13 +72,11 @@ function mod:Plague(args)
 	if self:Me(args.destGUID) then
 		self:Say(26556)
 		self:TargetBar(26556, 40, args.destName)
-		self:OpenProximity(26556, 5)
 	end
 end
 
 function mod:PlagueRemoved(args)
 	if self:Me(args.destGUID) then
-		self:CloseProximity(26556)
 		self:StopBar(args.spellName, args.destName)
 	end
 end
@@ -90,7 +88,6 @@ end
 function mod:Explode(args)
 	self:MessageOld(args.spellId, "orange", "alert", CL.casting:format(args.spellName))
 	self:Bar(args.spellId, 6) -- Duration is 7s but it expires after 6s
-	self:Flash(args.spellId)
 end
 
 do

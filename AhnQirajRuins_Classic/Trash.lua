@@ -30,12 +30,12 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		{26556, "PROXIMITY", "SAY"}, -- Plague
+		{26556, "SAY", "ME_ONLY_EMPHASIZE"}, -- Plague (Fake proxy spell as 22997 has no description)
 		24340, -- Meteor
 		26555, -- Shadow Storm
 		8732, -- Thunderclap
 		8269, -- Frenzy
-		{25698, "FLASH"}, -- Explode
+		{25698, "EMPHASIZE"}, -- Explode
 		"guard",
 		"warrior",
 	}, {
@@ -46,9 +46,9 @@ end
 function mod:OnBossEnable()
 	self:RegisterMessage("BigWigs_OnBossEngage", "Disable")
 
-	self:Log("SPELL_AURA_APPLIED", "Plague", 26556)
-	self:Log("SPELL_AURA_REFRESH", "Plague", 26556)
-	self:Log("SPELL_AURA_REMOVED", "PlagueRemoved", 26556)
+	self:Log("SPELL_AURA_APPLIED", "Plague", 22997)
+	self:Log("SPELL_AURA_REFRESH", "Plague", 22997)
+	self:Log("SPELL_AURA_REMOVED", "PlagueRemoved", 22997)
 
 	self:Log("SPELL_DAMAGE", "Meteor", 24340)
 	self:Log("SPELL_MISSED", "Meteor", 24340)
@@ -76,13 +76,11 @@ function mod:Plague(args)
 	if self:Me(args.destGUID) then
 		self:Say(26556)
 		self:TargetBar(26556, 40, args.destName)
-		self:OpenProximity(26556, 5)
 	end
 end
 
 function mod:PlagueRemoved(args)
 	if self:Me(args.destGUID) then
-		self:CloseProximity(26556)
 		self:StopBar(args.spellName, args.destName)
 	end
 end
@@ -129,7 +127,6 @@ function mod:Explode(args)
 	self:Message(25698, "orange", CL.casting:format(args.spellName))
 	self:PlaySound(25698, "long")
 	self:Bar(25698, 6) -- Duration is 7s but it expires after 6s
-	self:Flash(25698)
 end
 
 function mod:SummonAnubisathSwarmguard(args)
