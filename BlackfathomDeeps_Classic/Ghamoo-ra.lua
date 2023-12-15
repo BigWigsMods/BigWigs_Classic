@@ -29,9 +29,9 @@ end
 function mod:GetOptions()
 	return {
 		407095, -- Crunch Armor
-		{407025, "EMPHASIZE"}, -- Exposed
+		407025, -- Exposed
 		407077, -- Triple Chomp
-		{406970, "INFOBOX"}
+		{406970, "INFOBOX", "CASTBAR"}, -- Aqua Shell
 	},nil,{
 		[407025] = CL.weakened, -- Exposed (Weakened)
 	}
@@ -48,6 +48,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "ExposedOver", 407025)
 	self:Log("SPELL_AURA_APPLIED", "AquaShellApplied", 406970)
 	self:Log("SPELL_AURA_REMOVED_DOSE", "AquaShellRemovedDose", 406970)
+	self:Log("SPELL_CAST_START", "AquaShellCast", 414370)
 	self:Log("SPELL_AURA_APPLIED", "TripleChomp", 407077)
 
 	self:Death("Win", 201722)
@@ -92,6 +93,11 @@ end
 function mod:AquaShellRemovedDose(args)
 	self:SetInfoBar(args.spellId, 1, args.amount/100)
 	self:SetInfo(args.spellId, 1, args.amount)
+end
+
+function mod:AquaShellCast() -- Aqua shell being removed, Knockback incoming
+	self:Message(406970, "orange", CL.incoming:format(CL.knockback))
+	self:CastBar(406970, 4, CL.knockback)
 end
 
 function mod:TripleChomp(args)
