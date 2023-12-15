@@ -37,7 +37,7 @@ BigWigs:AddColors("High Priestess Arlokk", {
 })
 
 BigWigs:AddColors("Hakkar", {
-	[24322] = {"orange","red"},
+	[24324] = {"orange","red"},
 	[24327] = {"blue","yellow"},
 })
 

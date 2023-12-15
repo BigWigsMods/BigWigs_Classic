@@ -5,6 +5,7 @@ BigWigs:AddColors("Baron Aquanis Discovery", {
 })
 
 BigWigs:AddColors("Ghamoo-ra Discovery", {
+	[406970] = "orange",
 	[407025] = {"red","yellow"},
 	[407077] = "purple",
 	[407095] = {"blue","purple"},
@@ -29,6 +30,7 @@ BigWigs:AddColors("Lorgus Jett Discovery", {
 	[414763] = "red",
 	[419636] = "orange",
 	[419649] = "cyan",
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Twilight Lord Kelris Discovery", {

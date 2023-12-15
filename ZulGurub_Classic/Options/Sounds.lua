@@ -35,7 +35,7 @@ BigWigs:AddSounds("High Priestess Arlokk", {
 })
 
 BigWigs:AddSounds("Hakkar", {
-	[24322] = {"alarm","long"},
+	[24324] = {"alarm","long"},
 	[24327] = "info",
 })
 
