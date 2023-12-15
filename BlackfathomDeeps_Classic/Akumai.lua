@@ -71,7 +71,7 @@ function mod:CorrosiveBlastOrVoidBlast(args)
 end
 
 function mod:DarkProtectionApplied(args)
-	self:StopBar(429168) -- Corrosive Blast
+	self:StopBar(CL.breath) -- Corrosive Blast
 	self:SetStage(1.5)
 	self:Message("stages", "cyan", CL.percent:format(50, CL.intermission), args.spellId)
 	self:CDBar("stages", 17, CL.intermission, args.spellId)
