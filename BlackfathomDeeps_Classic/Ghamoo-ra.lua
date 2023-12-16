@@ -63,10 +63,12 @@ end
 --
 
 function mod:CrunchArmorApplied(args)
-	local amount = args.amount or 1
-	self:StackMessage(args.spellId, "purple", args.destName, amount, 3)
-	if amount >= 3 then
-		self:PlaySound(args.spellId, "warning")
+	if self:Player(args.destFlags) then -- Players, not pets
+		local amount = args.amount or 1
+		self:StackMessage(args.spellId, "purple", args.destName, amount, 3)
+		if amount >= 3 then
+			self:PlaySound(args.spellId, "warning")
+		end
 	end
 end
 
