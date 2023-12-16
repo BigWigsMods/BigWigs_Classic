@@ -131,6 +131,7 @@ end
 
 function mod:MindBlast(args) -- For lack of a better stage 2 indicator
 	self:RemoveLog("SPELL_CAST_START", args.spellId)
+	self:RemoveLog("SPELL_AURA_REMOVED", 423135) -- Sleep, there seems to be a bug where he might cast this once after entering stage 2
 	self:StopBar(423135) -- Sleep
 	self:StopBar(425265) -- Shadowy Chains
 	self:SetStage(2)
