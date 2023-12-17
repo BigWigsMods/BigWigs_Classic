@@ -1,7 +1,7 @@
 local L = BigWigs:NewBossLocale("Lucifron", "koKR")
 if not L then return end
 if L then
-	L.mc_bar = "정배: %s"
+	L.mc_bar = "정배"
 end
 
 L = BigWigs:NewBossLocale("Majordomo Executus", "koKR")
@@ -14,9 +14,6 @@ L = BigWigs:NewBossLocale("Ragnaros ", "koKR")
 if L then
 	L.submerge_trigger = "나의 종들아"
 	L.engage_trigger = "이제 너희"
-
-	L.knockback_message = "광역 튕겨냄!"
-	L.knockback_bar = "광역 튕겨냄"
 
 	L.submerge = "사라짐 경고"
 	L.submerge_desc = "라그나로스 사라짐 & 피조물에 대한 경고"

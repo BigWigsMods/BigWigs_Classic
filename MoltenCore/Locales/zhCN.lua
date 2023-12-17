@@ -1,7 +1,7 @@
 local L = BigWigs:NewBossLocale("Lucifron", "zhCN")
 if not L then return end
 if L then
-	L.mc_bar = "控制：%s"
+	L.mc_bar = "控制"
 end
 
 L = BigWigs:NewBossLocale("Majordomo Executus", "zhCN")
@@ -14,9 +14,6 @@ L = BigWigs:NewBossLocale("Ragnaros ", "zhCN")
 if L then
 	L.engage_trigger = "现在轮到你们了"
 	L.submerge_trigger = "出现吧，我的奴仆"
-
-	L.knockback_message = "群体击退！"
-	L.knockback_bar = "群体击退"
 
 	L.submerge = "消失"
 	L.submerge_desc = "当拉格纳罗斯消失时发出警报。"

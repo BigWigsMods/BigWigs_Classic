@@ -1,7 +1,7 @@
 local L = BigWigs:NewBossLocale("Lucifron", "frFR")
 if not L then return end
 if L then
-	L.mc_bar = "CM : %s"
+	L.mc_bar = "CM"
 end
 
 L = BigWigs:NewBossLocale("Majordomo Executus", "frFR")
@@ -14,9 +14,6 @@ L = BigWigs:NewBossLocale("Ragnaros ", "frFR")
 if L then
 	L.submerge_trigger = "VENEZ, MES SERVITEURS"
 	L.engage_trigger = "ET MAINTENANT"
-
-	L.knockback_message = "Projection de zone !"
-	L.knockback_bar = "Projection de zone"
 
 	L.submerge = "Immersion"
 	L.submerge_desc = "Préviens quand Ragnaros plonge et l'arrivée des Fils des flammes."

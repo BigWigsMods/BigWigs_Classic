@@ -1,26 +1,39 @@
-
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Baron Geddon", 409, 1524)
+local mod, CL = BigWigs:NewBoss("Baron Geddon", 409, 1524)
 if not mod then return end
 mod:RegisterEnableMob(12056)
-mod.toggleOptions = {{20475, "FLASH", "ICON", "PROXIMITY", "SAY"}, 19695, 20478}
+mod:SetEncounterID(668)
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
 
-function mod:OnBossEnable()
-	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
+function mod:GetOptions()
+	return {
+		{20475, "ICON", "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Living Bomb
+		{19695, "CASTBAR"}, -- Inferno
+		20478, -- Armageddon
+		19659, -- Ignite Mana
+	},nil,{
+		[20475] = CL.bomb, -- Living Bomb (Bomb)
+	}
+end
 
+function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "LivingBomb", 20475)
 	self:Log("SPELL_AURA_REMOVED", "LivingBombRemoved", 20475)
 	self:Log("SPELL_CAST_SUCCESS", "Inferno", 19695)
 	self:Log("SPELL_CAST_SUCCESS", "Armageddon", 20478)
+	self:Log("SPELL_CAST_SUCCESS", "IgniteMana", 19659)
 
 	self:Death("Win", 12056)
+end
+
+function mod:OnEngage()
+	self:CDBar(19659, 6) -- Ignite Mana
 end
 
 --------------------------------------------------------------------------------
@@ -29,28 +42,37 @@ end
 
 function mod:LivingBomb(args)
 	if self:Me(args.destGUID) then
-		self:Flash(args.spellId)
-		self:OpenProximity(args.spellId, 9)
-		self:Say(args.spellId)
-	else
-		self:OpenProximity(args.spellId, 9, args.destName)
+		self:Say(args.spellId, CL.bomb, nil, "Bomb")
+		self:SayCountdown(args.spellId, 8)
 	end
-	self:TargetMessageOld(args.spellId, args.destName, "blue", "alarm")
+	self:TargetMessage(args.spellId, "red", args.destName, CL.bomb)
+	self:TargetBar(args.spellId, 8, args.destName, CL.bomb)
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetBar(args.spellId, 8, args.destName)
+	self:PlaySound(args.spellId, "warning")
 end
 
 function mod:LivingBombRemoved(args)
-	self:CloseProximity(args.spellId)
+	if self:Me(args.destGUID) then
+		self:CancelSayCountdown(args.spellId)
+	end
+	self:PrimaryIcon(args.spellId)
+	self:StopBar(CL.bomb, args.destName)
 end
 
 function mod:Inferno(args)
-	self:MessageOld(args.spellId, "red", "long")
-	self:Bar(args.spellId, 8)
+	self:Message(args.spellId, "red")
+	self:PlaySound(args.spellId, "long")
+	self:CastBar(args.spellId, 8)
+	self:CDBar(args.spellId, 21) -- 21-29
 end
 
 function mod:Armageddon(args)
 	self:Bar(args.spellId, 8)
-	self:MessageOld(args.spellId, "orange")
+	self:Message(args.spellId, "orange")
 end
 
+function mod:IgniteMana(args)
+	self:CDBar(args.spellId, 27)
+	self:Message(args.spellId, "yellow")
+	self:PlaySound(args.spellId, "info")
+end

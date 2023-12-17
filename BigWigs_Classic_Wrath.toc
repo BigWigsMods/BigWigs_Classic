@@ -36,7 +36,7 @@
 ## X-Wago-ID: rNkPgm6a
 ## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531, 309
 
-MoltenCore_Classic\modules.xml
+MoltenCore\modules.xml
 BlackwingLair_Classic\modules.xml
 AhnQirajRuins_Classic\modules.xml
 AhnQirajTemple_Classic\modules.xml
