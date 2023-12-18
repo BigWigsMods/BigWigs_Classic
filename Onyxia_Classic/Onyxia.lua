@@ -84,7 +84,7 @@ end
 function mod:Breath() -- Stage 2 "Deep Breath"
 	self:Message(17086, "red", L.deep_breath)
 	self:PlaySound(17086, "warning")
-	self:CastBar(17086, 5, L.deep_breath)
+	self:CastBar(17086, 5, L.deep_breath) -- 8s on Wrath, 5s on Classic Era
 	self:PrimaryIcon(18392) -- Clear Fireball raid icon
 end
 
