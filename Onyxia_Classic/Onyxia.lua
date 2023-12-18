@@ -96,14 +96,14 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 	if msg:find(L.phase2_trigger, nil, true) then
 		self:SetStage(2)
-		self:Message("stages", "cyan", CL.stage:format(2), false)
+		self:Message("stages", "cyan", CL.percent:format(65, CL.stage:format(2)), false)
 		self:PlaySound("stages", "long")
 	elseif msg:find(L.phase3_trigger, nil, true) then
 		self:UnregisterEvent(event)
 		self:PrimaryIcon(18392) -- Clear Fireball raid icon
 
 		self:SetStage(3)
-		self:Message("stages", "cyan", CL.stage:format(3), false)
+		self:Message("stages", "cyan", CL.percent:format(40, CL.stage:format(3)), false)
 		self:PlaySound("stages", "long")
 	end
 end
