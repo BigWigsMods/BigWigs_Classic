@@ -3,12 +3,12 @@ if not L then return end
 if L then
 	L.bossName = "Suma sacerdotisa Jeklik"
 
-	-- L.swarm_desc = "Warn for the Bat swarms"
-	-- L.swarm_message = "Incoming bat swarm!"
+	L.swarm_desc = "Anuncia los enjambres de murciélagos"
+	L.swarm_message = "¡Enjambre de murciélagos entrante!"
 
-	-- L.bomb_desc = "Warn for Bomb Bats"
+	L.bomb_desc = "Anuncia las bombas de murciélagos"
 	-- L.bomb_trigger = "I command you to rain fire down upon these invaders!"
-	-- L.bomb_message = "Incoming bomb bats!"
+	L.bomb_message = "¡Bombas de murciélagos entrantes!"
 end
 
 L = BigWigs:NewBossLocale("High Priest Venoxis", "esMX")
@@ -27,7 +27,7 @@ if L then
 	L.lorkhan = "Zelote Lor'Khan"
 	L.zath = "Zelote Zath"
 
-	-- L.tigers_message = "Incoming Tigers!"
+	L.tigers_message = "¡Tigres entrantes!"
 end
 
 L = BigWigs:NewBossLocale("High Priestess Arlokk", "esMX")
@@ -39,7 +39,7 @@ L = BigWigs:NewBossLocale("Hakkar", "esMX")
 if L then
 	L.bossName = "Hakkar"
 
-	-- L.mc_bar = "MC: %s"
+	L.mc_bar = "CM: %s"
 end
 
 L = BigWigs:NewBossLocale("Bloodlord Mandokir", "esMX")
@@ -51,7 +51,7 @@ L = BigWigs:NewBossLocale("Jin'do the Hexxer", "esMX")
 if L then
 	L.bossName = "Jin'do el Aojador"
 
-	-- L.brain_wash_message = "Brain Wash Totem"
+	L.brain_wash_message = "Tótem de lavado mental"
 end
 
 L = BigWigs:NewBossLocale("Gahz'ranka", "esMX")
