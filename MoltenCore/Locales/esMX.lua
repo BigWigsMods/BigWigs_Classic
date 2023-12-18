@@ -21,7 +21,7 @@ if L then
 	L.submerge_bar = "Sumersión"
 
 	L.emerge = "Emersión"
-	L.emerge_desc = "Anuncia la sumersión de Ragnaros."
+	L.emerge_desc = "Anuncia la emersión de Ragnaros."
 	L.emerge_message = "¡Ragnaros se emergió, 3 minutos hasta que se sumerge!"
 	L.emerge_bar = "Emersión"
 end
