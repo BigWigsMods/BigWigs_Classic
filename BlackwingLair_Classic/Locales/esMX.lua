@@ -51,7 +51,7 @@ if L then
 	L.warnhunter = "¡Cazadores - armas están rotos!"
 	L.warnwarrior = "¡Guerreros - atrapado en actitud rabiosa!"
 	L.warnrogue = "¡Pícaros - teletransportado y enredado!"
-	L.warnpaladin = "¡Paladines - Bendición de protección!"
+	L.warnpaladin = "¡Paladines - bendición de protección!"
 	L.warnmage = "¡Magos - polimorfias entrantes!"
 
 	L.classcall_bar = "Llamada de clase"
