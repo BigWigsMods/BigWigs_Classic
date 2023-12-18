@@ -10,7 +10,7 @@ if L then
 	L.eggs_desc = "Cuenta los huevos destruídos."
 	L.eggs_message = "¡%d/30 huevos destruídos!"
 
-	L.phase2_message = "huyen mientras se consume el poder del orbe."
+	L.phase2_message = "¡Todos los huevos destruidos, Sangrevaja está suelto!"
 end
 
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esMX")
