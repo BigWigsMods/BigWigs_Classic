@@ -65,7 +65,7 @@ if L then
 	L.barGiant = "¡Tentáculo ocular gigante!"
 
 	L.groupwarning = "Mirada oscura al grupo %s (%s)"
-	L.phase2starting = "¡Ojo de C'Thun muere! Prepárense!"
+	L.phase2starting = "¡Ojo de C'Thun está muerto! Prepárense!"
 end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esMX")
