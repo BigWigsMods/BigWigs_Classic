@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Lorgus Jett Discovery", 48, -2710)
 if not mod then return end
-mod:RegisterEnableMob(207356) -- Lorgus Jett Season of Discovery
+mod:RegisterEnableMob(207356, 207358) -- Lorgus Jett Season of Discovery, Blackfathom Tide Priestess
 mod:SetEncounterID(2710)
 mod:SetStage(1)
 
