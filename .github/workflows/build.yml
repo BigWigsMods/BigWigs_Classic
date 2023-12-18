@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout addon
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -31,13 +31,13 @@ jobs:
           mkdir -p Core/Locales
           curl -sS https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/Core/Locales/common.enUS.lua > Core/Locales/common.enUS.lua
 
-      - name: Update option files for Retail
+      - name: Update option files (Retail)
         if: always()
         uses: BigWigsMods/actions/gen-options@master
         with:
           path: BigWigs_Classic_Mainline.toc
 
-      - name: Update option files for Classic
+      - name: Update option files (Classic)
         if: always()
         uses: BigWigsMods/actions/gen-options@master
         with:

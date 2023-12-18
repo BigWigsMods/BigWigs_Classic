@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout addon
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run luacheck
         uses: BigWigsMods/actions/luacheck@master
@@ -22,9 +22,18 @@ jobs:
           mkdir -p Core/Locales
           curl -sS https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/Core/Locales/common.enUS.lua > Core/Locales/common.enUS.lua
 
-      - name: Lint boss modules
+      - name: Lint boss modules (Retail)
         if: always()
         uses: BigWigsMods/actions/gen-options@master
         with:
+          path: BigWigs_Classic_Mainline.toc
+          quiet: true
+          lint: true
+
+      - name: Lint boss modules (Classic)
+        if: always()
+        uses: BigWigsMods/actions/gen-options@master
+        with:
+          path: BigWigs_Classic_Vanilla.toc
           quiet: true
           lint: true
