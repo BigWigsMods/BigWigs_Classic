@@ -1,8 +1,8 @@
 local L = BigWigs:NewBossLocale("General Rajaxx", "esMX")
 if not L then return end
 if L then
-	L.wave = "Avisos de oleadas"
-	L.wave_desc = "Aviso para oleadas entrantes"
+	L.wave = "Anunciar oleadas"
+	L.wave_desc = "Anuncia oleadas entrantes"
 
 	L.wave_trigger1a = "Ahí vienen. Intenta que no te maten,"
 	L.wave_trigger1b = "Rajaxx, ¿recuerdas que te dije que serías el último en morir?"
