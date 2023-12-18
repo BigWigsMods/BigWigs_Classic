@@ -23,6 +23,7 @@ L = BigWigs:NewBossLocale("Lorgus Jett Discovery", "esMX")
 if L then
 	--L.bossName = "Lorgus Jett"
 	--L.priestess = "Blackfathom Tide Priestess"
+	--L.priestess_short = "Priestess" -- Shortened version of L.priestess (Blackfathom Tide Priestess)
 	--L.murloc = "Blackfathom Murloc"
 end
 

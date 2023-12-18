@@ -16,6 +16,7 @@ local L = mod:GetLocale()
 if L then
 	L.bossName = "Lorgus Jett"
 	L.priestess = "Blackfathom Tide Priestess"
+	L.priestess_short = "Priestess" -- Shortened version of L.priestess (Blackfathom Tide Priestess)
 	L.murloc = "Blackfathom Murloc"
 end
 
@@ -105,12 +106,12 @@ function mod:HealInterrupted(args)
 end
 
 function mod:Priest1Death()
-	self:Message("stages", "cyan", CL.mob_remaining:format(L.priestess, 2), false)
+	self:Message("stages", "cyan", CL.mob_remaining:format(L.priestess_short, 2), false)
 	self:StopBar(22883) -- Heal
 end
 
 function mod:Priest2Death()
-	self:Message("stages", "cyan", CL.mob_remaining:format(L.priestess, 1), false)
+	self:Message("stages", "cyan", CL.mob_remaining:format(L.priestess_short, 1), false)
 	self:StopBar(22883) -- Heal
 end
 
