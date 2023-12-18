@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Ragnaros Classic", 409, 1528)
 if not mod then return end
 mod:RegisterEnableMob(11502, 12018)
 mod:SetEncounterID(672)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -73,6 +74,7 @@ end
 function mod:OnEngage()
 	sonsdead = 0
 	timer = nil
+	self:SetStage(1)
 	self:CDBar(20566, 27, CL.knockback) -- Wrath of Ragnaros
 	self:Bar("submerge", 180, L.submerge_bar, "Achievement_boss_ragnaros")
 	self:Message("submerge", "yellow", CL.custom_min:format(L.submerge, 3), "Achievement_boss_ragnaros")
@@ -113,6 +115,7 @@ end
 function mod:Emerge()
 	sonsdead = 10 -- Block this firing again if sons are killed after he emerges
 	timer = nil
+	self:SetStage(1)
 	self:CDBar(20566, 27, CL.knockback)
 	self:Bar("submerge", 180, L.submerge_bar, "Achievement_boss_ragnaros")
 	self:Message("emerge", "yellow", L.emerge_message, "Achievement_boss_ragnaros")
@@ -126,6 +129,7 @@ end
 
 function mod:Submerge()
 	sonsdead = 0 -- reset counter
+	self:SetStage(2)
 	self:StopBar(CL.knockback)
 	self:Message("submerge", "yellow", L.submerge_message, "Achievement_boss_ragnaros")
 	self:PlaySound("submerge", "long")
