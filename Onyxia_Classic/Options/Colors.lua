@@ -1,7 +1,8 @@
 
 BigWigs:AddColors("Onyxia", {
-	[17086] = "orange",
+	[17086] = "red",
+	[18392] = "blue",
 	[18431] = "yellow",
-	[18435] = "red",
-	["phase"] = "green",
+	[18435] = "orange",
+	["stages"] = "cyan",
 })
