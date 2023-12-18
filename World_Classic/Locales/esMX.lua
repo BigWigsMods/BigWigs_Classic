@@ -3,45 +3,45 @@ if not L then return end
 if L then
 	L.bossName = "Azuregos"
 
-	--L.teleport = "Teleport Alert"
-	--L.teleport_desc = "Warn for teleport."
+	L.teleport = "Anunciar teletransporte"
+	L.teleport_desc = "Anuncia para teletransporte."
 	--L.teleport_trigger = "Come, little ones"
-	--L.teleport_message = "Teleport!"
+	L.teleport_message = "¡Teletransporte!"
 end
 
 L = BigWigs:NewBossLocale("Lord Kazzak", "esMX")
 if L then
 	L.bossName = "Lord Kazzak"
 
-	-- L.engage_trigger = "For the Legion! For Kil'Jaeden!"
+	L.engage_trigger = "¡Por la Legión! ¡Por Kil'Jaeden!"
 
-	-- L.supreme_mode = "Supreme Mode"
+	L.supreme_mode = "Modo Supremo" --is this a spell name?
 end
 
 L = BigWigs:NewBossLocale("Emeriss", "esMX")
 if L then
 	L.bossName = "Emeriss"
 
-	-- L.engage_trigger = "Hope is a DISEASE of the soul! This land shall wither and die!"
+	L.engage_trigger = "¡La esperanza es una ENFERMEDAD del alma! ¡Esta tierra se marchitará y morirá!"
 end
 
 L = BigWigs:NewBossLocale("Lethon", "esMX")
 if L then
 	L.bossName = "Lethon"
 
-	-- L.engage_trigger = "I can sense the SHADOW on your hearts. There can be no rest for the wicked!"
+	L.engage_trigger = "Puedo sentir la SOMBRA en sus corazones. ¡No puede haber descanso para los malos!"
 end
 
 L = BigWigs:NewBossLocale("Taerar", "esMX")
 if L then
 	L.bossName = "Taerar"
 
-	-- L.engage_trigger = "Peace is but a fleeting dream! Let the NIGHTMARE reign!"
+	L.engage_trigger = "¡La paz no es más que un sueño fugaz! ¡Que reine la PESADILLA!"
 end
 
 L = BigWigs:NewBossLocale("Ysondre", "esMX")
 if L then
 	L.bossName = "Ysondre"
 
-	-- L.engage_trigger = "The strands of LIFE have been severed! The Dreamers must be avenged!"
+	L.engage_trigger = "¡Los hilos de la VIDA se han roto! ¡Tenemos que vengar a los Soñadores!"
 end
