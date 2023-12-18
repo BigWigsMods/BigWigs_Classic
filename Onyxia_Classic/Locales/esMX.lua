@@ -1,14 +1,14 @@
 local L = BigWigs:NewBossLocale("Onyxia", "esMX")
 if L then
-	--L.phase = "Phases"
-	--L.phase_desc = "Warn for phase changes."
-	--L.phase2_message = "Phase 2 incoming!"
-	--L.phase3_message = "Phase 3 incoming!"
+	L.phase = "Fases"
+	L.phase_desc = "Anuncia cambios de fase."
+	L.phase2_message = "¡Fase 2 entrante!"
+	L.phase3_message = "¡Fase 3 entrante!"
 
-	--L.phase1_trigger = "How fortuitous"
-	--L.phase2_trigger = "from above"
-	--L.phase3_trigger = "It seems you'll need another lesson"
+	L.phase1_trigger = "Qué casualidad"
+	L.phase2_trigger = "desde arriba"
+	L.phase3_trigger = "Parece ser que van a necesitar otra lección"
 
-	--L.deepbreath_message = "Deep Breath incoming!"
-	--L.fear_message = "Fear incoming!"
+	L.deepbreath_message = "¡Respiración entrante!"
+	L.fear_message = "¡Miedo entrante!"
 end
