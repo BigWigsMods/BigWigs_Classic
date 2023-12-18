@@ -25,7 +25,7 @@ end
 L = BigWigs:NewBossLocale("Ossirian the Unscarred", "esMX")
 if L then
 	L.debuff = "Debilidad"
-	L.debuff_desc = "Anunciar debilidades"
+	L.debuff_desc = "Anuncia debilidades"
 end
 
 L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "esMX")
