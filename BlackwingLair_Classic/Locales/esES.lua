@@ -1,67 +1,67 @@
 local L = BigWigs:NewBossLocale("Razorgore the Untamed", "esES")
 if not L then return end
 if L then
-	--L.start_trigger = "Intruders have breached"
-	--L.start_message = "Razorgore engaged! Mobs in 45sec!"
-	--L.start_soon = "Mob Spawn in 5sec!"
-	--L.start_mob = "Mob Spawn"
+	L.start_trigger = "¡Tenemos intrusos en El Criadero!"
+	L.start_message = "¡Sangrevaja el Indomable comenzado! Esbirros en 45 seg!"
+	L.start_soon = "¡Esbirros en 5 seg!"
+	L.start_mob = "Esbirros aparecen"
 
-	--L.eggs = "Count Eggs"
-	--L.eggs_desc = "Count the destroyed eggs."
-	--L.eggs_message = "%d/30 eggs destroyed!"
+	L.eggs = "Contar huevos"
+	L.eggs_desc = "Cuenta los huevos destruídos."
+	L.eggs_message = "¡%d/30 huevos destruídos!"
 
-	--L.phase2_message = "All eggs destroyed, Razorgore loose!"
+	L.phase2_message = "¡Todos los huevos destruidos, Sangrevaja está suelto!"
 end
 
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esES")
 if L then
-	--L.warmup_trigger = "Too late, friends!"
-	--L.warmup_message = "RP started, engaging in ~43s"
+	L.warmup_trigger = "¡Demasiado tarde, amigos!"
+	L.warmup_message = "Comenzando en ~43s"
 end
 
 L = BigWigs:NewBossLocale("Chromaggus", "esES")
 if L then
-	--L.breath = "Breaths"
-	--L.breath_desc = "Warn for Breaths."
+	L.breath = "Alientos"
+	L.breath_desc = "Anuncia los alientos."
 
-	--L.debuffs_message = "3/5 debuffs, carefull!"
-	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+	L.debuffs_message = "¡3/5 perjuicios, ten cuidado!"
+	L.debuffs_warning = "¡4/5 perjuicios, %s al 5to!"
 end
 
 L = BigWigs:NewBossLocale("NefarianBWL", "esES")
 if L then
-	--L.landing_soon_trigger = "Well done, my minions"
+	L.landing_soon_trigger = "Bien hecho, esbirros."
 	--L.landing_trigger = "BURN! You wretches"
-	--L.zerg_trigger = "Impossible! Rise my"
+	L.zerg_trigger = "¡Imposible! ¡Levantaos, esbirros!"
 
-	--L.triggershamans = "Shamans"
-	--L.triggerwarlock = "Warlocks"
-	--L.triggerhunter = "Hunters"
-	--L.triggermage = "Mages"
+	L.triggershamans = "Chamanes"
+	L.triggerwarlock = "Brujos"
+	L.triggerhunter = "Cazadores"
+	L.triggermage = "Magos"
 
-	--L.landing_soon_warning = "Nefarian landing in 10 seconds!"
-	--L.landing_warning = "Nefarian is landing!"
-	--L.zerg_warning = "Zerg incoming!"
-	--L.classcall_warning = "Class call incoming!"
+	L.landing_soon_warning = "¡Nefarian está aterrizando en 10 segundos!"
+	L.landing_warning = "¡Nefarian está aterrizando!"
+	L.zerg_warning = "¡Esbirros entrantes!"
+	L.classcall_warning = "¡Llamada de clase entrante!"
 
-	--L.warnshaman = "Shamans - Totems spawned!"
-	--L.warndruid = "Druids - Stuck in cat form!"
-	--L.warnwarlock = "Warlocks - Incoming Infernals!"
-	--L.warnpriest = "Priests - Heals hurt!"
-	--L.warnhunter = "Hunters - Bows/Guns broken!"
-	--L.warnwarrior = "Warriors - Stuck in berserking stance!"
-	--L.warnrogue = "Rogues - Ported and rooted!"
-	--L.warnpaladin = "Paladins - Blessing of Protection!"
-	--L.warnmage = "Mages - Incoming polymorphs!"
+	L.warnshaman = "¡Chamanes - aparecen tótems!"
+	L.warndruid = "¡Druidas - atrapado en forma felina!"
+	L.warnwarlock = "¡Brujos - infernales entrantes!"
+	L.warnpriest = "¡Sacerfotes - sanaciones hacen daño!"
+	L.warnhunter = "¡Cazadores - armas están rotos!"
+	L.warnwarrior = "¡Guerreros - atrapado en actitud rabiosa!"
+	L.warnrogue = "¡Pícaros - teletransportado y enredado!"
+	L.warnpaladin = "¡Paladines - bendición de protección!"
+	L.warnmage = "¡Magos - polimorfias entrantes!"
 
-	--L.classcall_bar = "Class call"
+	L.classcall_bar = "Llamada de clase"
 
-	--L.classcall = "Class Call"
-	--L.classcall_desc = "Warn for Class Calls."
+	L.classcall = "Llamada de clase"
+	L.classcall_desc = "Anucia las llamadas de clase."
 
-	--L.otherwarn = "Landing and Zerg"
-	--L.otherwarn_desc = "Landing and Zerg warnings."
+	L.otherwarn = "Aterrizaje y esbirros"
+	L.otherwarn_desc = "Anuncia el aterrizaje y esbirros de Nefarian."
 
-	--L.add = "Drakonid deaths"
-	--L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
+	L.add = "Muertes de dracónidos"
+	L.add_desc = "Anuncia el número de dracónidos muertos en fase 1 antes del aterrizaje de Nefarian."
 end
