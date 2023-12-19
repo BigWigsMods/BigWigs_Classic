@@ -1,71 +1,71 @@
 local L = BigWigs:NewBossLocale("Viscidus", "esES")
 if not L then return end
 if L then
-	--L.freeze = "Freezing States"
-	--L.freeze_desc = "Warn for the different frozen states."
+	L.freeze = "Congelación"
+	L.freeze_desc = "Anunciar los estados de congelación"
 
-	--L.freeze_trigger1 = "begins to slow!"
-	--L.freeze_trigger2 = "is freezing up!"
-	--L.freeze_trigger3 = "is frozen solid!"
-	--L.freeze_trigger4 = "begins to crack!"
-	--L.freeze_trigger5 = "looks ready to shatter!"
+	L.freeze_trigger1 = "comienza a remitir!"
+	L.freeze_trigger2 = "se queda inmóvil!"
+	L.freeze_trigger3 = "está paralizada!"
+	L.freeze_trigger4 = "empieza a desmoronarse!"
+	L.freeze_trigger5 = "parece a punto de hacerse añicos!"
 
-	--L.freeze_warn1 = "First freeze phase!"
-	--L.freeze_warn2 = "Second freeze phase!"
-	--L.freeze_warn3 = "Viscidus is frozen!"
-	--L.freeze_warn4 = "Cracking up - keep going!"
-	--L.freeze_warn5 = "Cracking up - almost there!"
-	--L.freeze_warn_melee = "%d melee attacks - %d more to go"
-	--L.freeze_warn_frost = "%d frost attacks - %d more to go"
+	L.freeze_warn1 = "¡Primera fase de congelación!"
+	L.freeze_warn2 = "¡Segunda fase de congelación!"
+	L.freeze_warn3 = "¡Viscidus está paralizada!"
+	L.freeze_warn4 = "Desmoronándose - ¡sigue adelante!"
+	L.freeze_warn5 = "Desmoronándose - ¡casi llegamos!"
+	L.freeze_warn_melee = "%d golpes físicos - faltan %d más"
+	L.freeze_warn_frost = "%d golpes de escarcha - faltan %d más"
 end
 
 L = BigWigs:NewBossLocale("Ouro", "esES")
 if L then
-	--L.engage_message = "Ouro engaged! Possible Submerge in 90sec!"
+	L.engage_message = "¡Ouro comenzado! Inmersión posible en 90 seg!"
 
-	--L.emerge = "Emerge"
-	--L.emergewarn = "15 sec to possible submerge!"
-	--L.emergewarn2 = "15 sec to Ouro sumberge!"
-	--L.emergebartext = "Ouro submerge"
+	L.emerge = "Emersión"
+	L.emergewarn = "¡15 segundos hasta posible inmersión!"
+	L.emergewarn2 = "¡15 segundos hasta la inmersión de Ouro!"
+	L.emergebartext = "Inmersión"
 
-	--L.submerge = "Submerge"
-	--L.possible_submerge_bar = "Possible submerge"
+	L.submerge = "Inmersión"
+	L.possible_submerge_bar = "Inmersión posible"
 
-	--L.scarab = "Scarab Despawn"
-	--L.scarab_desc = "Warn for Scarab Despawn."
-	--L.scarabdespawn = "Scarabs despawn in 10 Seconds"
-	--L.scarabbar = "Scarabs despawn"
+	L.scarab = "Desaparición de escarabajos"
+	L.scarab_desc = "Anunciar desaparición de escarabajos."
+	L.scarabdespawn = "Escarabajos desaparecerán en 10 segundos"
+	L.scarabbar = "Desaparición de escarabajos"
 end
 
 L = BigWigs:NewBossLocale("C'Thun", "esES")
 if L then
-	--L.tentacle = "Tentacles"
-	--L.tentacle_desc = "Warn for Tentacles"
+	L.tentacle = "Tentáculos"
+	L.tentacle_desc = "Anuncia cuando aparezcan tentáculos"
 
-	--L.giant = "Giant Eye Alert"
-	--L.giant_desc = "Warn for Giant Eyes"
+	L.giant = "Anunciar tentáculo ocular gigante"
+	L.giant_desc = "Anuncia cuando aparezca un tentáculo ocular gigante"
 
-	--L.weakened = "Weakened Alert"
-	--L.weakened_desc = "Warn for Weakened State"
+	L.weakened = "Anunciar debilidad"
+	L.weakened_desc = "Anuncia la debilidad de C'Thun"
 
-	--L.weakenedtrigger = "%s is weakened!"
+	L.weakenedtrigger = "%s está débil!"
 
-	--L.weakened_msg = "C'Thun is weakened for 45 sec"
-	--L.invulnerable2 = "Party ends in 5 seconds"
-	--L.invulnerable1 = "Party over - C'Thun invulnerable"
+	L.weakened_msg = "C'Thun queda debilitado durante 45 segundos"
+	L.invulnerable2 = "C'Thun es invulnerable en 5 segundos"
+	L.invulnerable1 = "C'Thun es invulnerable"
 
-	--L.giant3 = "Giant Eye - 10 sec"
-	--L.giant2 = "Giant Eye - 5 sec"
-	--L.giant1 = "Giant Eye - Poke it!"
+	L.giant3 = "Tentáculo ocular gigante - 10 seg"
+	L.giant2 = "Tentáculo ocular gigante - 5 seg"
+	L.giant1 = "Tentáculo ocular gigante - ¡mátalo!"
 
-	--L.startwarn = "C'Thun engaged! - 45 sec until Dark Glare and Eyes"
+	L.startwarn = "¡C'Thun comenzado! - 45 seg hasta mirada oscura y tentáculos oculares"
 
-	--L.tentacleParty = "Tentacle party!"
-	--L.barWeakened = "C'Thun is weakened!"
-	--L.barGiant = "Giant Eye!"
+	L.tentacleParty = "¡Un montón de tentáculos!"
+	L.barWeakened = "¡C'Thun está débil!"
+	L.barGiant = "¡Tentáculo ocular gigante!"
 
-	--L.groupwarning = "Dark Glare on group %s (%s)"
-	--L.phase2starting = "The Eye is dead! Body incoming!"
+	L.groupwarning = "Mirada oscura al grupo %s (%s)"
+	L.phase2starting = "¡Ojo de C'Thun está muerto! Prepárense!"
 end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esES")
