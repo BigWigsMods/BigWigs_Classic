@@ -2,6 +2,7 @@
 BigWigs:AddColors("Baron Aquanis Discovery", {
 	[404806] = {"blue","yellow"},
 	[405953] = "blue",
+	[413664] = "orange",
 })
 
 BigWigs:AddColors("Ghamoo-ra Discovery", {
@@ -20,6 +21,7 @@ BigWigs:AddColors("Lady Sarevess Discovery", {
 
 BigWigs:AddColors("Gelihast Discovery", {
 	[411956] = {"blue","yellow"},
+	[411959] = {"blue","red"},
 	[412072] = {"blue","purple"},
 	[412456] = "cyan",
 })
