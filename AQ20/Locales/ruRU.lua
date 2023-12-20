@@ -21,12 +21,6 @@ if L then
 	L.sacrifice = "Жертвоприношение"
 end
 
-L = BigWigs:NewBossLocale("Ossirian the Unscarred", "ruRU")
-if L then
-	L.debuff = "Слабость"
-	L.debuff_desc = "Предупреждать о наложении слабости на игроков."
-end
-
 L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "ruRU")
 if L then
 	L.guardian = "Анубисат-страж"

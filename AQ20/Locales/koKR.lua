@@ -21,12 +21,6 @@ if L then
 	L.sacrifice = "희생"
 end
 
-L = BigWigs:NewBossLocale("Ossirian the Unscarred", "koKR")
-if L then
-	L.debuff = "약화마법 경고"
-	L.debuff_desc = "약화마법에 대한 경고."
-end
-
 L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "koKR")
 if L then
 	L.guardian = "아누비사스 감시자"

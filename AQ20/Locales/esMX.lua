@@ -21,12 +21,6 @@ if L then
 	L.sacrifice = "Sacrificio"
 end
 
-L = BigWigs:NewBossLocale("Ossirian the Unscarred", "esMX")
-if L then
-	L.debuff = "Debilidad"
-	L.debuff_desc = "Anuncia debilidades."
-end
-
 L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "esMX")
 if L then
 	L.guardian = "Guardián Anubisath"

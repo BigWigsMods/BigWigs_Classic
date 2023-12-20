@@ -29,7 +29,7 @@ end
 function mod:GetOptions()
 	return {
 		{404806, "ICON", "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Depth Charge
-		413664, -- Bubble Beam
+		{413664, "CASTBAR"}, -- Bubble Beam
 		405953, -- Torrential Downpour
 	},nil,{
 		[404806] = CL.bomb, -- Depth Charge (Bomb)

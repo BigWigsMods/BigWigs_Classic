@@ -21,12 +21,6 @@ if L then
 	L.sacrifice = "Sacrifice"
 end
 
-L = BigWigs:NewBossLocale("Ossirian the Unscarred", "frFR")
-if L then
-	L.debuff = "Affaiblissements"
-	L.debuff_desc = "Préviens quand Ossirian est affaibli face à certaines écoles de magie."
-end
-
 L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "frFR")
 if L then
 	L.guardian = "Gardien anubisath"

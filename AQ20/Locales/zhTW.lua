@@ -21,12 +21,6 @@ if L then
 	L.sacrifice = "犧牲"
 end
 
-L = BigWigs:NewBossLocale("Ossirian the Unscarred", "zhTW")
-if L then
-	L.debuff = "虛弱警報"
-	L.debuff_desc = "無疤者奧斯里安受到虛弱效果影響時發出警報。"
-end
-
 L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "zhTW")
 if L then
 	L.guardian = "阿努比薩斯守衛者"
