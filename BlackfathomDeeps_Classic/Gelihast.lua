@@ -24,9 +24,11 @@ function mod:GetOptions()
 	return {
 		412072, -- Shadow Strike
 		411956, -- Curse of Blackfathom
+		411959, -- Fear
 		412456, -- March of the Murlocs
 	},nil,{
 		[411956] = CL.curse, -- Curse of Blackfathom (Curse)
+		[411959] = CL.fear, -- Fear (Fear)
 	}
 end
 
@@ -40,6 +42,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED_DOSE", "ShadowStrikeApplied", 412072, 412079, 412080)
 	self:Log("SPELL_CAST_SUCCESS", "CurseOfBlackfathom", 411973)
 	self:Log("SPELL_AURA_APPLIED", "CurseOfBlackfathomApplied", 411956)
+	self:Log("SPELL_AURA_APPLIED", "Fear", 411959)
 	self:Log("SPELL_CAST_SUCCESS", "MarchOfTheMurlocs", 412456)
 
 	self:Death("Win", 204921)
@@ -78,6 +81,13 @@ do
 		end
 		playerList[#playerList+1] = args.destName
 		self:TargetsMessage(args.spellId, "yellow", playerList, nil, CL.curse)
+	end
+end
+
+function mod:Fear(args)
+	self:TargetMessage(args.spellId, "red", args.destName, CL.fear)
+	if self:Dispeller("magic") then
+		self:PlaySound(args.spellId, "alert")
 	end
 end
 
