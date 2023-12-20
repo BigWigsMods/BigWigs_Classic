@@ -1,10 +1,11 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Kurinnaxx", 509, 1537)
 if not mod then return end
 mod:RegisterEnableMob(15348)
+mod:SetEncounterID(718)
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -13,25 +14,24 @@ mod:RegisterEnableMob(15348)
 function mod:GetOptions()
 	return {
 		25646, -- Mortal Wound
-		{25656, "SAY", "ME_ONLY_EMPHASIZE"}, -- Sand Trap
-		26527, -- Frenzy
+		{25656, "SAY", "ME_ONLY_EMPHASIZE"}, -- Sand Trap (Fake proxy spell as 25648 has no description or icon)
+		26527, -- Frenzy / Enrage (different name on classic era)
 	}
 end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "MortalWound", 25646)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWound", 25646)
+	self:Log("SPELL_AURA_REMOVED", "MortalWoundRemoved", 25646)
 	self:Log("SPELL_CREATE", "SandTrap", 25648)
-	self:Log("SPELL_AURA_APPLIED", "Frenzy", 26527)
-
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterEvent("UNIT_HEALTH")
+	self:Log("SPELL_AURA_APPLIED", "FrenzyEnrage", 26527)
 
 	self:Death("Win", 15348)
 end
 
 function mod:OnEngage()
-	self:StartWipeCheck()
+	self:RegisterEvent("UNIT_HEALTH")
+	self:CDBar(25656, 8) -- Sand Trap
 end
 
 --------------------------------------------------------------------------------
@@ -53,13 +53,14 @@ end
 
 function mod:SandTrap(args)
 	self:TargetMessage(25656, "orange", args.sourceName)
+	self:CDBar(25656, 8)
 	if self:Me(args.sourceGUID) then
 		self:PlaySound(25656, "alert", nil, args.sourceName)
-		self:Say(25656)
+		self:Say(25656, nil, nil, "Sand Trap")
 	end
 end
 
-function mod:Frenzy(args)
+function mod:FrenzyEnrage(args)
 	self:UnregisterEvent("UNIT_HEALTH")
 	self:Message(args.spellId, "red", CL.percent:format(30, args.spellName))
 end
@@ -69,8 +70,7 @@ function mod:UNIT_HEALTH(event, unit)
 		local hp = self:GetHealth(unit)
 		if hp < 36 then
 			self:UnregisterEvent(event)
-			self:Message(26527, "green", CL.soon:format(self:SpellName(26527)), false)
+			self:Message(26527, "green", CL.soon:format(self:SpellName(26527)), false) -- Frenzy / Enrage
 		end
 	end
 end
-

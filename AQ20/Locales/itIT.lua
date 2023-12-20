@@ -1,43 +1,33 @@
-local L = BigWigs:NewBossLocale("Moam", "itIT")
+local L = BigWigs:NewBossLocale("General Rajaxx", "itIT")
 if not L then return end
 if L then
-	--L.starttrigger = "%s senses your fear."
+	--L.wave_trigger1a = "Kill first, ask questions later... Incoming!"
+	--L.wave_trigger1b = "Remember, Rajaxx, when I said I'd kill you last?"
+	--L.wave_trigger3 = "The time of our retribution is at hand! Let darkness reign in the hearts of our enemies!"
+	--L.wave_trigger4 = "No longer will we wait behind barred doors and walls of stone! No longer will our vengeance be denied! The dragons themselves will tremble before our wrath!"
+	--L.wave_trigger5 = "Fear is for the enemy! Fear and death!"
+	--L.wave_trigger6 = "Staghelm will whimper and beg for his life, just as his whelp of a son did! One thousand years of injustice will end this day!"
+	--L.wave_trigger7 = "Fandral! Your time has come! Go and hide in the Emerald Dream and pray we never find you!"
+	--L.wave_trigger8 = "Impudent fool! I will kill you myself!"
+end
+
+L = BigWigs:NewBossLocale("Buru the Gorger", "itIT")
+if L then
+	L.fixate_desc = "Prende di mira il bersaglio, ignorando le provocazioni degli altri attaccanti."
+end
+
+L = BigWigs:NewBossLocale("Ayamiss the Hunter", "itIT")
+if L then
+	--L.sacrifice = "Sacrifice"
 end
 
 L = BigWigs:NewBossLocale("Ossirian the Unscarred", "itIT")
 if L then
-	--L.debuff = "Weakness"
+	L.debuff = "Debolezza"
 	--L.debuff_desc = "Warn for various weakness types."
-end
-
-L = BigWigs:NewBossLocale("General Rajaxx", "itIT")
-if L then
-	--L.wave = "Waves"
-	--L.wave_desc = "Warn for incoming waves."
-
-	--L.trigger1 = "Kill first, ask questions later... Incoming!"
-	--L.trigger2 = "?????" -- There is no callout for wave 2 ><
-	--L.trigger3 = "The time of our retribution is at hand! Let darkness reign in the hearts of our enemies!"
-	--L.trigger4 = "No longer will we wait behind barred doors and walls of stone! No longer will our vengeance be denied! The dragons themselves will tremble before our wrath!\013\n"
-	--L.trigger5 = "Fear is for the enemy! Fear and death!"
-	--L.trigger6 = "Staghelm will whimper and beg for his life, just as his whelp of a son did! One thousand years of injustice will end this day!\013\n"
-	--L.trigger7 = "Fandral! Your time has come! Go and hide in the Emerald Dream and pray we never find you!\013\n"
-	--L.trigger8 = "Impudent fool! I will kill you myself!"
-	--L.trigger9 = "Remember, Rajaxx, when I said I'd kill you last?"
-
-	--L.warn1 = "Wave 1/8"
-	--L.warn2 = "Wave 2/8"
-	--L.warn3 = "Wave 3/8"
-	--L.warn4 = "Wave 4/8"
-	--L.warn5 = "Wave 5/8"
-	--L.warn6 = "Wave 6/8"
-	--L.warn7 = "Wave 7/8"
-	--L.warn8 = "Incoming General Rajaxx"
-	--L.warn9 = "Wave 1/8" -- trigger for starting the event by pulling the first wave instead of talking to andorov
 end
 
 L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "itIT")
 if L then
-	--L.guardian = "Anubisath Guardian"
+	L.guardian = "Guardiano Anubisath"
 end
-

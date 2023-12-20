@@ -2,7 +2,7 @@
 ..\FrameXML\UI.xsd">
 
 <Script file="Kurinnaxx.lua"/>
-<Script file="GeneralRajaxx.lua"/>
+<Script file="Rajaxx.lua"/>
 <Script file="Moam.lua"/>
 <Script file="Buru.lua"/>
 <Script file="Ayamiss.lua"/>

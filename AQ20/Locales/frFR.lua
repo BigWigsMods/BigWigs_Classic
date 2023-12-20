@@ -1,7 +1,24 @@
-local L = BigWigs:NewBossLocale("Moam", "frFR")
+local L = BigWigs:NewBossLocale("General Rajaxx", "frFR")
 if not L then return end
 if L then
-	L.starttrigger = "%s sent votre peur."
+	L.wave_trigger1a = "Ils arrivent. Essayez de ne pas vous faire tuer, bleusaille."
+	L.wave_trigger1b = "Alors, Rajaxx, tu te souviens que j\226\128\153avais dit que je te tuerais le dernier ?"
+	L.wave_trigger3 = "L\226\128\153heure de notre vengeance sonne enfin ! Que les t\195\169n\195\168bres r\195\168gnent dans le coeur de nos ennemis !"
+	L.wave_trigger4 = "C\226\128\153en est fini d\226\128\153attendre derri\195\168re des portes ferm\195\169es et des murs de pierre\194\160! Nous ne serons pas priv\195\169s de notre vengeance\194\160! Les dragons eux-m\195\170mes trembleront devant notre courroux\194\160!"
+	L.wave_trigger5 = "La peur est pour l\226\128\153ennemi ! La peur et la mort\194\160!"
+	L.wave_trigger6 = "Staghelm pleurnichera pour avoir la vie sauve, comme l\226\128\153a fait son morveux de fils\194\160! En ce jour, mille ans d\226\128\153injustice s\226\128\153ach\195\168vent\194\160!"
+	L.wave_trigger7 = "Fandral ! Ton heure est venue ! Va te cacher dans le R\195\170ve d\226\128\153Emeraude, et prie pour que nous ne te trouvions jamais\194\160!"
+	L.wave_trigger8 = "Imb\195\169cile imprudent ! Je vais te tuer moi-m\195\170me !"
+end
+
+L = BigWigs:NewBossLocale("Buru the Gorger", "frFR")
+if L then
+	L.fixate_desc = "Se concentre sur une cible et ignore la menace des autres attaquants."
+end
+
+L = BigWigs:NewBossLocale("Ayamiss the Hunter", "frFR")
+if L then
+	L.sacrifice = "Sacrifice"
 end
 
 L = BigWigs:NewBossLocale("Ossirian the Unscarred", "frFR")
@@ -10,34 +27,7 @@ if L then
 	L.debuff_desc = "Préviens quand Ossirian est affaibli face à certaines écoles de magie."
 end
 
-L = BigWigs:NewBossLocale("General Rajaxx", "frFR")
-if L then
-	L.wave = "Vagues"
-	L.wave_desc = "Préviens de l'arrivée des vagues."
-
-	L.trigger1 = "Ils arrivent. Essayez de ne pas vous faire tuer, bleusaille."
-	--L.trigger2 = "?????"
-	L.trigger3 = "L’heure de notre vengeance sonne enfin ! Que les ténèbres règnent dans le coeur de nos ennemis !"
-	L.trigger4 = "C’en est fini d’attendre derrière des portes fermées et des murs de pierre ! Nous ne serons pas privés de notre vengeance ! Les dragons eux-mêmes trembleront devant notre courroux !"
-	L.trigger5 = "La peur est pour l’ennemi ! La peur et la mort !"
-	L.trigger6 = "Staghelm pleurnichera pour avoir la vie sauve, comme l’a fait son morveux de fils ! En ce jour, mille ans d’injustice s’achèvent !"
-	L.trigger7 = "Fandral ! Ton heure est venue ! Va te cacher dans le Rêve d’Emeraude, et prie pour que nous ne te trouvions jamais !"
-	L.trigger8 = "Imbécile imprudent ! Je vais te tuer moi-même !"
-	L.trigger9 = "Alors, Rajaxx, tu te souviens que j’avais dit que je te tuerais le dernier ?"
-
-	L.warn1 = "Vague 1/8"
-	L.warn2 = "Vague 2/8"
-	L.warn3 = "Vague 3/8"
-	L.warn4 = "Vague 4/8"
-	L.warn5 = "Vague 5/8"
-	L.warn6 = "Vague 6/8"
-	L.warn7 = "Vague 7/8"
-	L.warn8 = "Le général Rajaxx arrive !"
-	L.warn9 = "Vague 1/8" -- trigger for starting the event by pulling the first wave instead of talking to andorov
-end
-
 L = BigWigs:NewBossLocale("Ruins of Ahn'Qiraj Trash", "frFR")
 if L then
-	--L.guardian = "Anubisath Guardian"
+	L.guardian = "Gardien anubisath"
 end
-

@@ -40,7 +40,7 @@
 
 MoltenCore\modules.xml
 BlackwingLair_Classic\modules.xml
-AhnQirajRuins_Classic\modules.xml
+AQ20\modules.xml
 AhnQirajTemple_Classic\modules.xml
 ZulGurub_Classic\modules.xml
 Naxxramas_Classic\modules.xml
