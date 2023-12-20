@@ -57,7 +57,7 @@ function mod:MagicGroundingDeadenMagicApplied(args)
 end
 
 function mod:MagicGroundingDeadenMagicDispelled(args)
-	if args.extraSpellId == 19714 then
+	if args.extraSpellName == self:SpellName(19714) then
 		self:Message(19714, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end

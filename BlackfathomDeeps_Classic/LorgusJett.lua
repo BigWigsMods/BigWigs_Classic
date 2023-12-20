@@ -100,7 +100,7 @@ function mod:HealSuccess(args)
 end
 
 function mod:HealInterrupted(args)
-	if args.extraSpellId == 22883 then
+	if args.extraSpellName == self:SpellName(22883) then
 		self:Message(22883, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end

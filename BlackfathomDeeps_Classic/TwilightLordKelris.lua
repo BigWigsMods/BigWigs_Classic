@@ -105,7 +105,7 @@ function mod:ShadowyChainsStart(args) -- First stage only
 end
 
 function mod:ShadowyChainsInterrupted(args)
-	if args.extraSpellId == 425265 then
+	if args.extraSpellName == self:SpellName(425265) then
 		self:Message(425265, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end

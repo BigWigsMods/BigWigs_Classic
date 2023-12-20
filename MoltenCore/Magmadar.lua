@@ -51,7 +51,7 @@ function mod:EnrageFrenzy(args)
 end
 
 function mod:EnrageFrenzyDispelled(args)
-	if args.extraSpellId == 19451 then
+	if args.extraSpellName == self:SpellName(19451) then
 		self:StopBar(args.extraSpellName, args.destName)
 		self:Message(19451, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end

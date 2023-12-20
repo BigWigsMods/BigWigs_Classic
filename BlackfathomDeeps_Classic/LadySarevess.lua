@@ -118,7 +118,7 @@ function mod:AkumaisRageApplied(args)
 end
 
 function mod:AkumaisRageDispelled(args)
-	if args.extraSpellId == 407791 then
+	if args.extraSpellName == self:SpellName(407791) then
 		self:Message(407791, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end
