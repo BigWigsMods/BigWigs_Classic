@@ -8,6 +8,12 @@ mod:RegisterEnableMob(202699) -- Baron Aquanis Season of Discovery
 mod:SetEncounterID(2694)
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local depthChargeCount = 1
+
+--------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -23,9 +29,11 @@ end
 function mod:GetOptions()
 	return {
 		{404806, "ICON", "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Depth Charge
+		413664, -- Bubble Beam
 		405953, -- Torrential Downpour
 	},nil,{
 		[404806] = CL.bomb, -- Depth Charge (Bomb)
+		[413664] = CL.beam, -- Bubble Beam (Beam)
 	}
 end
 
@@ -34,8 +42,12 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
+	self:Log("SPELL_CAST_SUCCESS", "DepthCharge", 404806)
 	self:Log("SPELL_AURA_APPLIED", "DepthChargeApplied", 404806)
 	self:Log("SPELL_AURA_REMOVED", "DepthChargeRemoved", 404806)
+	self:Log("SPELL_AURA_APPLIED", "BubbleBeamCast", 413664)
+	self:Log("SPELL_AURA_APPLIED", "BubbleBeamChannel", 404373)
+	self:Log("SPELL_AURA_REMOVED", "BubbleBeamChannelOver", 404373)
 
 	self:Log("SPELL_AURA_APPLIED", "TorrentialDownpourDamage", 405953)
 	self:Log("SPELL_PERIODIC_DAMAGE", "TorrentialDownpourDamage", 405953)
@@ -44,9 +56,20 @@ function mod:OnBossEnable()
 	self:Death("Win", 202699)
 end
 
+function mod:OnEngage()
+	depthChargeCount = 1
+	self:CDBar(404806, 16, CL.bomb) -- Depth Charge
+	self:CDBar(413664, 26, CL.beam) -- Bubble Beam
+end
+
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:DepthCharge(args)
+	depthChargeCount = depthChargeCount + 1
+	self:CDBar(args.spellId, depthChargeCount % 2 == 0 and 22 or 16, CL.bomb)
+end
 
 function mod:DepthChargeApplied(args)
 	if self:Me(args.destGUID) then
@@ -55,6 +78,7 @@ function mod:DepthChargeApplied(args)
 		self:SayCountdown(args.spellId, 8)
 	end
 	self:PrimaryIcon(args.spellId, args.destName)
+	self:TargetBar(args.spellId, 8, args.destName, CL.bomb)
 	self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
 end
 
@@ -62,7 +86,22 @@ function mod:DepthChargeRemoved(args)
 	if self:Me(args.destGUID) then
 		self:CancelSayCountdown(args.spellId)
 	end
+	self:StopBar(CL.bomb, args.destName)
 	self:PrimaryIcon(args.spellId)
+end
+
+function mod:BubbleBeamCast(args)
+	self:Message(args.spellId, "orange", CL.incoming:format(args.spellName))
+	self:PlaySound(args.spellId, "long")
+end
+
+function mod:BubbleBeamChannel()
+	self:CastBar(413664, 10, CL.beam)
+	self:CDBar(404806, {10.5, 16}, CL.bomb) -- Depth Charge
+end
+
+function mod:BubbleBeamChannelOver()
+	self:CDBar(413664, 27, CL.beam)
 end
 
 do
