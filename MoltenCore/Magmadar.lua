@@ -16,12 +16,14 @@ function mod:GetOptions()
 		19408, -- Panic
 		19451, -- Enrage / Frenzy (different name on classic era)
 		19428, -- Conflagration
+	},nil,{
+		[19408] = CL.fear, -- Panic (Fear)
 	}
 end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Panic", 19408)
-	self:Log("SPELL_CAST_SUCCESS", "EnrageFrenzy", 19451)
+	self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 19451)
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
 	self:Log("SPELL_AURA_APPLIED", "Conflagration", 19428)
 
@@ -30,7 +32,7 @@ end
 
 function mod:OnEngage()
 	self:CDBar(19451, 8.1) -- Enrage / Frenzy
-	self:CDBar(19408, 9.7) -- Panic
+	self:CDBar(19408, 9.7, CL.fear) -- Panic
 end
 
 --------------------------------------------------------------------------------
@@ -38,8 +40,8 @@ end
 --
 
 function mod:Panic(args)
-	self:CDBar(args.spellId, 31) -- 31-50, sometimes even higher
-	self:Message(args.spellId, "orange")
+	self:CDBar(args.spellId, 31, CL.fear, "spell_shadow_psychicscream") -- 31-50, sometimes even higher
+	self:Message(args.spellId, "orange", CL.fear, "spell_shadow_psychicscream")
 	self:PlaySound(args.spellId, "long")
 end
 
