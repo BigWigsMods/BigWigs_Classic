@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -32,6 +31,8 @@ function mod:GetOptions()
 		21056, -- Mark of Kazzak
 		21063, -- Twisted Reflection
 		"berserk",
+	},nil,{
+		[21056] = CL.curse, -- Mark of Kazzak (Curse)
 	}
 end
 
@@ -58,18 +59,24 @@ end
 --
 
 function mod:MarkOfKazzak(args)
-	self:TargetMessage(21056, "yellow", args.destName)
+	self:TargetMessage(args.spellId, "yellow", args.destName, CL.curse)
 	if self:Me(args.destGUID) then
-		self:PlaySound(21056, "alert")
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
+	elseif self:Dispeller("curse") then
+		self:PlaySound(args.spellId, "warning")
 	end
 end
 
 function mod:TwistedReflection(args)
-	self:TargetMessage(21063, "orange", args.destName)
+	self:TargetMessage(args.spellId, "orange", args.destName)
+	if self:Dispeller("magic") then
+		self:PlaySound(args.spellId, "alarm")
+	end
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.engage_trigger, nil, true) then
+		self:Engage()
 		self:Berserk(180, nil, nil, L.supreme_mode, L.supreme_mode)
 	end
 end

@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -17,10 +16,7 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.bossName = "Azuregos"
 
-	L.teleport = "Teleport Alert"
-	L.teleport_desc = "Warn for teleport."
 	L.teleport_trigger = "Come, little ones"
-	L.teleport_message = "Teleport!"
 end
 L = mod:GetLocale()
 
@@ -31,7 +27,9 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		22067, -- Reflection
-		"teleport",
+		21147, -- Arcane Vacuum
+	},nil,{
+		[21147] = CL.teleport, -- Arcane Vacuum (Teleport)
 	}
 end
 
@@ -62,18 +60,18 @@ end
 --end
 
 function mod:Reflection(args)
-	self:Message(22067, "yellow")
-	self:PlaySound(22067, "long")
-	self:Bar(22067, 10)
+	self:Message(args.spellId, "yellow", CL.duration:format(args.spellName, 10))
+	self:PlaySound(args.spellId, "warning")
+	self:Bar(args.spellId, 10)
 end
 
 function mod:ReflectionRemoved(args)
-	self:Message(22067, "yellow", CL.over:format(args.spellName))
-	self:PlaySound(22067, "info")
+	self:Message(args.spellId, "green", CL.over:format(args.spellName))
+	self:PlaySound(args.spellId, "info")
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.teleport_trigger, nil, true) then
-		self:Message("teleport", "red", L.teleport_message, false)
+		self:Message(21147, "red", CL.teleport)
 	end
 end

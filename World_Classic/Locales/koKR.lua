@@ -3,10 +3,7 @@ if not L then return end
 if L then
 	L.bossName = "아주어고스"
 
-	L.teleport = "소환 경고"
-	L.teleport_desc = "소환에 대한 경고"
 	L.teleport_trigger = "오너라, 조무래기들아! 덤벼봐라!"
-	L.teleport_message = "강제 소환!"
 end
 
 L = BigWigs:NewBossLocale("Lord Kazzak", "koKR")

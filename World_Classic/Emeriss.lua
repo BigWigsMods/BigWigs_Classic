@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -41,6 +40,8 @@ function mod:GetOptions()
 		24814, -- Seeping Fog
 	},{
 		[24818] = CL.general,
+	},{
+		[24818] = CL.breath, -- Noxious Breath (Breath)
 	}
 end
 
@@ -49,25 +50,25 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+
 	self:Log("SPELL_CAST_SUCCESS", "NoxiousBreath", 24818)
 	self:Log("SPELL_AURA_APPLIED", "NoxiousBreathApplied", 24818)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "NoxiousBreathApplied", 24818)
 	self:Log("SPELL_CAST_SUCCESS", "SeepingFog", 24814)
 	self:Log("SPELL_AURA_APPLIED", "VolatileInfection", 24928)
-	self:Log("SPELL_CAST_SUCCESS", "Corruption", 24910)
+	self:Log("SPELL_CAST_SUCCESS", "CorruptionOfTheEarth", 24910)
 	self:Log("SPELL_AURA_APPLIED", "SporeCloudDamage", 24871)
 	self:Log("SPELL_PERIODIC_DAMAGE", "SporeCloudDamage", 24871)
 	self:Log("SPELL_PERIODIC_MISSED", "SporeCloudDamage", 24871)
 
-	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-
 	self:Death("Win", 14889)
 end
 
 function mod:OnEngage()
 	warnHP = 80
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
+	self:RegisterEvent("UNIT_HEALTH")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
 
@@ -75,42 +76,24 @@ end
 -- Event Handlers
 --
 
-function mod:Corruption(args)
-	self:Message(24910, "red")
-	self:PlaySound(24910, "long")
-	self:Bar(24910, 10)
-end
-
-function mod:VolatileInfection(args)
-	self:TargetMessage(24928, "orange", args.destName)
-	self:PlaySound(24928, "alert")
-	self:PrimaryIcon(24928, args.destName)
-end
-
-do
-	local prev = 0
-	function mod:SporeCloudDamage(args)
-		if self:Me(args.destGUID) then
-			local t = args.time
-			if t-prev > 2 then
-				prev = t
-				self:PersonalMessage(24871)
-				self:PlaySound(24871, "alarm")
-			end
-		end
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if msg:find(L.engage_trigger, nil, true) then
+		self:Engage()
+		self:Message(24818, "yellow", CL.custom_start_s:format(self.displayName, CL.breath, 10), false)
+		self:Bar(24818, 10, CL.breath) -- Noxious Breath
 	end
 end
 
 function mod:NoxiousBreath(args)
-	self:Bar(24818, 10)
+	self:Bar(args.spellId, 10, CL.breath)
 end
 
 function mod:NoxiousBreathApplied(args)
 	if not self:Damager() and self:Tank(args.destName) then
 		local amount = args.amount or 1
-		self:StackMessageOld(24818, args.destName, amount, "purple")
+		self:StackMessage(args.spellId, "purple", args.destName, amount, 3, CL.breath)
 		if self:Tank() and amount > 3 then
-			self:PlaySound(24818, "warning")
+			self:PlaySound(args.spellId, "warning")
 		end
 	end
 end
@@ -118,35 +101,50 @@ end
 do
 	local prev = 0
 	function mod:SeepingFog(args)
-		local t = args.time
-		if t-prev > 2 then
-			prev = t
-			self:Message(24814, "green")
-			self:PlaySound(24814, "info")
+		if args.time-prev > 2 then
+			prev = args.time
+			self:Message(args.spellId, "green")
+			self:PlaySound(args.spellId, "info")
 			-- self:CDBar(24818, 20)
 		end
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unit)
+function mod:VolatileInfection(args)
+	self:TargetMessage(args.spellId, "orange", args.destName)
+	self:PlaySound(args.spellId, "alert")
+	self:PrimaryIcon(args.spellId, args.destName)
+end
+
+function mod:CorruptionOfTheEarth(args)
+	self:Message(args.spellId, "red")
+	self:PlaySound(args.spellId, "long")
+	self:Bar(args.spellId, 10)
+end
+
+do
+	local prev = 0
+	function mod:SporeCloudDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 3 then
+			prev = args.time
+			self:PlaySound(args.spellId, "underyou")
+			self:PersonalMessage(args.spellId, "underyou")
+		end
+	end
+end
+
+function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 14889 then
 		local hp = self:GetHealth(unit)
 		if hp < warnHP then -- 80, 55, 30
 			warnHP = warnHP - 25
 			if hp > warnHP then -- avoid multiple messages when joining mid-fight
-				self:Message(24910, "red", CL.soon:format(self:SpellName(24910)), false)
+				self:Message(24910, "red", CL.soon:format(self:SpellName(24910)), false) -- Corruption of the Earth
 				self:PlaySound(24910, "alarm")
 			end
 			if warnHP < 30 then
-				self:UnregisterUnitEvent(event, "target", "focus")
+				self:UnregisterEvent(event)
 			end
 		end
-	end
-end
-
-function mod:CHAT_MSG_MONSTER_YELL(_, msg, sender)
-	if msg:find(L.engage_trigger, nil, true) then
-		self:Message(24818, "yellow", CL.custom_start_s:format(self.displayName, self:SpellName(24818), 10), false)
-		self:Bar(24818, 10) -- Noxious Breath
 	end
 end

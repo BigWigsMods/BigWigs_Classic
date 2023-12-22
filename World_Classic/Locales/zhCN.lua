@@ -3,10 +3,7 @@ if not L then return end
 if L then
 	L.bossName = "艾索雷苟斯"
 
-	L.teleport = "传送警报"
-	L.teleport_desc = "传送警报"
 	L.teleport_trigger = "来吧，小子。面对我！"
-	L.teleport_message = "传送发动！"
 end
 
 L = BigWigs:NewBossLocale("Lord Kazzak", "zhCN")

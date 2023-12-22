@@ -3,10 +3,7 @@ if not L then return end
 if L then
 	L.bossName = "Azuregos"
 
-	L.teleport = "Teleport"
-	L.teleport_desc = "Warnung für Azuregos Teleport."
 	L.teleport_trigger = "Tretet mir"
-	L.teleport_message = "Teleport!"
 end
 
 L = BigWigs:NewBossLocale("Lord Kazzak", "deDE")
