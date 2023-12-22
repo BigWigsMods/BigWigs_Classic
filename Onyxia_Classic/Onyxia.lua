@@ -103,7 +103,7 @@ function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 		self:PrimaryIcon(18392) -- Clear Fireball raid icon
 
 		self:SetStage(3)
-		self:Message("stages", "cyan", CL.percent:format(40, CL.stage:format(3)), false)
+		self:Message("stages", "cyan", CL.stage:format(3), false)
 		self:PlaySound("stages", "long")
 	end
 end
