@@ -130,7 +130,7 @@ function mod:ShadowFlame(args)
 end
 
 function mod:VeilOfShadow(args)
-	self:TargetMessage(args.spellId, "yellow", args.destName)
+	self:TargetMessage(args.spellId, "yellow", args.destName, CL.curse)
 	if self:Dispeller("curse") then
 		self:PlaySound(args.spellId, "warning")
 	end
