@@ -10,35 +10,35 @@ L = BigWigs:NewBossLocale("Lord Kazzak", "ptBR")
 if L then
 	L.bossName = "Lorde Kazzak"
 
-	-- L.engage_trigger = "For the Legion! For Kil'Jaeden!"
+	L.engage_trigger = "Pela Legião! Por Kil'Jaeden!"
 
-	-- L.supreme_mode = "Supreme Mode"
+	L.supreme_mode = "Modo Supremo"
 end
 
 L = BigWigs:NewBossLocale("Emeriss", "ptBR")
 if L then
 	L.bossName = "Emeriss"
 
-	-- L.engage_trigger = "Hope is a DISEASE of the soul! This land shall wither and die!"
+	L.engage_trigger = "A esperança é uma DOENÇA da alma! Estas terras definharão até a morte!"
 end
 
 L = BigWigs:NewBossLocale("Lethon", "ptBR")
 if L then
 	L.bossName = "Lethon"
 
-	-- L.engage_trigger = "I can sense the SHADOW on your hearts. There can be no rest for the wicked!"
+	L.engage_trigger = "Eu sinto as TREVAS no coração de vocês. Não há descanso para os perversos!"
 end
 
 L = BigWigs:NewBossLocale("Taerar", "ptBR")
 if L then
 	L.bossName = "Taerar"
 
-	-- L.engage_trigger = "Peace is but a fleeting dream! Let the NIGHTMARE reign!"
+	L.engage_trigger = "A paz é um sonho efêmero! Que os PESADELOS reinem soberanos!"
 end
 
 L = BigWigs:NewBossLocale("Ysondre", "ptBR")
 if L then
 	L.bossName = "Ysondra"
 
-	-- L.engage_trigger = "The strands of LIFE have been severed! The Dreamers must be avenged!"
+	L.engage_trigger = "Os fios da VIDA foram cortados! Os Sonhadores serão vingados!"
 end
