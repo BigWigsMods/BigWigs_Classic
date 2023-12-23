@@ -6,25 +6,25 @@ end
 
 L = BigWigs:NewBossLocale("Ghamoo-ra Discovery", "ptBR")
 if L then
-	--L.bossName = "Ghamoo-ra"
+	L.bossName = "Ghamoo-ra"
 end
 
 L = BigWigs:NewBossLocale("Lady Sarevess Discovery", "ptBR")
 if L then
-	--L.bossName = "Lady Sarevess"
+	L.bossName = "Lady Sarevess"
 end
 
 L = BigWigs:NewBossLocale("Gelihast Discovery", "ptBR")
 if L then
-	--L.bossName = "Gelihast"
+	L.bossName = "Gelihast"
 end
 
 L = BigWigs:NewBossLocale("Lorgus Jett Discovery", "ptBR")
 if L then
-	--L.bossName = "Lorgus Jett"
+	L.bossName = "Lorgus Jett"
 	L.priestess = "Sacerdotisa da Maré das Profundezas Negras"
-	--L.priestess_short = "Priestess" -- Shortened version of L.priestess (Blackfathom Tide Priestess)
-	--L.murloc = "Blackfathom Murloc"
+	L.priestess_short = "Sacerdotisa" -- Shortened version of L.priestess (Blackfathom Tide Priestess)
+	L.murloc = "Murloc das Profundezas Negras"
 end
 
 L = BigWigs:NewBossLocale("Twilight Lord Kelris Discovery", "ptBR")
@@ -34,5 +34,5 @@ end
 
 L = BigWigs:NewBossLocale("Aku'mai Discovery", "ptBR")
 if L then
-	--L.bossName = "Aku'mai"
+	L.bossName = "Aku'mai"
 end
