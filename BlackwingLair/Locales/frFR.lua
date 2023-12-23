@@ -2,20 +2,16 @@ local L = BigWigs:NewBossLocale("Razorgore the Untamed", "frFR")
 if not L then return end
 if L then
 	L.start_trigger = "Sonnez l'alarme"
-	L.start_message = "Tranchetripe engagé ! Gardes dans 45 sec. !"
-	L.start_soon = "Arrivée des gardes dans 5 sec. !"
-	L.start_mob = "Arrivée des gardes"
 
 	L.eggs = "Comptage des œufs"
 	L.eggs_desc = "Compte le nombre d'œufs détruits."
 	L.eggs_message = "%d/30 œuf(s) détruit(s) !"
-
-	L.phase2_message = "Tous les œufs ont été détruits !"
 end
 
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "frFR")
 if L then
 	L.warmup_trigger = "Trop tard, mes amis"
+	--L.tank_bomb = "Tank Bomb"
 end
 
 L = BigWigs:NewBossLocale("Chromaggus", "frFR")
@@ -27,23 +23,18 @@ if L then
 	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
 end
 
-L = BigWigs:NewBossLocale("Nefarian ", "frFR")
+L = BigWigs:NewBossLocale("Nefarian Classic", "frFR")
 if L then
 	L.landing_soon_trigger = "Beau travail"
-	L.landing_trigger = "BRÛLEZ, misérables"
-	L.zerg_trigger = "C'est impossible ! Relevez%-vous, serviteurs !"
+	L.stage2_yell_trigger = "BRÛLEZ, misérables"
+	L.stage3_yell_trigger = "C'est impossible"
 
-	L.triggershamans = "Chamans, montrez moi"
-	L.triggerwarlock = "Démonistes, vous ne devriez pas jouer"
-	L.triggerhunter = "Ah, les chasseurs et les stupides"
-	L.triggermage = "Les mages aussi"
-	L.triggerdeathknight = "Chevalier de la mort"
-	--L.triggermonk = "Monks"
-
-	L.landing_soon_warning = "Nefarian atterit dans 10 sec. !"
-	L.landing_warning = "Nefarian atterit !"
-	L.zerg_warning = "Zerg imminent !"
-	L.classcall_warning = "Arrivée de l'appel des classes !"
+	L.shaman_class_call_yell_trigger = "Chamans, montrez moi"
+	L.warlock_class_call_yell_trigger = "Démonistes, vous ne devriez pas jouer"
+	L.hunter_class_call_yell_trigger = "Ah, les chasseurs et les stupides"
+	L.mage_class_call_yell_trigger = "Les mages aussi"
+	L.deathknight_class_call_yell_trigger = "Chevalier de la mort"
+	--L.monk_class_call_yell_trigger = "Monks"
 
 	L.warnshaman = "Chamans - Totems posés !"
 	L.warndruid = "Druides - Coincés en forme de félin !"
@@ -58,12 +49,9 @@ if L then
 	--L.warnmonk = "Monks - Stuck Rolling"
 	--L.warndemonhunter = "Demon Hunters - Blinded"
 
-	L.classcall_bar = "Appel des classes"
-
 	L.classcall = "Appel de classe"
 	L.classcall_desc = "Préviens de l'arrivée des appels de classe."
 
-	L.otherwarn = "Atterissage et zerg"
-	L.otherwarn_desc = "Préviens quand les Zergs arrivent et quand Nefarian atterit."
+	--L.add = "Drakonid deaths"
+	--L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
 end
-

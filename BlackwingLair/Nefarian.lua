@@ -1,33 +1,36 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Nefarian ", 469, 1536) -- Space is intentional to prevent conflict with Nefarian from BWD
+local mod, CL = BigWigs:NewBoss("Nefarian Classic", 469, 1536) -- Space is intentional to prevent conflict with Nefarian from BWD
 if not mod then return end
 mod:RegisterEnableMob(11583, 10162) -- Nefarian, Lord Victor Nefarius
-mod.toggleOptions = {22539, 22686, "classcall", "otherwarn"}
+mod:SetEncounterID(617)
+
+--------------------------------------------------------------------------------
+-- Locals
+--
+
+local classCallYellTable = {}
+local classCallSpellTable = {}
+local adds_dead = 0
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:NewLocale()
 if L then
 	L.landing_soon_trigger = "Well done, my minions"
-	L.landing_trigger = "BURN! You wretches"
-	L.zerg_trigger = "Impossible! Rise my"
+	L.stage2_yell_trigger = "BURN! You wretches"
+	L.stage3_yell_trigger = "Impossible! Rise my"
 
-	L.triggershamans = "Shamans"
-	L.triggerwarlock = "Warlocks"
-	L.triggerhunter = "Hunters" -- Hunters and your annoying pea-shooters!
-	L.triggermage = "Mages"
-	L.triggerdeathknight = "Death Knights" -- Death Knights... get over here!
-	L.triggermonk = "Monks"
-
-	L.landing_soon_warning = "Nefarian landing in 10 seconds!"
-	L.landing_warning = "Nefarian is landing!"
-	L.zerg_warning = "Zerg incoming!"
-	L.classcall_warning = "Class call incoming!"
+	L.shaman_class_call_yell_trigger = "Shamans"
+	L.warlock_class_call_yell_trigger = "Warlocks"
+	L.hunter_class_call_yell_trigger = "Hunters" -- Hunters and your annoying pea-shooters!
+	L.mage_class_call_yell_trigger = "Mages"
+	L.deathknight_class_call_yell_trigger = "Death Knights" -- Death Knights... get over here!
+	L.monk_class_call_yell_trigger = "Monks"
 
 	L.warnshaman = "Shamans - Totems spawned!"
 	L.warndruid = "Druids - Stuck in cat form!"
@@ -42,97 +45,132 @@ if L then
 	L.warnmonk = "Monks - Stuck Rolling"
 	L.warndemonhunter = "Demon Hunters - Blinded"
 
-	L.classcall_bar = "Class call"
-
 	L.classcall = "Class Call"
 	L.classcall_desc = "Warn for Class Calls."
 
-	L.otherwarn = "Landing and Zerg"
-	L.otherwarn_desc = "Landing and Zerg warnings."
+	L.add = "Drakonid deaths"
+	L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
 end
-L = mod:GetLocale()
-
-local warnpairs = {
-	[L.triggershamans] = {L.warnshaman, true},
-	[L.triggerwarlock] = {L.warnwarlock, true},
-	[L.triggerhunter] = {L.warnhunter, true}, -- No event
-	[L.triggermage] = {L.warnmage, true},
-	[L.triggerdeathknight] = {L.warndeathknight, true}, -- No event
-	[L.triggermonk] = {L.warnmonk, true},
-	[L.landing_soon_trigger] = {L.landing_soon_warning},
-	[L.landing_trigger] = {L.landing_warning},
-	[L.zerg_trigger] = {L.zerg_warning},
-}
-local warnTable = {
-	[23414] = L.warnrogue,
-	[23398] = L.warndruid,
-	[23397] = L.warnwarrior,
-	[23401] = L.warnpriest,
-	[23418] = L.warnpaladin,
-	[204813] = L.warndemonhunter,
-}
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
 
+function mod:GetOptions()
+	return {
+		"stages",
+		{22539, "CASTBAR"}, -- Shadow Flame
+		{22686, "CASTBAR"}, -- Bellowing Roar
+		22687, -- Veil of Shadow
+		"classcall",
+		"add"
+	},nil,{
+		[22686] = CL.fear, -- Bellowing Roar (Fear)
+		[22687] = CL.curse, -- Veil of Shadow (Curse)
+	}
+end
+
+function mod:OnRegister()
+	classCallYellTable = {
+		[L.shaman_class_call_yell_trigger] = L.warnshaman,
+		[L.warlock_class_call_yell_trigger] = L.warnwarlock,
+		[L.hunter_class_call_yell_trigger] = L.warnhunter, -- No event
+		[L.mage_class_call_yell_trigger] = L.warnmage,
+		[L.deathknight_class_call_yell_trigger] = L.warndeathknight, -- No event
+		[L.monk_class_call_yell_trigger] = L.warnmonk,
+	}
+	classCallSpellTable = {
+		[23414] = L.warnrogue,
+		[23398] = L.warndruid,
+		[23397] = L.warnwarrior,
+		[23401] = L.warnpriest,
+		[23418] = L.warnpaladin,
+		[204813] = L.warndemonhunter,
+	}
+end
+
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_START", "Fear", 22686)
+	adds_dead = 0
+	self:Log("SPELL_CAST_START", "BellowingRoar", 22686)
 	self:Log("SPELL_CAST_START", "ShadowFlame", 22539)
+	self:Log("SPELL_AURA_APPLIED", "VeilOfShadow", 22687)
 
 	-- Rogue, Druid, Warrior, Priest, Paladin, Demon Hunter
 	self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 23397, 23401, 23418, 204813)
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 
+	self:Death("AddDied", 14261, 14262, 14263, 14264, 14265, 14302) -- Blue, Green, Bronze, Red, Black, Chromatic
+
+	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 11583)
+end
+
+function mod:OnEngage()
+	adds_dead = 0
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Fear(args)
-	self:DelayedMessage(args.spellId, 26, "orange", CL.custom_sec:format(args.spellName, 5))
-	self:CDBar(args.spellId, 32)
-	self:MessageOld(args.spellId, "red", "alert")
-	self:Bar(args.spellId, 1.5, CL.cast:format(args.spellName))
+function mod:BellowingRoar(args)
+	self:CDBar(args.spellId, 32, CL.fear, "spell_shadow_psychicscream")
+	self:Message(args.spellId, "red", CL.incoming:format(CL.fear), "spell_shadow_psychicscream")
+	self:PlaySound(args.spellId, "alert")
+	self:CastBar(args.spellId, 1.5, CL.fear, "spell_shadow_psychicscream")
 end
 
 function mod:ShadowFlame(args)
-	self:MessageOld(args.spellId, "yellow", "alert")
-	self:Bar(args.spellId, 2, CL.cast:format(args.spellName))
+	if self:MobId(args.sourceGUID) == 11583 then -- Shared with Ebonroc/Firemaw/Flamegor
+		self:Message(args.spellId, "yellow")
+		self:PlaySound(args.spellId, "alarm")
+		self:CastBar(args.spellId, 2)
+	end
+end
+
+function mod:VeilOfShadow(args)
+	self:TargetMessage(args.spellId, "yellow", args.destName)
+	if self:Dispeller("curse") then
+		self:PlaySound(args.spellId, "warning")
+	end
 end
 
 do
 	local prev = 0
 	function mod:ClassCall(args)
-		local t = GetTime()
-		if t-prev > 2 then
-			prev = t
-			self:Bar("classcall", 30, L.classcall_bar, "Spell_Shadow_Charm")
-			self:DelayedMessage("classcall", 27, "green", L.classcall_warning)
-			self:MessageOld("classcall", "red", nil, warnTable[args.spellId], "Spell_Shadow_Charm")
+		if args.time-prev > 2 then
+			prev = args.time
+			self:Bar("classcall", 30, L.classcall, "Spell_Shadow_Charm")
+			self:Message("classcall", "orange", classCallSpellTable[args.spellId], "Spell_Shadow_Charm")
 		end
 	end
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
-	if msg:find(L.landing_soon_trigger) then
-		self:Bar("otherwarn", 10, L.landing_warning, "INV_Misc_Head_Dragon_Black")
-		return
-	end
-	for i,v in pairs(warnpairs) do
-		if msg:find(i) then
-			if v[2] then
-				self:Bar("classcall", 30, L.classcall_bar, "Spell_Shadow_Charm")
-				self:DelayedMessage("classcall", 27, "green", L.classcall_warning)
-				self:MessageOld("classcall", "red", nil, v[1], "Spell_Shadow_Charm")
-			else
-				self:MessageOld("otherwarn", "red", nil, v[1], false)
+	if msg:find(L.landing_soon_trigger, nil, true) then
+		self:Message("stages", "cyan", CL.custom_sec:format(CL.stage:format(2), 10), "INV_Misc_Head_Dragon_Black")
+		self:Bar("stages", 10, CL.stage:format(2), "INV_Misc_Head_Dragon_Black")
+		self:PlaySound("stages", "long")
+	elseif msg:find(L.stage2_yell_trigger, nil, true) then
+		self:Message("stages", "cyan", CL.stage:format(2), false)
+		self:PlaySound("stages", "info")
+	elseif msg:find(L.stage3_yell_trigger, nil, true) then
+		self:Message("stages", "cyan", CL.percent:format(20, CL.stage:format(3)), false)
+		self:PlaySound("stages", "long")
+	else
+		for trigger,message in next, classCallYellTable do
+			if msg:find(trigger, nil, true) then
+				self:Bar("classcall", 30, L.classcall, "Spell_Shadow_Charm")
+				self:DelayedMessage("classcall", 27, "orange", L.classcall_warning)
+				self:Message("classcall", "orange", message, "Spell_Shadow_Charm")
+				return
 			end
-			return
 		end
 	end
 end
 
+function mod:AddDied()
+	adds_dead = adds_dead + 1
+	self:Message("add", "green", CL.add_killed:format(adds_dead, 42), "INV_Misc_Head_Dragon_Black")
+end

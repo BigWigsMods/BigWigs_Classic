@@ -2,20 +2,16 @@ local L = BigWigs:NewBossLocale("Razorgore the Untamed", "ruRU")
 if not L then return end
 if L then
 	L.start_trigger = "Злоумышленники проломились"
-	L.start_message = "Бритвосмерт в бещенстве! Помощники появятся через 45 секунд!"
-	L.start_soon = "Помощники через 5 секунд!"
-	L.start_mob = "Появляются помощники!"
 
 	L.eggs = "Считать яйца"
 	L.eggs_desc = "Пересчитывать уничтоженные яйца."
 	L.eggs_message = "%d/30 яиц уничтожено!"
-
-	L.phase2_message = "Все яйца уничтоже, Бритвосметр повержен!"
 end
 
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "ruRU")
 if L then
 	--L.warmup_trigger = "Too late, friends!"
+	--L.tank_bomb = "Tank Bomb"
 end
 
 L = BigWigs:NewBossLocale("Chromaggus", "ruRU")
@@ -27,23 +23,18 @@ if L then
 	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
 end
 
-L = BigWigs:NewBossLocale("Nefarian ", "ruRU")
+L = BigWigs:NewBossLocale("Nefarian Classic", "ruRU")
 if L then
 	L.landing_soon_trigger = "Отличная работа мои миньёны!"
-	L.landing_trigger = "СЖЕЧЬ! Вы обречены!"
-	L.zerg_trigger = "Невозможно!"
+	L.stage2_yell_trigger = "СЖЕЧЬ! Вы обречены!"
+	L.stage3_yell_trigger = "Невозможно!"
 
-	L.triggershamans = "Шаманы! Покажитесь мне!"
-	L.triggerwarlock = "Варлоки, вы должны играть!"
-	L.triggerhunter = "Охотники и ваше раздражение"
-	L.triggermage = "Маги так же%?"
-	L.triggerdeathknight = "Рыцари смерти! Сюда!"
-	--L.triggermonk = "Monks"
-
-	L.landing_soon_warning = "Нефариан приземлится через 10 секунд!"
-	L.landing_warning = "Нефариан ПРИЗЕМЛЯЕТСЯ!"
-	L.zerg_warning = "НАЧИНАЕТСЯ ЗЕРГ!"
-	L.classcall_warning = "Начинается классовый вызов!"
+	L.shaman_class_call_yell_trigger = "Шаманы! Покажитесь мне!"
+	L.warlock_class_call_yell_trigger = "Варлоки, вы должны играть!"
+	L.hunter_class_call_yell_trigger = "Охотники и ваше раздражение"
+	L.mage_class_call_yell_trigger = "Маги так же"
+	L.deathknight_class_call_yell_trigger = "Рыцари смерти! Сюда!"
+	--L.monk_class_call_yell_trigger = "Monks"
 
 	L.warnshaman = "Шаманы - ставьте тотемы!"
 	L.warndruid = "Друиды - пробудите в себе зверя!"
@@ -54,15 +45,13 @@ if L then
 	L.warnrogue = "Разбойники - точите свои клинки!"
 	L.warnpaladin = "Паладины - улучшайте защиту!"
 	L.warnmage = "Маги - используйте превращение!"
+	--L.warndeathknight = "Death Knights - Death Grip"
 	--L.warnmonk = "Monks - Stuck Rolling"
 	--L.warndemonhunter = "Demon Hunters - Blinded"
-
-	L.classcall_bar = "Классовый вызов"
 
 	L.classcall = "Классовый вызов"
 	L.classcall_desc = "Предупреждать о классовом вызове."
 
-	L.otherwarn = "Приземление и зерг"
-	L.otherwarn_desc = "Предупреждать об опасности приземления и зерга."
+	--L.add = "Drakonid deaths"
+	--L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
 end
-
