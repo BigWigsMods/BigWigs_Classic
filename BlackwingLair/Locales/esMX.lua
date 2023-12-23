@@ -11,7 +11,7 @@ end
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "esMX")
 if L then
 	L.warmup_trigger = "¡Demasiado tarde, amigos!"
-	--L.tank_bomb = "Tank Bomb"
+	L.tank_bomb = "Bomba de tanque"
 end
 
 L = BigWigs:NewBossLocale("Chromaggus", "esMX")
@@ -33,8 +33,8 @@ if L then
 	L.warlock_class_call_yell_trigger = "Brujos"
 	L.hunter_class_call_yell_trigger = "Cazadores"
 	L.mage_class_call_yell_trigger = "Magos"
-	--L.deathknight_class_call_yell_trigger = "Death Knights"
-	--L.monk_class_call_yell_trigger = "Monks"
+	L.deathknight_class_call_yell_trigger = "Caballeros de la Muerte"
+	L.monk_class_call_yell_trigger = "Monjes"
 
 	L.warnshaman = "¡Chamanes - aparecen tótems!"
 	L.warndruid = "¡Druidas - atrapado en forma felina!"
