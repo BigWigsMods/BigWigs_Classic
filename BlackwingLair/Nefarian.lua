@@ -159,11 +159,10 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:Message("stages", "cyan", CL.percent:format(20, CL.stage:format(3)), false)
 		self:PlaySound("stages", "long")
 	else
-		for trigger,message in next, classCallYellTable do
-			if msg:find(trigger, nil, true) then
+		for yellTrigger, bwMessage in next, classCallYellTable do
+			if msg:find(yellTrigger, nil, true) then
 				self:Bar("classcall", 30, L.classcall, "Spell_Shadow_Charm")
-				self:DelayedMessage("classcall", 27, "orange", L.classcall_warning)
-				self:Message("classcall", "orange", message, "Spell_Shadow_Charm")
+				self:Message("classcall", "orange", bwMessage, "Spell_Shadow_Charm")
 				return
 			end
 		end
