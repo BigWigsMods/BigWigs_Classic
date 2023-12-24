@@ -6,7 +6,7 @@ end
 
 L = BigWigs:NewBossLocale("Ghamoo-ra Discovery", "esES")
 if L then
-	L.bossName = "Ghamoo-ra"
+	L.bossName = "Ghamoo-Ra"
 end
 
 L = BigWigs:NewBossLocale("Lady Sarevess Discovery", "esES")
