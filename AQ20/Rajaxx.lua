@@ -39,7 +39,7 @@ end
 function mod:GetOptions()
 	return {
 		"stages",
-		{25471, "SAY"}, -- Attack Order
+		{25471, "SAY", "ME_ONLY_EMPHASIZE"}, -- Attack Order
 		8269, -- Frenzy / Enrage (different name on classic era)
 		25599, -- Thundercrash
 		25462, -- Enlarge
@@ -104,8 +104,8 @@ function mod:AttackOrderApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName)
 	self:TargetBar(args.spellId, 10, args.destName)
 	if self:Me(args.destGUID) then
-		self:PlaySound(args.spellId, "warning", nil, args.destName)
 		self:Say(args.spellId, nil, nil, "Attack Order")
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
 end
 
@@ -140,8 +140,8 @@ do
 	function mod:LightningCloudDamage(args)
 		if self:Me(args.destGUID) and args.time - prev > 3 then
 			prev = args.time
-			self:PlaySound(args.spellId, "underyou")
 			self:PersonalMessage(args.spellId, "aboveyou")
+			self:PlaySound(args.spellId, "underyou")
 		end
 	end
 end

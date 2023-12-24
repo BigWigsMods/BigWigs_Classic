@@ -35,21 +35,20 @@ end
 function mod:Energize(args)
 	-- Adds spawned
 	self:Message(args.spellId, "red")
-	self:PlaySound(args.spellId, "long")
 	local duration = 90
 	-- Need to find the mana regen rate because he comes back at 100% regardless
 	-- local unit = self:GetUnitIdByGUID(args.sourceGUID)
 	-- if unit then
 	-- 	duration = math.min(90, (100 - UnitPower(unit)) / mps)
 	-- end
-
 	self:CastBar(args.spellId, duration)
+	self:PlaySound(args.spellId, "long")
 end
 
 function mod:EnergizeRemoved(args)
 	self:StopBar(CL.cast:format(args.spellName))
 
 	self:Message(args.spellId, "yellow", CL.over:format(args.spellName))
-	self:PlaySound(args.spellId, "long")
 	self:Bar(args.spellId, 90)
+	self:PlaySound(args.spellId, "long")
 end

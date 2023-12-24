@@ -74,17 +74,15 @@ end
 
 function mod:PlagueApplied(args)
 	self:TargetMessage(26556, "yellow", args.destName)
+	self:TargetBar(26556, 40, args.destName)
 	if self:Me(args.destGUID) then
 		self:Say(26556, nil, nil, "Plague")
-		self:TargetBar(26556, 40, args.destName)
 		self:PlaySound(26556, "warning", nil, args.destName)
 	end
 end
 
 function mod:PlagueRemoved(args)
-	if self:Me(args.destGUID) then
-		self:StopBar(args.spellName, args.destName)
-	end
+	self:StopBar(args.spellName, args.destName)
 end
 
 do
@@ -127,8 +125,8 @@ end
 
 function mod:ExplodeApplied(args)
 	self:Message(args.spellId, "orange", CL.explosion)
-	self:PlaySound(args.spellId, "long")
 	self:Bar(args.spellId, 6, CL.explosion) -- Duration is 7s but it expires after 6s
+	self:PlaySound(args.spellId, "long")
 end
 
 function mod:ExplodeRemoved()

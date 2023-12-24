@@ -63,9 +63,9 @@ end
 
 function mod:Paralyze(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName, L.sacrifice)
-	self:PlaySound(args.spellId, "alarm")
 	self:TargetBar(args.spellId, 10, args.destName, L.sacrifice)
 	self:PrimaryIcon(args.spellId, args.destName)
+	self:PlaySound(args.spellId, "alarm")
 end
 
 function mod:ParalyzeRemoved(args)
@@ -83,8 +83,8 @@ do
 	function mod:CloudOfDiseaseDamage(args)
 		if self:Me(args.destGUID) and args.time - prev > 3 then
 			prev = args.time
-			self:PlaySound(args.spellId, "underyou")
 			self:PersonalMessage(args.spellId, "underyou")
+			self:PlaySound(args.spellId, "underyou")
 		end
 	end
 end

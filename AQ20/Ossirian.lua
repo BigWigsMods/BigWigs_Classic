@@ -64,7 +64,6 @@ end
 
 function mod:EnvelopingWindsRemoved(args)
 	self:StopBar(args.spellName, args.destName)
-	self:Message(args.spellId, "green", CL.removed_from:format(args.spellName, args.destName))
 end
 
 function mod:CurseOfTongues(args)

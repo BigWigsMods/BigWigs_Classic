@@ -41,10 +41,10 @@ end
 function mod:MortalWound(args)
 	local amount = args.amount or 1
 	self:StackMessage(args.spellId, "purple", args.destName, amount, 5)
+	self:TargetBar(args.spellId, 15, args.destName)
 	if amount >= 5 and self:Tank() then
 		self:PlaySound(args.spellId, "warning")
 	end
-	self:TargetBar(args.spellId, 15, args.destName)
 end
 
 function mod:MortalWoundRemoved(args)
@@ -55,8 +55,8 @@ function mod:SandTrap(args)
 	self:TargetMessage(25656, "orange", args.sourceName)
 	self:CDBar(25656, 8)
 	if self:Me(args.sourceGUID) then
-		self:PlaySound(25656, "alert", nil, args.sourceName)
 		self:Say(25656, nil, nil, "Sand Trap")
+		self:PlaySound(25656, "alert", nil, args.sourceName)
 	end
 end
 

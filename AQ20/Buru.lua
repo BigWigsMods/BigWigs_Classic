@@ -26,7 +26,7 @@ end
 function mod:GetOptions()
 	return {
 		"stages",
-		{"fixate", "ICON", "SAY"},
+		{"fixate", "ICON", "SAY", "ME_ONLY_EMPHASIZE"},
 	}
 end
 
@@ -59,6 +59,6 @@ end
 function mod:ThornsRemoved()
 	self:SetStage(2)
 	self:Message("stages", "cyan", CL.percent:format(20, CL.stage:format(2)), false)
-	self:PlaySound("stages", "long")
 	self:SecondaryIcon("fixate")
+	self:PlaySound("stages", "long")
 end
