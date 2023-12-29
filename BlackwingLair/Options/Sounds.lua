@@ -36,6 +36,8 @@ BigWigs:AddSounds("Flamegor", {
 BigWigs:AddSounds("Chromaggus", {
 	[23128] = "alarm",
 	[23174] = "warning",
+	["breath"] = "long",
+	["vulnerability"] = {"info","warning"},
 })
 
 BigWigs:AddSounds("Nefarian Classic", {

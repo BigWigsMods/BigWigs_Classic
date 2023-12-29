@@ -39,6 +39,7 @@ BigWigs:AddColors("Chromaggus", {
 	[23174] = "red",
 	[23537] = "red",
 	["breath"] = "yellow",
+	["vulnerability"] = {"green","red"},
 })
 
 BigWigs:AddColors("Nefarian Classic", {

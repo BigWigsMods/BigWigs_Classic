@@ -38,7 +38,7 @@ BigWigs:AddColors("Ossirian the Unscarred", {
 	[25181] = "yellow",
 	[25183] = "yellow",
 	[25188] = "orange",
-	[25189] = {"blue","green","red"},
+	[25189] = {"blue","red"},
 	[25195] = "orange",
 })
 
