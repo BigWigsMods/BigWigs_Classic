@@ -12,6 +12,7 @@ mod:RegisterEnableMob(14020)
 
 local barcount = 2
 local debuffCount = 0
+local prevWeakness = nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -25,6 +26,13 @@ if L then
 
 	L.debuffs_message = "3/5 debuffs, carefull!"
 	L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+
+	L.vulnerability = "Vulnerability Change"
+	L.vulnerability_desc = "Warn for Vulnerability changes."
+	L.vulnerability_icon = 22277
+	L.vulnerability_message = "Vulnerability: %s"
+	L.detect_magic_missing = "Detect Magic is missing from Chromaggus"
+	L.detect_magic_warning = "A Mage must cast Detect Magic on Chromaggus for vulnerability warnings to work."
 end
 
 --------------------------------------------------------------------------------
@@ -37,7 +45,7 @@ function mod:GetOptions()
 		23537, -- Frenzy / Enrage (different name on classic era)
 		{"breath", "CASTBAR"},
 		23174, -- Chromatic Mutation
-		--"vulnerability",
+		"vulnerability",
 	},nil,{
 		[23174] = self:SpellName(605), -- Chromatic Mutation (Mind Control)
 	}
@@ -58,14 +66,43 @@ function mod:OnBossEnable()
 	)
 
 	self:Death("Win", 14020)
+	if self:Classic() then
+		BigWigs:Print(L.detect_magic_warning)
+	end
 end
 
-function mod:OnEngage()
-	barcount = 2
-	debuffCount = 0
+do
+	local function CheckInitWeakness()
+		if not mod:IsEngaged() then return end
 
-	self:Bar("breath", 30, CL.count:format(CL.breath, 1), "INV_Misc_QuestionMark")
-	self:Bar("breath", 60, CL.count:format(CL.breath, 2), "INV_Misc_QuestionMark")
+		local unit = mod:GetUnitIdByGUID(14020)
+		if unit then
+			if mod:Classic() then
+				if mod:UnitDebuff(unit, 2855) then -- Detect Magic
+					mod:UNIT_AURA(nil, unit)
+				else
+					mod:Message("vulnerability", "red", L.detect_magic_missing, 22277)
+					mod:PlaySound("vulnerability", "warning")
+				end
+			else
+				mod:UNIT_AURA(nil, unit)
+			end
+		else
+			mod:SimpleTimer(CheckInitWeakness, 1)
+		end
+	end
+
+	function mod:OnEngage()
+		barcount = 2
+		debuffCount = 0
+		prevWeakness = nil
+
+		self:Bar("breath", 30, CL.count:format(CL.breath, 1), "INV_Misc_QuestionMark")
+		self:Bar("breath", 60, CL.count:format(CL.breath, 2), "INV_Misc_QuestionMark")
+
+		self:RegisterEvent("UNIT_AURA")
+		self:SimpleTimer(CheckInitWeakness, 1)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -123,96 +160,41 @@ function mod:Breaths(args)
 	self:CastBar("breath", 2, args.spellName, args.spellId)
 	self:Message("breath", "yellow", CL.casting:format(args.spellName), args.spellId)
 	self:Bar("breath", 60, args.spellName, args.spellId)
+	self:PlaySound("breath", "long")
 end
 
---function mod:CHAT_MSG_MONSTER_EMOTE(msg)
---	if msg == L["vulnerability_trigger"] then
---		if self.db.profile.vulnerability then
---			self:Message(L["vulnerability_warning"], "green")
---		end
---		--self:ScheduleEvent("BWChromNilSurv", function() mod.vulnerability = nil end, 2.5)
---	end
---end
-
---if (GetLocale() == "koKR") or (GetLocale() == "zhCN") then
---	function mod:PlayerDamageEvents(msg)
---		if (not self.vulnerability) then
---			local dmg, school, type = select(4, msg:find(L["vulnerability_test"]))
---			if ( type == L["hit"] or type == L["crit"] ) and tonumber(dmg or "") and school then
---				if (tonumber(dmg) >= 550 and type == L["hit"]) or (tonumber(dmg) >= 1100 and type == L["crit"]) then
---					self.vulnerability = school
---					if self.db.profile.vulnerability then self:Message(format(L["vulnerability_message"], school), "green") end
---				end
---			end
---		end
---	end
---else
---	function mod:PlayerDamageEvents(msg)
---		if (not self.vulnerability) then
---			local type, dmg, school = select(3, msg:find(L["vulnerability_test"]))
---			if ( type == L["hit"] or type == L["crit"] ) and tonumber(dmg or "") and school then
---				if (tonumber(dmg) >= 550 and type == L["hit"]) or (tonumber(dmg) >= 1100 and type == L["crit"]) then
---					self.vulnerability = school
---					if self.db.profile.vulnerability then self:Message(format(L["vulnerability_message"], school), "green") end
---				end
---			end
---		end
---	end
---end
-
---L:RegisterTranslations("enUS", function() return {
---	vulnerability = "Vulnerability Change",
---	vulnerability_desc = "Warn for Vulnerability changes.",
---	vulnerability_trigger = "%s flinches as its skin shimmers.",
---	vulnerability_message = "Vulnerability: %s!",
---	vulnerability_warning = "Spell vulnerability changed!",
---} end )
-
---L:RegisterTranslations("ruRU", function() return {
---	vulnerability = "Изменение уязвимости",
---	vulnerability_desc = "Сообщать когда уязвимость изменяется.",
---	vulnerability_trigger = "%s отступает как мерцания его кожи.",
---	vulnerability_message = "Уязвимость: %s!",
---	vulnerability_warning = "УЯЗВИМОСТЬ К СПЕЛАМ ИЗМЕНЕНА!",
---} end )
-
---L:RegisterTranslations("deDE", function() return {
---	vulnerability = "Zauber-Verwundbarkeiten",
---	vulnerability_desc = "Warnung, wenn Chromagguss Zauber-Verwundbarkeit sich ändert.",
---	vulnerability_trigger = "%s weicht zurück, als die Haut schimmert.",
---	vulnerability_message = "Neue Zauber-Verwundbarkeit: %s",
---	vulnerability_warning = "Zauber-Verwundbarkeit geändert!",
---} end )
-
---L:RegisterTranslations("zhCN", function() return {
---	vulnerability = "弱点警报",
---	vulnerability_desc = "克洛玛古斯弱点改变时发出警报",
---	vulnerability_trigger = "%s的皮肤闪着微光，它畏缩了。",
---	vulnerability_message = "克洛玛古斯新弱点：%s",
---	vulnerability_warning = "克洛玛古斯弱点改变",
---} end )
-
---L:RegisterTranslations("zhTW", function() return {
---	vulnerability = "弱點改變警報",
---	vulnerability_desc = "當克洛瑪古斯弱點改變時發出警報",
---	vulnerability_trigger = "%s因皮膚閃著微光而驚訝退縮。", --完全比對
---	vulnerability_message = "克洛瑪古斯新弱點：%s ！",
---	vulnerability_warning = "克洛瑪古斯弱點改變",
---} end )
-
---L:RegisterTranslations("koKR", function() return {
---	vulnerability = "약화 속성 경고",
---	vulnerability_desc = "약화 속성 변경에 대한 경고",
---	vulnerability_trigger = "%s|1이;가; 주춤하면서 물러나면서 가죽이 빛납니다.", --"가죽이 점점 빛나면서 물러서기 시작합니다.",
---	vulnerability_message = "새로운 취약 속성: %s",
---	vulnerability_warning = "취약 속성이 변경되었습니다!",
---} end )
-
---L:RegisterTranslations("frFR", function() return {
---	vulnerability = "Changement de vulnérabilité",
---	vulnerability_desc = "Préviens quand la vulnérabilité change.",
---	vulnerability_trigger = "%s grimace lorsque sa peau se met à briller.",
---	vulnerability_message = "Vulnerabilité : %s !",
---	vulnerability_warning = "Vulnérabilité aux sorts changée !",
---} end )
-
+function mod:UNIT_AURA(_, unit)
+	if self:MobId(self:UnitGUID(unit)) == 14020 then
+		if self:UnitBuff(unit, 22277) then -- Fire
+			if prevWeakness ~= 22277 then
+				prevWeakness = 22277
+				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_FIRE), prevWeakness)
+				self:PlaySound("vulnerability", "info")
+			end
+		elseif self:UnitBuff(unit, 22278) then -- Frost
+			if prevWeakness ~= 22278 then
+				prevWeakness = 22278
+				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_FROST), prevWeakness)
+				self:PlaySound("vulnerability", "info")
+			end
+		elseif self:UnitBuff(unit, 22279) then -- Shadow
+			if prevWeakness ~= 22279 then
+				prevWeakness = 22279
+				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_SHADOW), prevWeakness)
+				self:PlaySound("vulnerability", "info")
+			end
+		elseif self:UnitBuff(unit, 22280) then -- Nature
+			if prevWeakness ~= 22280 then
+				prevWeakness = 22280
+				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_NATURE), prevWeakness)
+				self:PlaySound("vulnerability", "info")
+			end
+		elseif self:UnitBuff(unit, 22281) then -- Arcane
+			if prevWeakness ~= 22281 then
+				prevWeakness = 22281
+				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_ARCANE), prevWeakness)
+				self:PlaySound("vulnerability", "info")
+			end
+		end
+	end
+end
