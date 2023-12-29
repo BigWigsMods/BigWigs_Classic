@@ -5,6 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Chromaggus", 469, 1535)
 if not mod then return end
 mod:RegisterEnableMob(14020)
+mod:SetEncounterID(616)
 
 --------------------------------------------------------------------------------
 -- Locals
