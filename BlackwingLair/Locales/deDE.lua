@@ -21,18 +21,22 @@ if L then
 
 	L.debuffs_message = "3/5 Debuffs, vorsicht!"
 	L.debuffs_warning = "4/5 Debuffs, %s auf 5th!"
+
+	L.vulnerability = "Zauber-Verwundbarkeiten"
+	L.vulnerability_desc = "Warnung, wenn Chromagguss Zauber-Verwundbarkeit sich ändert."
+	L.vulnerability_message = "Neue Zauber-Verwundbarkeit: %s"
+	--L.detect_magic_missing = "Detect Magic is missing from Chromaggus"
+	--L.detect_magic_warning = "A Mage must cast Detect Magic on Chromaggus for vulnerability warnings to work."
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "deDE")
 if L then
+	--L.engage_yell_trigger = "Let the games begin"
 	L.landing_soon_trigger = "Sehr gut, meine Diener"
 	L.stage2_yell_trigger = "BRENNT! Ihr Elenden!"
 	L.stage3_yell_trigger = "Unmöglich! Erhebt euch"
 
 	L.shaman_class_call_yell_trigger = "Schamane, zeigt mir was"
-	L.warlock_class_call_yell_trigger = "Hexenmeister, Ihr solltet nicht mit Magie"
-	L.hunter_class_call_yell_trigger = "Jäger und ihre lästigen"
-	L.mage_class_call_yell_trigger = "Auch Magier"
 	L.deathknight_class_call_yell_trigger = "Todesritter"
 	--L.monk_class_call_yell_trigger = "Monks"
 

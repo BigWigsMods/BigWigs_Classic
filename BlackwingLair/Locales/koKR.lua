@@ -21,18 +21,22 @@ if L then
 
 	--L.debuffs_message = "3/5 debuffs, carefull!"
 	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+
+	L.vulnerability = "약화 속성 경고"
+	L.vulnerability_desc = "약화 속성 변경에 대한 경고."
+	L.vulnerability_message = "새로운 취약 속성: %s"
+	--L.detect_magic_missing = "Detect Magic is missing from Chromaggus"
+	--L.detect_magic_warning = "A Mage must cast Detect Magic on Chromaggus for vulnerability warnings to work."
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "koKR")
 if L then
+	--L.engage_yell_trigger = "Let the games begin"
 	L.landing_soon_trigger = "적들의 사기가 떨어지고 있다"
 	L.stage2_yell_trigger = "불타라! 활활!"
 	L.stage3_yell_trigger = "말도 안 돼! 일어나라!"
 
 	L.shaman_class_call_yell_trigger = "주술사"
-	L.warlock_class_call_yell_trigger = "흑마법사여, 네가 이해하지도 못하는"
-	L.hunter_class_call_yell_trigger = "그 장난감"
-	L.mage_class_call_yell_trigger = "네가 마법사냐"
 	--L.deathknight_class_call_yell_trigger = "Death Knights"
 	--L.monk_class_call_yell_trigger = "Monks"
 

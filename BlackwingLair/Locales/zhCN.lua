@@ -21,18 +21,22 @@ if L then
 
 	L.debuffs_message = "3/5 减益，注意！"
 	L.debuffs_warning = "4/5 减益， 5层后将%s！"
+
+	L.vulnerability = "弱点警报"
+	L.vulnerability_desc = "克洛玛古斯弱点改变时发出警报。"
+	L.vulnerability_message = "克洛玛古斯新弱点：%s"
+	--L.detect_magic_missing = "Detect Magic is missing from Chromaggus"
+	--L.detect_magic_warning = "A Mage must cast Detect Magic on Chromaggus for vulnerability warnings to work."
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "zhCN")
 if L then
+	--L.engage_yell_trigger = "Let the games begin"
 	L.landing_soon_trigger = "干得好，我的手下。"
 	L.stage2_yell_trigger = "燃烧吧！"
 	L.stage3_yell_trigger = "不可能"
 
 	L.shaman_class_call_yell_trigger = "萨满祭司"
-	L.warlock_class_call_yell_trigger = "术士"
-	L.hunter_class_call_yell_trigger = "猎人"
-	L.mage_class_call_yell_trigger = "你们也是法师"
 	L.deathknight_class_call_yell_trigger = "死亡骑士"
 	L.monk_class_call_yell_trigger = "武僧"
 

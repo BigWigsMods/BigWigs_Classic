@@ -15,7 +15,7 @@ function mod:GetOptions()
 	return {
 		23339, -- Wing Buffet
 		22539, -- Shadow Flame
-		{23340, "ICON"}, -- Shadow of Ebonroc
+		23340, -- Shadow of Ebonroc
 	}
 end
 
@@ -54,11 +54,9 @@ end
 function mod:ShadowOfEbonrocApplied(args)
 	self:TargetMessage(args.spellId, "orange", args.destName)
 	self:TargetBar(args.spellId, 8, args.destName)
-	self:PrimaryIcon(args.spellId, args.destName)
 	self:PlaySound(args.spellId, "alarm")
 end
 
 function mod:ShadowOfEbonrocRemoved(args)
 	self:StopBar(args.spellName, args.destName)
-	self:PrimaryIcon(args.spellId)
 end

@@ -64,6 +64,7 @@ function mod:OnBossEnable()
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 
 	self:Log("SPELL_CAST_SUCCESS", "WrathOfRagnaros", 20566)
+	self:Log("SPELL_CAST_START", "SummonRagnarosStart", 19774)
 	self:Log("SPELL_CAST_SUCCESS", "SummonRagnaros", 19774)
 
 	self:Death("Win", 11502)
@@ -90,9 +91,7 @@ end
 --
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
-	if msg:find(L.engage_trigger, nil, true) then
-		self:Engage()
-	elseif msg:find(L.submerge_trigger, nil, true) then
+	if msg:find(L.submerge_trigger, nil, true) then
 		self:Submerge()
 	end
 end
@@ -102,14 +101,18 @@ function mod:WrathOfRagnaros(args)
 	self:Bar(args.spellId, 28, CL.knockback)
 end
 
+function mod:SummonRagnarosStart()
+	self:Bar("warmup", 84, CL.active, "Achievement_boss_ragnaros")
+end
+
 function mod:SummonRagnaros()
-	self:Bar("warmup", 73, CL.active, "Achievement_boss_ragnaros")
+	self:Bar("warmup", {74, 84}, CL.active, "Achievement_boss_ragnaros")
 end
 
 function mod:MajordomoDeath()
 	-- it takes exactly 10 seconds for combat to start after Majodromo dies, while
 	-- the time between starting the RP/summon and killing Majordomo varies
-	self:Bar("warmup", {10, 73}, CL.active, "Achievement_boss_ragnaros")
+	self:Bar("warmup", {10, 84}, CL.active, "Achievement_boss_ragnaros")
 end
 
 function mod:Emerge()

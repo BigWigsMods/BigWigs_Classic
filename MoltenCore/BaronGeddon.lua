@@ -73,6 +73,6 @@ end
 
 function mod:IgniteMana(args)
 	self:CDBar(args.spellId, 27)
-	self:Message(args.spellId, "yellow")
+	self:Message(args.spellId, "yellow", CL.on_group:format(args.spellName))
 	self:PlaySound(args.spellId, "info")
 end

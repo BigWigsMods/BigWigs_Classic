@@ -29,5 +29,6 @@ end
 --
 
 function mod:Pulse(args)
+	self:Message(args.spellId, "yellow")
 	self:Bar(args.spellId, 18)
 end

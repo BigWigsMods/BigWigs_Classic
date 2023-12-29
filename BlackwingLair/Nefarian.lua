@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Nefarian Classic", 469, 1536) -- Space is intentional to prevent conflict with Nefarian from BWD
+local mod, CL = BigWigs:NewBoss("Nefarian Classic", 469, 1536)
 if not mod then return end
 mod:RegisterEnableMob(11583, 10162) -- Nefarian, Lord Victor Nefarius
 mod:SetEncounterID(617)
+mod:SetRespawnTime(900)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -21,14 +22,12 @@ local adds_dead = 0
 
 local L = mod:NewLocale()
 if L then
+	L.engage_yell_trigger = "Let the games begin"
 	L.landing_soon_trigger = "Well done, my minions"
 	L.stage2_yell_trigger = "BURN! You wretches"
 	L.stage3_yell_trigger = "Impossible! Rise my"
 
 	L.shaman_class_call_yell_trigger = "Shamans"
-	L.warlock_class_call_yell_trigger = "Warlocks"
-	L.hunter_class_call_yell_trigger = "Hunters" -- Hunters and your annoying pea-shooters!
-	L.mage_class_call_yell_trigger = "Mages"
 	L.deathknight_class_call_yell_trigger = "Death Knights" -- Death Knights... get over here!
 	L.monk_class_call_yell_trigger = "Monks"
 
@@ -70,33 +69,42 @@ function mod:GetOptions()
 	}
 end
 
+function mod:VerifyEnable(unit, mobId)
+	if mobId == 11583 then -- Nefarian
+		return true
+	elseif mobId == 10162 then -- Lord Victor Nefarius, prevent enabling at Vael
+		return UnitReaction("player", unit) == 5
+	end
+end
+
 function mod:OnRegister()
 	classCallYellTable = {
 		[L.shaman_class_call_yell_trigger] = L.warnshaman,
-		[L.warlock_class_call_yell_trigger] = L.warnwarlock,
-		[L.hunter_class_call_yell_trigger] = L.warnhunter, -- No event
-		[L.mage_class_call_yell_trigger] = L.warnmage,
-		[L.deathknight_class_call_yell_trigger] = L.warndeathknight, -- No event
+		[L.deathknight_class_call_yell_trigger] = L.warndeathknight,
 		[L.monk_class_call_yell_trigger] = L.warnmonk,
 	}
 	classCallSpellTable = {
 		[23414] = L.warnrogue,
 		[23398] = L.warndruid,
+		[350567] = L.warndruid,
 		[23397] = L.warnwarrior,
 		[23401] = L.warnpriest,
+		[23410] = L.warnmage,
 		[23418] = L.warnpaladin,
+		[23427] = L.warnwarlock,
 		[204813] = L.warndemonhunter,
+		[23436] = L.warnhunter,
 	}
 end
 
 function mod:OnBossEnable()
-	adds_dead = 0
 	self:Log("SPELL_CAST_START", "BellowingRoar", 22686)
 	self:Log("SPELL_CAST_START", "ShadowFlame", 22539)
 	self:Log("SPELL_AURA_APPLIED", "VeilOfShadow", 22687)
 
-	-- Rogue, Druid, Warrior, Priest, Paladin, Demon Hunter
-	self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 23397, 23401, 23418, 204813)
+	-- Rogue, Druid, Druid (Retail WoW), Warrior, Priest, Mage, Paladin, Warlock, Demon Hunter
+	self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 350567, 23397, 23401, 23410, 23418, 23427, 204813)
+	self:Log("SPELL_DURABILITY_DAMAGE", "ClassCall", 23436) -- Hunter
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 
@@ -141,14 +149,16 @@ do
 	function mod:ClassCall(args)
 		if args.time-prev > 2 then
 			prev = args.time
-			self:Bar("classcall", 30, L.classcall, "Spell_Shadow_Charm")
+			self:CDBar("classcall", 30, L.classcall, "Spell_Shadow_Charm")
 			self:Message("classcall", "orange", classCallSpellTable[args.spellId], "Spell_Shadow_Charm")
 		end
 	end
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
-	if msg:find(L.landing_soon_trigger, nil, true) then
+	if msg:find(L.engage_yell_trigger, nil, true) then
+		self:Engage()
+	elseif msg:find(L.landing_soon_trigger, nil, true) then
 		self:Message("stages", "cyan", CL.custom_sec:format(CL.stage:format(2), 10), "INV_Misc_Head_Dragon_Black")
 		self:Bar("stages", 10, CL.stage:format(2), "INV_Misc_Head_Dragon_Black")
 		self:PlaySound("stages", "long")
@@ -161,7 +171,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	else
 		for yellTrigger, bwMessage in next, classCallYellTable do
 			if msg:find(yellTrigger, nil, true) then
-				self:Bar("classcall", 30, L.classcall, "Spell_Shadow_Charm")
+				self:CDBar("classcall", 30, L.classcall, "Spell_Shadow_Charm")
 				self:Message("classcall", "orange", bwMessage, "Spell_Shadow_Charm")
 				return
 			end
