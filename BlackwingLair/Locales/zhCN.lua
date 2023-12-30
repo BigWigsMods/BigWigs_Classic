@@ -11,7 +11,7 @@ end
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "zhCN")
 if L then
 	L.warmup_trigger = "太晚了，朋友们" -- 太晚了，朋友们！奈法利安的堕落力量已经生效……我无法……控制自己。
-	--L.tank_bomb = "Tank Bomb"
+	L.tank_bomb = "坦克炸弹"
 end
 
 L = BigWigs:NewBossLocale("Chromaggus", "zhCN")
@@ -25,13 +25,13 @@ if L then
 	L.vulnerability = "弱点警报"
 	L.vulnerability_desc = "克洛玛古斯弱点改变时发出警报。"
 	L.vulnerability_message = "克洛玛古斯新弱点：%s"
-	--L.detect_magic_missing = "Detect Magic is missing from Chromaggus"
-	--L.detect_magic_warning = "A Mage must cast Detect Magic on Chromaggus for vulnerability warnings to work."
+	--L.detect_magic_missing = "克洛玛古斯身上缺少技能：侦测魔法"
+	--L.detect_magic_warning = "法师必须对克洛玛古斯施放 侦测魔法 ，这样 弱点 的警报才有效。"
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "zhCN")
 if L then
-	--L.engage_yell_trigger = "Let the games begin"
+	L.engage_yell_trigger = "比赛现在开始！"
 	L.landing_soon_trigger = "干得好，我的手下。"
 	L.stage2_yell_trigger = "燃烧吧！"
 	L.stage3_yell_trigger = "不可能"
