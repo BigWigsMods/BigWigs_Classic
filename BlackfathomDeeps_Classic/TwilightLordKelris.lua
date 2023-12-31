@@ -85,8 +85,8 @@ end
 function mod:DreamEaterApplied(args)
 	if self:Me(args.destGUID) then
 		self:PersonalMessage(args.spellId, false, CL.you_die_sec:format(15))
-		self:PlaySound(args.spellId, "warning", nil, args.destName)
 		self:Bar(args.spellId, 15, CL.you_die)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
 end
 
@@ -120,12 +120,14 @@ do
 	end
 
 	function mod:ShadowyChainsApplied(args)
-		local count = #playerList
-		if count == 0 then
-			self:PlaySound(425265, "info")
+		if self:Player(args.destFlags) then -- Players, not pets
+			local count = #playerList
+			if count == 0 then
+				self:PlaySound(425265, "info")
+			end
+			playerList[count+1] = args.destName
+			self:TargetsMessage(425265, "orange", playerList)
 		end
-		playerList[count+1] = args.destName
-		self:TargetsMessage(425265, "orange", playerList)
 	end
 end
 

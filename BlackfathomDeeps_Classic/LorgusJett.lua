@@ -124,8 +124,8 @@ end
 
 function mod:CorruptedWindfuryTotem(args)
 	self:Message(args.spellId, "yellow")
-	self:PlaySound(args.spellId, "alert")
 	self:Bar(414763, 9.7) -- Corrupted Lightning Shield Totem
+	self:PlaySound(args.spellId, "alert")
 end
 
 do
@@ -150,8 +150,8 @@ end
 
 function mod:CorruptedLightningShieldTotem(args)
 	self:Message(args.spellId, "red")
-	self:PlaySound(args.spellId, "warning")
 	self:Bar(419636, 9.7) -- Corrupted Molten Fury Totem
+	self:PlaySound(args.spellId, "warning")
 end
 
 do
@@ -176,8 +176,8 @@ end
 
 function mod:CorruptedMoltenFuryTotem(args)
 	self:Message(args.spellId, "orange")
-	self:PlaySound(args.spellId, "info")
 	self:Bar(414691, 9.7) -- Corrupted Windfury Totem
+	self:PlaySound(args.spellId, "info")
 end
 
 do

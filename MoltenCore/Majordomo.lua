@@ -60,17 +60,17 @@ end
 function mod:MagicReflection(args)
 	self:Bar(args.spellId, 10)
 	self:Message(args.spellId, "red")
-	self:PlaySound(args.spellId, "info")
 	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, L.power_next, "ability_warlock_improvedsoulleech")
 	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 25, "orange", CL.custom_sec:format(L.power_next, 5))
+	self:PlaySound(args.spellId, "info")
 end
 
 function mod:DamageShield(args)
 	self:Bar(args.spellId, 10)
 	self:Message(args.spellId, "red")
-	self:PlaySound(args.spellId, "info")
 	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, L.power_next, "ability_warlock_improvedsoulleech")
 	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 25, "orange", CL.custom_sec:format(L.power_next, 5))
+	self:PlaySound(args.spellId, "info")
 end
 
 function mod:Teleport(args)

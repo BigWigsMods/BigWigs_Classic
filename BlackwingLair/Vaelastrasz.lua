@@ -66,13 +66,13 @@ end
 
 function mod:BurningAdrenalineApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
+	self:PrimaryIcon(args.spellId, args.destName)
+	self:TargetBar(args.spellId, 20, args.destName, CL.explosion)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, CL.bomb, nil, "Bomb")
 		self:SayCountdown(args.spellId, 20, nil, 5)
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
-	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetBar(args.spellId, 20, args.destName, CL.explosion)
 end
 
 function mod:BurningAdrenalineRemoved(args)

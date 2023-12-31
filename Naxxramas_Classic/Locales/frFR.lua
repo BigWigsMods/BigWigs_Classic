@@ -1,11 +1,5 @@
-local L = BigWigs:NewBossLocale("Anub'Rekhan", "frFR")
+local L = BigWigs:NewBossLocale("Grand Widow Faerlina", "frFR")
 if not L then return end
-if L then
-	L.gainwarn10sec = "~10 sec. avant la Nuée de sauterelles"
-	L.gainincbar = "~Prochaine Nuée"
-end
-
-L = BigWigs:NewBossLocale("Grand Widow Faerlina", "frFR")
 if L then
 	L.silencewarn = "Réduite au silence !"
 	L.silencewarn5sec = "Fin du silence dans 5 sec."
@@ -148,36 +142,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "frFR")
 if L then
-	L.starttrigger1 = "Mourez, intrus !"
-	L.starttrigger2 = "Gloire au maître !"
-	L.starttrigger3 = "Vos vies ne valent plus rien !"
-	L.startwarn = "Noth le Porte-peste engagé ! 90 sec. avant téléportation !"
-	L.add_trigger = "Levez-vous, soldats ! Levez-vous et combattez une fois encore !"
-
-	L.blink = "Transfert"
-	L.blink_desc = "Prévient quand Noth utilise son Transfert."
-	L.blink_trigger = "%s se transfère au loin !"
-	L.blink_bar = "Transfert"
-
-	L.teleport = "Téléportation"
-	L.teleport_desc = "Prévient quand Noth se téléporte."
-	L.teleport_bar = "Téléportation"
-	L.teleportwarn = "Téléportation ! Il est sur le balcon !"
-	L.teleportwarn2 = "Téléportation dans 10 sec. !"
-	L.back_bar = "Retour dans la salle !"
-	L.back_warn = "De retour dans la salle pendant %d sec. !"
-	L.back_warn2 = "10 sec. avant son retour dans la salle !"
-
-	L.curse_explosion = "Explosion des malé. !"
-	L.curse_warn = "Malédictions ! Prochaines dans ~55 sec."
-	L.curse_10sec_warn = "Malédictions dans ~10 sec."
-	L.curse_bar = "Prochaines malédictions"
-
-	L.wave = "Vagues"
-	L.wave_desc = "Prévient de l'arrivée des vagues."
-	L.wave1_bar = "1ère vague"
-	L.wave2_bar = "2ème vague"
-	L.wave2_message = "2ème vague dans 10 sec."
+	L.adds_yell_trigger = "Levez-vous, soldats" -- Levez-vous, soldats ! Levez-vous et combattez une fois encore !
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "frFR")

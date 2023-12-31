@@ -1,11 +1,5 @@
-local L = BigWigs:NewBossLocale("Anub'Rekhan", "ruRU")
+local L = BigWigs:NewBossLocale("Grand Widow Faerlina", "ruRU")
 if not L then return end
-if L then
-	L.gainwarn10sec = "~10 до жуков-трупоедов"
-	L.gainincbar = "Следующая волна жуков-трупоедов"
-end
-
-L = BigWigs:NewBossLocale("Grand Widow Faerlina", "ruRU")
 if L then
 	L.silencewarn = "Безмолвие! Задержка ярости!"
 	L.silencewarn5sec = "Безмолвие закончится через 5 секунд"
@@ -148,36 +142,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ruRU")
 if L then
-	L.starttrigger1 = "Смерть чужакам!"
-	L.starttrigger2 = "Слава господину!"
-	L.starttrigger3 = "Прощайся с жизнью!"
-	L.startwarn = "Нот Чумной вступает в бой! 90 секунд до телепорта"
-	L.add_trigger = "Встаньте мои воины! Встаньте и сражайтесь вновь!"
-
-	L.blink = "Опасность скачка"
-	L.blink_desc = "Предупреждать когда Нот использует скачок"
-	L.blink_trigger = "%s перескакивает на другое место!"
-	L.blink_bar = "Скачок"
-
-	L.teleport = "Телепорт"
-	L.teleport_desc = "Предупреждать о телепорте."
-	L.teleport_bar = "Телепорт!"
-	L.teleportwarn = "Телепорт! Он на балконе!"
-	L.teleportwarn2 = "Телепорт через 10 секунд!"
-	L.back_bar = "Назад в Команту!"
-	L.back_warn = "Он вернулся в комнату на %d секунд!"
-	L.back_warn2 = "10 секунд до возвращения в комнату!"
-
-	L.curse_explosion = "Проклятый взрыв!"
-	L.curse_warn = "Проклятие через ~55 секунд"
-	L.curse_10sec_warn = "Проклятие через ~10 секунд"
-	L.curse_bar = "Следующее проклятие"
-
-	L.wave = "Волны"
-	L.wave_desc = "Сообщать о волнах"
-	L.wave1_bar = "1-я волна"
-	L.wave2_bar = "2-я волна"
-	L.wave2_message = "2-я волна через 10 сек"
+	L.adds_yell_trigger = "Встаньте мои воины" -- Встаньте мои воины! Встаньте и сражайтесь вновь!
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "ruRU")

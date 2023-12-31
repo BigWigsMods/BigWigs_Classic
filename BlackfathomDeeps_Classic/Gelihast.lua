@@ -29,6 +29,7 @@ function mod:GetOptions()
 	},nil,{
 		[411956] = CL.curse, -- Curse of Blackfathom (Curse)
 		[411959] = CL.fear, -- Fear (Fear)
+		[412456] = CL.immune, -- March of the Murlocs (Immune)
 	}
 end
 
@@ -76,11 +77,11 @@ do
 	end
 
 	function mod:CurseOfBlackfathomApplied(args)
+		playerList[#playerList+1] = args.destName
+		self:TargetsMessage(args.spellId, "yellow", playerList, nil, CL.curse)
 		if self:Me(args.destGUID) then
 			self:PlaySound(args.spellId, "alert", nil, args.destName)
 		end
-		playerList[#playerList+1] = args.destName
-		self:TargetsMessage(args.spellId, "yellow", playerList, nil, CL.curse)
 	end
 end
 
@@ -96,11 +97,12 @@ do
 	function mod:MarchOfTheMurlocs(args)
 		if args.time - prev > 30 then
 			prev = args.time
-			self:Message(args.spellId, "cyan")
-			self:PlaySound(args.spellId, "long")
-			self:Bar(args.spellId, 30)
 			self:StopBar(412072) -- Shadow Strike
 			self:StopBar(CL.curse) -- Curse of Blackfathom
+			self:Message(args.spellId, "cyan")
+			self:Bar(args.spellId, 25, CL.immune)
+			self:Bar(args.spellId, 33)
+			self:PlaySound(args.spellId, "long")
 		end
 	end
 end
