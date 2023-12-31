@@ -52,7 +52,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, _, sender, _, _, player)
 		local guid = self:UnitGUID(player)
 		if self:Me(guid) then
 			self:Say("fixate", CL.fixate, nil, "Fixate")
-			self:PlaySound("stages", "warning", nil, player)
+			self:PlaySound("fixate", "warning", nil, player)
 		end
 	end
 end
