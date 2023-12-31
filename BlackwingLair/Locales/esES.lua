@@ -22,11 +22,11 @@ if L then
 	L.debuffs_message = "¡3/5 perjuicios, ten cuidado!"
 	L.debuffs_warning = "¡4/5 perjuicios, %s al 5to!"
 
-	--L.vulnerability = "Vulnerability Change"
-	--L.vulnerability_desc = "Warn for Vulnerability changes."
-	--L.vulnerability_message = "Vulnerability: %s"
-	--L.detect_magic_missing = "Detect Magic is missing from Chromaggus"
-	--L.detect_magic_warning = "A Mage must cast Detect Magic on Chromaggus for vulnerability warnings to work."
+	L.vulnerability = "Cambio de vulnerabilidad"
+	L.vulnerability_desc = "Anuncia cambios de vulnerabilidad."
+	L.vulnerability_message = "Vulnerabilidad: %s"
+	L.detect_magic_missing = "Falta Detectar magia en Chromaggus"
+	L.detect_magic_warning = "Un mago debe lanzar Detectar magia en Chromaggus para que funcionen los anuncios de vulnerabilidad."
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "esES")
