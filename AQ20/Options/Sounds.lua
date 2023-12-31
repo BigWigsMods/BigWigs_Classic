@@ -16,6 +16,7 @@ BigWigs:AddSounds("Moam", {
 })
 
 BigWigs:AddSounds("Buru the Gorger", {
+	["fixate"] = "warning",
 	["stages"] = "long",
 })
 
