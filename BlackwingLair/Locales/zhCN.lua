@@ -25,8 +25,8 @@ if L then
 	L.vulnerability = "弱点警报"
 	L.vulnerability_desc = "克洛玛古斯弱点改变时发出警报。"
 	L.vulnerability_message = "克洛玛古斯新弱点：%s"
-	--L.detect_magic_missing = "Detect Magic is missing from Chromaggus"
-	--L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Detect Magic]\124h\124r on Chromaggus for vulnerability warnings to work."
+	L.detect_magic_missing = "克洛玛古斯身上缺少侦测魔法"
+	L.detect_magic_warning = "法师必须对克洛玛古斯施放 \124cff71d5ff\124Hspell:2855:0\124h[Detect Magic]\124h\124r ，这样弱点的警报才有效。"
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "zhCN")
