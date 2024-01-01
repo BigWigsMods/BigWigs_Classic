@@ -36,7 +36,10 @@ BigWigs:AddSounds("Anub'Rekhan", {
 })
 
 BigWigs:AddSounds("Grand Widow Faerlina", {
-	[28794] = "alarm",
+	[28732] = "info",
+	[28794] = "underyou",
+	[28796] = "alert",
+	[28798] = "warning",
 })
 
 BigWigs:AddSounds("Maexxna", {

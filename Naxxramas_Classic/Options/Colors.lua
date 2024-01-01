@@ -50,9 +50,11 @@ BigWigs:AddColors("Anub'Rekhan", {
 })
 
 BigWigs:AddColors("Grand Widow Faerlina", {
-	[28732] = {"green","orange"},
+	[28732] = "yellow",
 	[28794] = "blue",
-	[28798] = {"green","orange","red","yellow"},
+	[28796] = "orange",
+	[28798] = {"green","red"},
+	[30225] = "blue",
 })
 
 BigWigs:AddColors("Maexxna", {
