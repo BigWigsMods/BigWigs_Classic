@@ -25,8 +25,8 @@ if L then
 	L.vulnerability = "Zauber-Verwundbarkeiten"
 	L.vulnerability_desc = "Warnung, wenn Chromagguss Zauber-Verwundbarkeit sich ändert."
 	L.vulnerability_message = "Neue Zauber-Verwundbarkeit: %s"
-	--L.detect_magic_missing = "Detect Magic is missing from Chromaggus"
-	--L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Detect Magic]\124h\124r on Chromaggus for vulnerability warnings to work."
+	L.detect_magic_missing = "Magie entdecken is missing from Chromaggus"
+	L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Magie entdecken]\124h\124r on Chromaggus for vulnerability warnings to work."
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "deDE")
