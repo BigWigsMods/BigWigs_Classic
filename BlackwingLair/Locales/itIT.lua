@@ -26,7 +26,7 @@ if L then
 	--L.vulnerability_desc = "Warn for Vulnerability changes."
 	--L.vulnerability_message = "Vulnerability: %s"
 	--L.detect_magic_missing = "Detect Magic is missing from Chromaggus"
-	--L.detect_magic_warning = "A Mage must cast Detect Magic on Chromaggus for vulnerability warnings to work."
+	--L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Detect Magic]\124h\124r on Chromaggus for vulnerability warnings to work."
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "itIT")

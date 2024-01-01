@@ -125,15 +125,15 @@ end
 function mod:BellowingRoar(args)
 	self:CDBar(args.spellId, 32, CL.fear, "spell_shadow_psychicscream")
 	self:Message(args.spellId, "red", CL.incoming:format(CL.fear), "spell_shadow_psychicscream")
-	self:PlaySound(args.spellId, "alert")
 	self:CastBar(args.spellId, 1.5, CL.fear, "spell_shadow_psychicscream")
+	self:PlaySound(args.spellId, "alert")
 end
 
 function mod:ShadowFlame(args)
 	if self:MobId(args.sourceGUID) == 11583 then -- Shared with Ebonroc/Firemaw/Flamegor
 		self:Message(args.spellId, "yellow")
-		self:PlaySound(args.spellId, "alarm")
 		self:CastBar(args.spellId, 2)
+		self:PlaySound(args.spellId, "alarm")
 	end
 end
 

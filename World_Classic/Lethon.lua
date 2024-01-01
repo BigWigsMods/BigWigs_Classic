@@ -113,8 +113,8 @@ end
 
 function mod:DrawSpirit(args)
 	self:Message(args.spellId, "red")
-	self:PlaySound(args.spellId, "long")
 	self:Bar(args.spellId, 5)
+	self:PlaySound(args.spellId, "long")
 end
 
 do

@@ -1,11 +1,5 @@
-local L = BigWigs:NewBossLocale("Anub'Rekhan", "zhCN")
+local L = BigWigs:NewBossLocale("Grand Widow Faerlina", "zhCN")
 if not L then return end
-if L then
-	L.gainwarn10sec = "约10秒后，下一波虫群风暴。"
-	L.gainincbar = "下一虫群风暴"
-end
-
-L = BigWigs:NewBossLocale("Grand Widow Faerlina", "zhCN")
 if L then
 	L.silencewarn = "沉默！延缓了激怒！"
 	L.silencewarn5sec = "5秒后沉默结束！"
@@ -148,36 +142,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "zhCN")
 if L then
-	L.starttrigger1 = "死吧，入侵者！"
-	L.starttrigger2 = "荣耀归于我主！"
-	L.starttrigger3 = "我要没收你的生命！"
-	L.startwarn = "药剂师诺斯已激活 - 90秒后，传送！"
-	L.add_trigger = "起来吧，我的战士们！起来，再为主人尽忠一次！"
-
-	L.blink = "闪现术"
-	L.blink_desc = "当施放闪现术时发出警报。"
-	L.blink_trigger = "%s施放了瞬移！"
-	L.blink_bar = "闪现术"
-
-	L.teleport = "传送"
-	L.teleport_desc = "当施放传送时发出警报。"
-	L.teleport_bar = "<传送>"
-	L.teleportwarn = "传送！"
-	L.teleportwarn2 = "10秒后，传送！"
-	L.back_bar = "回到房间"
-	L.back_warn = "诺斯回到房间 - %d秒后，传送！"
-	L.back_warn2 = "10秒后诺斯回到房间！"
-
-	L.curse_explosion = "瘟疫使者的诅咒！"
-	L.curse_warn = "约55秒后，瘟疫使者的诅咒！"
-	L.curse_10sec_warn = "约10秒后，瘟疫使者的诅咒！"
-	L.curse_bar = "下一瘟疫使者的诅咒"
-
-	L.wave = "骷髅"
-	L.wave_desc = "当召唤骷髅时发出警报。"
-	L.wave1_bar = "第一波"
-	L.wave2_bar = "二波"
-	L.wave2_message = "10秒后，第二波！"
+	L.adds_yell_trigger = "起来吧，我的战士们" -- 起来吧，我的战士们！起来，再为主人尽忠一次！
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "zhCN")

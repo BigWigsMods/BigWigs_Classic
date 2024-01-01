@@ -69,12 +69,12 @@ end
 
 do
 	local function printTarget(self, player, guid)
+		self:PrimaryIcon(18392, player)
 		if self:Me(guid) then
 			self:Say(18392, nil, nil, "Fireball")
 			self:PersonalMessage(18392)
 			self:PlaySound(18392, "alarm")
 		end
-		self:PrimaryIcon(18392, player)
 	end
 	function mod:Fireball(args) -- Stage 2 Targetted Fireball threat wipe
 		self:GetUnitTarget(printTarget, 0.1, args.sourceGUID)
@@ -83,9 +83,9 @@ end
 
 function mod:Breath() -- Stage 2 "Deep Breath"
 	self:Message(17086, "red", L.deep_breath)
-	self:PlaySound(17086, "warning")
 	self:CastBar(17086, 5, L.deep_breath) -- 8s on Wrath, 5s on Classic Era
 	self:PrimaryIcon(18392) -- Clear Fireball raid icon
+	self:PlaySound(17086, "warning")
 end
 
 function mod:BellowingRoar(args) -- Stage 3 "Fear"

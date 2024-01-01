@@ -23,10 +23,12 @@ BigWigs:AddColors("Thaddius", {
 })
 
 BigWigs:AddColors("Noth the Plaguebringer", {
-	[29213] = {"orange","red"},
-	["blink"] = {"red","yellow"},
-	["teleport"] = {"orange","red"},
-	["wave"] = "orange",
+	[29208] = "yellow",
+	[29212] = "blue",
+	[29213] = {"green","red"},
+	[29214] = "red",
+	["adds"] = "orange",
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Heigan the Unclean", {
@@ -43,8 +45,8 @@ BigWigs:AddColors("Loatheb", {
 })
 
 BigWigs:AddColors("Anub'Rekhan", {
-	[28783] = "orange",
-	[28785] = {"red","yellow"},
+	[28783] = {"blue","yellow"},
+	[28785] = {"green","orange","red","yellow"},
 })
 
 BigWigs:AddColors("Grand Widow Faerlina", {

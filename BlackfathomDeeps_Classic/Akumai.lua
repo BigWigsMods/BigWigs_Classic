@@ -82,8 +82,8 @@ function mod:DarkProtectionRemoved()
 	self:StopBar(CL.intermission)
 	self:SetStage(2)
 	self:Message("stages", "cyan", CL.stage:format(2), false)
-	self:PlaySound("stages", "info")
 	self:Bar(429356, 22, CL.breath) -- Void Blast
+	self:PlaySound("stages", "info")
 end
 
 function mod:CorrosionOrShadowSeepApplied(args)

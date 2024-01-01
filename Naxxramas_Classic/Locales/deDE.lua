@@ -1,11 +1,5 @@
-local L = BigWigs:NewBossLocale("Anub'Rekhan", "deDE")
+local L = BigWigs:NewBossLocale("Grand Widow Faerlina", "deDE")
 if not L then return end
-if L then
-	L.gainwarn10sec = "Heuschreckenschwarm in ~10 sek!"
-	L.gainincbar = "~Nächster Schwarm"
-end
-
-L = BigWigs:NewBossLocale("Grand Widow Faerlina", "deDE")
 if L then
 	L.silencewarn = "Stille! Raserei verzögert!"
 	L.silencewarn5sec = "Stille endet in 5 sek!"
@@ -148,36 +142,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "deDE")
 if L then
-	L.starttrigger1 = "Sterbt, Eindringling!"
-	L.starttrigger2 = "Ehre unserem Meister!"
-	L.starttrigger3 = "Euer Leben ist verwirkt!"
-	L.startwarn = "Noth angegriffen! Teleport in 90 sek!"
-	L.add_trigger = "Erhebt euch, Soldaten! Erhebt euch und kämpft erneut!"
-
-	L.blink = "Blinzeln"
-	L.blink_desc = "Warnungen und Timer für Blinzeln."
-	L.blink_trigger = "%s blinzelt sich davon!"
-	L.blink_bar = "Blinzeln"
-
-	L.teleport = "Teleport"
-	L.teleport_desc = "Warnungen und Timer für Teleport."
-	L.teleport_bar = "Teleport"
-	L.teleportwarn = "Teleport! Noth auf dem Balkon!"
-	L.teleportwarn2 = "Teleport in 10 sek!"
-	L.back_bar = "Rückteleport"
-	L.back_warn = "Noth zurück im Raum für %d sek!"
-	L.back_warn2 = "Rückteleport in 10 sek!"
-
-	L.curse_explosion = "Fluch Explosion!"
-	L.curse_warn = "Fluch! Nächster in ~55 sek."
-	L.curse_10sec_warn = "Fluch in ~10 sek!"
-	L.curse_bar = "Nächster Fluch"
-
-	L.wave = "Wellen"
-	L.wave_desc = "Warnungen und Timer für die Gegnerwellen."
-	L.wave1_bar = "Welle 1"
-	L.wave2_bar = "Welle 2"
-	L.wave2_message = "Welle 2 in 10 sek!"
+	L.adds_yell_trigger = "Erhebt euch, Soldaten" -- Erhebt euch, Soldaten! Erhebt euch und kämpft erneut!
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "deDE")

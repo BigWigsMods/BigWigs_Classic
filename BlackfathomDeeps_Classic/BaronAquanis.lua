@@ -72,14 +72,14 @@ function mod:DepthCharge(args)
 end
 
 function mod:DepthChargeApplied(args)
+	self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
+	self:TargetBar(args.spellId, 8, args.destName, CL.bomb)
+	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
-		self:PlaySound(args.spellId, "warning", nil, args.destName)
 		self:Say(args.spellId, CL.bomb, nil, "Bomb")
 		self:SayCountdown(args.spellId, 8)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
-	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetBar(args.spellId, 8, args.destName, CL.bomb)
-	self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
 end
 
 function mod:DepthChargeRemoved(args)
@@ -96,6 +96,7 @@ function mod:BubbleBeamCast(args)
 end
 
 function mod:BubbleBeamChannel()
+	self:StopBar(413664) -- Stop the CDBar
 	self:CastBar(413664, 10, CL.beam)
 	self:CDBar(404806, {10.5, 16}, CL.bomb) -- Depth Charge
 end
@@ -109,8 +110,8 @@ do
 	function mod:TorrentialDownpourDamage(args)
 		if self:Me(args.destGUID) and args.time - prev > 3 then
 			prev = args.time
-			self:PlaySound(args.spellId, "underyou")
 			self:PersonalMessage(args.spellId, "aboveyou")
+			self:PlaySound(args.spellId, "underyou")
 		end
 	end
 end

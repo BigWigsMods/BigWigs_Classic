@@ -1,11 +1,5 @@
-local L = BigWigs:NewBossLocale("Anub'Rekhan", "ptBR")
+local L = BigWigs:NewBossLocale("Grand Widow Faerlina", "ptBR")
 if not L then return end
-if L then
-	--L.gainwarn10sec = "~10 sec until Locust Swarm"
-	--L.gainincbar = "~Next Locust Swarm"
-end
-
-L = BigWigs:NewBossLocale("Grand Widow Faerlina", "ptBR")
 if L then
 	--L.silencewarn = "Silenced!"
 	--L.silencewarn5sec = "Silence ends in 5 sec"
@@ -161,36 +155,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ptBR")
 if L then
-	--L.starttrigger1 = "Die, trespasser!"
-	--L.starttrigger2 = "Glory to the master!"
-	--L.starttrigger3 = "Your life is forfeit!"
-	--L.startwarn = "Noth the Plaguebringer engaged! 90 sec till teleport"
-	--L.add_trigger = "Rise, my soldiers! Rise and fight once more!"
-
-	--L.blink = "Blink"
-	--L.blink_desc = "Warnings when Noth blinks."
-	--L.blink_trigger = "%s blinks away!"
-	--L.blink_bar = "Blink"
-
-	--L.teleport = "Teleport"
-	--L.teleport_desc = "Warnings and bars for teleport."
-	--L.teleport_bar = "Teleport!"
-	--L.teleportwarn = "Teleport! He's on the balcony!"
-	--L.teleportwarn2 = "Teleport in 10 sec!"
-	--L.back_bar = "Back in room!"
-	--L.back_warn = "He's back in the room for %d sec!"
-	--L.back_warn2 = "10 sec until he's back in the room!"
-
-	--L.curse_explosion = "Curse explosion!"
-	--L.curse_warn = "Curse! next in ~55 sec"
-	--L.curse_10sec_warn = "Curse in ~10 sec"
-	--L.curse_bar = "Next Curse"
-
-	--L.wave = "Waves"
-	--L.wave_desc = "Alerts for the different waves."
-	--L.wave1_bar = "Wave 1"
-	--L.wave2_bar = "Wave 2"
-	--L.wave2_message = "Wave 2 in 10 sec"
+	--L.adds_yell_trigger = "Rise, my soldiers" -- Rise, my soldiers! Rise and fight once more!
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ptBR")

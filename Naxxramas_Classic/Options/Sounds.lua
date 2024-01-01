@@ -16,7 +16,11 @@ BigWigs:AddSounds("Thaddius", {
 })
 
 BigWigs:AddSounds("Noth the Plaguebringer", {
+	[29208] = "alert",
 	[29213] = "alarm",
+	[29214] = "warning",
+	["adds"] = "info",
+	["stages"] = "long",
 })
 
 BigWigs:AddSounds("Heigan the Unclean", {
@@ -27,6 +31,8 @@ BigWigs:AddSounds("Loatheb", {
 })
 
 BigWigs:AddSounds("Anub'Rekhan", {
+	[28783] = {"alert","warning"},
+	[28785] = {"info","long"},
 })
 
 BigWigs:AddSounds("Grand Widow Faerlina", {

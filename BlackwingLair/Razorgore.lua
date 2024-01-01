@@ -87,17 +87,15 @@ end
 function mod:WarmingFlames() -- Stage 2
 	self:SetStage(2)
 	self:Message("stages", "cyan", CL.stage:format(2), false)
-	self:PlaySound("stages", "long")
 	self:Death("Win", 12435) -- Register here as he can die in stage 1 and you lose
+	self:PlaySound("stages", "long")
 end
 
 function mod:Conflagration(args)
 	self:TargetMessage(args.spellId, "orange", args.destName)
-	if self:Me(args.destGUID) then
-		self:PlaySound(args.spellId, "info", nil, args.destName)
-	end
 	self:TargetBar(args.spellId, 10, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
+	self:PlaySound(args.spellId, "info", nil, args.destName)
 end
 
 function mod:ConflagrationOver(args)

@@ -1,22 +1,18 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Anub'Rekhan", 533, 1601)
 if not mod then return end
 mod:RegisterEnableMob(15956)
 mod:SetEncounterID(1107)
+mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
--- Localization
+-- Locals
 --
 
-local L = mod:NewLocale()
-if L then
-	L.gainwarn10sec = "~10 sec until Locust Swarm"
-	L.gainincbar = "~Next Locust Swarm"
-end
-L = mod:GetLocale()
+local swarmCount = 1
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -24,39 +20,60 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		28783, -- Impale
-		28785, -- Locus Swarm
+		{28783, "SAY", "ME_ONLY_EMPHASIZE"}, -- Impale
+		{28785, "CASTBAR"}, -- Locust Swarm
 	}
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "Impale", 28783)
-	self:Log("SPELL_AURA_APPLIED", "GainSwarm", 28785)
-	self:Log("SPELL_CAST_START", "Swarm", 28785)
+	self:Log("SPELL_CAST_START", "Impale", 28783)
+	self:Log("SPELL_CAST_START", "LocustSwarm", 28785)
+	self:Log("SPELL_AURA_APPLIED", "LocustSwarmApplied", 28785)
+	self:Log("SPELL_AURA_REMOVED", "LocustSwarmRemoved", 28785)
+
+	self:Death("Win", 15956)
 end
 
 function mod:OnEngage()
+	swarmCount = 1
 	self:Message(28785, "yellow", CL.custom_start_s:format(self.displayName, self:SpellName(28785), 90), false)
-	self:DelayedMessage(28785, 80, "red", L.gainwarn10sec)
-	self:CDBar(28785, 90, L.gainincbar, 28785)
+	self:DelayedMessage(28785, 80, "orange", CL.custom_sec:format(self:SpellName(28785), 10))
+	self:CDBar(28785, 90, CL.count:format(self:SpellName(28785), swarmCount)) -- Locust Swarm
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Impale(args)
-	self:Message(28783, "orange")
+do
+	local function printTarget(self, player, guid)
+		self:TargetMessage(28783, "yellow", player)
+		if self:Me(guid) then
+			self:Say(28783, nil, nil, "Impale")
+			self:PlaySound(28783, "warning", nil, player)
+		else
+			self:PlaySound(28783, "alert", nil, player)
+		end
+	end
+	function mod:Impale(args)
+		self:GetUnitTarget(printTarget, 0.1, args.sourceGUID)
+	end
 end
 
-function mod:GainSwarm(args)
-	self:Bar(28785, 20)
-	self:DelayedMessage(28785, 20, "red", CL.over:format(args.spellName))
-	self:Bar(28785, 85, L.gainincbar)
-	self:DelayedMessage(28785, 75, "red", L.gainwarn10sec)
+function mod:LocustSwarm(args)
+	self:StopBar(CL.count:format(args.spellName, swarmCount))
+	self:Message(args.spellId, "yellow", CL.count:format(args.spellName, swarmCount))
+	self:PlaySound(args.spellId, "long")
 end
 
-function mod:Swarm(args)
-	self:Message(28785, "yellow", CL.incoming:format(args.spellName))
-	self:Bar(28785, 3.25, CL.incoming:format(args.spellName))
+function mod:LocustSwarmApplied(args)
+	swarmCount = swarmCount + 1
+	self:CastBar(args.spellId, 20)
+end
+
+function mod:LocustSwarmRemoved(args)
+	self:Message(args.spellId, "green", CL.over:format(args.spellName))
+	self:CDBar(args.spellId, 65, CL.count:format(args.spellName, swarmCount)) -- Swings between 82s-102s between cast start, minus 20s duration
+	self:DelayedMessage(args.spellId, 55, "red", CL.custom_sec:format(args.spellName, 10))
+	self:PlaySound(args.spellId, "info")
 end

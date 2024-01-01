@@ -25,13 +25,13 @@ if L then
 	L.vulnerability = "弱点警报"
 	L.vulnerability_desc = "克洛玛古斯弱点改变时发出警报。"
 	L.vulnerability_message = "克洛玛古斯新弱点：%s"
-	L.detect_magic_missing = "克洛玛古斯身上缺少技能|cff0c3cff侦测魔法|r"
-	L.detect_magic_warning = "法师必须对克洛玛古斯施放|cff0c3cff侦测魔法|r，这样|cff20ff20弱点|r的警报才有效。"
+	L.detect_magic_missing = "克洛玛古斯身上缺少侦测魔法"
+	L.detect_magic_warning = "法师必须对克洛玛古斯施放 \124cff71d5ff\124Hspell:2855:0\124h[Detect Magic]\124h\124r ，这样弱点的警报才有效。"
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "zhCN")
 if L then
-	L.engage_yell_trigger = "比赛现在开始！"
+	L.engage_yell_trigger = "比赛现在开始"
 	L.landing_soon_trigger = "干得好，我的手下。"
 	L.stage2_yell_trigger = "燃烧吧！"
 	L.stage3_yell_trigger = "不可能"

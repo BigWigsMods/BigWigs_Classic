@@ -63,13 +63,13 @@ function mod:ForkedLightning(args)
 end
 
 function mod:ForkedLightningApplied(args)
+	self:TargetMessage(args.spellId, "yellow", args.destName)
+	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
-		self:PlaySound(args.spellId, "warning", nil, args.destName)
 		self:Say(args.spellId, nil, nil, "Forked Lightning")
 		self:SayCountdown(args.spellId, 8)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
-	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessage(args.spellId, "yellow", args.destName)
 end
 
 function mod:ForkedLightningRemoved(args)
@@ -81,8 +81,8 @@ end
 
 function mod:FreezingArrow(args)
 	self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
-	self:PlaySound(args.spellId, "alert")
 	self:Bar(args.spellId, 24)
+	self:PlaySound(args.spellId, "alert")
 end
 
 function mod:FreezingArrowApplied(args)

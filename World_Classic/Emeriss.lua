@@ -112,14 +112,14 @@ end
 
 function mod:VolatileInfection(args)
 	self:TargetMessage(args.spellId, "orange", args.destName)
-	self:PlaySound(args.spellId, "alert")
 	self:PrimaryIcon(args.spellId, args.destName)
+	self:PlaySound(args.spellId, "alert")
 end
 
 function mod:CorruptionOfTheEarth(args)
 	self:Message(args.spellId, "red")
-	self:PlaySound(args.spellId, "long")
 	self:Bar(args.spellId, 10)
+	self:PlaySound(args.spellId, "long")
 end
 
 do
@@ -127,8 +127,8 @@ do
 	function mod:SporeCloudDamage(args)
 		if self:Me(args.destGUID) and args.time - prev > 3 then
 			prev = args.time
-			self:PlaySound(args.spellId, "underyou")
 			self:PersonalMessage(args.spellId, "underyou")
+			self:PlaySound(args.spellId, "underyou")
 		end
 	end
 end

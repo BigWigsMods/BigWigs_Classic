@@ -61,8 +61,8 @@ end
 
 function mod:Reflection(args)
 	self:Message(args.spellId, "yellow", CL.duration:format(args.spellName, 10))
-	self:PlaySound(args.spellId, "warning")
 	self:Bar(args.spellId, 10)
+	self:PlaySound(args.spellId, "warning")
 end
 
 function mod:ReflectionRemoved(args)

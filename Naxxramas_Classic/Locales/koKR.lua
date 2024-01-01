@@ -1,11 +1,5 @@
-local L = BigWigs:NewBossLocale("Anub'Rekhan", "koKR")
+local L = BigWigs:NewBossLocale("Grand Widow Faerlina", "koKR")
 if not L then return end
-if L then
-	L.gainwarn10sec = "10초 이내 메뚜기 떼"
-	L.gainincbar = "다음 메뚜기 떼"
-end
-
-L = BigWigs:NewBossLocale("Grand Widow Faerlina", "koKR")
 if L then
 	L.silencewarn = "침묵!"
 	L.silencewarn5sec = "5초 후 침묵 종료!"
@@ -148,36 +142,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "koKR")
 if L then
-	L.starttrigger1 = "죽어라, 침입자들아!"
-	L.starttrigger2 = "주인님께 영광을!"
-	L.starttrigger3 = "너희 생명은 끝이다!"
-	L.startwarn = "역병술사 노스와 전투 시작! 90초 후 순간이동"
-	L.add_trigger = "일어나라,병사들이여! 다시 일어나 싸워라!"
-
-	L.blink = "점멸"
-	L.blink_desc = "점멸을 알립니다."
-	L.blink_trigger = "%s|1이;가; 눈 깜짝할 사이에 도망칩니다!"
-	L.blink_bar = "점멸"
-
-	L.teleport = "순간이동"
-	L.teleport_desc = "순간이동을 알립니다."
-	L.teleport_bar = "순간이동!"
-	L.teleportwarn = "발코니로 순간이동!"
-	L.teleportwarn2 = "10초 후 순간이동!"
-	L.back_bar = "방으로 복귀!"
-	L.back_warn = "방으로 복귀! %d 초간 최대한 공격!"
-	L.back_warn2 = "10초 후 방으로 복귀!"
-
-	L.curse_explosion = "역병술사의 저주!"
-	L.curse_warn = "저주! 다음 저주 약 55초 이내"
-	L.curse_10sec_warn = "약 10초 이내 저주"
-	L.curse_bar = "다음 저주"
-
-	L.wave = "웨이브"
-	L.wave_desc = "웨이브를 알립니다."
-	L.wave1_bar = "웨이브 1"
-	L.wave2_bar = "웨이브 2"
-	L.wave2_message = "10초 이내 웨이브 2"
+	L.adds_yell_trigger = "일어나라,병사들이여" -- 일어나라,병사들이여! 다시 일어나 싸워라!
 end
 
 L = BigWigs:NewBossLocale("Maexxna", "koKR")

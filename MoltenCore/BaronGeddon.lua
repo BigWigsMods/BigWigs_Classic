@@ -55,15 +55,15 @@ function mod:LivingBombRemoved(args)
 	if self:Me(args.destGUID) then
 		self:CancelSayCountdown(args.spellId)
 	end
-	self:PrimaryIcon(args.spellId)
 	self:StopBar(CL.bomb, args.destName)
+	self:PrimaryIcon(args.spellId)
 end
 
 function mod:Inferno(args)
 	self:Message(args.spellId, "red")
-	self:PlaySound(args.spellId, "long")
 	self:CastBar(args.spellId, 8)
 	self:CDBar(args.spellId, 21) -- 21-29
+	self:PlaySound(args.spellId, "long")
 end
 
 function mod:Armageddon(args)

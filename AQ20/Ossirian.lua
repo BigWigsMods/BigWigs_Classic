@@ -81,11 +81,11 @@ function mod:StrengthOfOssirian(args)
 end
 
 function mod:Weakness(args)
-	self:Message(args.spellId, "yellow")
-	self:PlaySound(args.spellId, "info")
-	self:Bar(args.spellId, 45)
-
 	self:Bar(25176, 45) -- Strength of Ossirian
+
+	self:Message(args.spellId, "yellow")
+	self:Bar(args.spellId, 45)
+	self:PlaySound(args.spellId, "info")
 end
 
 function mod:WeaknessRemoved(args)
