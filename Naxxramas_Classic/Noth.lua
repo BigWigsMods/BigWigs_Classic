@@ -16,7 +16,7 @@ local timeroom = 90
 local timebalcony = 70
 local wave1time = 10
 local wave2time = 41
-local waveCount = 1
+local addsCount = 1
 local curseCount = 0
 
 --------------------------------------------------------------------------------
@@ -63,12 +63,12 @@ end
 function mod:OnEngage()
 	timeroom = 90
 	timebalcony = 70
-	waveCount = 1
+	addsCount = 1
 	curseCount = 0
 	self:SetStage(1)
 
 	self:CDBar(29213, 9, CL.curse) -- Curse of the Plaguebringer
-	self:CDBar("adds", 14, CL.count:format(CL.adds, waveCount), L.adds_icon) -- Adds
+	self:CDBar("adds", 14, CL.count:format(CL.adds, addsCount), L.adds_icon) -- Adds
 
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:DelayedMessage("stages", timeroom - 10, "cyan", CL.custom_sec:format(CL.stage:format(2), 10))
@@ -82,16 +82,16 @@ end
 
 do
 	local function NextAdds()
-		mod:Message("adds", "orange", CL.count:format(CL.adds, waveCount), L.adds_icon)
-		mod:PlaySound("adds", "info")
-		waveCount = waveCount + 1
+		mod:Message("adds", "orange", CL.count:format(CL.adds, addsCount), L.adds_icon)
+		addsCount = addsCount + 1
 		if mod:GetStage() == 1 then
-			mod:CDBar("adds", 32, CL.count:format(CL.adds, waveCount), L.adds_icon) -- 30~42
+			mod:CDBar("adds", 32, CL.count:format(CL.adds, addsCount), L.adds_icon) -- 30~42
 		end
+		mod:PlaySound("adds", "info")
 	end
 	function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		if msg:find(L.adds_yell_trigger, nil, true) then
-			self:Bar("adds", {5, waveCount == 1 and 15 or 33}, CL.count:format(CL.adds, waveCount), L.adds_icon)
+			self:Bar("adds", {5, addsCount == 1 and 15 or 33}, CL.count:format(CL.adds, addsCount), L.adds_icon)
 			self:ScheduleTimer(NextAdds, 5)
 		end
 	end
@@ -149,8 +149,8 @@ function mod:TeleportToBalcony()
 	elseif timeroom == 110 then
 		timeroom = 180
 	end
-	self:StopBar(CL.count:format(CL.adds, waveCount)) -- Adds
-	waveCount = 1
+	self:StopBar(CL.count:format(CL.adds, addsCount)) -- Adds
+	addsCount = 1
 	self:SetStage(2)
 
 	self:StopBar(29208) -- Blink
@@ -174,7 +174,7 @@ function mod:TeleportToRoom()
 	elseif timebalcony == 95 then
 		timebalcony = 120
 	end
-	waveCount = 1
+	addsCount = 1
 	self:SetStage(1)
 
 	self:CDBar(29213, 11, CL.curse) -- Curse of the Plaguebringer
