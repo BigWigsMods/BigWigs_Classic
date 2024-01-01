@@ -1,28 +1,17 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Grand Widow Faerlina", 533, 1602)
 if not mod then return end
-mod:RegisterEnableMob(15953, 16505, 16506) -- Faerlina, Follower, Worshipper
+mod:RegisterEnableMob(15953)
 mod:SetEncounterID(1110)
 
 --------------------------------------------------------------------------------
 -- Locals
 --
 
-local frenzied = nil
-
---------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale()
-if L then
-	L.silencewarn = "Silenced!"
-	L.silencewarn5sec = "Silence ends in 5 sec"
-end
-L = mod:GetLocale()
+local frenzyTimer = 0
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -31,59 +20,79 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		28732, -- Widow's Embrace
-		{28794, "FLASH"}, -- Rain of Fire
-		28798, -- Enrage
+		28798, -- Frenzy / Enrage (different name on classic era)
+		28794, -- Rain of Fire
+		30225, -- Silence
+		28796, -- Poison Bolt Volley
 	}
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "Silence", 28732)
-	self:Log("SPELL_AURA_APPLIED", "Rain", 28794)
-	self:Log("SPELL_AURA_APPLIED", "Frenzy", 28798)
+	self:Log("SPELL_AURA_APPLIED", "WidowsEmbrace", 28732)
+	self:Log("SPELL_AURA_APPLIED", "FrenzyEnrage", 28798)
+	self:Log("SPELL_AURA_REMOVED", "FrenzyEnrageRemoved", 28798)
+
+	self:Log("SPELL_AURA_APPLIED", "RainOfFireDamage", 28794)
+	self:Log("SPELL_PERIODIC_DAMAGE", "RainOfFireDamage", 28794)
+	self:Log("SPELL_PERIODIC_MISSED", "RainOfFireDamage", 28794)
+	self:Log("SPELL_AURA_APPLIED", "Silence", 30225)
+	self:Log("SPELL_CAST_SUCCESS", "PoisonBoltVolley", 28796)
+
+	self:Death("Win", 15953)
 end
 
 function mod:OnEngage()
-	frenzied = nil
-	self:Message(28798, "yellow", CL.custom_start_s:format(self.displayName, self:SpellName(28798), 60), false)
-	self:DelayedMessage(28798, 45, "red", CL.soon:format(self:SpellName(28798)))
-	self:Bar(28798, 60)
+	frenzyTimer = GetTime()
+	self:CDBar(28798, 55) -- Frenzy / Enrage
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
+function mod:WidowsEmbrace(args)
+	if self:MobId(args.destGUID) == 15953 then
+		self:Message(args.spellId, "yellow")
+		self:Bar(args.spellId, 30)
+		self:PlaySound(args.spellId, "info")
+
+		local currentTime = GetTime()
+		if (frenzyTimer + 30) < currentTime then
+			self:CDBar(28798, 31) -- Frenzy / Enrage
+		end
+	end
+end
+
+function mod:FrenzyEnrage(args)
+	self:StopBar(args.spellName)
+	self:Message(args.spellId, "red")
+	self:PlaySound(args.spellId, "warning")
+end
+
+function mod:FrenzyEnrageRemoved(args)
+	frenzyTimer = GetTime()
+	self:Message(args.spellId, "green", CL.removed:format(args.spellName))
+	self:CDBar(args.spellId, 60)
+end
+
+do
+	local prev = 0
+	function mod:RainOfFireDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 3 then
+			prev = args.time
+			self:PersonalMessage(args.spellId, "aboveyou")
+			self:PlaySound(args.spellId, "underyou")
+		end
+	end
+end
+
 function mod:Silence(args)
-	if not frenzied then
-		-- preemptive, 30s silence
-		self:Message(28732, "green", L.silencewarn)
-		self:Bar(28732, 30, self:SpellName(15487)) -- 15487 = Silence
-		self:DelayedMessage(28732, 25, "orange", L.silencewarn5sec)
-	else
-		-- Reactive enrage removed
-		self:Message(28798, "green", CL.removed:format(self:SpellName(28798)))
-		self:DelayedMessage(28798, 45, "red", CL.soon:format(self:SpellName(28798)))
-		self:Bar(28798, 60)
-
-		self:Bar(28732, 30, self:SpellName(15487)) -- 15487 = Silence
-		self:DelayedMessage(28732, 25, "orange", L.silencewarn5sec)
-		frenzied = nil
-	end
-end
-
-function mod:Rain(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(28794)
-		self:PlaySound(28794, "alarm")
-		self:Flash(28794)
+		self:PersonalMessage(args.spellId)
 	end
 end
 
-function mod:Frenzy(args)
-	self:StopBar(28798)
-	self:CancelDelayedMessage(CL.soon:format(self:SpellName(28798)))
-
-	frenzied = true
-	self:Message(28798, "orange")
+function mod:PoisonBoltVolley(args)
+	self:Message(args.spellId, "orange")
+	self:PlaySound(args.spellId, "alert")
 end
-

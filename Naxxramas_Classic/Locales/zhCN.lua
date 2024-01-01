@@ -1,11 +1,5 @@
-local L = BigWigs:NewBossLocale("Grand Widow Faerlina", "zhCN")
+local L = BigWigs:NewBossLocale("Gluth", "zhCN")
 if not L then return end
-if L then
-	L.silencewarn = "沉默！延缓了激怒！"
-	L.silencewarn5sec = "5秒后沉默结束！"
-end
-
-L = BigWigs:NewBossLocale("Gluth", "zhCN")
 if L then
 	L.startwarn = "格拉斯已激活 - 约105秒后，残杀！"
 

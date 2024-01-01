@@ -1,11 +1,5 @@
-local L = BigWigs:NewBossLocale("Grand Widow Faerlina", "frFR")
+local L = BigWigs:NewBossLocale("Gluth", "frFR")
 if not L then return end
-if L then
-	L.silencewarn = "Réduite au silence !"
-	L.silencewarn5sec = "Fin du silence dans 5 sec."
-end
-
-L = BigWigs:NewBossLocale("Gluth", "frFR")
 if L then
 	L.startwarn = "Gluth engagé ! ~105 sec. avant Décimer !"
 
