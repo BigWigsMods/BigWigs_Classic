@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Onyxia", 249, 1651)
 if not mod then return end
 mod:RegisterEnableMob(10184)
 mod:SetEncounterID(1084)
+mod:SetRespawnTime(60)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

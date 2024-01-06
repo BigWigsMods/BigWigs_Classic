@@ -64,15 +64,18 @@ function mod:WidowsEmbrace(args)
 end
 
 function mod:FrenzyEnrage(args)
+	frenzyTimer = GetTime()
 	self:StopBar(args.spellName)
 	self:Message(args.spellId, "red")
 	self:PlaySound(args.spellId, "warning")
 end
 
 function mod:FrenzyEnrageRemoved(args)
-	frenzyTimer = GetTime()
 	self:Message(args.spellId, "green", CL.removed:format(args.spellName))
-	self:CDBar(args.spellId, 60)
+	local elapsed = GetTime() - frenzyTimer
+	if elapsed < 31 then
+		self:CDBar(args.spellId, 60-elapsed)
+	end
 end
 
 do

@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Ossirian the Unscarred", 509, 1542)
 if not mod then return end
 mod:RegisterEnableMob(15339)
 mod:SetEncounterID(723)
+mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -67,7 +68,7 @@ function mod:EnvelopingWindsRemoved(args)
 end
 
 function mod:CurseOfTongues(args)
-	self:Message(args.spellId, "orange", CL.curse)
+	self:Message(args.spellId, "orange", CL.on_group:format(CL.curse))
 	self:PlaySound(args.spellId, "long")
 end
 

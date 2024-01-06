@@ -63,6 +63,7 @@ end
 function mod:FrenzyEnrage(args)
 	self:UnregisterEvent("UNIT_HEALTH")
 	self:Message(args.spellId, "red", CL.percent:format(30, args.spellName))
+	self:PlaySound(args.spellId, "long")
 end
 
 function mod:UNIT_HEALTH(event, unit)

@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Ragnaros Classic", 409, 1528)
 if not mod then return end
-mod:RegisterEnableMob(11502, 12018)
+mod:RegisterEnableMob(11502, 12018, 54404) -- Ragnaros, Majordomo Executus, Majordomo Executus (Retail)
 mod:SetEncounterID(672)
 mod:SetStage(1)
 
@@ -14,6 +14,7 @@ mod:SetStage(1)
 
 local sonsdead = 0
 local timer = nil
+local warmupTimer = mod:Retail() and 72 or 84
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -55,7 +56,7 @@ end
 function mod:VerifyEnable(unit, mobId)
 	if mobId == 11502 then
 		return true
-	elseif mobId == 12018 then
+	elseif mobId == 12018 or mobId == 54404 then
 		return not UnitCanAttack(unit, "player")
 	end
 end
@@ -69,7 +70,7 @@ function mod:OnBossEnable()
 
 	self:Death("Win", 11502)
 	self:Death("SonDeaths", 12143)
-	self:Death("MajordomoDeath", 12018)
+	self:Death("MajordomoDeath", 12018, 54404)
 end
 
 function mod:OnEngage()
@@ -102,17 +103,17 @@ function mod:WrathOfRagnaros(args)
 end
 
 function mod:SummonRagnarosStart()
-	self:Bar("warmup", 84, CL.active, "Achievement_boss_ragnaros")
+	self:Bar("warmup", warmupTimer, CL.active, "Achievement_boss_ragnaros")
 end
 
 function mod:SummonRagnaros()
-	self:Bar("warmup", {74, 84}, CL.active, "Achievement_boss_ragnaros")
+	self:Bar("warmup", {warmupTimer-10, warmupTimer}, CL.active, "Achievement_boss_ragnaros")
 end
 
 function mod:MajordomoDeath()
 	-- it takes exactly 10 seconds for combat to start after Majodromo dies, while
 	-- the time between starting the RP/summon and killing Majordomo varies
-	self:Bar("warmup", {10, 84}, CL.active, "Achievement_boss_ragnaros")
+	self:Bar("warmup", {10, warmupTimer}, CL.active, "Achievement_boss_ragnaros")
 end
 
 function mod:Emerge()

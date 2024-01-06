@@ -48,7 +48,7 @@ function mod:GetOptions()
 		23174, -- Chromatic Mutation
 		"vulnerability",
 	},nil,{
-		[23174] = self:SpellName(605), -- Chromatic Mutation (Mind Control)
+		[23174] = CL.mind_control, -- Chromatic Mutation (Mind Control)
 	}
 end
 
@@ -134,10 +134,10 @@ function mod:BroodAffliction(args)
 			self:Message(23174, "red", L.debuffs_message, args.spellId)
 			self:PlaySound(23174, "warning")
 		elseif debuffCount == 4 then
-			self:Message(23174, "red", L.debuffs_warning:format(self:SpellName(605)), args.spellId) -- 605 = Mind Control
+			self:Message(23174, "red", L.debuffs_warning:format(CL.mind_control), args.spellId)
 			self:PlaySound(23174, "warning")
 		elseif debuffCount == 5 then
-			self:Message(23174, "red", self:SpellName(605), args.spellId) -- 605 = Mind Control
+			self:Message(23174, "red", CL.mind_control, args.spellId)
 			self:PlaySound(23174, "warning")
 		end
 	end

@@ -1,10 +1,5 @@
-local L = BigWigs:NewBossLocale("Lucifron", "esMX")
+local L = BigWigs:NewBossLocale("Majordomo Executus", "esMX")
 if not L then return end
-if L then
-	L.mc_bar = "CM"
-end
-
-L = BigWigs:NewBossLocale("Majordomo Executus", "esMX")
 if L then
 	--L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
 	L.power_next = "Próximo Escudo"
@@ -25,4 +20,3 @@ if L then
 	L.emerge_message = "¡Ragnaros se emergió, 3 minutos hasta que se sumerge!"
 	L.emerge_bar = "Emersión"
 end
-

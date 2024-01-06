@@ -14,15 +14,6 @@ mod:SetEncounterID(663)
 local assignMarks = {}
 
 --------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:NewLocale()
-if L then
-	L.mc_bar = "MC"
-end
-
---------------------------------------------------------------------------------
 -- Initialization
 --
 
@@ -35,7 +26,7 @@ function mod:GetOptions()
 		dominateMindMarker,
 	},nil,{
 		[19703] = CL.curse, -- Lucifron's Curse (Curse)
-		[20604] = L.mc_bar, -- Dominate Mind (MC)
+		[20604] = CL.mind_control, -- Dominate Mind (Mind Control)
 	}
 end
 
@@ -78,13 +69,13 @@ function mod:DominateMind(args)
 end
 
 function mod:DominateMindApplied(args)
-	self:TargetBar(args.spellId, 15, args.destName, L.mc_bar)
-	self:TargetMessage(args.spellId, "orange", args.destName)
+	self:TargetBar(args.spellId, 15, args.destName, CL.mind_control_short)
+	self:TargetMessage(args.spellId, "orange", args.destName, CL.mind_control)
 	self:CustomIcon(dominateMindMarker, args.destName, assignMarks[args.sourceGUID])
 	self:PlaySound(args.spellId, "warning")
 end
 
 function mod:DominateMindRemoved(args)
 	self:CustomIcon(dominateMindMarker, args.destName)
-	self:StopBar(L.mc_bar, args.destName)
+	self:StopBar(CL.mind_control_short, args.destName)
 end

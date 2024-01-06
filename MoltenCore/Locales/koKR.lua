@@ -1,10 +1,5 @@
-local L = BigWigs:NewBossLocale("Lucifron", "koKR")
+local L = BigWigs:NewBossLocale("Majordomo Executus", "koKR")
 if not L then return end
-if L then
-	L.mc_bar = "정배"
-end
-
-L = BigWigs:NewBossLocale("Majordomo Executus", "koKR")
 if L then
 	L.disabletrigger = "이럴 수가! 그만! 제발 그만! 내가 졌다! 내가 졌어!"
 	--L.power_next = "Next Power"
@@ -25,4 +20,3 @@ if L then
 	L.emerge_message = "라그나로스가 등장했습니다. 3분후 피조물 소환!"
 	L.emerge_bar = "라그나로스 등장"
 end
-

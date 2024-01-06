@@ -1,10 +1,5 @@
-local L = BigWigs:NewBossLocale("Lucifron", "deDE")
+local L = BigWigs:NewBossLocale("Majordomo Executus", "deDE")
 if not L then return end
-if L then
-	L.mc_bar = "GK"
-end
-
-L = BigWigs:NewBossLocale("Majordomo Executus", "deDE")
 if L then
 	L.disabletrigger = "Haltet ein, Sterbliche"
 	--L.power_next = "Next Power"
@@ -25,4 +20,3 @@ if L then
 	L.emerge_message = "Ragnaros aufgetaucht! Untertauchen in 3 min!"
 	L.emerge_bar = "Auftauchen"
 end
-

@@ -38,6 +38,8 @@ function mod:GetOptions()
 		{23023, "ICON"}, -- Conflagration
 		"eggs",
 		"stages",
+	},nil,{
+		[14515] = CL.mind_control, -- Dominate Mind (Mind Control)
 	}
 end
 
@@ -69,7 +71,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 end
 
 function mod:DominateMind(args)
-	self:TargetMessage(args.spellId, "red", args.destName)
+	self:TargetMessage(args.spellId, "red", args.destName, CL.mind_control)
 	if self:Me(args.destGUID) then
 		self:PlaySound(args.spellId, "alert", nil, args.destName)
 	elseif self:Dispeller("magic") then
