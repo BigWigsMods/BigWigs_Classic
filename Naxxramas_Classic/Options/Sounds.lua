@@ -44,8 +44,9 @@ BigWigs:AddSounds("Grand Widow Faerlina", {
 
 BigWigs:AddSounds("Maexxna", {
 	[28622] = "alert",
-	[28747] = "alarm",
+	[28747] = "warning",
 	[28776] = "info",
+	[29484] = "long",
 })
 
 BigWigs:AddSounds("Instructor Razuvious", {

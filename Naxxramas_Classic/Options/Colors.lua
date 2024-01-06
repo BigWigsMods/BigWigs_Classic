@@ -58,10 +58,11 @@ BigWigs:AddColors("Grand Widow Faerlina", {
 })
 
 BigWigs:AddColors("Maexxna", {
-	[28622] = {"blue","red"},
-	[28747] = {"orange","red"},
-	[28776] = {"blue","purple"},
-	[29484] = {"red","yellow"},
+	[28622] = {"blue","yellow"},
+	[28747] = "orange",
+	[28776] = {"blue","green","purple"},
+	[29484] = "red",
+	["adds"] = "yellow",
 })
 
 BigWigs:AddColors("Instructor Razuvious", {

@@ -2,11 +2,14 @@
 BigWigs:AddSounds("Kurinnaxx", {
 	[25646] = "warning",
 	[25656] = "alert",
+	[26527] = "long",
 })
 
 BigWigs:AddSounds("General Rajaxx", {
+	[8269] = "long",
 	[25462] = "alarm",
 	[25471] = "warning",
+	[25599] = "alert",
 	[26550] = "underyou",
 	["stages"] = "info",
 })
