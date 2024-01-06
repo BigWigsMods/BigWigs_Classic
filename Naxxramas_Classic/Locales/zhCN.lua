@@ -141,15 +141,7 @@ end
 
 L = BigWigs:NewBossLocale("Maexxna", "zhCN")
 if L then
-	L.webspraywarn30sec = "10秒后，蛛网裹体！"
-	L.webspraywarn20sec = "蛛网裹体！10秒后小蜘蛛出现！"
-	L.webspraywarn10sec = "小蜘蛛出现！10秒后蛛网喷射！"
-	L.webspraywarn5sec = "蛛网喷射5秒！"
-	L.enragewarn = "激怒！"
-	L.enragesoonwarn = "即将 激怒！"
-
-	L.cocoonbar = "蛛网裹体"
-	L.spiderbar = "出现 小蜘蛛"
+	L.cocoons = "蛛网裹体"
 end
 
 L = BigWigs:NewBossLocale("Sapphiron", "zhCN")

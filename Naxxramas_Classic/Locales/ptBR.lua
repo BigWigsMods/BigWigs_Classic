@@ -136,15 +136,7 @@ end
 
 L = BigWigs:NewBossLocale("Maexxna", "ptBR")
 if L then
-	--L.webspraywarn30sec = "Cocoons in 10 sec"
-	--L.webspraywarn20sec = "Cocoons! Spiders in 10 sec!"
-	--L.webspraywarn10sec = "Spiders! Spray in 10 sec!"
-	--L.webspraywarn5sec = "WEB SPRAY in 5 seconds!"
-	--L.enragewarn = "Frenzy - SQUISH SQUISH SQUISH!"
-	--L.enragesoonwarn = "Frenzy Soon - Bugsquatters out!"
-
-	--L.cocoonbar = "Cocoons"
-	--L.spiderbar = "Spiders"
+	--L.cocoons = "Cocoons"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ptBR")

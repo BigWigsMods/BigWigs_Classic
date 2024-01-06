@@ -141,15 +141,7 @@ end
 
 L = BigWigs:NewBossLocale("Maexxna", "koKR")
 if L then
-	L.webspraywarn30sec = "10초 이내 거미줄 감싸기"
-	L.webspraywarn20sec = "거미줄 감싸기. 10초 후 거미 소환!"
-	L.webspraywarn10sec = "거미 소환. 10초 후 거미줄 뿌리기!"
-	L.webspraywarn5sec = "5초 후 거미줄 뿌리기!"
-	L.enragewarn = "광기!"
-	L.enragesoonwarn = "잠시 후 광기!"
-
-	L.cocoonbar = "거미줄 감싸기"
-	L.spiderbar = "거미 소환"
+	L.cocoons = "거미줄 감싸기"
 end
 
 L = BigWigs:NewBossLocale("Sapphiron", "koKR")

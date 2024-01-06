@@ -141,15 +141,7 @@ end
 
 L = BigWigs:NewBossLocale("Maexxna", "deDE")
 if L then
-	L.webspraywarn30sec = "Fangnetz in 10 sek!"
-	L.webspraywarn20sec = "Fangnetz! Spinnen in 10 sek!"
-	L.webspraywarn10sec = "Spinnen! Gespinstschauer in 10 sek!"
-	L.webspraywarn5sec = "Gespinstschauer in 5 sek!"
-	L.enragewarn = "Raserei!"
-	L.enragesoonwarn = "Raserei bald!"
-
-	L.cocoonbar = "Fangnetz"
-	L.spiderbar = "Spinnen"
+	L.cocoons = "Fangnetz"
 end
 
 L = BigWigs:NewBossLocale("Sapphiron", "deDE")

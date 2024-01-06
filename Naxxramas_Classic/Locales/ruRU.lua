@@ -141,15 +141,7 @@ end
 
 L = BigWigs:NewBossLocale("Maexxna", "ruRU")
 if L then
-	L.webspraywarn30sec = "Паутина через 10 секунд"
-	L.webspraywarn20sec = "Паутина! 10 секунд до появления пауков!"
-	L.webspraywarn10sec = "Пауки! 10 секунд до паутины!"
-	L.webspraywarn5sec = "Паутина через 5 секунд!"
-	L.enragewarn = "Бешенство - ХЛЮП ХЛЮП ХЛЮП!"
-	L.enragesoonwarn = "Скоро бешенство"
-
-	L.cocoonbar = "Коконы"
-	L.spiderbar = "Пауки"
+	L.cocoons = "Коконы"
 end
 
 L = BigWigs:NewBossLocale("Sapphiron", "ruRU")
