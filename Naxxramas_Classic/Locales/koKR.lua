@@ -1,12 +1,5 @@
-local L = BigWigs:NewBossLocale("Gluth", "koKR")
+local L = BigWigs:NewBossLocale("Gothik the Harvester", "koKR")
 if not L then return end
-if L then
-	L.startwarn = "글루스 전투 시작! 약 105초 후 좀비 척살!"
-
-	L.decimate_bar = "좀비 척살"
-end
-
-L = BigWigs:NewBossLocale("Gothik the Harvester", "koKR")
 if L then
 	L.add_death = "추가 몹 죽음 알림"
 	L.add_death_desc = "추가된 몹 죽음을 알립니다."
@@ -63,9 +56,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "koKR")
 if L then
 	L.understudy = "죽음의 기사 수습생"
-
-	L.taunt_warning = "5초 후 도발 종료!"
-	L.shieldwall_warning = "5초 후 방패의 벽 종료!"
 end
 
 L = BigWigs:NewBossLocale("Thaddius", "koKR")

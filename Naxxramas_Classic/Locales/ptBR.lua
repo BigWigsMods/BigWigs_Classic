@@ -1,12 +1,5 @@
-local L = BigWigs:NewBossLocale("Gluth", "ptBR")
+local L = BigWigs:NewBossLocale("Gothik the Harvester", "ptBR")
 if not L then return end
-if L then
-	--L.startwarn = "Gluth engaged, ~105 sec to decimate!"
-
-	--L.decimate_bar = "Decimate Zombies"
-end
-
-L = BigWigs:NewBossLocale("Gothik the Harvester", "ptBR")
 if L then
 	--L.add_death = "Add Death Alert"
 	--L.add_death_desc = "Alerts when an add dies."
@@ -63,9 +56,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ptBR")
 if L then
 	L.understudy = "Deathknight Understudy"
-
-	--L.taunt_warning = "Taunt ready in 5sec!"
-	--L.shieldwall_warning = "Barrier gone in 5sec!"
 end
 
 L = BigWigs:NewBossLocale("Thaddius", "ptBR")

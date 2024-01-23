@@ -13,8 +13,7 @@ mod:SetEncounterID(1108)
 
 local L = mod:GetLocale()
 if L then
-	L.decimate = 28375 -- Decimate
-	L.decimate_icon = "inv_shield_01"
+	L["28375_icon"] = "inv_shield_01"
 end
 
 --------------------------------------------------------------------------------
@@ -27,7 +26,7 @@ function mod:GetOptions()
 		29685, -- Terrifying Roar
 		25646, -- Mortal Wound
 		29306, -- Infected Wound
-		"decimate", -- Decimate
+		28375, -- Decimate
 		"berserk",
 	},nil,{
 		[29685] = CL.fear, -- Terrifying Roar (Fear)
@@ -46,8 +45,8 @@ end
 
 function mod:OnEngage()
 	self:Berserk(360, true)
-	self:CDBar("decimate", 105, self:SpellName(28375), L.decimate_icon)
-	self:DelayedMessage("decimate", 100, "orange", CL.soon:format(self:SpellName(28375)), L.decimate_icon)
+	self:CDBar(28375, 105, self:SpellName(28375), L["28375_icon"])
+	self:DelayedMessage(28375, 100, "orange", CL.soon:format(self:SpellName(28375)))
 end
 
 --------------------------------------------------------------------------------
@@ -94,10 +93,10 @@ do
 	function mod:Decimate(args)
 		if args.time - prev > 5 then
 			prev = args.time
-			self:Message("decimate", "red", args.spellName, L.decimate_icon)
-			self:CDBar("decimate", 105, args.spellName, L.decimate_icon)
-			self:DelayedMessage("decimate", 100, "red", CL.soon:format(args.spellName))
-			self:PlaySound("decimate", "warning")
+			self:Message(args.spellId, "red", args.spellName, L["28375_icon"])
+			self:CDBar(args.spellId, 105, args.spellName, L["28375_icon"])
+			self:DelayedMessage(args.spellId, 100, "red", CL.soon:format(args.spellName))
+			self:PlaySound(args.spellId, "warning")
 		end
 	end
 end

@@ -1,12 +1,5 @@
-local L = BigWigs:NewBossLocale("Gluth", "ruRU")
+local L = BigWigs:NewBossLocale("Gothik the Harvester", "ruRU")
 if not L then return end
-if L then
-	L.startwarn = "Глут вступает в бой! ~105 cекунд до появления зомби!"
-
-	L.decimate_bar = "Истребление зомби"
-end
-
-L = BigWigs:NewBossLocale("Gothik the Harvester", "ruRU")
 if L then
 	L.add_death = "Оповещать смерть помощников"
 	L.add_death_desc = "Сообщать о смерти помощников."
@@ -63,9 +56,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ruRU")
 if L then
 	L.understudy = "Ученик рыцаря смерти"
-
-	L.taunt_warning = "Провокация закончится через 5сек!"
-	L.shieldwall_warning = "Преграда из костей закончится через 5сек!"
 end
 
 L = BigWigs:NewBossLocale("Thaddius", "ruRU")

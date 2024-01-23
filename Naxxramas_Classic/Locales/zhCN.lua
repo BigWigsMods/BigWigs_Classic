@@ -1,12 +1,5 @@
-local L = BigWigs:NewBossLocale("Gluth", "zhCN")
+local L = BigWigs:NewBossLocale("Gothik the Harvester", "zhCN")
 if not L then return end
-if L then
-	L.startwarn = "格拉斯已激活 - 约105秒后，残杀！"
-
-	L.decimate_bar = "残杀"
-end
-
-L = BigWigs:NewBossLocale("Gothik the Harvester", "zhCN")
 if L then
 	L.add_death = "增援死亡"
 	L.add_death_desc = "当增援死亡时发出警报。"
@@ -63,9 +56,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "zhCN")
 if L then
 	L.understudy = "见习死亡骑士"
-
-	L.taunt_warning = "5秒后，可以嘲讽！"
-	L.shieldwall_warning = "5秒后，可以白骨屏障！"
 end
 
 L = BigWigs:NewBossLocale("Thaddius", "zhCN")

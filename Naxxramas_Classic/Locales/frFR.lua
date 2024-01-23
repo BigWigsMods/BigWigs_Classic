@@ -1,12 +1,5 @@
-local L = BigWigs:NewBossLocale("Gluth", "frFR")
+local L = BigWigs:NewBossLocale("Gothik the Harvester", "frFR")
 if not L then return end
-if L then
-	L.startwarn = "Gluth engagé ! ~105 sec. avant Décimer !"
-
-	L.decimate_bar = "Prochain Décimer"
-end
-
-L = BigWigs:NewBossLocale("Gothik the Harvester", "frFR")
 if L then
 	L.add_death = "Mort des renforts"
 	L.add_death_desc = "Prévient quand un des renforts meurt."
@@ -63,9 +56,6 @@ end
 L = BigWigs:NewBossLocale("Instructor Razuvious", "frFR")
 if L then
 	L.understudy = "Doublure de chevalier de la mort"
-
-	L.taunt_warning = "Provocation prête dans 5 sec. !"
-	L.shieldwall_warning = "Barrière d'os terminée dans 5 sec. !"
 end
 
 L = BigWigs:NewBossLocale("Thaddius", "frFR")
