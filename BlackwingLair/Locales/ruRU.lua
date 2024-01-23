@@ -5,7 +5,7 @@ if L then
 
 	L.eggs = "Считать яйца"
 	L.eggs_desc = "Пересчитывать уничтоженные яйца."
-	L.eggs_message = "%d/30 яиц уничтожено!"
+	L.eggs_message = "%d/30 яиц уничтожено"
 end
 
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "ruRU")

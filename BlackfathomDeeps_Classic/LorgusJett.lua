@@ -18,6 +18,7 @@ if L then
 	L.priestess = "Blackfathom Tide Priestess"
 	L.priestess_short = "Priestess" -- Shortened version of L.priestess (Blackfathom Tide Priestess)
 	L.murloc = "Blackfathom Murloc"
+	L["419649_icon"] = "inv_misc_head_murloc_01"
 end
 
 --------------------------------------------------------------------------------
@@ -75,7 +76,7 @@ end
 function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
-	self:CDBar(419649, 27, self:SpellName(419649), "inv_misc_head_murloc_01") -- Spawn Murloc
+	self:CDBar(419649, 27, self:SpellName(419649), L["419649_icon"]) -- Spawn Murloc
 end
 
 --------------------------------------------------------------------------------
@@ -83,8 +84,8 @@ end
 --
 
 function mod:SpawnMurloc(args)
-	self:Message(args.spellId, "cyan", args.spellName, "inv_misc_head_murloc_01")
-	self:CDBar(args.spellId, 27, args.spellName, "inv_misc_head_murloc_01")
+	self:Message(args.spellId, "cyan", args.spellName, L["419649_icon"])
+	self:CDBar(args.spellId, 27, args.spellName, L["419649_icon"])
 end
 
 function mod:Heal(args)

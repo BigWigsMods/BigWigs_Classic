@@ -25,6 +25,8 @@ if L then
 	L.engage_trigger = "NOW FOR YOU,"
 	L.submerge_trigger = "COME FORTH,"
 
+	L.warmup_icon = "Achievement_boss_ragnaros"
+
 	L.submerge = "Submerge"
 	L.submerge_desc = "Warn for Ragnaros' submerge."
 	L.submerge_icon = "Achievement_boss_ragnaros"
@@ -78,8 +80,8 @@ function mod:OnEngage()
 	timer = nil
 	self:SetStage(1)
 	self:CDBar(20566, 27, CL.knockback) -- Wrath of Ragnaros
-	self:Bar("submerge", 180, L.submerge_bar, "Achievement_boss_ragnaros")
-	self:Message("submerge", "yellow", CL.custom_min:format(L.submerge, 3), "Achievement_boss_ragnaros")
+	self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
+	self:Message("submerge", "yellow", CL.custom_min:format(L.submerge, 3), L.submerge_icon)
 	self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
 	self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
 	self:DelayedMessage("submerge", 150, "yellow", CL.custom_sec:format(L.submerge, 30))
@@ -103,17 +105,17 @@ function mod:WrathOfRagnaros(args)
 end
 
 function mod:SummonRagnarosStart()
-	self:Bar("warmup", warmupTimer, CL.active, "Achievement_boss_ragnaros")
+	self:Bar("warmup", warmupTimer, CL.active, L.warmup_icon)
 end
 
 function mod:SummonRagnaros()
-	self:Bar("warmup", {warmupTimer-10, warmupTimer}, CL.active, "Achievement_boss_ragnaros")
+	self:Bar("warmup", {warmupTimer-10, warmupTimer}, CL.active, L.warmup_icon)
 end
 
 function mod:MajordomoDeath()
 	-- it takes exactly 10 seconds for combat to start after Majodromo dies, while
 	-- the time between starting the RP/summon and killing Majordomo varies
-	self:Bar("warmup", {10, warmupTimer}, CL.active, "Achievement_boss_ragnaros")
+	self:Bar("warmup", {10, warmupTimer}, CL.active, L.warmup_icon)
 end
 
 function mod:Emerge()
@@ -121,8 +123,8 @@ function mod:Emerge()
 	timer = nil
 	self:SetStage(1)
 	self:CDBar(20566, 27, CL.knockback)
-	self:Bar("submerge", 180, L.submerge_bar, "Achievement_boss_ragnaros")
-	self:Message("emerge", "yellow", L.emerge_message, "Achievement_boss_ragnaros")
+	self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
+	self:Message("emerge", "yellow", L.emerge_message, L.emerge_icon)
 	self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
 	self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
 	self:DelayedMessage("submerge", 150, "yellow", CL.custom_sec:format(L.submerge, 30))
@@ -136,8 +138,8 @@ function mod:Submerge()
 	self:SetStage(2)
 	timer = self:ScheduleTimer("Emerge", 90)
 	self:StopBar(CL.knockback)
-	self:Message("submerge", "yellow", L.submerge_message, "Achievement_boss_ragnaros")
-	self:Bar("emerge", 90, L.emerge_bar, "Achievement_boss_ragnaros")
+	self:Message("submerge", "yellow", L.submerge_message, L.submerge_icon)
+	self:Bar("emerge", 90, L.emerge_bar, L.emerge_icon)
 	self:DelayedMessage("emerge", 30, "yellow", CL.custom_sec:format(L.emerge, 60))
 	self:DelayedMessage("emerge", 60, "yellow", CL.custom_sec:format(L.emerge, 30))
 	self:DelayedMessage("emerge", 80, "orange", CL.custom_sec:format(L.emerge, 10), false, "alarm")

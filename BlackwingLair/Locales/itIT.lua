@@ -5,7 +5,7 @@ if L then
 
 	--L.eggs = "Count Eggs"
 	--L.eggs_desc = "Count the destroyed eggs."
-	--L.eggs_message = "%d/30 eggs destroyed!"
+	--L.eggs_message = "%d/30 eggs destroyed"
 end
 
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "itIT")

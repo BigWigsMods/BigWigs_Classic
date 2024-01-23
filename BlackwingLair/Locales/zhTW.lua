@@ -5,7 +5,7 @@ if L then
 
 	L.eggs = "龍蛋計數"
 	L.eggs_desc = "已摧毀龍蛋計數。"
-	L.eggs_message = "已摧毀 %d/30 個龍蛋！"
+	L.eggs_message = "已摧毀 %d/30 個龍蛋"
 end
 
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "zhTW")

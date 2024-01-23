@@ -4,8 +4,8 @@ if L then
 	L.start_trigger = "침입자들이 들어왔다! 어떤 희생이 있더라도 알을 반드시 수호하라!"
 
 	L.eggs = "알 개수 알림 미사용"
-	L.eggs_desc = "남은 알 개수 알림 미사용"
-	L.eggs_message = "%d/30 알을 파괴하였습니다."
+	L.eggs_desc = "남은 알 개수 알림 미사용."
+	L.eggs_message = "%d/30 알을 파괴하였습니다"
 end
 
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "koKR")

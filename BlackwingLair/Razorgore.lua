@@ -25,7 +25,7 @@ if L then
 	L.eggs = "Count Eggs"
 	L.eggs_desc = "Count the destroyed eggs."
 	L.eggs_icon = "inv_egg_03"
-	L.eggs_message = "%d/30 eggs destroyed!"
+	L.eggs_message = "%d/30 eggs destroyed"
 end
 
 --------------------------------------------------------------------------------

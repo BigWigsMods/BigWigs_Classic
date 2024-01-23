@@ -20,6 +20,7 @@ if L then
 	L.phase3_trigger = "It seems you'll need another lesson"
 
 	L.deep_breath = "Deep Breath" -- Preserving the original way it was referred to during classic
+	L["18431_icon"] = "spell_shadow_psychicscream"
 end
 
 --------------------------------------------------------------------------------
@@ -90,7 +91,7 @@ function mod:Breath() -- Stage 2 "Deep Breath"
 end
 
 function mod:BellowingRoar(args) -- Stage 3 "Fear"
-	self:Message(args.spellId, "yellow", CL.incoming:format(CL.fear), "spell_shadow_psychicscream") -- Use custom icon instead of the same fire icon for 3 different abilities
+	self:Message(args.spellId, "yellow", CL.incoming:format(CL.fear), L["18431_icon"]) -- Use custom icon instead of the same fire icon for 3 different abilities
 	self:PlaySound(args.spellId, "info")
 end
 

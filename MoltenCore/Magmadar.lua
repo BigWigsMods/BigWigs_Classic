@@ -8,6 +8,15 @@ mod:RegisterEnableMob(11982)
 mod:SetEncounterID(664)
 
 --------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:NewLocale()
+if L then
+	L["19408_icon"] = "spell_shadow_psychicscream"
+end
+
+--------------------------------------------------------------------------------
 -- Initialization
 --
 
@@ -32,7 +41,7 @@ end
 
 function mod:OnEngage()
 	self:CDBar(19451, 8.1) -- Enrage / Frenzy
-	self:CDBar(19408, 9.7, CL.fear) -- Panic
+	self:CDBar(19408, 9.7, CL.fear, L["19408_icon"]) -- Panic
 end
 
 --------------------------------------------------------------------------------
@@ -40,8 +49,8 @@ end
 --
 
 function mod:Panic(args)
-	self:CDBar(args.spellId, 31, CL.fear, "spell_shadow_psychicscream") -- 31-50, sometimes even higher
-	self:Message(args.spellId, "orange", CL.fear, "spell_shadow_psychicscream")
+	self:CDBar(args.spellId, 31, CL.fear, L["19408_icon"]) -- 31-50, sometimes even higher
+	self:Message(args.spellId, "orange", CL.fear, L["19408_icon"])
 	self:PlaySound(args.spellId, "long")
 end
 

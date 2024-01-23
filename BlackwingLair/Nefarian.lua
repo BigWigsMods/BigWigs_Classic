@@ -44,6 +44,8 @@ if L then
 	L.warnmonk = "Monks - Stuck Rolling"
 	L.warndemonhunter = "Demon Hunters - Blinded"
 
+	L["22686_icon"] = "spell_shadow_psychicscream"
+
 	L.classcall = "Class Call"
 	L.classcall_desc = "Warn for Class Calls."
 
@@ -123,9 +125,9 @@ end
 --
 
 function mod:BellowingRoar(args)
-	self:CDBar(args.spellId, 32, CL.fear, "spell_shadow_psychicscream")
-	self:Message(args.spellId, "red", CL.incoming:format(CL.fear), "spell_shadow_psychicscream")
-	self:CastBar(args.spellId, 1.5, CL.fear, "spell_shadow_psychicscream")
+	self:CDBar(args.spellId, 32, CL.fear, L["22686_icon"])
+	self:Message(args.spellId, "red", CL.incoming:format(CL.fear), L["22686_icon"])
+	self:CastBar(args.spellId, 1.5, CL.fear, L["22686_icon"])
 	self:PlaySound(args.spellId, "alert")
 end
 

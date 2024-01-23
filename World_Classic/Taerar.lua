@@ -23,6 +23,8 @@ if L then
 	L.bossName = "Taerar"
 
 	L.engage_trigger = "Peace is but a fleeting dream! Let the NIGHTMARE reign!"
+
+	L["22686_icon"] = "spell_shadow_psychicscream"
 end
 L = mod:GetLocale()
 
@@ -110,8 +112,8 @@ do
 end
 
 function mod:BellowingRoar(args)
-	self:Message(args.spellId, "orange", CL.incoming:format(CL.fear), "spell_shadow_psychicscream")
-	self:Bar(args.spellId, 30, CL.fear, "spell_shadow_psychicscream")
+	self:Message(args.spellId, "orange", CL.incoming:format(CL.fear), L["22686_icon"])
+	self:Bar(args.spellId, 30, CL.fear, L["22686_icon"])
 end
 
 function mod:SummonShadeOfTaerar(args)
