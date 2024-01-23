@@ -1,48 +1,30 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Kel'Thuzad", 533, 1615)
 if not mod then return end
-mod:RegisterEnableMob(15990)
+mod:RegisterEnableMob(15990, 16428, 16427, 16429) -- Kel'Thuzad, Unstoppable Abomination, Soldier of the Frozen Wastes, Soul Weaver
 mod:SetEncounterID(1114)
-
---------------------------------------------------------------------------------
--- Locals
---
-
-local fbTargets = mod:NewTargetList()
-local mcTargets = mod:NewTargetList()
+mod:SetRespawnTime(61)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Kel'Thuzad's Chamber"
 
-	L.start_trigger = "Minions, servants, soldiers of the cold dark! Obey the call of Kel'Thuzad!"
-	L.start_warning = "Kel'Thuzad encounter started! ~5min until he is active!"
-
-	L.phase2_trigger1 = "Pray for mercy!"
-	L.phase2_trigger2 = "Scream your dying breath!"
-	L.phase2_trigger3 = "The end is upon you!"
-	L.phase2_warning = "Phase 2 - Kel'Thuzad incoming!"
-	L.phase2_bar = "Kel'Thuzad Active!"
-
-	L.phase3_trigger = "Master, I require aid!"
-	L.phase3_soon_warning = "Phase 3 soon!"
-	L.phase3_warning = "Phase 3 - Guardians in ~15 sec!"
-
-	L.guardians = "Guardian Spawns"
-	L.guardians_desc = "Warn for incoming Icecrown Guardians in phase 3."
-	L.guardians_icon = 28866 -- inv_trinket_naxxramas04
-	L.guardians_trigger = "Very well. Warriors of the frozen wastes, rise up! I command you to fight, kill and die for your master! Let none survive!"
-	L.guardians_warning = "Guardians incoming in ~10sec!"
-	L.guardians_bar = "Guardians incoming!"
+	L.engage_yell_trigger = "Minions, servants, soldiers of the cold dark! Obey the call of Kel'Thuzad!"
+	L.stage2_yell_trigger1 = "Pray for mercy!"
+	L.stage2_yell_trigger2 = "Scream your dying breath!"
+	L.stage2_yell_trigger3 = "The end is upon you!"
+	L.stage3_yell_trigger = "Master, I require aid!"
+	L.adds_yell_trigger = "Very well. Warriors of the frozen wastes, rise up! I command you to fight, kill and die for your master! Let none survive!"
+	L.adds_icon = "inv_trinket_naxxramas04"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -50,13 +32,17 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
+		28467, -- Mortal Wound
 		27808, -- Frost Blast
-		27810, -- Shadow Fissure
+		{27810, "SAY", "ME_ONLY_EMPHASIZE"}, -- Shadow Fissure
 		28410, -- Chains of Kel'Thuzad
-		{27819, "ICON", "FLASH"}, -- Detonate Mana
-		"guardians",
+		{27819, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Detonate Mana
+		"adds",
 		"stages",
 		"proximity",
+	},nil,{
+		[28410] = CL.mind_control, -- Chains of Kel'Thuzad (Minc Control)
+		[27819] = CL.bomb, -- Detonate Mana (Bomb)
 	}
 end
 
@@ -74,101 +60,126 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "Fizzure", 27810)
-	self:Log("SPELL_AURA_APPLIED", "FrostBlast", 27808)
-	self:Log("SPELL_AURA_APPLIED", "Detonate", 27819)
-	self:Log("SPELL_AURA_APPLIED", "ChainsOfKelThuzad", 28410)
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 
-	self:BossYell("Engage", L.start_trigger)
-	self:BossYell("Phase2", L.phase2_trigger1, L.phase2_trigger2, L.phase2_trigger3)
-	self:BossYell("Phase3", L.phase3_trigger)
-	self:BossYell("Guardians", L.guardians_trigger)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWoundApplied", 28467)
+	self:Log("SPELL_CAST_SUCCESS", "ShadowFissure", 27810)
+	self:Log("SPELL_CAST_SUCCESS", "FrostBlast", 27808)
+	self:Log("SPELL_AURA_APPLIED", "FrostBlastApplied", 27808)
+	self:Log("SPELL_CAST_SUCCESS", "DetonateMana", 27819)
+	self:Log("SPELL_AURA_APPLIED", "DetonateManaApplied", 27819)
+	self:Log("SPELL_AURA_REMOVED", "DetonateManaRemoved", 27819)
+	self:Log("SPELL_CAST_SUCCESS", "ChainsOfKelThuzad", 28408)
+	self:Log("SPELL_AURA_APPLIED", "ChainsOfKelThuzadApplied", 28410)
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 15990)
 end
 
 function mod:OnEngage()
-	fbTargets = self:NewTargetList()
-	mcTargets = self:NewTargetList()
+	self:SetStage(1)
 	self:CloseProximity("proximity")
 
-	self:Message("stages", "yellow", L.start_warning, false) -- CL.custom_start:format(self.displayName, _G.ACTIVE_PETS, 5)
-	self:Bar("stages", 310, CL.phase:format(2), "spell_shadow_chilltouch")
+	self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:Bar("stages", 315, CL.stage:format(2), "spell_shadow_chilltouch")
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:Phase2()
-	self:StopBar(CL.phase:format(2))
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if msg:find(L.engage_yell_trigger, nil, true) then
+		self:Engage()
+	elseif msg:find(L.stage2_yell_trigger1, nil, true) or msg:find(L.stage2_yell_trigger2, nil, true) or msg:find(L.stage2_yell_trigger3, nil, true) then
+		self:StopBar(CL.stage:format(2))
+		self:SetStage(2)
+		self:RegisterEvent("UNIT_HEALTH")
 
-	self:Message("stages", "cyan", L.phase2_warning, false)
-	self:PlaySound("stages", "info")
-	self:Bar("stages", 15, L.phase2_bar, "Spell_Shadow_Charm")
-	self:OpenProximity("proximity", 10)
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "target", "focus")
+		self:Message("stages", "cyan", CL.stage:format(2), false)
+		self:Bar("stages", 15, self.displayName, "Spell_Shadow_Charm")
+		self:OpenProximity("proximity", 10)
+		self:PlaySound("stages", "info")
+	elseif msg:find(L.stage3_yell_trigger, nil, true) then
+		self:SetStage(3)
+		self:Message("stages", "cyan", CL.percent:format(40, CL.stage:format(3)), false)
+		self:PlaySound("stages", "info")
+	elseif msg:find(L.adds_yell_trigger, nil, true) then
+		self:Message("adds", "cyan", CL.spawning:format(CL.adds), L.adds_icon)
+		self:Bar("adds", 10, CL.adds, L.adds_icon)
+		self:PlaySound("adds", "info")
+	end
 end
 
-function mod:Phase3()
-	self:Message("stages", "cyan", L.phase3_warning, false)
-	self:PlaySound("stages", "info")
+function mod:MortalWoundApplied(args)
+	if args.amount >= 3 then
+		self:StackMessage(args.spellId, "purple", args.destName, args.amount, 5)
+	end
 end
 
-function mod:Guardians()
-	self:Message("guardians", "red", L.guardians_warning, L.guardians_icon)
-	self:Bar("guardians", 10, L.guardians_bar, L.guardians_icon)
-end
-
-function mod:Fizzure(args)
-	self:Message(27810, "red")
-end
-
-function mod:FrostBlast(args)
-	fbTargets[#fbTargets + 1] = args.destName
-	self:TargetsMessageOld(27808, "red", fbTargets, 0, nil, nil, 0.4)
+function mod:ShadowFissure(args)
+	self:TargetMessage(args.spellId, "red", args.destName)
 	if self:Me(args.destGUID) then
-		self:PlaySound(27808, "alert")
-	end
-	if #fbTargets == 1 then
-		self:DelayedMessage(27808, 20, "yellow", CL.soon:format(args.spellName))
-		self:CDBar(27808, 25)
+		self:Say(args.spellId, nil, nil, "Shadow Fissure")
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
 end
 
-function mod:Detonate(args)
-	self:TargetMessage(27819, "yellow", args.destName, self:SpellName(20789)) -- 20789 = Detonate
+do
+	local playerList = {}
+	function mod:FrostBlast(args)
+		playerList = {}
+		self:CDBar(args.spellId, 25)
+		self:PlaySound(args.spellId, "alert")
+	end
+
+	function mod:FrostBlastApplied(args)
+		playerList[#playerList+1] = args.destName
+		self:TargetsMessage(args.spellId, "yellow", playerList)
+	end
+end
+
+function mod:DetonateMana(args)
+	self:CDBar(args.spellId, 20, CL.bomb)
+end
+
+function mod:DetonateManaApplied(args)
+	self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
+	self:TargetBar(args.spellId, 5, args.destName, CL.bomb)
 	if self:Me(args.destGUID) then
-		self:PlaySound(27819, "alert")
-		self:Flash(27819)
+		self:Say(args.spellId, CL.bomb, nil, "Bomb")
+		self:SayCountdown(args.spellId, 5)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
-	self:PrimaryIcon(27819, args.destName)
-	self:TargetBar(27819, 5, args.destName, self:SpellName(20789))
-	self:CDBar(27819, 20, self:SpellName(20789))
-	self:DelayedMessage(27819, 15, "yellow", CL.soon:format(self:SpellName(20789)))
 end
 
-function mod:ChainsOfKelThuzad(args)
-	mcTargets[#mcTargets + 1] = args.destName
-	self:TargetsMessageOld(28410, "red", mcTargets, 5, self:SpellName(605), nil, 0.5) -- 605 = Mind Control
+function mod:DetonateManaRemoved(args)
+	self:StopBar(CL.bomb, args.destName)
 	if self:Me(args.destGUID) then
-		self:PlaySound(28410, "alert")
-	end
-	if #mcTargets == 1 then
-		self:Bar(28410, 20, mod:SpellName(605))
-		self:DelayedMessage(28410, 68, "orange", CL.soon:format(self:SpellName(605)))
-		self:CDBar(28410, 68, self:SpellName(605))
+		self:CancelSayCountdown(args.spellId)
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unit)
+do
+	local playerList = {}
+	function mod:ChainsOfKelThuzad()
+		playerList = {}
+		self:CDBar(28410, 68, CL.mind_control)
+		self:PlaySound(28410, "long")
+	end
+
+	function mod:ChainsOfKelThuzadApplied(args)
+		playerList[#playerList+1] = args.destName
+		self:TargetsMessage(args.spellId, "orange", playerList, 5, CL.mind_control, nil, 1)
+	end
+end
+
+function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15990 then
 		local hp = self:GetHealth(unit)
-		if hp < 46 then
-			self:UnregisterUnitEvent(event, "target", "focus")
-			self:Message("stages", "cyan", L.phase3_soon_warning, false)
-			self:PlaySound("stages", "info")
+		if hp < 45 then
+			self:UnregisterEvent(event)
+			self:Message("stages", "cyan", CL.soon:format(CL.stage:format(3)), false)
 		end
 	end
 end

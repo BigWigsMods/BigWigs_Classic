@@ -1,40 +1,32 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Sapphiron", 533, 1614)
 if not mod then return end
 mod:RegisterEnableMob(15989)
 mod:SetEncounterID(1119)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
 --
 
-local airTimer
 local targetCheck = nil
 local blockCount = 0
+local curseCount = 0
+local curseTime = 0
+local CheckAirPhase
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
-	L.deepbreath_trigger = "%s takes in a deep breath..."
-
-	L.air_phase = "Air Phase"
-	L.ground_phase = "Ground Phase"
-
-	L.deepbreath = "Ice Bomb"
-	L.deepbreath_icon = 3129 -- Frost Breath
-	L.deepbreath_warning = "Ice Bomb Incoming!"
-	L.deepbreath_bar = "Ice Bomb Lands!"
-
-	L.icebolt_say = "I'm a Block!"
-
+	L["28524_icon"] = "spell_frost_arcticwinds"
+	L.stages_icon = "inv_misc_head_dragon_blue"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -43,33 +35,40 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		28542, -- Life Drain
-		"deepbreath", -- Ice Bomb (Frost Breath)
 		{28522, "SAY"}, -- Ice Bolt
+		{28524, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Frost Breath
+		28547, -- Chill
 		"stages",
 		"berserk",
+	},nil,{
+		[28547] = self:SpellName(26607), -- Chill (Blizzard)
 	}
-
 end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "LifeDrain", 28542)
-	self:Log("SPELL_AURA_APPLIED", "Icebolt", 28522)
-	self:Log("SPELL_CAST_START", "DeepBreath", 28524)
-	-- self:Emote("DeepBreath", L.deepbreath_trigger)
-	self:Log("SPELL_CAST_SUCCESS", "IceBomb", 28524)
+	self:Log("SPELL_AURA_APPLIED", "LifeDrainApplied", 28542)
+	self:Log("SPELL_AURA_REMOVED", "LifeDrainRemoved", 28542)
+	self:Log("SPELL_AURA_APPLIED", "IceboltApplied", 28522)
+	self:Log("SPELL_CAST_START", "FrostBreathStart", 28524)
+	self:Log("SPELL_CAST_SUCCESS", "FrostBreath", 28524)
+	self:Log("SPELL_AURA_APPLIED", "ChillDamage", 28547)
+	self:Log("SPELL_PERIODIC_DAMAGE", "ChillDamage", 28547)
+	self:Log("SPELL_PERIODIC_MISSED", "ChillDamage", 28547)
 
 	self:Death("Win", 15989)
 end
 
 function mod:OnEngage()
 	blockCount = 0
+	curseCount = 0
+	curseTime = 0
 	targetCheck = nil
+	self:SetStage(1)
 	self:Berserk(900)
-	self:CDBar(28542, 10) -- Drain Life
-	self:CDBar("stages", 32, L.air_phase, 3129)
-	self:SimpleTimer(function()
-		airTimer = self:ScheduleRepeatingTimer("CheckAirPhase", 0.5)
-	end, 20)
+	self:CDBar(28542, 12.5) -- Life Drain
+	self:CDBar("stages", 32, CL.stage:format(2), L.stages_icon)
+	self:ScheduleTimer(CheckAirPhase, 20)
 end
 
 --------------------------------------------------------------------------------
@@ -77,68 +76,86 @@ end
 --
 
 function mod:LifeDrain(args)
-	self:Message(28542, "yellow")
-	self:CDBar(28542, 23)
-	if self:Dispeller("curse") then
-		self:PlaySound(28542, "alert")
+	curseCount = 0
+	curseTime = args.time
+	self:Message(args.spellId, "orange")
+	self:CDBar(args.spellId, 23)
+	self:PlaySound(args.spellId, "alert")
+end
+
+function mod:LifeDrainApplied(args)
+	curseCount = curseCount + 1
+end
+
+function mod:LifeDrainRemoved(args)
+	curseCount = curseCount - 1
+	if curseCount == 0 then
+		self:Message(args.spellId, "green", CL.removed_after:format(args.spellName, args.time-curseTime))
 	end
 end
 
-function mod:CheckAirPhase()
+function mod:IceboltApplied(args)
+	blockCount = blockCount + 1
+	self:TargetMessage(args.spellId, "yellow", args.destName, CL.count:format(args.spellName, blockCount))
+	if self:Me(args.destGUID) then
+		self:Yell(args.spellId, nil, nil, "Icebolt")
+	end
+end
+
+function CheckAirPhase()
+	if not mod:IsEngaged() then return end
+
 	-- No air phase emote in Classic, but Sapphiron drops his target
 	-- Find someone targeting him to get a unit token
-	local boss = self:GetBossId(15989)
-	if not boss then
-		-- No one is targeting the boss? Just reset and bail
-		targetCheck = nil
-		return
-	end
+	local unit = mod:GetUnitIdByGUID(15989)
 
-	if UnitExists(boss.."target") then
-		-- Boss still has a target, reset
+	if not unit or mod:UnitGUID(unit.."target") then
+		-- No one is targeting the boss, or boss still has a target, reset
 		targetCheck = nil
+		mod:SimpleTimer(CheckAirPhase, 0.5)
 	elseif targetCheck then
 		-- Boss has had no target for two iterations, fire the air phase trigger
 		-- (The original module had a 1s delay between scans, not sure if that matters)
-		self:CancelTimer(airTimer)
 		targetCheck = nil
-		self:AirPhase()
+		mod:SetStage(2)
+
+		mod:StopBar(28542) -- Life Drain
+		mod:StopBar(CL.stage:format(2))
+
+		mod:Message("stages", "cyan", CL.stage:format(2), L.stages_icon)
+		mod:PlaySound("stages", "long")
 	else
 		-- Boss has no target, check one more time to make sure
 		targetCheck = true
+		mod:SimpleTimer(CheckAirPhase, 0.5)
 	end
 end
 
-function mod:AirPhase()
-	self:StopBar(28542)
-	self:StopBar(L.air_phase)
-
-	self:Message("stages", "cyan", L.air_phase, L.deepbreath_icon)
-	self:PlaySound("stages", "info")
-	self:Bar("deepbreath", 28.5, L.deepbreath_bar, L.deepbreath_icon) -- 28~33, updated on cast
+function mod:FrostBreathStart(args) -- Deep Breath
+	self:Message(args.spellId, "red", args.spellName, L["28524_icon"])
+	self:CastBar(args.spellId, 7, args.spellName, L["28524_icon"])
+	self:PlaySound(args.spellId, "warning")
 end
 
-function mod:DeepBreath(args)
-	self:Message("deepbreath", "red", L.deepbreath_warning, L.deepbreath_icon)
-	self:PlaySound("deepbreath", "alarm")
-	self:Bar("deepbreath", 7, L.deepbreath_bar, L.deepbreath_icon)
-
-	self:CDBar("stages", 13, L.ground_phase, 15847) -- 15847 = Tail Sweep
-	self:CDBar(28542, 14.5) -- Drain Life
-	self:ScheduleTimer("CDBar", 13, "stages", 66, L.air_phase, L.deepbreath_icon) -- 65~67
-end
-
-function mod:IceBomb(args)
+function mod:FrostBreath(args) -- Deep Breath
 	blockCount = 0
-	self:SimpleTimer(function()
-		airTimer = self:ScheduleRepeatingTimer("CheckAirPhase", 0.5)
-	end, 50) -- ~74 until next
+	self:SetStage(1)
+	self:Message("stages", "cyan", CL.stage:format(1), L.stages_icon)
+
+	self:CDBar(28542, 8) -- Life Drain
+	self:CDBar("stages", 72, CL.stage:format(2), L.stages_icon)
+	self:ScheduleTimer(CheckAirPhase, 50) -- ~74 until next
+
+	self:PlaySound("stages", "long")
 end
 
-function mod:Icebolt(args)
-	blockCount = blockCount + 1
-	self:TargetMessage(28522, "yellow", args.destName, CL.count:format(args.spellName, blockCount))
-	if self:Me(args.destGUID) then
-		self:Say(28522, L.icebolt_say, true)
+do
+	local prev = 0
+	function mod:ChillDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 3 then
+			prev = args.time
+			self:PersonalMessage(args.spellId, "aboveyou", self:SpellName(26607)) -- Blizzard
+			self:PlaySound(args.spellId, "underyou")
+		end
 	end
 end

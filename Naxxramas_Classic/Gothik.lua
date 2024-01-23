@@ -1,70 +1,41 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Gothik the Harvester", 533, 1608)
+local mod, CL = BigWigs:NewBoss("Gothik the Harvester", 533, 1608)
 if not mod then return end
 mod:RegisterEnableMob(16060)
 mod:SetEncounterID(1109)
+mod:SetRespawnTime(13)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
--- Locales
+-- Locals
 --
 
-local wave = 0
-local numTrainer, numDK, numRider = 1, 1, 1
+local waveCount = 0
+local traineeCount = 1
+local deathKnightCount = 1
+local riderCount = 1
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
-	L.room = "Room Arrival Warnings"
-	L.room_desc = "Warn for Gothik's arrival"
-
-	L.add = "Add Warnings"
-	L.add_desc = "Warn for adds"
-
-	L.adddeath = "Add Death Alert"
-	L.adddeath_desc = "Alerts when an add dies."
-
-	L.starttrigger1 = "Foolishly you have sought your own demise."
-	L.starttrigger2 = "Teamanare shi rikk mannor rikk lok karkun"
-	L.startwarn = "Gothik the Harvester engaged! 4:30 till he's in the room."
-
-	L.rider = "Unrelenting Rider"
-	L.spectral_rider = "Spectral Rider"
-	L.deathknight = "Unrelenting Deathknight"
-	L.spectral_deathknight = "Spektral Deathknight"
-	L.trainee = "Unrelenting Trainee"
-	L.spectral_trainee = "Spectral Trainee"
-
-	L.riderdiewarn = "Rider dead!"
-	L.dkdiewarn = "Death Knight dead!"
-
-	L.warn1 = "In room in 3 min"
-	L.warn2 = "In room in 90 sec"
-	L.warn3 = "In room in 60 sec"
-	L.warn4 = "In room in 30 sec"
-	L.warn5 = "Gothik Incoming in 10 sec"
+	L.add_death = "Add Death Alert"
+	L.add_death_desc = "Alerts when an add dies."
 
 	L.wave = "%d/23: %s"
 
-	L.trawarn = "Trainees in 3 sec"
-	L.dkwarn = "Deathknights in 3 sec"
-	L.riderwarn = "Rider in 3 sec"
+	L.trainee = "Trainee" -- Unrelenting Trainee NPC 16124
+	-- Technically "Deathknight" in classic era but we are using the modern 2 word term
+	L.deathKnight = "Death Knight" -- Unrelenting Death Knight NPC 16125
+	L.rider = "Rider" -- Unrelenting Rider NPC 16126
 
-	L.trabar = "Trainee - %d"
-	L.dkbar = "Deathknight - %d"
-	L.riderbar = "Rider - %d"
-
-	L.inroomtrigger = "I have waited long enough. Now you face the harvester of souls."
-	L.inroomwarn = "He's in the room!"
-
-	L.inroombartext = "In Room"
+	L.stages_icon = "Spell_Magic_LesserInvisibilty"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -72,30 +43,36 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		"room",
-		"add",
-		"adddeath",
+		"stages",
+		"adds",
+		"add_death",
 	}
 end
 
 function mod:OnBossEnable()
-	self:BossYell("InRoom", L.inroomtrigger)
-	self:Death("Deaths", 16125, 16126) -- DK, Rider
+	self:Log("SPELL_CAST_SUCCESS", "HarvestSoul", 28679)
+	self:Death("UnrelentingDeathKnightDies", 16125) -- Unrelenting Death Knight
+	self:Death("UnrelentingRiderDies", 16126) -- Unrelenting Rider
+
+	self:Death("Win", 16060)
 end
 
 function mod:OnEngage()
-	self:Message("room", "yellow", L.startwarn, false)
-	self:Bar("room", 270, L.inroombartext, "Spell_Magic_LesserInvisibilty")
-	self:DelayedMessage("room", 90, "yellow", L.warn1)
-	self:DelayedMessage("room", 180, "yellow", L.warn2)
-	self:DelayedMessage("room", 210, "orange", L.warn3)
-	self:DelayedMessage("room", 240, "red", L.warn4)
-	self:DelayedMessage("room", 260, "red", L.warn5)
+	waveCount = 0
+	traineeCount = 1
+	deathKnightCount = 1
+	riderCount = 1
+	self:SetStage(1)
 
-	wave = 0
-	numTrainer, numDK, numRider = 1, 1, 1
+	self:Message("stages", "cyan", CL.stage:format(1), false)
+	local stage2Msg = CL.stage:format(2)
+	self:Bar("stages", 270, stage2Msg, L.stages_icon)
+	self:DelayedMessage("stages", 210, "cyan", CL.custom_sec:format(stage2Msg, 60))
+	self:DelayedMessage("stages", 240, "cyan", CL.custom_sec:format(stage2Msg, 30))
+	self:DelayedMessage("stages", 260, "cyan", CL.custom_sec:format(stage2Msg, 10))
+
 	self:NewTrainee(27)
-	self:NewDeathknight(77)
+	self:NewDeathKnight(77)
 	self:NewRider(137)
 end
 
@@ -103,55 +80,78 @@ end
 -- Event Handlers
 --
 
-function mod:Deaths(args)
-	if args.mobId == 16125 then
-		self:Message("adddeath", "red", L.dkdiewarn, false)
-	elseif args.mobId == 16126 then
-		self:Message("adddeath", "red", L.riderdiewarn, false)
+do
+	local function Teleport(noMsg) -- 28025 and 28026 are hidden
+		mod:ScheduleTimer(Teleport, 20)
+		mod:Bar("stages", 20, CL.teleport, L.stages_icon)
+		if not noMsg then
+			mod:Message("stages", "cyan", CL.teleport, false)
+			mod:PlaySound("stages", "info")
+		end
+	end
+	function mod:HarvestSoul(args)
+		Teleport(true)
+		self:RemoveLog("SPELL_CAST_SUCCESS", args.spellId)
+		self:SetStage(2)
+		self:RegisterEvent("UNIT_HEALTH")
+		self:Message("stages", "cyan", CL.stage:format(2), false)
+		self:PlaySound("stages", "long")
 	end
 end
 
-function mod:InRoom()
-	self:Message("room", "red", L.inroomwarn, false)
-end
-
--- Wave timers
-
-local colors = {
-	[L.trawarn] = "yellow",
-	[L.dkwarn] = "orange",
-	[L.riderwarn] = "red",
-}
-local function waveWarn(message)
-	wave = wave + 1
-	if wave < 24 then
-		mod:Message("add", colors[message], L.wave:format(wave, message), false) -- SetOption::yellow,orange,red::
-	end
-	if wave == 23 then
-		mod:StopBar(L.trabar:format(numTrainer - 1))
-		mod:StopBar(L.dkbar:format(numDK - 1))
-		mod:StopBar(L.riderbar:format(numRider - 1))
-		mod:CancelAllTimers()
+function mod:UNIT_HEALTH(event, unit)
+	if self:MobId(self:UnitGUID(unit)) == 16060 then
+		local hp = self:GetHealth(unit)
+		if hp > 30 and hp < 35 then
+			self:UnregisterEvent(event)
+			self:Message("stages", "cyan", CL.soon:format(CL.gate_open), false)
+			self:PlaySound("stages", "long")
+		elseif hp < 30 then -- too fast!
+			self:UnregisterEvent(event)
+		end
 	end
 end
 
-function mod:NewTrainee(timeTrainer)
-	self:Bar("add", timeTrainer, L.trabar:format(numTrainer), "Ability_Seal")
-	self:ScheduleTimer(waveWarn, timeTrainer - 3, L.trawarn)
-	self:ScheduleTimer("NewTrainee", timeTrainer, 20)
-	numTrainer = numTrainer + 1
+function mod:UnrelentingDeathKnightDies()
+	self:Message("add_death", "green", CL.killed:format(L.deathKnight), false)
 end
 
-function mod:NewDeathknight(timeDK)
-	self:Bar("add", timeDK, L.dkbar:format(numDK), "INV_Boots_Plate_08")
-	self:ScheduleTimer(waveWarn, timeDK - 3, L.dkwarn)
-	self:ScheduleTimer("NewDeathknight", timeDK, 25)
-	numDK = numDK + 1
+function mod:UnrelentingRiderDies()
+	self:Message("add_death", "green", CL.killed:format(L.rider), false)
 end
 
-function mod:NewRider(timeRider)
-	self:Bar("add", timeRider, L.riderbar:format(numRider), "Spell_Shadow_DeathPact")
-	self:ScheduleTimer(waveWarn, timeRider - 3, L.riderwarn)
-	self:ScheduleTimer("NewRider", timeRider, 30)
-	numRider = numRider + 1
+do
+	local function waveWarn(color, message, icon)
+		waveCount = waveCount + 1
+		if waveCount < 24 then
+			mod:Message("adds", color, L.wave:format(waveCount, message), icon) -- SetOption::yellow,orange,red::
+		end
+		if waveCount == 23 then
+			mod:StopBar(CL.count:format(L.trainee, traineeCount - 1))
+			mod:StopBar(CL.count:format(L.deathKnight, deathKnightCount - 1))
+			mod:StopBar(CL.count:format(L.rider, riderCount - 1))
+			mod:CancelAllTimers()
+		end
+	end
+
+	function mod:NewTrainee(timeTrainee)
+		self:Bar("adds", timeTrainee, CL.count:format(L.trainee, traineeCount), "Achievement_character_human_male")
+		self:ScheduleTimer(waveWarn, timeTrainee - 3, "yellow", CL.custom_sec:format(L.trainee, 3), "Achievement_character_human_male")
+		self:ScheduleTimer("NewTrainee", timeTrainee, 20)
+		traineeCount = traineeCount + 1
+	end
+
+	function mod:NewDeathKnight(timeDK)
+		self:Bar("adds", timeDK, CL.count:format(L.deathKnight, deathKnightCount), "Spell_deathknight_frostpresence")
+		self:ScheduleTimer(waveWarn, timeDK - 3, "orange", CL.custom_sec:format(L.deathKnight, 3), "Spell_deathknight_frostpresence")
+		self:ScheduleTimer("NewDeathKnight", timeDK, 25)
+		deathKnightCount = deathKnightCount + 1
+	end
+
+	function mod:NewRider(timeRider)
+		self:Bar("adds", timeRider, CL.count:format(L.rider, riderCount), "ability_mount_undeadhorse")
+		self:ScheduleTimer(waveWarn, timeRider - 3, "red", CL.custom_sec:format(L.rider, 3), "ability_mount_undeadhorse")
+		self:ScheduleTimer("NewRider", timeRider, 30)
+		riderCount = riderCount + 1
+	end
 end

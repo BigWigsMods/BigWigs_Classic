@@ -18,12 +18,13 @@ local wave1time = 10
 local wave2time = 41
 local addsCount = 1
 local curseCount = 0
+local curseTime = 0
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.adds_yell_trigger = "Rise, my soldiers" -- Rise, my soldiers! Rise and fight once more!
 	L.adds_icon = "inv_misc_bone_dwarfskull_01"
@@ -65,6 +66,7 @@ function mod:OnEngage()
 	timebalcony = 70
 	addsCount = 1
 	curseCount = 0
+	curseTime = 0
 	self:SetStage(1)
 
 	self:CDBar(29213, 9, CL.curse) -- Curse of the Plaguebringer
@@ -105,10 +107,11 @@ end
 
 function mod:CurseOfThePlaguebringer(args)
 	curseCount = 0
+	curseTime = args.time
 	self:Message(args.spellId, "red", CL.curse)
 	self:CDBar(args.spellId, 51.7, CL.curse)
 	self:Bar(29214, 10, CL.explosion) -- Wrath of the Plaguebringer
-	self:PlaySound(args.spellId, "alarm")
+	self:PlaySound(args.spellId, "warning")
 end
 
 function mod:CurseOfThePlaguebringerApplied(args)
@@ -120,7 +123,7 @@ function mod:CurseOfThePlaguebringerDispelled(args)
 		curseCount = curseCount - 1
 		if curseCount == 0 then
 			self:StopBar(CL.explosion)
-			self:Message(29213, "green", CL.removed:format(CL.curse))
+			self:Message(29213, "green", CL.removed_after:format(CL.curse, args.time-curseTime))
 		end
 	end
 end
@@ -131,7 +134,7 @@ do
 		if args.time - prev > 10 then
 			prev = args.time
 			self:Message(args.spellId, "red", CL.explosion)
-			self:PlaySound(args.spellId, "warning")
+			self:PlaySound(args.spellId, "alarm")
 		end
 	end
 end

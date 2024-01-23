@@ -8,130 +8,46 @@ end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "zhTW")
 if L then
-	L.room = "進入房間警報"
-	L.room_desc = "當『收割者』高希進入房間時發出警報。"
-
-	L.add = "增援警報"
-	L.add_desc = "當增援時發出警報。"
-
-	L.adddeath = "增援死亡"
-	L.adddeath_desc = "當增援死亡時發出警報。"
-
-	L.starttrigger1 = "你們這些蠢貨已經主動步入了陷阱。"
-	L.starttrigger2 = "Kazile Teamanare ZennshinagasRil" -- check
-	L.startwarn = "『收割者』高希已進入戰鬥 - 4:30後，進入房間！"
-
-	L.rider = "無情的騎兵"
-	L.spectral_rider = "鬼靈騎兵"
-	L.deathknight = "無情的死亡騎士"
-	L.spectral_deathknight = "鬼靈死亡騎士"
-	L.trainee = "無情的受訓員"
-	L.spectral_trainee = "鬼靈受訓員"
-
-	L.riderdiewarn = "騎兵已死亡！"
-	L.dkdiewarn = "死亡騎士已死亡！"
-
-	L.warn1 = "3分鐘後進入房間！"
-	L.warn2 = "90秒後進入房間！"
-	L.warn3 = "60秒後進入房間！"
-	L.warn4 = "30秒後進入房間！"
-	L.warn5 = "10秒後進入房間！"
+	L.add_death = "增援死亡"
+	L.add_death_desc = "當增援死亡時發出警報。"
 
 	L.wave = "%d/23：%s"
 
-	L.trawarn = "3秒後受訓員出現"
-	L.dkwarn = "3秒後死亡騎士出現"
-	L.riderwarn = "3秒後騎兵出現"
-
-	L.trabar = "受訓員 - %d"
-	L.dkbar = "死亡騎士 - %d"
-	L.riderbar = "騎兵 - %d"
-
-	L.inroomtrigger = "我已經等待很久了。現在你們將面對靈魂的收割者。"
-	L.inroomwarn = "『收割者』高希進入了房間！"
-
-	L.inroombartext = "進入房間"
+	L.trainee = "受訓員" -- Unrelenting Trainee NPC 16124
+	L.deathKnight = "死亡騎士" -- Unrelenting Death Knight NPC 16125
+	L.rider = "騎兵" -- Unrelenting Rider NPC 16126
 end
 
 L = BigWigs:NewBossLocale("Grobbulus", "zhTW")
 if L then
-	L.bomb_message = "突變注射"
+	L.injection = "突變注射"
 end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "zhTW")
 if L then
-	L.starttrigger = "你現在是我的了。"
-	L.starttrigger2 = "你……就是下一個。"
-	L.starttrigger3 = "我看到你了……"
-
-	L.engage = "進入戰鬥"
-	L.engage_desc = "當海根進入戰鬥時發出警報。"
-	L.engage_message = "海根已進入戰鬥 - 90秒後，傳送！"
-
-	L.teleport = "傳送"
-	L.teleport_desc = "當傳送時發出警報。"
-	L.teleport_trigger = "你的生命正走向終結。"
-	L.teleport_1min_message = "1分鐘後傳送"
-	L.teleport_30sec_message = "30秒後傳送"
-	L.teleport_10sec_message = "10秒後傳送！"
-	L.on_platform_message = "傳送！ - 45秒後海根出現！"
-
-	L.to_floor_30sec_message = "30 秒後返回"
-	L.to_floor_10sec_message = "10 秒後返回！"
-	L.on_floor_message = "返回！90秒後，傳送！"
-
-	L.teleport_bar = "傳送"
-	L.back_bar = "出現"
+	L.teleport_yell_trigger = "你的生命正走向終結。"
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "zhTW")
 if L then
-	L.mark = "印記"
 	L.mark_desc = "當施放印記時發出警報。"
-
-	L.markbar = "印記：%d"
-	L.markwarn1 = "印記%d！"
-	L.markwarn2 = "5秒後，印記%d！"
-
-	L.startwarn = "四騎士已進入戰鬥 - 約17秒後，印記！"
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad", "zhTW")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "科爾蘇加德密室"
 
-	L.start_trigger = "僕從們，侍衛們，隸屬於黑暗與寒冷的戰士們!聽從科爾蘇加德的召喚!"
-	L.start_warning = "戰鬥開始，約3分30秒後，科爾蘇加德進入戰鬥！"
-
-	L.phase2_trigger1 = "祈禱我的慈悲吧!"
-	L.phase2_trigger2 = "呼出你的最後一口氣!"
-	L.phase2_trigger3 = "你的末日臨近了!"
-	L.phase2_warning = "第二階段 - 科爾蘇加德！"
-	L.phase2_bar = "科爾蘇加德進入戰鬥"
-
-	L.phase3_trigger = "主人，我需要幫助!"
-	L.phase3_soon_warning = "即將 第三階段！"
-	L.phase3_warning = "第三階段開始， 約15秒後，寒冰皇冠守衛者出現！"
-
-	L.guardians = "寒冰皇冠守護者"
-	L.guardians_desc = "當第三階段召喚寒冰皇冠守護者時發出警報。"
-	L.guardians_trigger = "非常好，凍原的戰士們，起來吧!我命令你們作戰，為你們的主人殺戮或獻身吧!不要留下活口!"
-	L.guardians_warning = "約10秒後，寒冰皇冠守護者出現！"
-	L.guardians_bar = "寒冰皇冠守護者出現"
+	L.engage_yell_trigger = "僕從們，侍衛們，隸屬於黑暗與寒冷的戰士們!聽從科爾蘇加德的召喚!"
+	L.stage2_yell_trigger1 = "祈禱我的慈悲吧!"
+	L.stage2_yell_trigger2 = "呼出你的最後一口氣!"
+	L.stage2_yell_trigger3 = "你的末日臨近了!"
+	L.stage3_yell_trigger = "主人，我需要幫助!"
+	L.adds_yell_trigger = "非常好，凍原的戰士們，起來吧!我命令你們作戰，為你們的主人殺戮或獻身吧!不要留下活口!"
 end
 
 L = BigWigs:NewBossLocale("Loatheb", "zhTW")
 if L then
-	L.startwarn = "憎恨者已進入戰鬥 - 2分鐘後，無可避免的末日！"
-
-	L.doom_5sec_warn = "5秒後，無可避免的末日%d！"
-	L.doomtime_bar = "每隔15秒 無可避免的末日"
-	L.doomtime_warn = "%s秒後改變無可避免的末日發動頻率！"
-	L.doomtime_now = "無可避免的末日現在每隔15秒發動一次！"
-
-	L.remove_curse = "洛斯伯消除了一個詛咒效果"
-
-	L.spore_warn = "孢子：>%d<！"
+	L.ready = "|cff20ff20準備完成|r"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "zhTW")
@@ -144,20 +60,6 @@ if L then
 	L.cocoons = "纏繞之網"
 end
 
-L = BigWigs:NewBossLocale("Sapphiron", "zhTW")
-if L then
-	L.deepbreath_trigger = "%s深深地吸了一口氣……"
-
-	--L.air_phase = "Air Phase"
-	--L.ground_phase = "Ground Phase"
-
-	L.deepbreath = "寒冰炸彈"
-	L.deepbreath_warning = "即將 寒冰炸彈！"
-	L.deepbreath_bar = "寒冰炸彈 落地"
-
-	L.icebolt_say = "我是寒冰凍體！"
-end
-
 L = BigWigs:NewBossLocale("Instructor Razuvious", "zhTW")
 if L then
 	L.understudy = "死亡騎士實習者"
@@ -168,28 +70,16 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "zhTW")
 if L then
-	L.trigger_phase1_1 = "斯塔拉格要碾碎你!"
-	L.trigger_phase1_2 = "主人要吃了你!"
-	L.trigger_phase2_1 = "咬碎……你的……骨頭……"
-	L.trigger_phase2_2 = "打…碎…你……"
-	L.trigger_phase2_3 = "殺……"
+	L.stage1_yell_trigger1 = "斯塔拉格要碾碎你!"
+	L.stage1_yell_trigger2 = "主人要吃了你!"
 
-	L.add_death_trigger = "%s死亡了。"
-	L.overload_trigger = "%s超負荷！"
-	L.polarity_trigger = "你感受到痛苦的滋味了吧……"
+	L.stage2_yell_trigger1 = "咬碎……你的……骨頭……"
+	L.stage2_yell_trigger2 = "打…碎…你……"
+	L.stage2_yell_trigger3 = "殺……"
 
-	L.polarity_warning = "3秒後，兩極移形！"
-	L.polarity_changed = "兩極移形改變！"
-	L.polarity_nochange = "相同兩極移形！"
-	L.polarity_first_positive = "你是 >正極<！"
-	L.polarity_first_negative = "你是 >負極<！"
-
-	L.phase1_message = "第一階段"
-	L.phase2_message = "第二階段 - 5分鍾後狂怒！"
-
-	L.throw = "投擲"
-	L.throw_desc = "當主坦克被投擲到對面平台時發出警報。"
-	L.throw_warning = "約5秒後，投擲！"
+	L.add_death_emote_trigger = "%s死亡了。"
+	L.overload_emote_trigger = "%s超負荷！"
+	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
 	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
 
@@ -217,4 +107,6 @@ if L then
 	L.right = "---> 向右 ---> 向右 ---"
 	L.swap = "^^^^ 交換 ^^^^ 交換 ^^^^"
 	L.stay = "==== 不要動 ==== 不要動 ===="
+
+	--L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
 end

@@ -11,7 +11,7 @@ mod:SetEncounterID(1116)
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.cocoons = "Cocoons"
 	L.adds_icon = "inv_misc_monsterspidercarapace_01"
@@ -70,7 +70,7 @@ do
 			self:PlaySound(args.spellId, "alert")
 		end
 		playerList[#playerList+1] = args.destName
-		self:TargetsMessage(args.spellId, "yellow", playerList, 3, L.cocoons)
+		self:TargetsMessage(args.spellId, "yellow", playerList, 3, L.cocoons, nil, 1)
 	end
 end
 

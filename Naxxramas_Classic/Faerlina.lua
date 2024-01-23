@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Grand Widow Faerlina", 533, 1602)
 if not mod then return end
-mod:RegisterEnableMob(15953)
+mod:RegisterEnableMob(15953, 16505, 16506) -- Faerlina, Naxxramas Follower, Naxxramas Worshipper
 mod:SetEncounterID(1110)
 
 --------------------------------------------------------------------------------
@@ -25,6 +25,14 @@ function mod:GetOptions()
 		30225, -- Silence
 		28796, -- Poison Bolt Volley
 	}
+end
+
+function mod:VerifyEnable(unit, mobId)
+	if mobId == 15953 then
+		return true
+	elseif mobId == 16505 or mobId == 16506 then
+		return self:GetHealth(unit) == 100
+	end
 end
 
 function mod:OnBossEnable()

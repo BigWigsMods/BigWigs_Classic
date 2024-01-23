@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Gluth", 533, 1612)
@@ -11,15 +11,11 @@ mod:SetEncounterID(1108)
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
-	L.startwarn = "Gluth engaged, ~105 sec to Decimate!"
-
 	L.decimate = 28375 -- Decimate
 	L.decimate_icon = "inv_shield_01"
-	L.decimate_bar = "Decimate Zombies"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -27,24 +23,30 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		28371, -- Frenzy
+		28371, -- Enrage / Frenzy (different name on classic era)
 		29685, -- Terrifying Roar
+		25646, -- Mortal Wound
+		29306, -- Infected Wound
 		"decimate", -- Decimate
 		"berserk",
+	},nil,{
+		[29685] = CL.fear, -- Terrifying Roar (Fear)
 	}
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "Frenzy", 28371)
-	self:Log("SPELL_CAST_SUCCESS", "Fear", 29685)
+	self:Log("SPELL_CAST_SUCCESS", "EnrageFrenzy", 28371)
+	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
+	self:Log("SPELL_CAST_SUCCESS", "TerrifyingRoar", 29685)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWoundApplied", 25646)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "InfectedWoundApplied", 29306)
 	self:Log("SPELL_DAMAGE", "Decimate", 28375)
 	self:Log("SPELL_MISSED", "Decimate", 28375)
 end
 
-function mod:OnEngage(diff)
+function mod:OnEngage()
 	self:Berserk(360, true)
-	self:Message("berserk", "yellow", L.startwarn, false)
-	self:CDBar("decimate", 105, L.decimate_bar, L.decimate_icon)
+	self:CDBar("decimate", 105, self:SpellName(28375), L.decimate_icon)
 	self:DelayedMessage("decimate", 100, "orange", CL.soon:format(self:SpellName(28375)), L.decimate_icon)
 end
 
@@ -52,24 +54,50 @@ end
 -- Event Handlers
 --
 
-function mod:Frenzy(args)
-	self:Message(28371, "red")
-	self:Bar(28371, 9.7)
+function mod:EnrageFrenzy(args)
+	self:Message(args.spellId, "orange")
+	self:Bar(args.spellId, 9.7)
+	if self:Dispeller("enrage", true) then
+		self:PlaySound(args.spellId, "alert")
+	end
 end
 
-function mod:Fear(args)
-	self:Message(29685, "red")
-	self:CDBar(29685, 21)
+function mod:EnrageFrenzyDispelled(args)
+	if args.extraSpellName == self:SpellName(28371) then
+		self:Message(28371, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+	end
 end
 
-local prev = 0
-function mod:Decimate(args)
-	local t = GetTime()
-	if t-prev > 5 then
-		prev = t
-		self:Message("decimate", "yellow", L.decimate, L.decimate_icon)
-		self:PlaySound("decimate", "alert")
-		self:CDBar("decimate", 105, L.decimate_bar, L.decimate_icon)
-		self:DelayedMessage("decimate", 100, "orange", CL.soon:format(self:SpellName(28375)), L.decimate_icon, "alarm")
+function mod:TerrifyingRoar(args)
+	self:Message(args.spellId, "yellow", CL.fear)
+	self:CDBar(args.spellId, 18, CL.fear)
+	self:PlaySound(args.spellId, "long")
+end
+
+function mod:MortalWoundApplied(args)
+	if args.amount >= 4 and args.amount % 2 == 0 then
+		self:StackMessage(args.spellId, "purple", args.destName, args.amount, 6)
+		if args.amount >= 6 then
+			self:PlaySound(args.spellId, "info")
+		end
+	end
+end
+
+function mod:InfectedWoundApplied(args)
+	if self:Me(args.destGUID) and args.amount % 3 == 0 then
+		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 9)
+	end
+end
+
+do
+	local prev = 0
+	function mod:Decimate(args)
+		if args.time - prev > 5 then
+			prev = args.time
+			self:Message("decimate", "red", args.spellName, L.decimate_icon)
+			self:CDBar("decimate", 105, args.spellName, L.decimate_icon)
+			self:DelayedMessage("decimate", 100, "red", CL.soon:format(args.spellName))
+			self:PlaySound("decimate", "warning")
+		end
 	end
 end

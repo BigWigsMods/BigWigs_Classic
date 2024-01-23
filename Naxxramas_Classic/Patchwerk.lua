@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Patchwerk", 533, 1610)
@@ -13,13 +13,13 @@ mod:SetEncounterID(1118)
 
 function mod:GetOptions()
 	return {
-		28131, -- Enrage
+		28131, -- Frenzy / Enrage (different name on classic era)
 		"berserk",
 	}
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "Frenzy", 28131)
+	self:Log("SPELL_AURA_APPLIED", "FrenzyEnrage", 28131)
 end
 
 function mod:OnEngage()
@@ -30,7 +30,7 @@ end
 -- Event Handlers
 --
 
-function mod:Frenzy(args)
-	self:Message(28131, "orange", CL.percent:format(5, args.spellName))
-	self:PlaySound(28131, "alarm")
+function mod:FrenzyEnrage(args)
+	self:Message(args.spellId, "orange", CL.percent:format(5, args.spellName))
+	self:PlaySound(args.spellId, "long")
 end

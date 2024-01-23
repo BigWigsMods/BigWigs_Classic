@@ -8,130 +8,46 @@ end
 
 L = BigWigs:NewBossLocale("Gothik the Harvester", "deDE")
 if L then
-	L.room = "Ankunft"
-	L.room_desc = "Warnungen und Timer für die Ankunft von Gothik im Raum."
-
-	L.add = "Adds"
-	L.add_desc = "Warnungen und Timer für die Adds."
-
-	L.adddeath = "Tod eines Adds"
-	L.adddeath_desc = "Warnt, wenn ein Add stirbt."
-
-	L.starttrigger1 = "Ihr Narren habt euren eigenen Untergang heraufbeschworen."
-	L.starttrigger2 = "Maz Azgala veni kamil toralar Naztheros zennshinagas."
-	L.startwarn = "Gothik der Ernter angegriffen! Im Raum in 4:30 min!"
-
-	L.rider = "Unerbittlicher Reiter"
-	L.spectral_rider = "Spektraler Reiter"
-	L.deathknight = "Unerbittlicher Todesritter"
-	L.spectral_deathknight = "Spektraler Todesritter"
-	L.trainee = "Unerbittlicher Lehrling"
-	L.spectral_trainee = "Spektraler Lehrling"
-
-	L.riderdiewarn = "Reiter tot!"
-	L.dkdiewarn = "Todesritter tot!"
-
-	L.warn1 = "Im Raum in 3 min"
-	L.warn2 = "Im Raum in 90 sek"
-	L.warn3 = "Im Raum in 60 sek"
-	L.warn4 = "Im Raum in 30 sek!"
-	L.warn5 = "Gothik im Raum in 10 sek!"
+	L.add_death = "Tod eines Adds"
+	L.add_death_desc = "Warnt, wenn ein Add stirbt."
 
 	L.wave = "%d/23: %s"
 
-	L.trawarn = "Lehrlinge in 3 sek!"
-	L.dkwarn = "Todesritter in 3 sek!"
-	L.riderwarn = "Reiter in 3 sek!"
-
-	L.trabar = "Lehrling (%d)"
-	L.dkbar = "Todesritter (%d)"
-	L.riderbar = "Reiter (%d)"
-
-	L.inroomtrigger = "Ich habe lange genug gewartet. Stellt euch dem Seelenjäger."
-	L.inroomwarn = "Gothik im Raum!"
-
-	L.inroombartext = "Gothik im Raum"
+	L.trainee = "Lehrling" -- Unrelenting Trainee NPC 16124
+	L.deathKnight = "Todesritter" -- Unrelenting Death Knight NPC 16125
+	L.rider = "Reiter" -- Unrelenting Rider NPC 16126
 end
 
 L = BigWigs:NewBossLocale("Grobbulus", "deDE")
 if L then
-	L.bomb_message = "Injektion"
+	L.injection = "Injektion"
 end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "deDE")
 if L then
-	L.starttrigger = "Ihr gehört mir..."
-	L.starttrigger2 = "Ihr seid.... als nächstes dran."
-	L.starttrigger3 = "Ihr entgeht mir nicht..."
-
-	L.engage = "Angriff"
-	L.engage_desc = "Warnt, wenn Heigan angegriffen wird."
-	L.engage_message = "Heigan der Unreine angegriffen! Teleport in 90 sek!"
-
-	L.teleport = "Teleport"
-	L.teleport_desc = "Warnungen und Timer für Teleport."
-	L.teleport_trigger = "Euer Ende naht."
-	L.teleport_1min_message = "Teleport in 1 min"
-	L.teleport_30sec_message = "Teleport in 30 sek"
-	L.teleport_10sec_message = "Teleport in 10 sek!"
-	L.on_platform_message = "Teleport! Auf Plattform für 45 sek!"
-
-	L.to_floor_30sec_message = "Zurück in 30 sek"
-	L.to_floor_10sec_message = "Zurück in 10 sek!"
-	L.on_floor_message = "Zurück im Raum! Nächster Teleport in 90 sek!"
-
-	L.teleport_bar = "Teleport"
-	L.back_bar = "Zurück im Raum"
+	L.teleport_yell_trigger = "Euer Ende naht."
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "deDE")
 if L then
-	L.mark = "Male"
 	L.mark_desc = "Warnungen und Timer für die Male."
-
-	L.markbar = "Mal (%d)"
-	L.markwarn1 = "Mal (%d)!"
-	L.markwarn2 = "Mal (%d) in 5 sek!"
-
-	L.startwarn = "Die Vier Reiter angegriffen! Male in ~17 sek."
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad", "deDE")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Kel'Thuzads Gemächer"
 
-	L.start_trigger = "Lakaien, Diener, Soldaten der eisigen Finsternis! Folgt dem Ruf von Kel'Thuzad!"
-	L.start_warning = "Kel'Thuzad gestartet! ~3:30 min, bis er aktiv wird!"
-
-	L.phase2_trigger1 = "Betet um Gnade!"
-	L.phase2_trigger2 = "Schreiend werdet ihr diese Welt verlassen!"
-	L.phase2_trigger3 = "Euer Ende ist gekommen!"
-	L.phase2_warning = "Phase 2, Kel'Thuzad kommt!"
-	L.phase2_bar = "Kel'Thuzad aktiv"
-
-	L.phase3_trigger = "Meister, ich benötige Beistand."
-	L.phase3_soon_warning = "Phase 3 bald!"
-	L.phase3_warning = "Phase 3, Wächter in ~15 sek!"
-
-	L.guardians = "Wächter"
-	L.guardians_desc = "Warnt vor den Wächtern von Eiskrone in Phase 3."
-	L.guardians_trigger = "Wohlan, Krieger der Eisigen Weiten, erhebt euch! Ich befehle euch für euren Meister zu kämpfen, zu töten und zu sterben! Keiner darf überleben!"
-	L.guardians_warning = "Wächter in ~10 sek!"
-	L.guardians_bar = "Wächter kommen"
+	L.engage_yell_trigger = "Lakaien, Diener, Soldaten der eisigen Finsternis! Folgt dem Ruf von Kel'Thuzad!"
+	L.stage2_yell_trigger1 = "Betet um Gnade!"
+	L.stage2_yell_trigger2 = "Schreiend werdet ihr diese Welt verlassen!"
+	L.stage2_yell_trigger3 = "Euer Ende ist gekommen!"
+	L.stage3_yell_trigger = "Meister, ich benötige Beistand."
+	L.adds_yell_trigger = "Wohlan, Krieger der Eisigen Weiten, erhebt euch! Ich befehle euch für euren Meister zu kämpfen, zu töten und zu sterben! Keiner darf überleben!"
 end
 
 L = BigWigs:NewBossLocale("Loatheb", "deDE")
 if L then
-	L.startwarn = "Loatheb angegriffen! 2 min bis Unausweichliches Schicksal!"
-
-	L.doom_5sec_warn = "Unausweichliches Schicksal (%d) in 5 sek!"
-	L.doomtime_bar = "Schicksal alle 15 sek"
-	L.doomtime_warn = "Schicksal: Timer Wechsel in %s sek!"
-	L.doomtime_now = "Unausweichliches Schicksal nun alle 15 sek!"
-
-	L.remove_curse = "Flüche bei Loatheb aufgehoben"
-
-	L.spore_warn = "Spore (%d)!"
+	L.ready = "|cff20ff20Bereit|r"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "deDE")
@@ -144,20 +60,6 @@ if L then
 	L.cocoons = "Fangnetz"
 end
 
-L = BigWigs:NewBossLocale("Sapphiron", "deDE")
-if L then
-	L.deepbreath_trigger = "%s atmet tief ein..."
-
-	L.air_phase = "Luftphase"
-	L.ground_phase = "Bodenphase"
-
-	L.deepbreath = "Eisbombe"
-	L.deepbreath_warning = "Eisbombe kommt!"
-	L.deepbreath_bar = "Eisbombe landet!"
-
-	L.icebolt_say = "Ich bin ein Eisblock!"
-end
-
 L = BigWigs:NewBossLocale("Instructor Razuvious", "deDE")
 if L then
 	L.understudy = "Reservist der Todesritter"
@@ -168,28 +70,16 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "deDE")
 if L then
-	L.trigger_phase1_1 = "Stalagg zerquetschen!"
-	L.trigger_phase1_2 = "Verfüttere euch an Meister!"
-	L.trigger_phase2_1 = "Eure... Knochen... zermalmen..."
-	L.trigger_phase2_2 = "Euch... zerquetschen!"
-	L.trigger_phase2_3 = "Töten..."
+	L.stage1_yell_trigger1 = "Stalagg zerquetschen!"
+	L.stage1_yell_trigger2 = "Verfüttere euch an Meister!"
 
-	L.add_death_trigger = "%s stirbt."
-	L.overload_trigger = "%s überlädt!"
-	L.polarity_trigger = "Jetzt spürt ihr den Schmerz..."
+	L.stage2_yell_trigger1 = "Eure... Knochen... zermalmen..."
+	L.stage2_yell_trigger2 = "Euch... zerquetschen!"
+	L.stage2_yell_trigger3 = "Töten..."
 
-	L.polarity_warning = "Polaritätsveränderung in 3 sek!"
-	L.polarity_changed = "Polarität geändert!"
-	L.polarity_nochange = "Selbe Polarität!"
-	L.polarity_first_positive = "Du bist POSITIV!"
-	L.polarity_first_negative = "Du bist NEGATIV!"
-
-	L.phase1_message = "Phase 1"
-	L.phase2_message = "Thaddius Phase 2 - Berserker in 5 min"
-
-	L.throw = "Magnetische Anziehung"
-	L.throw_desc = "Warnt, wenn die Tanks die Plattform wechseln."
-	L.throw_warning = "Magnetische Anziehung in ~5 sek!"
+	L.add_death_emote_trigger = "%s stirbt."
+	L.overload_emote_trigger = "%s überlädt!"
+	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
 	L.polarity_extras = "Zusätzliche Warnungen für Polaritätsveränderung-Positionierung"
 
@@ -217,4 +107,6 @@ if L then
 	L.right = "---> Nach Rechts ---> Nach Rechts --->"
 	L.swap = "^^^^ Seitenwechseln ^^^^ Seitenwechseln ^^^^"
 	L.stay = "==== Nicht Bewegen ==== Nicht Bewegen ===="
+
+	--L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
 end
