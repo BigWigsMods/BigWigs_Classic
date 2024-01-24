@@ -11,22 +11,22 @@ if L then
 	L.rider = "Jinete" -- Unrelenting Rider NPC 16126
 end
 
-L = BigWigs:NewBossLocale("Grobbulus", "esMX")
+L = BigWigs:NewBossLocale("Grobbulus", "esES")
 if L then
 	L.injection = "Inyección"
 end
 
-L = BigWigs:NewBossLocale("Heigan the Unclean", "esMX")
+L = BigWigs:NewBossLocale("Heigan the Unclean", "esES")
 if L then
 	--L.teleport_yell_trigger = "The end is upon you."
 end
 
-L = BigWigs:NewBossLocale("The Four Horsemen", "esMX")
+L = BigWigs:NewBossLocale("The Four Horsemen", "esES")
 if L then
 	L.mark_desc = "Aviso para marcas."
 end
 
-L = BigWigs:NewBossLocale("Kel'Thuzad", "esMX")
+L = BigWigs:NewBossLocale("Kel'Thuzad", "esES")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Cámara de Kel'Thuzad"
 
@@ -38,27 +38,27 @@ if L then
 	--L.adds_yell_trigger = "Very well. Warriors of the frozen wastes, rise up! I command you to fight, kill and die for your master! Let none survive!"
 end
 
-L = BigWigs:NewBossLocale("Loatheb", "esMX")
+L = BigWigs:NewBossLocale("Loatheb", "esES")
 if L then
 	L.ready = "|cff20ff20Listo|r"
 end
 
-L = BigWigs:NewBossLocale("Maexxna", "esMX")
+L = BigWigs:NewBossLocale("Maexxna", "esES")
 if L then
 	L.cocoons = "Capullos"
 end
 
-L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esMX")
+L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esES")
 if L then
 	L.adds_yell_trigger = "¡Levantaos, soldados míos!" -- Rise, my soldiers! Rise and fight once more!
 end
 
-L = BigWigs:NewBossLocale("Instructor Razuvious", "esMX")
+L = BigWigs:NewBossLocale("Instructor Razuvious", "esES")
 if L then
 	L.understudy = "Suplente Caballero de la Muerte"
 end
 
-L = BigWigs:NewBossLocale("Thaddius", "esMX")
+L = BigWigs:NewBossLocale("Thaddius", "esES")
 if L then
 	L.stage1_yell_trigger1 = "¡Stalagg aplasta!"
 	--L.stage1_yell_trigger2 = "Feed you to master!"
