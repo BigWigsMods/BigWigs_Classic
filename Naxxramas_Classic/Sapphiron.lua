@@ -41,6 +41,7 @@ function mod:GetOptions()
 		"stages",
 		"berserk",
 	},nil,{
+		[28542] = CL.curse, -- Life Drain (Curse)
 		[28547] = self:SpellName(26607), -- Chill (Blizzard)
 	}
 end
@@ -66,7 +67,7 @@ function mod:OnEngage()
 	targetCheck = nil
 	self:SetStage(1)
 	self:Berserk(900)
-	self:CDBar(28542, 12.5) -- Life Drain
+	self:CDBar(28542, 12.5, CL.curse) -- Life Drain
 	self:CDBar("stages", 32, CL.stage:format(2), L.stages_icon)
 	self:ScheduleTimer(CheckAirPhase, 20)
 end
@@ -78,19 +79,19 @@ end
 function mod:LifeDrain(args)
 	curseCount = 0
 	curseTime = args.time
-	self:Message(args.spellId, "orange")
+	self:Message(args.spellId, "orange", CL.curse)
 	self:CDBar(args.spellId, 23)
 	self:PlaySound(args.spellId, "alert")
 end
 
-function mod:LifeDrainApplied(args)
+function mod:LifeDrainApplied()
 	curseCount = curseCount + 1
 end
 
 function mod:LifeDrainRemoved(args)
 	curseCount = curseCount - 1
 	if curseCount == 0 then
-		self:Message(args.spellId, "green", CL.removed_after:format(args.spellName, args.time-curseTime))
+		self:Message(args.spellId, "green", CL.removed_after:format(CL.curse, args.time-curseTime))
 	end
 end
 
@@ -119,7 +120,7 @@ function CheckAirPhase()
 		targetCheck = nil
 		mod:SetStage(2)
 
-		mod:StopBar(28542) -- Life Drain
+		mod:StopBar(CL.curse) -- Life Drain
 		mod:StopBar(CL.stage:format(2))
 
 		mod:Message("stages", "cyan", CL.stage:format(2), L.stages_icon)
@@ -142,7 +143,7 @@ function mod:FrostBreath(args) -- Deep Breath
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), L.stages_icon)
 
-	self:CDBar(28542, 8) -- Life Drain
+	self:CDBar(28542, 8, CL.curse) -- Life Drain
 	self:CDBar("stages", 72, CL.stage:format(2), L.stages_icon)
 	self:ScheduleTimer(CheckAirPhase, 50) -- ~74 until next
 

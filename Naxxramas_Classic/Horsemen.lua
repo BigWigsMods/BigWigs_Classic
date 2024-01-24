@@ -20,7 +20,7 @@ local markCounter = 1
 
 local L = mod:GetLocale()
 if L then
-	L.mark = CL.mark
+	L.mark = CL.marks
 	L.mark_desc = "Warn for marks."
 	L.mark_icon = 28835 -- Mark of Zeliek
 end

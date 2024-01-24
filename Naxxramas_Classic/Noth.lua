@@ -54,7 +54,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Cripple", 29212)
 	self:Log("SPELL_CAST_SUCCESS", "CurseOfThePlaguebringer", 29213)
 	self:Log("SPELL_AURA_APPLIED", "CurseOfThePlaguebringerApplied", 29213)
-	self:Log("SPELL_DISPEL", "CurseOfThePlaguebringerDispelled", "*")
+	self:Log("SPELL_AURA_REMOVED", "CurseOfThePlaguebringerRemoved", 29213)
 	self:Log("SPELL_AURA_APPLIED", "WrathOfThePlaguebringerApplied", 29214)
 	self:Log("SPELL_CAST_SUCCESS", "Blink", 29208, 29209, 29210, 29211)
 
@@ -114,17 +114,15 @@ function mod:CurseOfThePlaguebringer(args)
 	self:PlaySound(args.spellId, "warning")
 end
 
-function mod:CurseOfThePlaguebringerApplied(args)
+function mod:CurseOfThePlaguebringerApplied()
 	curseCount = curseCount + 1
 end
 
-function mod:CurseOfThePlaguebringerDispelled(args)
-	if args.extraSpellName == self:SpellName(29213) then
-		curseCount = curseCount - 1
-		if curseCount == 0 then
-			self:StopBar(CL.explosion)
-			self:Message(29213, "green", CL.removed_after:format(CL.curse, args.time-curseTime))
-		end
+function mod:CurseOfThePlaguebringerRemoved(args)
+	curseCount = curseCount - 1
+	if curseCount == 0 then
+		self:StopBar(CL.explosion)
+		self:Message(args.spellId, "green", CL.removed_after:format(CL.curse, args.time-curseTime))
 	end
 end
 

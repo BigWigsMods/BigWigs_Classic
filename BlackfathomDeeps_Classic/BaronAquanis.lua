@@ -45,7 +45,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "DepthCharge", 404806)
 	self:Log("SPELL_AURA_APPLIED", "DepthChargeApplied", 404806)
 	self:Log("SPELL_AURA_REMOVED", "DepthChargeRemoved", 404806)
-	self:Log("SPELL_AURA_APPLIED", "BubbleBeamCast", 413664)
+	self:Log("SPELL_CAST_SUCCESS", "BubbleBeam", 413664)
 	self:Log("SPELL_AURA_APPLIED", "BubbleBeamChannel", 404373)
 	self:Log("SPELL_AURA_REMOVED", "BubbleBeamChannelOver", 404373)
 
@@ -90,13 +90,13 @@ function mod:DepthChargeRemoved(args)
 	self:PrimaryIcon(args.spellId)
 end
 
-function mod:BubbleBeamCast(args)
+function mod:BubbleBeam(args)
+	self:StopBar(CL.beam) -- Stop the CDBar
 	self:Message(args.spellId, "orange", CL.incoming:format(args.spellName))
 	self:PlaySound(args.spellId, "long")
 end
 
 function mod:BubbleBeamChannel()
-	self:StopBar(413664) -- Stop the CDBar
 	self:CastBar(413664, 10, CL.beam)
 	self:CDBar(404806, {10.5, 16}, CL.bomb) -- Depth Charge
 end

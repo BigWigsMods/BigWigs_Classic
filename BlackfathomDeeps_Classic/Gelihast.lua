@@ -100,7 +100,7 @@ do
 			self:StopBar(412072) -- Shadow Strike
 			self:StopBar(CL.curse) -- Curse of Blackfathom
 			self:Message(args.spellId, "cyan")
-			self:Bar(args.spellId, 25, CL.immune)
+			self:Bar(args.spellId, 24, CL.immune)
 			self:Bar(args.spellId, 33)
 			self:PlaySound(args.spellId, "long")
 		end

@@ -41,7 +41,7 @@ function mod:GetOptions()
 		"stages",
 		"proximity",
 	},nil,{
-		[28410] = CL.mind_control, -- Chains of Kel'Thuzad (Minc Control)
+		[28410] = CL.mind_control, -- Chains of Kel'Thuzad (Mind Control)
 		[27819] = CL.bomb, -- Detonate Mana (Bomb)
 	}
 end
