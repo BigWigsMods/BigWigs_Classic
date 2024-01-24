@@ -1,10 +1,10 @@
 local L = BigWigs:NewBossLocale("Gothik the Harvester", "esMX")
 if not L then return end
 if L then
-	--L.add_death = "Add Death Alert"
-	--L.add_death_desc = "Alerts when an add dies."
+	L.add_death = "Aviso de muerte de esbirros"
+	L.add_death_desc = "Avisa cuando muere un esbirro."
 
-	--L.wave = "%d/23: %s"
+	L.wave = "%d/23: %s"
 
 	L.trainee = "Practicante" -- Unrelenting Trainee NPC 16124
 	L.deathKnight = "Caballero de la Muerte" -- Unrelenting Death Knight NPC 16125
@@ -23,12 +23,12 @@ end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "esMX")
 if L then
-	--L.mark_desc = "Warn for marks."
+	L.mark_desc = "Aviso para marcas."
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad", "esMX")
 if L then
-	--L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Kel'Thuzad's Chamber"
+	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Cámara de Kel'Thuzad"
 
 	--L.engage_yell_trigger = "Minions, servants, soldiers of the cold dark! Obey the call of Kel'Thuzad!"
 	--L.stage2_yell_trigger1 = "Pray for mercy!"
@@ -45,7 +45,7 @@ end
 
 L = BigWigs:NewBossLocale("Maexxna", "esMX")
 if L then
-	--L.cocoons = "Cocoons"
+	L.cocoons = "Capullos"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esMX")
@@ -60,7 +60,7 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "esMX")
 if L then
-	--L.stage1_yell_trigger1 = "Stalagg crush you!"
+	L.stage1_yell_trigger1 = "¡Stalagg aplasta!"
 	--L.stage1_yell_trigger2 = "Feed you to master!"
 
 	--L.stage2_yell_trigger1 = "Eat... your... bones..."
@@ -68,36 +68,36 @@ if L then
 	--L.stage2_yell_trigger3 = "Kill..."
 
 	--L.add_death_emote_trigger = "%s dies."
-	--L.overload_emote_trigger = "%s overloads!"
+	L.overload_emote_trigger = "¡%s se sobrecarga!"
 	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
-	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
+	L.polarity_extras = "Avisos adicionales para el posicionamiento del cambio de polaridad"
 
-	--L.custom_off_select_charge_position = "First position"
-	--L.custom_off_select_charge_position_desc = "Where to move to after the first Polarity Shift."
-	--L.custom_off_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
-	--L.custom_off_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
+	L.custom_off_select_charge_position = "Primera posición"
+	L.custom_off_select_charge_position_desc = "Posicionamiento después del primer cambio de polaridad."
+	L.custom_off_select_charge_position_value1 = "|cffff2020Carga negativa (-)|r a la IZQUIERDA, |cff2020ffCarga positiva (+)|r a la DERECHA"
+	L.custom_off_select_charge_position_value2 = "|cff2020ffCarga positiva (+)|r a la IZQUIERDA, |cffff2020Carga negativa (-)|r a la DERECHA"
 
-	--L.custom_off_select_charge_movement = "Movement"
-	--L.custom_off_select_charge_movement_desc = "The movement strategy your group uses."
-	--L.custom_off_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
-	--L.custom_off_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
-	--L.custom_off_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
-	--L.custom_off_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
-	--L.custom_off_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
+	L.custom_off_select_charge_movement = "Movimiento"
+	L.custom_off_select_charge_movement_desc = "La estrategia de movimiento que utiliza tu grupo."
+	L.custom_off_select_charge_movement_value1 = "Corre |cff20ff20A TRAVÉS|r del jefe"
+	L.custom_off_select_charge_movement_value2 = "Corre |cff20ff20EN SENTIDO HORARIO|r alrededor del jefe."
+	L.custom_off_select_charge_movement_value3 = "Corre |cff20ff20EN SENTIDO ANTIHORARIO|r alrededor del jefe."
+	L.custom_off_select_charge_movement_value4 = "Cuatro campamentos 1: Cambio de polaridad se mueve |cff20ff20A LA DERECHA|r, misma polaridad se mueve |cff20ff20A LA IZQUIERDA|r."
+	L.custom_off_select_charge_movement_value5 = "Cuatro campamentos 2: Cambio de polaridad se mueve |cff20ff20A LA IZQUIERDA|r, misma polaridad se mueve |cff20ff20A LA DERECHA|r."
 
-	--L.custom_off_charge_graphic = "Graphical arrow"
-	--L.custom_off_charge_graphic_desc = "Show an arrow graphic."
-	--L.custom_off_charge_text = "Text arrows"
-	--L.custom_off_charge_text_desc = "Show an additional message."
-	--L.custom_off_charge_voice = "Voice alert"
-	--L.custom_off_charge_voice_desc = "Play a voice alert."
+	L.custom_off_charge_graphic = "Flecha gráfica"
+	L.custom_off_charge_graphic_desc = "Muestra una flecha gráfica."
+	L.custom_off_charge_text = "Flecha de texto"
+	L.custom_off_charge_text_desc = "Muestra un mensaje adicional."
+	L.custom_off_charge_voice = "Alerta de voz"
+	L.custom_off_charge_voice_desc = "Reproduce una alerta de voz."
 
 	--Translate these to get locale sound files!
-	--L.left = "<--- GO LEFT <--- GO LEFT <---"
-	--L.right = "---> GO RIGHT ---> GO RIGHT --->"
-	--L.swap = "^^^^ SWITCH SIDES ^^^^ SWITCH SIDES ^^^^"
-	--L.stay = "==== DON'T MOVE ==== DON'T MOVE ===="
+	L.left = "<--- VE A LA IZQUIERDA <--- VE A LA IZQUIERDA <---"
+	L.right = "---> VE A LA DERECHA ---> VE A LA DERECHA --->"
+	L.swap = "^^^^ CAMBIA DE LADO ^^^^ CAMBIA DE LADO ^^^^"
+	L.stay = "==== NO TE MUEVES ==== NO TE MUEVES ===="
 
-	--L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
+	L.chat_message = "El módulo de Thaddius admite mostrar flechas direccionales y reproducir voces. Abre las opciones para configurarlas."
 end
