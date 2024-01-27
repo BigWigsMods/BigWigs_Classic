@@ -91,7 +91,7 @@ function mod:CorrosionOrShadowSeepApplied(args)
 		local amount = args.amount or 1
 		self:StackMessage(args.spellId, "blue", args.destName, amount, 3)
 		if amount >= 3 then
-			self:PlaySound("stages", "alarm", nil, args.destName)
+			self:PlaySound(args.spellId, "alarm", nil, args.destName)
 		end
 	end
 end
