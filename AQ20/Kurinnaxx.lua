@@ -16,6 +16,8 @@ function mod:GetOptions()
 		25646, -- Mortal Wound
 		{25656, "SAY", "ME_ONLY_EMPHASIZE"}, -- Sand Trap (Fake proxy spell as 25648 has no description or icon)
 		26527, -- Frenzy / Enrage (different name on classic era)
+	},nil,{
+		[26527] = CL.hp:format(30), -- Frenzy / Enrage (30% HP)
 	}
 end
 

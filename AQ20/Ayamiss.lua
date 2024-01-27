@@ -35,6 +35,7 @@ function mod:GetOptions()
 		17742, -- Cloud of Disease
 	},nil,{
 		[25725] = L.sacrifice, -- Paralyze (Sacrifice)
+		[8269] = CL.hp:format(20), -- Frenzy / Enrage (20% HP)
 	}
 end
 

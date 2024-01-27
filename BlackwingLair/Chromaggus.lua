@@ -48,6 +48,7 @@ function mod:GetOptions()
 		23174, -- Chromatic Mutation
 		"vulnerability",
 	},nil,{
+		[23537] = CL.hp:format(20), -- Frenzy / Enrage (20% HP)
 		[23174] = CL.mind_control, -- Chromatic Mutation (Mind Control)
 	}
 end

@@ -69,7 +69,7 @@ function mod:OnEngage()
 	self:Bar(29204, 120, CL.count:format(self:SpellName(29204), doomCount)) -- Inevitable Doom
 
 	-- Corrupted Mind
-	self:OpenInfo(29184, self:SpellName(29184), true)
+	self:OpenInfo(29184, "BigWigs: ".. self:SpellName(29184), true)
 	self:SimpleTimer(UpdateHealerList, 0.1)
 end
 

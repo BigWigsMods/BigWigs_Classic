@@ -8,6 +8,12 @@ mod.displayName = CL.trash
 mod:RegisterEnableMob(15355) -- Anubisath Guardian
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local guardiansAlive = 8
+
+--------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -15,11 +21,10 @@ local L = mod:NewLocale()
 if L then
 	L.guardian = "Anubisath Guardian"
 
-	L.guard = 17430 -- Summon Anubisath Swarmguard
-	L.guard_icon = "spell_nature_insectswarm"
+	L["22997_desc"] = 26556 -- 22997 has no description, so using an alternative
 
-	L.warrior = 17431 -- Summon Anubisath Warrior
-	L.warrior_icon = "ability_warrior_savageblow"
+	L["17430_icon"] = "spell_nature_insectswarm" -- Summon Anubisath Swarmguard
+	L["17431_icon"] = "ability_warrior_savageblow" -- Summon Anubisath Warrior
 end
 
 --------------------------------------------------------------------------------
@@ -28,22 +33,24 @@ end
 
 function mod:GetOptions()
 	return {
-		{26556, "SAY", "ME_ONLY_EMPHASIZE"}, -- Plague (Fake proxy spell as 22997 has no description)
+		{22997, "SAY", "ME_ONLY_EMPHASIZE"}, -- Plague
 		24340, -- Meteor
 		14297, -- Shadow Storm
 		8732, -- Thunderclap
 		8269, -- Frenzy / Enrage (different name on classic era)
 		{25698, "EMPHASIZE", "COUNTDOWN"}, -- Explode
-		"guard",
-		"warrior",
+		17430, -- Summon Anubisath Swarmguard
+		17431, -- Summon Anubisath Warrior
+		"stages",
 	},{
-		[26556] = L.guardian,
+		[22997] = L.guardian,
 	},{
 		[25698] = CL.explosion, -- Explode (Explosion)
 	}
 end
 
 function mod:OnBossEnable()
+	guardiansAlive = 8
 	self:RegisterMessage("BigWigs_OnBossEngage", "Disable")
 
 	self:Log("SPELL_AURA_APPLIED", "PlagueApplied", 22997)
@@ -66,6 +73,8 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_SUMMON", "SummonAnubisathSwarmguard", 17430)
 	self:Log("SPELL_SUMMON", "SummonAnubisathWarrior", 17431)
+
+	self:Death("GuardianKilled", 15355)
 end
 
 --------------------------------------------------------------------------------
@@ -73,16 +82,19 @@ end
 --
 
 function mod:PlagueApplied(args)
-	self:TargetMessage(26556, "yellow", args.destName)
-	self:TargetBar(26556, 40, args.destName)
+	self:TargetMessage(args.spellId, "yellow", args.destName)
+	self:TargetBar(args.spellId, 40, args.destName)
 	if self:Me(args.destGUID) then
-		self:Say(26556, nil, nil, "Plague")
-		self:PlaySound(26556, "warning", nil, args.destName)
+		self:Say(args.spellId, nil, nil, "Plague")
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
 end
 
 function mod:PlagueRemoved(args)
 	self:StopBar(args.spellName, args.destName)
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId, "removed")
+	end
 end
 
 do
@@ -134,9 +146,14 @@ function mod:ExplodeRemoved()
 end
 
 function mod:SummonAnubisathSwarmguard(args)
-	self:Message("guard", "green", args.spellName, L.guard_icon)
+	self:Message(args.spellId, "green", args.spellName, L["17430_icon"])
 end
 
 function mod:SummonAnubisathWarrior(args)
-	self:Message("warrior", "green", args.spellName, L.warrior_icon)
+	self:Message(args.spellId, "green", args.spellName, L["17431_icon"])
+end
+
+function mod:GuardianKilled()
+	guardiansAlive = guardiansAlive - 1
+	self:Message("stages", "cyan", CL.mob_remaining:format(L.guardian, guardiansAlive), false)
 end

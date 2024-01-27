@@ -55,10 +55,14 @@ end
 function mod:OnEngage()
 	markCounter = 1
 	deaths = 0
+
+	self:CDBar(28863, 12) -- Void Zone
+	self:CDBar(28884, 21) -- Meteor
+	self:CDBar(28883, 21) -- Holy Wrath
+
 	-- berserk is at 100 marks, so 1297s or ~21.5 min? lol
-	self:Message("mark", "yellow", CL.custom_sec:format(CL.mark, 20), false)
-	self:CDBar("mark", 20, CL.count:format(CL.mark, markCounter), L.mark_icon)
-	-- initial spell casts are with the first mark, with Void Zone 3~6s earlier
+	self:Message("mark", "yellow", CL.custom_sec:format(CL.mark, 21), false)
+	self:CDBar("mark", 21, CL.count:format(CL.mark, markCounter), L.mark_icon)
 end
 
 --------------------------------------------------------------------------------
@@ -85,7 +89,7 @@ function mod:MarkApplied(args)
 	if self:Me(args.destGUID) and args.amount >= 3 then
 		self:StackMessage("mark", "blue", args.destName, args.amount, 4, CL.mark, args.spellId)
 		if args.amount >= 4 then
-			self:PlaySound("mark", "warning")
+			self:PlaySound("mark", "warning", nil, args.destName)
 		end
 	end
 end
@@ -106,10 +110,10 @@ function mod:VoidZone(args)
 		self:PersonalMessage(args.spellId, "underyou")
 		self:PlaySound(args.spellId, "underyou")
 	else
-		self:Message(args.spellId, "orange")
+		self:TargetMessage(args.spellId, "orange", args.destName)
 		local unit = self:GetUnitIdByGUID(args.sourceGUID)
 		if not unit or self:UnitWithinRange(unit, 35) then
-			self:PlaySound(args.spellId, "alarm")
+			self:PlaySound(args.spellId, "alarm", nil, args.destName)
 		end
 	end
 end

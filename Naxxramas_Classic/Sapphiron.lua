@@ -80,7 +80,7 @@ function mod:LifeDrain(args)
 	curseCount = 0
 	curseTime = args.time
 	self:Message(args.spellId, "orange", CL.curse)
-	self:CDBar(args.spellId, 23)
+	self:CDBar(args.spellId, 23, CL.curse)
 	self:PlaySound(args.spellId, "alert")
 end
 
@@ -114,21 +114,23 @@ function CheckAirPhase()
 		-- No one is targeting the boss, or boss still has a target, reset
 		targetCheck = nil
 		mod:SimpleTimer(CheckAirPhase, 0.5)
-	elseif targetCheck then
-		-- Boss has had no target for two iterations, fire the air phase trigger
-		-- (The original module had a 1s delay between scans, not sure if that matters)
-		targetCheck = nil
-		mod:SetStage(2)
+	elseif mod:GetHealth(unit) > 0 then -- Prevent firing during the small window of opportunity after death
+		if targetCheck then
+			-- Boss has had no target for two iterations, fire the air phase trigger
+			-- (The original module had a 1s delay between scans, not sure if that matters)
+			targetCheck = nil
+			mod:SetStage(2)
 
-		mod:StopBar(CL.curse) -- Life Drain
-		mod:StopBar(CL.stage:format(2))
+			mod:StopBar(CL.curse) -- Life Drain
+			mod:StopBar(CL.stage:format(2))
 
-		mod:Message("stages", "cyan", CL.stage:format(2), L.stages_icon)
-		mod:PlaySound("stages", "long")
-	else
-		-- Boss has no target, check one more time to make sure
-		targetCheck = true
-		mod:SimpleTimer(CheckAirPhase, 0.5)
+			mod:Message("stages", "cyan", CL.stage:format(2), L.stages_icon)
+			mod:PlaySound("stages", "long")
+		else
+			-- Boss has no target, check one more time to make sure
+			targetCheck = true
+			mod:SimpleTimer(CheckAirPhase, 0.5)
+		end
 	end
 end
 

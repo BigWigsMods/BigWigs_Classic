@@ -81,7 +81,7 @@ function mod:OnEngage()
 	self:CloseProximity("proximity")
 
 	self:Message("stages", "cyan", CL.stage:format(1), false)
-	self:Bar("stages", 315, CL.stage:format(2), "spell_shadow_chilltouch")
+	self:Bar("stages", 308, CL.stage:format(2), "inv_jewelry_trinket_04")
 end
 
 --------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:RegisterEvent("UNIT_HEALTH")
 
 		self:Message("stages", "cyan", CL.stage:format(2), false)
-		self:Bar("stages", 15, self.displayName, "Spell_Shadow_Charm")
+		self:Bar("stages", 15, CL.active, "achievement_boss_kelthuzad_01")
 		self:OpenProximity("proximity", 10)
 		self:PlaySound("stages", "info")
 	elseif msg:find(L.stage3_yell_trigger, nil, true) then
@@ -106,7 +106,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:PlaySound("stages", "info")
 	elseif msg:find(L.adds_yell_trigger, nil, true) then
 		self:Message("adds", "cyan", CL.spawning:format(CL.adds), L.adds_icon)
-		self:Bar("adds", 10, CL.adds, L.adds_icon)
+		self:Bar("adds", 9, CL.adds, L.adds_icon)
 		self:PlaySound("adds", "info")
 	end
 end
