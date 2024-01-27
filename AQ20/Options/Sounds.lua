@@ -44,7 +44,7 @@ BigWigs:AddSounds("Ruins of Ahn'Qiraj Trash", {
 	[8269] = "long",
 	[8732] = "alert",
 	[14297] = "alarm",
+	[22997] = "warning",
 	[24340] = "info",
 	[25698] = "long",
-	[26556] = "warning",
 })

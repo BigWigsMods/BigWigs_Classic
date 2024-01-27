@@ -38,7 +38,9 @@ BigWigs:AddSounds("Twilight Lord Kelris Discovery", {
 })
 
 BigWigs:AddSounds("Aku'mai Discovery", {
+	[427625] = "alarm",
+	[428482] = "alarm",
 	[429168] = "warning",
 	[429356] = "warning",
-	["stages"] = {"alarm","info","long"},
+	["stages"] = {"info","long"},
 })

@@ -46,9 +46,10 @@ BigWigs:AddColors("Ruins of Ahn'Qiraj Trash", {
 	[8269] = "red",
 	[8732] = "orange",
 	[14297] = "red",
+	[17430] = "green",
+	[17431] = "green",
+	[22997] = {"blue","yellow"},
 	[24340] = "red",
 	[25698] = "orange",
-	[26556] = {"blue","yellow"},
-	["guard"] = "green",
-	["warrior"] = "green",
+	["stages"] = "cyan",
 })
