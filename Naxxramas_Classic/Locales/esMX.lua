@@ -79,12 +79,12 @@ if L then
 	L.custom_off_select_charge_position_value2 = "|cff2020ffCarga positiva (+)|r a la IZQUIERDA, |cffff2020Carga negativa (-)|r a la DERECHA"
 
 	L.custom_off_select_charge_movement = "Movimiento"
-	L.custom_off_select_charge_movement_desc = "La estrategia de movimiento que utiliza tu grupo."
+	L.custom_off_select_charge_movement_desc = "La estrategia de movimiento que se utiliza tu grupo."
 	L.custom_off_select_charge_movement_value1 = "Corre |cff20ff20A TRAVÉS|r del jefe"
 	L.custom_off_select_charge_movement_value2 = "Corre |cff20ff20EN SENTIDO HORARIO|r alrededor del jefe."
 	L.custom_off_select_charge_movement_value3 = "Corre |cff20ff20EN SENTIDO ANTIHORARIO|r alrededor del jefe."
-	L.custom_off_select_charge_movement_value4 = "Cuatro campamentos 1: Cambio de polaridad se mueve |cff20ff20A LA DERECHA|r, misma polaridad se mueve |cff20ff20A LA IZQUIERDA|r."
-	L.custom_off_select_charge_movement_value5 = "Cuatro campamentos 2: Cambio de polaridad se mueve |cff20ff20A LA IZQUIERDA|r, misma polaridad se mueve |cff20ff20A LA DERECHA|r."
+	L.custom_off_select_charge_movement_value4 = "Cuatro grupos 1: Cambio de polaridad hacia la |cff20ff20DERECHA|r, misma polaridad hacia la |cff20ff20IZQUIERDA|r."
+	L.custom_off_select_charge_movement_value5 = "Cuatro grupos 2: Cambio de polaridad hacia la |cff20ff20IZQUIERDA|r, misma polaridad hacia la |cff20ff20DERECHA|r."
 
 	L.custom_off_charge_graphic = "Flecha gráfica"
 	L.custom_off_charge_graphic_desc = "Muestra una flecha gráfica."
