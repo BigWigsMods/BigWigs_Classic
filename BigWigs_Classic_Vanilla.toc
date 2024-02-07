@@ -47,3 +47,4 @@ Naxxramas_Classic\modules.xml
 Onyxia_Classic\modules.xml
 World_Classic\modules.xml
 BlackfathomDeeps_Classic\modules.xml
+Gnomeregan_Classic\modules.xml
