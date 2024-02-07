@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Grubbis Discovery", 90, -2925)
 if not mod then return end
-mod:RegisterEnableMob(0) -- Grubbis Season of Discovery
+mod:RegisterEnableMob(20) -- Grubbis Season of Discovery
 mod:SetEncounterID(2925)
 
 --------------------------------------------------------------------------------

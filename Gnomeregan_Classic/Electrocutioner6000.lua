@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Electrocutioner 6000 Discovery", 90, -2927)
 if not mod then return end
-mod:RegisterEnableMob(0) -- Electrocutioner 6000 Season of Discovery
+mod:RegisterEnableMob(30) -- Electrocutioner 6000 Season of Discovery
 mod:SetEncounterID(2927)
 
 --------------------------------------------------------------------------------

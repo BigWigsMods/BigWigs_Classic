@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Crowd Pummeler 9-60 Discovery", 90, -2899)
 if not mod then return end
-mod:RegisterEnableMob(0) -- Crowd Pummeler 9-60 Season of Discovery
+mod:RegisterEnableMob(60) -- Crowd Pummeler 9-60 Season of Discovery
 mod:SetEncounterID(2899)
 
 --------------------------------------------------------------------------------

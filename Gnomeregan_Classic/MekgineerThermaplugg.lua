@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Mekgineer Thermaplugg Discovery", 90, -2940)
 if not mod then return end
-mod:RegisterEnableMob(0) -- Mekgineer Thermaplugg Season of Discovery
+mod:RegisterEnableMob(40) -- Mekgineer Thermaplugg Season of Discovery
 mod:SetEncounterID(2940)
 
 --------------------------------------------------------------------------------

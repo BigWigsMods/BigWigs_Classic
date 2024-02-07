@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Mechanical Menagerie Discovery", 90, -2935)
 if not mod then return end
-mod:RegisterEnableMob(0) -- Mechanical Menagerie Season of Discovery
+mod:RegisterEnableMob(10) -- Mechanical Menagerie Season of Discovery
 mod:SetEncounterID(2935)
 
 --------------------------------------------------------------------------------

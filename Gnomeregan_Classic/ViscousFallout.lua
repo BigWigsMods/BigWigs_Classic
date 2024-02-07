@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Viscous Fallout Discovery", 90, -2928)
 if not mod then return end
-mod:RegisterEnableMob(0) -- Viscous Fallout Season of Discovery
+mod:RegisterEnableMob(50) -- Viscous Fallout Season of Discovery
 mod:SetEncounterID(2928)
 
 --------------------------------------------------------------------------------
