@@ -18,7 +18,7 @@ local eggs = 0
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.start_trigger = "Intruders have breached"
 

@@ -11,7 +11,7 @@ mod:SetEncounterID(664)
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L["19408_icon"] = "spell_shadow_psychicscream"
 end

@@ -131,7 +131,6 @@ end
 
 function mod:InitialCorruptedMindRemoved(args) -- The player died
 	self:DeleteFromTable(healerList, args.destName)
-	healerDebuffTime[args.destName] = nil
 end
 
 function mod:FungalBloomApplied(args)

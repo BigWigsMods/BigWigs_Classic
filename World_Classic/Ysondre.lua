@@ -18,13 +18,12 @@ local warnHP = 80
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.bossName = "Ysondre"
 
 	L.engage_trigger = "The strands of LIFE have been severed! The Dreamers must be avenged!"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization

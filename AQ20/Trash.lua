@@ -17,7 +17,7 @@ local guardiansAlive = 8
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.guardian = "Anubisath Guardian"
 

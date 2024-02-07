@@ -59,3 +59,14 @@ if L then
 	L.add = "Muertes de dracónidos"
 	L.add_desc = "Anuncia el número de dracónidos muertos en fase 1 antes del aterrizaje de Nefarian."
 end
+
+L = BigWigs:NewBossLocale("Blackwing Lair Trash", "esES")
+if L then
+	L.wyrmguard_overseer = "Vermiguardia Garramortal / Sobrestante Garramortal" -- NPC 12460 / 12461
+
+	--L.target_vulnerability = "Target Vulnerability Warnings"
+	--L.target_vulnerability_desc = "When your target is a Death Talon Wyrmguard or a Death Talon Overseer, show a warning for what vulnerability it has."
+	--L.target_vulnerability_message = "Target Vulnerability: %s"
+	L.detect_magic_missing_message = "Detectar magia is missing from your target"
+	L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Detectar magia]\124h\124r on your target for vulnerability warnings to work."
+end

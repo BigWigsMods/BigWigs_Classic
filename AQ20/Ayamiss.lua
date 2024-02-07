@@ -18,7 +18,7 @@ local hasStageWarned = false
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.sacrifice = "Sacrifice"
 end

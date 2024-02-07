@@ -11,7 +11,7 @@ mod:SetEncounterID(611)
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.warmup_trigger = "Too late, friends!"
 	L.tank_bomb = "Tank Bomb"

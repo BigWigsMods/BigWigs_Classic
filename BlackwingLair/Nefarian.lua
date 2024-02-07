@@ -7,6 +7,7 @@ if not mod then return end
 mod:RegisterEnableMob(11583, 10162) -- Nefarian, Lord Victor Nefarius
 mod:SetEncounterID(617)
 mod:SetRespawnTime(900)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -20,7 +21,7 @@ local adds_dead = 0
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.engage_yell_trigger = "Let the games begin"
 	L.landing_soon_trigger = "Well done, my minions"
@@ -60,12 +61,14 @@ end
 function mod:GetOptions()
 	return {
 		"stages",
+		{22667, "ICON"}, -- Shadow Command
 		{22539, "CASTBAR"}, -- Shadow Flame
 		{22686, "CASTBAR"}, -- Bellowing Roar
 		22687, -- Veil of Shadow
 		"classcall",
 		"add"
 	},nil,{
+		[22667] = CL.mind_control, -- Shadow Command (Mind Control)
 		[22686] = CL.fear, -- Bellowing Roar (Fear)
 		[22687] = CL.curse, -- Veil of Shadow (Curse)
 	}
@@ -74,8 +77,8 @@ end
 function mod:VerifyEnable(unit, mobId)
 	if mobId == 11583 then -- Nefarian
 		return true
-	elseif mobId == 10162 then -- Lord Victor Nefarius, prevent enabling at Vael
-		return UnitReaction("player", unit) == 5
+	else -- Lord Victor Nefarius, prevent enabling at Vael
+		return self:UnitIsInteractable(unit)
 	end
 end
 
@@ -100,9 +103,12 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
+	self:Log("SPELL_AURA_APPLIED", "ShadowCommandApplied", 22667)
+	self:Log("SPELL_AURA_REMOVED", "ShadowCommandRemoved", 22667)
 	self:Log("SPELL_CAST_START", "BellowingRoar", 22686)
 	self:Log("SPELL_CAST_START", "ShadowFlame", 22539)
 	self:Log("SPELL_AURA_APPLIED", "VeilOfShadow", 22687)
+	self:Log("SPELL_DISPEL", "VeilOfShadowDispelled", "*")
 
 	-- Rogue, Druid, Druid (Retail WoW), Warrior, Priest, Mage, Paladin, Warlock, Demon Hunter
 	self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 350567, 23397, 23401, 23410, 23418, 23427, 204813)
@@ -118,11 +124,31 @@ end
 
 function mod:OnEngage()
 	adds_dead = 0
+	self:SetStage(1)
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+do
+	local prevMindControl = nil
+	function mod:ShadowCommandApplied(args) -- Mind control
+		prevMindControl = args.destGUID
+		self:TargetMessage(args.spellId, "yellow", args.destName, CL.mind_control)
+		self:TargetBar(args.spellId, 15, args.destName, CL.mind_control_short)
+		self:PrimaryIcon(args.spellId, args.destName)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
+	end
+	function mod:ShadowCommandRemoved(args)
+		if args.destGUID == prevMindControl then
+			prevMindControl = nil
+			self:StopBar(CL.mind_control_short, args.destName)
+			self:PrimaryIcon(args.spellId)
+		end
+	end
+end
 
 function mod:BellowingRoar(args)
 	self:CDBar(args.spellId, 32, CL.fear, L["22686_icon"])
@@ -146,6 +172,12 @@ function mod:VeilOfShadow(args)
 	end
 end
 
+function mod:VeilOfShadowDispelled(args)
+	if args.extraSpellName == self:SpellName(22687) then
+		self:Message(22687, "green", CL.removed_by:format(CL.curse, self:ColorName(args.sourceName)))
+	end
+end
+
 do
 	local prev = 0
 	function mod:ClassCall(args)
@@ -161,13 +193,15 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.engage_yell_trigger, nil, true) then
 		self:Engage()
 	elseif msg:find(L.landing_soon_trigger, nil, true) then
-		self:Message("stages", "cyan", CL.custom_sec:format(CL.stage:format(2), 10), "INV_Misc_Head_Dragon_Black")
-		self:Bar("stages", 10, CL.stage:format(2), "INV_Misc_Head_Dragon_Black")
+		self:Message("stages", "cyan", CL.custom_sec:format(CL.stage:format(2), 10), false)
+		self:Bar("stages", 11, CL.stage:format(2), "INV_Misc_Head_Dragon_Black")
 		self:PlaySound("stages", "long")
 	elseif msg:find(L.stage2_yell_trigger, nil, true) then
+		self:SetStage(2)
 		self:Message("stages", "cyan", CL.stage:format(2), false)
 		self:PlaySound("stages", "info")
 	elseif msg:find(L.stage3_yell_trigger, nil, true) then
+		self:SetStage(3)
 		self:Message("stages", "cyan", CL.percent:format(20, CL.stage:format(3)), false)
 		self:PlaySound("stages", "long")
 	else
@@ -183,5 +217,5 @@ end
 
 function mod:AddDied()
 	adds_dead = adds_dead + 1
-	self:Message("add", "green", CL.add_killed:format(adds_dead, 42), "INV_Misc_Head_Dragon_Black")
+	self:Message("add", "green", CL.add_killed:format(adds_dead, 41), "INV_Misc_Head_Dragon_Black")
 end

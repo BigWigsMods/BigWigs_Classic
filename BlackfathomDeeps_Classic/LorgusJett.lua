@@ -35,7 +35,7 @@ function mod:GetOptions()
 		"stages",
 		414691, -- Corrupted Windfury Totem
 		windfuryTotemMarker,
-		414763, -- Corrupted Lightning Shield Totem
+		{414763, "COUNTDOWN"}, -- Corrupted Lightning Shield Totem
 		shieldTotemMarker,
 		419636, -- Corrupted Molten Fury Totem
 		moltenTotemMarker,

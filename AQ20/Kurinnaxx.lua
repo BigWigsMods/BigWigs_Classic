@@ -8,13 +8,23 @@ mod:RegisterEnableMob(15348)
 mod:SetEncounterID(718)
 
 --------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:GetLocale()
+if L then
+	L["25648_desc"] = 25656 -- 25648 has no description, so using an alternative
+	L["25648_icon"] = "inv_misc_dust_02" -- 25648 has no icon, so using an alternative
+end
+
+--------------------------------------------------------------------------------
 -- Initialization
 --
 
 function mod:GetOptions()
 	return {
 		25646, -- Mortal Wound
-		{25656, "SAY", "ME_ONLY_EMPHASIZE"}, -- Sand Trap (Fake proxy spell as 25648 has no description or icon)
+		{25648, "SAY", "ME_ONLY_EMPHASIZE"}, -- Sand Trap
 		26527, -- Frenzy / Enrage (different name on classic era)
 	},nil,{
 		[26527] = CL.hp:format(30), -- Frenzy / Enrage (30% HP)
@@ -33,7 +43,7 @@ end
 
 function mod:OnEngage()
 	self:RegisterEvent("UNIT_HEALTH")
-	self:CDBar(25656, 8) -- Sand Trap
+	self:CDBar(25648, 8) -- Sand Trap
 end
 
 --------------------------------------------------------------------------------
@@ -54,11 +64,11 @@ function mod:MortalWoundRemoved(args)
 end
 
 function mod:SandTrap(args)
-	self:TargetMessage(25656, "orange", args.sourceName)
-	self:CDBar(25656, 8)
+	self:TargetMessage(args.spellId, "orange", args.sourceName, args.spellName, L["25648_icon"])
+	self:CDBar(args.spellId, 8, args.spellName, L["25648_icon"])
 	if self:Me(args.sourceGUID) then
-		self:Say(25656, nil, nil, "Sand Trap")
-		self:PlaySound(25656, "alert", nil, args.sourceName)
+		self:Say(args.spellId, nil, nil, "Sand Trap")
+		self:PlaySound(args.spellId, "alert", nil, args.sourceName)
 	end
 end
 

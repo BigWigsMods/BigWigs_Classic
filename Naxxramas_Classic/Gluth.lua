@@ -45,8 +45,9 @@ end
 
 function mod:OnEngage()
 	self:Berserk(360, true)
-	self:CDBar(28375, 105, self:SpellName(28375), L["28375_icon"])
-	self:DelayedMessage(28375, 100, "orange", CL.soon:format(self:SpellName(28375)))
+	self:CDBar(29685, 18, CL.fear) -- Terrifying Roar
+	self:CDBar(28375, 105, self:SpellName(28375), L["28375_icon"]) -- Decimate
+	self:DelayedMessage(28375, 100, "orange", CL.soon:format(self:SpellName(28375))) -- Decimate
 end
 
 --------------------------------------------------------------------------------

@@ -39,7 +39,6 @@ function mod:GetOptions()
 		{27819, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Detonate Mana
 		"adds",
 		"stages",
-		"proximity",
 	},nil,{
 		[28410] = CL.mind_control, -- Chains of Kel'Thuzad (Mind Control)
 		[27819] = CL.bomb, -- Detonate Mana (Bomb)
@@ -78,10 +77,9 @@ end
 
 function mod:OnEngage()
 	self:SetStage(1)
-	self:CloseProximity("proximity")
 
 	self:Message("stages", "cyan", CL.stage:format(1), false)
-	self:Bar("stages", 308, CL.stage:format(2), "inv_jewelry_trinket_04")
+	self:CDBar("stages", 308, CL.stage:format(2), "inv_jewelry_trinket_04")
 end
 
 --------------------------------------------------------------------------------
@@ -98,7 +96,6 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 
 		self:Message("stages", "cyan", CL.stage:format(2), false)
 		self:Bar("stages", 15, CL.active, "achievement_boss_kelthuzad_01")
-		self:OpenProximity("proximity", 10)
 		self:PlaySound("stages", "info")
 	elseif msg:find(L.stage3_yell_trigger, nil, true) then
 		self:SetStage(3)

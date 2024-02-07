@@ -21,7 +21,7 @@ local addsAlive = 7
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.wave_trigger1a = "Kill first, ask questions later... Incoming!"
 	L.wave_trigger1b = "kill you last" -- Remember, Rajaxx, when I said I'd kill you last? [when you pull the first wave instead of talking to Andorov]

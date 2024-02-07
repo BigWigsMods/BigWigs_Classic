@@ -12,7 +12,6 @@ mod:SetEncounterID(1113)
 --
 
 local understudyIcons = {}
-local prevTaunt = nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -62,8 +61,6 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	understudyIcons = {}
-	prevTaunt = nil
 	self:CDBar(29107, 25, self:SpellName(29107), L["29107_icon"]) -- Disrupting Shout
 	self:DelayedMessage(29107, 20, "red", CL.soon:format(self:SpellName(29107)))
 end
@@ -92,15 +89,18 @@ function mod:Taunt(args)
 	self:PlaySound(args.spellId, "info")
 end
 
-function mod:TauntApplied(args)
-	prevTaunt = args.sourceGUID
-	self:Bar(args.spellId, 20, CL.on:format(args.spellName, CL.boss))
-end
+do
+	local prevTaunt = nil
+	function mod:TauntApplied(args)
+		prevTaunt = args.sourceGUID
+		self:Bar(args.spellId, 20, CL.on:format(args.spellName, CL.boss))
+	end
 
-function mod:TauntRemoved(args)
-	if prevTaunt == args.sourceGUID then
-		self:StopBar(CL.on:format(args.spellName, CL.boss))
-		self:Message(args.spellId, "orange", CL.over:format(args.spellName))
+	function mod:TauntRemoved(args)
+		if prevTaunt == args.sourceGUID then
+			self:StopBar(CL.on:format(args.spellName, CL.boss))
+			self:Message(args.spellId, "orange", CL.over:format(args.spellName))
+		end
 	end
 end
 
@@ -128,11 +128,15 @@ end
 --end
 
 function mod:MindControl(args)
-	local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
-	if icon then
-		understudyIcons[args.destGUID] = icon
-		-- Not much of a point if they aren't marked
-		self:Bar(29051, 60, icon .. self:SpellName(29107)) -- Mind Exhaustion is hidden but we can just do it here
+	if self:MobId(args.destGUID) == 16803 then -- Only when mind controlling an understudy
+		local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
+		if icon then
+			understudyIcons[args.destGUID] = icon
+			-- Not much of a point if they aren't marked
+			self:Bar(29051, 60, icon .. self:SpellName(29051)) -- Mind Exhaustion is hidden but we can just do it here
+		else
+			understudyIcons[args.destGUID] = nil
+		end
 	end
 end
 

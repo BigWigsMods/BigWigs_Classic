@@ -18,7 +18,7 @@ local warnHP = 80
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.bossName = "Taerar"
 
@@ -26,7 +26,6 @@ if L then
 
 	L["22686_icon"] = "spell_shadow_psychicscream"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization

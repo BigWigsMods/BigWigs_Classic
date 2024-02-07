@@ -12,6 +12,8 @@ mod:SetEncounterID(663)
 --
 
 local assignMarks = {}
+local curseCount = 0
+local curseTime = 0
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -33,6 +35,8 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "ImpendingDoom", 19702)
 	self:Log("SPELL_CAST_SUCCESS", "LucifronsCurse", 19703)
+	self:Log("SPELL_AURA_APPLIED", "LucifronsCurseApplied", 19703)
+	self:Log("SPELL_AURA_REMOVED", "LucifronsCurseRemoved", 19703)
 	self:Log("SPELL_CAST_START", "DominateMind", 20604)
 	self:Log("SPELL_AURA_APPLIED", "DominateMindApplied", 20604)
 	self:Log("SPELL_AURA_REMOVED", "DominateMindRemoved", 20604)
@@ -42,7 +46,9 @@ end
 
 function mod:OnEngage()
 	assignMarks = {}
-	self:CDBar(19702, 8) -- Impending Doom
+	curseCount = 0
+	curseTime = 0
+	self:CDBar(19702, 7) -- Impending Doom
 	self:CDBar(19703, 11, CL.curse) -- Lucifron's Curse
 end
 
@@ -57,9 +63,25 @@ function mod:ImpendingDoom(args)
 end
 
 function mod:LucifronsCurse(args)
-	self:Bar(args.spellId, 20, CL.curse)
+	curseTime = args.time
+	self:CDBar(args.spellId, 20, CL.curse)
 	self:Message(args.spellId, "yellow", CL.curse)
 	self:PlaySound(args.spellId, "info")
+end
+
+function mod:LucifronsCurseApplied(args)
+	if self:Player(args.destFlags) then -- Players, not pets
+		curseCount = curseCount + 1
+	end
+end
+
+function mod:LucifronsCurseRemoved(args)
+	if self:Player(args.destFlags) then -- Players, not pets
+		curseCount = curseCount - 1
+		if curseCount == 0 then
+			self:Message(args.spellId, "green", CL.removed_after:format(CL.curse, args.time-curseTime))
+		end
+	end
 end
 
 function mod:DominateMind(args)

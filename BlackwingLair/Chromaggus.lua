@@ -14,12 +14,13 @@ mod:SetEncounterID(616)
 local barcount = 2
 local debuffCount = 0
 local prevWeakness = nil
+local buffList = {}
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.breath = "Breaths"
 	L.breath_desc = "Warn for Breaths."
@@ -53,6 +54,16 @@ function mod:GetOptions()
 	}
 end
 
+function mod:OnRegister()
+	buffList = {
+		[22277] = L.vulnerability_message:format(STRING_SCHOOL_FIRE),
+		[22278] = L.vulnerability_message:format(STRING_SCHOOL_FROST),
+		[22279] = L.vulnerability_message:format(STRING_SCHOOL_SHADOW),
+		[22280] = L.vulnerability_message:format(STRING_SCHOOL_NATURE),
+		[22281] = L.vulnerability_message:format(STRING_SCHOOL_ARCANE),
+	}
+end
+
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 23128)
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
@@ -68,7 +79,7 @@ function mod:OnBossEnable()
 	)
 
 	self:Death("Win", 14020)
-	if self:Classic() then
+	if self:Vanilla() then
 		BigWigs:Print(L.detect_magic_warning)
 	end
 end
@@ -79,11 +90,11 @@ do
 
 		local unit = mod:GetUnitIdByGUID(14020)
 		if unit then
-			if mod:Classic() then
+			if mod:Vanilla() then
 				if mod:UnitDebuff(unit, 2855) then -- Detect Magic
 					mod:UNIT_AURA(nil, unit)
 				else
-					mod:Message("vulnerability", "red", L.detect_magic_missing, 22277)
+					mod:Message("vulnerability", "red", L.detect_magic_missing, 2855)
 					mod:PlaySound("vulnerability", "warning")
 				end
 			else
@@ -167,35 +178,18 @@ end
 
 function mod:UNIT_AURA(_, unit)
 	if self:MobId(self:UnitGUID(unit)) == 14020 then
-		if self:UnitBuff(unit, 22277) then -- Fire
-			if prevWeakness ~= 22277 then
-				prevWeakness = 22277
-				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_FIRE), prevWeakness)
-				self:PlaySound("vulnerability", "info")
-			end
-		elseif self:UnitBuff(unit, 22278) then -- Frost
-			if prevWeakness ~= 22278 then
-				prevWeakness = 22278
-				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_FROST), prevWeakness)
-				self:PlaySound("vulnerability", "info")
-			end
-		elseif self:UnitBuff(unit, 22279) then -- Shadow
-			if prevWeakness ~= 22279 then
-				prevWeakness = 22279
-				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_SHADOW), prevWeakness)
-				self:PlaySound("vulnerability", "info")
-			end
-		elseif self:UnitBuff(unit, 22280) then -- Nature
-			if prevWeakness ~= 22280 then
-				prevWeakness = 22280
-				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_NATURE), prevWeakness)
-				self:PlaySound("vulnerability", "info")
-			end
-		elseif self:UnitBuff(unit, 22281) then -- Arcane
-			if prevWeakness ~= 22281 then
-				prevWeakness = 22281
-				self:Message("vulnerability", "green", L.vulnerability_message:format(STRING_SCHOOL_ARCANE), prevWeakness)
-				self:PlaySound("vulnerability", "info")
+		for buffId, message in next, buffList do
+			if self:UnitBuff(unit, buffId) then
+				if prevWeakness ~= buffId then
+					if buffList[prevWeakness] then
+						self:StopBar(buffList[prevWeakness])
+					end
+					prevWeakness = buffId
+					self:Message("vulnerability", "green", message, buffId)
+					self:CDBar("vulnerability", 0.1, message, buffId)
+					self:PlaySound("vulnerability", "info")
+				end
+				return
 			end
 		end
 	end

@@ -12,15 +12,15 @@ mod:SetStage(1)
 -- Locals
 --
 
-local sonsdead = 0
+local sonsDead = 0
 local timer = nil
-local warmupTimer = mod:Retail() and 72 or 84
+local warmupTimer = mod:Retail() and 74 or 84
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.engage_trigger = "NOW FOR YOU,"
 	L.submerge_trigger = "COME FORTH,"
@@ -56,9 +56,9 @@ function mod:GetOptions()
 end
 
 function mod:VerifyEnable(unit, mobId)
-	if mobId == 11502 then
+	if mobId == 11502 then -- Ragnaros
 		return true
-	elseif mobId == 12018 or mobId == 54404 then
+	elseif mobId == 12018 or mobId == 54404 then -- Majordomo Executus, Majordomo Executus (Retail)
 		return not UnitCanAttack(unit, "player")
 	end
 end
@@ -76,10 +76,10 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	sonsdead = 0
+	sonsDead = 0
 	timer = nil
 	self:SetStage(1)
-	self:CDBar(20566, 27, CL.knockback) -- Wrath of Ragnaros
+	self:CDBar(20566, 26, CL.knockback) -- Wrath of Ragnaros
 	self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
 	self:Message("submerge", "yellow", CL.custom_min:format(L.submerge, 3), L.submerge_icon)
 	self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
@@ -101,7 +101,7 @@ end
 
 function mod:WrathOfRagnaros(args)
 	self:Message(args.spellId, "red", CL.knockback)
-	self:Bar(args.spellId, 28, CL.knockback)
+	self:CDBar(args.spellId, 27, CL.knockback)
 end
 
 function mod:SummonRagnarosStart()
@@ -119,7 +119,7 @@ function mod:MajordomoDeath()
 end
 
 function mod:Emerge()
-	sonsdead = 10 -- Block this firing again if sons are killed after he emerges
+	sonsDead = 10 -- Block this firing again if sons are killed after he emerges
 	timer = nil
 	self:SetStage(1)
 	self:CDBar(20566, 27, CL.knockback)
@@ -134,7 +134,7 @@ function mod:Emerge()
 end
 
 function mod:Submerge()
-	sonsdead = 0 -- reset counter
+	sonsDead = 0 -- reset counter
 	self:SetStage(2)
 	timer = self:ScheduleTimer("Emerge", 90)
 	self:StopBar(CL.knockback)
@@ -148,11 +148,11 @@ function mod:Submerge()
 end
 
 function mod:SonDeaths()
-	sonsdead = sonsdead + 1
-	if sonsdead < 9 then
-		self:Message("emerge", "green", CL.add_killed:format(sonsdead, 8), "spell_fire_elemental_totem")
+	sonsDead = sonsDead + 1
+	if sonsDead < 9 then
+		self:Message("emerge", "green", CL.add_killed:format(sonsDead, 8), "spell_fire_elemental_totem")
 	end
-	if sonsdead == 8 then
+	if sonsDead == 8 then
 		self:CancelTimer(timer)
 		self:StopBar(L.emerge_bar)
 		self:CancelDelayedMessage(CL.custom_sec:format(L.emerge, 60))

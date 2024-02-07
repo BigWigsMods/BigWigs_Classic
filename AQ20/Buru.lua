@@ -12,7 +12,7 @@ mod:SetStage(1)
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.fixate = CL.fixate
 	L.fixate_desc = "Fixate on a target, ignoring threat from other attackers."

@@ -202,7 +202,7 @@ function mod:OnEngage()
 	if self:Retail() then
 		self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	end
-	self:Message("stages", "yellow", CL.stage:format(1), false) -- L.engage_message
+	self:Message("stages", "cyan", CL.stage:format(1), false) -- L.engage_message
 	self:Bar(28134, 11) -- Power Surge
 	self:Bar(28338, 20) -- Magnetic Pull
 end

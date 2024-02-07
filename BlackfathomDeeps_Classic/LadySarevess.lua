@@ -59,7 +59,7 @@ end
 --
 
 function mod:ForkedLightning(args)
-	self:Bar(args.spellId, 20)
+	self:CDBar(args.spellId, 20)
 end
 
 function mod:ForkedLightningApplied(args)

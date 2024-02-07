@@ -18,13 +18,12 @@ local warnHP = 80
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.bossName = "Emeriss"
 
 	L.engage_trigger = "Hope is a DISEASE of the soul! This land shall wither and die!"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization

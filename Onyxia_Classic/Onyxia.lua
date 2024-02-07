@@ -13,7 +13,7 @@ mod:SetStage(1)
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.phase1_trigger = "How fortuitous"
 	L.phase2_trigger = "from above"

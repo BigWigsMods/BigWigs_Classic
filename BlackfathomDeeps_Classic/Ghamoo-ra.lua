@@ -56,6 +56,7 @@ end
 
 function mod:OnEngage()
 	isWeakened = false
+	self:Bar(407077, 15.8) -- Triple Chomp
 end
 
 --------------------------------------------------------------------------------
@@ -64,10 +65,13 @@ end
 
 function mod:CrunchArmorApplied(args)
 	if self:Player(args.destFlags) then -- Players, not pets
-		local amount = args.amount or 1
-		self:StackMessage(args.spellId, "purple", args.destName, amount, 3)
-		if amount >= 3 then
-			self:PlaySound(args.spellId, "warning")
+		if args.amount then -- 2+
+			self:StackMessage(args.spellId, "purple", args.destName, args.amount, 3)
+			if args.amount >= 3 then
+				self:PlaySound(args.spellId, "alert")
+			end
+		elseif self:Me(args.destGUID) then
+			self:StackMessage(args.spellId, "blue", args.destName, 1, 3)
 		end
 	end
 end
@@ -100,11 +104,10 @@ end
 function mod:AquaShellCast() -- Aqua shell being removed, Knockback incoming
 	self:Message(406970, "orange", CL.incoming:format(CL.knockback))
 	self:CastBar(406970, 4, CL.knockback)
+	self:PlaySound(406970, "warning")
 end
 
 function mod:TripleChomp(args)
 	self:Message(args.spellId, "purple")
-	if isWeakened then
-		self:Bar(args.spellId, 11.3)
-	end
+	self:Bar(args.spellId, isWeakened and 11.3 or 16.2)
 end

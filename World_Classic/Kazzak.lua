@@ -12,7 +12,7 @@ mod.worldBoss = 12397
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.bossName = "Lord Kazzak"
 
@@ -20,7 +20,6 @@ if L then
 
 	L.supreme_mode = "Supreme Mode"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization

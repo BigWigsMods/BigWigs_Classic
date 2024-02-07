@@ -12,13 +12,12 @@ mod.worldBoss = 6109
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.bossName = "Azuregos"
 
 	L.teleport_trigger = "Come, little ones"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization

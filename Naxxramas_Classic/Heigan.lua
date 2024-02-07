@@ -9,6 +9,13 @@ mod:SetEncounterID(1112)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local diseaseCount = 0
+local diseaseTime = 0
+
+--------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -35,11 +42,15 @@ function mod:OnBossEnable()
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 
 	self:Log("SPELL_CAST_SUCCESS", "DecrepitFever", 29998)
+	self:Log("SPELL_AURA_APPLIED", "DecrepitFeverApplied", 29998)
+	self:Log("SPELL_AURA_REMOVED", "DecrepitFeverRemoved", 29998)
 
 	self:Death("Win", 15936)
 end
 
 function mod:OnEngage()
+	diseaseCount = 0
+	diseaseTime = 0
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:Bar("stages", 90, CL.teleport, L.stages_icon)
@@ -74,6 +85,19 @@ do
 end
 
 function mod:DecrepitFever(args)
+	diseaseCount = 0
+	diseaseTime = args.time
 	self:Message(args.spellId, "yellow", CL.on_group:format(args.spellName))
 	self:PlaySound(args.spellId, "alert")
+end
+
+function mod:DecrepitFeverApplied()
+	diseaseCount = diseaseCount + 1
+end
+
+function mod:DecrepitFeverRemoved(args)
+	diseaseCount = diseaseCount - 1
+	if diseaseCount == 0 then
+		self:Message(args.spellId, "green", CL.removed_after:format(args.spellName, args.time-diseaseTime))
+	end
 end

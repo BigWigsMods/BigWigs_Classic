@@ -4,14 +4,14 @@
 
 local mod, CL = BigWigs:NewBoss("Majordomo Executus", 409, 1527)
 if not mod then return end
-mod:RegisterEnableMob(12018, 11663, 11664)
+mod:RegisterEnableMob(12018, 11663, 11664) -- Majordomo Executus, Flamewaker Healer, Flamewaker Elite
 mod:SetEncounterID(671)
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale()
+local L = mod:GetLocale()
 if L then
 	L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
 	L.power_next = "Next Power"

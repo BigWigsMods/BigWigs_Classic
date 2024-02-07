@@ -19,13 +19,12 @@ local whirlCount = 0
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.bossName = "Lethon"
 
 	L.engage_trigger = "I can sense the SHADOW on your hearts. There can be no rest for the wicked!"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
