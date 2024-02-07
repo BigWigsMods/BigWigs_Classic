@@ -1,11 +1,15 @@
-
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Viscidus", 531, 1548)
 if not mod then return end
 mod:RegisterEnableMob(15299)
+mod:SetEncounterID(713)
+
+--------------------------------------------------------------------------------
+-- Locals
+--
 
 local swingCount = -1
 local frostCount = 0
@@ -14,16 +18,18 @@ local frostCount = 0
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.freeze = "Freezing States"
 	L.freeze_desc = "Warn for the different frozen states."
-	L.freeze_icon = 11836 -- spell_frost_glacier / Freeze Solid
+	L.freeze_icon = "spell_frost_glacier"
+
 	L.freeze_trigger1 = "%s begins to slow!"
 	L.freeze_trigger2 = "%s is freezing up!"
 	L.freeze_trigger3 = "%s is frozen solid!"
 	L.freeze_trigger4 = "%s begins to crack!"
 	L.freeze_trigger5 = "%s looks ready to shatter!"
+
 	L.freeze_warn1 = "First freeze phase!"
 	L.freeze_warn2 = "Second freeze phase!"
 	L.freeze_warn3 = "Viscidus is frozen!"
@@ -32,7 +38,6 @@ if L then
 	L.freeze_warn_melee = "%d melee attacks - %d more to go"
 	L.freeze_warn_frost = "%d frost attacks - %d more to go"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -49,19 +54,16 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "PoisonBoltVolley", 25991)
 
+	self:Log("SPELL_AURA_APPLIED", "ToxinDamage", 25989)
 	self:Log("SPELL_PERIODIC_DAMAGE", "ToxinDamage", 25989)
 	self:Log("SPELL_PERIODIC_MISSED", "ToxinDamage", 25989)
-	self:Log("SPELL_AURA_APPLIED", "ToxinDamage", 25989)
 
-	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+	self:Log("SPELL_DAMAGE", "FrostDamage", "*")
+	self:Log("SWING_DAMAGE", "SwingDamage", "*")
+
 	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
 
 	self:Death("Win", 15299)
-end
-
-function mod:OnEngage()
-	self:StartWipeCheck()
 end
 
 function mod:OnWipe()
@@ -74,53 +76,52 @@ end
 
 function mod:PoisonBoltVolley(args)
 	swingCount = -1
-	self:MessageOld(args.spellId, "yellow")
+	self:Message(args.spellId, "yellow")
 	self:CDBar(args.spellId, 10)
 end
 
 do
 	local prev = 0
 	function mod:ToxinDamage(args)
-		local t = GetTime()
-		if t-prev > 2 and self:Me(args.destGUID) then
-			prev = t
-			self:MessageOld(args.spellId, "blue", "alarm", CL.underyou:format(args.spellName))
+		if self:Me(args.destGUID) and args.time - prev > 3 then
+			prev = args.time
+			self:PersonalMessage(args.spellId, "underyou")
+			self:PlaySound(args.spellId, "underyou")
 		end
 	end
 end
 
-do
-	local CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo -- XXX InfoBox?
-	function mod:COMBAT_LOG_EVENT_UNFILTERED()
-		local _,event,_,_,_,_,_,destGUID,_,_,_,_,_,school = CombatLogGetCurrentEventInfo()
-		if event == "SPELL_DAMAGE" and school == 0x10 and self:MobId(destGUID) == 15299 then -- 0x10 is Frost
-			frostCount = frostCount + 1
-			if frostCount < 20 and frostCount % 3 == 0 then
-				self:MessageOld("freeze", "green", nil, L.freeze_warn_frost:format(frostCount, 20-frostCount), L.freeze_icon)
-			end
-		elseif event == "SWING_DAMAGE" and swingCount ~= -1 and self:MobId(destGUID) == 15299 then
-			swingCount = swingCount + 1
-			if swingCount < 30 and swingCount % 3 == 0 then
-				self:MessageOld("freeze", "green", nil, L.freeze_warn_melee:format(swingCount, 30-swingCount), L.freeze_icon)
-			end
+function mod:FrostDamage(args)
+	if args.spellSchool == 0x10 and self:MobId(args.destGUID) == 15299 then -- 0x10 is Frost
+		frostCount = frostCount + 1
+		if frostCount < 20 and frostCount % 3 == 0 then
+			self:Message("freeze", "green", L.freeze_warn_frost:format(frostCount, 20-frostCount), L.freeze_icon)
+		end
+	end
+end
+
+function mod:SwingDamage(args)
+	if swingCount ~= -1 and self:MobId(args.destGUID) == 15299 then
+		swingCount = swingCount + 1
+		if swingCount < 30 and swingCount % 3 == 0 then
+			self:Message("freeze", "green", L.freeze_warn_melee:format(swingCount, 30-swingCount), L.freeze_icon)
 		end
 	end
 end
 
 function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
-	if msg == L.freeze_trigger1 then
-		self:MessageOld("freeze", "cyan", nil, L.freeze_warn1, L.freeze_icon)
-	elseif msg == L.freeze_trigger2 then
-		self:MessageOld("freeze", "cyan", nil, L.freeze_warn2, L.freeze_icon)
-	elseif msg == L.freeze_trigger3 then
+	if msg:find(L.freeze_trigger1, nil, true) then
+		self:Message("freeze", "orange", L.freeze_warn1, L.freeze_icon)
+	elseif msg:find(L.freeze_trigger2, nil, true) then
+		self:Message("freeze", "orange", L.freeze_warn2, L.freeze_icon)
+	elseif msg:find(L.freeze_trigger3, nil, true) then
 		swingCount = 0
-		self:MessageOld("freeze", "red", nil, L.freeze_warn3, L.freeze_icon)
+		self:Message("freeze", "red", L.freeze_warn3, L.freeze_icon)
 		self:Bar("freeze", 30, L.freeze_warn3, L.freeze_icon)
 		self:ScheduleTimer("OnWipe", 27) -- Reset the frostCount
-	elseif msg == L.freeze_trigger4 then
-		self:MessageOld("freeze", "orange", nil, L.freeze_warn4, L.freeze_icon)
-	elseif msg == L.freeze_trigger5 then
-		self:MessageOld("freeze", "red", nil, L.freeze_warn5, L.freeze_icon)
+	elseif msg:find(L.freeze_trigger4, nil, true) then
+		self:Message("freeze", "orange", L.freeze_warn4, L.freeze_icon)
+	elseif msg:find(L.freeze_trigger5, nil, true) then
+		self:Message("freeze", "red", L.freeze_warn5, L.freeze_icon)
 	end
 end
-

@@ -1,11 +1,18 @@
-
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("Princess Huhuran", 531, 1546)
 if not mod then return end
 mod:RegisterEnableMob(15509)
+mod:SetEncounterID(714)
+
+--------------------------------------------------------------------------------
+-- Locals
+--
+
+local poisonCount = 0
+local poisonTime = 0
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -14,25 +21,28 @@ mod:RegisterEnableMob(15509)
 function mod:GetOptions()
 	return {
 		26180, -- Wyvern Sting
-		26051, -- Enrage
+		26051, -- Enrage / Frenzy (different name on classic era)
 		"berserk",
+	},nil,{
+		["berserk"] = CL.hp:format(30), -- Berserk (30% HP)
 	}
 end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "WyvernSting", 26180)
 	self:Log("SPELL_AURA_APPLIED", "WyvernStingApplied", 26180)
-	self:Log("SPELL_AURA_APPLIED", "Enrage", 26051)
+	self:Log("SPELL_AURA_REMOVED", "WyvernStingRemoved", 26180)
+	self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 26051)
+	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
 	self:Log("SPELL_AURA_APPLIED", "BerserkApplied", 26068)
-
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterUnitEvent("UNIT_HEALTH", nil, "target", "focus")
 
 	self:Death("Win", 15509)
 end
 
 function mod:OnEngage()
-	self:StartWipeCheck()
+	poisonCount = 0
+	poisonTime = 0
+	self:RegisterEvent("UNIT_HEALTH")
 	self:Berserk(300)
 end
 
@@ -41,47 +51,57 @@ end
 --
 
 function mod:WyvernSting(args)
+	poisonCount = 0
+	poisonTime = args.time
 	self:CDBar(args.spellId, 25) -- Can randomly be way higher than 25
-	self:DelayedMessage(args.spellId, 23, "green", CL.soon:format(args.spellName))
+	self:Message(args.spellId, "red", CL.on_group:format(args.spellName))
+	self:PlaySound(args.spellId, "alert")
 end
 
-do
-	local stingTbl = mod:NewTargetList()
-	function mod:WyvernStingApplied(args)
-		stingTbl[#stingTbl+1] = args.destName
-		if #stingTbl == 1 then
-			self:ScheduleTimer("TargetMessageOld", 1, args.spellId, stingTbl, "red") -- Can take a while to apply to everyone if very spread out (travel time)
+function mod:WyvernStingApplied(args)
+	if self:Player(args.destFlags) then -- Players, not pets
+		poisonCount = poisonCount + 1
+	end
+end
+
+function mod:WyvernStingRemoved(args)
+	if self:Player(args.destFlags) then -- Players, not pets
+		poisonCount = poisonCount - 1
+		if poisonCount == 0 then
+			self:Message(args.spellId, "green", CL.removed_after:format(args.spellName, args.time-poisonTime))
 		end
 	end
 end
 
-function mod:Enrage(args)
-	self:MessageOld(args.spellId, "yellow", self:Dispeller("enrage", true) and "warning")
+function mod:EnrageFrenzy(args)
 	self:CDBar(args.spellId, 14.5)
+	self:Message(args.spellId, "yellow")
+	if self:Dispeller("enrage", true) then
+		self:PlaySound(args.spellId, "alarm")
+	end
 end
 
-function mod:BerserkApplied(args)
-	self:UnregisterUnitEvent("UNIT_HEALTH", "target", "focus")
+function mod:EnrageFrenzyDispelled(args)
+	if args.extraSpellName == self:SpellName(26051) then
+		self:Message(26051, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+	end
+end
 
-	-- Cancel Berserk
-	local berserk, format = self:SpellName(26662), string.format
-	self:StopBar(berserk)
-	self:CancelDelayedMessage(format(CL.custom_min, berserk, 2))
-	self:CancelDelayedMessage(format(CL.custom_min, berserk, 1))
-	self:CancelDelayedMessage(format(CL.custom_sec, berserk, 30))
-	self:CancelDelayedMessage(format(CL.custom_sec, berserk, 10))
-	self:CancelDelayedMessage(format(CL.custom_sec, berserk, 5))
-	self:CancelDelayedMessage(format(CL.custom_end, self.displayName, berserk))
+function mod:BerserkApplied()
+	self:UnregisterEvent("UNIT_HEALTH")
+	self:StopBar(26051) -- Enrage / Frenzy (different name on classic era)
+	self:StopBerserk(self:SpellName(26662))
 
-	self:MessageOld("berserk", "orange", nil, "30% - ".. args.spellName)
+	self:Message("berserk", "red", CL.percent:format(30, self:SpellName(26662)), 26662)
+	self:PlaySound("berserk", "long")
 end
 
 function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15509 then
 		local hp = self:GetHealth(unit)
 		if hp < 36  then
-			self:UnregisterUnitEvent(event, "target", "focus")
-			self:MessageOld("berserk", "red", nil, CL.soon:format(self:SpellName(26662)), false)
+			self:UnregisterEvent(event)
+			self:Message("berserk", "red", CL.soon:format(self:SpellName(26662)), false)
 		end
 	end
 end

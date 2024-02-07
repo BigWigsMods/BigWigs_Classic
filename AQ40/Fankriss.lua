@@ -1,11 +1,20 @@
-
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod = BigWigs:NewBoss("Fankriss the Unyielding", 531, 1545)
 if not mod then return end
 mod:RegisterEnableMob(15510)
+mod:SetEncounterID(712)
+
+--------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:GetLocale()
+if L then
+	L["25832_icon"] = "inv_misc_monstertail_03"
+end
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -32,15 +41,19 @@ end
 --
 
 function mod:MortalWound(args)
-	self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow")
+	self:StackMessage(args.spellId, "purple", args.destName, args.amount, 5)
 	self:TargetBar(args.spellId, 15, args.destName)
+	if args.amount >= 5 then
+		self:PlaySound(args.spellId, "alert", nil, args.destName)
+	end
 end
 
-function mod:SummonWorm()
-	self:MessageOld(25832, "orange", "info")
+function mod:SummonWorm(args)
+	self:Message(25832, "cyan", args.spellName, L["25832_icon"])
+	self:PlaySound(25832, "warning")
 end
 
 function mod:Entangle(args)
-	self:TargetMessageOld(720, args.destName, "red", "alert", nil, nil, true)
+	self:TargetMessage(720, "red", args.destName)
+	self:PlaySound(720, "alarm", nil, args.destName)
 end
-

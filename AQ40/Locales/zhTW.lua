@@ -1,18 +1,15 @@
-local L = BigWigs:NewBossLocale("Battleguard Sartura", "zhTW")
+local L = BigWigs:NewBossLocale("Viscidus", "zhTW")
 if not L then return end
-if L then
-	L.engage_trigger = "玷汙這些神聖之地" -- You will be judged for defiling these sacred grounds!  The laws of the Ancients will not be challenged!  Trespassers will be annihilated!\r\n
-end
-
-L = BigWigs:NewBossLocale("Viscidus", "zhTW")
 if L then
 	--L.freeze = "Freezing States"
 	--L.freeze_desc = "Warn for the different frozen states."
+
 	L.freeze_trigger1 = "的速度慢下來了！"
 	L.freeze_trigger2 = "凍住了！"
 	L.freeze_trigger3 = "變成了堅硬的固體！"
 	L.freeze_trigger4 = "開始碎裂了！"
 	L.freeze_trigger5 = "馬上就要碎裂的樣子！"
+
 	--L.freeze_warn1 = "First freeze phase!"
 	--L.freeze_warn2 = "Second freeze phase!"
 	--L.freeze_warn3 = "Viscidus is frozen!"
@@ -27,53 +24,47 @@ if L then
 	--L.engage_message = "Ouro engaged! Possible Submerge in 90sec!"
 	--L.possible_submerge_bar = "Possible submerge"
 
-	--L.emergeannounce = "Ouro has emerged!"
-	--L.emergewarn = "15 sec to possible submerge!"
-	--L.emergewarn2 = "15 sec to Ouro sumberge!"
-	--L.emergebartext = "Ouro submerge"
+	--L.emerge_message = "Ouro has emerged"
+	--L.emerge_bar = "Emerge"
 
-	--L.submergeannounce = "Ouro has submerged!"
-	--L.submergewarn = "5 seconds until Ouro Emerges!"
-	--L.submergebartext = "Ouro Emerge"
+	--L.submerge_message = "Ouro has submerged"
+	--L.submerge_bar = "Submerge"
 
 	--L.scarab = "Scarab Despawn"
 	--L.scarab_desc = "Warn for Scarab Despawn."
-	--L.scarabdespawn = "Scarabs despawn in 10 Seconds"
-	--L.scarabbar = "Scarabs despawn"
-end
-
-L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "zhTW")
-if L then
-	--L.defender = "Anubisath Defender"
-	--L.crawler = "Vekniss Hive Crawler"
+	--L.scarab_bar = "Scarabs despawn"
 end
 
 L = BigWigs:NewBossLocale("C'Thun", "zhTW")
 if L then
-	--L.tentacle_desc = "Warn for Tentacles"
+	--L.claw_tentacle = "Claw Tentacle"
+	--L.claw_tentacle_desc = "Timers for the claw tentacle."
 
-	--L.giant = "Giant Eye Alert"
-	--L.giant_desc = "Warn for Giant Eyes"
+	--L.giant_claw_tentacle = "Giant Claw"
+	--L.giant_claw_tentacle_desc = "Timers for the giant claw tentacle."
 
-	--L.weakened = "Weakened Alert"
-	--L.weakened_desc = "Warn for Weakened State"
-	L.weakenedtrigger = "%s變弱了！"
+	--L.eye_tentacles = "Eye Tentacles"
+	--L.eye_tentacles_desc = "Timers for the 8 eye tentacles."
 
-	--L.weakened_msg = "C'Thun is weakened for 45 sec"
-	--L.invulnerable2 = "Party ends in 5 seconds"
-	--L.invulnerable1 = "Party over - C'Thun invulnerable"
+	--L.giant_eye_tentacle = "Giant Eye"
+	--L.giant_eye_tentacle_desc = "Timers for the giant eye tentacle."
 
-	--L.giant3 = "Giant Eye - 10 sec"
-	--L.giant2 = "Giant Eye - 5 sec"
-	--L.giant1 = "Giant Eye - Poke it!"
+	--L.weakened_desc = "Warn for weakened state."
+	L.weakenedtrigger = "%s變弱了"
 
-	--L.startwarn = "C'Thun engaged! - 45 sec until Dark Glare and Eyes"
-
-	--L.tentacleParty = "Tentacle party!"
-	--L.barWeakened = "C'Thun is weakened!"
-	--L.barGiant = "Giant Eye!"
-
-	--L.groupwarning = "Dark Glare on group %s (%s)"
-	--L.phase2starting = "The Eye is dead! Body incoming!"
+	--L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYERNAME (Group 1)
 end
 
+L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "zhTW")
+if L then
+	--L.sentinel = "Anubisath Sentinel" -- NPC 15264
+	--L.brainwasher = "Qiraji Brainwasher" -- NPC 15247
+	--L.defender = "Anubisath Defender" -- NPC 15277
+	--L.crawler = "Vekniss Hive Crawler" -- NPC 15240
+
+	--L.target_buffs = "Target Buff Warnings"
+	--L.target_buffs_desc = "When your target is an Anubisath Sentinel, show a warning for what buff it has."
+	--L.target_buffs_message = "Target Buffs: %s"
+	--L.detect_magic_missing_message = "Detect Magic is missing from your target"
+	--L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Detect Magic]\124h\124r on your target for buff warnings to work."
+end

@@ -1,13 +1,11 @@
-
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Bug Trio", 531, 1547)
+local mod, CL = BigWigs:NewBoss("Silithid Royalty", 531, 1547)
 if not mod then return end
 mod:RegisterEnableMob(15543, 15544, 15511) -- Princess Yauj, Vem, Lord Kri
-
-local deaths = 0
+mod:SetEncounterID(710)
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -15,30 +13,31 @@ local deaths = 0
 
 function mod:GetOptions()
 	return {
-		25807, -- Great Heal
+		{25807, "CASTBAR"}, -- Great Heal
 		26580, -- Fear
 		25812, -- Toxic Volley
 		25786, -- Toxic Vapors
+	},nil,{
+		[26580] = CL.fear, -- Fear (Fear)
 	}
 end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "GreatHeal", 25807)
+	self:Log("SPELL_INTERRUPT", "GreatHealInterrupted", "*")
 	self:Log("SPELL_CAST_SUCCESS", "Fear", 26580)
 	self:Log("SPELL_CAST_SUCCESS", "ToxicVolley", 25812)
 
+	self:Log("SPELL_AURA_APPLIED", "ToxicVaporsDamage", 25786)
 	self:Log("SPELL_PERIODIC_DAMAGE", "ToxicVaporsDamage", 25786)
 	self:Log("SPELL_PERIODIC_MISSED", "ToxicVaporsDamage", 25786)
-	self:Log("SPELL_AURA_APPLIED", "ToxicVaporsDamage", 25786)
 
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-
-	self:Death("Deaths", 15543, 15544, 15511)
+	self:Death("YaujDies", 15543)
 end
 
 function mod:OnEngage()
-	deaths = 0
-	self:StartWipeCheck()
+	self:CDBar(25807, 8.1) -- Great Heal
+	self:CDBar(26580, 11.3, CL.fear) -- Fear
 end
 
 --------------------------------------------------------------------------------
@@ -46,35 +45,45 @@ end
 --
 
 function mod:GreatHeal(args)
-	self:MessageOld(args.spellId, "orange", nil, CL.casting:format(args.spellName))
-	self:Bar(args.spellId, 2, CL.cast:format(args.spellName))
+	self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
+	self:CastBar(args.spellId, 2)
+	self:Bar(args.spellId, 12.9)
+	if self:Interrupter() then
+		self:PlaySound(args.spellId, "alert")
+	end
+end
+
+function mod:GreatHealInterrupted(args)
+	if args.extraSpellName == self:SpellName(25807) then
+		self:StopBar(CL.cast:format(args.extraSpellName))
+		self:Message(25807, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+	end
 end
 
 function mod:Fear(args)
-	self:Bar(args.spellId, 20)
-	self:MessageOld(args.spellId, "red")
-	self:DelayedMessage(args.spellId, 15, "orange", CL.custom_sec:format(args.spellName, 5))
+	self:Message(args.spellId, "red", CL.fear)
+	self:CDBar(args.spellId, 21, CL.fear)
+	self:PlaySound(args.spellId, "long")
 end
 
 function mod:ToxicVolley(args)
-	self:MessageOld(args.spellId, "yellow")
+	self:Message(args.spellId, "yellow")
+	self:PlaySound(args.spellId, "info")
 end
 
 do
 	local prev = 0
 	function mod:ToxicVaporsDamage(args)
-		local t = GetTime()
-		if t-prev > 2 and self:Me(args.destGUID) then
-			prev = t
-			self:MessageOld(args.spellId, "blue", "alarm", CL.underyou:format(args.spellName))
+		if self:Me(args.destGUID) and args.time - prev > 3 then
+			prev = args.time
+			self:PersonalMessage(args.spellId, "underyou")
+			self:PlaySound(args.spellId, "underyou")
 		end
 	end
 end
 
-function mod:Deaths()
-	deaths = deaths + 1
-	if deaths > 2 then
-		self:Win()
-	end
+function mod:YaujDies()
+	self:StopBar(CL.cast:format(self:SpellName(25807))) -- Great Heal
+	self:StopBar(25807) -- Great Heal
+	self:StopBar(CL.fear) -- Fear
 end
-
