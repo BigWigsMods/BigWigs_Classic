@@ -1,7 +1,7 @@
 
 BigWigs:AddColors("Lucifron", {
 	[19702] = "red",
-	[19703] = "yellow",
+	[19703] = {"green","yellow"},
 	[20604] = {"blue","orange"},
 })
 
@@ -12,7 +12,7 @@ BigWigs:AddColors("Magmadar", {
 })
 
 BigWigs:AddColors("Gehennas", {
-	[19716] = "orange",
+	[19716] = {"green","orange"},
 	[19717] = "blue",
 })
 

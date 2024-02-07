@@ -44,9 +44,14 @@ BigWigs:AddColors("Chromaggus", {
 
 BigWigs:AddColors("Nefarian Classic", {
 	[22539] = "yellow",
+	[22667] = {"blue","yellow"},
 	[22686] = "red",
-	[22687] = {"blue","yellow"},
+	[22687] = {"blue","green","yellow"},
 	["add"] = "green",
 	["classcall"] = "orange",
 	["stages"] = "cyan",
+})
+
+BigWigs:AddColors("Blackwing Lair Trash", {
+	["target_vulnerability"] = {"red","yellow"},
 })

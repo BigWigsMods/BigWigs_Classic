@@ -6,8 +6,9 @@ BigWigs:AddSounds("Baron Aquanis Discovery", {
 })
 
 BigWigs:AddSounds("Ghamoo-ra Discovery", {
+	[406970] = "warning",
 	[407025] = {"info","long"},
-	[407095] = "warning",
+	[407095] = "alert",
 })
 
 BigWigs:AddSounds("Lady Sarevess Discovery", {

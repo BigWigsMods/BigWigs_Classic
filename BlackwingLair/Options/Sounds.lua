@@ -42,7 +42,11 @@ BigWigs:AddSounds("Chromaggus", {
 
 BigWigs:AddSounds("Nefarian Classic", {
 	[22539] = "alarm",
+	[22667] = "warning",
 	[22686] = "alert",
 	[22687] = "warning",
 	["stages"] = {"info","long"},
+})
+
+BigWigs:AddSounds("Blackwing Lair Trash", {
 })

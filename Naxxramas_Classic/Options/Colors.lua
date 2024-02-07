@@ -23,7 +23,7 @@ BigWigs:AddColors("Thaddius", {
 	[28089] = "orange",
 	[28134] = "red",
 	[28338] = "red",
-	["stages"] = {"cyan","green","yellow"},
+	["stages"] = {"cyan","green"},
 })
 
 BigWigs:AddColors("Noth the Plaguebringer", {
@@ -36,7 +36,7 @@ BigWigs:AddColors("Noth the Plaguebringer", {
 })
 
 BigWigs:AddColors("Heigan the Unclean", {
-	[29998] = "yellow",
+	[29998] = {"green","yellow"},
 	["stages"] = "cyan",
 })
 

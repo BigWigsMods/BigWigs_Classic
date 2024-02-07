@@ -1,71 +1,81 @@
 
 BigWigs:AddColors("The Prophet Skeram", {
+	[747] = "cyan",
 	[785] = {"blue","yellow"},
 	[20449] = "red",
 	[26192] = "orange",
-	["images"] = {"green","red"},
 })
 
-BigWigs:AddColors("The Bug Trio", {
+BigWigs:AddColors("Silithid Royalty", {
 	[25786] = "blue",
-	[25807] = "orange",
+	[25807] = {"green","orange"},
 	[25812] = "yellow",
-	[26580] = {"orange","red"},
+	[26580] = "red",
 })
 
 BigWigs:AddColors("Battleguard Sartura", {
-	[8269] = {"orange","yellow"},
+	[8269] = "orange",
 	[26083] = {"green","red"},
-	["stages"] = "green",
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Fankriss the Unyielding", {
 	[720] = {"blue","red"},
-	[25646] = {"blue","yellow"},
-	[25832] = "orange",
+	[25646] = {"blue","purple"},
+	[25832] = "cyan",
 })
 
 BigWigs:AddColors("Viscidus", {
 	[25989] = "blue",
 	[25991] = "yellow",
-	["freeze"] = {"cyan","green","orange","red"},
+	["freeze"] = {"green","orange","red"},
 })
 
 BigWigs:AddColors("Princess Huhuran", {
-	[26051] = "yellow",
-	[26180] = {"blue","green","red"},
-	["berserk"] = {"orange","red"},
+	[26051] = {"green","yellow"},
+	[26180] = {"green","red"},
+	["berserk"] = "red",
 })
 
 BigWigs:AddColors("The Twin Emperors", {
-	[800] = {"orange","red","yellow"},
-	[802] = "cyan",
+	[800] = "orange",
+	[802] = "yellow",
+	[804] = "red",
 	[7393] = "red",
 	[26607] = "blue",
 })
 
 BigWigs:AddColors("Ouro", {
-	[26102] = {"red","yellow"},
-	[26103] = "red",
-	[26615] = {"green","orange"},
-	["scarab"] = "red",
-	["stages"] = {"red","yellow"},
+	[26102] = "red",
+	[26103] = "orange",
+	[26615] = {"green","yellow"},
+	["stages"] = {"cyan","yellow"},
 })
 
 BigWigs:AddColors("C'Thun", {
 	[26029] = {"orange","red"},
-	["stages"] = {"cyan","yellow"},
-	["tentacle"] = {"orange","red"},
-	["weakened"] = {"green","orange","red"},
+	[26134] = "blue",
+	[26476] = "blue",
+	["eye_tentacles"] = "red",
+	["giant_claw_tentacle"] = "red",
+	["giant_eye_tentacle"] = "red",
+	["stages"] = "cyan",
+	["weakened"] = "green",
 })
 
 BigWigs:AddColors("Ahn'Qiraj Trash", {
 	[8269] = "red",
-	[25051] = {"blue","yellow"},
+	[8599] = "red",
+	[17430] = "green",
+	[17431] = "green",
+	[25051] = {"blue","purple"},
 	[25698] = "orange",
-	[26554] = "cyan",
+	[26079] = {"blue","yellow"},
+	[26554] = "orange",
+	[26555] = "red",
 	[26556] = {"blue","yellow"},
-	[26558] = "cyan",
-	["guard"] = "green",
-	["warrior"] = "green",
+	[26558] = "red",
+	[26565] = "orange",
+	["stages"] = "cyan",
+	["target_buffs"] = {"red","yellow"},
 })

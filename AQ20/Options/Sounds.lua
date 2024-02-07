@@ -1,7 +1,7 @@
 
 BigWigs:AddSounds("Kurinnaxx", {
 	[25646] = "warning",
-	[25656] = "alert",
+	[25648] = "alert",
 	[26527] = "long",
 })
 
