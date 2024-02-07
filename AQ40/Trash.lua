@@ -49,7 +49,7 @@ function mod:GetOptions()
 		"target_buffs",
 		26565, -- Heal Brethren
 		8599, -- Enrage
-		26079, -- Cause Insanity
+		{26079, "ICON"}, -- Cause Insanity
 		{26556, "SAY", "ME_ONLY_EMPHASIZE"}, -- Plague
 		8269, -- Frenzy / Enrage (different name on classic era)
 		26554, -- Thunderclap
