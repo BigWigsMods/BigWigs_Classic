@@ -37,9 +37,9 @@ function mod:GetOptions()
 		3019, -- Enrage
 		436100, -- Petrify
 		436074, -- Trogg Rage
-		436027, -- Grubbis Mad!
+		{436027, "CASTBAR"}, -- Grubbis Mad!
 		434941, -- Toxic Vigor
-		436059, -- Radiation?
+		{436059, "CASTBAR"}, -- Radiation?
 	},{
 		[3019] = CL.adds,
 		[436074] = L.bossName,
