@@ -21,6 +21,9 @@ BigWigs:AddSounds("Crowd Pummeler 9-60 Discovery", {
 })
 
 BigWigs:AddSounds("Electrocutioner 6000 Discovery", {
+	[433251] = "warning",
+	[433359] = "alarm",
+	[433398] = "info",
 })
 
 BigWigs:AddSounds("Mechanical Menagerie Discovery", {
