@@ -10,6 +10,9 @@ BigWigs:AddSounds("Grubbis Discovery", {
 })
 
 BigWigs:AddSounds("Viscous Fallout Discovery", {
+	[433546] = {"info","warning"},
+	[434358] = "long",
+	[434434] = {"alarm","underyou"},
 })
 
 BigWigs:AddSounds("Crowd Pummeler 9-60 Discovery", {
