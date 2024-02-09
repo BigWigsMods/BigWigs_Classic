@@ -10,6 +10,7 @@ end
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "ptBR")
 if L then
 	--L.bossName = "Viscous Fallout"
+	--L.desiccated_fallout = "Desiccated Fallout"
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "ptBR")
