@@ -26,6 +26,9 @@ end
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "frFR")
 if L then
 	--L.bossName = "Mechanical Menagerie"
+	--L.attack_buff = "+50% attack speed"
+	--L.dont_attack = "Don't attack the sheep"
+	--L.sheep_safe = "Sheep is safe to attack"
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "frFR")
