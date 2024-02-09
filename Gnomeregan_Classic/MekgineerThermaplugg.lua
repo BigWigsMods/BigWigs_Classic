@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Mekgineer Thermaplugg Discovery", 90, -2940)
 if not mod then return end
-mod:RegisterEnableMob(40) -- Mekgineer Thermaplugg Season of Discovery
+mod:RegisterEnableMob(218537) -- Mekgineer Thermaplugg
 mod:SetEncounterID(2940)
 mod:SetStage(1)
 
@@ -66,9 +66,9 @@ end
 -- Event Handlers
 --
 
-local function stageCheck(sourceGUID)
-	local curStage = mod:GetStage()
-	local sourceMobId = mod:MobId(sourceGUID)
+local function stageCheck(self, sourceGUID)
+	local curStage = self:GetStage()
+	local sourceMobId = self:MobId(sourceGUID)
 	local nextStage
 	if curStage ~= 2 and sourceMobId == 218970 then -- STX-97/IC = Stage 2
 		nextStage = 2
@@ -78,15 +78,15 @@ local function stageCheck(sourceGUID)
 		nextStage = 4
 	end
 	if not nextStage then return end -- No stage change
-	mod:SetStage(nextStage)
-	mod:Message("stages", "cyan", CL.stage:format(nextStage), false)
-	mod:StopBar(437853) -- Summon Bomb
-	mod:StopBar(438726) -- Hazardous Hammer
-	mod:StopBar(438732) -- Toxic Ventilation
-	mod:StopBar(438683) -- Sprocketfire Punch
-	mod:StopBar(438713) -- Furnace Surge
-	mod:StopBar(438719) -- Supercooled Smash
-	mod:StopBar(438723) -- Coolant Discharge
+	self:SetStage(nextStage)
+	self:Message("stages", "cyan", CL.stage:format(nextStage), false)
+	self:StopBar(437853) -- Summon Bomb
+	self:StopBar(438726) -- Hazardous Hammer
+	self:StopBar(438732) -- Toxic Ventilation
+	self:StopBar(438683) -- Sprocketfire Punch
+	self:StopBar(438713) -- Furnace Surge
+	self:StopBar(438719) -- Supercooled Smash
+	self:StopBar(438723) -- Coolant Discharge
 end
 
 function mod:SummonBomb(args)
@@ -102,7 +102,7 @@ function mod:SprocketfirePunch(args)
 	self:PlaySound(args.spellId, "alarm")
 	if self:GetStage() < 4 then -- no timers in stage 4
 		self:CDBar(args.spellId, 8.2)
-		stageCheck(args.sourceGUID)
+		stageCheck(self, args.sourceGUID)
 	end
 end
 
@@ -122,7 +122,7 @@ function mod:SupercooledSmash(args)
 	self:PlaySound(args.spellId, "alarm")
 	if self:GetStage() < 4 then -- no timers in stage 4
 		self:CDBar(args.spellId, 6.5)
-		stageCheck(args.sourceGUID)
+		stageCheck(self, args.sourceGUID)
 	end
 end
 
@@ -142,7 +142,7 @@ function mod:HazardousHammer(args)
 	self:PlaySound(args.spellId, "alarm")
 	if self:GetStage() < 4 then -- no timers in stage 4
 		self:CDBar(args.spellId, 6)
-		stageCheck(args.sourceGUID)
+		stageCheck(self, args.sourceGUID)
 	end
 end
 
