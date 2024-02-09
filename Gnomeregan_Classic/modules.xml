@@ -3,8 +3,8 @@
 
 <Script file="Grubbis.lua"/>
 <Script file="ViscousFallout.lua"/>
-<Script file="Electrocutioner6000.lua"/>
 <Script file="CrowdPummeler9-60.lua"/>
+<Script file="Electrocutioner6000.lua"/>
 <Script file="MechanicalMenagerie.lua"/>
 <Script file="MekgineerThermaplugg.lua"/>
 
