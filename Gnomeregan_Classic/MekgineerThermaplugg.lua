@@ -100,7 +100,7 @@ end
 function mod:SprocketfirePunch(args)
 	self:Message(args.spellId, "purple")
 	self:PlaySound(args.spellId, "alarm")
-	if self:GetStage() > 4 then -- no timers in stage 4
+	if self:GetStage() < 4 then -- no timers in stage 4
 		self:CDBar(args.spellId, 8.2)
 		stageCheck(args.sourceGUID)
 	end
@@ -109,7 +109,7 @@ end
 function mod:FurnaceSurge(args)
 	self:Message(args.spellId, "yellow")
 	self:PlaySound(args.spellId, "alert")
-	if self:GetStage() > 4 then
+	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 34)
 	else
 		self:CDBar(args.spellId, 20, L.nextAbility) -- Random which cast is next in stage 4
@@ -120,7 +120,7 @@ end
 function mod:SupercooledSmash(args)
 	self:Message(args.spellId, "purple")
 	self:PlaySound(args.spellId, "alarm")
-	if self:GetStage() > 4 then -- no timers in stage 4
+	if self:GetStage() < 4 then -- no timers in stage 4
 		self:CDBar(args.spellId, 6.5)
 		stageCheck(args.sourceGUID)
 	end
@@ -129,7 +129,7 @@ end
 function mod:CoolantDischarge(args)
 	self:Message(args.spellId, "yellow")
 	self:PlaySound(args.spellId, "alert")
-	if self:GetStage() > 4 then
+	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 24)
 	else
 		self:CDBar(args.spellId, 20, L.nextAbility) -- Random which cast is next in stage 4
@@ -140,7 +140,7 @@ end
 function mod:HazardousHammer(args)
 	self:Message(args.spellId, "purple")
 	self:PlaySound(args.spellId, "alarm")
-	if self:GetStage() > 4 then -- no timers in stage 4
+	if self:GetStage() < 4 then -- no timers in stage 4
 		self:CDBar(args.spellId, 6)
 		stageCheck(args.sourceGUID)
 	end
@@ -149,7 +149,7 @@ end
 function mod:ToxicVentilation(args)
 	self:Message(args.spellId, "yellow")
 	self:PlaySound(args.spellId, "alert")
-	if self:GetStage() > 4 then
+	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 21)
 	else
 		self:CDBar(args.spellId, 20, L.nextAbility) -- Random which cast is next in stage 4
