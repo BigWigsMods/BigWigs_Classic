@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Mekgineer Thermaplugg Discovery", 90, -2940)
 if not mod then return end
 mod:RegisterEnableMob(40) -- Mekgineer Thermaplugg Season of Discovery
 mod:SetEncounterID(2940)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -14,7 +15,7 @@ mod:SetEncounterID(2940)
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Mekgineer Thermaplugg"
-	L.nextAbility = "Next Ability"
+	L.nextAbility = "Next Ability" -- Any of Furnace Surge, Coolant Discharge or Toxic Ventilation
 end
 
 --------------------------------------------------------------------------------
@@ -50,7 +51,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "FurnaceSurge", 438713)
 	-- STX-97/IC
 	self:Log("SPELL_CAST_SUCCESS", "SupercooledSmash", 438719)
-	self:Log("SPELL_CAST_START", "CoolantDischarge ", 438723)
+	self:Log("SPELL_CAST_START", "CoolantDischarge", 438723)
 	-- STX-98/PO
 	self:Log("SPELL_CAST_SUCCESS", "HazardousHammer", 438726)
 	self:Log("SPELL_CAST_SUCCESS", "ToxicVentilation", 438732)
@@ -69,9 +70,9 @@ local function stageCheck(sourceGUID)
 	local curStage = mod:GetStage()
 	local sourceMobId = mod:MobId(sourceGUID)
 	local nextStage
-	if curStage == 1 and sourceMobId == 218970 then -- STX-97/IC = Stage 2
+	if curStage ~= 2 and sourceMobId == 218970 then -- STX-97/IC = Stage 2
 		nextStage = 2
-	elseif curStage == 2 and sourceMobId == 218972 then -- STX-98/PO = Stage 3
+	elseif curStage ~= 3 and sourceMobId == 218972 then -- STX-98/PO = Stage 3
 		nextStage = 3
 	elseif curStage ~= 4 and sourceMobId == 218974 then -- STX-99/XD = Stage 4
 		nextStage = 4
@@ -89,7 +90,7 @@ local function stageCheck(sourceGUID)
 end
 
 function mod:SummonBomb(args)
-	self:Message(437853, "cyan", CL.incoming(CL.bomb)) -- Bomb Incoming
+	self:Message(437853, "cyan", CL.incoming:format(CL.bomb)) -- Bomb Incoming
 	self:PlaySound(437853, "info")
 	-- cooldown is sometimes delayed to 23~ seconds, unsure why.
 	self:CDBar(437853, 11) -- Summon Bomb
