@@ -2,6 +2,9 @@ local L = BigWigs:NewBossLocale("Grubbis Discovery", "zhTW")
 if not L then return end
 if L then
 	--L.bossName = "Grubbis"
+	--L.aoe = "AoE melee damage"
+	--L.cloud = "A cloud reached the boss"
+	--L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "zhTW")
