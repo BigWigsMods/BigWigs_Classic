@@ -29,7 +29,14 @@ BigWigs:AddColors("Electrocutioner 6000 Discovery", {
 })
 
 BigWigs:AddColors("Mechanical Menagerie Discovery", {
-	["stages"] = "cyan",
+	[436570] = "orange",
+	[436692] = "yellow",
+	[436741] = "red",
+	[436816] = {"blue","yellow"},
+	[436825] = {"green","red"},
+	[436833] = {"green","orange"},
+	[436836] = "red",
+	[440073] = {"blue","cyan"},
 })
 
 BigWigs:AddColors("Mekgineer Thermaplugg Discovery", {
