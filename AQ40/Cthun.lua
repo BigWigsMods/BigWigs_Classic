@@ -88,6 +88,7 @@ function mod:OnBossEnable()
 	self:RegisterMessage("BigWigs_BossComm")
 
 	self:Death("EyeOfCThunKilled", 15589)
+	self:Death("GiantEyeTentacleKilled", 15334)
 	self:Death("Win", 15727)
 end
 
@@ -171,7 +172,7 @@ do
 		end
 	end
 
-	function mod:EyeBeam(args)
+	function mod:EyeBeam(args) -- Cast by Eye of C'Thun and the Giant Eye Tentacle
 		self:GetUnitTarget(printTarget, 0.1, args.sourceGUID)
 	end
 end
@@ -186,6 +187,7 @@ function mod:EyeOfCThunKilled()
 	self:SetStage(2)
 
 	self:StopBar(L.claw_tentacle)
+	self:PrimaryIcon(26134) -- Clear icon
 
 	self:Message("stages", "cyan", CL.stage:format(2), false)
 	self:Bar("giant_claw_tentacle", 12.3, L.giant_claw_tentacle, L.giant_claw_tentacle_icon)
@@ -204,6 +206,11 @@ function mod:EyeOfCThunKilled()
 	self:CancelTimer(timerGroupWarning)
 
 	self:PlaySound("stages", "long")
+end
+
+function mod:GiantEyeTentacleKilled()
+	-- Just in case it managed to get a cast of Eye Beam off
+	self:PrimaryIcon(26134) -- Clear icon
 end
 
 do
