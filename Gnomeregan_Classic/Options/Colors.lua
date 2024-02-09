@@ -17,7 +17,9 @@ BigWigs:AddColors("Viscous Fallout Discovery", {
 })
 
 BigWigs:AddColors("Crowd Pummeler 9-60 Discovery", {
-	["stages"] = "cyan",
+	[431839] = "blue",
+	[432062] = {"blue","yellow"},
+	[432423] = "orange",
 })
 
 BigWigs:AddColors("Electrocutioner 6000 Discovery", {

@@ -16,6 +16,8 @@ BigWigs:AddSounds("Viscous Fallout Discovery", {
 })
 
 BigWigs:AddSounds("Crowd Pummeler 9-60 Discovery", {
+	[432062] = "alarm",
+	[432423] = "warning",
 })
 
 BigWigs:AddSounds("Electrocutioner 6000 Discovery", {
