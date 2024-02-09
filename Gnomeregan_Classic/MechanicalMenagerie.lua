@@ -57,7 +57,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "WidgetFortressApplied", 436837)
 	self:Log("SPELL_CAST_START", "SprocketfireBreath", 436816)
 	self:Log("SPELL_AURA_APPLIED", "SprocketfireBreathApplied", 440014)
-	self:Log("SPELL_AURA_APPLIED", "SprocketfireBreathAppliedDose", 440014)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "SprocketfireBreathAppliedDose", 440014)
 	self:Log("SPELL_AURA_APPLIED", "OverheatApplied", 436741)
 	self:Log("SPELL_AURA_APPLIED", "FrayedWiringApplied", 436825)
 	self:Log("SPELL_AURA_REMOVED", "FrayedWiringRemoved", 436825)
@@ -121,8 +121,8 @@ function mod:WidgetFortress(args)
 end
 
 function mod:WidgetFortressApplied(args)
-	self:Message(args.spellId, "red", CL.on:format(CL.shield, args.destName))
-	self:PlaySound(args.spellId, "info")
+	self:Message(436836, "red", CL.on:format(CL.shield, args.destName))
+	self:PlaySound(436836, "info")
 end
 
 function mod:SprocketfireBreath(args)
@@ -133,13 +133,13 @@ end
 
 function mod:SprocketfireBreathApplied(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, nil, CL.breath)
+		self:PersonalMessage(436816, nil, CL.breath)
 	end
 end
 
 function mod:SprocketfireBreathAppliedDose(args)
 	if self:Me(args.destGUID) then
-		self:StackMessage(args.spellId, "blue", CL.breath, args.amount, 1)
+		self:StackMessage(436816, "blue", CL.breath, args.amount, 1)
 	end
 end
 
