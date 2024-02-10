@@ -44,7 +44,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:CDBar(432423, 21, CL.knockback) -- Gnomeregan Smash
+	self:CDBar(432423, 6, CL.knockback) -- Gnomeregan Smash
 end
 
 --------------------------------------------------------------------------------
