@@ -139,7 +139,7 @@ end
 
 function mod:SprocketfireBreathAppliedDose(args)
 	if self:Me(args.destGUID) then
-		self:StackMessage(436816, "blue", CL.breath, args.amount, 1)
+		self:StackMessage(436816, "blue", args.destName, args.amount, 1, CL.breath)
 	end
 end
 
