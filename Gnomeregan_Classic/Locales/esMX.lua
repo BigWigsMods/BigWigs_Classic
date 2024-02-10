@@ -34,6 +34,5 @@ end
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "esMX")
 if L then
 	L.bossName = "Mekigeniero Termochufe"
-	L.nextAbility = "Próxima habilidad" -- Any of Furnace Surge, Coolant Discharge or Toxic Ventilation
 	L.interruptable = "Interrumpible"
 end
