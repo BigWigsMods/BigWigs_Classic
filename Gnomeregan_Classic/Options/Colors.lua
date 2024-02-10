@@ -40,5 +40,15 @@ BigWigs:AddColors("Mechanical Menagerie Discovery", {
 })
 
 BigWigs:AddColors("Mekgineer Thermaplugg Discovery", {
+	[437853] = "cyan",
+	[438683] = "purple",
+	[438710] = {"blue","purple"},
+	[438713] = "yellow",
+	[438719] = "purple",
+	[438720] = {"blue","orange"},
+	[438723] = "yellow",
+	[438726] = "purple",
+	[438727] = {"blue","purple"},
+	[438732] = {"green","yellow"},
 	["stages"] = "cyan",
 })
