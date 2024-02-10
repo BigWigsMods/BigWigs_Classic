@@ -1,6 +1,8 @@
 
 BigWigs:AddColors("Grubbis Discovery", {
 	[3019] = {"green","red"},
+	[434168] = "cyan",
+	[434724] = {"blue","yellow"},
 	[434941] = "orange",
 	[436027] = "yellow",
 	[436059] = "yellow",
@@ -30,12 +32,12 @@ BigWigs:AddColors("Electrocutioner 6000 Discovery", {
 
 BigWigs:AddColors("Mechanical Menagerie Discovery", {
 	[436570] = "orange",
-	[436692] = "yellow",
+	[436692] = "cyan",
 	[436741] = "red",
 	[436816] = {"blue","yellow"},
 	[436825] = {"green","red"},
 	[436833] = {"green","orange"},
-	[436836] = "red",
+	[436836] = "yellow",
 	[440073] = {"blue","cyan"},
 })
 
