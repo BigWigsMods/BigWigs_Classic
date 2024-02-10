@@ -16,6 +16,7 @@ local L = mod:GetLocale()
 if L then
 	L.bossName = "Mekgineer Thermaplugg"
 	L.nextAbility = "Next Ability" -- Any of Furnace Surge, Coolant Discharge or Toxic Ventilation
+	L.interruptable = "Interruptable"
 end
 
 --------------------------------------------------------------------------------
@@ -29,12 +30,15 @@ function mod:GetOptions()
 		437853, -- Summon Bomb
 		-- STX-96/FR
 		438683, -- Sprocketfire Punch
+		438710, -- Sprocketfire
 		438713, -- Furnace Surge
 		-- STX-97/IC
 		438719, -- Supercooled Smash
+		438720, -- Freezing
 		438723, -- Coolant Discharge
 		-- STX-98/PO
 		438726, -- Hazardous Hammer
+		438727, -- Radiation Sickness
 		438732, -- Toxic Ventilation
 	}
 end
@@ -48,13 +52,18 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "SummonBomb", 11518, 11521, 11524, 11526, 11527) -- Activate Bombe 01 -> 06 (03 is missing)
 	-- STX-96/FR
 	self:Log("SPELL_CAST_SUCCESS", "SprocketfirePunch", 438683)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "SprocketfireApplied", 438710)
 	self:Log("SPELL_CAST_START", "FurnaceSurge", 438713)
 	-- STX-97/IC
 	self:Log("SPELL_CAST_SUCCESS", "SupercooledSmash", 438719)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "FreezingApplied", 438720)
 	self:Log("SPELL_CAST_START", "CoolantDischarge", 438723)
 	-- STX-98/PO
 	self:Log("SPELL_CAST_SUCCESS", "HazardousHammer", 438726)
+	self:Log("SPELL_AURA_APPLIED", "RadiationSicknessApplied", 438727)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "RadiationSicknessApplied", 438727)
 	self:Log("SPELL_CAST_SUCCESS", "ToxicVentilation", 438732)
+	self:Log("SPELL_INTERRUPT", "ToxicVentilationInterrupted", "*")
 end
 
 function mod:OnEngage()
@@ -106,6 +115,12 @@ function mod:SprocketfirePunch(args)
 	end
 end
 
+function mod:SprocketfireApplied(args)
+	if args.amount >= 3 then
+		self:StackMessage(args.spellId, "purple", args.destName, args.amount, 4)
+	end
+end
+
 function mod:FurnaceSurge(args)
 	self:Message(args.spellId, "yellow")
 	self:PlaySound(args.spellId, "alert")
@@ -123,6 +138,12 @@ function mod:SupercooledSmash(args)
 	if self:GetStage() < 4 then -- no timers in stage 4
 		self:CDBar(args.spellId, 6.5)
 		stageCheck(self, args.sourceGUID)
+	end
+end
+
+function mod:FreezingApplied(args)
+	if args.amount >= 5 then
+		self:StackMessage(args.spellId, "orange", args.destName, args.amount, 5)
 	end
 end
 
@@ -146,12 +167,22 @@ function mod:HazardousHammer(args)
 	end
 end
 
+function mod:RadiationSicknessApplied(args)
+	self:StackMessage(args.spellId, "purple", args.destName, args.amount, 2)
+end
+
 function mod:ToxicVentilation(args)
-	self:Message(args.spellId, "yellow")
+	self:Message(args.spellId, "yellow", CL.other:format(args.spellName, L.interruptable))
 	self:PlaySound(args.spellId, "alert")
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 21)
 	else
 		self:CDBar(args.spellId, 20, L.nextAbility) -- Random which cast is next in stage 4
+	end
+end
+
+function mod:ToxicVentilationInterrupted(args)
+	if args.extraSpellName == self:SpellName(438732) then
+		self:Message(438732, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end
