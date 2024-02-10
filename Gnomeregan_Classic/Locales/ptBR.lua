@@ -1,38 +1,38 @@
 local L = BigWigs:NewBossLocale("Grubbis Discovery", "ptBR")
 if not L then return end
 if L then
-	--L.bossName = "Grubbis"
-	--L.aoe = "AoE melee damage"
-	--L.cloud = "A cloud reached the boss"
-	--L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
+	L.bossName = "Grúdio"
+	L.aoe = "Dano corpo a corpo em área"
+	L.cloud = "Uma nuvem chegou ao chefe"
+	L.cone = "Cone \"frontal\"" -- "Frontal" Cone, it's a rear cone (he's farting)
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "ptBR")
 if L then
-	--L.bossName = "Viscous Fallout"
+	L.bossName = "Precipitação Radioativa Viscosa"
 	--L.desiccated_fallout = "Desiccated Fallout" -- NPC ID 216810
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "ptBR")
 if L then
-	--L.bossName = "Crowd Pummeler 9-60"
+	L.bossName = "Espanca-gente 9-60"
 end
 
 L = BigWigs:NewBossLocale("Electrocutioner 6000 Discovery", "ptBR")
 if L then
-	--L.bossName = "Electrocutioner 6000"
+	L.bossName = "Eletrocutor 6000"
 end
 
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "ptBR")
 if L then
-	--L.bossName = "Mechanical Menagerie"
-	--L.attack_buff = "+50% attack speed"
-	--L.dont_attack = "Don't attack the sheep"
-	--L.sheep_safe = "Sheep is safe to attack"
+	L.bossName = "Viveiro Mecânico"
+	L.attack_buff = "+50% de velocidade de ataque"
+	L.dont_attack = "Não ataque a ovelha"
+	L.sheep_safe = "A ovelha pode ser atacada com segurança"
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "ptBR")
 if L then
-	--L.bossName = "Mekgineer Thermaplugg"
-	--L.interruptable = "Interruptable"
+	L.bossName = "Mecangenheiro Termaplugue"
+	L.interruptable = "Interrompível"
 end
