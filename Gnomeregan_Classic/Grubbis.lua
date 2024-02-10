@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Grubbis Discovery", 90, -2925)
 if not mod then return end
-mod:RegisterEnableMob(217969, 217280, 217956) -- Blastmaster Emi Shortfuse, Grubbis, Chomper
+mod:RegisterEnableMob(217969, 217280) -- Blastmaster Emi Shortfuse, Grubbis
 mod:SetEncounterID(2925)
 mod:SetStage(1)
 
@@ -13,6 +13,7 @@ mod:SetStage(1)
 --
 
 local quakeCount = 0
+local addsCount = 0
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -40,6 +41,8 @@ function mod:GetOptions()
 		{436027, "CASTBAR"}, -- Grubbis Mad!
 		434941, -- Toxic Vigor
 		{436059, "CASTBAR"}, -- Radiation?
+		434724, -- Radiation Sickness
+		434168, -- Irradiated Cloud
 	},{
 		[3019] = CL.adds,
 		[436074] = L.bossName,
@@ -47,6 +50,7 @@ function mod:GetOptions()
 		[436027] = L.aoe, -- Grubbis Mad! (AoE melee damage)
 		[434941] = L.cloud, -- Toxic Vigor (A cloud reached the boss)
 		[436059] = L.cone, -- Radiation? ("Frontal" Cone)
+		[434724] = CL.disease, -- Radiation Sickness (Disease)
 	}
 end
 
@@ -61,7 +65,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_INTERRUPT", "PetrifyInterrupted", "*")
 	self:Log("SPELL_AURA_APPLIED", "PetrifyApplied", 436100)
 	self:Log("SPELL_AURA_REMOVED", "PetrifyRemoved", 436100)
-	self:Log("SPELL_CAST_START", "TroggRage", 436074)
+	self:Death("ChomperDied", 217956)
 	self:Log("SPELL_AURA_APPLIED", "TroggRageApplied", 436074)
 	self:Log("SPELL_AURA_REMOVED", "TroggRageRemoved", 436074)
 	self:Log("SPELL_CAST_START", "GrubbisMad", 436027)
@@ -72,12 +76,13 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Radiation", 436059)
 	self:Log("SPELL_CAST_SUCCESS", "Adds", 435361, 435362, 435363)
 	self:Log("SPELL_CAST_SUCCESS", "Troggquake", 436168)
+	self:Log("SPELL_AURA_APPLIED", "RadiationSicknessApplied", 434724)
+	self:Log("SPELL_SUMMON", "IrradiatedCloudSummon", 434168)
 end
 
 function mod:OnEngage()
 	quakeCount = 0
-	self:SetStage(1)
-	self:Message("stages", "cyan", CL.stage:format(1), false)
+	addsCount = 0
 end
 
 --------------------------------------------------------------------------------
@@ -89,11 +94,13 @@ function mod:Dispelled(args)
 		self:Message(3019, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	elseif args.extraSpellName == self:SpellName(436074) then
 		self:Message(436074, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+	elseif args.extraSpellName == self:SpellName(436100) then
+		self:Message(436100, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end
 
 function mod:EnrageApplied(args)
-	self:Message(args.spellId, "red", CL.buff_other:format(args.destName, args.spellName))
+	self:Message(args.spellId, "red", CL.magic_buff_other:format(args.destName, args.spellName))
 end
 
 function mod:Petrify(args)
@@ -112,7 +119,7 @@ end
 
 function mod:PetrifyApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName)
-	self:TargetBar(args.spellId, 8, args.destName, CL.bomb)
+	self:TargetBar(args.spellId, 8, args.destName)
 	self:PlaySound(args.spellId, "alert")
 end
 
@@ -120,8 +127,8 @@ function mod:PetrifyRemoved(args)
 	self:StopBar(args.spellName, args.destName)
 end
 
-function mod:TroggRage(args)
-	self:Message(args.spellId, "red", CL.incoming:format(args.spellName))
+function mod:ChomperDied()
+	self:StopBar(436100) -- Petrify
 end
 
 function mod:TroggRageApplied(args)
@@ -165,15 +172,40 @@ function mod:Radiation(args)
 end
 
 function mod:Adds(args)
-	self:Message("adds", "cyan", CL.adds_spawned, false)
+	addsCount = addsCount + 1
+	self:Message("adds", "cyan", CL.count:format(CL.adds_spawned, addsCount), false)
 	self:PlaySound("adds", "info")
 end
 
 function mod:Troggquake(args)
 	quakeCount = quakeCount + 1
-	if quakeCount == 2 then
-		self:SetStage(2)
-		self:Message("stages", "cyan", CL.stage:format(2), false)
+	self:SetStage(quakeCount)
+	if quakeCount == 3 then
+		self:Message("stages", "cyan", CL.other:format(CL.stage:format(quakeCount), CL.boss), false)
 		self:PlaySound("stages", "info")
+	else
+		self:Message("stages", "cyan", CL.stage:format(quakeCount), false)
+	end
+end
+
+do
+	local playerList, prev = {}, 0
+	function mod:RadiationSicknessApplied(args)
+		if args.time - prev > 0.4 then
+			prev = args.time
+			playerList = {}
+		end
+		playerList[#playerList+1] = args.destName
+		self:TargetsMessage(args.spellId, "yellow", playerList, nil, CL.disease)
+	end
+end
+
+do
+	local prev = 0
+	function mod:IrradiatedCloudSummon(args)
+		if args.time - prev > 1 then
+			prev = args.time
+			self:Message(args.spellId, "cyan", CL.spawned:format(args.spellName))
+		end
 	end
 end

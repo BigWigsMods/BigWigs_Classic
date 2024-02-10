@@ -110,8 +110,8 @@ do
 		debuffCount = 0
 		prevWeakness = nil
 
-		self:Bar("breath", 30, CL.count:format(CL.breath, 1), "INV_Misc_QuestionMark")
-		self:Bar("breath", 60, CL.count:format(CL.breath, 2), "INV_Misc_QuestionMark")
+		self:Bar("breath", 30, CL.count:format(CL.next_ability, 1), "INV_Misc_QuestionMark")
+		self:Bar("breath", 60, CL.count:format(CL.next_ability, 2), "INV_Misc_QuestionMark")
 
 		self:RegisterEvent("UNIT_AURA")
 		self:SimpleTimer(CheckInitWeakness, 1)
@@ -164,10 +164,10 @@ end
 function mod:Breaths(args)
 	if barcount == 2 then
 		barcount = 1
-		self:StopBar(CL.count:format(CL.breath, 1)) -- Breath (1)
+		self:StopBar(CL.count:format(CL.next_ability, 1)) -- Next ability (1)
 	elseif barcount == 1 then
 		barcount = 0
-		self:StopBar(CL.count:format(CL.breath, 2)) -- Breath (2)
+		self:StopBar(CL.count:format(CL.next_ability, 2)) -- Next ability (2)
 	end
 
 	self:CastBar("breath", 2, args.spellName, args.spellId)

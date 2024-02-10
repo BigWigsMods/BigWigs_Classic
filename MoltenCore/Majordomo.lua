@@ -14,7 +14,6 @@ mod:SetEncounterID(671)
 local L = mod:GetLocale()
 if L then
 	L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
-	L.power_next = "Next Power"
 end
 
 --------------------------------------------------------------------------------
@@ -43,8 +42,8 @@ end
 
 function mod:OnEngage()
 	self:CDBar(20534, 20) -- Teleport
-	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 27, L.power_next, "ability_warlock_improvedsoulleech")
-	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 22, "orange", CL.custom_sec:format(L.power_next, 5))
+	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 27, CL.next_ability, "ability_warlock_improvedsoulleech")
+	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 22, "orange", CL.custom_sec:format(CL.next_ability, 5))
 end
 
 --------------------------------------------------------------------------------
@@ -60,16 +59,16 @@ end
 function mod:MagicReflection(args)
 	self:Bar(args.spellId, 10)
 	self:Message(args.spellId, "red")
-	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, L.power_next, "ability_warlock_improvedsoulleech")
-	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 25, "orange", CL.custom_sec:format(L.power_next, 5))
+	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, CL.next_ability, "ability_warlock_improvedsoulleech")
+	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 25, "orange", CL.custom_sec:format(CL.next_ability, 5))
 	self:PlaySound(args.spellId, "info")
 end
 
 function mod:DamageShield(args)
 	self:Bar(args.spellId, 10)
 	self:Message(args.spellId, "red")
-	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, L.power_next, "ability_warlock_improvedsoulleech")
-	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 25, "orange", CL.custom_sec:format(L.power_next, 5))
+	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, CL.next_ability, "ability_warlock_improvedsoulleech")
+	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 25, "orange", CL.custom_sec:format(CL.next_ability, 5))
 	self:PlaySound(args.spellId, "info")
 end
 
