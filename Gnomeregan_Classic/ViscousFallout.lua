@@ -36,7 +36,7 @@ end
 function mod:OnRegister()
 	self.displayName = L.bossName
 	-- Delayed for custom locale
-	desiccatedFalloutMarker = mod:AddMarkerOption(true, "npc", 8, "desiccated", 8, 7, 6) -- Desiccated Fallout
+	desiccatedFalloutMarker = mod:AddMarkerOption(true, "npc", 8, "desiccated_fallout", 8, 7, 6) -- Desiccated Fallout
 end
 
 function mod:OnBossEnable()
