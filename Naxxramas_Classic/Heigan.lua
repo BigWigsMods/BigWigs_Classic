@@ -35,6 +35,7 @@ function mod:GetOptions()
 		29998, -- Decrepit Fever
 	},nil,{
 		["stages"] = CL.teleport, -- Stages (Teleport)
+		[29998] = CL.disease, -- Decrepit Fever (Disease)
 	}
 end
 
@@ -87,7 +88,7 @@ end
 function mod:DecrepitFever(args)
 	diseaseCount = 0
 	diseaseTime = args.time
-	self:Message(args.spellId, "yellow", CL.on_group:format(args.spellName))
+	self:Message(args.spellId, "yellow", CL.on_group:format(CL.disease))
 	self:PlaySound(args.spellId, "alert")
 end
 
@@ -98,6 +99,6 @@ end
 function mod:DecrepitFeverRemoved(args)
 	diseaseCount = diseaseCount - 1
 	if diseaseCount == 0 then
-		self:Message(args.spellId, "green", CL.removed_after:format(args.spellName, args.time-diseaseTime))
+		self:Message(args.spellId, "green", CL.removed_after:format(CL.disease, args.time-diseaseTime))
 	end
 end

@@ -15,7 +15,6 @@ mod:SetStage(1)
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Mekgineer Thermaplugg"
-	L.nextAbility = "Next Ability" -- Any of Furnace Surge, Coolant Discharge or Toxic Ventilation
 	L.interruptable = "Interruptable"
 end
 
@@ -127,7 +126,7 @@ function mod:FurnaceSurge(args)
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 34)
 	else
-		self:CDBar(args.spellId, 20, L.nextAbility) -- Random which cast is next in stage 4
+		self:CDBar(args.spellId, 20, CL.next_ability) -- Random which cast is next in stage 4
 	end
 end
 
@@ -153,7 +152,7 @@ function mod:CoolantDischarge(args)
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 24)
 	else
-		self:CDBar(args.spellId, 20, L.nextAbility) -- Random which cast is next in stage 4
+		self:CDBar(args.spellId, 20, CL.next_ability) -- Random which cast is next in stage 4
 	end
 end
 
@@ -177,7 +176,7 @@ function mod:ToxicVentilation(args)
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 21)
 	else
-		self:CDBar(args.spellId, 20, L.nextAbility) -- Random which cast is next in stage 4
+		self:CDBar(args.spellId, 20, CL.next_ability) -- Random which cast is next in stage 4
 	end
 end
 

@@ -50,7 +50,7 @@ function mod:GateOfShazzrah(args)
 end
 
 function mod:MagicGroundingDeadenMagicApplied(args)
-	self:Message(args.spellId, "orange", CL.buff_boss:format(args.spellName))
+	self:Message(args.spellId, "orange", CL.magic_buff_boss:format(args.spellName))
 	if self:Dispeller("magic", true) then
 		self:PlaySound(args.spellId, "warning")
 	end
