@@ -29,6 +29,11 @@ if L then
 	L.attack_buff = "Velocidad de ataque +50%"
 	L.dont_attack = "No ataques a la oveja"
 	L.sheep_safe = "La oveja es segura para atacar"
+
+	--L[218242] = "Dragon"
+	--L[218243] = "Sheep"
+	--L[218244] = "Squirrel"
+	--L[218245] = "Chicken"
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "esES")

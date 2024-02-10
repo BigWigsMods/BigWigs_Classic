@@ -17,6 +17,11 @@ if L then
 	L.attack_buff = "+50% attack speed"
 	L.dont_attack = "Don't attack the sheep"
 	L.sheep_safe = "Sheep is safe to attack"
+
+	L[218242] = "Dragon"
+	L[218243] = "Sheep"
+	L[218244] = "Squirrel"
+	L[218245] = "Chicken"
 end
 
 --------------------------------------------------------------------------------
@@ -58,9 +63,10 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "SprocketfireBreath", 436816)
 	self:Log("SPELL_AURA_APPLIED", "SprocketfireBreathApplied", 440014)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "SprocketfireBreathAppliedDose", 440014)
-	self:Log("SPELL_AURA_APPLIED", "OverheatApplied", 436741)
 	self:Log("SPELL_AURA_APPLIED", "FrayedWiringApplied", 436825)
 	self:Log("SPELL_AURA_REMOVED", "FrayedWiringRemoved", 436825)
+	self:Log("SPELL_AURA_APPLIED", "OverheatApplied", 436741)
+	self:Log("SPELL_AURA_REMOVED", "OverheatRemoved", 436741)
 	self:Log("SPELL_CAST_START", "SelfRepair", 440073)
 end
 
@@ -77,7 +83,7 @@ do
 	local eggGUID = nil
 
 	function mod:ExplosiveEggSummon(args)
-		self:Message(args.spellId, "yellow", CL.spawned:format(args.spellName))
+		self:Message(args.spellId, "cyan", CL.spawned:format(args.spellName))
 		self:CDBar(args.spellId, 21)
 		self:PlaySound(args.spellId, "info")
 		-- register events to auto-mark egg
@@ -97,7 +103,7 @@ do
 end
 
 function mod:Cluck(args)
-	self:Message(args.spellId, "orange", CL.buff_boss:format(L.attack_buff))
+	self:Message(args.spellId, "orange", CL.other:format(args.spellName, L.attack_buff))
 	self:Bar(args.spellId, 15, L.attack_buff)
 end
 
@@ -115,13 +121,14 @@ function mod:WidgetVolleyInterrupted(args)
 end
 
 function mod:WidgetFortress(args)
-	self:Message(args.spellId, "red", CL.incoming:format(CL.shield))
-	self:CDBar(args.spellId, 50.1)
+	self:Message(args.spellId, "yellow", CL.incoming:format(CL.shield))
+	self:CDBar(args.spellId, 50.1, CL.shield)
 	self:PlaySound(args.spellId, "long")
 end
 
 function mod:WidgetFortressApplied(args)
-	self:Message(436836, "red", CL.on:format(CL.shield, args.destName))
+	local msg = L[self:MobId(args.destGUID)] or args.destName
+	self:Message(436836, "yellow", CL.on:format(CL.shield, msg))
 	self:PlaySound(436836, "info")
 end
 
@@ -143,30 +150,38 @@ function mod:SprocketfireBreathAppliedDose(args)
 	end
 end
 
-do
-	local prev = 0
-	function mod:OverheatApplied(args)
-		if args.time - prev > 3 then
-			prev = args.time
-			self:Message(args.spellId, "red", CL.duration:format(CL.weakened, 15))
-			self:Bar(args.spellId, 15, CL.weakened)
-			self:PlaySound(args.spellId, "warning")
-		end
+function mod:FrayedWiringApplied(args)
+	if self:MobId(args.destGUID) == 218243 then -- Appears to act as a group aura, applying to bosses within 15? yards
+		self:Message(args.spellId, "red", CL.other:format(args.spellName, L.dont_attack))
+		self:Bar(args.spellId, 15, L.dont_attack)
 	end
 end
 
-function mod:FrayedWiringApplied(args)
-	self:Message(args.spellId, "red", CL.other:format(args.spellName, L.dont_attack))
-	self:Bar(args.spellId, 15, L.dont_attack)
+function mod:FrayedWiringRemoved(args)
+	if self:MobId(args.destGUID) == 218243 then
+		self:StopBar(L.dont_attack)
+		self:Message(args.spellId, "green", L.sheep_safe)
+	end
 end
 
-function mod:FrayedWiringRemoved(args)
-	self:StopBar(L.dont_attack)
-	self:Message(args.spellId, "green", L.sheep_safe)
+function mod:OverheatApplied(args)
+	if self:MobId(args.destGUID) == 218242 then -- Appears to also be applying as if it is a group aura
+		self:Message(args.spellId, "red", CL.duration:format(CL.weakened, 15))
+		self:Bar(args.spellId, 15, CL.weakened)
+		self:PlaySound(args.spellId, "warning")
+	end
+end
+
+function mod:OverheatRemoved(args)
+	if self:MobId(args.destGUID) == 218242 then
+		self:StopBar(CL.weakened)
+		self:Message(args.spellId, "red", CL.over:format(CL.weakened))
+	end
 end
 
 function mod:SelfRepair(args)
-	self:TargetMessage(args.spellId, "cyan", args.sourceName)
-	self:TargetBar(args.spellId, 20, args.sourceName)
+	local msg = L[self:MobId(args.sourceGUID)] or args.sourceName
+	self:TargetMessage(args.spellId, "cyan", msg)
+	self:TargetBar(args.spellId, 20, msg)
 	self:PlaySound(args.spellId, "long")
 end
