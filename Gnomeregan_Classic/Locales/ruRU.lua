@@ -4,7 +4,7 @@ if L then
 	L.bossName = "Грязнюк"
 	L.aoe = "АоЕ урон ближнего боя"
 	L.cloud = "Облако достигло босса"
-	L.cone = "\"Frontal\" конус" -- "Frontal" Cone, it's a rear cone (he's farting)
+	L.cone = "\"Фронтальный\" конус" -- "Frontal" Cone, it's a rear cone (he's farting)
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "ruRU")
@@ -38,6 +38,6 @@ end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "ruRU")
 if L then
-	L.bossName = "Мекжинер Термоштепсель"
+	L.bossName = "Анжинер Термоштепсель"
 	L.interruptable = "Прерываемый"
 end
