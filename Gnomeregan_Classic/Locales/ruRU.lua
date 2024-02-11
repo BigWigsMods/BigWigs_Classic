@@ -20,7 +20,7 @@ end
 
 L = BigWigs:NewBossLocale("Electrocutioner 6000 Discovery", "ruRU")
 if L then
-	L.bossName = "Электрошокер 6000"
+	L.bossName = "Электрошокер-6000"
 end
 
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "ruRU")
