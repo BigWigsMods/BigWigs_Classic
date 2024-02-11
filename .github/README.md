@@ -1,6 +1,8 @@
 # BigWigs_Classic
 A collection of BigWigs modules from the **Classic** era, including:
 
+* Gnomeregan *[Vanilla WoW - Season of Discovery only]*
+* Blackfathom Deeps *[Vanilla WoW - Season of Discovery only]*
 * Molten Core
 * Blackwing Lair
 * Temple of Ahn'Qiraj
