@@ -1,7 +1,7 @@
 local L = BigWigs:NewBossLocale("Grubbis Discovery", "koKR")
 if not L then return end
 if L then
-	--L.bossName = "Grubbis"
+	L.bossName = "그루비스"
 	--L.aoe = "AoE melee damage"
 	--L.cloud = "A cloud reached the boss"
 	--L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
@@ -9,23 +9,23 @@ end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "koKR")
 if L then
-	--L.bossName = "Viscous Fallout"
+	L.bossName = "방사성 폐기물"
 	--L.desiccated_fallout = "Desiccated Fallout" -- NPC ID 216810
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "koKR")
 if L then
-	--L.bossName = "Crowd Pummeler 9-60"
+	L.bossName = "고철 압축기 9-60"
 end
 
 L = BigWigs:NewBossLocale("Electrocutioner 6000 Discovery", "koKR")
 if L then
-	--L.bossName = "Electrocutioner 6000"
+	L.bossName = "기계화 문지기 6000"
 end
 
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "koKR")
 if L then
-	--L.bossName = "Mechanical Menagerie"
+	L.bossName = "기계 동물원"
 	--L.attack_buff = "+50% attack speed"
 	--L.dont_attack = "Don't attack the sheep"
 	--L.sheep_safe = "Sheep is safe to attack"
@@ -38,6 +38,6 @@ end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "koKR")
 if L then
-	--L.bossName = "Mekgineer Thermaplugg"
+	L.bossName = "기계박사 텔마플러그"
 	--L.interruptable = "Interruptable"
 end
