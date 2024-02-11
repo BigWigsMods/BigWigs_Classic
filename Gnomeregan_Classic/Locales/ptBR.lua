@@ -30,10 +30,10 @@ if L then
 	L.dont_attack = "Não ataque a ovelha"
 	L.sheep_safe = "A ovelha pode ser atacada com segurança"
 
-	--L[218242] = "Dragon"
-	--L[218243] = "Sheep"
-	--L[218244] = "Squirrel"
-	--L[218245] = "Chicken"
+	L[218242] = "Dragão"
+	L[218243] = "Ovelha"
+	L[218244] = "Esquilo"
+	L[218245] = "Frango"
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "ptBR")
