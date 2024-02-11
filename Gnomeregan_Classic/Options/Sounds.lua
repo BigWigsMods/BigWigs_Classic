@@ -32,6 +32,7 @@ BigWigs:AddSounds("Mechanical Menagerie Discovery", {
 	[436816] = "alarm",
 	[436833] = "alert",
 	[436836] = {"info","long"},
+	[438735] = "long",
 	[440073] = "long",
 })
 
@@ -43,4 +44,5 @@ BigWigs:AddSounds("Mekgineer Thermaplugg Discovery", {
 	[438723] = "alert",
 	[438726] = "alarm",
 	[438732] = "alert",
+	[438735] = "long",
 })
