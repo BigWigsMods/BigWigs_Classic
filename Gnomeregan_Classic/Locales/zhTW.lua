@@ -26,7 +26,6 @@ end
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "zhTW")
 if L then
 	L.bossName = "機械展示廳"
-	L.bossName = "機械博覽館"
 	L.attack_buff = "+50% 攻擊速度"
 	L.dont_attack = "危險不要攻擊羊"
 	L.sheep_safe = "安全可以攻擊羊"
