@@ -15,12 +15,12 @@ end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "ruRU")
 if L then
-	L.bossName = "Толпогон 9-60"
+	L.bossName = \"Толпогон 9-60\"
 end
 
 L = BigWigs:NewBossLocale("Electrocutioner 6000 Discovery", "ruRU")
 if L then
-	L.bossName = "Электрошокер-6000"
+	L.bossName = \"Электрошокер-6000\"
 end
 
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "ruRU")
