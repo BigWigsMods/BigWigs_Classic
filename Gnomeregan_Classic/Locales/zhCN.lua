@@ -1,43 +1,43 @@
 local L = BigWigs:NewBossLocale("Grubbis Discovery", "zhCN")
 if not L then return end
 if L then
-	--L.bossName = "Grubbis"
-	--L.aoe = "AoE melee damage"
-	--L.cloud = "A cloud reached the boss"
+	L.bossName = "格鲁比斯"
+	L.aoe = "近战AOE"
+	L.cloud = "一团毒云接近了首领"
 	--L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "zhCN")
 if L then
-	--L.bossName = "Viscous Fallout"
-	--L.desiccated_fallout = "Desiccated Fallout" -- NPC ID 216810
+	L.bossName = "粘性辐射尘"
+	L.desiccated_fallout = "干燥辐射尘" -- NPC ID 216810
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "zhCN")
 if L then
-	--L.bossName = "Crowd Pummeler 9-60"
+	L.bossName = "群体打击者9-60"
 end
 
 L = BigWigs:NewBossLocale("Electrocutioner 6000 Discovery", "zhCN")
 if L then
-	--L.bossName = "Electrocutioner 6000"
+	L.bossName = "电刑器6000型"
 end
 
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "zhCN")
 if L then
-	--L.bossName = "Mechanical Menagerie"
-	--L.attack_buff = "+50% attack speed"
-	--L.dont_attack = "Don't attack the sheep"
-	--L.sheep_safe = "Sheep is safe to attack"
+	L.bossName = "机械博览馆"
+	L.attack_buff = "+50% 攻击速度"
+	L.dont_attack = "危险不要攻击羊"
+	L.sheep_safe = "安全可以攻击羊"
 
-	--L[218242] = "Dragon"
-	--L[218243] = "Sheep"
-	--L[218244] = "Squirrel"
-	--L[218245] = "Chicken"
+	L[218242] = "龙"
+	L[218243] = "羊"
+	L[218244] = "松鼠"
+	L[218245] = "鸡"
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "zhCN")
 if L then
-	--L.bossName = "Mekgineer Thermaplugg"
-	--L.interruptable = "Interruptable"
+	L.bossName = "机械师瑟玛普拉格"
+	L.interruptable = "打断"
 end
