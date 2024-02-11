@@ -31,6 +31,7 @@ end
 local explosiveEggMarker = mod:AddMarkerOption(true, "npc", 8, 436692, 8) -- Explosive Egg
 function mod:GetOptions()
 	return {
+		438735, -- High Voltage!
 		436692, -- Explosive Egg
 		explosiveEggMarker,
 		436570, -- Cluck!
@@ -54,6 +55,8 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
+	self:Log("SPELL_AURA_APPLIED", "HighVoltageApplied", 438735)
+	self:Log("SPELL_AURA_REMOVED", "HighVoltageRemoved", 438735)
 	self:Log("SPELL_SUMMON", "ExplosiveEggSummon", 436692)
 	self:Log("SPELL_CAST_SUCCESS", "Cluck", 436570)
 	self:Log("SPELL_CAST_START", "WidgetVolley", 436833)
@@ -78,6 +81,20 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:HighVoltageApplied(args)
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId)
+		self:TargetBar(args.spellId, 30, args.destName)
+	end
+end
+
+function mod:HighVoltageRemoved(args)
+	if self:Me(args.destGUID) then
+		self:StopBar(args.spellName, args.destName)
+		self:PlaySound(args.spellId, "long")
+	end
+end
 
 do
 	local eggGUID = nil
