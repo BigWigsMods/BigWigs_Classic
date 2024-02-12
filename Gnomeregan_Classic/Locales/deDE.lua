@@ -15,7 +15,7 @@ end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "deDE")
 if L then
-	L.bossName = "Meute-Verprügler 9-60"
+	L.bossName = "Meuteverprügler 9-60"
 end
 
 L = BigWigs:NewBossLocale("Electrocutioner 6000 Discovery", "deDE")
