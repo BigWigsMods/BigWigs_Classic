@@ -4,7 +4,7 @@ if L then
 	L.bossName = "格鲁比斯"
 	L.aoe = "近战AOE"
 	L.cloud = "一团毒云接近了首领"
-	--L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
+	L.cone = "辐射？" -- "Frontal" Cone, it's a rear cone (he's farting) 还是使用技能名称（诡异的技能）
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "zhCN")
