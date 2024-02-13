@@ -30,7 +30,7 @@ function mod:GetOptions()
 	return {
 		{433359, "SAY", "ME_ONLY_EMPHASIZE"}, -- Magnetic Pulse
 		{433398, "COUNTDOWN"}, -- Discombobulation Protocol
-		{433251, "CASTBAR", "SAY", "ICON", "ME_ONLY_EMPHASIZE"}, -- Static Arc
+		{433251, "CASTBAR", "SAY", "SAY_COUNTDOWN", "ICON", "ME_ONLY_EMPHASIZE"}, -- Static Arc
 	},nil,{
 		[433398] = CL.knockback, -- Discombobulation Protocol (Knockback)
 	}
@@ -84,6 +84,7 @@ do
 		self:TargetMessage(433251, "red", name)
 		if self:Me(guid) then
 			self:Say(433251, nil, nil, "Static Arc")
+			self:SayCountdown(433251, 3.4, nil, 2)
 			self:PlaySound(433251, "warning", nil, name)
 		end
 	end
