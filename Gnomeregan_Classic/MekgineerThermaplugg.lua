@@ -9,6 +9,14 @@ mod:SetEncounterID(2940)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local highVoltageList = {}
+local highVoltageDebuffTime = {}
+local UpdateInfoBoxList
+
+--------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -16,6 +24,7 @@ local L = mod:GetLocale()
 if L then
 	L.bossName = "Mekgineer Thermaplugg"
 	L.interruptable = "Interruptable"
+	L.ready = "|cff20ff20Ready|r"
 end
 
 --------------------------------------------------------------------------------
@@ -27,7 +36,7 @@ function mod:GetOptions()
 		-- General
 		"stages",
 		437853, -- Summon Bomb
-		438735, -- High Voltage!
+		{438735, "INFOBOX"}, -- High Voltage!
 		-- STX-96/FR
 		438683, -- Sprocketfire Punch
 		438710, -- Sprocketfire
@@ -77,8 +86,18 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
+	highVoltageList = {}
+	highVoltageDebuffTime = {}
+	for unit in self:IterateGroup() do
+		local name = self:UnitName(unit)
+		highVoltageList[#highVoltageList + 1] = name
+	end
+
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
+
+	self:OpenInfo(438735, "BigWigs: |T237290:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(438735), 10)
+	self:SimpleTimer(UpdateInfoBoxList, 0.1)
 end
 
 --------------------------------------------------------------------------------
@@ -116,6 +135,9 @@ function mod:SummonBomb(args)
 end
 
 function mod:HighVoltageApplied(args)
+	self:DeleteFromTable(highVoltageList, args.destName)
+	highVoltageList[#highVoltageList + 1] = args.destName
+	highVoltageDebuffTime[args.destName] = GetTime() + 60
 	if self:Me(args.destGUID) then
 		self:PersonalMessage(args.spellId)
 		self:TargetBar(args.spellId, 30, args.destName)
@@ -123,6 +145,7 @@ function mod:HighVoltageApplied(args)
 end
 
 function mod:HighVoltageRemoved(args)
+	highVoltageDebuffTime[args.destName] = nil
 	if self:Me(args.destGUID) then
 		self:StopBar(args.spellName, args.destName)
 		self:PersonalMessage(args.spellId, "removed")
@@ -223,5 +246,33 @@ end
 function mod:ToxicVentilationInterrupted(args)
 	if args.extraSpellName == self:SpellName(438732) then
 		self:Message(438732, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+	end
+end
+
+function UpdateInfoBoxList()
+	if not mod:IsEngaged() then return end
+	mod:SimpleTimer(UpdateInfoBoxList, 0.1)
+
+	-- Healer rotation lite
+	local t = GetTime()
+	local line = 1
+	for i = 1, 10 do
+		local player = highVoltageList[i]
+		if player then
+			local remaining = (highVoltageDebuffTime[player] or 0) - t
+			mod:SetInfo(438735, line, mod:ColorName(player))
+			if remaining > 0 then
+				mod:SetInfo(438735, line + 1, CL.seconds:format(remaining))
+				mod:SetInfoBar(438735, line, remaining / 60)
+			else
+				mod:SetInfo(438735, line + 1, L.ready)
+				mod:SetInfoBar(438735, line, 0)
+			end
+		else
+			mod:SetInfo(438735, line, "")
+			mod:SetInfo(438735, line + 1, "")
+			mod:SetInfoBar(438735, line, 0)
+		end
+		line = line + 2
 	end
 end
