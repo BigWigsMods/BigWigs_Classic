@@ -125,6 +125,7 @@ end
 function mod:HighVoltageRemoved(args)
 	if self:Me(args.destGUID) then
 		self:StopBar(args.spellName, args.destName)
+		self:PersonalMessage(args.spellId, "removed")
 		self:PlaySound(args.spellId, "long")
 	end
 end
