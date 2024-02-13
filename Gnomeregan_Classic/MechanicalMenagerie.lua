@@ -41,6 +41,7 @@ function mod:GetOptions()
 		436741, -- Overheat
 		436825, -- Frayed Wiring
 		440073, -- Self Repair
+		{"health", "INFOBOX"},
 	},nil,{
 		[436570] = L.attack_buff, -- Cluck! (+50% attack speed)
 		[436836] = CL.shield, -- Widget Fortress (Shield)
@@ -74,6 +75,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
+	self:OpenInfo("health", "BigWigs: ".. CL.health)
+	self:RegisterEvent("UNIT_HEALTH")
 	self:CDBar(436816, 11.6, CL.breath) -- Sprocketfire Breath
 	self:CDBar(436692, 12.2) -- Explosive Egg
 end
@@ -201,4 +204,23 @@ function mod:SelfRepair(args)
 	self:TargetMessage(args.spellId, "cyan", msg)
 	self:TargetBar(args.spellId, 20, msg)
 	self:PlaySound(args.spellId, "long")
+end
+
+do
+	local bossList = {
+		[218242] = 1, -- Dragon
+		[218243] = 3, -- Sheep
+		[218244] = 5, -- Squirrel
+		[218245] = 7, -- Chicken
+	}
+	function mod:UNIT_HEALTH(_, unit)
+		local npcId = self:MobId(self:UnitGUID(unit))
+		local line = bossList[npcId]
+		if line then
+			local currentHealthPercent = math.floor(self:GetHealth(unit))
+			self:SetInfo("health", line, L[npcId])
+			self:SetInfoBar("health", line, currentHealthPercent/100)
+			self:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+		end
+	end
 end
