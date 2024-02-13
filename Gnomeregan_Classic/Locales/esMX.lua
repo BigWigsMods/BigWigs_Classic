@@ -30,14 +30,15 @@ if L then
 	L.dont_attack = "No ataques a la oveja"
 	L.sheep_safe = "La oveja es segura para atacar"
 
-	L[218242] = "Dragón"
-	L[218243] = "Oveja"
-	L[218244] = "Ardilla"
-	L[218245] = "Pollo"
+	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDragón"
+	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tOveja"
+	L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|tArdilla"
+	L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|tPollo"
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "esMX")
 if L then
 	L.bossName = "Mekigeniero Termochufe"
 	L.interruptable = "Interrumpible"
+	L.ready = "|cff20ff20Listo|r"
 end

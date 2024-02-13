@@ -30,14 +30,15 @@ if L then
 	--L.dont_attack = "Don't attack the sheep"
 	--L.sheep_safe = "Sheep is safe to attack"
 
-	--L[218242] = "Dragon"
-	--L[218243] = "Sheep"
-	--L[218244] = "Squirrel"
-	--L[218245] = "Chicken"
+	--L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDragon"
+	--L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tSheep"
+	--L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|tSquirrel"
+	--L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|tChicken"
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "koKR")
 if L then
 	L.bossName = "기계박사 텔마플러그"
 	--L.interruptable = "Interruptable"
+	L.ready = "|cff20ff20준비|r"
 end

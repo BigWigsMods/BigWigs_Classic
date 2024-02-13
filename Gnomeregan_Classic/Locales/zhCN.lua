@@ -30,14 +30,15 @@ if L then
 	L.dont_attack = "危险不要攻击羊"
 	L.sheep_safe = "安全可以攻击羊"
 
-	L[218242] = "龙"
-	L[218243] = "羊"
-	L[218244] = "松鼠"
-	L[218245] = "鸡"
+	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|t龙"
+	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|t羊"
+	L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|t松鼠"
+	L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|t鸡"
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "zhCN")
 if L then
 	L.bossName = "机械师瑟玛普拉格"
 	L.interruptable = "打断"
+	L.ready = "|cff20ff20就绪|r"
 end

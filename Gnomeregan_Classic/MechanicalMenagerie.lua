@@ -8,6 +8,16 @@ mod:RegisterEnableMob(218242, 218243, 218244, 218245) -- STX-04/BD (Dragon), STX
 mod:SetEncounterID(2935)
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local shieldTimers = {}
+local dragonHP = 100
+local sheepHP = 100
+local squirrelHP = 100
+local chickenHP = 100
+
+--------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -18,10 +28,10 @@ if L then
 	L.dont_attack = "Don't attack the sheep"
 	L.sheep_safe = "Sheep is safe to attack"
 
-	L[218242] = "Dragon"
-	L[218243] = "Sheep"
-	L[218244] = "Squirrel"
-	L[218245] = "Chicken"
+	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDragon"
+	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tSheep"
+	L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|tSquirrel"
+	L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|tChicken"
 end
 
 --------------------------------------------------------------------------------
@@ -64,6 +74,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_INTERRUPT", "WidgetVolleyInterrupted", "*")
 	self:Log("SPELL_CAST_START", "WidgetFortress", 436836)
 	self:Log("SPELL_AURA_APPLIED", "WidgetFortressApplied", 436837)
+	self:Log("SPELL_AURA_REMOVED", "WidgetFortressRemoved", 436837)
 	self:Log("SPELL_CAST_START", "SprocketfireBreath", 436816)
 	self:Log("SPELL_AURA_APPLIED", "SprocketfireBreathApplied", 440014)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "SprocketfireBreathAppliedDose", 440014)
@@ -75,8 +86,22 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
+	shieldTimers = {}
+	dragonHP = 100
+	sheepHP = 100
+	squirrelHP = 100
+	chickenHP = 100
+
 	self:OpenInfo("health", "BigWigs: ".. CL.health)
+	local npcId = 218241
+	for i = 1, 7, 2 do
+		npcId = npcId + 1
+		self:SetInfo("health", i, L[npcId])
+		self:SetInfoBar("health", i, 1)
+		self:SetInfo("health", i + 1, "100%")
+	end
 	self:RegisterEvent("UNIT_HEALTH")
+
 	self:CDBar(436816, 11.6, CL.breath) -- Sprocketfire Breath
 	self:CDBar(436692, 12.2) -- Explosive Egg
 end
@@ -124,7 +149,8 @@ do
 end
 
 function mod:Cluck(args)
-	self:Message(args.spellId, "orange", CL.other:format(args.spellName, L.attack_buff))
+	chickenHP = chickenHP - 25
+	self:Message(args.spellId, "orange", L[218245] .." - ".. chickenHP .."% - ".. L.attack_buff)
 	self:Bar(args.spellId, 15, L.attack_buff)
 end
 
@@ -142,15 +168,28 @@ function mod:WidgetVolleyInterrupted(args)
 end
 
 function mod:WidgetFortress(args)
-	self:Message(args.spellId, "yellow", CL.incoming:format(CL.shield))
-	self:CDBar(args.spellId, 50.1, CL.shield)
+	squirrelHP = squirrelHP - 25
+	self:Message(args.spellId, "yellow", L[218244] .." - ".. squirrelHP .."% - ".. CL.incoming:format(CL.shield))
 	self:PlaySound(args.spellId, "long")
 end
 
 function mod:WidgetFortressApplied(args)
-	local msg = L[self:MobId(args.destGUID)] or args.destName
-	self:Message(436836, "yellow", CL.on:format(CL.shield, msg))
-	self:PlaySound(436836, "info")
+	local npcId = self:MobId(args.destGUID)
+	local name = L[npcId]
+	if name and not shieldTimers[npcId] then -- Delay so we don't warn for bosses just running through it
+		shieldTimers[npcId] = self:ScheduleTimer(function()
+			self:Message(436836, "yellow", CL.on:format(CL.shield, name))
+			self:PlaySound(436836, "info")
+		end, 2)
+	end
+end
+
+function mod:WidgetFortressRemoved(args)
+	local npcId = self:MobId(args.destGUID)
+	if shieldTimers[npcId] then
+		self:CancelTimer(shieldTimers[npcId])
+		shieldTimers[npcId] = nil
+	end
 end
 
 function mod:SprocketfireBreath(args)
@@ -172,8 +211,10 @@ function mod:SprocketfireBreathAppliedDose(args)
 end
 
 function mod:FrayedWiringApplied(args)
-	if self:MobId(args.destGUID) == 218243 then -- Appears to act as a group aura, applying to bosses within 15? yards
-		self:Message(args.spellId, "red", CL.other:format(args.spellName, L.dont_attack))
+	local npcId = self:MobId(args.destGUID)
+	if npcId == 218243 then -- Acts as a group aura, applying to nearby bosses
+		sheepHP = sheepHP - 25
+		self:Message(args.spellId, "red", L[npcId] .." - ".. sheepHP .."% - ".. L.dont_attack)
 		self:Bar(args.spellId, 15, L.dont_attack)
 	end
 end
@@ -186,8 +227,10 @@ function mod:FrayedWiringRemoved(args)
 end
 
 function mod:OverheatApplied(args)
-	if self:MobId(args.destGUID) == 218242 then -- Appears to also be applying as if it is a group aura
-		self:Message(args.spellId, "red", CL.duration:format(CL.weakened, 15))
+	local npcId = self:MobId(args.destGUID)
+	if npcId == 218242 then -- Acts as a group aura, applying to nearby bosses
+		dragonHP = dragonHP - 25
+		self:Message(args.spellId, "red", L[npcId] .." - ".. dragonHP .."% - ".. CL.weakened)
 		self:Bar(args.spellId, 15, CL.weakened)
 		self:PlaySound(args.spellId, "warning")
 	end
@@ -196,7 +239,6 @@ end
 function mod:OverheatRemoved(args)
 	if self:MobId(args.destGUID) == 218242 then
 		self:StopBar(CL.weakened)
-		self:Message(args.spellId, "red", CL.over:format(CL.weakened))
 	end
 end
 
