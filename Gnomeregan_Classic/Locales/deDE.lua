@@ -30,7 +30,7 @@ if L then
 	L.dont_attack = "Nicht das Schaf angreifen"
 	L.sheep_safe = "Schaf kann sicher angegriffen werden"
 
-	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDrache"
+	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDrachenwelpe"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tSchaf"
 	L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|tEichhörnchen"
 	L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|tHuhn"
