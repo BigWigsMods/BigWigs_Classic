@@ -127,7 +127,7 @@ function mod:Petrify(args)
 end
 
 function mod:PetrifyInterrupted(args)
-	if args.extraSpellName == self:SpellName(425265) then
+	if args.extraSpellName == self:SpellName(436100) then
 		self:Message(436100, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end
