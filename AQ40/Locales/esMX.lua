@@ -32,7 +32,7 @@ if L then
 
 	L.scarab = "Desaparición de escarabajo"
 	L.scarab_desc = "Anuncio para desaparición de escarabajo."
-	L.scarab_bar = "Desaparición de escarabajo"
+	L.scarab_bar = "Escarabajos desaparecen"
 end
 
 L = BigWigs:NewBossLocale("C'Thun", "esMX")
