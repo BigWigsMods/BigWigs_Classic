@@ -64,7 +64,7 @@ if L then
 
 	L.target_buffs = "Avertissement d'améliorations de la cible"
 	L.target_buffs_desc = "Lorsque votre cible est un Sentinelle Anubisath, affiche un avertissement pour indiquer quelle amélioration il possède."
-	L.target_buffs_message = "Améliorations de la Cible : %s"
+	L.target_buffs_message = "Améliorations de la cible : %s"
 	L.detect_magic_missing_message = "La Détection de la magie est manquante sur votre cible"
 	L.detect_magic_warning = "Un mage doit incanter \124cff71d5ff\124Hspell:2855:0\124h[Détection de la magie]\124h\124r sur votre cible pour que les avertissements d'améliorations fonctionnent."
 end
