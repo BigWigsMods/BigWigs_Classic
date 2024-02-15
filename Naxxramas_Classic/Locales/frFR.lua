@@ -82,7 +82,7 @@ if L then
 	L.custom_off_select_charge_movement_desc = "La stratégie de déplacement que votre groupe utilise."
 	L.custom_off_select_charge_movement_value1 = "Courir |cff20ff20À TRAVERS|r le boss"
 	L.custom_off_select_charge_movement_value2 = "Courir |cff20ff20DANS LE SENS DES AIGUILLES D'UNE MONTRE|r autour du boss"
-	L.custom_off_select_charge_movement_value3 = "Courir |cff20ff20DANS LE SENS CONTRAIRE DES AIGUILLES D'UNE MONTRE|r autour du boss"
+	L.custom_off_select_charge_movement_value3 = "Courir |cff20ff20DANS LE SENS INVERSE DES AIGUILLES D'UNE MONTRE|r autour du boss"
 	L.custom_off_select_charge_movement_value4 = "Quatre groupes 1 : Changement de polarité se déplace à |cff20ff20DROITE|r, même polarité se déplace à |cff20ff20GAUCHE|r"
 	L.custom_off_select_charge_movement_value5 = "Quatre groupes 2 : Changement de polarité se déplace à |cff20ff20GAUCHE|r, même polarité se déplace à |cff20ff20DROITE|r"
 
