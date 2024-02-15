@@ -29,7 +29,7 @@ L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "esES")
 if L then
 	L.bossName = "Animalario mecánico"
 	L.attack_buff = "Velocidad de ataque +50%"
-	--L.boss_at_hp = "%s at %d%%" -- BOSS_NAME at 50%
+	L.boss_at_hp = "%s al %d%%" -- BOSS_NAME at 50%
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDragón"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tOveja"
