@@ -21,7 +21,7 @@ end
 
 L = BigWigs:NewBossLocale("Ouro", "esMX")
 if L then
-	L.engage_message = "¡Entrando combate con Ouro! ¡Sumersión posible en 90 segundos!"
+	L.engage_message = "¡Entrando en combate con Ouro! ¡Sumersión posible en 90 segundos!"
 	L.possible_submerge_bar = "Sumersión posible"
 
 	L.emerge_message = "Ouro se ha emergido"
