@@ -43,7 +43,7 @@ if L then
 	L.warnshaman = "¡Chamanes - aparecen tótems!"
 	L.warndruid = "¡Druidas - atrapado en forma felina!"
 	L.warnwarlock = "¡Brujos - infernales entrantes!"
-	L.warnpriest = "¡Sacerfotes - sanaciones hacen daño!"
+	L.warnpriest = "¡Sacerdotes - sanaciones hacen daño!"
 	L.warnhunter = "¡Cazadores - armas están rotos!"
 	L.warnwarrior = "¡Guerreros - atrapado en actitud rabiosa!"
 	L.warnrogue = "¡Pícaros - teletransportado y enredado!"
