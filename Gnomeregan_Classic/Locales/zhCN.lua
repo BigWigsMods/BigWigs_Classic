@@ -6,6 +6,7 @@ if L then
 	L.cloud = "一团毒云接近了首领"
 	L.cone = "辐射？" -- "Frontal" Cone, it's a rear cone (he's farting) 还是使用技能名称（诡异的技能）
 	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
+	L.interruptable = "打断"
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "zhCN")

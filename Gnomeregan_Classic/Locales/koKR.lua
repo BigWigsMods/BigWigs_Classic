@@ -6,6 +6,7 @@ if L then
 	--L.cloud = "A cloud reached the boss"
 	--L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
 	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
+	--L.interruptable = "Interruptible"
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "koKR")
@@ -40,6 +41,6 @@ end
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "koKR")
 if L then
 	L.bossName = "멕기니어 텔마플러그"
-	--L.interruptable = "Interruptable"
+	--L.interruptable = "Interruptible"
 	L.ready = "|cff20ff20준비|r"
 end

@@ -6,6 +6,7 @@ if L then
 	L.cloud = "一團毒雲接近了首領"
 	--L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
 	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
+	L.interruptable = "打斷"
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "zhTW")

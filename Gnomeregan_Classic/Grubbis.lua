@@ -26,6 +26,7 @@ if L then
 	L.cloud = "A cloud reached the boss"
 	L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
 	L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
+	L.interruptable = "Interruptible"
 end
 
 --------------------------------------------------------------------------------
@@ -35,23 +36,23 @@ end
 function mod:GetOptions()
 	return {
 		"stages",
+		434168, -- Irradiated Cloud
+		434724, -- Radiation Sickness
 		"adds",
 		3019, -- Enrage
 		436100, -- Petrify
-		436074, -- Trogg Rage
+		{436074, "CASTBAR"}, -- Trogg Rage
 		{436027, "CASTBAR"}, -- Grubbis Mad!
 		434941, -- Toxic Vigor
 		{436059, "CASTBAR"}, -- Radiation?
-		434724, -- Radiation Sickness
-		434168, -- Irradiated Cloud
 	},{
-		[3019] = CL.adds,
-		[436074] = L.bossName,
+		["adds"] = CL.adds,
+		[436100] = L.bossName,
 	},{
+		[434724] = CL.disease, -- Radiation Sickness (Disease)
 		[436027] = L.aoe, -- Grubbis Mad! (AoE melee damage)
 		[434941] = L.cloud, -- Toxic Vigor (A cloud reached the boss)
 		[436059] = L.cone, -- Radiation? ("Frontal" Cone)
-		[434724] = CL.disease, -- Radiation Sickness (Disease)
 	}
 end
 
@@ -99,9 +100,9 @@ function mod:CHAT_MSG_MONSTER_SAY(_, msg)
 end
 
 function mod:Dispelled(args)
-	if args.extraSpellName == self:SpellName(3019) then
+	if args.extraSpellName == self:SpellName(3019) then -- Enrage
 		self:Message(3019, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
-	elseif args.extraSpellName == self:SpellName(436074) then
+	elseif args.extraSpellName == self:SpellName(436074) then -- Trogg Rage
 		self:Message(436074, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	elseif args.extraSpellName == self:SpellName(436100) then
 		self:Message(436100, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
@@ -109,14 +110,18 @@ function mod:Dispelled(args)
 end
 
 function mod:EnrageApplied(args)
-	self:Message(args.spellId, "red", CL.magic_buff_other:format(args.destName, args.spellName))
+	if self:GetStage() ~= 3 or (self:GetStage() == 3 and args.destGUID == self:UnitGUID("target")) then
+		self:Message(args.spellId, "red", CL.magic_buff_other:format(args.destName, args.spellName))
+	end
 end
 
 function mod:Petrify(args)
-	self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
 	self:CDBar(args.spellId, 21)
-	if self:Interrupter() then
-		self:PlaySound(args.spellId, "alert")
+
+	local npcId = self:MobId(self:UnitGUID("target"))
+	if npcId == 217956 then -- Chomper
+		self:Message(args.spellId, "orange", CL.other:format(args.spellName, L.interruptable))
+		self:PlaySound(args.spellId, "warning")
 	end
 end
 
@@ -141,14 +146,14 @@ function mod:ChomperDied()
 end
 
 function mod:TroggRageApplied(args)
-	self:Message(args.spellId, "red", CL.buff_other:format(args.destName, args.spellName))
-	self:TargetBar(args.spellId, 10, args.destName)
+	self:Message(args.spellId, "red", CL.on:format(args.spellName, args.destName))
+	self:CastBar(args.spellId, 10)
 	self:CDBar(args.spellId, 22)
 	self:PlaySound(args.spellId, "alarm")
 end
 
 function mod:TroggRageRemoved(args)
-	self:StopBar(args.spellName, args.destName)
+	self:StopBar(CL.cast:format(args.spellName))
 end
 
 function mod:GrubbisMad(args)

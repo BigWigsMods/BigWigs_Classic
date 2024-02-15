@@ -23,7 +23,7 @@ local UpdateInfoBoxList
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Mekgineer Thermaplugg"
-	L.interruptable = "Interruptable"
+	L.interruptable = "Interruptible"
 	L.ready = "|cff20ff20Ready|r"
 end
 

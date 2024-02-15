@@ -6,6 +6,7 @@ if L then
 	L.cloud = "Un nuage a atteint le boss"
 	L.cone = "Cône \"frontal\"" -- "Frontal" Cone, it's a rear cone (he's farting)
 	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
+	L.interruptable = "Interrompable"
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "frFR")
