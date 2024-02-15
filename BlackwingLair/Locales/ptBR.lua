@@ -42,7 +42,7 @@ if L then
 	--L.monk_class_call_yell_trigger = "Monks"
 
 	L.warnshaman = "Xamãs - Totens invocados!"
-	L.warndruid = "Druidas - Presos na forma de gato!"
+	L.warndruid = "Druidas - Presos na forma de felino!"
 	L.warnwarlock = "Bruxos - Infernais chegando!"
 	L.warnpriest = "Sacerdotes - Cura em perigo!"
 	L.warnhunter = "Caçadores - Arcos/Armas de fogo quebrados!"
