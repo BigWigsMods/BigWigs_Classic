@@ -139,7 +139,7 @@ function mod:GetOptions()
 		-- Stage 1
 		28338, -- Magnetic Pull
 		28134, -- Power Surge
-		"health",
+		{"health", "INFOBOX"},
 		-- Stage 2
 		{28089, "COUNTDOWN"}, -- Polarity Shift
 		{28084, "EMPHASIZE"}, -- Negative Charge

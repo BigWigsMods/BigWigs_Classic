@@ -43,7 +43,7 @@ function mod:GetOptions()
 		28883, -- Holy Wrath (Sir Zeliek)
 		29061, -- Shield Wall
 		"stages",
-		"health",
+		{"health", "INFOBOX"},
 	}
 end
 
