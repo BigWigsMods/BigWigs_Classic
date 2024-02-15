@@ -13,6 +13,7 @@ mod:SetEncounterID(1121)
 
 local deaths = 0
 local markCounter = 1
+local UpdateInfoBoxList
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -23,6 +24,11 @@ if L then
 	L.mark = CL.marks
 	L.mark_desc = "Warn for marks."
 	L.mark_icon = 28835 -- Mark of Zeliek
+
+	L[16062] = "Mograine" -- Surname of Highlord Mograine
+	L[16063] = "Zeliek" -- Surname of Sir Zeliek
+	L[16064] = "Korth'azz" -- Surname of Thane Korth'azz
+	L[16065] = "Blaumeux" -- Surname of Lady Blaumeux
 end
 
 --------------------------------------------------------------------------------
@@ -37,6 +43,7 @@ function mod:GetOptions()
 		28883, -- Holy Wrath (Sir Zeliek)
 		29061, -- Shield Wall
 		"stages",
+		{"health", "INFOBOX"},
 	}
 end
 
@@ -55,6 +62,16 @@ end
 function mod:OnEngage()
 	markCounter = 1
 	deaths = 0
+
+	self:OpenInfo("health", "BigWigs: ".. CL.health)
+	local npcId = 16061
+	for i = 1, 7, 2 do
+		npcId = npcId + 1
+		self:SetInfo("health", i, L[npcId])
+		self:SetInfoBar("health", i, 1)
+		self:SetInfo("health", i + 1, "100%")
+	end
+	self:SimpleTimer(UpdateInfoBoxList, 1)
 
 	self:CDBar(28863, 12) -- Void Zone
 	self:CDBar(28884, 21) -- Meteor
@@ -128,21 +145,55 @@ function mod:HolyWrath(args)
 end
 
 function mod:ShieldWall(args)
-	self:Message(args.spellId, "yellow", CL.other:format(args.destName, args.spellName))
-	self:Bar(args.spellId, 20, args.destName)
+	local npcId = self:MobId(args.destGUID)
+	local msg = CL.other:format(args.spellName, L[npcId])
+	self:Message(args.spellId, "yellow", msg)
+	self:Bar(args.spellId, 20, msg)
 end
 
-function mod:Deaths(args)
-	self:StopBar(args.destName)
-	if args.mobId == 16063 then -- Sir Zeliek
-		self:StopBar(28883) -- Holy Wrath
-	elseif args.mobId == 16065 then -- Lady Blaumeux
-		self:StopBar(28863) -- Void Zone
-	elseif args.mobId == 16064 then -- Thane Korth'azz
-		self:StopBar(28884) -- Meteor
+do
+	local bossList = {
+		[16062] = 1, -- Highlord Mograine
+		[16063] = 3, -- Sir Zeliek
+		[16064] = 5, -- Thane Korth'azz
+		[16065] = 7, -- Lady Blaumeux
+	}
+	function mod:Deaths(args)
+		deaths = deaths + 1
+		self:StopBar(CL.other:format(self:SpellName(29061), L[args.mobId])) -- Shield Wall
+		if args.mobId == 16063 then -- Sir Zeliek
+			self:StopBar(28883) -- Holy Wrath
+		elseif args.mobId == 16065 then -- Lady Blaumeux
+			self:StopBar(28863) -- Void Zone
+		elseif args.mobId == 16064 then -- Thane Korth'azz
+			self:StopBar(28884) -- Meteor
+		end
+
+		local line = bossList[args.mobId]
+		self:SetInfoBar("health", line, 0)
+		self:SetInfo("health", line + 1, "0%")
+
+		if deaths < 4 then
+			self:Message("stages", "cyan", CL.mob_killed:format(args.destName, deaths, 4), false)
+		end
 	end
-	deaths = deaths + 1
-	if deaths < 4 then
-		self:Message("stages", "cyan", CL.mob_killed:format(args.destName, deaths, 4), false)
+
+	local unitTracker = {}
+	function UpdateInfoBoxList()
+		if not mod:IsEngaged() then return end
+		mod:SimpleTimer(UpdateInfoBoxList, 1)
+
+		for npcId in next, bossList do
+			if not unitTracker[npcId] or mod:MobId(mod:UnitGUID(unitTracker[npcId])) ~= npcId then
+				unitTracker[npcId] = mod:GetUnitIdByGUID(npcId)
+			end
+		end
+
+		for npcId, unitToken in next, unitTracker do
+			local line = bossList[npcId]
+			local currentHealthPercent = math.floor(mod:GetHealth(unitToken))
+			mod:SetInfoBar("health", line, currentHealthPercent/100)
+			mod:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+		end
 	end
 end

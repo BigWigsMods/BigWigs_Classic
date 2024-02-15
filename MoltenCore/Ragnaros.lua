@@ -22,7 +22,6 @@ local warmupTimer = mod:Retail() and 74 or 84
 
 local L = mod:GetLocale()
 if L then
-	L.engage_trigger = "NOW FOR YOU,"
 	L.submerge_trigger = "COME FORTH,"
 
 	L.warmup_icon = "Achievement_boss_ragnaros"

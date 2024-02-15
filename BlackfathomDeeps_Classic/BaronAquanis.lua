@@ -92,13 +92,13 @@ end
 
 function mod:BubbleBeam(args)
 	self:StopBar(CL.beam) -- Stop the CDBar
-	self:Message(args.spellId, "orange", CL.incoming:format(args.spellName))
+	self:Message(args.spellId, "orange", CL.incoming:format(CL.beam))
 	self:PlaySound(args.spellId, "long")
 end
 
 function mod:BubbleBeamChannel()
 	self:CastBar(413664, 10, CL.beam)
-	self:CDBar(404806, {10.5, 16}, CL.bomb) -- Depth Charge
+	self:CDBar(404806, {11, 16}, CL.bomb) -- Depth Charge
 end
 
 function mod:BubbleBeamChannelOver()

@@ -6,7 +6,6 @@ end
 
 L = BigWigs:NewBossLocale("Ragnaros Classic", "zhTW")
 if L then
-	L.engage_trigger = "現在輪到你們了"
 	L.submerge_trigger = "出現吧，我的奴僕"
 
 	L.submerge = "消失"

@@ -7,7 +7,6 @@ end
 L = BigWigs:NewBossLocale("Ragnaros Classic", "ruRU")
 if L then
 	L.submerge_trigger = "ПРИБЫВАЙТЕ ЕЩЕ"
-	L.engage_trigger = "Тогда получите ещё!"
 
 	L.submerge = "Погружение Рагнароса"
 	L.submerge_desc = "Предупреждать о погружении Рагнароса и появлении сыновей пламени"

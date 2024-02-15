@@ -6,7 +6,6 @@ end
 
 L = BigWigs:NewBossLocale("Ragnaros Classic", "esES")
 if L then
-	--L.engage_trigger = "NOW FOR YOU,"
 	L.submerge_trigger = "¡SIERVOS, A MÍ!"
 
 	L.submerge = "Sumersión"

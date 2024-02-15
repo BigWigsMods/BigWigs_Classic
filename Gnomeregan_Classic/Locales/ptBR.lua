@@ -5,6 +5,7 @@ if L then
 	L.aoe = "Dano corpo a corpo em área"
 	L.cloud = "Uma nuvem chegou ao chefe"
 	L.cone = "Cone \"frontal\"" -- "Frontal" Cone, it's a rear cone (he's farting)
+	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "ptBR")
@@ -21,14 +22,14 @@ end
 L = BigWigs:NewBossLocale("Electrocutioner 6000 Discovery", "ptBR")
 if L then
 	L.bossName = "Eletrocutor 6000"
+	L.ready = "|cff20ff20Pronto|r"
 end
 
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "ptBR")
 if L then
 	L.bossName = "Viveiro Mecânico"
 	L.attack_buff = "+50% de velocidade de ataque"
-	L.dont_attack = "Não ataque a ovelha"
-	L.sheep_safe = "A ovelha pode ser atacada com segurança"
+	--L.boss_at_hp = "%s at %d%%" -- BOSS_NAME at 50%
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDragão"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tOvelha"

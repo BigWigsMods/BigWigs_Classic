@@ -5,6 +5,7 @@ if L then
 	L.aoe = "近战AOE"
 	L.cloud = "一团毒云接近了首领"
 	L.cone = "辐射？" -- "Frontal" Cone, it's a rear cone (he's farting) 还是使用技能名称（诡异的技能）
+	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "zhCN")
@@ -21,14 +22,14 @@ end
 L = BigWigs:NewBossLocale("Electrocutioner 6000 Discovery", "zhCN")
 if L then
 	L.bossName = "电刑器6000型"
+	L.ready = "|cff20ff20就绪|r"
 end
 
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "zhCN")
 if L then
 	L.bossName = "机械博览馆"
 	L.attack_buff = "+50% 攻击速度"
-	L.dont_attack = "危险不要攻击羊"
-	L.sheep_safe = "安全可以攻击羊"
+	--L.boss_at_hp = "%s at %d%%" -- BOSS_NAME at 50%
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|t龙"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|t羊"

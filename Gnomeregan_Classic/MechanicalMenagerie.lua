@@ -25,8 +25,7 @@ local L = mod:GetLocale()
 if L then
 	L.bossName = "Mechanical Menagerie"
 	L.attack_buff = "+50% attack speed"
-	L.dont_attack = "Don't attack the sheep"
-	L.sheep_safe = "Sheep is safe to attack"
+	L.boss_at_hp = "%s at %d%%" -- BOSS_NAME at 50%
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDragon"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tSheep"
@@ -57,7 +56,7 @@ function mod:GetOptions()
 		[436836] = CL.shield, -- Widget Fortress (Shield)
 		[436816] = CL.breath, -- Sprocketfire Breath (Breath)
 		[436741] = CL.weakened, -- Overheat (Weakened)
-		[436825] = L.dont_attack, -- Frayed Wiring (Don't attack the sheep)
+		[436825] = CL.spell_reflection, -- Frayed Wiring (Spell Reflection)
 	}
 end
 
@@ -150,7 +149,7 @@ end
 
 function mod:Cluck(args)
 	chickenHP = chickenHP - 25
-	self:Message(args.spellId, "orange", L[218245] .." - ".. chickenHP .."% - ".. L.attack_buff)
+	self:Message(args.spellId, "orange", CL.other:format(L.attack_buff, L.boss_at_hp:format(L[218245], chickenHP)))
 	self:Bar(args.spellId, 15, L.attack_buff)
 end
 
@@ -169,7 +168,7 @@ end
 
 function mod:WidgetFortress(args)
 	squirrelHP = squirrelHP - 25
-	self:Message(args.spellId, "yellow", L[218244] .." - ".. squirrelHP .."% - ".. CL.incoming:format(CL.shield))
+	self:Message(args.spellId, "yellow", CL.other:format(CL.shield, L.boss_at_hp:format(L[218244], squirrelHP)))
 	self:PlaySound(args.spellId, "long")
 end
 
@@ -214,15 +213,15 @@ function mod:FrayedWiringApplied(args)
 	local npcId = self:MobId(args.destGUID)
 	if npcId == 218243 then -- Acts as a group aura, applying to nearby bosses
 		sheepHP = sheepHP - 25
-		self:Message(args.spellId, "red", L[npcId] .." - ".. sheepHP .."% - ".. L.dont_attack)
-		self:Bar(args.spellId, 15, L.dont_attack)
+		self:Message(args.spellId, "red", CL.other:format(CL.spell_reflection, L.boss_at_hp:format(L[npcId], sheepHP)))
+		self:Bar(args.spellId, 15, CL.spell_reflection)
 	end
 end
 
 function mod:FrayedWiringRemoved(args)
 	if self:MobId(args.destGUID) == 218243 then
-		self:StopBar(L.dont_attack)
-		self:Message(args.spellId, "green", L.sheep_safe)
+		self:StopBar(CL.spell_reflection)
+		self:Message(args.spellId, "green", CL.over:format(CL.spell_reflection))
 	end
 end
 
@@ -230,7 +229,7 @@ function mod:OverheatApplied(args)
 	local npcId = self:MobId(args.destGUID)
 	if npcId == 218242 then -- Acts as a group aura, applying to nearby bosses
 		dragonHP = dragonHP - 25
-		self:Message(args.spellId, "red", L[npcId] .." - ".. dragonHP .."% - ".. CL.weakened)
+		self:Message(args.spellId, "red", CL.other:format(CL.weakened, L.boss_at_hp:format(L[npcId], dragonHP)))
 		self:Bar(args.spellId, 15, CL.weakened)
 		self:PlaySound(args.spellId, "warning")
 	end
@@ -261,7 +260,6 @@ do
 		local line = bossList[npcId]
 		if line then
 			local currentHealthPercent = math.floor(self:GetHealth(unit))
-			self:SetInfo("health", line, L[npcId])
 			self:SetInfoBar("health", line, currentHealthPercent/100)
 			self:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
 		end

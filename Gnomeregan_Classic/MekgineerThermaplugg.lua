@@ -137,7 +137,7 @@ end
 function mod:HighVoltageApplied(args)
 	self:DeleteFromTable(highVoltageList, args.destName)
 	highVoltageList[#highVoltageList + 1] = args.destName
-	highVoltageDebuffTime[args.destName] = GetTime() + 60
+	highVoltageDebuffTime[args.destName] = GetTime() + 30
 	if self:Me(args.destGUID) then
 		self:PersonalMessage(args.spellId)
 		self:TargetBar(args.spellId, 30, args.destName)
@@ -253,7 +253,6 @@ function UpdateInfoBoxList()
 	if not mod:IsEngaged() then return end
 	mod:SimpleTimer(UpdateInfoBoxList, 0.1)
 
-	-- Healer rotation lite
 	local t = GetTime()
 	local line = 1
 	for i = 1, 10 do
@@ -263,7 +262,7 @@ function UpdateInfoBoxList()
 			mod:SetInfo(438735, line, mod:ColorName(player))
 			if remaining > 0 then
 				mod:SetInfo(438735, line + 1, CL.seconds:format(remaining))
-				mod:SetInfoBar(438735, line, remaining / 60)
+				mod:SetInfoBar(438735, line, remaining / 30)
 			else
 				mod:SetInfo(438735, line + 1, L.ready)
 				mod:SetInfoBar(438735, line, 0)

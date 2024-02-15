@@ -24,6 +24,11 @@ end
 L = BigWigs:NewBossLocale("The Four Horsemen", "deDE")
 if L then
 	L.mark_desc = "Warnungen und Timer für die Male."
+
+	L[16062] = "Mograine" -- Surname of Highlord Mograine
+	L[16063] = "Zeliek" -- Surname of Sir Zeliek
+	L[16064] = "Korth'azz" -- Surname of Thane Korth'azz
+	L[16065] = "Blaumeux" -- Surname of Lady Blaumeux
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad", "deDE")
@@ -60,6 +65,9 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "deDE")
 if L then
+	L[15929] = "Stalagg"
+	L[15930] = "Feugen"
+
 	L.stage1_yell_trigger1 = "Stalagg zerquetschen!"
 	L.stage1_yell_trigger2 = "Verfüttere euch an Meister!"
 

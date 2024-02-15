@@ -24,6 +24,11 @@ end
 L = BigWigs:NewBossLocale("The Four Horsemen", "ruRU")
 if L then
 	L.mark_desc = "Предупреждать о знаках."
+
+	L[16062] = "Могрейн" -- Surname of Highlord Mograine
+	L[16063] = "Зелиек" -- Surname of Sir Zeliek
+	L[16064] = "Кортазз" -- Surname of Thane Korth'azz
+	L[16065] = "Бломе" -- Surname of Lady Blaumeux
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad", "ruRU")
@@ -60,6 +65,9 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "ruRU")
 if L then
+	L[15929] = "Сталагг"
+	L[15930] = "Фойген"
+
 	L.stage1_yell_trigger1 = "Сталагг тебя раздавит!"
 	L.stage1_yell_trigger2 = "На корм хозяину!"
 

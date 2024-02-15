@@ -7,7 +7,6 @@ end
 L = BigWigs:NewBossLocale("Ragnaros Classic", "koKR")
 if L then
 	L.submerge_trigger = "나의 종들아"
-	L.engage_trigger = "이제 너희"
 
 	L.submerge = "사라짐 경고"
 	L.submerge_desc = "라그나로스 사라짐 & 피조물에 대한 경고"
