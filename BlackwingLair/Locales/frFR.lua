@@ -11,7 +11,7 @@ end
 L = BigWigs:NewBossLocale("Vaelastrasz the Corrupt", "frFR")
 if L then
 	L.warmup_trigger = "Trop tard, mes amis"
-	--L.tank_bomb = "Tank Bomb"
+	L.tank_bomb = "Bombe de tank"
 end
 
 L = BigWigs:NewBossLocale("Chromaggus", "frFR")
@@ -19,19 +19,19 @@ if L then
 	L.breath = "Souffles"
 	L.breath_desc = "Préviens de l'arrivée des souffles."
 
-	--L.debuffs_message = "3/5 debuffs, carefull!"
-	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+	L.debuffs_message = "3/5 affaiblissements, prudence !"
+	L.debuffs_warning = "4/5 affaiblissements, %s sur le 5ème !"
 
 	L.vulnerability = "Changement de vulnérabilité"
 	L.vulnerability_desc = "Préviens quand la vulnérabilité change."
 	L.vulnerability_message = "Vulnerabilité : %s"
-	L.detect_magic_missing = "Détection de la magie is missing from Chromaggus"
-	L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Détection de la magie]\124h\124r on Chromaggus for vulnerability warnings to work."
+	L.detect_magic_missing = "Détection de la magie est absente de Chromaggus"
+	L.detect_magic_warning = "Un Mage doit incanter \124cff71d5ff\124Hspell:2855:0\124h[Détection de la magie]\124h\124r sur Chromaggus pour que les avertissements de vulnérabilité fonctionnent."
 end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "frFR")
 if L then
-	--L.engage_yell_trigger = "Let the games begin"
+	L.engage_yell_trigger = "Que les jeux commencent"
 	L.landing_soon_trigger = "Beau travail"
 	L.stage2_yell_trigger = "BRÛLEZ, misérables"
 	L.stage3_yell_trigger = "C'est impossible"
@@ -56,17 +56,17 @@ if L then
 	L.classcall = "Appel de classe"
 	L.classcall_desc = "Préviens de l'arrivée des appels de classe."
 
-	--L.add = "Drakonid deaths"
-	--L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
+	L.add = "Morts de drakônides"
+	L.add_desc = "Annoncer le nombre de serviteurs tués en phase 1 avant l'atterrissage de Nefarian"
 end
 
 L = BigWigs:NewBossLocale("Blackwing Lair Trash", "frFR")
 if L then
 	L.wyrmguard_overseer = "Garde wyrm Griffemort / Surveillant Griffemort" -- NPC 12460 / 12461
 
-	--L.target_vulnerability = "Target Vulnerability Warnings"
-	--L.target_vulnerability_desc = "When your target is a Death Talon Wyrmguard or a Death Talon Overseer, show a warning for what vulnerability it has."
-	--L.target_vulnerability_message = "Target Vulnerability: %s"
-	L.detect_magic_missing_message = "Détection de la magie is missing from your target"
-	L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Détection de la magie]\124h\124r on your target for vulnerability warnings to work."
+	L.target_vulnerability = "Avertissements de vulnérabilité de la cible"
+	L.target_vulnerability_desc = "Lorsque votre cible est un Garde wyrm Griffemort ou un Surveillant Griffemort, affichez un avertissement pour indiquer sa vulnérabilité."
+	L.target_vulnerability_message = "Vulnérabilité de la cible: %s"
+	L.detect_magic_missing_message = "Détection de la magie est absente de votre cible"
+	L.detect_magic_warning = "Un mage doit incanter \124cff71d5ff\124Hspell:2855:0\124h[Détection de la magie]\124h\124r sur votre cible pour que les avertissements de vulnérabilité fonctionnent."
 end
