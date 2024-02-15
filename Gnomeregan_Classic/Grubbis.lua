@@ -82,6 +82,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Troggquake", 436168)
 	self:Log("SPELL_AURA_APPLIED", "RadiationSicknessApplied", 434724)
 	self:Log("SPELL_SUMMON", "IrradiatedCloudSummon", 434168)
+	self:Log("SPELL_DAMAGE", "IrradiatedCloudKilled", 434948)
 end
 
 function mod:OnEngage()
@@ -220,6 +221,16 @@ do
 		if args.time - prev > 1 then
 			prev = args.time
 			self:Message(args.spellId, "cyan", CL.spawned:format(args.spellName))
+		end
+	end
+end
+
+do
+	local prev = 0
+	function mod:IrradiatedCloudKilled(args)
+		if args.time - prev > 1 then
+			prev = args.time
+			self:Message(434168, "cyan", CL.killed:format(args.spellName))
 		end
 	end
 end
