@@ -10,7 +10,7 @@ end
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "ruRU")
 if L then
 	L.bossName = "Липкая муть"
-	L.desiccated_fallout = "Ожог от радиации" -- NPC ID 216810
+	L.desiccated_fallout = "Иссохший выброс" -- NPC ID 216810
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "ruRU")
