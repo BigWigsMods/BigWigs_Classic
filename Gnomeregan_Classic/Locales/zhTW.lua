@@ -10,7 +10,7 @@ end
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "zhTW")
 if L then
 	L.bossName = "粘性輻射塵"
-	--L.desiccated_fallout = "Desiccated Fallout" -- NPC ID 216810
+	L.desiccated_fallout = "乾燥的輻射塵" -- NPC ID 216810
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "zhTW")
