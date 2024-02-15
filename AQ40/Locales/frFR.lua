@@ -1,58 +1,58 @@
 local L = BigWigs:NewBossLocale("Viscidus", "frFR")
 if not L then return end
 if L then
-	--L.freeze = "Freezing States"
-	--L.freeze_desc = "Warn for the different frozen states."
+	L.freeze = "États de Gel"
+	L.freeze_desc = "Annoncer des différents états gelés."
+	
 	L.freeze_trigger1 = "%s commence à ralentir !"
-
 	L.freeze_trigger2 = "%s est gelé !"
 	L.freeze_trigger3 = "%s est congelé !"
 	L.freeze_trigger4 = "%s commence à se briser !"
 	L.freeze_trigger5 = "%s semble prêt à se briser !"
 
-	--L.freeze_warn1 = "First freeze phase!"
-	--L.freeze_warn2 = "Second freeze phase!"
-	--L.freeze_warn3 = "Viscidus is frozen!"
-	--L.freeze_warn4 = "Cracking up - keep going!"
-	--L.freeze_warn5 = "Cracking up - almost there!"
-	--L.freeze_warn_melee = "%d melee attacks - %d more to go"
-	--L.freeze_warn_frost = "%d frost attacks - %d more to go"
+	L.freeze_warn1 = "Première phase de gel !"
+	L.freeze_warn2 = "Deuxième phase de gel !"
+	L.freeze_warn3 = "Viscidus est gelé !"
+	L.freeze_warn4 = "Brisement - continuez !"
+	L.freeze_warn5 = "Brisement - presque là !"
+	L.freeze_warn_melee = "%d attaques en mêlée - %d de plus"
+	L.freeze_warn_frost = "%d attaques de givre - %d de plus"
 end
 
 L = BigWigs:NewBossLocale("Ouro", "frFR")
 if L then
-	--L.engage_message = "Ouro engaged! Possible Submerge in 90sec!"
-	--L.possible_submerge_bar = "Possible submerge"
+	L.engage_message = "Ouro engagé ! Submersion possible dans 90 secondes !"
+	L.possible_submerge_bar = "Submersion possible"
 
-	--L.emerge_message = "Ouro has emerged"
-	--L.emerge_bar = "Emerge"
+	L.emerge_message = "Ouro a émergé"
+	L.emerge_bar = "Émergence"
 
-	--L.submerge_message = "Ouro has submerged"
-	--L.submerge_bar = "Submerge"
+	L.submerge_message = "Ouro a submergé"
+	L.submerge_bar = "Submersion"
 
-	--L.scarab = "Scarab Despawn"
-	--L.scarab_desc = "Warn for Scarab Despawn."
-	--L.scarab_bar = "Scarabs despawn"
+	L.scarab = "Disparition des scarabées"
+	L.scarab_desc = "Avertissement pour la disparition des scarabées."
+	L.scarab_bar = "Scarabées disparaissent"
 end
 
 L = BigWigs:NewBossLocale("C'Thun", "frFR")
 if L then
-	--L.claw_tentacle = "Claw Tentacle"
-	--L.claw_tentacle_desc = "Timers for the claw tentacle."
+	L.claw_tentacle = "Tentacule griffu"
+	L.claw_tentacle_desc = "Chronomètres pour le tentacule griffu."
 
-	--L.giant_claw_tentacle = "Giant Claw"
-	--L.giant_claw_tentacle_desc = "Timers for the giant claw tentacle."
+	L.giant_claw_tentacle = "Tentacule griffu géant"
+	L.giant_claw_tentacle_desc = "Chronomètres pour le tentacule griffu géant."
 
-	--L.eye_tentacles = "Eye Tentacles"
-	--L.eye_tentacles_desc = "Timers for the 8 eye tentacles."
+	L.eye_tentacles = "Tentacule oculaire"
+	L.eye_tentacles_desc = "Chronomètres pour les 8 tentacules oculaires."
 
-	--L.giant_eye_tentacle = "Giant Eye"
-	--L.giant_eye_tentacle_desc = "Timers for the giant eye tentacle."
+	L.giant_eye_tentacle = "Tentacule oculaire géant"
+	L.giant_eye_tentacle_desc = "Chronomètres pour le tentacule oculaire géant."
 
-	--L.weakened_desc = "Warn for weakened state."
+	L.weakened_desc = "Annoncer affaiblissement."
 	L.weakenedtrigger = "%s est affaibli"
 
-	--L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYERNAME (Group 1)
+	L.dark_glare_message = "%s: %s (Groupe %s)" -- Dark Glare: PLAYERNAME (Group 1)
 end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "frFR")
@@ -62,9 +62,9 @@ if L then
 	L.defender = "Défenseur Anubisath" -- NPC 15277
 	L.crawler = "Rampant de la ruche vekniss" -- NPC 15240
 
-	--L.target_buffs = "Target Buff Warnings"
-	--L.target_buffs_desc = "When your target is an Anubisath Sentinel, show a warning for what buff it has."
-	--L.target_buffs_message = "Target Buffs: %s"
-	L.detect_magic_missing_message = "Détection de la magie is missing from your target"
-	L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Détection de la magie]\124h\124r on your target for buff warnings to work."
+	L.target_buffs = "Avertissement d'améliorations de la cible"
+	L.target_buffs_desc = "Lorsque votre cible est un Sentinelle Anubisath, affiche un avertissement pour indiquer quelle amélioration il possède."
+	L.target_buffs_message = "Améliorations de la Cible : %s"
+	L.detect_magic_missing_message = "La Détection de la magie est manquante sur votre cible"
+	L.detect_magic_warning = "Un mage doit incanter \124cff71d5ff\124Hspell:2855:0\124h[Détection de la magie]\124h\124r sur votre cible pour que les avertissements d'améliorations fonctionnent."
 end
