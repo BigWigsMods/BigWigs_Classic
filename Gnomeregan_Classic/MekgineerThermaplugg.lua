@@ -181,7 +181,7 @@ function mod:FurnaceSurge(args)
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 34)
 	else
-		self:CDBar(args.spellId, 20, CL.next_ability) -- Random which cast is next in stage 4
+		self:CDBar(args.spellId, 20, CL.next_ability, "INV_Misc_QuestionMark") -- Random which cast is next in stage 4
 	end
 	self:PlaySound(args.spellId, "alert")
 end
@@ -214,7 +214,7 @@ function mod:CoolantDischarge(args)
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 24)
 	else
-		self:CDBar(args.spellId, 20, CL.next_ability) -- Random which cast is next in stage 4
+		self:CDBar(args.spellId, 20, CL.next_ability, "INV_Misc_QuestionMark") -- Random which cast is next in stage 4
 	end
 	self:PlaySound(args.spellId, "alert")
 end
@@ -238,7 +238,7 @@ function mod:ToxicVentilation(args)
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 21)
 	else
-		self:CDBar(args.spellId, 20, CL.next_ability) -- Random which cast is next in stage 4
+		self:CDBar(args.spellId, 20, CL.next_ability, "INV_Misc_QuestionMark") -- Random which cast is next in stage 4
 	end
 	self:PlaySound(args.spellId, "alert")
 end
