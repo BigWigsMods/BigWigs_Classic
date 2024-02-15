@@ -118,10 +118,10 @@ end
 
 function mod:Petrify(args)
 	self:CDBar(args.spellId, 21)
+	self:Message(args.spellId, "orange", CL.other:format(args.spellName, L.interruptable)) -- XXX target filter this in a few weeks
 
 	local npcId = self:MobId(self:UnitGUID("target"))
 	if npcId == 217956 then -- Chomper
-		self:Message(args.spellId, "orange", CL.other:format(args.spellName, L.interruptable))
 		self:PlaySound(args.spellId, "warning")
 	end
 end
