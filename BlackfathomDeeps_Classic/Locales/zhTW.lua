@@ -11,7 +11,7 @@ end
 
 L = BigWigs:NewBossLocale("Lady Sarevess Discovery", "zhTW")
 if L then
-	L.bossName = "薩利維女士"
+	L.bossName = "薩利維絲女士"
 end
 
 L = BigWigs:NewBossLocale("Gelihast Discovery", "zhTW")
