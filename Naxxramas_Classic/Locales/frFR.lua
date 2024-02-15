@@ -83,23 +83,23 @@ if L then
 
 	L.custom_off_select_charge_position = "Première position"
 	L.custom_off_select_charge_position_desc = "Où se déplacer après le premier changement de polarité."
-	L.custom_off_select_charge_position_value1 = "|cffff2020Négatif (-)|r est à GAUCHE, |cff2020ffPositif (+)|r est à DROITE"
-	L.custom_off_select_charge_position_value2 = "|cff2020ffPositif (+)|r est à GAUCHE, |cffff2020Négatif (-)|r est à DROITE"
+	L.custom_off_select_charge_position_value1 = "|cffff2020Charge négative (-)|r à GAUCHE, |cff2020ffCharge positive (+)|r à DROITE"
+	L.custom_off_select_charge_position_value2 = "|cff2020ffCharge positive (+)|r à GAUCHE, |cffff2020Charge négative (-)|r à DROITE"
 
 	L.custom_off_select_charge_movement = "Déplacement"
 	L.custom_off_select_charge_movement_desc = "La stratégie de déplacement que votre groupe utilise."
 	L.custom_off_select_charge_movement_value1 = "Courir |cff20ff20À TRAVERS|r le boss"
 	L.custom_off_select_charge_movement_value2 = "Courir |cff20ff20DANS LE SENS DES AIGUILLES D'UNE MONTRE|r autour du boss"
 	L.custom_off_select_charge_movement_value3 = "Courir |cff20ff20DANS LE SENS INVERSE DES AIGUILLES D'UNE MONTRE|r autour du boss"
-	L.custom_off_select_charge_movement_value4 = "Quatre groupes 1 : Changement de polarité se déplace à |cff20ff20DROITE|r, même polarité se déplace à |cff20ff20GAUCHE|r"
-	L.custom_off_select_charge_movement_value5 = "Quatre groupes 2 : Changement de polarité se déplace à |cff20ff20GAUCHE|r, même polarité se déplace à |cff20ff20DROITE|r"
+	L.custom_off_select_charge_movement_value4 = "Quatre groupes 1 : Changement de polarité à |cff20ff20DROITE|r, même polarité à |cff20ff20GAUCHE|r"
+	L.custom_off_select_charge_movement_value5 = "Quatre groupes 2 : Changement de polarité à |cff20ff20GAUCHE|r, même polarité à |cff20ff20DROITE|r"
 
 	L.custom_off_charge_graphic = "Flèche graphique"
-	L.custom_off_charge_graphic_desc = "Afficher une flèche graphique."
+	L.custom_off_charge_graphic_desc = "Affiche une flèche graphique."
 	L.custom_off_charge_text = "Flèches de texte"
-	L.custom_off_charge_text_desc = "Afficher un message supplémentaire."
+	L.custom_off_charge_text_desc = "Affiche un message supplémentaire."
 	L.custom_off_charge_voice = "Alerte vocale"
-	L.custom_off_charge_voice_desc = "Jouer un alerte vocale."
+	L.custom_off_charge_voice_desc = "Joue un alerte vocale."
 
 	--Translate these to get locale sound files!
 	L.left = "<--- ALLEZ À GAUCHE <--- ALLEZ À GAUCHE <---"
