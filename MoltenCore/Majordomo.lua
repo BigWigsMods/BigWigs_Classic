@@ -25,6 +25,8 @@ function mod:GetOptions()
 		20619, -- Magic Reflection
 		21075, -- Damage Shield
 		20534, -- Teleport
+	},{
+		[20619] = CL.spell_reflection, -- Magic Reflection (Spell Reflection)
 	}
 end
 
@@ -42,7 +44,7 @@ end
 
 function mod:OnEngage()
 	self:CDBar(20534, 20) -- Teleport
-	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 27, CL.next_ability, "ability_warlock_improvedsoulleech")
+	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 27, CL.next_ability, "INV_Misc_QuestionMark")
 	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 22, "orange", CL.custom_sec:format(CL.next_ability, 5))
 end
 
@@ -57,9 +59,9 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 end
 
 function mod:MagicReflection(args)
-	self:Bar(args.spellId, 10)
-	self:Message(args.spellId, "red")
-	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, CL.next_ability, "ability_warlock_improvedsoulleech")
+	self:Bar(args.spellId, 10, CL.spell_reflection)
+	self:Message(args.spellId, "red", CL.spell_reflection)
+	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, CL.next_ability, "INV_Misc_QuestionMark")
 	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 25, "orange", CL.custom_sec:format(CL.next_ability, 5))
 	self:PlaySound(args.spellId, "info")
 end
@@ -67,7 +69,7 @@ end
 function mod:DamageShield(args)
 	self:Bar(args.spellId, 10)
 	self:Message(args.spellId, "red")
-	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, CL.next_ability, "ability_warlock_improvedsoulleech")
+	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 30, CL.next_ability, "INV_Misc_QuestionMark")
 	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 25, "orange", CL.custom_sec:format(CL.next_ability, 5))
 	self:PlaySound(args.spellId, "info")
 end

@@ -24,6 +24,11 @@ end
 L = BigWigs:NewBossLocale("The Four Horsemen", "zhCN")
 if L then
 	L.mark_desc = "当施放印记时发出警报。"
+
+	--L[16062] = "Mograine" -- Surname of Highlord Mograine
+	--L[16063] = "Zeliek" -- Surname of Sir Zeliek
+	--L[16064] = "Korth'azz" -- Surname of Thane Korth'azz
+	--L[16065] = "Blaumeux" -- Surname of Lady Blaumeux
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad", "zhCN")
@@ -60,6 +65,9 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "zhCN")
 if L then
+	L[15929] = "斯塔拉格"
+	L[15930] = "费尔根"
+
 	L.stage1_yell_trigger1 = "斯塔拉格要碾碎你！"
 	L.stage1_yell_trigger2 = "主人要吃了你！"
 

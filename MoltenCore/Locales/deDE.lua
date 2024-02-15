@@ -7,7 +7,6 @@ end
 L = BigWigs:NewBossLocale("Ragnaros Classic", "deDE")
 if L then
 	L.submerge_trigger = "KOMMT HERBEI, MEINE DIENER"
-	L.engage_trigger = "NUN ZU EUCH, INSEKTEN"
 
 	L.submerge = "Untertauchen"
 	L.submerge_desc = "Warnt, wenn Ragnaros untertaucht."

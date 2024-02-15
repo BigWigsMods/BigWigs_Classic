@@ -12,6 +12,7 @@ mod:SetStage(1)
 -- Locals
 --
 
+local UpdateInfoBoxList
 local printed = false
 local deaths = 0
 local firstCharge = true
@@ -82,6 +83,9 @@ local INITIAL_DIRECTION = {
 
 local L = mod:GetLocale()
 if L then
+	L[15929] = "Stalagg"
+	L[15930] = "Feugen"
+
 	L.stage1_yell_trigger1 = "Stalagg crush you!"
 	L.stage1_yell_trigger2 = "Feed you to master!"
 
@@ -135,6 +139,7 @@ function mod:GetOptions()
 		-- Stage 1
 		28338, -- Magnetic Pull
 		28134, -- Power Surge
+		"health",
 		-- Stage 2
 		{28089, "COUNTDOWN"}, -- Polarity Shift
 		{28084, "EMPHASIZE"}, -- Negative Charge
@@ -199,9 +204,16 @@ function mod:OnEngage()
 	firstCharge = true
 	self:SetStage(1)
 
-	if self:Retail() then
-		self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
+	self:OpenInfo("health", "BigWigs: ".. CL.health)
+	local npcId = 15928
+	for i = 1, 3, 2 do
+		npcId = npcId + 1
+		self:SetInfo("health", i, L[npcId])
+		self:SetInfoBar("health", i, 1)
+		self:SetInfo("health", i + 1, "100%")
 	end
+	self:SimpleTimer(UpdateInfoBoxList, 0.5)
+
 	self:Message("stages", "cyan", CL.stage:format(1), false) -- L.engage_message
 	self:Bar(28134, 11) -- Power Surge
 	self:Bar(28338, 20) -- Magnetic Pull
@@ -242,6 +254,13 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg, sender)
 			self:StopBar(28338) -- Magnetic Pull
 			self:StopBar(28134) -- Power Surge
 		end
+		if sender == L[15929] then
+			self:SetInfoBar("health", 1, 0)
+			self:SetInfo("health", 2, "0%")
+		elseif sender == L[15930] then
+			self:SetInfoBar("health", 3, 0)
+			self:SetInfo("health", 4, "0%")
+		end
 		self:PlaySound("stages", "info")
 	elseif msg == L.overload_emote_trigger then
 		self:PreStage2()
@@ -256,6 +275,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
+			self:CloseInfo("health")
 			self:Message("stages", "cyan", CL.incoming:format(self.displayName), false)
 			self:Bar("stages", 3, CL.stage:format(2), "spell_lightning_lightningbolt01")
 			self:PlaySound("stages", "long")
@@ -287,7 +307,7 @@ function mod:PolarityShiftStart(args)
 end
 
 function mod:PolarityShift(args)
-	self:CDBar(args.spellId, 30)
+	self:CDBar(args.spellId, 28)
 end
 
 function mod:NegativeCharge(args)
@@ -424,6 +444,31 @@ function mod:PositiveChargeRefresh(args)
 		end
 		if self:GetOption("custom_off_charge_voice") then
 			self:PlaySoundFile(DIRECTION_SOUND[direction])
+		end
+	end
+end
+
+do
+	local bossList = {
+		[15929] = 1, -- Stalagg
+		[15930] = 3, -- Feugen
+	}
+	local unitTracker = {}
+	function UpdateInfoBoxList()
+		if not mod:IsEngaged() or deaths == 2 then return end
+		mod:SimpleTimer(UpdateInfoBoxList, 0.5)
+
+		for npcId in next, bossList do
+			if not unitTracker[npcId] or mod:MobId(mod:UnitGUID(unitTracker[npcId])) ~= npcId then
+				unitTracker[npcId] = mod:GetUnitIdByGUID(npcId)
+			end
+		end
+
+		for npcId, unitToken in next, unitTracker do
+			local line = bossList[npcId]
+			local currentHealthPercent = math.floor(mod:GetHealth(unitToken))
+			mod:SetInfoBar("health", line, currentHealthPercent/100)
+			mod:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
 		end
 	end
 end

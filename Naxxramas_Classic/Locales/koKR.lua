@@ -24,6 +24,11 @@ end
 L = BigWigs:NewBossLocale("The Four Horsemen", "koKR")
 if L then
 	L.mark_desc = "징표를 알립니다."
+
+	L[16062] = "모그레인" -- Surname of Highlord Mograine
+	L[16063] = "젤리에크" -- Surname of Sir Zeliek
+	L[16064] = "코스아즈" -- Surname of Thane Korth'azz
+	L[16065] = "블라미우스" -- Surname of Lady Blaumeux
 end
 
 L = BigWigs:NewBossLocale("Kel'Thuzad", "koKR")
@@ -60,6 +65,9 @@ end
 
 L = BigWigs:NewBossLocale("Thaddius", "koKR")
 if L then
+	L[15929] = "스탈라그"
+	L[15930] = "퓨진"
+
 	L.stage1_yell_trigger1 = "스탈라그, 박살낸다!"
 	L.stage1_yell_trigger2 = "너 주인님께 바칠꺼야!"
 

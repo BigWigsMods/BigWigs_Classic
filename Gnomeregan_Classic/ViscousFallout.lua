@@ -41,6 +41,7 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "SummonIrradiatedGoo", 434358)
+	self:Log("SPELL_AURA_APPLIED", "ToxicEmissionApplied", 434399)
 	self:Log("SPELL_CAST_START", "RadiationBurnStart", 433546)
 	self:Log("SPELL_CAST_SUCCESS", "RadiationBurn", 433546)
 	self:Log("SPELL_CAST_SUCCESS", "Sludge", 434434)
@@ -59,7 +60,7 @@ end
 --
 
 do
-	local gooCollector, icon = {}, 8
+	local gooCollector, gooIcon, falloutIcon = {}, 8, 8
 	function mod:GooMarking(_, unit, guid)
 		if gooCollector[guid] then
 			self:CustomIcon(desiccatedFalloutMarker, unit, gooCollector[guid])
@@ -68,17 +69,24 @@ do
 
 	function mod:SummonIrradiatedGoo(args)
 		gooCollector = {}
-		icon = 8
+		gooIcon, falloutIcon = 8, 8
 		self:RegisterTargetEvents("GooMarking")
 		self:Message(args.spellId, "cyan", CL.incoming:format(CL.adds))
 		self:CDBar(args.spellId, 63, CL.adds)
 		self:PlaySound(args.spellId, "long")
 	end
 
+	function mod:ToxicEmissionApplied(args)
+		if not gooCollector[args.destGUID] then -- Mark Irradiated Goo
+			gooCollector[args.destGUID] = gooIcon
+			gooIcon = gooIcon - 1
+		end
+	end
+
 	function mod:RadiationBurnStart(args)
-		if not gooCollector[args.sourceGUID] then
-			gooCollector[args.sourceGUID] = icon
-			icon = icon - 1
+		if not gooCollector[args.sourceGUID] then -- Mark Desiccated Fallout
+			gooCollector[args.sourceGUID] = falloutIcon
+			falloutIcon = falloutIcon - 1
 		end
 		local icon = self:GetIconTexture(gooCollector[args.sourceGUID])
 		self:Message(args.spellId, "orange", icon.. CL.casting:format(args.spellName))

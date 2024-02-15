@@ -12,6 +12,9 @@ mod:SetEncounterID(2927)
 --
 
 local knockbackCount = 1
+local staticArcList = {}
+local staticArcDebuffTime = {}
+local UpdateInfoBoxList
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -20,6 +23,7 @@ local knockbackCount = 1
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Electrocutioner 6000"
+	L.ready = "|cff20ff20Ready|r"
 end
 
 --------------------------------------------------------------------------------
@@ -30,7 +34,7 @@ function mod:GetOptions()
 	return {
 		{433359, "SAY", "ME_ONLY_EMPHASIZE"}, -- Magnetic Pulse
 		{433398, "COUNTDOWN"}, -- Discombobulation Protocol
-		{433251, "CASTBAR", "SAY", "SAY_COUNTDOWN", "ICON", "ME_ONLY_EMPHASIZE"}, -- Static Arc
+		{433251, "CASTBAR", "SAY", "SAY_COUNTDOWN", "ICON", "ME_ONLY_EMPHASIZE", "INFOBOX"}, -- Static Arc
 	},nil,{
 		[433398] = CL.knockback, -- Discombobulation Protocol (Knockback)
 	}
@@ -46,12 +50,24 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "DiscombobulationProtocol", 433398)
 	self:Log("SPELL_CAST_START", "StaticArcStart", 433251)
 	self:Log("SPELL_CAST_SUCCESS", "StaticArc", 433251)
+	self:Log("SPELL_AURA_APPLIED", "StaticArcApplied", 433251)
+	self:Log("SPELL_AURA_REMOVED", "StaticArcRemoved", 433251)
 end
 
 function mod:OnEngage()
 	knockbackCount = 1
+	staticArcList = {}
+	staticArcDebuffTime = {}
+	for unit in self:IterateGroup() do
+		local name = self:UnitName(unit)
+		staticArcList[#staticArcList + 1] = name
+	end
+
 	self:CDBar(433251, 6.2) -- Static Arc
 	self:Bar(433398, 30.5, CL.count:format(CL.knockback, knockbackCount)) -- Discombobulation Protocol
+
+	self:OpenInfo(433251, "BigWigs: |T237587:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(433251), 10)
+	self:SimpleTimer(UpdateInfoBoxList, 0.1)
 end
 
 --------------------------------------------------------------------------------
@@ -98,4 +114,41 @@ end
 
 function mod:StaticArc(args)
 	self:PrimaryIcon(args.spellId)
+end
+
+function mod:StaticArcApplied(args)
+	self:DeleteFromTable(staticArcList, args.destName)
+	staticArcList[#staticArcList + 1] = args.destName
+	staticArcDebuffTime[args.destName] = GetTime() + 20
+end
+
+function mod:StaticArcRemoved(args)
+	staticArcDebuffTime[args.destName] = nil
+end
+
+function UpdateInfoBoxList()
+	if not mod:IsEngaged() then return end
+	mod:SimpleTimer(UpdateInfoBoxList, 0.1)
+
+	local t = GetTime()
+	local line = 1
+	for i = 1, 10 do
+		local player = staticArcList[i]
+		if player then
+			local remaining = (staticArcDebuffTime[player] or 0) - t
+			mod:SetInfo(433251, line, mod:ColorName(player))
+			if remaining > 0 then
+				mod:SetInfo(433251, line + 1, CL.seconds:format(remaining))
+				mod:SetInfoBar(433251, line, remaining / 20)
+			else
+				mod:SetInfo(433251, line + 1, L.ready)
+				mod:SetInfoBar(433251, line, 0)
+			end
+		else
+			mod:SetInfo(433251, line, "")
+			mod:SetInfo(433251, line + 1, "")
+			mod:SetInfoBar(433251, line, 0)
+		end
+		line = line + 2
+	end
 end

@@ -25,6 +25,7 @@ if L then
 	L.aoe = "AoE melee damage"
 	L.cloud = "A cloud reached the boss"
 	L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
+	L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
 end
 
 --------------------------------------------------------------------------------
@@ -59,6 +60,8 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
+	self:RegisterEvent("CHAT_MSG_MONSTER_SAY")
+
 	self:Log("SPELL_DISPEL", "Dispelled", "*")
 	self:Log("SPELL_AURA_APPLIED", "EnrageApplied", 3019)
 	self:Log("SPELL_CAST_START", "Petrify", 436100)
@@ -88,6 +91,12 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:CHAT_MSG_MONSTER_SAY(_, msg)
+	if msg:find(L.warmup_say_chat_trigger, nil, true) then
+		self:Bar("stages", 45, CL.stage:format(1), "inv_stone_10")
+	end
+end
 
 function mod:Dispelled(args)
 	if args.extraSpellName == self:SpellName(3019) then
@@ -184,7 +193,7 @@ function mod:Troggquake(args)
 		self:Message("stages", "cyan", CL.other:format(CL.stage:format(quakeCount), CL.boss), false)
 		self:PlaySound("stages", "info")
 	else
-		self:Message("stages", "cyan", CL.stage:format(quakeCount), false)
+		self:Message("stages", "cyan", CL.other:format(CL.stage:format(quakeCount), CL.adds), false)
 	end
 end
 
