@@ -64,9 +64,9 @@ L = BigWigs:NewBossLocale("Blackwing Lair Trash", "esES")
 if L then
 	L.wyrmguard_overseer = "Vermiguardia Garramortal / Sobrestante Garramortal" -- NPC 12460 / 12461
 
-	--L.target_vulnerability = "Target Vulnerability Warnings"
-	--L.target_vulnerability_desc = "When your target is a Death Talon Wyrmguard or a Death Talon Overseer, show a warning for what vulnerability it has."
-	--L.target_vulnerability_message = "Target Vulnerability: %s"
-	L.detect_magic_missing_message = "Detectar magia is missing from your target"
-	L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Detectar magia]\124h\124r on your target for vulnerability warnings to work."
+	L.target_vulnerability = "Anuncios de vulnerabilidad de objetivo"
+	L.target_vulnerability_desc = "Cuando tu objetivo es un Vermiguardia Garramortal o un Sobrestante Garramortal, muestra un anuncio sobre qué vulnerabilidad tiene."
+	L.target_vulnerability_message = "Vulnerabilidad de objetivo: %s"
+	L.detect_magic_missing_message = "Falta Detectar magia en tu objetivo"
+	L.detect_magic_warning = "Un mago debe lanzar \124cff71d5ff\124Hspell:2855:0\124h[Detectar magia]\124h\124r en tu objetivo para que funcionen los anuncios de vulnerabilidad."
 end
