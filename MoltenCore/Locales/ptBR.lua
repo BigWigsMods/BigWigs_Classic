@@ -7,15 +7,15 @@ end
 L = BigWigs:NewBossLocale("Ragnaros Classic", "ptBR")
 if L then
 	--L.engage_trigger = "NOW FOR YOU,"
-	--L.submerge_trigger = "COME FORTH,"
+	L.submerge_trigger = "VENHAM, MEUS SERVOS"
 
-	--L.submerge = "Submerge"
-	--L.submerge_desc = "Warn for Ragnaros' submerge."
-	--L.submerge_message = "Ragnaros down for 90 sec!"
-	--L.submerge_bar = "Submerge"
+	L.submerge = "Submersão"
+	L.submerge_desc = "Aviso para a submersão de Ragnaros."
+	L.submerge_message = "Ragnaros fora por 90 seg!"
+	L.submerge_bar = "Submersão"
 
-	--L.emerge = "Emerge"
-	--L.emerge_desc = "Warn for Ragnaros' emerge."
-	--L.emerge_message = "Ragnaros emerged, 3 mins until submerge!"
-	--L.emerge_bar = "Emerge"
+	L.emerge = "Emersão"
+	L.emerge_desc = "Aviso para a emersão de Ragnaros."
+	L.emerge_message = "Ragnaros emergiu, 3 minutos até a submersão!"
+	L.emerge_bar = "Emersão"
 end
