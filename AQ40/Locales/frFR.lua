@@ -3,7 +3,7 @@ if not L then return end
 if L then
 	L.freeze = "États de Gel"
 	L.freeze_desc = "Annoncer des différents états gelés."
-	
+
 	L.freeze_trigger1 = "%s commence à ralentir !"
 	L.freeze_trigger2 = "%s est gelé !"
 	L.freeze_trigger3 = "%s est congelé !"
