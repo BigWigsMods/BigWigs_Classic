@@ -1,10 +1,10 @@
 local L = BigWigs:NewBossLocale("Gothik the Harvester", "ptBR")
 if not L then return end
 if L then
-	--L.add_death = "Add Death Alert"
-	--L.add_death_desc = "Alerts when an add dies."
+	L.add_death = "Aviso de morte do lacaio"
+	L.add_death_desc = "Avisa quando um lacaio morre."
 
-	--L.wave = "%d/23: %s"
+	L.wave = "%d/23: %s"
 
 	L.trainee = "Aprendiz" -- Unrelenting Trainee NPC 16124
 	L.deathKnight = "Cavaleiro da Morte" -- Unrelenting Death Knight NPC 16125
@@ -23,7 +23,7 @@ end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "ptBR")
 if L then
-	--L.mark_desc = "Warn for marks."
+	L.mark_desc = "Avisa sobre marcas."
 
 	L[16062] = "Mograine" -- Surname of Highlord Mograine
 	L[16063] = "Zeliek" -- Surname of Sir Zeliek
@@ -50,7 +50,7 @@ end
 
 L = BigWigs:NewBossLocale("Maexxna", "ptBR")
 if L then
-	--L.cocoons = "Cocoons"
+	L.cocoons = "Casulos"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ptBR")
@@ -60,7 +60,7 @@ end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ptBR")
 if L then
-	L.understudy = "Deathknight Understudy"
+	L.understudy = "Cavaleiro da Morte Aspirante"
 end
 
 L = BigWigs:NewBossLocale("Thaddius", "ptBR")
@@ -79,33 +79,33 @@ if L then
 	--L.overload_emote_trigger = "%s overloads!"
 	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
-	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
+	L.polarity_extras = "Avisos adicionais para posicionamento da mudança de polaridade"
 
-	--L.custom_off_select_charge_position = "First position"
-	--L.custom_off_select_charge_position_desc = "Where to move to after the first Polarity Shift."
-	--L.custom_off_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
-	--L.custom_off_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
+	L.custom_off_select_charge_position = "Primeira posição"
+	L.custom_off_select_charge_position_desc = "Onde mover-se após a primeira mudança de polaridade."
+	L.custom_off_select_charge_position_value1 = "|cffff2020Carga Negativa (-)|r à ESQUERDA, |cff2020ffCarga Positiva (+)|r à DIREITA"
+	L.custom_off_select_charge_position_value2 = "|cff2020ffCarga Positiva (+)|r à ESQUERDA, |cffff2020Carga Negativa (-)|r à DIREITA"
 
-	--L.custom_off_select_charge_movement = "Movement"
-	--L.custom_off_select_charge_movement_desc = "The movement strategy your group uses."
-	--L.custom_off_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
-	--L.custom_off_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
-	--L.custom_off_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
-	--L.custom_off_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
-	--L.custom_off_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
+	L.custom_off_select_charge_movement = "Movimento"
+	L.custom_off_select_charge_movement_desc = "A estratégia de movimento que seu grupo utiliza."
+	L.custom_off_select_charge_movement_value1 = "Correr |cff20ff20ATRAVÉS|r do chefe"
+	L.custom_off_select_charge_movement_value2 = "Correr no |cff20ff20SENTIDO HORÁRIO|r ao redor do chefe"
+	L.custom_off_select_charge_movement_value3 = "Correr no |cff20ff20SENTIDO ANTI-HORÁRIO|r ao redor do chefe"
+	L.custom_off_select_charge_movement_value4 = "Quatro grupos 1: Mudança de polaridade à |cff20ff20DIREITA|r, mesma polaridade à |cff20ff20ESQUERDA|r"
+	L.custom_off_select_charge_movement_value5 = "Quatro grupos 2: Mudança de polaridade à |cff20ff20ESQUERDA|r, mesma polaridade à |cff20ff20DIREITA|r"
 
-	--L.custom_off_charge_graphic = "Graphical arrow"
-	--L.custom_off_charge_graphic_desc = "Show an arrow graphic."
-	--L.custom_off_charge_text = "Text arrows"
-	--L.custom_off_charge_text_desc = "Show an additional message."
-	--L.custom_off_charge_voice = "Voice alert"
-	--L.custom_off_charge_voice_desc = "Play a voice alert."
+	L.custom_off_charge_graphic = "Seta gráfica"
+	L.custom_off_charge_graphic_desc = "Mostra uma seta gráfica."
+	L.custom_off_charge_text = "Setas de texto"
+	L.custom_off_charge_text_desc = "Mostra uma mensagem adicional."
+	L.custom_off_charge_voice = "Alerta de voz"
+	L.custom_off_charge_voice_desc = "Reproduz um alerta de voz."
 
 	--Translate these to get locale sound files!
-	--L.left = "<--- GO LEFT <--- GO LEFT <---"
-	--L.right = "---> GO RIGHT ---> GO RIGHT --->"
-	--L.swap = "^^^^ SWITCH SIDES ^^^^ SWITCH SIDES ^^^^"
-	--L.stay = "==== DON'T MOVE ==== DON'T MOVE ===="
+	L.left = "<--- VÁ PARA A ESQUERDA <--- VÁ PARA A ESQUERDA <---"
+	L.right = "---> VÁ PARA A DIREITA ---> VÁ PARA A DIREITA --->"
+	L.swap = "^^^^ TROQUE DE LADO ^^^^ TROQUE DE LADO ^^^^"
+	L.stay = "==== NÃO SE MOVA ==== NÃO SE MOVA ===="
 
-	--L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
+	L.chat_message = "O mod Thaddius suporta mostrar setas direcionais e reproduzir vozes. Abra as opções para configurá-las."
 end
