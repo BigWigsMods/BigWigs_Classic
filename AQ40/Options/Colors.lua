@@ -11,6 +11,7 @@ BigWigs:AddColors("Silithid Royalty", {
 	[25807] = {"green","orange"},
 	[25812] = "yellow",
 	[26580] = "red",
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Battleguard Sartura", {

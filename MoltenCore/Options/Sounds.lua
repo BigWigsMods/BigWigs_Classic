@@ -35,7 +35,7 @@ BigWigs:AddSounds("Sulfuron Harbinger", {
 })
 
 BigWigs:AddSounds("Golemagg the Incinerator", {
-	[13880] = "info",
+	[13880] = "alert",
 })
 
 BigWigs:AddSounds("Majordomo Executus", {
