@@ -30,7 +30,7 @@ function mod:GetOptions()
 		28747, -- Frenzy / Enrage (different name on classic era)
 	},nil,{
 		[28622] = L.cocoons, -- Web Wrap (Cocoons)
-		[28747] = CL.hp:format(30), -- Frenzy / Enrage (30% HP)
+		[28747] = CL.health_percent:format(30), -- Frenzy / Enrage (30% Health)
 	}
 end
 

@@ -24,7 +24,7 @@ function mod:GetOptions()
 		26051, -- Enrage / Frenzy (different name on classic era)
 		"berserk",
 	},nil,{
-		["berserk"] = CL.hp:format(30), -- Berserk (30% HP)
+		["berserk"] = CL.health_percent:format(30), -- Berserk (30% Health)
 	}
 end
 
@@ -44,6 +44,7 @@ function mod:OnEngage()
 	poisonTime = 0
 	self:RegisterEvent("UNIT_HEALTH")
 	self:Berserk(300)
+	self:CDBar(26180, 21) -- Wyvern Sting, can randomly be way higher
 end
 
 --------------------------------------------------------------------------------

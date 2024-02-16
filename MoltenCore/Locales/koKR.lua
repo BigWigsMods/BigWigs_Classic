@@ -1,10 +1,5 @@
-local L = BigWigs:NewBossLocale("Majordomo Executus", "koKR")
+local L = BigWigs:NewBossLocale("Ragnaros Classic", "koKR")
 if not L then return end
-if L then
-	L.disabletrigger = "이럴 수가! 그만! 제발 그만! 내가 졌다! 내가 졌어!"
-end
-
-L = BigWigs:NewBossLocale("Ragnaros Classic", "koKR")
 if L then
 	L.submerge_trigger = "나의 종들아"
 

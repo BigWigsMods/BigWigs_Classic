@@ -43,4 +43,5 @@ if L then
 	L.bossName = "机械师瑟玛普拉格"
 	L.interruptable = "打断"
 	L.ready = "|cff20ff20就绪|r"
+	--L.red_button = "Red Button"
 end

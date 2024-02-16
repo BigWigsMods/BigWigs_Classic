@@ -16,6 +16,7 @@ local dragonHP = 100
 local sheepHP = 100
 local squirrelHP = 100
 local chickenHP = 100
+local UpdateInfoBoxList
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -99,7 +100,7 @@ function mod:OnEngage()
 		self:SetInfoBar("health", i, 1)
 		self:SetInfo("health", i + 1, "100%")
 	end
-	self:RegisterEvent("UNIT_HEALTH")
+	self:SimpleTimer(UpdateInfoBoxList, 1)
 
 	self:CDBar(436816, 11.6, CL.breath) -- Sprocketfire Breath
 	self:CDBar(436692, 12.2) -- Explosive Egg
@@ -255,13 +256,22 @@ do
 		[218244] = 5, -- Squirrel
 		[218245] = 7, -- Chicken
 	}
-	function mod:UNIT_HEALTH(_, unit)
-		local npcId = self:MobId(self:UnitGUID(unit))
-		local line = bossList[npcId]
-		if line then
-			local currentHealthPercent = math.floor(self:GetHealth(unit))
-			self:SetInfoBar("health", line, currentHealthPercent/100)
-			self:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+	local unitTracker = {}
+	function UpdateInfoBoxList()
+		if not mod:IsEngaged() then return end
+		mod:SimpleTimer(UpdateInfoBoxList, 1)
+
+		for npcId in next, bossList do
+			if not unitTracker[npcId] or mod:MobId(mod:UnitGUID(unitTracker[npcId])) ~= npcId then
+				unitTracker[npcId] = mod:GetUnitIdByGUID(npcId)
+			end
+		end
+
+		for npcId, unitToken in next, unitTracker do
+			local line = bossList[npcId]
+			local currentHealthPercent = math.floor(mod:GetHealth(unitToken))
+			mod:SetInfoBar("health", line, currentHealthPercent/100)
+			mod:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
 		end
 	end
 end

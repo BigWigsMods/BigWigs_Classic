@@ -39,6 +39,7 @@ if L then
 	L.shaman_class_call_yell_trigger = "Шаманы! Покажитесь мне!"
 	L.deathknight_class_call_yell_trigger = "Рыцари смерти! Сюда!"
 	--L.monk_class_call_yell_trigger = "Monks"
+	L.hunter_class_call_yell_trigger = "Охотники и ваше раздражение"
 
 	L.warnshaman = "Шаманы - ставьте тотемы!"
 	L.warndruid = "Друиды - пробудите в себе зверя!"
@@ -57,7 +58,7 @@ if L then
 	L.classcall_desc = "Предупреждать о классовом вызове."
 
 	--L.add = "Drakonid deaths"
-	--L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
+	--L.add_desc = "Announce the number of adds killed in stage 1 before Nefarian lands."
 end
 
 L = BigWigs:NewBossLocale("Blackwing Lair Trash", "ruRU")

@@ -8,6 +8,12 @@ mod:RegisterEnableMob(15543, 15544, 15511) -- Princess Yauj, Vem, Lord Kri
 mod:SetEncounterID(710)
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local deaths = 0
+
+--------------------------------------------------------------------------------
 -- Initialization
 --
 
@@ -17,6 +23,7 @@ function mod:GetOptions()
 		26580, -- Fear
 		25812, -- Toxic Volley
 		25786, -- Toxic Vapors
+		"stages",
 	},nil,{
 		[26580] = CL.fear, -- Fear (Fear)
 	}
@@ -32,10 +39,12 @@ function mod:OnBossEnable()
 	self:Log("SPELL_PERIODIC_DAMAGE", "ToxicVaporsDamage", 25786)
 	self:Log("SPELL_PERIODIC_MISSED", "ToxicVaporsDamage", 25786)
 
-	self:Death("YaujDies", 15543)
+	self:Death("YaujDies", 15543) -- Princess Yauj
+	self:Death("Deaths", 15544, 15511) -- Vem, Lord Kri
 end
 
 function mod:OnEngage()
+	deaths = 0
 	self:CDBar(25807, 8.1) -- Great Heal
 	self:CDBar(26580, 11.3, CL.fear) -- Fear
 end
@@ -82,8 +91,16 @@ do
 	end
 end
 
-function mod:YaujDies()
+function mod:YaujDies(args)
 	self:StopBar(CL.cast:format(self:SpellName(25807))) -- Great Heal
 	self:StopBar(25807) -- Great Heal
 	self:StopBar(CL.fear) -- Fear
+	self:Deaths(args)
+end
+
+function mod:Deaths(args)
+	deaths = deaths + 1
+	if deaths < 3 then
+		self:Message("stages", "cyan", CL.mob_killed:format(args.destName, deaths, 3), false)
+	end
 end

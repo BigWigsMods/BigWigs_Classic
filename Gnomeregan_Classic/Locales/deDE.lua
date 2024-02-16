@@ -43,4 +43,5 @@ if L then
 	L.bossName = "Robogenieur Thermaplugg"
 	L.interruptable = "Unterbrechbar"
 	L.ready = "|cff20ff20Bereit|r"
+	--L.red_button = "Red Button"
 end

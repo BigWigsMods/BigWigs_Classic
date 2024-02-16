@@ -91,20 +91,40 @@ do
 	end
 end
 
-function mod:FrostDamage(args)
-	if args.spellSchool == 0x10 and self:MobId(args.destGUID) == 15299 then -- 0x10 is Frost
-		frostCount = frostCount + 1
-		if frostCount < 20 and frostCount % 3 == 0 then
-			self:Message("freeze", "green", L.freeze_warn_frost:format(frostCount, 20-frostCount), L.freeze_icon)
+if mod:Vanilla() then
+	function mod:FrostDamage(args)
+		if args.spellSchool == 0x10 and self:MobId(args.destGUID) == 15299 then -- 0x10 is Frost
+			frostCount = frostCount + 1
+			if (frostCount <= 190 and frostCount % 20 == 0) or (frostCount > 190 and frostCount < 210) then
+				self:Message("freeze", "green", L.freeze_warn_frost:format(frostCount, 200-frostCount), L.freeze_icon)
+			end
 		end
 	end
-end
 
-function mod:SwingDamage(args)
-	if swingCount ~= -1 and self:MobId(args.destGUID) == 15299 then
-		swingCount = swingCount + 1
-		if swingCount < 30 and swingCount % 3 == 0 then
-			self:Message("freeze", "green", L.freeze_warn_melee:format(swingCount, 30-swingCount), L.freeze_icon)
+	function mod:SwingDamage(args)
+		if swingCount ~= -1 and self:MobId(args.destGUID) == 15299 then
+			swingCount = swingCount + 1
+			if (swingCount < 190 and swingCount % 20 == 0) or (swingCount > 190 and swingCount < 210) then
+				self:Message("freeze", "green", L.freeze_warn_melee:format(swingCount, 200-swingCount), L.freeze_icon)
+			end
+		end
+	end
+else
+	function mod:FrostDamage(args)
+		if args.spellSchool == 0x10 and self:MobId(args.destGUID) == 15299 then -- 0x10 is Frost
+			frostCount = frostCount + 1
+			if frostCount < 20 and frostCount % 3 == 0 then
+				self:Message("freeze", "green", L.freeze_warn_frost:format(frostCount, 20-frostCount), L.freeze_icon)
+			end
+		end
+	end
+
+	function mod:SwingDamage(args)
+		if swingCount ~= -1 and self:MobId(args.destGUID) == 15299 then
+			swingCount = swingCount + 1
+			if swingCount < 30 and swingCount % 3 == 0 then
+				self:Message("freeze", "green", L.freeze_warn_melee:format(swingCount, 30-swingCount), L.freeze_icon)
+			end
 		end
 	end
 end

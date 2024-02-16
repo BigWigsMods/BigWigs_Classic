@@ -27,7 +27,7 @@ function mod:GetOptions()
 		{25648, "SAY", "ME_ONLY_EMPHASIZE"}, -- Sand Trap
 		26527, -- Frenzy / Enrage (different name on classic era)
 	},nil,{
-		[26527] = CL.hp:format(30), -- Frenzy / Enrage (30% HP)
+		[26527] = CL.health_percent:format(30), -- Frenzy / Enrage (30% Health)
 	}
 end
 

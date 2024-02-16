@@ -39,6 +39,7 @@ if L then
 	L.shaman_class_call_yell_trigger = "주술사"
 	--L.deathknight_class_call_yell_trigger = "Death Knights"
 	--L.monk_class_call_yell_trigger = "Monks"
+	L.hunter_class_call_yell_trigger = "그 장난감"
 
 	L.warnshaman = "주술사 - 토템 파괴!"
 	L.warndruid = "드루이드 - 강제 표범 변신!"
@@ -57,7 +58,7 @@ if L then
 	L.classcall_desc = "직업 지목에 대한 경고"
 
 	--L.add = "Drakonid deaths"
-	--L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
+	--L.add_desc = "Announce the number of adds killed in stage 1 before Nefarian lands."
 end
 
 L = BigWigs:NewBossLocale("Blackwing Lair Trash", "koKR")

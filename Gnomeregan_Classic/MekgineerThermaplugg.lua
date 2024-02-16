@@ -25,6 +25,7 @@ if L then
 	L.bossName = "Mekgineer Thermaplugg"
 	L.interruptable = "Interruptible"
 	L.ready = "|cff20ff20Ready|r"
+	L.red_button = "Red Button"
 end
 
 --------------------------------------------------------------------------------
@@ -56,6 +57,7 @@ function mod:GetOptions()
 		[438726] =  CL.stage:format(3),
 	},{
 		[437853] = CL.incoming:format(CL.bombs), -- Summon Bomb (Bombs Incoming)
+		[438735] = L.red_button, -- High Voltage! (Red Button)
 		[438727] = CL.disease, -- Radiation Sickness (Disease)
 	}
 end
@@ -96,7 +98,7 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 
-	self:OpenInfo(438735, "BigWigs: |T237290:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(438735), 10)
+	self:OpenInfo(438735, "BigWigs: |T237290:0:0:0:0:64:64:4:60:4:60|t".. L.red_button, 10)
 	self:SimpleTimer(UpdateInfoBoxList, 0.1)
 end
 
@@ -139,16 +141,16 @@ function mod:HighVoltageApplied(args)
 	highVoltageList[#highVoltageList + 1] = args.destName
 	highVoltageDebuffTime[args.destName] = GetTime() + 30
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId)
-		self:TargetBar(args.spellId, 30, args.destName)
+		self:PersonalMessage(args.spellId, nil, L.red_button)
+		self:TargetBar(args.spellId, 30, args.destName, L.red_button)
 	end
 end
 
 function mod:HighVoltageRemoved(args)
 	highVoltageDebuffTime[args.destName] = nil
 	if self:Me(args.destGUID) then
-		self:StopBar(args.spellName, args.destName)
-		self:PersonalMessage(args.spellId, "removed")
+		self:StopBar(L.red_button, args.destName)
+		self:PersonalMessage(args.spellId, "over", L.red_button)
 		self:PlaySound(args.spellId, "long")
 	end
 end
@@ -230,7 +232,14 @@ function mod:HazardousHammer(args)
 end
 
 function mod:RadiationSicknessApplied(args)
-	self:StackMessage(args.spellId, "purple", args.destName, args.amount, 2, CL.disease)
+	if self:Me(args.destGUID) then
+		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 3)
+	else
+		local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
+		if bossUnit and self:Tanking(bossUnit, args.destName) then
+			self:StackMessage(args.spellId, "purple", args.destName, args.amount, 3)
+		end
+	end
 end
 
 function mod:ToxicVentilation(args)

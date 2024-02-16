@@ -43,7 +43,7 @@ function mod:GetOptions()
 		25462, -- Enlarge
 		26550, -- Lightning Cloud
 	},nil,{
-		[8269] = CL.hp:format(30), -- Frenzy / Enrage (30% HP)
+		[8269] = CL.health_percent:format(30), -- Frenzy / Enrage (30% Health)
 		[25599] = CL.knockback, -- Thundercrash (Knockback)
 	}
 end

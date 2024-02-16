@@ -16,7 +16,7 @@ function mod:GetOptions()
 		28131, -- Frenzy / Enrage (different name on classic era)
 		"berserk",
 	},nil,{
-		[28131] = CL.hp:format(5), -- Frenzy / Enrage (5% HP)
+		[28131] = CL.health_percent:format(5), -- Frenzy / Enrage (5% Health)
 	}
 end
 

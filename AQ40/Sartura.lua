@@ -24,7 +24,7 @@ function mod:GetOptions()
 		"stages",
 		"berserk",
 	},nil,{
-		[8269] = CL.hp:format(25), -- Frenzy / Enrage (25% HP)
+		[8269] = CL.health_percent:format(25), -- Frenzy / Enrage (25% Health)
 	}
 end
 

@@ -1,10 +1,5 @@
-local L = BigWigs:NewBossLocale("Majordomo Executus", "frFR")
+local L = BigWigs:NewBossLocale("Ragnaros Classic", "frFR")
 if not L then return end
-if L then
-	L.disabletrigger = "Impossible ! Arrêtez votre attaque, mortels... Je me rends ! Je me rends !"
-end
-
-L = BigWigs:NewBossLocale("Ragnaros Classic", "frFR")
 if L then
 	L.submerge_trigger = "VENEZ, MES SERVITEURS"
 

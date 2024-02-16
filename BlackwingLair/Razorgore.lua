@@ -81,9 +81,7 @@ end
 
 function mod:DestroyEgg()
 	eggs = eggs + 1
-	if eggs < 30 then
-		self:Message("eggs", "green", L.eggs_message:format(eggs), L.eggs_icon)
-	end
+	self:Message("eggs", "green", L.eggs_message:format(eggs), L.eggs_icon)
 end
 
 function mod:WarmingFlames() -- Stage 2

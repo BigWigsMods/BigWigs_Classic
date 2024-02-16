@@ -1,10 +1,5 @@
-local L = BigWigs:NewBossLocale("Majordomo Executus", "zhCN")
+local L = BigWigs:NewBossLocale("Ragnaros Classic", "zhCN")
 if not L then return end
-if L then
-	L.disabletrigger = "不……不可能！等一下……我投降！我投降！"
-end
-
-L = BigWigs:NewBossLocale("Ragnaros Classic", "zhCN")
 if L then
 	L.submerge_trigger = "出现吧，我的奴仆"
 

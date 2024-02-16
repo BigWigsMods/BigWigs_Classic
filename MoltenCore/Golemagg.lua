@@ -28,10 +28,18 @@ function mod:OnBossEnable()
 --
 
 function mod:MagmaSplashApplied(args)
-	if self:Player(args.destFlags) and args.amount >= 4 then -- Players, not pets
-		self:StackMessage(args.spellId, "purple", args.destName, args.amount, 4)
-		if self:Me(args.destGUID) then
-			self:PlaySound(args.spellId, "info")
+	if self:Me(args.destGUID) then
+		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 4)
+		if args.amount >= 4 then
+			self:PlaySound(args.spellId, "alert")
+		end
+	elseif self:Player(args.destFlags) and args.amount >= 4 then -- Players, not pets
+		local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
+		if bossUnit and self:Tanking(bossUnit, args.destName) then
+			self:StackMessage(args.spellId, "purple", args.destName, args.amount, 4)
+			if args.amount >= 4 then
+				self:PlaySound(args.spellId, "alert")
+			end
 		end
 	end
 end

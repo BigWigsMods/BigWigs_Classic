@@ -39,6 +39,7 @@ if L then
 	--L.shaman_class_call_yell_trigger = "Shamans"
 	--L.deathknight_class_call_yell_trigger = "Death Knights"
 	--L.monk_class_call_yell_trigger = "Monks"
+	--L.hunter_class_call_yell_trigger = "Hunters"
 
 	--L.warnshaman = "Shamans - Totems spawned!"
 	--L.warndruid = "Druids - Stuck in cat form!"
@@ -57,7 +58,7 @@ if L then
 	--L.classcall_desc = "Warn for Class Calls."
 
 	--L.add = "Drakonid deaths"
-	--L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
+	--L.add_desc = "Announce the number of adds killed in stage 1 before Nefarian lands."
 end
 
 L = BigWigs:NewBossLocale("Blackwing Lair Trash", "itIT")

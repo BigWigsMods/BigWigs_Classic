@@ -39,6 +39,7 @@ if L then
 	L.shaman_class_call_yell_trigger = "薩滿，讓我看看你圖騰到底是什麼用處的"
 	L.deathknight_class_call_yell_trigger = "死亡騎士們…來這"
 	L.monk_class_call_yell_trigger = "武僧"
+	L.hunter_class_call_yell_trigger = "獵人和你那討厭的豌豆射擊"
 
 	L.warnshaman = "薩滿 - 圖騰湧現"
 	L.warndruid = "德魯伊 - 強制貓形態，無法治療和解詛咒"
@@ -57,7 +58,7 @@ if L then
 	L.classcall_desc = "當奈法利安進行職業點名時發出警報"
 
 	--L.add = "Drakonid deaths"
-	--L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
+	--L.add_desc = "Announce the number of adds killed in stage 1 before Nefarian lands."
 end
 
 L = BigWigs:NewBossLocale("Blackwing Lair Trash", "zhTW")

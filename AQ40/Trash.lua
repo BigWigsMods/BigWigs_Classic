@@ -151,7 +151,7 @@ do
 							self:Message("target_buffs", "red", L.detect_magic_missing_message, 2855)
 						end
 					end
-					return
+					--return
 				end
 				local total = {}
 				for buffId, message in next, buffList do
@@ -198,11 +198,13 @@ do
 end
 
 function mod:EnrageApplied(args)
-	local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
-	if icon then
-		self:Message(args.spellId, "red", icon .. CL.percent:format(30, args.spellName))
-	else
-		self:Message(args.spellId, "red", CL.percent:format(30, args.spellName))
+	if self:MobId(args.destGUID) == 15264 then -- Anubisath Sentinel
+		local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
+		if icon then
+			self:Message(args.spellId, "red", icon .. CL.percent:format(30, args.spellName))
+		else
+			self:Message(args.spellId, "red", CL.percent:format(30, args.spellName))
+		end
 	end
 end
 

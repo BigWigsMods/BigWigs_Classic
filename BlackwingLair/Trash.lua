@@ -92,7 +92,7 @@ do
 							self:Message("target_vulnerability", "red", L.detect_magic_missing_message, 2855)
 						end
 					end
-					return
+					--return
 				end
 				for buffId, message in next, buffList do
 					if self:UnitBuff("target", buffId) then

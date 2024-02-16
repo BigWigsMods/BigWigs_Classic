@@ -39,6 +39,7 @@ if L then
 	L.shaman_class_call_yell_trigger = "Schamane, zeigt mir was"
 	L.deathknight_class_call_yell_trigger = "Todesritter"
 	--L.monk_class_call_yell_trigger = "Monks"
+	L.hunter_class_call_yell_trigger = "Jäger und ihre lästigen"
 
 	L.warnshaman = "Schamanen - Totems!"
 	L.warndruid = "Druiden - Gefangen in Katzenform!"

@@ -43,4 +43,5 @@ if L then
 	L.bossName = "Анжинер Термоштепсель"
 	L.interruptable = "Прерываемый"
 	L.ready = "|cff20ff20Готов|r"
+	--L.red_button = "Red Button"
 end

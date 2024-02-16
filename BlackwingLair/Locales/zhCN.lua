@@ -39,6 +39,7 @@ if L then
 	L.shaman_class_call_yell_trigger = "萨满祭司"
 	L.deathknight_class_call_yell_trigger = "死亡骑士"
 	L.monk_class_call_yell_trigger = "武僧"
+	L.hunter_class_call_yell_trigger = "猎人"
 
 	L.warnshaman = "萨满祭司 - 图腾出现！"
 	L.warndruid = "德鲁伊 - 强制猫形态，无法治疗和解诅咒！"

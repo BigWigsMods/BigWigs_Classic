@@ -36,7 +36,7 @@ function mod:GetOptions()
 		27808, -- Frost Blast
 		{27810, "SAY", "ME_ONLY_EMPHASIZE"}, -- Shadow Fissure
 		28410, -- Chains of Kel'Thuzad
-		{27819, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Detonate Mana
+		{27819, "ICON", "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Detonate Mana
 		"adds",
 		"stages",
 	},nil,{
@@ -143,6 +143,7 @@ end
 function mod:DetonateManaApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName, CL.bomb)
 	self:TargetBar(args.spellId, 5, args.destName, CL.bomb)
+	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, CL.bomb, nil, "Bomb")
 		self:SayCountdown(args.spellId, 5)
@@ -152,6 +153,7 @@ end
 
 function mod:DetonateManaRemoved(args)
 	self:StopBar(CL.bomb, args.destName)
+	self:PrimaryIcon(args.spellId)
 	if self:Me(args.destGUID) then
 		self:CancelSayCountdown(args.spellId)
 	end

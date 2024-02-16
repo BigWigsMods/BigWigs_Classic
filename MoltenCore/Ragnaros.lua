@@ -22,6 +22,7 @@ local warmupTimer = mod:Retail() and 74 or 84
 
 local L = mod:GetLocale()
 if L then
+	--Impudent whelps! You've rushed headlong to your own deaths! See now, the master stirs!\r\n
 	L.submerge_trigger = "COME FORTH,"
 
 	L.warmup_icon = "Achievement_boss_ragnaros"
@@ -57,21 +58,22 @@ end
 function mod:VerifyEnable(unit, mobId)
 	if mobId == 11502 then -- Ragnaros
 		return true
-	elseif mobId == 12018 or mobId == 54404 then -- Majordomo Executus, Majordomo Executus (Retail)
+	else -- Majordomo Executus, Majordomo Executus (Retail)
 		return not UnitCanAttack(unit, "player")
 	end
 end
 
 function mod:OnBossEnable()
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+	self:RegisterMessage("BigWigs_BossComm")
 
 	self:Log("SPELL_CAST_SUCCESS", "WrathOfRagnaros", 20566)
 	self:Log("SPELL_CAST_START", "SummonRagnarosStart", 19774)
 	self:Log("SPELL_CAST_SUCCESS", "SummonRagnaros", 19774)
+	self:Log("SPELL_CAST_SUCCESS", "ElementalFire", 19773)
 
 	self:Death("Win", 11502)
 	self:Death("SonDeaths", 12143)
-	self:Death("MajordomoDeath", 12018, 54404)
 end
 
 function mod:OnEngage()
@@ -104,14 +106,26 @@ function mod:WrathOfRagnaros(args)
 end
 
 function mod:SummonRagnarosStart()
-	self:Bar("warmup", warmupTimer, CL.active, L.warmup_icon)
+	self:Sync("RagWarmup") -- Speedrunners like to have someone start it as soon as the Executus encounter ends
 end
 
-function mod:SummonRagnaros()
-	self:Bar("warmup", {warmupTimer-10, warmupTimer}, CL.active, L.warmup_icon)
+do
+	local prev = 0
+	function mod:BigWigs_BossComm(_, msg)
+		local t = GetTime()
+		if msg == "RagWarmup" and t - prev > 20 and not self:IsEngaged() then
+			prev = t
+			self:Bar("warmup", warmupTimer, CL.active, L.warmup_icon)
+		end
+	end
+
+	function mod:SummonRagnaros()
+		prev = GetTime()+100 -- No more sync allowed
+		self:Bar("warmup", {warmupTimer-10, warmupTimer}, CL.active, L.warmup_icon)
+	end
 end
 
-function mod:MajordomoDeath()
+function mod:ElementalFire()
 	-- it takes exactly 10 seconds for combat to start after Majodromo dies, while
 	-- the time between starting the RP/summon and killing Majordomo varies
 	self:Bar("warmup", {10, warmupTimer}, CL.active, L.warmup_icon)

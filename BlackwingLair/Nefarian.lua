@@ -31,6 +31,7 @@ if L then
 	L.shaman_class_call_yell_trigger = "Shamans"
 	L.deathknight_class_call_yell_trigger = "Death Knights" -- Death Knights... get over here!
 	L.monk_class_call_yell_trigger = "Monks"
+	L.hunter_class_call_yell_trigger = "Hunters" -- Hunters and your annoying pea-shooters!
 
 	L.warnshaman = "Shamans - Totems spawned!"
 	L.warndruid = "Druids - Stuck in cat form!"
@@ -51,7 +52,7 @@ if L then
 	L.classcall_desc = "Warn for Class Calls."
 
 	L.add = "Drakonid deaths"
-	L.add_desc = "Announce the number of adds killed in Phase 1 before Nefarian lands."
+	L.add_desc = "Announce the number of adds killed in stage 1 before Nefarian lands."
 end
 
 --------------------------------------------------------------------------------
@@ -87,6 +88,7 @@ function mod:OnRegister()
 		[L.shaman_class_call_yell_trigger] = L.warnshaman,
 		[L.deathknight_class_call_yell_trigger] = L.warndeathknight,
 		[L.monk_class_call_yell_trigger] = L.warnmonk,
+		[L.hunter_class_call_yell_trigger] = L.warnhunter,
 	}
 	classCallSpellTable = {
 		[23414] = L.warnrogue,
@@ -98,7 +100,7 @@ function mod:OnRegister()
 		[23418] = L.warnpaladin,
 		[23427] = L.warnwarlock,
 		[204813] = L.warndemonhunter,
-		[23436] = L.warnhunter,
+		[23436] = L.warnhunter, -- Might not be working on classic?
 	}
 end
 
@@ -112,7 +114,7 @@ function mod:OnBossEnable()
 
 	-- Rogue, Druid, Druid (Retail WoW), Warrior, Priest, Mage, Paladin, Warlock, Demon Hunter
 	self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 350567, 23397, 23401, 23410, 23418, 23427, 204813)
-	self:Log("SPELL_DURABILITY_DAMAGE", "ClassCall", 23436) -- Hunter
+	self:Log("SPELL_DURABILITY_DAMAGE", "ClassCall", 23436) -- Hunter, might not be working on classic?
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 

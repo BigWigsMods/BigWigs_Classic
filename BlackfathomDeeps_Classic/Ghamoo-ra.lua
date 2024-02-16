@@ -65,7 +65,11 @@ end
 
 function mod:CrunchArmorApplied(args)
 	if self:Me(args.destGUID) then
-		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 3)
+		local amount = args.amount or 1
+		self:StackMessage(args.spellId, "blue", args.destName, amount, 3)
+		if amount >= 3 then
+			self:PlaySound(args.spellId, "alert")
+		end
 	elseif args.amount and self:Player(args.destFlags) then -- Players, not pets
 		local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
 		if bossUnit and self:Tanking(bossUnit, args.destName) then

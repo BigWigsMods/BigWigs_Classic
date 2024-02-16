@@ -8,15 +8,6 @@ mod:RegisterEnableMob(12018, 11663, 11664) -- Majordomo Executus, Flamewaker Hea
 mod:SetEncounterID(671)
 
 --------------------------------------------------------------------------------
--- Localization
---
-
-local L = mod:GetLocale()
-if L then
-	L.disabletrigger = "Impossible! Stay your attack, mortals... I submit! I submit!"
-end
-
---------------------------------------------------------------------------------
 -- Initialization
 --
 
@@ -30,13 +21,13 @@ function mod:GetOptions()
 	}
 end
 
-function mod:VerifyEnable(unit)
-	return (UnitIsEnemy(unit, "player") and UnitCanAttack(unit, "player")) and true or false
+function mod:VerifyEnable(_, npcId)
+	if npcId ~= 12018 then -- Majordomo Executus
+		return true -- Only enable on his adds since he doesn't die, we keep him in enable mobs for his boss frame to trigger engage
+	end
 end
 
 function mod:OnBossEnable()
-	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
-
 	self:Log("SPELL_CAST_SUCCESS", "MagicReflection", 20619)
 	self:Log("SPELL_CAST_SUCCESS", "DamageShield", 21075)
 	self:Log("SPELL_CAST_SUCCESS", "Teleport", 20534)
@@ -51,12 +42,6 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
-
-function mod:CHAT_MSG_MONSTER_YELL(_, msg)
-	if msg:find(L.disabletrigger, nil, true) then
-		self:Win()
-	end
-end
 
 function mod:MagicReflection(args)
 	self:Bar(args.spellId, 10, CL.spell_reflection)

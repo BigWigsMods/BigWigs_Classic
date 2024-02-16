@@ -19,8 +19,8 @@ local timeP1GlareStart = 48 -- delay for first dark glare from engage onwards
 local timeP1Glare = 86 -- interval for dark glare
 local timeP1GlareDuration = 40 -- duration of dark glare
 
-local firstGlare = nil
-local firstWarning = nil
+local firstGlare = false
+local firstWarning = false
 local lastKnownCThunTarget = nil
 
 local timerDarkGlare = nil
@@ -102,9 +102,10 @@ function mod:OnEngage()
 
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 
-	self:Bar(26029, timeP1GlareStart) -- Dark Glare
-	self:DelayedMessage(26029, timeP1GlareStart - 5, "orange", CL.custom_sec:format(self:SpellName(26029), 5)) -- Dark Glare in 5 sec
-	self:DelayedMessage(26029, timeP1GlareStart, "red", 26029, 26029) -- Dark Glare
+	local darkGlare = self:SpellName(26029)
+	self:Bar(26029, timeP1GlareStart, darkGlare) -- Dark Glare
+	self:DelayedMessage(26029, timeP1GlareStart - 5, "orange", CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
+	self:DelayedMessage(26029, timeP1GlareStart, "red", darkGlare, 26029) -- Dark Glare
 
 	timerDarkGlare = self:ScheduleTimer("DarkGlare", timeP1GlareStart)
 	timerGroupWarning = self:ScheduleTimer("GroupWarning", timeP1GlareStart - 3)
@@ -229,21 +230,21 @@ do
 end
 
 function mod:CThunWeakened()
-	self:StopBar(L.eye_tentacles)
-	self:StopBar(L.giant_claw_tentacle)
-	self:StopBar(L.giant_eye_tentacle)
-
 	self:Message("weakened", "green", CL.duration:format(CL.weakened, 45), L.weakened_icon)
 	self:Bar("weakened", 45, L.weakened, L.weakened_icon)
 
-	--self:Bar("giant_claw_tentacle", 12.3, L.giant_claw_tentacle, L.giant_claw_tentacle_icon)
-	self:Bar("eye_tentacles", 70, L.eye_tentacles, L.eye_tentacles_icon)
-	--self:Bar("giant_eye_tentacle", 43.1, L.giant_eye_tentacle, L.giant_eye_tentacle_icon)
+	self:Bar("giant_claw_tentacle", 51, L.giant_claw_tentacle, L.giant_claw_tentacle_icon)
+	self:Bar("eye_tentacles", 81, L.eye_tentacles, L.eye_tentacles_icon)
+	self:Bar("giant_eye_tentacle", 82, L.giant_eye_tentacle, L.giant_eye_tentacle_icon)
 
 	self:PlaySound("weakened", "long")
 end
 
 function mod:GroupWarning()
+	if firstWarning then
+		firstWarning = false
+		timerGroupWarning = self:ScheduleRepeatingTimer("GroupWarning", timeP1Glare)
+	end
 	if lastKnownCThunTarget then
 		for unit in self:IterateGroup() do
 			local guid = self:UnitGUID(unit)
@@ -266,25 +267,19 @@ function mod:GroupWarning()
 			end
 		end
 	end
-	if firstWarning then
-		firstWarning = nil
-		self:CancelTimer(timerGroupWarning)
-		timerGroupWarning = self:ScheduleRepeatingTimer("GroupWarning", timeP1Glare)
-	end
 end
 
 function mod:DarkGlare()
-	self:CastBar(26029, timeP1GlareDuration)
-	self:Bar(26029, timeP1Glare) -- Dark Glare
-	local darkGlare = self:SpellName(26029)
-	self:DelayedMessage(26029, timeP1Glare - .1, "red", CL.incoming:format(darkGlare), 26029) -- Dark Glare
-	self:DelayedMessage(26029, timeP1Glare - 5, "orange", CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
-	self:DelayedMessage(26029, timeP1GlareDuration, "red", CL.over:format(darkGlare)) -- Dark Glare Over
 	if firstGlare then
-		firstGlare = nil
-		self:CancelTimer(timerDarkGlare)
+		firstGlare = false
 		timerDarkGlare = self:ScheduleRepeatingTimer("DarkGlare", timeP1Glare)
 	end
+	local darkGlare = self:SpellName(26029)
+	self:CastBar(26029, timeP1GlareDuration, darkGlare)
+	self:Bar(26029, timeP1Glare, darkGlare) -- Dark Glare
+	self:DelayedMessage(26029, timeP1Glare - .1, "red", darkGlare, 26029) -- Dark Glare
+	self:DelayedMessage(26029, timeP1Glare - 5, "orange", CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
+	self:DelayedMessage(26029, timeP1GlareDuration, "red", CL.over:format(darkGlare)) -- Dark Glare Over
 end
 
 function mod:DigestiveAcidApplied(args)
@@ -297,7 +292,7 @@ function mod:DigestiveAcidApplied(args)
 end
 
 function mod:DigestiveAcidAppliedDose(args)
-	if self:Me(args.destGUID) and args.amount % 2 == 0 then
+	if self:Me(args.destGUID) and (args.amount % 2 == 0 or args.amount > 6) then
 		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 6)
 		if args.amount >= 6 then
 			self:PlaySound(args.spellId, "warning", nil, args.destName)
