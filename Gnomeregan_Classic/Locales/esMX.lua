@@ -43,5 +43,5 @@ if L then
 	L.bossName = "Mekigeniero Termochufe"
 	L.interruptable = "Interrumpible"
 	L.ready = "|cff20ff20Listo|r"
-	--L.red_button = "Red Button"
+	L.red_button = "Botón rojo"
 end
