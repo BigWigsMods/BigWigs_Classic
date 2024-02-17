@@ -14,6 +14,7 @@ mod:SetStage(1)
 
 local highVoltageList = {}
 local highVoltageDebuffTime = {}
+local castCollector = {}
 local UpdateInfoBoxList
 
 --------------------------------------------------------------------------------
@@ -67,8 +68,11 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
+	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED")
+	self:RegisterMessage("BigWigs_BossComm")
+
 	-- General
-	self:Log("SPELL_CAST_SUCCESS", "SummonBomb", 11518, 11521, 11524, 11526, 11527) -- Activate Bombe 01 -> 06 (03 is missing)
+	self:Log("SPELL_CAST_SUCCESS", "SummonBomb", 11518, 11521, 11524, 11526, 11527) -- Activate Bomb 01 -> 06 (03 is hidden)
 	self:Log("SPELL_AURA_APPLIED", "HighVoltageApplied", 438735)
 	self:Log("SPELL_AURA_REMOVED", "HighVoltageRemoved", 438735)
 	-- STX-96/FR
@@ -90,6 +94,7 @@ end
 function mod:OnEngage()
 	highVoltageList = {}
 	highVoltageDebuffTime = {}
+	castCollector = {}
 	for unit in self:IterateGroup() do
 		local name = self:UnitName(unit)
 		highVoltageList[#highVoltageList + 1] = name
@@ -105,6 +110,55 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+do
+	local prev = 0
+	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
+		if spellId == 11523 and not castCollector[castGUID] then -- Activate Bomb 03
+			castCollector[castGUID] = true
+			self:Sync("b3")
+		elseif spellId == 438572 and not castCollector[castGUID] then -- Vehicle Damaged
+			castCollector[castGUID] = true
+			self:Sync("stage")
+		elseif spellId == 438487 and not castCollector[castGUID] then -- Ride Vehicle XXX just for testing
+			castCollector[castGUID] = true
+			self:Sync("ride")
+		end
+	end
+end
+
+do
+	local times = {
+		["b3"] = 0,
+		["stage"] = 0,
+		["ride"] = 0,
+	}
+	function mod:BigWigs_BossComm(_, msg)
+		if times[msg] then
+			local t = GetTime()
+			if t-times[msg] > 5 then
+				times[msg] = t
+				if msg == "b3" then
+					self:Message(437853, "cyan", CL.incoming:format(CL.bombs)) -- Bombs Incoming XXX intentionally showing twice temp
+					self:SummonBomb()
+				elseif msg == "stage" then
+					local stage = self:GetStage()+1
+					self:SetStage(stage)
+					self:Message("stages", "cyan", CL.stage:format(stage), false)
+					self:StopBar(437853) -- Summon Bomb
+					self:StopBar(438726) -- Hazardous Hammer
+					self:StopBar(438732) -- Toxic Ventilation
+					self:StopBar(438683) -- Sprocketfire Punch
+					self:StopBar(438713) -- Furnace Surge
+					self:StopBar(438719) -- Supercooled Smash
+					self:StopBar(438723) -- Coolant Discharge
+				elseif msg == "ride" then
+					self:Message("stages", "cyan", self:SpellName(438487), false) -- Just for testing, probably useless
+				end
+			end
+		end
+	end
+end
 
 local function stageCheck(self, sourceGUID)
 	local curStage = self:GetStage()
@@ -129,7 +183,7 @@ local function stageCheck(self, sourceGUID)
 	self:StopBar(438723) -- Coolant Discharge
 end
 
-function mod:SummonBomb(args)
+function mod:SummonBomb()
 	self:Message(437853, "cyan", CL.incoming:format(CL.bombs)) -- Bombs Incoming
 	-- cooldown is sometimes delayed to 23~ seconds, unsure why.
 	self:CDBar(437853, 11) -- Summon Bomb
