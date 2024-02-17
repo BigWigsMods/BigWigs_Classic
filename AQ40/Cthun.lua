@@ -306,7 +306,7 @@ function mod:DigestiveAcidApplied(args)
 			break
 		end
 	end
-	self:SetInfoByTable(args.spellId, digestiveAcidList, 3, 5)
+	self:SetInfoByTable("infobox", digestiveAcidList, 3, 5)
 end
 
 function mod:DigestiveAcidAppliedDose(args)
@@ -317,13 +317,13 @@ function mod:DigestiveAcidAppliedDose(args)
 		end
 	end
 	digestiveAcidList[args.destName] = args.amount
-	self:SetInfoByTable(args.spellId, digestiveAcidList, 3, 5)
+	self:SetInfoByTable("infobox", digestiveAcidList, 3, 5)
 end
 
 function mod:DigestiveAcidRemoved(args)
 	digestiveAcidList[args.destName] = nil
 	digestiveAcidListTokens[args.destName] = nil
-	self:SetInfoByTable(args.spellId, digestiveAcidList, 3, 5)
+	self:SetInfoByTable("infobox", digestiveAcidList, 3, 5)
 end
 
 function mod:FleshTentacleKilled(args) -- Stomach Tentacle
