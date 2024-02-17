@@ -13,7 +13,10 @@ mod:SetStage(1)
 --
 
 local digestiveAcidList = {}
-local isInfoOpen = false
+local digestiveAcidListTokens = {}
+local healthList = {}
+local deaths = 0
+local UpdateInfoBoxList
 
 local timeP1GlareStart = 48 -- delay for first dark glare from engage onwards
 local timeP1Glare = 86 -- interval for dark glare
@@ -53,7 +56,9 @@ if L then
 	L.weakened_icon = "ability_rogue_findweakness"
 	L.weakenedtrigger = "%s is weakened"
 
-	L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYERNAME (Group 1)
+	L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYER_NAME (Group 1)
+	L.stomach = "Stomach"
+	L.tentacle = "Tentacle (%d)"
 end
 
 --------------------------------------------------------------------------------
@@ -67,10 +72,11 @@ function mod:GetOptions()
 		{26029, "CASTBAR"}, -- Dark Glare
 		"claw_tentacle",
 		{26134, "ICON", "SAY", "ME_ONLY_EMPHASIZE"}, -- Eye Beam
-		{26476, "INFOBOX"}, -- Digestive Acid
+		26476, -- Digestive Acid
 		"giant_claw_tentacle",
 		"giant_eye_tentacle",
 		{"weakened", "COUNTDOWN", "EMPHASIZE"},
+		"infobox",
 	},{
 		[26029] = CL.stage:format(1),
 		[26476] = CL.stage:format(2),
@@ -78,7 +84,6 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	self:RegisterEvent("UNIT_TARGET")
 	self:Log("SPELL_CAST_SUCCESS", "Birth", 26586)
 	self:Log("SPELL_CAST_START", "EyeBeam", 26134, self:Vanilla() and 341722 or 32950)
 	self:Log("SPELL_AURA_APPLIED", "DigestiveAcidApplied", 26476)
@@ -89,6 +94,7 @@ function mod:OnBossEnable()
 
 	self:Death("EyeOfCThunKilled", 15589)
 	self:Death("GiantEyeTentacleKilled", 15334)
+	self:Death("FleshTentacleKilled", 15802)
 	self:Death("Win", 15727)
 end
 
@@ -97,7 +103,7 @@ function mod:OnEngage()
 	firstGlare = true
 	firstWarning = true
 	digestiveAcidList = {}
-	isInfoOpen = false
+	digestiveAcidListTokens = {}
 	self:SetStage(1)
 
 	self:Message("stages", "cyan", CL.stage:format(1), false)
@@ -117,28 +123,6 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
-
-function mod:UNIT_TARGET(_, unit)
-	local guid = self:UnitGUID(unit)
-	local npcId = self:MobId(guid)
-	if npcId == 15589 then
-		local unitTarget = unit.."target"
-		local guid = self:UnitGUID(unitTarget)
-		if guid then
-			lastKnownCThunTarget = guid
-		end
-	else
-		guid = self:UnitGUID(unit.."target")
-		npcId = self:MobId(guid)
-		if npcId == 15589 then
-			local unitTarget = unit.."targettarget"
-			local guid = self:UnitGUID(unitTarget)
-			if guid then
-				lastKnownCThunTarget = guid
-			end
-		end
-	end
-end
 
 do
 	local prev = 0
@@ -165,6 +149,7 @@ end
 
 do
 	local function printTarget(self, name, guid)
+		lastKnownCThunTarget = guid
 		self:PrimaryIcon(26134, name)
 		if self:Me(guid) then
 			self:PersonalMessage(26134)
@@ -185,15 +170,15 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 end
 
 function mod:EyeOfCThunKilled()
+	deaths = 0
+	healthList = {}
+	if self:Retail() and not self:IsEngaged() then
+		self:Engage("NoEngage") -- XXX temp until the eye has a boss frame
+	end
 	self:SetStage(2)
 
 	self:StopBar(L.claw_tentacle)
 	self:PrimaryIcon(26134) -- Clear icon
-
-	self:Message("stages", "cyan", CL.stage:format(2), false)
-	self:Bar("giant_claw_tentacle", 12.3, L.giant_claw_tentacle, L.giant_claw_tentacle_icon)
-	self:Bar("eye_tentacles", 41.3, L.eye_tentacles, L.eye_tentacles_icon)
-	self:Bar("giant_eye_tentacle", 43.1, L.giant_eye_tentacle, L.giant_eye_tentacle_icon)
 
 	local darkGlare = self:SpellName(26029)
 	self:StopBar(darkGlare) -- Dark Glare
@@ -205,6 +190,20 @@ function mod:EyeOfCThunKilled()
 	-- cancel the repeaters
 	self:CancelTimer(timerDarkGlare)
 	self:CancelTimer(timerGroupWarning)
+
+	self:Message("stages", "cyan", CL.stage:format(2), false)
+	self:Bar("giant_claw_tentacle", 12.3, L.giant_claw_tentacle, L.giant_claw_tentacle_icon)
+	self:Bar("eye_tentacles", 41.3, L.eye_tentacles, L.eye_tentacles_icon)
+	self:Bar("giant_eye_tentacle", 43.1, L.giant_eye_tentacle, L.giant_eye_tentacle_icon)
+
+	self:OpenInfo("infobox", "BigWigs: ".. L.stomach)
+	self:SetInfo("infobox", 1, L.tentacle:format(1))
+	self:SetInfoBar("infobox", 1, 1)
+	self:SetInfo("infobox", 2, "100%")
+	self:SetInfo("infobox", 3, L.tentacle:format(2))
+	self:SetInfoBar("infobox", 3, 1)
+	self:SetInfo("infobox", 4, "100%")
+	self:SimpleTimer(UpdateInfoBoxList, 0.5)
 
 	self:PlaySound("stages", "long")
 end
@@ -229,15 +228,31 @@ do
 	end
 end
 
-function mod:CThunWeakened()
-	self:Message("weakened", "green", CL.duration:format(CL.weakened, 45), L.weakened_icon)
-	self:Bar("weakened", 45, L.weakened, L.weakened_icon)
+do
+	local function ResetInfoHealth(self)
+		self:SetInfoBar("infobox", 1, 1)
+		self:SetInfo("infobox", 2, "100%")
+		self:SetInfoBar("infobox", 3, 1)
+		self:SetInfo("infobox", 4, "100%")
+	end
+	function mod:CThunWeakened()
+		deaths = 0
+		healthList = {}
+		self:Message("weakened", "green", CL.duration:format(CL.weakened, 45), L.weakened_icon)
+		self:Bar("weakened", 45, L.weakened, L.weakened_icon)
 
-	self:Bar("giant_claw_tentacle", 51, L.giant_claw_tentacle, L.giant_claw_tentacle_icon)
-	self:Bar("eye_tentacles", 81, L.eye_tentacles, L.eye_tentacles_icon)
-	self:Bar("giant_eye_tentacle", 82, L.giant_eye_tentacle, L.giant_eye_tentacle_icon)
+		self:Bar("giant_claw_tentacle", 51, L.giant_claw_tentacle, L.giant_claw_tentacle_icon)
+		self:Bar("eye_tentacles", 81, L.eye_tentacles, L.eye_tentacles_icon)
+		self:Bar("giant_eye_tentacle", 82, L.giant_eye_tentacle, L.giant_eye_tentacle_icon)
 
-	self:PlaySound("weakened", "long")
+		self:SetInfoBar("infobox", 1, 0)
+		self:SetInfo("infobox", 2, "0%")
+		self:SetInfoBar("infobox", 3, 0)
+		self:SetInfo("infobox", 4, "0%")
+
+		self:ScheduleTimer(ResetInfoHealth, 44, self)
+		self:PlaySound("weakened", "long")
+	end
 end
 
 function mod:GroupWarning()
@@ -283,12 +298,15 @@ function mod:DarkGlare()
 end
 
 function mod:DigestiveAcidApplied(args)
-	if not isInfoOpen then
-		isInfoOpen = true
-		self:OpenInfo(args.spellId, args.spellName)
-	end
 	digestiveAcidList[args.destName] = 1
-	self:SetInfoByTable(args.spellId, digestiveAcidList)
+	for unit in self:IterateGroup() do
+		local guid = self:UnitGUID(unit)
+		if args.destGUID == guid then
+			digestiveAcidListTokens[args.destName] = unit
+			break
+		end
+	end
+	self:SetInfoByTable(args.spellId, digestiveAcidList, 3, 5)
 end
 
 function mod:DigestiveAcidAppliedDose(args)
@@ -299,15 +317,45 @@ function mod:DigestiveAcidAppliedDose(args)
 		end
 	end
 	digestiveAcidList[args.destName] = args.amount
-	self:SetInfoByTable(args.spellId, digestiveAcidList)
+	self:SetInfoByTable(args.spellId, digestiveAcidList, 3, 5)
 end
 
 function mod:DigestiveAcidRemoved(args)
 	digestiveAcidList[args.destName] = nil
-	if next(digestiveAcidList) then
-		self:SetInfoByTable(args.spellId, digestiveAcidList)
-	elseif isInfoOpen then
-		isInfoOpen = false
-		self:CloseInfo(args.spellId)
+	digestiveAcidListTokens[args.destName] = nil
+	self:SetInfoByTable(args.spellId, digestiveAcidList, 3, 5)
+end
+
+function mod:FleshTentacleKilled(args) -- Stomach Tentacle
+	deaths = deaths + 1
+
+	local line = healthList[args.destGUID]
+	if not line then
+		line = next(healthList) and 3 or 1
+		healthList[args.destGUID] = line
+	end
+	self:SetInfoBar("infobox", line, 0)
+	self:SetInfo("infobox", line + 1, "0%")
+
+	self:Message("stages", "cyan", CL.mob_killed:format(args.destName, deaths, 2), false)
+end
+
+function UpdateInfoBoxList()
+	if not mod:IsEngaged() then return end
+	mod:SimpleTimer(UpdateInfoBoxList, 0.5)
+
+	for playerName, unitToken in next, digestiveAcidListTokens do
+		local unitTarget = unitToken .. "target"
+		local guid = mod:UnitGUID(unitTarget)
+		if mod:MobId(guid) == 15802 then
+			local line = healthList[guid]
+			if not line then
+				line = next(healthList) and 3 or 1
+				healthList[guid] = line
+			end
+			local currentHealthPercent = math.floor(mod:GetHealth(unitTarget))
+			mod:SetInfoBar("infobox", line, currentHealthPercent/100)
+			mod:SetInfo("infobox", line + 1, ("%d%%"):format(currentHealthPercent))
+		end
 	end
 end

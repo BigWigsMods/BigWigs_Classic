@@ -52,7 +52,9 @@ if L then
 	L.weakened_desc = "虚弱状态警报。"
 	L.weakenedtrigger = "%s的力量被削弱了"
 
-	--L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYERNAME (Group 1)
+	--L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYER_NAME (Group 1)
+	--L.stomach = "Stomach"
+	--L.tentacle = "Tentacle (%d)"
 end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "zhCN")
