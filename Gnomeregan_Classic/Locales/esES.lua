@@ -12,7 +12,7 @@ end
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "esES")
 if L then
 	L.bossName = "Radiactivo viscoso"
-	--L.desiccated_fallout = "Desiccated Fallout" -- NPC ID 216810
+	L.desiccated_fallout = "Radiación desecada" -- NPC ID 216810
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "esES")
@@ -43,5 +43,5 @@ if L then
 	L.bossName = "Mekigeniero Termochufe"
 	L.interruptable = "Interrumpible"
 	L.ready = "|cff20ff20Listo|r"
-	--L.red_button = "Red Button"
+	L.red_button = "Botón rojo"
 end
