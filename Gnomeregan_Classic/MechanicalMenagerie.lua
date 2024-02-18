@@ -17,6 +17,7 @@ local sheepHP = 100
 local squirrelHP = 100
 local chickenHP = 100
 local UpdateInfoBoxList
+local repairList = {}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -47,7 +48,7 @@ function mod:GetOptions()
 		436570, -- Cluck!
 		436833, -- Widget Volley
 		436836, -- Widget Fortress
-		436816, -- Sprocketfire Breath
+		{436816, "EMPHASIZE"}, -- Sprocketfire Breath
 		436741, -- Overheat
 		436825, -- Frayed Wiring
 		440073, -- Self Repair
@@ -56,7 +57,6 @@ function mod:GetOptions()
 		[436570] = L.attack_buff, -- Cluck! (+50% attack speed)
 		[436836] = CL.shield, -- Widget Fortress (Shield)
 		[436816] = CL.breath, -- Sprocketfire Breath (Breath)
-		[436741] = CL.weakened, -- Overheat (Weakened)
 		[436825] = CL.spell_reflection, -- Frayed Wiring (Spell Reflection)
 	}
 end
@@ -69,20 +69,22 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "HighVoltageApplied", 438735)
 	self:Log("SPELL_AURA_REMOVED", "HighVoltageRemoved", 438735)
 	self:Log("SPELL_SUMMON", "ExplosiveEggSummon", 436692)
+	self:Log("SPELL_CAST_START", "CluckStart", 436570)
 	self:Log("SPELL_CAST_SUCCESS", "Cluck", 436570)
 	self:Log("SPELL_CAST_START", "WidgetVolley", 436833)
-	self:Log("SPELL_INTERRUPT", "WidgetVolleyInterrupted", "*")
 	self:Log("SPELL_CAST_START", "WidgetFortress", 436836)
 	self:Log("SPELL_AURA_APPLIED", "WidgetFortressApplied", 436837)
 	self:Log("SPELL_AURA_REMOVED", "WidgetFortressRemoved", 436837)
 	self:Log("SPELL_CAST_START", "SprocketfireBreath", 436816)
 	self:Log("SPELL_AURA_APPLIED", "SprocketfireBreathApplied", 440014)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "SprocketfireBreathAppliedDose", 440014)
+	self:Log("SPELL_CAST_START", "FrayedWiringStart", 436825)
 	self:Log("SPELL_AURA_APPLIED", "FrayedWiringApplied", 436825)
 	self:Log("SPELL_AURA_REMOVED", "FrayedWiringRemoved", 436825)
 	self:Log("SPELL_AURA_APPLIED", "OverheatApplied", 436741)
 	self:Log("SPELL_AURA_REMOVED", "OverheatRemoved", 436741)
-	self:Log("SPELL_CAST_START", "SelfRepair", 440073)
+	self:Log("SPELL_CAST_START", "SelfRepairStart", 440073)
+	self:Log("SPELL_CAST_SUCCESS", "SelfRepair", 440073)
 end
 
 function mod:OnEngage()
@@ -91,6 +93,7 @@ function mod:OnEngage()
 	sheepHP = 100
 	squirrelHP = 100
 	chickenHP = 100
+	repairList = {}
 
 	self:OpenInfo("health", "BigWigs: ".. CL.health)
 	local npcId = 218241
@@ -148,9 +151,12 @@ do
 	end
 end
 
+function mod:CluckStart(args)
+	self:Message(args.spellId, "orange", CL.other:format(L.attack_buff, L.boss_at_hp:format(L[218245], chickenHP-25)))
+end
+
 function mod:Cluck(args)
 	chickenHP = chickenHP - 25
-	self:Message(args.spellId, "orange", CL.other:format(L.attack_buff, L.boss_at_hp:format(L[218245], chickenHP)))
 	self:Bar(args.spellId, 15, L.attack_buff)
 end
 
@@ -158,12 +164,6 @@ function mod:WidgetVolley(args)
 	self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
 	if self:Interrupter() then
 		self:PlaySound(args.spellId, "alert")
-	end
-end
-
-function mod:WidgetVolleyInterrupted(args)
-	if args.extraSpellName == self:SpellName(436833) then
-		self:Message(436833, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end
 
@@ -176,19 +176,18 @@ end
 function mod:WidgetFortressApplied(args)
 	local npcId = self:MobId(args.destGUID)
 	local name = L[npcId]
-	if name and not shieldTimers[npcId] then -- Delay so we don't warn for bosses just running through it
-		shieldTimers[npcId] = self:ScheduleTimer(function()
+	if name and not shieldTimers[args.destGUID] then -- Delay so we don't warn for bosses just running through it
+		shieldTimers[args.destGUID] = self:ScheduleTimer(function()
 			self:Message(436836, "yellow", CL.on:format(CL.shield, name))
 			self:PlaySound(436836, "info")
-		end, 2)
+		end, 3)
 	end
 end
 
 function mod:WidgetFortressRemoved(args)
-	local npcId = self:MobId(args.destGUID)
-	if shieldTimers[npcId] then
-		self:CancelTimer(shieldTimers[npcId])
-		shieldTimers[npcId] = nil
+	if shieldTimers[args.destGUID] then
+		self:CancelTimer(shieldTimers[args.destGUID])
+		shieldTimers[args.destGUID] = nil
 	end
 end
 
@@ -210,11 +209,14 @@ function mod:SprocketfireBreathAppliedDose(args)
 	end
 end
 
+function mod:FrayedWiringStart(args)
+	self:Message(args.spellId, "red", CL.other:format(CL.spell_reflection, L.boss_at_hp:format(L[218243], sheepHP-25)))
+end
+
 function mod:FrayedWiringApplied(args)
 	local npcId = self:MobId(args.destGUID)
 	if npcId == 218243 then -- Acts as a group aura, applying to nearby bosses
 		sheepHP = sheepHP - 25
-		self:Message(args.spellId, "red", CL.other:format(CL.spell_reflection, L.boss_at_hp:format(L[npcId], sheepHP)))
 		self:Bar(args.spellId, 15, CL.spell_reflection)
 	end
 end
@@ -230,23 +232,28 @@ function mod:OverheatApplied(args)
 	local npcId = self:MobId(args.destGUID)
 	if npcId == 218242 then -- Acts as a group aura, applying to nearby bosses
 		dragonHP = dragonHP - 25
-		self:Message(args.spellId, "red", CL.other:format(CL.weakened, L.boss_at_hp:format(L[npcId], dragonHP)))
-		self:Bar(args.spellId, 15, CL.weakened)
+		self:Message(args.spellId, "red", CL.other:format(args.spellName, L.boss_at_hp:format(L[npcId], dragonHP)))
+		self:Bar(args.spellId, 15)
 		self:PlaySound(args.spellId, "warning")
 	end
 end
 
 function mod:OverheatRemoved(args)
 	if self:MobId(args.destGUID) == 218242 then
-		self:StopBar(CL.weakened)
+		self:StopBar(args.spellName)
 	end
 end
 
-function mod:SelfRepair(args)
-	local msg = L[self:MobId(args.sourceGUID)] or args.sourceName
-	self:TargetMessage(args.spellId, "cyan", msg)
-	self:TargetBar(args.spellId, 20, msg)
+function mod:SelfRepairStart(args)
+	local npcId = self:MobId(args.sourceGUID)
+	repairList[npcId] = GetTime()
+	self:TargetMessage(args.spellId, "cyan", L[npcId])
 	self:PlaySound(args.spellId, "long")
+end
+
+function mod:SelfRepair(args)
+	local npcId = self:MobId(args.sourceGUID)
+	repairList[npcId] = nil
 end
 
 do
@@ -259,10 +266,15 @@ do
 	local unitTracker = {}
 	function UpdateInfoBoxList()
 		if not mod:IsEngaged() then return end
-		mod:SimpleTimer(UpdateInfoBoxList, 1)
+		mod:SimpleTimer(UpdateInfoBoxList, next(repairList) and 0.1 or 1)
 
-		for npcId in next, bossList do
-			if not unitTracker[npcId] or mod:MobId(mod:UnitGUID(unitTracker[npcId])) ~= npcId then
+		for npcId, line in next, bossList do
+			if repairList[npcId] then
+				unitTracker[npcId] = nil
+				local elapsed = GetTime() - repairList[npcId]
+				mod:SetInfoBar("health", line, elapsed / 20, 0.5, 0, 1, 1) -- Fill purple when casting
+				mod:SetInfo("health", line + 1, CL.seconds:format(20 - elapsed))
+			elseif not unitTracker[npcId] or mod:MobId(mod:UnitGUID(unitTracker[npcId])) ~= npcId then
 				unitTracker[npcId] = mod:GetUnitIdByGUID(npcId)
 			end
 		end
