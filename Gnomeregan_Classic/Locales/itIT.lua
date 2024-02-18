@@ -41,7 +41,6 @@ end
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "itIT")
 if L then
 	--L.bossName = "Mekgineer Thermaplugg"
-	--L.interruptable = "Interruptible"
 	L.ready = "|cff20ff20Pronto|r"
 	--L.red_button = "Red Button"
 end

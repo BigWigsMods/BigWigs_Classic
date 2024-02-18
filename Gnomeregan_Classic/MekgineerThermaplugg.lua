@@ -24,7 +24,6 @@ local UpdateInfoBoxList
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Mekgineer Thermaplugg"
-	L.interruptable = "Interruptible"
 	L.ready = "|cff20ff20Ready|r"
 	L.red_button = "Red Button"
 end
@@ -50,7 +49,7 @@ function mod:GetOptions()
 		-- STX-98/PO
 		438726, -- Hazardous Hammer
 		438727, -- Radiation Sickness
-		438732, -- Toxic Ventilation
+		{438732, "EMPHASIZE"}, -- Toxic Ventilation
 	},{
 		["stages"] = CL.general,
 		[438683] =  CL.stage:format(1),
@@ -226,7 +225,7 @@ function mod:SprocketfireApplied(args)
 		else
 			local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
 			if bossUnit and self:Tanking(bossUnit, args.destName) then
-				self:StackMessage(args.spellId, "purple", args.destName, args.amount, 4)
+				self:StackMessage(args.spellId, "orange", args.destName, args.amount, 4)
 			end
 		end
 	end
@@ -259,7 +258,7 @@ function mod:FreezingApplied(args)
 		else
 			local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
 			if bossUnit and self:Tanking(bossUnit, args.destName) then
-				self:StackMessage(args.spellId, "purple", args.destName, args.amount, 5)
+				self:StackMessage(args.spellId, "orange", args.destName, args.amount, 5)
 			end
 		end
 	end
@@ -287,17 +286,17 @@ end
 
 function mod:RadiationSicknessApplied(args)
 	if self:Me(args.destGUID) then
-		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 3)
+		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 3, CL.disease)
 	else
 		local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
 		if bossUnit and self:Tanking(bossUnit, args.destName) then
-			self:StackMessage(args.spellId, "purple", args.destName, args.amount, 3)
+			self:StackMessage(args.spellId, "orange", args.destName, args.amount, 3, CL.disease)
 		end
 	end
 end
 
 function mod:ToxicVentilation(args)
-	self:Message(args.spellId, "yellow", CL.other:format(args.spellName, L.interruptable))
+	self:Message(args.spellId, "yellow")
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 21)
 	else
@@ -308,7 +307,7 @@ end
 
 function mod:ToxicVentilationInterrupted(args)
 	if args.extraSpellName == self:SpellName(438732) then
-		self:Message(438732, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+		self:Message(438732, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)), 438732, true) -- Disable emphasize
 	end
 end
 
