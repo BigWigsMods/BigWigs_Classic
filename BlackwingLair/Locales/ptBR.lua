@@ -40,7 +40,7 @@ if L then
 	L.shaman_class_call_yell_trigger = "Xamãs"
 	--L.deathknight_class_call_yell_trigger = "Death Knights"
 	--L.monk_class_call_yell_trigger = "Monks"
-	--L.hunter_class_call_yell_trigger = "Hunters"
+	L.hunter_class_call_yell_trigger = "Caçadores"
 
 	L.warnshaman = "Xamãs - Totens aparecendo!"
 	L.warndruid = "Druidas - Presos na forma de felino!"
