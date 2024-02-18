@@ -1,8 +1,8 @@
 local L = BigWigs:NewBossLocale("General Rajaxx", "ruRU")
 if not L then return end
 if L then
-	--L.wave_trigger1a = "Kill first, ask questions later... Incoming!"
-	--L.wave_trigger1b = "Remember, Rajaxx, when I said I'd kill you last?"
+	L.wave_trigger1a = "Сначала убей, потом задавай вопросы... На подходе!"
+	L.wave_trigger1b = "Помнишь, Раджакс, когда я сказал, что убью тебя последним?"
 end
 
 L = BigWigs:NewBossLocale("Buru the Gorger", "ruRU")
