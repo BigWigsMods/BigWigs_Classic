@@ -21,7 +21,7 @@ end
 
 L = BigWigs:NewBossLocale("Ouro", "ruRU")
 if L then
-	L.engage_message = "Оуро занят! Погружение через 90 секунд!"
+	L.engage_message = "Оуро занят! Возможное погружение через 90 секунд!"
 	L.possible_submerge_bar = "Погружение"
 
 	L.emerge_message = "Оуро появился"
@@ -68,5 +68,5 @@ if L then
 	L.target_buffs_desc = "Когда ваша цель - Анубисат-часовой, показывать предупреждение о том, какой у него бафф."
 	L.target_buffs_message = "Бафф цели: %s"
 	L.detect_magic_missing_message = "Распознавание магии is missing from your target"
-	L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[Распознавание магии]\124h\124r on your target for buff warnings to work."
+	L.detect_magic_warning = "Маг должен наложить \124cff71d5ff\124Hspell:2855:0\124h[Распознавание магии]\124h\124r на вашу цель, чтобы предупреждения о баффах работали."
 end
