@@ -6,7 +6,7 @@ if L then
 
 	L.freeze_trigger1 = "%s замедлен!"
 	L.freeze_trigger2 = "%s замерзает!"
-	--L.freeze_trigger3 = "%s заморожен!\ тело!"
+	L.freeze_trigger3 = "%s заморожен!"
 	L.freeze_trigger4 = "%s Начинает трескаться!"
 	L.freeze_trigger5 = "%s Скоро разобьётся на части!"
 
@@ -38,10 +38,10 @@ end
 L = BigWigs:NewBossLocale("C'Thun", "ruRU")
 if L then
 	L.claw_tentacle = "Когтещупальце"
-	L.claw_tentacle_desc = "Таймеры для Когтещупальца".
+	L.claw_tentacle_desc = "Таймеры для Когтещупальца."
 
 	L.giant_claw_tentacle = "Гигантское Когтещцпальце"
-	L.giant_claw_tentacle_desc = "Таймеры для Гигантского Когтещупальца"
+	L.giant_claw_tentacle_desc = "Таймеры для Гигантского Когтещупальца."
 
 	L.eye_tentacles = "Глазастое щупальце"
 	L.eye_tentacles_desc = "Таймеры для 8 Глазастых щупалец."
