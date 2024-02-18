@@ -40,7 +40,8 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_START", "SummonIrradiatedGoo", 434358)
+	self:Log("SPELL_CAST_START", "SummonIrradiatedGooStart", 434358)
+	self:Log("SPELL_CAST_SUCCESS", "SummonIrradiatedGoo", 434358)
 	self:Log("SPELL_AURA_APPLIED", "ToxicEmissionApplied", 434399)
 	self:Log("SPELL_CAST_START", "RadiationBurnStart", 433546)
 	self:Log("SPELL_CAST_SUCCESS", "RadiationBurn", 433546)
@@ -67,13 +68,16 @@ do
 		end
 	end
 
-	function mod:SummonIrradiatedGoo(args)
-		gooCollector = {}
-		gooIcon, falloutIcon = 8, 8
-		self:RegisterTargetEvents("GooMarking")
+	function mod:SummonIrradiatedGooStart(args)
 		self:Message(args.spellId, "cyan", CL.incoming:format(CL.adds))
 		self:CDBar(args.spellId, 63, CL.adds)
 		self:PlaySound(args.spellId, "long")
+	end
+
+	function mod:SummonIrradiatedGoo(args)
+		gooCollector = {}
+		gooIcon, falloutIcon = 8, 8
+		self:RegisterTargetEvents("GooMarking", 1.1)
 	end
 
 	function mod:ToxicEmissionApplied(args)
