@@ -77,13 +77,17 @@ do
 	function mod:SummonIrradiatedGoo(args)
 		gooCollector = {}
 		gooIcon, falloutIcon = 8, 8
-		self:RegisterTargetEvents("GooMarking", 1.1)
+		self:RegisterTargetEvents("GooMarking")
 	end
 
 	function mod:ToxicEmissionApplied(args)
 		if not gooCollector[args.destGUID] then -- Mark Irradiated Goo
 			gooCollector[args.destGUID] = gooIcon
 			gooIcon = gooIcon - 1
+			local unit = self:GetUnitIdByGUID(args.destGUID)
+			if unit then
+				self:CustomIcon(desiccatedFalloutMarker, unit, gooCollector[args.destGUID])
+			end
 		end
 	end
 

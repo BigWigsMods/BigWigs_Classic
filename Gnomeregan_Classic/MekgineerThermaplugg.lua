@@ -71,7 +71,7 @@ function mod:OnBossEnable()
 	self:RegisterMessage("BigWigs_BossComm")
 
 	-- General
-	self:Log("SPELL_CAST_SUCCESS", "SummonBomb", 11518, 11521, 11524, 11526, 11527) -- Activate Bomb 01 -> 06 (03 is hidden)
+	self:Log("SPELL_CAST_SUCCESS", "SummonBomb", 11518, 11521, 11523, 11524, 11526, 11527) -- Activate Bomb 01 -> 06 (03 is hidden)
 	self:Log("SPELL_AURA_APPLIED", "HighVoltageApplied", 438735)
 	self:Log("SPELL_AURA_REMOVED", "HighVoltageRemoved", 438735)
 	-- STX-96/FR
@@ -138,8 +138,7 @@ do
 			if t-times[msg] > 5 then
 				times[msg] = t
 				if msg == "b3" then
-					self:Message(437853, "cyan", CL.incoming:format(CL.bombs)) -- Bombs Incoming XXX intentionally showing twice temp
-					self:SummonBomb()
+					self:SummonBomb({["spellId"]=11523})
 				elseif msg == "stage" then
 					local stage = self:GetStage()+1
 					self:SetStage(stage)
@@ -182,11 +181,21 @@ local function stageCheck(self, sourceGUID)
 	self:StopBar(438723) -- Coolant Discharge
 end
 
-function mod:SummonBomb()
-	self:Message(437853, "cyan", CL.incoming:format(CL.bombs)) -- Bombs Incoming
-	-- cooldown is sometimes delayed to 23~ seconds, unsure why.
-	self:CDBar(437853, 11) -- Summon Bomb
-	self:PlaySound(437853, "info")
+do
+	local bombCount = {
+		[11518] = 1,
+		[11521] = 2,
+		[11523] = 3,
+		[11524] = 4,
+		[11526] = 5,
+		[11527] = 6,
+	}
+	function mod:SummonBomb(args)
+		self:Message(437853, "cyan", CL.count:format(CL.incoming:format(CL.bombs), bombCount[args.spellId])) -- Bombs Incoming
+		-- cooldown is sometimes delayed to 23~ seconds, unsure why.
+		self:CDBar(437853, 11) -- Summon Bomb
+		self:PlaySound(437853, "info")
+	end
 end
 
 function mod:HighVoltageApplied(args)

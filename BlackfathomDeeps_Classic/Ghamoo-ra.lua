@@ -96,7 +96,7 @@ function mod:ExposedOver(args)
 end
 
 function mod:AquaShellApplied(args)
-	self:OpenInfo(args.spellId, args.spellName)
+	self:OpenInfo(args.spellId, "BigWigs: |T134564:0:0:0:0:64:64:4:60:4:60|t".. args.spellName)
 	self:SetInfoBar(args.spellId, 1, 1)
 	self:SetInfo(args.spellId, 1, 100)
 end

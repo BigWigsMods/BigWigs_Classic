@@ -68,7 +68,7 @@ do
 	end
 
 	function mod:TheClawStart(args)
-		self:GetUnitTarget(printTarget, 0.1, args.sourceGUID)
+		self:GetUnitTarget(printTarget, 0.3, args.sourceGUID)
 	end
 end
 

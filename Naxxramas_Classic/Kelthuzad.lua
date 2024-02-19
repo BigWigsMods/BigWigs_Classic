@@ -71,7 +71,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "ChainsOfKelThuzad", 28408)
 	self:Log("SPELL_AURA_APPLIED", "ChainsOfKelThuzadApplied", 28410)
 
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 	self:Death("Win", 15990)
 end
 

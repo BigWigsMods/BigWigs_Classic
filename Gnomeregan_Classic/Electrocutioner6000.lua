@@ -95,18 +95,18 @@ function mod:DiscombobulationProtocol(args)
 end
 
 do
-	local function printTarget(self, name, guid)
+	local function printTarget(self, name, guid, elapsed)
 		self:PrimaryIcon(433251, name)
 		self:TargetMessage(433251, "red", name)
 		if self:Me(guid) then
 			self:Say(433251, nil, nil, "Static Arc")
-			self:SayCountdown(433251, 3.4, nil, 2)
+			self:SayCountdown(433251, 3.5-elapsed, nil, 2)
 			self:PlaySound(433251, "warning", nil, name)
 		end
 	end
 
 	function mod:StaticArcStart(args)
-		self:GetUnitTarget(printTarget, 0.1, args.sourceGUID)
+		self:GetUnitTarget(printTarget, 0.5, args.sourceGUID) -- Can take a while to swap target
 		self:CastBar(args.spellId, 3.5)
 		self:CDBar(args.spellId, 14.5)
 	end

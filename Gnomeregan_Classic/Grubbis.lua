@@ -45,6 +45,7 @@ function mod:GetOptions()
 		{436027, "CASTBAR"}, -- Grubbis Mad!
 		434941, -- Toxic Vigor
 		{436059, "CASTBAR"}, -- Radiation?
+		{439956, "CASTBAR"}, -- Revive Pet
 	},{
 		["adds"] = CL.adds,
 		[436100] = L.bossName,
@@ -62,6 +63,7 @@ end
 
 function mod:OnBossEnable()
 	self:RegisterEvent("CHAT_MSG_MONSTER_SAY")
+	self:RegisterMessage("BigWigs_BossComm")
 
 	self:Log("SPELL_DISPEL", "Dispelled", "*")
 	self:Log("SPELL_AURA_APPLIED", "EnrageApplied", 3019)
@@ -83,6 +85,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "RadiationSicknessApplied", 434724)
 	self:Log("SPELL_SUMMON", "IrradiatedCloudSummon", 434168)
 	self:Log("SPELL_DAMAGE", "IrradiatedCloudKilled", 434948)
+	self:Log("SPELL_CAST_START", "RevivePet", 439956)
 end
 
 function mod:OnEngage()
@@ -96,7 +99,20 @@ end
 
 function mod:CHAT_MSG_MONSTER_SAY(_, msg)
 	if msg:find(L.warmup_say_chat_trigger, nil, true) then
-		self:Bar("stages", 45, CL.stage:format(1), "inv_stone_10")
+		self:Sync("warmup")
+	end
+end
+
+do
+	local prev = 0
+	function mod:BigWigs_BossComm(_, msg)
+		if msg == "warmup" and self:GetStage() == 1 then
+			local t = GetTime()
+			if t-prev > 10 then
+				prev = t
+				self:Bar("stages", 45, CL.stage:format(1), "inv_stone_10")
+			end
+		end
 	end
 end
 
@@ -233,4 +249,10 @@ do
 			self:Message(434168, "cyan", CL.killed:format(args.spellName))
 		end
 	end
+end
+
+function mod:RevivePet(args)
+	self:Message(args.spellId, "orange")
+	self:CastBar(args.spellId, 10)
+	self:PlaySound(args.spellId, "warning")
 end
