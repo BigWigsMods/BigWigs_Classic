@@ -17,28 +17,28 @@ end
 
 L = BigWigs:NewBossLocale("Emeriss", "deDE")
 if L then
-	L.bossName = "Smariss"
+	L.bossName = "Emeriss"
 
-	-- L.engage_trigger = "Hope is a DISEASE of the soul! This land shall wither and die!"
+	L.engage_trigger = "Die Hoffnung ist eine KRANKHEIT der Seele. Dieses Land wird verdorren und sterben!"
 end
 
 L = BigWigs:NewBossLocale("Lethon", "deDE")
 if L then
 	L.bossName = "Lethon"
 
-	-- L.engage_trigger = "I can sense the SHADOW on your hearts. There can be no rest for the wicked!"
+	L.engage_trigger = "Ich fühle die SCHATTEN in Euren Herzen. Niemals darf das Böse Ruhe finden!"
 end
 
 L = BigWigs:NewBossLocale("Taerar", "deDE")
 if L then
 	L.bossName = "Taerar"
 
-	-- L.engage_trigger = "Peace is but a fleeting dream! Let the NIGHTMARE reign!"
+	L.engage_trigger = "Frieden ist nur ein flüchtiger Traum! Von nun an herrscht der ALPTRAUM!"
 end
 
 L = BigWigs:NewBossLocale("Ysondre", "deDE")
 if L then
 	L.bossName = "Ysondre"
 
-	-- L.engage_trigger = "The strands of LIFE have been severed! The Dreamers must be avenged!"
+	L.engage_trigger = "Die Fäden des LEBENS wurden durchtrennt! Die Träumer müssen gerächt werden!"
 end
