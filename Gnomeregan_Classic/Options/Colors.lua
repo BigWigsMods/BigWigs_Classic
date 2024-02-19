@@ -8,6 +8,7 @@ BigWigs:AddColors("Grubbis Discovery", {
 	[436059] = "yellow",
 	[436074] = {"green","red"},
 	[436100] = {"blue","green","orange","yellow"},
+	[439956] = "orange",
 	["adds"] = "cyan",
 	["stages"] = "cyan",
 })

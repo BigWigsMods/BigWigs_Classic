@@ -5,6 +5,7 @@ BigWigs:AddSounds("Grubbis Discovery", {
 	[436059] = "long",
 	[436074] = "alarm",
 	[436100] = {"alert","warning"},
+	[439956] = "warning",
 	["adds"] = "info",
 	["stages"] = "info",
 })
