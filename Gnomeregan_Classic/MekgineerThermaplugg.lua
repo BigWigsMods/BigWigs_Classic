@@ -221,8 +221,8 @@ end
 function mod:SprocketfirePunch(args)
 	self:Message(args.spellId, "purple")
 	if self:GetStage() < 4 then -- no timers in stage 4
-		self:CDBar(args.spellId, 8.2)
 		stageCheck(self, args.sourceGUID)
+		self:CDBar(args.spellId, 8.2)
 	end
 	self:PlaySound(args.spellId, "alarm")
 end
@@ -254,8 +254,8 @@ end
 function mod:SupercooledSmash(args)
 	self:Message(args.spellId, "purple")
 	if self:GetStage() < 4 then -- no timers in stage 4
-		self:CDBar(args.spellId, 6.5)
 		stageCheck(self, args.sourceGUID)
+		self:CDBar(args.spellId, 6.5)
 	end
 	self:PlaySound(args.spellId, "alarm")
 end
@@ -287,8 +287,8 @@ end
 function mod:HazardousHammer(args)
 	self:Message(args.spellId, "purple")
 	if self:GetStage() < 4 then -- no timers in stage 4
-		self:CDBar(args.spellId, 6)
 		stageCheck(self, args.sourceGUID)
+		self:CDBar(args.spellId, 6)
 	end
 	self:PlaySound(args.spellId, "alarm")
 end
