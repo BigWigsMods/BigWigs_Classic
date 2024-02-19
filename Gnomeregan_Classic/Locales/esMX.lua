@@ -2,7 +2,7 @@ local L = BigWigs:NewBossLocale("Grubbis Discovery", "esMX")
 if not L then return end
 if L then
 	L.bossName = "Grubbis"
-	L.aoe = "Daño cuerpo a cuerpo en área de efecto"
+	L.aoe = "Daño cuerpo a cuerpo en área"
 	L.cloud = "Una nube alcanzó al jefe"
 	L.cone = "Cono \"frontal\"" -- "Frontal" Cone, it's a rear cone (he's farting)
 	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
