@@ -12,7 +12,7 @@ end
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "koKR")
 if L then
 	L.bossName = "방사성 폐기물"
-	--L.desiccated_fallout = "Desiccated Fallout" -- NPC ID 216810
+	L.desiccated_fallout = "메마른 낙진" -- NPC ID 216810
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "koKR")
