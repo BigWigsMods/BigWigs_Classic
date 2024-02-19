@@ -12,7 +12,7 @@ end
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "deDE")
 if L then
 	L.bossName = "Verflüssigte Ablagerung"
-	--L.desiccated_fallout = "Desiccated Fallout" -- NPC ID 216810
+	L.desiccated_fallout = "Ausgetrocknete Ablagerungen" -- NPC ID 216810
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "deDE")
@@ -30,7 +30,7 @@ L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "deDE")
 if L then
 	L.bossName = "Mechanische Menagerie"
 	L.attack_buff = "+50% Angriffstempo"
-	--L.boss_at_hp = "%s at %d%%" -- BOSS_NAME at 50%
+	L.boss_at_hp = "%s auf %d%%" -- BOSS_NAME at 50%
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDrache"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tSchaf"
@@ -42,5 +42,5 @@ L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "deDE")
 if L then
 	L.bossName = "Robogenieur Thermaplugg"
 	L.ready = "|cff20ff20Bereit|r"
-	--L.red_button = "Red Button"
+	L.red_button = "Roter Knopf"
 end
