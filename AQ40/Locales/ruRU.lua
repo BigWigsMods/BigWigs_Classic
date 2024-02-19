@@ -22,7 +22,7 @@ end
 L = BigWigs:NewBossLocale("Ouro", "ruRU")
 if L then
 	L.engage_message = "Оуро занят! Возможное погружение через 90 секунд!"
-	L.possible_submerge_bar = "Погружение"
+	L.possible_submerge_bar = "Возможное погружение"
 
 	L.emerge_message = "Оуро появился"
 	L.emerge_bar = "Появление"
