@@ -5,7 +5,7 @@ if L then
 	L.aoe = "近战AOE"
 	L.cloud = "一团毒云接近了首领"
 	L.cone = "辐射？" -- "Frontal" Cone, it's a rear cone (he's farting) 还是使用技能名称（诡异的技能）
-	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
+	L.warmup_say_chat_trigger = "诺莫瑞根" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
 	L.interruptable = "打断"
 end
 
@@ -42,5 +42,5 @@ L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "zhCN")
 if L then
 	L.bossName = "机械师瑟玛普拉格"
 	L.ready = "|cff20ff20就绪|r"
-	--L.red_button = "Red Button"
+	L.red_button = "红色按钮"
 end
