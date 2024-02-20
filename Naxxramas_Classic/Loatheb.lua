@@ -23,8 +23,6 @@ local UpdateHealerList
 
 local L = mod:GetLocale()
 if L then
-	L.ready = "|cff20ff20Ready|r"
-
 	L["29234_icon"] = "Spell_nature_wispsplodegreen"
 end
 
@@ -155,7 +153,7 @@ function UpdateHealerList()
 				mod:SetInfo(29184, line + 1, CL.seconds:format(remaining))
 				mod:SetInfoBar(29184, line, remaining / 60)
 			else
-				mod:SetInfo(29184, line + 1, L.ready)
+				mod:SetInfo(29184, line + 1, CL.ready, 0.13, 1, 0.13)
 				mod:SetInfoBar(29184, line, 0)
 			end
 		else

@@ -43,11 +43,6 @@ if L then
 	L.adds_yell_trigger = "Wohlan, Krieger der Eisigen Weiten, erhebt euch! Ich befehle euch für euren Meister zu kämpfen, zu töten und zu sterben! Keiner darf überleben!"
 end
 
-L = BigWigs:NewBossLocale("Loatheb", "deDE")
-if L then
-	L.ready = "|cff20ff20Bereit|r"
-end
-
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "deDE")
 if L then
 	L.adds_yell_trigger = "Erhebt euch, Soldaten" -- Erhebt euch, Soldaten! Erhebt euch und kämpft erneut!

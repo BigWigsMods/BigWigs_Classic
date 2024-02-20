@@ -6,7 +6,6 @@ if L then
 	L.cloud = "Uma nuvem chegou ao chefe"
 	L.cone = "Cone \"frontal\"" -- "Frontal" Cone, it's a rear cone (he's farting)
 	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
-	L.interruptable = "Interrompível"
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "ptBR")
@@ -23,7 +22,6 @@ end
 L = BigWigs:NewBossLocale("Electrocutioner 6000 Discovery", "ptBR")
 if L then
 	L.bossName = "Eletrocutor 6000"
-	L.ready = "|cff20ff20Pronto|r"
 end
 
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "ptBR")
@@ -31,6 +29,7 @@ if L then
 	L.bossName = "Viveiro Mecânico"
 	L.attack_buff = "+50% de velocidade de ataque"
 	L.boss_at_hp = "%s com %d%%" -- BOSS_NAME at 50%
+	--L.red_button = "Red Button"
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDragão"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tOvelha"
@@ -41,6 +40,5 @@ end
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "ptBR")
 if L then
 	L.bossName = "Mecangenheiro Termaplugue"
-	L.ready = "|cff20ff20Pronto|r"
 	--L.red_button = "Red Button"
 end

@@ -43,11 +43,6 @@ if L then
 	L.adds_yell_trigger = "Très bien. Guerriers des terres gelées, relevez-vous ! Je vous ordonne de combattre, de tuer et de mourir pour votre maître ! N'épargnez personne !"
 end
 
-L = BigWigs:NewBossLocale("Loatheb", "frFR")
-if L then
-	L.ready = "|cff20ff20Prêt|r"
-end
-
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "frFR")
 if L then
 	L.adds_yell_trigger = "Levez-vous, soldats" -- Levez-vous, soldats ! Levez-vous et combattez une fois encore !

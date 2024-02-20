@@ -43,11 +43,6 @@ if L then
 	L.adds_yell_trigger = "좋다. 얼어붙은 땅의 전사들이여, 일어나라! 너희에게 싸울 것을 명하노라. 날 위해 죽고, 날 위해 죽여라! 한 놈도 살려두지 마라!"
 end
 
-L = BigWigs:NewBossLocale("Loatheb", "koKR")
-if L then
-	L.ready = "|cff20ff20준비|r"
-end
-
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "koKR")
 if L then
 	L.adds_yell_trigger = "일어나라,병사들이여" -- 일어나라,병사들이여! 다시 일어나 싸워라!

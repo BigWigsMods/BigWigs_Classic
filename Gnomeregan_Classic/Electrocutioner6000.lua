@@ -14,6 +14,7 @@ mod:SetEncounterID(2927)
 local knockbackCount = 1
 local staticArcList = {}
 local staticArcDebuffTime = {}
+local magneticPulsePlayer = nil
 local UpdateInfoBoxList
 
 --------------------------------------------------------------------------------
@@ -23,7 +24,6 @@ local UpdateInfoBoxList
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Electrocutioner 6000"
-	L.ready = "|cff20ff20Ready|r"
 end
 
 --------------------------------------------------------------------------------
@@ -58,6 +58,7 @@ function mod:OnEngage()
 	knockbackCount = 1
 	staticArcList = {}
 	staticArcDebuffTime = {}
+	magneticPulsePlayer = nil
 	for unit in self:IterateGroup() do
 		local name = self:UnitName(unit)
 		staticArcList[#staticArcList + 1] = name
@@ -75,6 +76,7 @@ end
 --
 
 function mod:MagneticPulseApplied(args)
+	magneticPulsePlayer = args.destName
 	self:TargetMessage(args.spellId, "yellow", args.destName)
 	self:TargetBar(args.spellId, 12, args.destName)
 	if self:Me(args.destGUID) then
@@ -84,6 +86,7 @@ function mod:MagneticPulseApplied(args)
 end
 
 function mod:MagneticPulseRemoved(args)
+	magneticPulsePlayer = nil
 	self:StopBar(args.spellName, args.destName)
 end
 
@@ -141,7 +144,15 @@ function UpdateInfoBoxList()
 				mod:SetInfo(433251, line + 1, CL.seconds:format(remaining))
 				mod:SetInfoBar(433251, line, remaining / 20)
 			else
-				mod:SetInfo(433251, line + 1, L.ready)
+				if UnitIsDeadOrGhost(player) then
+					mod:SetInfo(433251, line + 1, CL.dead, 1, 0.2, 0.2)
+				else
+					if player == magneticPulsePlayer then
+						mod:SetInfo(433251, line + 1, "|T135768:0:0:0:0:64:64:4:60:4:60|t")
+					else
+						mod:SetInfo(433251, line + 1, CL.ready, 0.13, 1, 0.13)
+					end
+				end
 				mod:SetInfoBar(433251, line, 0)
 			end
 		else

@@ -24,7 +24,6 @@ local UpdateInfoBoxList
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Mekgineer Thermaplugg"
-	L.ready = "|cff20ff20Ready|r"
 	L.red_button = "Red Button"
 end
 
@@ -335,7 +334,11 @@ function UpdateInfoBoxList()
 				mod:SetInfo(438735, line + 1, CL.seconds:format(remaining))
 				mod:SetInfoBar(438735, line, remaining / 30)
 			else
-				mod:SetInfo(438735, line + 1, L.ready)
+				if UnitIsDeadOrGhost(player) then
+					mod:SetInfo(438735, line + 1, CL.dead, 1, 0.2, 0.2)
+				else
+					mod:SetInfo(438735, line + 1, CL.ready, 0.13, 1, 0.13)
+				end
 				mod:SetInfoBar(438735, line, 0)
 			end
 		else

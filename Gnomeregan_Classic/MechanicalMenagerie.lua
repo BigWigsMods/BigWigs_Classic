@@ -28,6 +28,7 @@ if L then
 	L.bossName = "Mechanical Menagerie"
 	L.attack_buff = "+50% attack speed"
 	L.boss_at_hp = "%s at %d%%" -- BOSS_NAME at 50%
+	L.red_button = "Red Button"
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDragon"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tSheep"
@@ -54,6 +55,7 @@ function mod:GetOptions()
 		440073, -- Self Repair
 		{"health", "INFOBOX"},
 	},nil,{
+		[438735] = L.red_button, -- High Voltage! (Red Button)
 		[436570] = L.attack_buff, -- Cluck! (+50% attack speed)
 		[436836] = CL.shield, -- Widget Fortress (Shield)
 		[436816] = CL.breath, -- Sprocketfire Breath (Breath)
@@ -115,15 +117,15 @@ end
 
 function mod:HighVoltageApplied(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId)
-		self:TargetBar(args.spellId, 30, args.destName)
+		self:PersonalMessage(args.spellId, nil, L.red_button)
+		self:TargetBar(args.spellId, 30, args.destName, L.red_button)
 	end
 end
 
 function mod:HighVoltageRemoved(args)
 	if self:Me(args.destGUID) then
-		self:StopBar(args.spellName, args.destName)
-		self:PersonalMessage(args.spellId, "removed")
+		self:StopBar(L.red_button, args.destName)
+		self:PersonalMessage(args.spellId, "over", L.red_button)
 		self:PlaySound(args.spellId, "long")
 	end
 end

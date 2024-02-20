@@ -26,7 +26,6 @@ if L then
 	L.cloud = "A cloud reached the boss"
 	L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
 	L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
-	L.interruptable = "Interruptible"
 end
 
 --------------------------------------------------------------------------------
@@ -134,7 +133,7 @@ end
 
 function mod:Petrify(args)
 	self:CDBar(args.spellId, 21)
-	self:Message(args.spellId, "orange", CL.other:format(args.spellName, L.interruptable)) -- XXX target filter this in a few weeks
+	self:Message(args.spellId, "orange", CL.extra:format(args.spellName, CL.interruptible)) -- XXX target filter this in a few weeks
 
 	local npcId = self:MobId(self:UnitGUID("target"))
 	if npcId == 217956 then -- Chomper

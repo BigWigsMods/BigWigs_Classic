@@ -43,11 +43,6 @@ if L then
 	L.adds_yell_trigger = "Хорошо. Воины ледяных пустошей восстаньте! Повелеваю вам сражаться убивать и умирать во имя своего повелителя! Не щадить никого!"
 end
 
-L = BigWigs:NewBossLocale("Loatheb", "ruRU")
-if L then
-	L.ready = "|cff20ff20Готов|r"
-end
-
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ruRU")
 if L then
 	L.adds_yell_trigger = "Встаньте мои воины" -- Встаньте мои воины! Встаньте и сражайтесь вновь!

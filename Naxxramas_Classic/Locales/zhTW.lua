@@ -43,11 +43,6 @@ if L then
 	L.adds_yell_trigger = "非常好，凍原的戰士們，起來吧!我命令你們作戰，為你們的主人殺戮或獻身吧!不要留下活口!"
 end
 
-L = BigWigs:NewBossLocale("Loatheb", "zhTW")
-if L then
-	L.ready = "|cff20ff20準備完成|r"
-end
-
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "zhTW")
 if L then
 	L.adds_yell_trigger = "起來吧，我的戰士們" -- 起來吧，我的戰士們!起來，再為主人盡忠一次!
