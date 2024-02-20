@@ -34,6 +34,9 @@ if L then
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tSheep"
 	L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|tSquirrel"
 	L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|tChicken"
+
+	L.run = "Run to the door"
+	L.run_desc = "Show a message when you defeat this boss to run to the door. This is intended to help you avoid accidentally engaging the next boss."
 end
 
 --------------------------------------------------------------------------------
@@ -54,6 +57,7 @@ function mod:GetOptions()
 		436825, -- Frayed Wiring
 		440073, -- Self Repair
 		{"health", "INFOBOX"},
+		{"run", "EMPHASIZE"},
 	},nil,{
 		[438735] = L.red_button, -- High Voltage! (Red Button)
 		[436570] = L.attack_buff, -- Cluck! (+50% attack speed)
@@ -109,6 +113,10 @@ function mod:OnEngage()
 
 	self:CDBar(436816, 11.6, CL.breath) -- Sprocketfire Breath
 	self:CDBar(436692, 12.2) -- Explosive Egg
+end
+
+function mod:OnWin()
+	self:Message("run", "blue", L.run, false)
 end
 
 --------------------------------------------------------------------------------

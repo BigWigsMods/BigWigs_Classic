@@ -35,6 +35,9 @@ if L then
 	--L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tSheep"
 	--L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|tSquirrel"
 	--L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|tChicken"
+
+	--L.run = "Run to the door"
+	--L.run_desc = "Show a message when you defeat this boss to run to the door. This is intended to help you avoid accidentally engaging the next boss."
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "itIT")
