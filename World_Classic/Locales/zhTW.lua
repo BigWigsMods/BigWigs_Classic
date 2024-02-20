@@ -8,7 +8,7 @@ end
 
 L = BigWigs:NewBossLocale("Lord Kazzak", "zhTW")
 if L then
-	L.bossName = "卡札克"
+	L.bossName = "卡札克領主" -- this is name according to DBM mod
 
 	L.engage_trigger = "為了軍團！為了基爾加德！"
 
