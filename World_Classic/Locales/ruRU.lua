@@ -12,7 +12,7 @@ if L then
 
 	L.engage_trigger = "За Легион! За Кил'джедена!"
 
-	-- L.supreme_mode = "Supreme Mode"
+	L.supreme_mode = "Высший режим"
 end
 
 L = BigWigs:NewBossLocale("Emeriss", "ruRU")
