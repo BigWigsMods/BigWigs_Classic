@@ -29,7 +29,7 @@ BigWigs:AddSounds("Electrocutioner 6000 Discovery", {
 
 BigWigs:AddSounds("Mechanical Menagerie Discovery", {
 	[436692] = "info",
-	[436741] = "warning",
+	[436695] = "warning",
 	[436816] = "alarm",
 	[436833] = "alert",
 	[436836] = {"info","long"},

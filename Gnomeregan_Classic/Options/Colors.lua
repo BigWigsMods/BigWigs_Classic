@@ -34,7 +34,7 @@ BigWigs:AddColors("Electrocutioner 6000 Discovery", {
 BigWigs:AddColors("Mechanical Menagerie Discovery", {
 	[436570] = "orange",
 	[436692] = "cyan",
-	[436741] = "red",
+	[436695] = "red",
 	[436816] = {"blue","yellow"},
 	[436825] = {"green","red"},
 	[436833] = "orange",
