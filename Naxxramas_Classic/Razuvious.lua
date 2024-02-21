@@ -12,6 +12,9 @@ mod:SetEncounterID(1113)
 --
 
 local understudyIcons = {}
+local mindExhaustionList = {}
+local mindExhaustionDebuffTime = {}
+local UpdateInfoBoxList
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -33,7 +36,7 @@ function mod:GetOptions()
 		29107, -- Disrupting Shout
 		29060, -- Taunt
 		29061, -- Shield Wall
-		29051, -- Mind Exhaustion
+		{29051, "INFOBOX"}, -- Mind Exhaustion
 	}, {
 		[29060] = L.understudy,
 	}
@@ -56,13 +59,17 @@ function mod:OnBossEnable()
 	--self:Log("SPELL_AURA_APPLIED", "MindExhaustion", 29051) -- Hidden
 
 	self:Log("SPELL_AURA_APPLIED", "MindControl", 10912)
-	self:Death("Deaths", 16803) -- Deathknight Understudy
+	self:Death("UnderstudyKilled", 16803) -- Deathknight Understudy
 	self:Death("Win", 16061)
 end
 
 function mod:OnEngage()
+	-- Mind Control can happen before engage, so we don't reset any locals
 	self:CDBar(29107, 25, self:SpellName(29107), L["29107_icon"]) -- Disrupting Shout
 	self:DelayedMessage(29107, 20, "red", CL.soon:format(self:SpellName(29107)))
+
+	self:OpenInfo(29051, "BigWigs: |T136222:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(29051))
+	self:SimpleTimer(UpdateInfoBoxList, 0.1)
 end
 
 --------------------------------------------------------------------------------
@@ -129,25 +136,55 @@ end
 
 function mod:MindControl(args)
 	if self:MobId(args.destGUID) == 16803 then -- Only when mind controlling an understudy
+		self:DeleteFromTable(mindExhaustionList, args.destGUID)
 		local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
 		if icon then
+			mindExhaustionList[#mindExhaustionList + 1] = args.destGUID
+			mindExhaustionDebuffTime[args.destGUID] = GetTime() + 60
 			understudyIcons[args.destGUID] = icon
-			-- Not much of a point if they aren't marked
-			self:Bar(29051, 60, icon .. self:SpellName(29051)) -- Mind Exhaustion is hidden but we can just do it here
 		else
 			understudyIcons[args.destGUID] = nil
 		end
 	end
 end
 
-function mod:Deaths(args)
+function mod:UnderstudyKilled(args)
+	self:DeleteFromTable(mindExhaustionList, args.destGUID)
+	mindExhaustionDebuffTime[args.destGUID] = nil
 	local icon = understudyIcons[args.destGUID]
 	if icon then
-		self:StopBar(icon .. self:SpellName(29051)) -- Mind Exhaustion
 		self:StopBar(icon .. self:SpellName(29060)) -- Taunt
 		self:StopBar(icon .. self:SpellName(29061)) -- Shield Wall
 	else
 		self:StopBar(29060) -- Taunt
 		self:StopBar(29061) -- Shield Wall
+	end
+	understudyIcons[args.destGUID] = nil
+end
+
+function UpdateInfoBoxList()
+	if not mod:IsEngaged() then return end
+	mod:SimpleTimer(UpdateInfoBoxList, 0.1)
+
+	local t = GetTime()
+	local line = 1
+	for i = 1, 5 do
+		local npcGUID = mindExhaustionList[i]
+		if npcGUID then
+			local remaining = (mindExhaustionDebuffTime[npcGUID] or 0) - t
+			mod:SetInfo(29051, line, understudyIcons[npcGUID])
+			if remaining > 0 then
+				mod:SetInfo(29051, line + 1, CL.seconds:format(remaining))
+				mod:SetInfoBar(29051, line, remaining / 60)
+			else
+				mod:SetInfo(29051, line + 1, CL.ready, 0.13, 1, 0.13)
+				mod:SetInfoBar(29051, line, 0)
+			end
+		else
+			mod:SetInfo(29051, line, "")
+			mod:SetInfo(29051, line + 1, "")
+			mod:SetInfoBar(29051, line, 0)
+		end
+		line = line + 2
 	end
 end

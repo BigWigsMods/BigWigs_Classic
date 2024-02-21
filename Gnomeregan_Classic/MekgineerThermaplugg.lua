@@ -4,7 +4,13 @@
 
 local mod, CL = BigWigs:NewBoss("Mekgineer Thermaplugg Discovery", 90, -2940)
 if not mod then return end
-mod:RegisterEnableMob(218537) -- Mekgineer Thermaplugg
+mod:RegisterEnableMob(
+	218537, -- Mekgineer Thermaplugg
+	218538, -- STX-96/FR
+	218970, -- STX-97/IC
+	218972, -- STX-98/PO
+	218974 -- STX-99/XD
+)
 mod:SetEncounterID(2940)
 mod:SetStage(1)
 
@@ -15,6 +21,7 @@ mod:SetStage(1)
 local highVoltageList = {}
 local highVoltageDebuffTime = {}
 local castCollector = {}
+local currentBoss = 218538
 local UpdateInfoBoxList
 
 --------------------------------------------------------------------------------
@@ -66,7 +73,7 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED")
+	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 	self:RegisterMessage("BigWigs_BossComm")
 
 	-- General
@@ -93,6 +100,7 @@ function mod:OnEngage()
 	highVoltageList = {}
 	highVoltageDebuffTime = {}
 	castCollector = {}
+	currentBoss = 218538
 	for unit in self:IterateGroup() do
 		local name = self:UnitName(unit)
 		highVoltageList[#highVoltageList + 1] = name
@@ -139,9 +147,9 @@ do
 				if msg == "b3" then
 					self:SummonBomb({["spellId"]=11523})
 				elseif msg == "stage" then
-					local stage = self:GetStage()+1
-					self:SetStage(stage)
-					self:Message("stages", "cyan", CL.stage:format(stage), false)
+					--local stage = self:GetStage()+1
+					--self:SetStage(stage)
+					self:Message("stages", "cyan", CL.stage:format(self:GetStage()+1), false)
 					self:StopBar(437853) -- Summon Bomb
 					self:StopBar(438726) -- Hazardous Hammer
 					self:StopBar(438732) -- Toxic Ventilation
@@ -163,10 +171,13 @@ local function stageCheck(self, sourceGUID)
 	local nextStage
 	if curStage ~= 2 and sourceMobId == 218970 then -- STX-97/IC = Stage 2
 		nextStage = 2
+		currentBoss = 218970
 	elseif curStage ~= 3 and sourceMobId == 218972 then -- STX-98/PO = Stage 3
 		nextStage = 3
+		currentBoss = 218972
 	elseif curStage ~= 4 and sourceMobId == 218974 then -- STX-99/XD = Stage 4
 		nextStage = 4
+		currentBoss = 218974
 	end
 	if not nextStage then return end -- No stage change
 	self:SetStage(nextStage)
@@ -231,7 +242,7 @@ function mod:SprocketfireApplied(args)
 		if self:Me(args.destGUID) then
 			self:StackMessage(args.spellId, "blue", args.destName, args.amount, 4)
 		else
-			local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
+			local bossUnit = self:GetUnitIdByGUID(currentBoss) -- Source can vary or be nil
 			if bossUnit and self:Tanking(bossUnit, args.destName) then
 				self:StackMessage(args.spellId, "orange", args.destName, args.amount, 4)
 			end
@@ -263,8 +274,8 @@ function mod:FreezingApplied(args)
 	if args.amount >= 5 then
 		if self:Me(args.destGUID) then
 			self:StackMessage(args.spellId, "blue", args.destName, args.amount, 5)
-		else
-			local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
+		elseif self:Player(args.destFlags) then -- Players, not pets
+			local bossUnit = self:GetUnitIdByGUID(currentBoss) -- Source can vary or be nil
 			if bossUnit and self:Tanking(bossUnit, args.destName) then
 				self:StackMessage(args.spellId, "orange", args.destName, args.amount, 5)
 			end
@@ -296,7 +307,7 @@ function mod:RadiationSicknessApplied(args)
 	if self:Me(args.destGUID) then
 		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 3, CL.disease)
 	else
-		local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
+		local bossUnit = self:GetUnitIdByGUID(currentBoss) -- Source can vary or be nil
 		if bossUnit and self:Tanking(bossUnit, args.destName) then
 			self:StackMessage(args.spellId, "orange", args.destName, args.amount, 3, CL.disease)
 		end

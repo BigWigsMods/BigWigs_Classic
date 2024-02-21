@@ -11,7 +11,7 @@ mod:SetEncounterID(1121)
 -- Locals
 --
 
-local deaths = 0
+local killedBosses = {}
 local markCounter = 1
 local UpdateInfoBoxList
 
@@ -61,7 +61,7 @@ end
 
 function mod:OnEngage()
 	markCounter = 1
-	deaths = 0
+	killedBosses = {}
 
 	self:OpenInfo("health", "BigWigs: ".. CL.health)
 	local npcId = 16061
@@ -158,8 +158,12 @@ do
 		[16064] = 5, -- Thane Korth'azz
 		[16065] = 7, -- Lady Blaumeux
 	}
+	local unitTracker = {}
 	function mod:Deaths(args)
-		deaths = deaths + 1
+		unitTracker[args.mobId] = nil
+		killedBosses[args.mobId] = true
+		local count = #killedBosses + 1
+		killedBosses[count] = true
 		self:StopBar(CL.other:format(self:SpellName(29061), L[args.mobId])) -- Shield Wall
 		if args.mobId == 16063 then -- Sir Zeliek
 			self:StopBar(28883) -- Holy Wrath
@@ -171,20 +175,19 @@ do
 
 		local line = bossList[args.mobId]
 		self:SetInfoBar("health", line, 0)
-		self:SetInfo("health", line + 1, "0%")
+		self:SetInfo("health", line + 1, CL.dead)
 
-		if deaths < 4 then
-			self:Message("stages", "cyan", CL.mob_killed:format(args.destName, deaths, 4), false)
+		if count < 4 then
+			self:Message("stages", "cyan", CL.mob_killed:format(args.destName, count, 4), false)
 		end
 	end
 
-	local unitTracker = {}
 	function UpdateInfoBoxList()
 		if not mod:IsEngaged() then return end
-		mod:SimpleTimer(UpdateInfoBoxList, 1)
+		mod:SimpleTimer(UpdateInfoBoxList, 0.5)
 
 		for npcId in next, bossList do
-			if not unitTracker[npcId] or mod:MobId(mod:UnitGUID(unitTracker[npcId])) ~= npcId then
+			if not killedBosses[npcId] and (not unitTracker[npcId] or mod:MobId(mod:UnitGUID(unitTracker[npcId])) ~= npcId) then
 				unitTracker[npcId] = mod:GetUnitIdByGUID(npcId)
 			end
 		end

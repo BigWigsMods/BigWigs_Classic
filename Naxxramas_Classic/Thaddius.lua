@@ -256,10 +256,10 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg, sender)
 		end
 		if sender == L[15929] then
 			self:SetInfoBar("health", 1, 0)
-			self:SetInfo("health", 2, "0%")
+			self:SetInfo("health", 2, CL.dead)
 		elseif sender == L[15930] then
 			self:SetInfoBar("health", 3, 0)
-			self:SetInfo("health", 4, "0%")
+			self:SetInfo("health", 4, CL.dead)
 		end
 		self:PlaySound("stages", "info")
 	elseif msg == L.overload_emote_trigger then

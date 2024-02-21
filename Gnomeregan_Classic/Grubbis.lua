@@ -211,6 +211,7 @@ function mod:Troggquake(args)
 	quakeCount = quakeCount + 1
 	self:SetStage(quakeCount)
 	if quakeCount == 3 then
+		self:Bar(434168, 23.8) -- Irradiated Cloud
 		self:Message("stages", "cyan", CL.other:format(CL.stage:format(quakeCount), CL.boss), false)
 		self:PlaySound("stages", "info")
 	else

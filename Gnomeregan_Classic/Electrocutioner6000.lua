@@ -86,7 +86,9 @@ function mod:MagneticPulseApplied(args)
 end
 
 function mod:MagneticPulseRemoved(args)
-	magneticPulsePlayer = nil
+	if magneticPulsePlayer == args.destName then
+		magneticPulsePlayer = nil
+	end
 	self:StopBar(args.spellName, args.destName)
 end
 

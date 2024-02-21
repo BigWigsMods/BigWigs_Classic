@@ -53,7 +53,7 @@ function mod:GetOptions()
 		436833, -- Widget Volley
 		436836, -- Widget Fortress
 		{436816, "EMPHASIZE"}, -- Sprocketfire Breath
-		436741, -- Overheat
+		436695, -- Overheat
 		436825, -- Frayed Wiring
 		440073, -- Self Repair
 		{"health", "INFOBOX"},
@@ -78,17 +78,18 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "CluckStart", 436570)
 	self:Log("SPELL_CAST_SUCCESS", "Cluck", 436570)
 	self:Log("SPELL_CAST_START", "WidgetVolley", 436833)
-	self:Log("SPELL_CAST_START", "WidgetFortress", 436836)
+	self:Log("SPELL_CAST_START", "WidgetFortressStart", 436836)
+	self:Log("SPELL_CAST_SUCCESS", "WidgetFortress", 436836)
 	self:Log("SPELL_AURA_APPLIED", "WidgetFortressApplied", 436837)
 	self:Log("SPELL_AURA_REMOVED", "WidgetFortressRemoved", 436837)
 	self:Log("SPELL_CAST_START", "SprocketfireBreath", 436816)
 	self:Log("SPELL_AURA_APPLIED", "SprocketfireBreathApplied", 440014)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "SprocketfireBreathAppliedDose", 440014)
-	self:Log("SPELL_CAST_START", "FrayedWiringStart", 436825)
+	self:Log("SPELL_CAST_START", "FrayedWiringStart", 436824)
 	self:Log("SPELL_AURA_APPLIED", "FrayedWiringApplied", 436825)
 	self:Log("SPELL_AURA_REMOVED", "FrayedWiringRemoved", 436825)
-	self:Log("SPELL_AURA_APPLIED", "OverheatApplied", 436741)
-	self:Log("SPELL_AURA_REMOVED", "OverheatRemoved", 436741)
+	self:Log("SPELL_CAST_START", "OverheatStart", 436695)
+	self:Log("SPELL_CAST_SUCCESS", "Overheat", 436695)
 	self:Log("SPELL_CAST_START", "SelfRepairStart", 440073)
 	self:Log("SPELL_CAST_SUCCESS", "SelfRepair", 440073)
 end
@@ -177,20 +178,26 @@ function mod:WidgetVolley(args)
 	end
 end
 
-function mod:WidgetFortress(args)
-	squirrelHP = squirrelHP - 25
-	self:Message(args.spellId, "yellow", CL.other:format(CL.shield, L.boss_at_hp:format(L[218244], squirrelHP)))
+function mod:WidgetFortressStart(args)
+	self:Message(args.spellId, "yellow", CL.other:format(CL.shield, L.boss_at_hp:format(L[218244], squirrelHP-25)))
 	self:PlaySound(args.spellId, "long")
 end
 
+function mod:WidgetFortress()
+	squirrelHP = squirrelHP - 25
+end
+
 function mod:WidgetFortressApplied(args)
-	local npcId = self:MobId(args.destGUID)
+	local destGUID = args.destGUID
+	local npcId = self:MobId(destGUID)
 	local name = L[npcId]
-	if name and not shieldTimers[args.destGUID] then -- Delay so we don't warn for bosses just running through it
-		shieldTimers[args.destGUID] = self:ScheduleTimer(function()
-			self:Message(436836, "yellow", CL.on:format(CL.shield, name))
-			self:PlaySound(436836, "info")
-		end, 3)
+	if name and not shieldTimers[destGUID] then -- Delay so we don't warn for bosses just running through it
+		shieldTimers[destGUID] = self:ScheduleTimer(function()
+			if destGUID == self:UnitGUID("target") then -- Only if you're attacking it
+				self:Message(436836, "yellow", CL.on:format(CL.shield, name))
+				self:PlaySound(436836, "info")
+			end
+		end, 2)
 	end
 end
 
@@ -219,8 +226,8 @@ function mod:SprocketfireBreathAppliedDose(args)
 	end
 end
 
-function mod:FrayedWiringStart(args)
-	self:Message(args.spellId, "red", CL.other:format(CL.spell_reflection, L.boss_at_hp:format(L[218243], sheepHP-25)))
+function mod:FrayedWiringStart()
+	self:Message(436825, "red", CL.other:format(CL.spell_reflection, L.boss_at_hp:format(L[218243], sheepHP-25)))
 end
 
 function mod:FrayedWiringApplied(args)
@@ -238,20 +245,14 @@ function mod:FrayedWiringRemoved(args)
 	end
 end
 
-function mod:OverheatApplied(args)
-	local npcId = self:MobId(args.destGUID)
-	if npcId == 218242 then -- Acts as a group aura, applying to nearby bosses
-		dragonHP = dragonHP - 25
-		self:Message(args.spellId, "red", CL.other:format(args.spellName, L.boss_at_hp:format(L[npcId], dragonHP)))
-		self:Bar(args.spellId, 15)
-		self:PlaySound(args.spellId, "warning")
-	end
+function mod:OverheatStart(args)
+	self:Message(args.spellId, "red", CL.other:format(args.spellName, L.boss_at_hp:format(L[218242], dragonHP-25)))
+	self:PlaySound(args.spellId, "warning")
 end
 
-function mod:OverheatRemoved(args)
-	if self:MobId(args.destGUID) == 218242 then
-		self:StopBar(args.spellName)
-	end
+function mod:Overheat(args)
+	dragonHP = dragonHP - 25
+	self:Bar(args.spellId, 15)
 end
 
 function mod:SelfRepairStart(args)
@@ -261,11 +262,6 @@ function mod:SelfRepairStart(args)
 	self:PlaySound(args.spellId, "long")
 end
 
-function mod:SelfRepair(args)
-	local npcId = self:MobId(args.sourceGUID)
-	repairList[npcId] = nil
-end
-
 do
 	local bossList = {
 		[218242] = 1, -- Dragon
@@ -273,10 +269,29 @@ do
 		[218244] = 5, -- Squirrel
 		[218245] = 7, -- Chicken
 	}
+	function mod:SelfRepair(args)
+		local npcId = self:MobId(args.sourceGUID)
+		repairList[npcId] = nil
+		-- They rez with 30% HP, so they do another ability at 25%
+		if npcId == 218242 then -- Dragon
+			dragonHP = 50
+		elseif npcId == 218243 then -- Sheep
+			sheepHP = 50
+		elseif npcId == 218244 then -- Squirrel
+			squirrelHP = 50
+		elseif npcId == 218245 then -- Chicken
+			chickenHP = 50
+		end
+		-- Don't wait until we get a valid unit before swapping from cast back to health
+		local line = bossList[npcId]
+		self:SetInfoBar("health", line, 0.3)
+		self:SetInfo("health", line + 1, "30%")
+	end
+
 	local unitTracker = {}
 	function UpdateInfoBoxList()
 		if not mod:IsEngaged() then return end
-		mod:SimpleTimer(UpdateInfoBoxList, next(repairList) and 0.1 or 1)
+		mod:SimpleTimer(UpdateInfoBoxList, next(repairList) and 0.1 or 0.5)
 
 		for npcId, line in next, bossList do
 			if repairList[npcId] then
