@@ -5,7 +5,7 @@ if L then
 	L.aoe = "近战AOE"
 	L.cloud = "一团毒云接近了首领"
 	L.cone = "辐射？" -- "Frontal" Cone, it's a rear cone (he's farting) 还是使用技能名称（诡异的技能）
-	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
+	L.warmup_say_chat_trigger = "诺莫瑞根" -- 在诺莫瑞根各地，还有一些会喷出辐射性物质的通风井。
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "zhCN")
@@ -36,8 +36,8 @@ if L then
 	L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|t松鼠"
 	L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|t鸡"
 
-	--L.run = "Run to the door"
-	--L.run_desc = "Show a message when you defeat this boss to run to the door. This is intended to help you avoid accidentally engaging the next boss."
+	L.run = "远离中场"
+	L.run_desc = "当你击败首领时，会显示一条信息，让你远离中场跑到门口。这样做的目的是帮助你避免引起与新出现的首领开战。"
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "zhCN")
