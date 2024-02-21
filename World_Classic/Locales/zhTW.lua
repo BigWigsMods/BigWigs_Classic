@@ -19,7 +19,7 @@ L = BigWigs:NewBossLocale("Emeriss", "zhTW")
 if L then
 	L.bossName = "艾莫莉絲"
 
-	L.engage_trigger = "希望是靈魂染上的疾病!這片土地應該枯竭，從此死氣騰騰！"
+	L.engage_trigger = "希望是靈魂染上的疾病！這片土地應該枯竭，從此死氣騰騰！"
 end
 
 L = BigWigs:NewBossLocale("Lethon", "zhTW")
@@ -33,12 +33,12 @@ L = BigWigs:NewBossLocale("Taerar", "zhTW")
 if L then
 	L.bossName = "泰拉爾"
 
-	L.engage_trigger = "和平不過是短暫的夢想!讓夢魘統治整個世界吧！"
+	L.engage_trigger = "和平不過是短暫的夢想！讓夢魘統治整個世界吧！"
 end
 
 L = BigWigs:NewBossLocale("Ysondre", "zhTW")
 if L then
 	L.bossName = "伊索德雷"
 
-	L.engage_trigger = "生命的希冀已被切斷!夢遊者要展開報復！"
+	L.engage_trigger = "生命的希冀已被切斷！夢遊者要展開報復！"
 end
