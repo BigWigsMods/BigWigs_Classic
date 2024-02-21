@@ -11,7 +11,7 @@ end
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "frFR")
 if L then
 	L.bossName = "Retombée visqueuse"
-	--L.desiccated_fallout = "Desiccated Fallout" -- NPC ID 216810
+	L.desiccated_fallout = "Retombée desséchée" -- NPC ID 216810
 end
 
 L = BigWigs:NewBossLocale("Crowd Pummeler 9-60 Discovery", "frFR")
@@ -29,19 +29,19 @@ if L then
 	L.bossName = "Ménagerie mécanique"
 	L.attack_buff = "+50% de vitesse d'attaque"
 	L.boss_at_hp = "%s à %d%%" -- BOSS_NAME at 50%
-	--L.red_button = "Red Button"
+	L.red_button = "Bouton rouge"
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tDragon"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tMouton"
 	L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|tÉcureuil"
 	L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|tPoulet"
 
-	--L.run = "Run to the door"
-	--L.run_desc = "Show a message when you defeat this boss to run to the door. This is intended to help you avoid accidentally engaging the next boss."
+	L.run = "Courir jusqu'à la porte"
+	L.run_desc = "Affichez un message lorsque vous avez vaincu ce boss pour courir jusqu'à la porte. Cela est destiné à vous aider à éviter d'engager accidentellement le prochain boss."
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "frFR")
 if L then
 	L.bossName = "Mekgénieur Thermojoncteur"
-	--L.red_button = "Red Button"
+	L.red_button = "Bouton rouge"
 end
