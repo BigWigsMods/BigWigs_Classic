@@ -24,7 +24,7 @@ if L then
 
 	L.vulnerability = "Changement de vulnérabilité"
 	L.vulnerability_desc = "Préviens quand la vulnérabilité change."
-	L.vulnerability_message = "Vulnerabilité : %s"
+	L.vulnerability_message = "Vulnérabilité : %s"
 	L.detect_magic_missing = "Détection de la magie est absente de Chromaggus"
 	L.detect_magic_warning = "Un Mage doit incanter \124cff71d5ff\124Hspell:2855:0\124h[Détection de la magie]\124h\124r sur Chromaggus pour que les avertissements de vulnérabilité fonctionnent."
 end
