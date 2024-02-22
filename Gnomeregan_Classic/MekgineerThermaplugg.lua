@@ -306,7 +306,7 @@ end
 function mod:RadiationSicknessApplied(args)
 	if self:Me(args.destGUID) then
 		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 3, CL.disease)
-	else
+	elseif args.amount then
 		local bossUnit = self:GetUnitIdByGUID(currentBossGUID) -- Source can vary or be nil
 		if bossUnit and self:Tanking(bossUnit, args.destName) then
 			self:StackMessage(args.spellId, "orange", args.destName, args.amount, 3, CL.disease)
