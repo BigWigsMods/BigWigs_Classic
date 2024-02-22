@@ -3,7 +3,7 @@ if not L then return end
 if L then
 	L.bossName = "Grubbis"
 	L.aoe = "Daño cuerpo a cuerpo en área"
-	L.cloud = "Una nube alcanzó al jefe"
+	L.cloud = "Una nube radiactiva alcanzó al jefe"
 	L.cone = "Cono \"frontal\"" -- "Frontal" Cone, it's a rear cone (he's farting)
 	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
 end
@@ -36,13 +36,13 @@ if L then
 	L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|tArdilla"
 	L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|tPollo"
 
-	--L.run = "Run to the door"
-	--L.run_desc = "Show a message when you defeat this boss to run to the door. This is intended to help you avoid accidentally engaging the next boss."
+	L.run = "Corre hacia la puerta"
+	L.run_desc = "Muestra un mensaje cuando derrotes a este jefe para correr hacia la puerta. Esto tiene como objetivo ayudarte a evitar enfrentarte accidentalmente al próximo jefe."
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "esES")
 if L then
 	L.bossName = "Mekigeniero Termochufe"
 	L.red_button = "Botón rojo"
-	--L.position = "Position %d" -- Position 5
+	L.position = "Posición %d" -- Position 5
 end
