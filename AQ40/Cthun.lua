@@ -54,7 +54,6 @@ if L then
 	L.weakened = CL.weakened
 	L.weakened_desc = "Warn for Weakened state."
 	L.weakened_icon = "ability_rogue_findweakness"
-	L.weakenedtrigger = "%s is weakened"
 
 	L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYER_NAME (Group 1)
 	L.stomach = "Stomach"
@@ -89,8 +88,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "DigestiveAcidApplied", 26476)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "DigestiveAcidAppliedDose", 26476)
 	self:Log("SPELL_AURA_REMOVED", "DigestiveAcidRemoved", 26476)
-	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
-	self:RegisterMessage("BigWigs_BossComm")
 
 	self:Death("EyeOfCThunKilled", 15589)
 	self:Death("GiantEyeTentacleKilled", 15334)
@@ -163,12 +160,6 @@ do
 	end
 end
 
-function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
-	if msg:find(L.weakenedtrigger, nil, true) then
-		self:Sync("CThunWeakened")
-	end
-end
-
 function mod:EyeOfCThunKilled()
 	deaths = 0
 	healthList = {}
@@ -211,21 +202,6 @@ end
 function mod:GiantEyeTentacleKilled()
 	-- Just in case it managed to get a cast of Eye Beam off
 	self:PrimaryIcon(26134) -- Clear icon
-end
-
-do
-	local times = {
-		["CThunWeakened"] = 0,
-	}
-	function mod:BigWigs_BossComm(_, msg)
-		if times[msg] then
-			local t = GetTime()
-			if t-times[msg] > 5 then
-				times[msg] = t
-				self[msg](self)
-			end
-		end
-	end
 end
 
 do
@@ -338,6 +314,10 @@ function mod:FleshTentacleKilled(args) -- Stomach Tentacle
 	self:SetInfo("infobox", line + 1, "0%")
 
 	self:Message("stages", "cyan", CL.mob_killed:format(args.destName, deaths, 2), false)
+
+	if deaths == 2 then
+		self:CThunWeakened()
+	end
 end
 
 function UpdateInfoBoxList()

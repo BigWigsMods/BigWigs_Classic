@@ -56,7 +56,7 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.warmup_trigger, nil, true) then
-		self:Bar("warmup", self:Vanilla() and 45 or 43.5, CL.active, "inv_misc_monsterscales_05")
+		self:Bar("warmup", 43.5, CL.active, "inv_misc_monsterscales_05") -- Can vary up to 45s
 	end
 end
 

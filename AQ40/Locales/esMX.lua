@@ -50,7 +50,6 @@ if L then
 	L.giant_eye_tentacle_desc = "Temporizadores para Tentáculo ocular gigante."
 
 	L.weakened_desc = "Anunciar debilidad."
-	L.weakenedtrigger = "%s está débil!"
 
 	L.dark_glare_message = "%s: %s (Grupo %s)" -- Dark Glare: PLAYER_NAME (Group 1)
 	--L.stomach = "Stomach"

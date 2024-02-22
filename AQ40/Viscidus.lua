@@ -62,6 +62,7 @@ function mod:OnBossEnable()
 	self:Log("SWING_DAMAGE", "SwingDamage", "*")
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
+	self:RegisterEvent("UNIT_TARGET")
 
 	self:Death("Win", 15299)
 end
@@ -95,8 +96,8 @@ if mod:Vanilla() then
 	function mod:FrostDamage(args)
 		if args.spellSchool == 0x10 and self:MobId(args.destGUID) == 15299 then -- 0x10 is Frost
 			frostCount = frostCount + 1
-			if (frostCount <= 190 and frostCount % 20 == 0) or (frostCount > 190 and frostCount < 210) then
-				self:Message("freeze", "green", L.freeze_warn_frost:format(frostCount, 200-frostCount), L.freeze_icon)
+			if (frostCount <= 160 and frostCount % 20 == 0) or (frostCount > 160 and frostCount < 180) then
+				self:Message("freeze", "green", L.freeze_warn_frost:format(frostCount, 170-frostCount), L.freeze_icon)
 			end
 		end
 	end
@@ -104,8 +105,8 @@ if mod:Vanilla() then
 	function mod:SwingDamage(args)
 		if swingCount ~= -1 and self:MobId(args.destGUID) == 15299 then
 			swingCount = swingCount + 1
-			if (swingCount < 190 and swingCount % 20 == 0) or (swingCount > 190 and swingCount < 210) then
-				self:Message("freeze", "green", L.freeze_warn_melee:format(swingCount, 200-swingCount), L.freeze_icon)
+			if (swingCount < 90 and swingCount % 20 == 0) or (swingCount > 90 and swingCount < 130) then
+				self:Message("freeze", "green", L.freeze_warn_melee:format(swingCount, 100-swingCount), L.freeze_icon)
 			end
 		end
 	end
@@ -131,17 +132,23 @@ end
 
 function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 	if msg:find(L.freeze_trigger1, nil, true) then
-		self:Message("freeze", "orange", L.freeze_warn1, L.freeze_icon)
+		self:Message("freeze", "orange", CL.count:format(L.freeze_warn1, frostCount), L.freeze_icon)
 	elseif msg:find(L.freeze_trigger2, nil, true) then
-		self:Message("freeze", "orange", L.freeze_warn2, L.freeze_icon)
+		self:Message("freeze", "orange", CL.count:format(L.freeze_warn2, frostCount), L.freeze_icon)
 	elseif msg:find(L.freeze_trigger3, nil, true) then
 		swingCount = 0
-		self:Message("freeze", "red", L.freeze_warn3, L.freeze_icon)
+		self:Message("freeze", "red", CL.count:format(L.freeze_warn3, frostCount), L.freeze_icon)
 		self:Bar("freeze", 30, L.freeze_warn3, L.freeze_icon)
-		self:ScheduleTimer("OnWipe", 27) -- Reset the frostCount
 	elseif msg:find(L.freeze_trigger4, nil, true) then
-		self:Message("freeze", "orange", L.freeze_warn4, L.freeze_icon)
+		self:Message("freeze", "orange", CL.count:format(L.freeze_warn4, swingCount), L.freeze_icon)
 	elseif msg:find(L.freeze_trigger5, nil, true) then
-		self:Message("freeze", "red", L.freeze_warn5, L.freeze_icon)
+		self:Message("freeze", "red", CL.count:format(L.freeze_warn5, swingCount), L.freeze_icon)
+	end
+end
+
+function mod:UNIT_TARGET(_, unit)
+	if self:MobId(self:UnitGUID(unit.."target")) == 15667 then -- Glob of Viscidus
+		swingCount = -1
+		frostCount = 0
 	end
 end

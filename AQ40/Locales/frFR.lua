@@ -50,7 +50,6 @@ if L then
 	L.giant_eye_tentacle_desc = "Chronomètres pour le tentacule oculaire géant."
 
 	L.weakened_desc = "Annoncer affaiblissement."
-	L.weakenedtrigger = "%s est affaibli"
 
 	L.dark_glare_message = "%s: %s (Groupe %s)" -- Dark Glare: PLAYER_NAME (Group 1)
 	--L.stomach = "Stomach"

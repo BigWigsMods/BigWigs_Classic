@@ -50,7 +50,6 @@ if L then
 	--L.giant_eye_tentacle_desc = "Timers for the giant eye tentacle."
 
 	--L.weakened_desc = "Warn for weakened state."
-	L.weakenedtrigger = "%s變弱了"
 
 	--L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYER_NAME (Group 1)
 	--L.stomach = "Stomach"

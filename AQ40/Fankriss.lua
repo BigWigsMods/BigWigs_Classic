@@ -54,6 +54,8 @@ function mod:SummonWorm(args)
 end
 
 function mod:Entangle(args)
-	self:TargetMessage(720, "red", args.destName)
-	self:PlaySound(720, "alarm", nil, args.destName)
+	if self:Player(args.destFlags) then -- Players, not pets
+		self:TargetMessage(720, "red", args.destName)
+		self:PlaySound(720, "alarm", nil, args.destName)
+	end
 end

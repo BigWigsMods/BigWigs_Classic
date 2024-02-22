@@ -50,7 +50,6 @@ if L then
 	L.giant_eye_tentacle_desc = "Таймеры для Огромного глазастого щупальца."
 
 	L.weakened_desc = "Предупреждение об ослаблении."
-	L.weakenedtrigger = "%s ослаблен"
 
 	--L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYER_NAME (Group 1)
 	L.stomach = "Желудок"

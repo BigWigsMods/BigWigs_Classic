@@ -76,7 +76,7 @@ end
 
 function mod:EnrageFrenzy(args)
 	self:CDBar(args.spellId, 14.5)
-	self:Message(args.spellId, "yellow")
+	self:Message(args.spellId, "yellow", CL.buff_boss:format(args.spellName))
 	if self:Dispeller("enrage", true) then
 		self:PlaySound(args.spellId, "alarm")
 	end
