@@ -21,7 +21,7 @@ mod:SetStage(1)
 local highVoltageList = {}
 local highVoltageDebuffTime = {}
 local castCollector = {}
-local currentBoss = 218538
+local currentBossGUID = "none"
 local UpdateInfoBoxList
 
 --------------------------------------------------------------------------------
@@ -32,6 +32,7 @@ local L = mod:GetLocale()
 if L then
 	L.bossName = "Mekgineer Thermaplugg"
 	L.red_button = "Red Button"
+	L.position = "Position %d" -- Position 5
 end
 
 --------------------------------------------------------------------------------
@@ -62,7 +63,7 @@ function mod:GetOptions()
 		[438719] =  CL.stage:format(2),
 		[438726] =  CL.stage:format(3),
 	},{
-		[437853] = CL.incoming:format(CL.bombs), -- Summon Bomb (Bombs Incoming)
+		[437853] = CL.bombs, -- Summon Bomb (Bombs)
 		[438735] = L.red_button, -- High Voltage! (Red Button)
 		[438727] = CL.disease, -- Radiation Sickness (Disease)
 	}
@@ -100,7 +101,7 @@ function mod:OnEngage()
 	highVoltageList = {}
 	highVoltageDebuffTime = {}
 	castCollector = {}
-	currentBoss = 218538
+	currentBossGUID = "none"
 	for unit in self:IterateGroup() do
 		local name = self:UnitName(unit)
 		highVoltageList[#highVoltageList + 1] = name
@@ -147,9 +148,9 @@ do
 				if msg == "b3" then
 					self:SummonBomb({["spellId"]=11523})
 				elseif msg == "stage" then
-					--local stage = self:GetStage()+1
-					--self:SetStage(stage)
-					self:Message("stages", "cyan", CL.stage:format(self:GetStage()+1), false)
+					local stage = self:GetStage()+1
+					self:SetStage(stage)
+					self:Message("stages", "cyan", CL.stage:format(stage), false)
 					self:StopBar(437853) -- Summon Bomb
 					self:StopBar(438726) -- Hazardous Hammer
 					self:StopBar(438732) -- Toxic Ventilation
@@ -171,13 +172,10 @@ local function stageCheck(self, sourceGUID)
 	local nextStage
 	if curStage ~= 2 and sourceMobId == 218970 then -- STX-97/IC = Stage 2
 		nextStage = 2
-		currentBoss = 218970
 	elseif curStage ~= 3 and sourceMobId == 218972 then -- STX-98/PO = Stage 3
 		nextStage = 3
-		currentBoss = 218972
 	elseif curStage ~= 4 and sourceMobId == 218974 then -- STX-99/XD = Stage 4
 		nextStage = 4
-		currentBoss = 218974
 	end
 	if not nextStage then return end -- No stage change
 	self:SetStage(nextStage)
@@ -201,9 +199,8 @@ do
 		[11527] = 6,
 	}
 	function mod:SummonBomb(args)
-		self:Message(437853, "cyan", CL.count:format(CL.incoming:format(CL.bombs), bombCount[args.spellId])) -- Bombs Incoming
-		-- cooldown is sometimes delayed to 23~ seconds, unsure why.
-		self:CDBar(437853, 11) -- Summon Bomb
+		self:Message(437853, "cyan", CL.extra:format(CL.bombs, L.position:format(bombCount[args.spellId])))
+		self:CDBar(437853, 11, CL.bombs)
 		self:PlaySound(437853, "info")
 	end
 end
@@ -229,6 +226,7 @@ end
 
 -- STX-96/FR
 function mod:SprocketfirePunch(args)
+	currentBossGUID = args.sourceGUID
 	self:Message(args.spellId, "purple")
 	if self:GetStage() < 4 then -- no timers in stage 4
 		stageCheck(self, args.sourceGUID)
@@ -242,7 +240,7 @@ function mod:SprocketfireApplied(args)
 		if self:Me(args.destGUID) then
 			self:StackMessage(args.spellId, "blue", args.destName, args.amount, 4)
 		else
-			local bossUnit = self:GetUnitIdByGUID(currentBoss) -- Source can vary or be nil
+			local bossUnit = self:GetUnitIdByGUID(currentBossGUID) -- Source can vary or be nil
 			if bossUnit and self:Tanking(bossUnit, args.destName) then
 				self:StackMessage(args.spellId, "orange", args.destName, args.amount, 4)
 			end
@@ -262,6 +260,7 @@ end
 
 -- STX-97/IC
 function mod:SupercooledSmash(args)
+	currentBossGUID = args.sourceGUID
 	self:Message(args.spellId, "purple")
 	if self:GetStage() < 4 then -- no timers in stage 4
 		stageCheck(self, args.sourceGUID)
@@ -275,7 +274,7 @@ function mod:FreezingApplied(args)
 		if self:Me(args.destGUID) then
 			self:StackMessage(args.spellId, "blue", args.destName, args.amount, 5)
 		elseif self:Player(args.destFlags) then -- Players, not pets
-			local bossUnit = self:GetUnitIdByGUID(currentBoss) -- Source can vary or be nil
+			local bossUnit = self:GetUnitIdByGUID(currentBossGUID) -- Source can vary or be nil
 			if bossUnit and self:Tanking(bossUnit, args.destName) then
 				self:StackMessage(args.spellId, "orange", args.destName, args.amount, 5)
 			end
@@ -295,6 +294,7 @@ end
 
 -- STX-98/PO
 function mod:HazardousHammer(args)
+	currentBossGUID = args.sourceGUID
 	self:Message(args.spellId, "purple")
 	if self:GetStage() < 4 then -- no timers in stage 4
 		stageCheck(self, args.sourceGUID)
@@ -307,7 +307,7 @@ function mod:RadiationSicknessApplied(args)
 	if self:Me(args.destGUID) then
 		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 3, CL.disease)
 	else
-		local bossUnit = self:GetUnitIdByGUID(currentBoss) -- Source can vary or be nil
+		local bossUnit = self:GetUnitIdByGUID(currentBossGUID) -- Source can vary or be nil
 		if bossUnit and self:Tanking(bossUnit, args.destName) then
 			self:StackMessage(args.spellId, "orange", args.destName, args.amount, 3, CL.disease)
 		end

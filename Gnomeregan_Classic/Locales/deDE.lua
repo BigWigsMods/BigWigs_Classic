@@ -44,4 +44,5 @@ L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "deDE")
 if L then
 	L.bossName = "Robogenieur Thermaplugg"
 	L.red_button = "Roter Knopf"
+	--L.position = "Position %d" -- Position 5
 end
