@@ -3,7 +3,7 @@ if not L then return end
 if L then
 	L.bossName = "Grúdio"
 	L.aoe = "Dano corpo a corpo em área"
-	L.cloud = "Uma nuvem radioativa chegou ao chefe"
+	L.cloud = "Uma nuvem chegou ao chefe"
 	L.cone = "Cone \"frontal\"" -- "Frontal" Cone, it's a rear cone (he's farting)
 	L.warmup_say_chat_trigger = "Gnomeregan" -- Ainda há dutos de ventilação espalhando material radioativo em Gnomeregan.
 end
