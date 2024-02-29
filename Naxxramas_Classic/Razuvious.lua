@@ -68,7 +68,8 @@ function mod:OnEngage()
 	self:CDBar(29107, 25, self:SpellName(29107), L["29107_icon"]) -- Disrupting Shout
 	self:DelayedMessage(29107, 20, "red", CL.soon:format(self:SpellName(29107)))
 
-	self:OpenInfo(29051, "BigWigs: |T136222:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(29051))
+	self:OpenInfo(29051, "BigWigs")
+	self:SetInfo(29051, 1, "|T136222:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(29051))
 	self:SimpleTimer(UpdateInfoBoxList, 0.1)
 end
 
@@ -167,7 +168,7 @@ function UpdateInfoBoxList()
 	mod:SimpleTimer(UpdateInfoBoxList, 0.1)
 
 	local t = GetTime()
-	local line = 1
+	local line = 3
 	for i = 1, 5 do
 		local npcGUID = mindExhaustionList[i]
 		if npcGUID then

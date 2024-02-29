@@ -149,6 +149,10 @@ function mod:ShieldWall(args)
 	local msg = CL.other:format(args.spellName, L[npcId])
 	self:Message(args.spellId, "yellow", msg)
 	self:Bar(args.spellId, 20, msg)
+	local unit = self:GetUnitIdByGUID(args.destGUID)
+	if unit and self:UnitWithinRange(unit, 35) or args.destGUID == self:UnitGUID("target") then
+		self:PlaySound(args.spellId, "long")
+	end
 end
 
 do

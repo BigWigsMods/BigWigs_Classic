@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("C'Thun", 531, 1551)
 if not mod then return end
-mod:RegisterEnableMob(15727, 15589) -- C'Thun, Eye of C'Thun
+mod:RegisterEnableMob(15727, 15589, 15802) -- C'Thun, Eye of C'Thun, Flesh Tentacle
 mod:SetEncounterID(717)
 mod:SetStage(1)
 

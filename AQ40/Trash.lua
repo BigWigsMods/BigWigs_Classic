@@ -79,6 +79,7 @@ function mod:OnBossEnable()
 	if self:Vanilla() then
 		self:Log("SPELL_AURA_APPLIED", "DetectMagicApplied", 2855)
 	end
+	self:Death("SentinelKilled", 15264)
 	self:Log("SPELL_HEAL", "HealBrethren", 26565)
 	self:Log("SPELL_AURA_APPLIED", "EnrageApplied", 8599)
 
@@ -142,7 +143,7 @@ do
 						printed = true
 						BigWigs:Print(L.detect_magic_warning)
 					end
-					if GetTime() - prevMsg > 60 then
+					if GetTime() - prevMsg > 40 then
 						prevMsg = GetTime()
 						local icon = self:GetIconTexture(self:GetIcon("target"))
 						if icon then
@@ -151,7 +152,7 @@ do
 							self:Message("target_buffs", "red", L.detect_magic_missing_message, 2855)
 						end
 					end
-					--return
+					return
 				end
 				local total = {}
 				for buffId, message in next, buffList do
@@ -181,6 +182,12 @@ do
 	end
 	function mod:DetectMagicApplied(args)
 		if args.destGUID == self:UnitGUID("target") then
+			self:CheckTarget()
+		end
+	end
+	function mod:SentinelKilled(args)
+		if args.destGUID ~= self:UnitGUID("target") then
+			prevGUID = nil
 			self:CheckTarget()
 		end
 	end

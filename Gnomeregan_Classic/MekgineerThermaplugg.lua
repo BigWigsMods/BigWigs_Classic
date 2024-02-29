@@ -151,7 +151,7 @@ do
 					local stage = self:GetStage()+1
 					self:SetStage(stage)
 					self:Message("stages", "cyan", CL.stage:format(stage), false)
-					self:StopBar(437853) -- Summon Bomb
+					self:StopBar(CL.bombs) -- Summon Bomb
 					self:StopBar(438726) -- Hazardous Hammer
 					self:StopBar(438732) -- Toxic Ventilation
 					self:StopBar(438683) -- Sprocketfire Punch
@@ -180,7 +180,7 @@ local function stageCheck(self, sourceGUID)
 	if not nextStage then return end -- No stage change
 	self:SetStage(nextStage)
 	self:Message("stages", "cyan", CL.stage:format(nextStage), false)
-	self:StopBar(437853) -- Summon Bomb
+	self:StopBar(CL.bombs) -- Summon Bomb
 	self:StopBar(438726) -- Hazardous Hammer
 	self:StopBar(438732) -- Toxic Ventilation
 	self:StopBar(438683) -- Sprocketfire Punch

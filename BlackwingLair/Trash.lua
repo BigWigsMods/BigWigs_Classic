@@ -83,7 +83,7 @@ do
 						printed = true
 						BigWigs:Print(L.detect_magic_warning)
 					end
-					if GetTime() - prevMsg > 60 then
+					if GetTime() - prevMsg > 40 then
 						prevMsg = GetTime()
 						local icon = self:GetIconTexture(self:GetIcon("target"))
 						if icon then
@@ -92,7 +92,7 @@ do
 							self:Message("target_vulnerability", "red", L.detect_magic_missing_message, 2855)
 						end
 					end
-					--return
+					return
 				end
 				for buffId, message in next, buffList do
 					if self:UnitBuff("target", buffId) then

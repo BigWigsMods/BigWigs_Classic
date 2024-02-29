@@ -96,14 +96,15 @@ function mod:ExposedOver(args)
 end
 
 function mod:AquaShellApplied(args)
-	self:OpenInfo(args.spellId, "BigWigs: |T134564:0:0:0:0:64:64:4:60:4:60|t".. args.spellName)
-	self:SetInfoBar(args.spellId, 1, 1)
-	self:SetInfo(args.spellId, 1, 100)
+	self:OpenInfo(args.spellId, "BigWigs")
+	self:SetInfo(args.spellId, 1, "|T134564:0:0:0:0:64:64:4:60:4:60|t".. args.spellName)
+	self:SetInfoBar(args.spellId, 3, 1)
+	self:SetInfo(args.spellId, 3, 100)
 end
 
 function mod:AquaShellRemovedDose(args)
-	self:SetInfoBar(args.spellId, 1, args.amount/100)
-	self:SetInfo(args.spellId, 1, args.amount)
+	self:SetInfoBar(args.spellId, 3, args.amount/100)
+	self:SetInfo(args.spellId, 3, args.amount)
 end
 
 function mod:AquaShellCast() -- Aqua shell being removed, Knockback incoming
