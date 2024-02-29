@@ -77,6 +77,7 @@ BigWigs:AddSounds("The Four Horsemen", {
 	[28863] = {"alarm","underyou"},
 	[28883] = "alert",
 	[28884] = "info",
+	[29061] = "long",
 	["mark"] = "warning",
 })
 
