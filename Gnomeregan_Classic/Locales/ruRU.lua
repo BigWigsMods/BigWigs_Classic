@@ -28,8 +28,8 @@ L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "ruRU")
 if L then
 	L.bossName = "Механический зверинец"
 	L.attack_buff = "+50% скорость атаки"
-	--L.boss_at_hp = "%s at %d%%" -- BOSS_NAME at 50%
-	--L.red_button = "Red Button"
+	L.boss_at_hp = "%s на %d%%" -- BOSS_NAME at 50%
+	L.red_button = "Красная кнопка"
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|tДракон"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|tОвца"
@@ -43,6 +43,6 @@ end
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "ruRU")
 if L then
 	L.bossName = "Анжинер Термоштепсель"
-	--L.red_button = "Red Button"
+	L.red_button = "Красная кнопка"
 	--L.position = "Position %d" -- Position 5
 end
