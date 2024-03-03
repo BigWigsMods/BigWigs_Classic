@@ -13,7 +13,7 @@ mod:SetEncounterID(1108)
 
 local L = mod:GetLocale()
 if L then
-	L["28375_icon"] = "inv_shield_01"
+	L["28375_icon"] = "spell_nature_purge"
 end
 
 --------------------------------------------------------------------------------
@@ -22,11 +22,11 @@ end
 
 function mod:GetOptions()
 	return {
-		28371, -- Enrage / Frenzy (different name on classic era)
+		28371, -- Frenzy
 		29685, -- Terrifying Roar
 		25646, -- Mortal Wound
 		29306, -- Infected Wound
-		28375, -- Decimate
+		{28375, "EMPHASIZE"}, -- Decimate
 		"berserk",
 	},nil,{
 		[29685] = CL.fear, -- Terrifying Roar (Fear)
@@ -34,8 +34,8 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "EnrageFrenzy", 28371)
-	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
+	self:Log("SPELL_CAST_SUCCESS", "Frenzy", 28371)
+	self:Log("SPELL_DISPEL", "FrenzyDispelled", "*")
 	self:Log("SPELL_CAST_SUCCESS", "TerrifyingRoar", 29685)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWoundApplied", 25646)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "InfectedWoundApplied", 29306)
@@ -47,14 +47,13 @@ function mod:OnEngage()
 	self:Berserk(360, true)
 	self:CDBar(29685, 18, CL.fear) -- Terrifying Roar
 	self:CDBar(28375, 105, self:SpellName(28375), L["28375_icon"]) -- Decimate
-	self:DelayedMessage(28375, 100, "orange", CL.soon:format(self:SpellName(28375))) -- Decimate
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:EnrageFrenzy(args)
+function mod:Frenzy(args)
 	self:Message(args.spellId, "orange")
 	self:Bar(args.spellId, 9.7)
 	if self:Dispeller("enrage", true) then
@@ -62,7 +61,7 @@ function mod:EnrageFrenzy(args)
 	end
 end
 
-function mod:EnrageFrenzyDispelled(args)
+function mod:FrenzyDispelled(args)
 	if args.extraSpellName == self:SpellName(28371) then
 		self:Message(28371, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
@@ -96,7 +95,6 @@ do
 			prev = args.time
 			self:Message(args.spellId, "red", args.spellName, L["28375_icon"])
 			self:CDBar(args.spellId, 105, args.spellName, L["28375_icon"])
-			self:DelayedMessage(args.spellId, 100, "red", CL.soon:format(args.spellName))
 			self:PlaySound(args.spellId, "warning")
 		end
 	end

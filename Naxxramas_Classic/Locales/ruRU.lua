@@ -63,9 +63,6 @@ if L then
 	L[15929] = "Сталагг"
 	L[15930] = "Фойген"
 
-	L.stage1_yell_trigger1 = "Сталагг тебя раздавит!"
-	L.stage1_yell_trigger2 = "На корм хозяину!"
-
 	L.stage2_yell_trigger1 = "Отведайте... своих... костей..."
 	L.stage2_yell_trigger2 = "Растерзаю!!!"
 	L.stage2_yell_trigger3 = "Убей..."

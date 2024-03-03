@@ -127,9 +127,9 @@ do
 		elseif spellId == 438572 and not castCollector[castGUID] then -- Vehicle Damaged
 			castCollector[castGUID] = true
 			self:Sync("stage")
-		elseif spellId == 438487 and not castCollector[castGUID] then -- Ride Vehicle XXX just for testing
-			castCollector[castGUID] = true
-			self:Sync("ride")
+		--elseif spellId == 438487 and not castCollector[castGUID] then -- Ride Vehicle XXX just for testing
+		--	castCollector[castGUID] = true
+		--	self:Sync("ride")
 		end
 	end
 end
@@ -138,7 +138,7 @@ do
 	local times = {
 		["b3"] = 0,
 		["stage"] = 0,
-		["ride"] = 0,
+		--["ride"] = 0,
 	}
 	function mod:BigWigs_BossComm(_, msg)
 		if times[msg] then
@@ -158,8 +158,8 @@ do
 					self:StopBar(438713) -- Furnace Surge
 					self:StopBar(438719) -- Supercooled Smash
 					self:StopBar(438723) -- Coolant Discharge
-				elseif msg == "ride" then
-					self:Message("stages", "cyan", self:SpellName(438487), false) -- Just for testing, probably useless
+				--elseif msg == "ride" then
+				--	self:Message("stages", "cyan", self:SpellName(438487), false) -- Just for testing, probably useless
 				end
 			end
 		end

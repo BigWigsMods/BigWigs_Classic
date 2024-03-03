@@ -63,9 +63,6 @@ if L then
 	L[15929] = "스탈라그"
 	L[15930] = "퓨진"
 
-	L.stage1_yell_trigger1 = "스탈라그, 박살낸다!"
-	L.stage1_yell_trigger2 = "너 주인님께 바칠꺼야!"
-
 	L.stage2_yell_trigger1 = "잡아... 먹어주마..."
 	L.stage2_yell_trigger2 = "박살을 내주겠다!"
 	L.stage2_yell_trigger3 = "죽여주마..."

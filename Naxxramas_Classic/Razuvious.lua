@@ -51,6 +51,10 @@ function mod:VerifyEnable(unit, mobId)
 end
 
 function mod:OnBossEnable()
+	understudyIcons = {}
+	mindExhaustionList = {}
+	mindExhaustionDebuffTime = {}
+
 	self:Log("SPELL_CAST_SUCCESS", "DisruptingShout", 29107)
 	self:Log("SPELL_CAST_SUCCESS", "Taunt", 29060)
 	self:Log("SPELL_AURA_APPLIED", "TauntApplied", 29060)
@@ -150,8 +154,7 @@ function mod:MindControl(args)
 end
 
 function mod:UnderstudyKilled(args)
-	self:DeleteFromTable(mindExhaustionList, args.destGUID)
-	mindExhaustionDebuffTime[args.destGUID] = nil
+	mindExhaustionDebuffTime[args.destGUID] = -1
 	local icon = understudyIcons[args.destGUID]
 	if icon then
 		self:StopBar(icon .. self:SpellName(29060)) -- Taunt
@@ -160,7 +163,6 @@ function mod:UnderstudyKilled(args)
 		self:StopBar(29060) -- Taunt
 		self:StopBar(29061) -- Shield Wall
 	end
-	understudyIcons[args.destGUID] = nil
 end
 
 function UpdateInfoBoxList()
@@ -178,7 +180,11 @@ function UpdateInfoBoxList()
 				mod:SetInfo(29051, line + 1, CL.seconds:format(remaining))
 				mod:SetInfoBar(29051, line, remaining / 60)
 			else
-				mod:SetInfo(29051, line + 1, CL.ready, 0.13, 1, 0.13)
+				if mindExhaustionDebuffTime[npcGUID] == -1 then
+					mod:SetInfo(29051, line + 1, CL.dead, 1, 0.2, 0.2)
+				else
+					mod:SetInfo(29051, line + 1, CL.ready, 0.13, 1, 0.13)
+				end
 				mod:SetInfoBar(29051, line, 0)
 			end
 		else

@@ -115,7 +115,7 @@ function mod:Meteor(args)
 	self:CDBar(args.spellId, 12) -- 11~14
 	self:Message(args.spellId, "red")
 	local unit = self:GetUnitIdByGUID(args.sourceGUID)
-	if not unit or self:UnitWithinRange(unit, 35) then
+	if not unit or self:UnitWithinRange(unit, 35) or args.sourceGUID == self:UnitGUID("target") then
 		self:PlaySound(args.spellId, "info")
 	end
 end
@@ -129,7 +129,7 @@ function mod:VoidZone(args)
 	else
 		self:TargetMessage(args.spellId, "orange", args.destName)
 		local unit = self:GetUnitIdByGUID(args.sourceGUID)
-		if not unit or self:UnitWithinRange(unit, 35) then
+		if not unit or self:UnitWithinRange(unit, 35) or args.sourceGUID == self:UnitGUID("target") then
 			self:PlaySound(args.spellId, "alarm", nil, args.destName)
 		end
 	end
@@ -139,7 +139,7 @@ function mod:HolyWrath(args)
 	self:CDBar(args.spellId, 12) -- 11~14
 	self:Message(args.spellId, "yellow")
 	local unit = self:GetUnitIdByGUID(args.sourceGUID)
-	if not unit or self:UnitWithinRange(unit, 35) then
+	if not unit or self:UnitWithinRange(unit, 35) or args.sourceGUID == self:UnitGUID("target") then
 		self:PlaySound(args.spellId, "alert")
 	end
 end

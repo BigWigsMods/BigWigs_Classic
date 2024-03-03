@@ -63,9 +63,6 @@ if L then
 	--L[15929] = "Stalagg"
 	--L[15930] = "Feugen"
 
-	L.stage1_yell_trigger1 = "斯塔拉格要碾碎你!"
-	L.stage1_yell_trigger2 = "主人要吃了你!"
-
 	L.stage2_yell_trigger1 = "咬碎……你的……骨頭……"
 	L.stage2_yell_trigger2 = "打…碎…你……"
 	L.stage2_yell_trigger3 = "殺……"
@@ -96,8 +93,8 @@ if L then
 	--L.custom_off_charge_voice = "Voice alert"
 	--L.custom_off_charge_voice_desc = "Play a voice alert."
 
-	L.left = "--- 到左邊 <--- 到左邊 <---"
-	L.right = "---> 向右 ---> 向右 ---"
+	L.left = "<--- 到左邊 <--- 到左邊 <---"
+	L.right = "---> 向右 ---> 向右 --->"
 	L.swap = "^^^^ 交換 ^^^^ 交換 ^^^^"
 	L.stay = "==== 不要動 ==== 不要動 ===="
 

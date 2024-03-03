@@ -217,7 +217,7 @@ function mod:Troggquake(args)
 	else
 		self:Message("stages", "cyan", CL.other:format(CL.stage:format(quakeCount), CL.adds), false)
 		if quakeCount == 1 then
-			self:Bar("adds", 8, CL.adds, "inv_hammer_15")
+			self:Bar("adds", 10, CL.adds, "inv_hammer_15")
 		end
 	end
 end

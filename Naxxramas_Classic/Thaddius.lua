@@ -86,9 +86,6 @@ if L then
 	L[15929] = "Stalagg"
 	L[15930] = "Feugen"
 
-	L.stage1_yell_trigger1 = "Stalagg crush you!"
-	L.stage1_yell_trigger2 = "Feed you to master!"
-
 	L.stage2_yell_trigger1 = "Eat... your... bones..."
 	L.stage2_yell_trigger2 = "Break... you!!"
 	L.stage2_yell_trigger3 = "Kill..."
@@ -182,16 +179,11 @@ function mod:OnBossEnable()
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
-	if self:Retail() then
-		self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE", "CHAT_MSG_MONSTER_EMOTE")
-	end
 
 	self:Log("SPELL_AURA_APPLIED", "NegativeCharge", 28084)
 	self:Log("SPELL_AURA_REFRESH", "NegativeChargeRefresh", 28084)
 	self:Log("SPELL_AURA_APPLIED", "PositiveCharge", 28059)
 	self:Log("SPELL_AURA_REFRESH", "PositiveChargeRefresh", 28059)
-
-	self:Death("Win", 15928)
 
 	if not printed then
 		printed = true
@@ -214,7 +206,7 @@ function mod:OnEngage()
 	end
 	self:SimpleTimer(UpdateInfoBoxList, 0.5)
 
-	self:Message("stages", "cyan", CL.stage:format(1), false) -- L.engage_message
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:Bar(28134, 11) -- Power Surge
 	self:Bar(28338, 20) -- Magnetic Pull
 end
@@ -289,15 +281,10 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg) -- Stage 2
 		self:StopBar(28134) -- Power Surge
 		self:SetRespawnTime(32)
 		self:SetStage(2)
-		if self:Retail() then
-			self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-		end
 
 		self:Message("stages", "cyan", CL.stage:format(2), false)
 		self:Berserk(300, true)
 		self:PlaySound("stages", "info")
-	elseif self:Retail() and (msg:find(L.stage1_yell_trigger1, nil, true) or msg:find(L.stage1_yell_trigger2, nil, true)) then
-		self:Engage()
 	end
 end
 

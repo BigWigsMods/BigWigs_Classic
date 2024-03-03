@@ -63,9 +63,6 @@ if L then
 	L[15929] = "Stalagg"
 	L[15930] = "Feugen"
 
-	L.stage1_yell_trigger1 = "Stalagg écraser toi !"
-	L.stage1_yell_trigger2 = "À manger pour maître !"
-
 	L.stage2_yell_trigger1 = "Manger… tes… os…"
 	L.stage2_yell_trigger2 = "Casser... toi !"
 	L.stage2_yell_trigger3 = "Tuer…"
