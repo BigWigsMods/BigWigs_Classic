@@ -45,8 +45,6 @@ function mod:OnBossEnable()
 	-- Weakened
 	self:Log("SPELL_AURA_APPLIED", "Weakness", 25177, 25178, 25180, 25181, 25183)
 	self:Log("SPELL_AURA_REMOVED", "WeaknessRemoved", 25177, 25178, 25180, 25181, 25183)
-
-	self:Death("Win", 15339)
 end
 
 function mod:OnEngage()

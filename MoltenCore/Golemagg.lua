@@ -19,8 +19,6 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED_DOSE", "MagmaSplashApplied", 13880)
-
-	self:Death("Win", 11988)
  end
 
 --------------------------------------------------------------------------------

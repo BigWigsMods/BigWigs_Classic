@@ -56,8 +56,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "ChillDamage", 28547)
 	self:Log("SPELL_PERIODIC_DAMAGE", "ChillDamage", 28547)
 	self:Log("SPELL_PERIODIC_MISSED", "ChillDamage", 28547)
-
-	self:Death("Win", 15989)
 end
 
 function mod:OnEngage()

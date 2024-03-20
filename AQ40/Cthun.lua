@@ -92,7 +92,6 @@ function mod:OnBossEnable()
 	self:Death("EyeOfCThunKilled", 15589)
 	self:Death("GiantEyeTentacleKilled", 15334)
 	self:Death("FleshTentacleKilled", 15802)
-	self:Death("Win", 15727)
 end
 
 function mod:OnEngage()
@@ -222,9 +221,9 @@ do
 		self:Bar("giant_eye_tentacle", 82, L.giant_eye_tentacle, L.giant_eye_tentacle_icon)
 
 		self:SetInfoBar("infobox", 1, 0)
-		self:SetInfo("infobox", 2, "0%")
+		self:SetInfo("infobox", 2, CL.dead)
 		self:SetInfoBar("infobox", 3, 0)
-		self:SetInfo("infobox", 4, "0%")
+		self:SetInfo("infobox", 4, CL.dead)
 
 		self:ScheduleTimer(ResetInfoHealth, 44, self)
 		self:PlaySound("weakened", "long")
@@ -311,7 +310,7 @@ function mod:FleshTentacleKilled(args) -- Stomach Tentacle
 		healthList[args.destGUID] = line
 	end
 	self:SetInfoBar("infobox", line, 0)
-	self:SetInfo("infobox", line + 1, "0%")
+	self:SetInfo("infobox", line + 1, CL.dead)
 
 	self:Message("stages", "cyan", CL.mob_killed:format(args.destName, deaths, 2), false)
 

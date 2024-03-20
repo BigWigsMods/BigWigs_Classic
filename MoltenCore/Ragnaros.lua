@@ -72,7 +72,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "SummonRagnaros", 19774)
 	self:Log("SPELL_CAST_SUCCESS", "ElementalFire", 19773)
 
-	self:Death("Win", 11502)
 	self:Death("SonDeaths", 12143)
 end
 

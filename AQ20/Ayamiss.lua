@@ -47,8 +47,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "CloudOfDiseaseDamage", 17742)
 	self:Log("SPELL_PERIODIC_DAMAGE", "CloudOfDiseaseDamage", 17742)
 	self:Log("SPELL_PERIODIC_MISSED", "CloudOfDiseaseDamage", 17742)
-
-	self:Death("Win", 15369)
 end
 
 function mod:OnEngage()
@@ -75,7 +73,6 @@ function mod:ParalyzeRemoved(args)
 end
 
 function mod:FrenzyEnrage(args)
-	self:UnregisterEvent("UNIT_HEALTH")
 	self:Message(args.spellId, "red", CL.percent:format(20, args.spellName))
 end
 
@@ -99,8 +96,10 @@ function mod:UNIT_HEALTH(event, unit)
 			self:Message("stages", "cyan", CL.percent:format(70, CL.stage:format(2)), false)
 			self:PlaySound("stages", "long")
 		elseif hp < 26 then
-			self:UnregisterUnitEvent(event)
-			self:Message(8269, "green", CL.soon:format(self:SpellName(8269)), false) -- Frenzy / Enrage
+			self:UnregisterEvent(event)
+			if hp > 20 then
+				self:Message(8269, "green", CL.soon:format(self:SpellName(8269)), false) -- Frenzy / Enrage
+			end
 		end
 	end
 end

@@ -28,8 +28,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Inferno", 19695)
 	self:Log("SPELL_CAST_SUCCESS", "Armageddon", 20478)
 	self:Log("SPELL_CAST_SUCCESS", "IgniteMana", 19659)
-
-	self:Death("Win", 12056)
 end
 
 function mod:OnEngage()

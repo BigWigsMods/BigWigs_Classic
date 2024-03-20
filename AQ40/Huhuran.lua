@@ -35,8 +35,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 26051)
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
 	self:Log("SPELL_AURA_APPLIED", "BerserkApplied", 26068)
-
-	self:Death("Win", 15509)
 end
 
 function mod:OnEngage()
@@ -89,7 +87,6 @@ function mod:EnrageFrenzyDispelled(args)
 end
 
 function mod:BerserkApplied()
-	self:UnregisterEvent("UNIT_HEALTH")
 	self:StopBar(26051) -- Enrage / Frenzy (different name on classic era)
 	self:StopBerserk(self:SpellName(26662))
 
@@ -100,9 +97,11 @@ end
 function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15509 then
 		local hp = self:GetHealth(unit)
-		if hp < 36  then
+		if hp < 36 then
 			self:UnregisterEvent(event)
-			self:Message("berserk", "red", CL.soon:format(self:SpellName(26662)), false)
+			if hp > 30 then
+				self:Message("berserk", "red", CL.soon:format(self:SpellName(26662)), false)
+			end
 		end
 	end
 end

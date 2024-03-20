@@ -78,7 +78,6 @@ function mod:OnBossEnable()
 		23187, 23189 -- Frost Burn
 	)
 
-	self:Death("Win", 14020)
 	if self:Vanilla() then
 		BigWigs:Print(L.detect_magic_warning)
 	end

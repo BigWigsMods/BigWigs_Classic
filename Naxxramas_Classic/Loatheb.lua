@@ -51,8 +51,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "InitialCorruptedMindApplied", 29185, 29194, 29196, 29198) -- Priest, Druid, Paladin, Shaman
 	self:Log("SPELL_AURA_REMOVED", "InitialCorruptedMindRemoved", 29185, 29194, 29196, 29198)
 	self:Log("SPELL_AURA_APPLIED", "FungalBloomApplied", 29232)
-
-	self:Death("Win", 16011)
 end
 
 function mod:OnEngage()

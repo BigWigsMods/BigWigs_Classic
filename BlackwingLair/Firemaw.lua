@@ -23,8 +23,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "WingBuffet", 23339)
 	self:Log("SPELL_CAST_START", "ShadowFlame", 22539)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "FlameBuffetApplied", 23341)
-
-	self:Death("Win", 11983)
 end
 
 function mod:OnEngage()

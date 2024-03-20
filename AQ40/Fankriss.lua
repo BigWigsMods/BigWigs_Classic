@@ -32,8 +32,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED_DOSE", "MortalWound", 25646)
 	self:Log("SPELL_CAST_SUCCESS", "SummonWorm", 518, 25831, 25832)
 	self:Log("SPELL_AURA_APPLIED", "Entangle", 720, 731, 1121)
-
-	self:Death("Win", 15510)
 end
 
 --------------------------------------------------------------------------------

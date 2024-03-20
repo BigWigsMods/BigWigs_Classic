@@ -64,7 +64,6 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_AURA_APPLIED", "MindControl", 10912)
 	self:Death("UnderstudyKilled", 16803) -- Deathknight Understudy
-	self:Death("Win", 16061)
 end
 
 function mod:OnEngage()

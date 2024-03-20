@@ -78,7 +78,6 @@ function mod:OnBossEnable()
 		15385 -- Colonel Zerran (Stage 7)
 	)
 	self:Death("AndorovDies", 15471)
-	self:Death("Win", 15341)
 end
 
 function mod:OnWin()

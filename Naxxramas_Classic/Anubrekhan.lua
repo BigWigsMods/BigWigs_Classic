@@ -30,8 +30,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "LocustSwarm", 28785)
 	self:Log("SPELL_AURA_APPLIED", "LocustSwarmApplied", 28785)
 	self:Log("SPELL_AURA_REMOVED", "LocustSwarmRemoved", 28785)
-
-	self:Death("Win", 15956)
 end
 
 function mod:OnEngage()

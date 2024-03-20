@@ -21,8 +21,6 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "DarkMending", 19775)
 	self:Log("SPELL_CAST_SUCCESS", "Inspire", 19779)
-
-	self:Death("Win", 12098)
  end
 
 --------------------------------------------------------------------------------

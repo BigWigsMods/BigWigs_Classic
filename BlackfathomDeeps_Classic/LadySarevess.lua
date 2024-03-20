@@ -45,8 +45,6 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_AURA_APPLIED", "AkumaisRageApplied", 407791)
 	self:Log("SPELL_DISPEL", "AkumaisRageDispelled", "*")
-
-	self:Death("Win", 204068)
 end
 
 function mod:OnEngage()

@@ -45,8 +45,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "CurseOfBlackfathomApplied", 411956)
 	self:Log("SPELL_AURA_APPLIED", "Fear", 411959)
 	self:Log("SPELL_CAST_SUCCESS", "MarchOfTheMurlocs", 412456)
-
-	self:Death("Win", 204921)
 end
 
 function mod:OnEngage()

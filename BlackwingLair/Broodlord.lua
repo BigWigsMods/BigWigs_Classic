@@ -22,8 +22,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "MortalStrike", 24573)
 	self:Log("SPELL_AURA_REMOVED", "MortalStrikeOver", 24573)
 	self:Log("SPELL_CAST_SUCCESS", "BlastWave", 23331)
-
-	self:Death("Win", 12017)
 end
 
 --------------------------------------------------------------------------------

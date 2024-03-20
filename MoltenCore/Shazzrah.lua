@@ -29,8 +29,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DISPEL", "MagicGroundingDeadenMagicDispelled", "*")
 	self:Log("SPELL_CAST_SUCCESS", "Counterspell", 19715)
 	self:Log("SPELL_CAST_SUCCESS", "ShazzrahsCurse", 19713)
-
-	self:Death("Win", 12264)
 end
 
 function mod:OnEngage()

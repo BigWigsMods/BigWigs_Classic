@@ -57,8 +57,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "CurseOfThePlaguebringerRemoved", 29213)
 	self:Log("SPELL_AURA_APPLIED", "WrathOfThePlaguebringerApplied", 29214)
 	self:Log("SPELL_CAST_SUCCESS", "Blink", 29208, 29209, 29210, 29211)
-
-	self:Death("Win", 15954)
 end
 
 function mod:OnEngage()

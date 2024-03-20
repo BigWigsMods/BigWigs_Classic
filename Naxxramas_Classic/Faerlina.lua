@@ -20,7 +20,7 @@ local frenzyTimer = 0
 function mod:GetOptions()
 	return {
 		28732, -- Widow's Embrace
-		28798, -- Frenzy / Enrage (different name on classic era)
+		28798, -- Enrage
 		28794, -- Rain of Fire
 		30225, -- Silence
 		28796, -- Poison Bolt Volley
@@ -37,21 +37,19 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "WidowsEmbrace", 28732)
-	self:Log("SPELL_AURA_APPLIED", "FrenzyEnrage", 28798)
-	self:Log("SPELL_AURA_REMOVED", "FrenzyEnrageRemoved", 28798)
+	self:Log("SPELL_AURA_APPLIED", "Enrage", 28798)
+	self:Log("SPELL_AURA_REMOVED", "EnrageRemoved", 28798)
 
 	self:Log("SPELL_AURA_APPLIED", "RainOfFireDamage", 28794)
 	self:Log("SPELL_PERIODIC_DAMAGE", "RainOfFireDamage", 28794)
 	self:Log("SPELL_PERIODIC_MISSED", "RainOfFireDamage", 28794)
 	self:Log("SPELL_AURA_APPLIED", "Silence", 30225)
 	self:Log("SPELL_CAST_SUCCESS", "PoisonBoltVolley", 28796)
-
-	self:Death("Win", 15953)
 end
 
 function mod:OnEngage()
 	frenzyTimer = GetTime()
-	self:CDBar(28798, 55) -- Frenzy / Enrage
+	self:CDBar(28798, 55) -- Enrage
 end
 
 --------------------------------------------------------------------------------
@@ -66,19 +64,19 @@ function mod:WidowsEmbrace(args)
 
 		local currentTime = GetTime()
 		if (frenzyTimer + 30) < currentTime then
-			self:CDBar(28798, 31) -- Frenzy / Enrage
+			self:CDBar(28798, 31) -- Enrage
 		end
 	end
 end
 
-function mod:FrenzyEnrage(args)
+function mod:Enrage(args)
 	frenzyTimer = GetTime()
 	self:StopBar(args.spellName)
 	self:Message(args.spellId, "red")
 	self:PlaySound(args.spellId, "warning")
 end
 
-function mod:FrenzyEnrageRemoved(args)
+function mod:EnrageRemoved(args)
 	self:Message(args.spellId, "green", CL.removed:format(args.spellName))
 	local elapsed = GetTime() - frenzyTimer
 	if elapsed < 31 then

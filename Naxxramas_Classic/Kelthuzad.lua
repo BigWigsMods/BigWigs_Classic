@@ -70,8 +70,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "DetonateManaRemoved", 27819)
 	self:Log("SPELL_CAST_SUCCESS", "ChainsOfKelThuzad", 28408)
 	self:Log("SPELL_AURA_APPLIED", "ChainsOfKelThuzadApplied", 28410)
-
-	self:Death("Win", 15990)
 end
 
 function mod:OnEngage()
@@ -177,7 +175,9 @@ function mod:UNIT_HEALTH(event, unit)
 		local hp = self:GetHealth(unit)
 		if hp < 45 then
 			self:UnregisterEvent(event)
-			self:Message("stages", "cyan", CL.soon:format(CL.stage:format(3)), false)
+			if hp > 40 then
+				self:Message("stages", "cyan", CL.soon:format(CL.stage:format(3)), false)
+			end
 		end
 	end
 end

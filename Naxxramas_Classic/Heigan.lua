@@ -45,8 +45,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "DecrepitFever", 29998)
 	self:Log("SPELL_AURA_APPLIED", "DecrepitFeverApplied", 29998)
 	self:Log("SPELL_AURA_REMOVED", "DecrepitFeverRemoved", 29998)
-
-	self:Death("Win", 15936)
 end
 
 function mod:OnEngage()

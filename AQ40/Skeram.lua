@@ -44,8 +44,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Teleport", 20449, 4801, 8195)
 	self:Log("SPELL_CAST_START", "ArcaneExplosion", 26192)
 	self:Log("SPELL_CAST_SUCCESS", "SummonImages", 747)
-
-	self:Death("Win", 15263)
 end
 
 function mod:OnEngage()
@@ -98,10 +96,10 @@ function mod:UNIT_HEALTH(event, unit)
 		local hp = self:GetHealth(unit)
 		if (hp < 82 and splitPhase == 1) or (hp < 57 and splitPhase == 2) or (hp < 32 and splitPhase == 3) then
 			splitPhase = splitPhase + 1
-			self:Message(747, "cyan", CL.soon:format(self:SpellName(747)), false) -- Summon Images
 			if splitPhase > 3 then
 				self:UnregisterEvent(event)
 			end
+			self:Message(747, "cyan", CL.soon:format(self:SpellName(747)), false) -- Summon Images
 		end
 	end
 end

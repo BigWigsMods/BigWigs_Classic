@@ -24,8 +24,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "ShadowFlame", 22539)
 	self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 23342)
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
-
-	self:Death("Win", 11981)
 end
 
 function mod:OnEngage()

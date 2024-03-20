@@ -32,8 +32,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "GehennasCurseApplied", 19716)
 	self:Log("SPELL_AURA_REMOVED", "GehennasCurseRemoved", 19716)
 	self:Log("SPELL_AURA_APPLIED", "RainOfFire", 19717)
-
-	self:Death("Win", 12259)
 end
 
 function mod:OnEngage()

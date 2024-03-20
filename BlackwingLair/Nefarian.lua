@@ -121,7 +121,6 @@ function mod:OnBossEnable()
 	self:Death("AddDied", 14261, 14262, 14263, 14264, 14265, 14302) -- Blue, Green, Bronze, Red, Black, Chromatic
 
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Death("Win", 11583)
 end
 
 function mod:OnEngage()

@@ -69,8 +69,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_SUMMON", "CorruptedLightningShieldTotemSummon", 414763)
 	self:Log("SPELL_CAST_SUCCESS", "CorruptedMoltenFuryTotem", 419636)
 	self:Log("SPELL_SUMMON", "CorruptedMoltenFuryTotemSummon", 419636)
-
-	self:Death("Win", 207356)
 end
 
 function mod:OnEngage()

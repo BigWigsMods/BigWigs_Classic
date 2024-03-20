@@ -41,8 +41,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "BurningAdrenalineTank", 23620)
 	self:Log("SPELL_AURA_APPLIED", "BurningAdrenalineTankApplied", 23620)
 	self:Log("SPELL_AURA_REMOVED", "BurningAdrenalineTankRemoved", 23620)
-
-	self:Death("Win", 13020)
 end
 
 function mod:OnEngage()

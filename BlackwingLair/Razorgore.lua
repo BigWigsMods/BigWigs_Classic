@@ -87,7 +87,6 @@ end
 function mod:WarmingFlames() -- Stage 2
 	self:SetStage(2)
 	self:Message("stages", "cyan", CL.stage:format(2), false)
-	self:Death("Win", 12435) -- Register here as he can die in stage 1 and you lose
 	self:PlaySound("stages", "long")
 end
 

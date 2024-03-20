@@ -33,7 +33,6 @@ end
 function mod:OnBossEnable()
 	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
 	self:Log("SPELL_AURA_REMOVED", "ThornsRemoved", 25640)
-	self:Death("Win", 15370)
 end
 
 function mod:OnEngage()

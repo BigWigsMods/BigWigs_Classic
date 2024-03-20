@@ -51,8 +51,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "CorrosionOrShadowSeepApplied", 427625, 428482) -- Corrosion, Shadow Seep
 	self:Log("SPELL_AURA_APPLIED_DOSE", "CorrosionOrShadowSeepApplied", 427625, 428482) -- Corrosion, Shadow Seep
 	self:Log("SPELL_AURA_REMOVED", "CorrosionOrShadowSeepRemoved", 427625, 428482) -- Corrosion, Shadow Seep
-
-	self:Death("Win", 213334)
 end
 
 function mod:OnEngage()

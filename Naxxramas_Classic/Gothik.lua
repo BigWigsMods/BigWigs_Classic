@@ -53,8 +53,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "HarvestSoul", 28679)
 	self:Death("UnrelentingDeathKnightDies", 16125) -- Unrelenting Death Knight
 	self:Death("UnrelentingRiderDies", 16126) -- Unrelenting Rider
-
-	self:Death("Win", 16060)
 end
 
 function mod:OnEngage()
@@ -102,12 +100,12 @@ end
 function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 16060 then
 		local hp = self:GetHealth(unit)
-		if hp > 30 and hp < 35 then
+		if hp < 35 then
 			self:UnregisterEvent(event)
-			self:Message("stages", "cyan", CL.soon:format(CL.gate_open), false)
-			self:PlaySound("stages", "long")
-		elseif hp < 30 then -- too fast!
-			self:UnregisterEvent(event)
+			if hp > 30 then
+				self:Message("stages", "cyan", CL.soon:format(CL.gate_open), false)
+				self:PlaySound("stages", "long")
+			end
 		end
 	end
 end

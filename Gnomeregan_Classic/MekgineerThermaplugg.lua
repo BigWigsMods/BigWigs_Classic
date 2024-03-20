@@ -158,6 +158,7 @@ do
 					self:StopBar(438713) -- Furnace Surge
 					self:StopBar(438719) -- Supercooled Smash
 					self:StopBar(438723) -- Coolant Discharge
+					self:StopBar(CL.next_ability)
 				--elseif msg == "ride" then
 				--	self:Message("stages", "cyan", self:SpellName(438487), false) -- Just for testing, probably useless
 				end
@@ -187,6 +188,7 @@ local function stageCheck(self, sourceGUID)
 	self:StopBar(438713) -- Furnace Surge
 	self:StopBar(438719) -- Supercooled Smash
 	self:StopBar(438723) -- Coolant Discharge
+	self:StopBar(CL.next_ability)
 end
 
 do
@@ -253,7 +255,7 @@ function mod:FurnaceSurge(args)
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 34)
 	else
-		self:CDBar(args.spellId, 20, CL.next_ability, "INV_Misc_QuestionMark") -- Random which cast is next in stage 4
+		self:CDBar("stages", 20, CL.next_ability, "INV_Misc_QuestionMark") -- Random which cast is next in stage 4
 	end
 	self:PlaySound(args.spellId, "alert")
 end
@@ -287,7 +289,7 @@ function mod:CoolantDischarge(args)
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 24)
 	else
-		self:CDBar(args.spellId, 20, CL.next_ability, "INV_Misc_QuestionMark") -- Random which cast is next in stage 4
+		self:CDBar("stages", 20, CL.next_ability, "INV_Misc_QuestionMark") -- Random which cast is next in stage 4
 	end
 	self:PlaySound(args.spellId, "alert")
 end
@@ -319,7 +321,7 @@ function mod:ToxicVentilation(args)
 	if self:GetStage() < 4 then
 		self:CDBar(args.spellId, 21)
 	else
-		self:CDBar(args.spellId, 20, CL.next_ability, "INV_Misc_QuestionMark") -- Random which cast is next in stage 4
+		self:CDBar("stages", 20, CL.next_ability, "INV_Misc_QuestionMark") -- Random which cast is next in stage 4
 	end
 	self:PlaySound(args.spellId, "alert")
 end

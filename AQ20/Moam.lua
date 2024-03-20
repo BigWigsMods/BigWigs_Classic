@@ -20,7 +20,6 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Energize", 25685)
 	self:Log("SPELL_AURA_REMOVED", "EnergizeRemoved", 25685)
-	self:Death("Win", 15340)
 end
 
 function mod:OnEngage()

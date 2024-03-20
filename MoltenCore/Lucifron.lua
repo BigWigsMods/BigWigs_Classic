@@ -40,8 +40,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "DominateMind", 20604)
 	self:Log("SPELL_AURA_APPLIED", "DominateMindApplied", 20604)
 	self:Log("SPELL_AURA_REMOVED", "DominateMindRemoved", 20604)
-
-	self:Death("Win", 12118)
 end
 
 function mod:OnEngage()

@@ -50,8 +50,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED_DOSE", "AquaShellRemovedDose", 406970)
 	self:Log("SPELL_CAST_START", "AquaShellCast", 414370)
 	self:Log("SPELL_AURA_APPLIED", "TripleChomp", 407077)
-
-	self:Death("Win", 201722)
 end
 
 function mod:OnEngage()

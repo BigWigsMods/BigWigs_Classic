@@ -27,10 +27,10 @@ function mod:GetOptions()
 		"adds",
 		{29484, "EMPHASIZE", "COUNTDOWN"}, -- Web Spray
 		28776, -- Necrotic Poison
-		28747, -- Frenzy / Enrage (different name on classic era)
+		28747, -- Enrage
 	},nil,{
 		[28622] = L.cocoons, -- Web Wrap (Cocoons)
-		[28747] = CL.health_percent:format(30), -- Frenzy / Enrage (30% Health)
+		[28747] = CL.health_percent:format(30), -- Enrage (30% Health)
 	}
 end
 
@@ -39,9 +39,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "WebSpray", 29484)
 	self:Log("SPELL_AURA_APPLIED", "NecroticPoison", 28776)
 	self:Log("SPELL_DISPEL", "NecroticPoisonDispelled", "*")
-	self:Log("SPELL_AURA_APPLIED", "FrenzyEnrage", 28747)
-
-	self:Death("Win", 15952)
+	self:Log("SPELL_AURA_APPLIED", "Enrage", 28747)
 end
 
 function mod:OnEngage()
@@ -85,20 +83,26 @@ function mod:WebSpray(args)
 	self:PlaySound(args.spellId, "long")
 end
 
-function mod:NecroticPoison(args)
-	self:TargetMessage(args.spellId, "purple", args.destName)
-	if self:Me(args.destGUID) or self:Healer() or self:Dispeller("poison") then
-		self:PlaySound(args.spellId, "info")
+do
+	local player = nil
+	function mod:NecroticPoison(args)
+		if self:MobId(args.sourceGUID) == 15952 then -- Only Maexxna, not the adds
+			player = args.destGUID
+			self:TargetMessage(args.spellId, "purple", args.destName)
+			if self:Me(args.destGUID) or self:Healer() or self:Dispeller("poison") then
+				self:PlaySound(args.spellId, "info")
+			end
+		end
+	end
+	function mod:NecroticPoisonDispelled(args)
+		if args.extraSpellName == self:SpellName(28776) and player == args.destGUID then
+			player = nil
+			self:Message(28776, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+		end
 	end
 end
 
-function mod:NecroticPoisonDispelled(args)
-	if args.extraSpellName == self:SpellName(28776) then
-		self:Message(28776, "green", CL.removed_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
-	end
-end
-
-function mod:FrenzyEnrage(args)
+function mod:Enrage(args)
 	self:Message(args.spellId, "orange", CL.percent:format(30, args.spellName))
 	self:PlaySound(args.spellId, "warning")
 end
@@ -106,11 +110,11 @@ end
 function mod:UNIT_HEALTH(event, unit)
 	if self:MobId(self:UnitGUID(unit)) == 15952 then
 		local hp = self:GetHealth(unit)
-		if hp > 30 and hp < 36 then
-			self:Message(28747, "orange", CL.soon:format(self:SpellName(28747)))
+		if hp < 36 then
 			self:UnregisterEvent(event)
-		elseif hp < 30 then -- too fast!
-			self:UnregisterEvent(event)
+			if hp > 30 then
+				self:Message(28747, "orange", CL.soon:format(self:SpellName(28747)))
+			end
 		end
 	end
 end

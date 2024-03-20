@@ -52,8 +52,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "TorrentialDownpourDamage", 405953)
 	self:Log("SPELL_PERIODIC_DAMAGE", "TorrentialDownpourDamage", 405953)
 	self:Log("SPELL_PERIODIC_MISSED", "TorrentialDownpourDamage", 405953)
-
-	self:Death("Win", 202699)
 end
 
 function mod:OnEngage()

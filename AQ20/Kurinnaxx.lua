@@ -37,8 +37,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "MortalWoundRemoved", 25646)
 	self:Log("SPELL_CREATE", "SandTrap", 25648)
 	self:Log("SPELL_AURA_APPLIED", "FrenzyEnrage", 26527)
-
-	self:Death("Win", 15348)
 end
 
 function mod:OnEngage()
@@ -73,7 +71,6 @@ function mod:SandTrap(args)
 end
 
 function mod:FrenzyEnrage(args)
-	self:UnregisterEvent("UNIT_HEALTH")
 	self:Message(args.spellId, "red", CL.percent:format(30, args.spellName))
 	self:PlaySound(args.spellId, "long")
 end
@@ -83,7 +80,9 @@ function mod:UNIT_HEALTH(event, unit)
 		local hp = self:GetHealth(unit)
 		if hp < 36 then
 			self:UnregisterEvent(event)
-			self:Message(26527, "green", CL.soon:format(self:SpellName(26527)), false) -- Frenzy / Enrage
+			if hp > 30 then
+				self:Message(26527, "green", CL.soon:format(self:SpellName(26527)), false) -- Frenzy / Enrage
+			end
 		end
 	end
 end

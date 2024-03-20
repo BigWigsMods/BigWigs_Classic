@@ -35,8 +35,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 19451)
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
 	self:Log("SPELL_AURA_APPLIED", "Conflagration", 19428)
-
-	self:Death("Win", 11982)
 end
 
 function mod:OnEngage()

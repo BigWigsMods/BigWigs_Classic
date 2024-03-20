@@ -24,8 +24,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "ShadowFlame", 22539)
 	self:Log("SPELL_AURA_APPLIED", "ShadowOfEbonrocApplied", 23340)
 	self:Log("SPELL_AURA_REMOVED", "ShadowOfEbonrocRemoved", 23340)
-
-	self:Death("Win", 14601)
 end
 
 function mod:OnEngage()

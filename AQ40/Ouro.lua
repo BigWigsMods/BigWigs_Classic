@@ -57,8 +57,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "BerserkApplied", 26615)
 	self:Log("SPELL_CAST_SUCCESS", "SummonOuroMounds", 26058) -- Submerge
 	self:Log("SPELL_SUMMON", "SummonOuroScarabs", 26060) -- Emerge
-
-	self:Death("Win", 15517)
 end
 
 function mod:OnEngage()
@@ -90,7 +88,6 @@ function mod:SandBlast(args)
 end
 
 function mod:BerserkApplied(args)
-	self:UnregisterEvent("UNIT_HEALTH")
 	self:StopBar(L.possible_submerge_bar)
 	self:StopBar(L.submerge_bar)
 	self:RemoveLog("SPELL_SUMMON", 26060) -- Summon Ouro Scarabs (Emerge) | He summons scarabs regularly after berserk without submerging
@@ -145,7 +142,9 @@ function mod:UNIT_HEALTH(event, unit)
 		local hp = self:GetHealth(unit)
 		if hp < 25 then
 			self:UnregisterEvent(event)
-			self:Message(26615, "green", CL.soon:format(self:SpellName(26615)), false)
+			if hp > 20 then
+				self:Message(26615, "green", CL.soon:format(self:SpellName(26615)), false)
+			end
 		end
 	end
 end

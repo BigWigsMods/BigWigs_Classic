@@ -49,8 +49,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "MindBlast", 426493) -- Stage 2
 	self:Log("SPELL_AURA_APPLIED", "ManifestingDreamsApplied", 426489)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "ManifestingDreamsApplied", 426489)
-
-	self:Death("Win", 209678)
 end
 
 function mod:OnEngage()

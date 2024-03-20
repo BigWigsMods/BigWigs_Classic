@@ -33,7 +33,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "WhirlwindRemoved", 26083)
 	self:Log("SPELL_AURA_APPLIED", "FrenzyEnrage", 8269)
 
-	self:Death("Win", 15516)
 	self:Death("AddDies", 15984)
 end
 
@@ -58,7 +57,6 @@ function mod:WhirlwindRemoved(args)
 end
 
 function mod:FrenzyEnrage(args)
-	self:UnregisterEvent("UNIT_HEALTH")
 	self:Message(args.spellId, "orange", CL.percent:format(25, args.spellName))
 	self:PlaySound(args.spellId, "long")
 end
@@ -68,7 +66,9 @@ function mod:UNIT_HEALTH(event, unit)
 		local hp = self:GetHealth(unit)
 		if hp < 31 then
 			self:UnregisterEvent(event)
-			self:Message(8269, "orange", CL.soon:format(self:SpellName(8269)), false)
+			if hp > 25 then
+				self:Message(8269, "orange", CL.soon:format(self:SpellName(8269)), false)
+			end
 		end
 	end
 end
