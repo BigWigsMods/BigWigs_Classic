@@ -12,8 +12,7 @@ mod:SetStage(1)
 -- Locals
 --
 
-local quakeCount = 0
-local addsCount = 0
+
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -43,8 +42,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	quakeCount = 0
-	addsCount = 0
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 end
 
 --------------------------------------------------------------------------------

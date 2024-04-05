@@ -47,11 +47,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-
-end
-
-function mod:OnWin()
-
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 end
 
 --------------------------------------------------------------------------------

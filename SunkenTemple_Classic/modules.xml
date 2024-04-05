@@ -5,10 +5,10 @@
 <Script file="FesteringRotslime.lua"/>
 <Script file="AtalaiDefenders.lua"/>
 <Script file="DreamscytheAndWeaver.lua"/>
-<Script file="AvatarOfHakkar.lua"/>
 <Script file="JammalanAndOgom.lua"/>
 <Script file="MorphazAndHazzas.lua"/>
 <Script file="ShadeOfEranikus.lua"/>
+<Script file="AvatarOfHakkar.lua"/>
 
 <Include file="Locales\locales.xml"/>
 <Include file="Options\options.xml"/>
