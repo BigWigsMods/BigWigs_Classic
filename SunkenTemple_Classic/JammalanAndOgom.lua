@@ -35,7 +35,6 @@ function mod:GetOptions()
 		437809, -- Holy Fire
 		437868, -- Agonizing Weakness
 		437847, -- Mortal Lash
-		437995, -- Draining...
 		437927, -- Shadow Sermon: Pain
 		437921, -- Mass Penance
 		437930, -- Power Word: Shield
