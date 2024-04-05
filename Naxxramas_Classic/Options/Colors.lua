@@ -12,7 +12,7 @@ BigWigs:AddColors("Grobbulus", {
 BigWigs:AddColors("Gluth", {
 	[25646] = {"blue","purple"},
 	[28371] = {"green","orange"},
-	[28375] = {"orange","red"},
+	[28375] = "red",
 	[29306] = "blue",
 	[29685] = "yellow",
 })
