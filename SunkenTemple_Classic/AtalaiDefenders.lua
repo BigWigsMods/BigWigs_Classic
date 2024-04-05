@@ -31,21 +31,6 @@ end
 function mod:GetOptions()
 	return {
 		"stages",
-		434168, -- Irradiated Cloud
-		434724, -- Radiation Sickness
-		"adds",
-		3019, -- Enrage
-		436100, -- Petrify
-		{436074, "CASTBAR"}, -- Trogg Rage
-		{436027, "CASTBAR"}, -- Grubbis Mad!
-		434941, -- Toxic Vigor
-		{436059, "CASTBAR"}, -- Radiation?
-		{439956, "CASTBAR"}, -- Revive Pet
-	},{
-		["adds"] = CL.adds,
-		[436100] = L.bossName,
-	},{
-		[434724] = CL.disease, -- Radiation Sickness (Disease)
 	}
 end
 
