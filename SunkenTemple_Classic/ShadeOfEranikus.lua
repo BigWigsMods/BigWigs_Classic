@@ -88,10 +88,10 @@ function mod:CorrosiveBreath(args)
 end
 
 function mod:CorrosiveBreathApplied(args)
-	if self:Me(args.destGUID) or self:Tank() then
-		self:TargetMessage(args.spellId, "purple", args.destName)
-		self:PlaySound(args.spellId, "alarm")
-	end
+    if self:Me(args.destGUID) then
+        self:PersonalMessage(args.spellId)
+        self:PlaySound(args.spellId, "alarm")
+    end
 end
 
 function mod:BellowingRoar(args)
