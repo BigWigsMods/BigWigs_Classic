@@ -10,9 +10,23 @@ BigWigs:AddSounds("Festering Rotslime Discovery", {
 })
 
 BigWigs:AddSounds("Atal'ai Defenders Discovery", {
+	[23511] = "warning",
+	[438335] = "alert",
+	[438341] = "warning",
+	[438350] = "warning",
+	[445289] = "alarm",
+	[446338] = "warning",
+	[446360] = "alarm",
+	[446364] = "alert",
+	[446372] = "long",
+	["stages"] = "info",
 })
 
 BigWigs:AddSounds("Dreamscythe and Weaver Discovery", {
+	[442622] = "alert",
+	[443766] = "info",
+	[443856] = "underyou",
+	["stages"] = "long",
 })
 
 BigWigs:AddSounds("Jammal'an and Ogom Discovery", {

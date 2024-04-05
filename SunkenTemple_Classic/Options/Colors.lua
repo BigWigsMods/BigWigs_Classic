@@ -10,10 +10,24 @@ BigWigs:AddColors("Festering Rotslime Discovery", {
 })
 
 BigWigs:AddColors("Atal'ai Defenders Discovery", {
+	[23511] = "red",
+	[438294] = "orange",
+	[438335] = "red",
+	[438341] = {"green","red"},
+	[438350] = "red",
+	[445284] = {"blue","yellow"},
+	[445289] = "orange",
+	[446338] = "red",
+	[446360] = "orange",
+	[446364] = {"green","yellow"},
+	[446372] = "red",
 	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Dreamscythe and Weaver Discovery", {
+	[442622] = {"blue","purple"},
+	[443766] = "yellow",
+	[443856] = "blue",
 	["stages"] = "cyan",
 })
 
