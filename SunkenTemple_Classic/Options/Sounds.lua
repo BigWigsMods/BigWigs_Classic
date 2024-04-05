@@ -30,21 +30,21 @@ BigWigs:AddSounds("Dreamscythe and Weaver Discovery", {
 })
 
 BigWigs:AddSounds("Jammal'an and Ogom Discovery", {
-	[433546] = {"info","warning"},
-	[434358] = "long",
-	[434434] = {"alarm","underyou"},
+	[437809] = "alarm",
+	[437817] = "warning",
+	[437847] = "info",
+	[437868] = "alert",
+	[437921] = "alert",
+	[437927] = "alarm",
+	[437928] = "long",
+	[437930] = "warning",
+	["stages"] = "long",
 })
 
 BigWigs:AddSounds("Morphaz and Hazzas Discovery", {
-	[433546] = {"info","warning"},
-	[434358] = "long",
-	[434434] = {"alarm","underyou"},
 })
 
 BigWigs:AddSounds("Shade of Eranikus Discovery", {
-	[433546] = {"info","warning"},
-	[434358] = "long",
-	[434434] = {"alarm","underyou"},
 })
 
 BigWigs:AddSounds("Avatar of Hakkar Discovery", {

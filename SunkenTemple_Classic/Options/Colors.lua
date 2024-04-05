@@ -32,21 +32,23 @@ BigWigs:AddColors("Dreamscythe and Weaver Discovery", {
 })
 
 BigWigs:AddColors("Jammal'an and Ogom Discovery", {
-	[433546] = "orange",
-	[434358] = "cyan",
-	[434434] = {"blue","red"},
+	[437809] = "yellow",
+	[437817] = "red",
+	[437847] = {"blue","orange"},
+	[437868] = {"green","red"},
+	[437921] = "orange",
+	[437927] = "red",
+	[437928] = "yellow",
+	[437930] = {"green","yellow"},
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Morphaz and Hazzas Discovery", {
-	[433546] = "orange",
-	[434358] = "cyan",
-	[434434] = {"blue","red"},
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Shade of Eranikus Discovery", {
-	[433546] = "orange",
-	[434358] = "cyan",
-	[434434] = {"blue","red"},
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Avatar of Hakkar Discovery", {
