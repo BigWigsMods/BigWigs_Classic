@@ -106,11 +106,11 @@ function mod:BellowingRoar(args)
 	--self:CDBar(args.spellId, 34) -- 34~63s
 end
 
-function mod:DeepSlumber(args)
+function mod:DeepSlumberClouds(args)
 	self:StopBar(args.spellId)
 	self:Message(args.spellId, "cyan")
 	self:PlaySound(args.spellId, "info")
-	self:CDBar(args.spellId, 19, CL.deep_slumber_clouds)
+	self:CDBar(args.spellId, 19, L.deep_slumber_clouds)
 end
 
 function mod:DeepSlumberApplied(args)
@@ -173,8 +173,8 @@ function mod:Dreamwalker(args)
 	self:StopBar(437390) -- Lethargic Poison
 	self:StopBar(437398) -- Waking Nightmare
 
-	self:Message(args.spellId, "long")
-	self:PlaySound(args.spellId, "cyan")
+	self:Message(args.spellId, "cyan")
+	self:PlaySound(args.spellId, "long")
 	self:CastBar(args.spellId, 23) -- 3s cast, 20s buff before waking up again
 end
 
