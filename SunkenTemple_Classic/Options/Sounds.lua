@@ -42,6 +42,10 @@ BigWigs:AddSounds("Jammal'an and Ogom Discovery", {
 })
 
 BigWigs:AddSounds("Morphaz and Hazzas Discovery", {
+	[446468] = "alert",
+	[446487] = "alert",
+	[446489] = "alarm",
+	[446661] = "info",
 })
 
 BigWigs:AddSounds("Shade of Eranikus Discovery", {

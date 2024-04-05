@@ -44,7 +44,10 @@ BigWigs:AddColors("Jammal'an and Ogom Discovery", {
 })
 
 BigWigs:AddColors("Morphaz and Hazzas Discovery", {
-	["stages"] = "cyan",
+	[446468] = "orange",
+	[446487] = {"blue","purple"},
+	[446489] = "red",
+	[446661] = "cyan",
 })
 
 BigWigs:AddColors("Shade of Eranikus Discovery", {
