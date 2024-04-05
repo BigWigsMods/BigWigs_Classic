@@ -15,8 +15,8 @@ if L then
 	L.freeze_warn3 = "维希度斯冻住了！"
 	L.freeze_warn4 = "开始碎了 - 继续！"
 	L.freeze_warn5 = "快裂开了 - 加油！"
-	L.freeze_warn_melee = ">%d<物理攻击 - 还需>%d<下！"
-	L.freeze_warn_frost = ">%d<冰霜攻击 - 还需>%d<下！"
+	L.freeze_warn_melee = "%d 物理攻击 - 还需%d下！"
+	L.freeze_warn_frost = "%d 冰霜攻击 - 还需%d下！"
 end
 
 L = BigWigs:NewBossLocale("Ouro", "zhCN")
@@ -37,23 +37,23 @@ end
 
 L = BigWigs:NewBossLocale("C'Thun", "zhCN")
 if L then
-	--L.claw_tentacle = "Claw Tentacle"
-	--L.claw_tentacle_desc = "Timers for the claw tentacle."
+	L.claw_tentacle = "利爪触须"
+	L.claw_tentacle_desc = "利爪触须的计时器。"
 
-	--L.giant_claw_tentacle = "Giant Claw"
-	--L.giant_claw_tentacle_desc = "Timers for the giant claw tentacle."
+	L.giant_claw_tentacle = "巨钩触须"
+	L.giant_claw_tentacle_desc = "巨钩触须的计时器。"
 
-	--L.eye_tentacles = "Eye Tentacles"
-	--L.eye_tentacles_desc = "Timers for the 8 eye tentacles."
+	L.eye_tentacles = "眼球触须"
+	L.eye_tentacles_desc = "眼球触须的计时器。"
 
-	--L.giant_eye_tentacle = "Giant Eye"
-	--L.giant_eye_tentacle_desc = "Timers for the giant eye tentacle."
+	L.giant_eye_tentacle = "巨眼触须"
+	L.giant_eye_tentacle_desc = "巨眼触须的计时器。"
 
 	L.weakened_desc = "虚弱状态警报。"
 
-	--L.dark_glare_message = "%s: %s (Group %s)" -- Dark Glare: PLAYER_NAME (Group 1)
-	--L.stomach = "Stomach"
-	--L.tentacle = "Tentacle (%d)"
+	L.dark_glare_message = "%s: %s (队伍 %s)" -- Dark Glare: PLAYER_NAME (Group 1)
+	L.stomach = "胃"
+	L.tentacle = "触须 (%d)"
 end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "zhCN")
@@ -63,9 +63,9 @@ if L then
 	L.defender = "阿努比萨斯防御者" -- NPC 15277
 	L.crawler = "维克尼爬行者" -- NPC 15240
 
-	--L.target_buffs = "Target Buff Warnings"
-	--L.target_buffs_desc = "When your target is an Anubisath Sentinel, show a warning for what buff it has."
-	--L.target_buffs_message = "Target Buffs: %s"
-	L.detect_magic_missing_message = "侦测魔法 is missing from your target"
-	L.detect_magic_warning = "A Mage must cast \124cff71d5ff\124Hspell:2855:0\124h[侦测魔法]\124h\124r on your target for buff warnings to work."
+	L.target_buffs = "目标增益警报"
+	L.target_buffs_desc = "当你的目标是阿努比萨斯哨兵时，会显示一个警报，提醒你有什么增益。"
+	L.target_buffs_message = "目标增益: %s"
+	L.detect_magic_missing_message = "你的目标缺少侦测魔法"
+	L.detect_magic_warning = "法师必须对你的目标施放 \124cff71d5ff\124Hspell:2855:0\124h[侦测魔法]\124h\124r 这样警报才能生效。"
 end
