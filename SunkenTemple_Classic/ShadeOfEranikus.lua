@@ -20,11 +20,9 @@ end
 -- Initialization
 --
 
-local desiccatedFalloutMarker = mod:AddMarkerOption(true, "npc", 8, "desiccated_fallout", 8, 7, 6) -- Desiccated Fallout
 function mod:GetOptions()
 	return {
 		434358, -- Summon Irradiated Goo
-		desiccatedFalloutMarker,
 		433546, -- Radiation Burn
 		434434, -- Sludge
 	},nil,{
@@ -34,8 +32,6 @@ end
 
 function mod:OnRegister()
 	self.displayName = L.bossName
-	-- Delayed for custom locale
-	desiccatedFalloutMarker = mod:AddMarkerOption(true, "npc", 8, "desiccated_fallout", 8, 7, 6) -- Desiccated Fallout
 end
 
 function mod:OnBossEnable()
@@ -61,11 +57,6 @@ end
 
 do
 	local gooCollector, gooIcon, falloutIcon = {}, 8, 8
-	function mod:GooMarking(_, unit, guid)
-		if gooCollector[guid] then
-			self:CustomIcon(desiccatedFalloutMarker, unit, gooCollector[guid])
-		end
-	end
 
 	function mod:SummonIrradiatedGooStart(args)
 		self:Message(args.spellId, "cyan", CL.incoming:format(CL.adds))
@@ -76,7 +67,6 @@ do
 	function mod:SummonIrradiatedGoo(args)
 		gooCollector = {}
 		gooIcon, falloutIcon = 8, 8
-		self:RegisterTargetEvents("GooMarking")
 	end
 
 	function mod:ToxicEmissionApplied(args)
@@ -84,9 +74,6 @@ do
 			gooCollector[args.destGUID] = gooIcon
 			gooIcon = gooIcon - 1
 			local unit = self:GetUnitIdByGUID(args.destGUID)
-			if unit then
-				self:CustomIcon(desiccatedFalloutMarker, unit, gooCollector[args.destGUID])
-			end
 		end
 	end
 
