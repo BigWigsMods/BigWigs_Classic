@@ -15,6 +15,7 @@ local barcount = 2
 local debuffCount = 0
 local prevWeakness = nil
 local buffList = {}
+local firstWarning = false
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -77,6 +78,7 @@ function mod:OnBossEnable()
 		23308, 23309, -- Incinerate
 		23187, 23189 -- Frost Burn
 	)
+	self:Log("SPELL_AURA_APPLIED", "ElementalShield", 22277, 22278, 22279, 22280, 22281) -- Fire, Frost, Shadow, Nature, Arcane
 
 	if self:Vanilla() then
 		BigWigs:Print(L.detect_magic_warning)
@@ -91,16 +93,35 @@ do
 		if unit then
 			if mod:Vanilla() then
 				if mod:UnitDebuff(unit, 2855) then -- Detect Magic
-					mod:UNIT_AURA(nil, unit)
+					for buffId, message in next, buffList do
+						if mod:UnitBuff(unit, buffId) then
+							prevWeakness = buffId
+							mod:Message("vulnerability", "green", message, buffId)
+							mod:CDBar("vulnerability", 0.1, message, buffId)
+							mod:PlaySound("vulnerability", "info")
+							return
+						end
+					end
 				else
-					mod:Message("vulnerability", "red", L.detect_magic_missing, 2855)
-					mod:PlaySound("vulnerability", "warning")
+					if not firstWarning then
+						firstWarning = true
+						mod:Message("vulnerability", "red", L.detect_magic_missing, 2855)
+						mod:PlaySound("vulnerability", "warning")
+					end
 				end
 			else
-				mod:UNIT_AURA(nil, unit)
+				for buffId, message in next, buffList do
+					if mod:UnitBuff(unit, buffId) then
+						prevWeakness = buffId
+						mod:Message("vulnerability", "green", message, buffId)
+						mod:CDBar("vulnerability", 0.1, message, buffId)
+						mod:PlaySound("vulnerability", "info")
+						return
+					end
+				end
 			end
 		else
-			mod:SimpleTimer(CheckInitWeakness, 1)
+			mod:SimpleTimer(CheckInitWeakness, 0.5)
 		end
 	end
 
@@ -108,11 +129,11 @@ do
 		barcount = 2
 		debuffCount = 0
 		prevWeakness = nil
+		firstWarning = false
 
 		self:Bar("breath", 30, CL.count:format(CL.next_ability, 1), "INV_Misc_QuestionMark")
 		self:Bar("breath", 60, CL.count:format(CL.next_ability, 2), "INV_Misc_QuestionMark")
 
-		self:RegisterEvent("UNIT_AURA")
 		self:SimpleTimer(CheckInitWeakness, 1)
 	end
 end
@@ -175,21 +196,14 @@ function mod:Breaths(args)
 	self:PlaySound("breath", "long")
 end
 
-function mod:UNIT_AURA(_, unit)
-	if self:MobId(self:UnitGUID(unit)) == 14020 then
-		for buffId, message in next, buffList do
-			if self:UnitBuff(unit, buffId) then
-				if prevWeakness ~= buffId then
-					if buffList[prevWeakness] then
-						self:StopBar(buffList[prevWeakness])
-					end
-					prevWeakness = buffId
-					self:Message("vulnerability", "green", message, buffId)
-					self:CDBar("vulnerability", 0.1, message, buffId)
-					self:PlaySound("vulnerability", "info")
-				end
-				return
-			end
+function mod:ElementalShield(args) -- Weaknesses
+	if self:MobId(args.destGUID) == 14020 then
+		if buffList[prevWeakness] then
+			self:StopBar(buffList[prevWeakness])
 		end
+		prevWeakness = args.spellId
+		self:Message("vulnerability", "green", buffList[prevWeakness], prevWeakness)
+		self:CDBar("vulnerability", 0.1, buffList[prevWeakness], prevWeakness)
+		self:PlaySound("vulnerability", "info")
 	end
 end
