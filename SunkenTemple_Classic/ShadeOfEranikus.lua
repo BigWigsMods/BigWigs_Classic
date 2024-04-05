@@ -90,11 +90,7 @@ end
 function mod:CorrosiveBreathApplied(args)
 	if self:Me(args.destGUID) or self:Tank() then
 		self:TargetMessage(args.spellId, "purple", args.destName)
-		if self:Me(args.destGUID) then
-			self:PlaySound(args.spellId, "warning")
-		elseif self:Tank(args.destGUID) then  -- Taunt
-			self:PlaySound(args.spellId, "alert")
-		end
+		self:PlaySound(args.spellId, "alarm")
 	end
 end
 
