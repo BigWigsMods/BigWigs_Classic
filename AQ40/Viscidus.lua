@@ -65,6 +65,10 @@ function mod:OnBossEnable()
 	self:RegisterEvent("UNIT_TARGET")
 end
 
+function mod:OnEngage()
+	self:CDBar(25991, 8.8) -- Poison Bolt Volley
+end
+
 function mod:OnWipe()
 	frostCount = 0 -- We might pull with a frost ability, so don't reset on engage
 end
@@ -135,6 +139,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 		self:Message("freeze", "orange", CL.count:format(L.freeze_warn2, frostCount), L.freeze_icon)
 	elseif msg:find(L.freeze_trigger3, nil, true) then
 		swingCount = 0
+		frostCount = 999
 		self:Message("freeze", "red", CL.count:format(L.freeze_warn3, frostCount), L.freeze_icon)
 		self:Bar("freeze", 30, L.freeze_warn3, L.freeze_icon)
 	elseif msg:find(L.freeze_trigger4, nil, true) then
@@ -148,5 +153,6 @@ function mod:UNIT_TARGET(_, unit)
 	if self:MobId(self:UnitGUID(unit.."target")) == 15667 then -- Glob of Viscidus
 		swingCount = -1
 		frostCount = 0
+		self:StopBar(L.freeze_warn3)
 	end
 end

@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Shade of Eranikus Discovery", 109, -2959)
 if not mod then return end
-mod:RegisterEnableMob(220007) -- Shade of Eranikus
+mod:RegisterEnableMob(218571) -- Shade of Eranikus
 mod:SetEncounterID(2959)
 
 --------------------------------------------------------------------------------
