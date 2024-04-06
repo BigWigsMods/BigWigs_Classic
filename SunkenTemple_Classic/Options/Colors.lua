@@ -51,9 +51,23 @@ BigWigs:AddColors("Morphaz and Hazzas Discovery", {
 })
 
 BigWigs:AddColors("Shade of Eranikus Discovery", {
+	[3391] = "purple",
+	[437301] = "cyan",
+	[437324] = {"blue","green"},
+	[437353] = {"blue","purple"},
+	[437390] = {"blue","green","yellow"},
+	[437398] = "orange",
+	[437416] = "cyan",
+	[445498] = "red",
 	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Avatar of Hakkar Discovery", {
+	[443953] = "blue",
+	[443990] = {"green","red"},
+	[444039] = {"blue","red"},
+	[444046] = {"green","orange"},
+	[444132] = "yellow",
+	[444255] = "blue",
 	["stages"] = "cyan",
 })

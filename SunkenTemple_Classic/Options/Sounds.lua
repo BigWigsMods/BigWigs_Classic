@@ -49,7 +49,21 @@ BigWigs:AddSounds("Morphaz and Hazzas Discovery", {
 })
 
 BigWigs:AddSounds("Shade of Eranikus Discovery", {
+	[3391] = "info",
+	[437301] = "info",
+	[437324] = {"alarm","info"},
+	[437353] = {"alarm","alert"},
+	[437390] = {"alarm","alert","info"},
+	[437398] = "warning",
+	[437416] = "long",
+	[445498] = "warning",
 })
 
 BigWigs:AddSounds("Avatar of Hakkar Discovery", {
+	[443953] = "underyou",
+	[443990] = "warning",
+	[444039] = "warning",
+	[444046] = "alarm",
+	[444132] = "long",
+	["stages"] = "info",
 })
