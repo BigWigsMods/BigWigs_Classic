@@ -128,7 +128,7 @@ end
 function mod:CorruptedBloodRemoved(args)
 	if self:Me(args.destGUID) then
 		corruptedBloodOnMe = false
-		self:PersonalMessage(args.spellId)
+		self:PersonalMessage(args.spellId, "removed")
 	end
 end
 
