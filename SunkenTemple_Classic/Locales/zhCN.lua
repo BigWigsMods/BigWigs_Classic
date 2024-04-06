@@ -37,4 +37,6 @@ end
 L = BigWigs:NewBossLocale("Shade of Eranikus Discovery", "zhCN")
 if L then
 	L.bossName = "伊兰尼库斯的阴影"
+	L.deep_slumber_clouds = "云雾" -- 昏睡迷云
+	L.deep_slumber_player_debuff = "玩家"
 end
