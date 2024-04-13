@@ -74,7 +74,7 @@ function mod:OnEngage()
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:CDBar(437817, 8) -- Holy Nova
 	self:CDBar(437809, 7.4) -- Holy Fire
-	self:CDBar(437868, 14.9) -- Agonizing Weakness
+	self:CDBar(437868, 14.9, CL.curse) -- Agonizing Weakness
 	self:CDBar(437847, 6.4) -- Mortal Lash
 end
 
@@ -135,7 +135,7 @@ function mod:Draining()
 	self:CDBar(437927, 12.1) -- Shadow Sermon: Pain
 	self:CDBar(437921, 23.1) -- Mass Penance
 	self:CDBar(437930, 19.8) -- Power Word: Shield
-	self:CDBar(437928, 16.6) -- Psychic Scream
+	self:CDBar(437928, 16.6, CL.fear) -- Psychic Scream
 end
 
 function mod:ShadowSermonPain(args)
