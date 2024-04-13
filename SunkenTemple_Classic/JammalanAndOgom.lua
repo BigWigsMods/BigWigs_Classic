@@ -122,7 +122,7 @@ end
 function mod:DrainingStart(args)
 	self:StopBar(437817) -- Holy Nova
 	self:StopBar(437809) -- Holy Fire
-	self:StopBar(437868) -- Agonizing Weakness
+	self:StopBar(CL.curse) -- Agonizing Weakness
 	self:StopBar(437847) -- Mortal Lash
 	self:Message("stages", "cyan", CL.intermission, args.spellId)
 	self:Bar("stages", 6, CL.intermission, args.spellId)
