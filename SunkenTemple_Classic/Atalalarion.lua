@@ -40,7 +40,7 @@ end
 
 function mod:OnEngage()
 	self:CDBar(437503, 6) -- Pillars of Might
-	self:CDBar(437597, 24) -- Demolishing Smash
+	self:CDBar(437597, 24, CL.knockback) -- Demolishing Smash
 end
 
 --------------------------------------------------------------------------------
