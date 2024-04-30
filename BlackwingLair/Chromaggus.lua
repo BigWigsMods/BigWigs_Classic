@@ -103,6 +103,7 @@ do
 						end
 					end
 				else
+					mod:SimpleTimer(CheckInitWeakness, 0.5)
 					if not firstWarning then
 						firstWarning = true
 						mod:Message("vulnerability", "red", L.detect_magic_missing, 2855)

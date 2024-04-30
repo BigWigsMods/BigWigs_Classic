@@ -143,7 +143,7 @@ do
 						printed = true
 						BigWigs:Print(L.detect_magic_warning)
 					end
-					if GetTime() - prevMsg > 40 then
+					if GetTime() - prevMsg > 40 and self:GetHealth("target") > 5 then
 						prevMsg = GetTime()
 						local icon = self:GetIconTexture(self:GetIcon("target"))
 						if icon then
