@@ -22,11 +22,15 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Pulse", 19492)
 end
 
+function mod:OnEngage()
+	self:CDBar(19492, 11.3) -- Antimagic Pulse
+end
+
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
 function mod:Pulse(args)
 	self:Message(args.spellId, "yellow")
-	self:Bar(args.spellId, 18)
+	self:CDBar(args.spellId, 18)
 end

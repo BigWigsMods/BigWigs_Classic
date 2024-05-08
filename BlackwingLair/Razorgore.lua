@@ -82,6 +82,15 @@ end
 function mod:DestroyEgg()
 	eggs = eggs + 1
 	self:Message("eggs", "green", L.eggs_message:format(eggs), L.eggs_icon)
+	if eggs == 30 then
+		self:ScheduleTimer("Stage2Backup", 4)
+	end
+end
+
+function mod:Stage2Backup() -- Backup for Warming Flames sometimes not casting
+	if self:GetStage() ~= 2 then
+		self:WarmingFlames()
+	end
 end
 
 function mod:WarmingFlames() -- Stage 2

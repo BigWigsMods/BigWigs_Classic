@@ -11,7 +11,7 @@ mod:SetEncounterID(715)
 -- Initialization
 --
 
-local explodeMarker = mod:AddMarkerOption(true, "npc", 8, 804, 8)
+local explodeMarker = mod:AddMarkerOption(true, "npc", 8, 804, 8) -- Explode Bug
 function mod:GetOptions()
 	return {
 		7393, -- Heal Brother

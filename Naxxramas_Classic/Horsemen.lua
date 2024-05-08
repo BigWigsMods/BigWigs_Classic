@@ -14,6 +14,12 @@ mod:SetEncounterID(1121)
 local killedBosses = {}
 local markCounter = 1
 local UpdateInfoBoxList
+local bossList = {
+	[16062] = 1, -- Highlord Mograine
+	[16063] = 3, -- Sir Zeliek
+	[16064] = 5, -- Thane Korth'azz
+	[16065] = 7, -- Lady Blaumeux
+}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -64,12 +70,10 @@ function mod:OnEngage()
 	killedBosses = {}
 
 	self:OpenInfo("health", "BigWigs: ".. CL.health)
-	local npcId = 16061
-	for i = 1, 7, 2 do
-		npcId = npcId + 1
-		self:SetInfo("health", i, L[npcId])
-		self:SetInfoBar("health", i, 1)
-		self:SetInfo("health", i + 1, "100%")
+	for npcId, line in next, bossList do
+		self:SetInfo("health", line, L[npcId])
+		self:SetInfoBar("health", line, 1)
+		self:SetInfo("health", line + 1, "100%")
 	end
 	self:SimpleTimer(UpdateInfoBoxList, 1)
 
@@ -89,6 +93,15 @@ end
 do
 	local prev = 0
 	function mod:Mark(args)
+		local icon = self:GetIconTexture(self:GetIcon(args.sourceRaidFlags))
+		if icon then
+			local npcId = self:MobId(args.sourceGUID)
+			local line = bossList[npcId]
+			if line then
+				self:SetInfoBar("health", line, icon.. L[npcId]) -- Add raid icons to the boss names
+			end
+		end
+
 		if args.time - prev > 5 then
 			prev = args.time
 			local markMsg = CL.count:format(CL.mark, markCounter)
@@ -156,12 +169,6 @@ function mod:ShieldWall(args)
 end
 
 do
-	local bossList = {
-		[16062] = 1, -- Highlord Mograine
-		[16063] = 3, -- Sir Zeliek
-		[16064] = 5, -- Thane Korth'azz
-		[16065] = 7, -- Lady Blaumeux
-	}
 	local unitTracker = {}
 	function mod:Deaths(args)
 		unitTracker[args.mobId] = nil
