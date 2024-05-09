@@ -121,6 +121,7 @@ function mod:CorruptedBloodApplied(args)
 	if self:Me(args.destGUID) then
 		corruptedBloodOnMe = true
 		self:PersonalMessage(args.spellId)
+		self:PlaySound(args.spellId, "alarm")
 		self:Say(args.spellId, nil, nil, "Corrupted Blood")
 	end
 end
