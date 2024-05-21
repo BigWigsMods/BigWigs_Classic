@@ -21,6 +21,7 @@ if L then
 
 	L.debuffs_message = "3/5 减益，注意！"
 	L.debuffs_warning = "4/5 减益， 5层后将%s！"
+	L.bronze = "青铜"
 
 	L.vulnerability = "弱点警报"
 	L.vulnerability_desc = "克洛玛古斯弱点改变时发出警报。"

@@ -22,6 +22,7 @@ if L then
 
 	L.debuffs_message = "3/5 penalidades, cuidado!"
 	L.debuffs_warning = "4/5 penalidades, %s na 5ª!"
+	L.bronze = "Bronze"
 
 	L.vulnerability = "Mudanças de vulnerabilidade"
 	L.vulnerability_desc = "Aviso para mudanças de vulnerabilidade."

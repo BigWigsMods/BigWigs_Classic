@@ -21,6 +21,7 @@ if L then
 
 	--L.debuffs_message = "3/5 debuffs, carefull!"
 	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+	L.bronze = "Бронзовое"
 
 	L.vulnerability = "Изменение уязвимости"
 	L.vulnerability_desc = "Сообщать когда уязвимость изменяется."

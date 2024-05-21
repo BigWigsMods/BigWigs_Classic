@@ -21,6 +21,7 @@ if L then
 
 	L.debuffs_message = "3/5 Debuffs, vorsicht!"
 	L.debuffs_warning = "4/5 Debuffs, %s auf 5th!"
+	L.bronze = "Bronze"
 
 	L.vulnerability = "Zauber-Verwundbarkeiten"
 	L.vulnerability_desc = "Warnung, wenn Chromagguss Zauber-Verwundbarkeit sich ändert."

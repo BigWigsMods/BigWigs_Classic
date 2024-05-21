@@ -21,6 +21,7 @@ if L then
 
 	L.debuffs_message = "¡3/5 perjuicios, ten cuidado!"
 	L.debuffs_warning = "¡4/5 perjuicios, %s al 5to!"
+	L.bronze = "Bronce"
 
 	L.vulnerability = "Cambio de vulnerabilidad"
 	L.vulnerability_desc = "Anuncia cambios de vulnerabilidad."

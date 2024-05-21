@@ -29,6 +29,7 @@ if L then
 
 	L.debuffs_message = "3/5 debuffs, carefull!"
 	L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+	L.bronze = "Bronze"
 
 	L.vulnerability = "Vulnerability Change"
 	L.vulnerability_desc = "Warn for Vulnerability changes."
@@ -49,19 +50,21 @@ function mod:GetOptions()
 		{"breath", "CASTBAR"},
 		23174, -- Chromatic Mutation
 		"vulnerability",
+		{23170, "ME_ONLY_EMPHASIZE"}, -- Brood Affliction: Bronze
 	},nil,{
 		[23537] = CL.health_percent:format(20), -- Frenzy / Enrage (20% Health)
 		[23174] = CL.mind_control, -- Chromatic Mutation (Mind Control)
+		[23170] = L.bronze, -- Brood Affliction: Bronze (Bronze)
 	}
 end
 
 function mod:OnRegister()
 	buffList = {
-		[22277] = L.vulnerability_message:format(STRING_SCHOOL_FIRE),
-		[22278] = L.vulnerability_message:format(STRING_SCHOOL_FROST),
-		[22279] = L.vulnerability_message:format(STRING_SCHOOL_SHADOW),
-		[22280] = L.vulnerability_message:format(STRING_SCHOOL_NATURE),
-		[22281] = L.vulnerability_message:format(STRING_SCHOOL_ARCANE),
+		[22277] = L.vulnerability_message:format(CL.fire),
+		[22278] = L.vulnerability_message:format(CL.frost),
+		[22279] = L.vulnerability_message:format(CL.shadow),
+		[22280] = L.vulnerability_message:format(CL.nature),
+		[22281] = L.vulnerability_message:format(CL.arcane),
 	}
 end
 
@@ -162,6 +165,9 @@ end
 
 function mod:BroodAffliction(args)
 	if self:Me(args.destGUID) then
+		if args.spellId == 23170 then -- Brood Affliction: Bronze
+			self:PersonalMessage(23170, false, L.bronze)
+		end
 		debuffCount = debuffCount + 1
 		if debuffCount == 3 then
 			self:Message(23174, "red", L.debuffs_message, args.spellId)

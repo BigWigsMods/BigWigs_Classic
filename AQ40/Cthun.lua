@@ -334,7 +334,9 @@ function UpdateInfoBoxList()
 			end
 			local currentHealthPercent = math.floor(mod:GetHealth(unitTarget))
 			mod:SetInfoBar("infobox", line, currentHealthPercent/100)
-			mod:SetInfo("infobox", line + 1, ("%d%%"):format(currentHealthPercent))
+			if currentHealthPercent > 0 then
+				mod:SetInfo("infobox", line + 1, ("%d%%"):format(currentHealthPercent))
+			end
 		end
 	end
 end

@@ -98,7 +98,7 @@ do
 			local npcId = self:MobId(args.sourceGUID)
 			local line = bossList[npcId]
 			if line then
-				self:SetInfoBar("health", line, icon.. L[npcId]) -- Add raid icons to the boss names
+				self:SetInfo("health", line, icon.. L[npcId]) -- Add raid icons to the boss names
 			end
 		end
 

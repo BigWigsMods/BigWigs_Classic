@@ -46,11 +46,11 @@ end
 
 function mod:OnRegister()
 	buffList = {
-		[22277] = L.target_vulnerability_message:format(STRING_SCHOOL_FIRE),
-		[22278] = L.target_vulnerability_message:format(STRING_SCHOOL_FROST),
-		[22279] = L.target_vulnerability_message:format(STRING_SCHOOL_SHADOW),
-		[22280] = L.target_vulnerability_message:format(STRING_SCHOOL_NATURE),
-		[22281] = L.target_vulnerability_message:format(STRING_SCHOOL_ARCANE),
+		[22277] = L.vulnerability_message:format(CL.fire),
+		[22278] = L.vulnerability_message:format(CL.frost),
+		[22279] = L.vulnerability_message:format(CL.shadow),
+		[22280] = L.vulnerability_message:format(CL.nature),
+		[22281] = L.vulnerability_message:format(CL.arcane),
 	}
 end
 
@@ -115,7 +115,7 @@ do
 	end
 	function mod:DetectMagicApplied(args)
 		if args.destGUID == self:UnitGUID("target") then
-			self:CheckTarget()
+			self:SimpleTimer(function() self:CheckTarget() end, 0.01) -- Combat log is sometimes faster than the aura API
 		end
 	end
 end

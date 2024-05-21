@@ -21,6 +21,7 @@ if L then
 
 	--L.debuffs_message = "3/5 debuffs, carefull!"
 	--L.debuffs_warning = "4/5 debuffs, %s on 5th!"
+	L.bronze = "청동"
 
 	L.vulnerability = "약화 속성 경고"
 	L.vulnerability_desc = "약화 속성 변경에 대한 경고."
