@@ -46,11 +46,11 @@ end
 
 function mod:OnRegister()
 	buffList = {
-		[22277] = L.vulnerability_message:format(CL.fire),
-		[22278] = L.vulnerability_message:format(CL.frost),
-		[22279] = L.vulnerability_message:format(CL.shadow),
-		[22280] = L.vulnerability_message:format(CL.nature),
-		[22281] = L.vulnerability_message:format(CL.arcane),
+		[22277] = L.target_vulnerability_message:format(CL.fire),
+		[22278] = L.target_vulnerability_message:format(CL.frost),
+		[22279] = L.target_vulnerability_message:format(CL.shadow),
+		[22280] = L.target_vulnerability_message:format(CL.nature),
+		[22281] = L.target_vulnerability_message:format(CL.arcane),
 	}
 end
 
