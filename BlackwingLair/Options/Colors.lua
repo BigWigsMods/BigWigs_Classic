@@ -36,6 +36,7 @@ BigWigs:AddColors("Flamegor", {
 
 BigWigs:AddColors("Chromaggus", {
 	[23128] = {"green","orange"},
+	[23170] = "blue",
 	[23174] = "red",
 	[23537] = "red",
 	["breath"] = "yellow",

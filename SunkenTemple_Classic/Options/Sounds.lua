@@ -65,5 +65,6 @@ BigWigs:AddSounds("Avatar of Hakkar Discovery", {
 	[444039] = "warning",
 	[444046] = "alarm",
 	[444132] = "long",
+	[444255] = "alarm",
 	["stages"] = "info",
 })
