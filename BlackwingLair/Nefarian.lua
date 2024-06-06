@@ -88,7 +88,7 @@ function mod:OnRegister()
 		[L.shaman_class_call_yell_trigger] = L.warnshaman,
 		[L.deathknight_class_call_yell_trigger] = L.warndeathknight,
 		[L.monk_class_call_yell_trigger] = L.warnmonk,
-		[L.hunter_class_call_yell_trigger] = L.warnhunter,
+		[L.hunter_class_call_yell_trigger] = L.warnhunter, -- Backup for Hunter spell not working
 	}
 	classCallSpellTable = {
 		[23414] = L.warnrogue,
@@ -100,7 +100,7 @@ function mod:OnRegister()
 		[23418] = L.warnpaladin,
 		[23427] = L.warnwarlock,
 		[204813] = L.warndemonhunter,
-		[23436] = L.warnhunter, -- Might not be working on classic?
+		[23436] = L.warnhunter, -- Hunter sometimes doesn't work
 	}
 end
 
@@ -112,14 +112,13 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "VeilOfShadow", 22687)
 	self:Log("SPELL_DISPEL", "VeilOfShadowDispelled", "*")
 
-	if self:Classic() then
-		-- Rogue, Druid, Warrior, Priest, Mage, Paladin, Warlock
-		self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 23397, 23401, 23410, 23418, 23427)
-	else
-		-- Rogue, Druid, Druid (Retail WoW), Warrior, Priest, Mage, Paladin, Warlock, Demon Hunter
-		self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 350567, 23397, 23401, 23410, 23418, 23427, 204813)
+	-- Rogue, Druid, Warrior, Priest, Mage, Paladin, Warlock
+	self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 23397, 23401, 23410, 23418, 23427)
+	if self:Retail() then
+		-- Druid (Retail WoW), Demon Hunter
+		self:Log("SPELL_AURA_APPLIED", "ClassCall", 350567, 204813)
 	end
-	self:Log("SPELL_DURABILITY_DAMAGE", "ClassCall", 23436) -- Hunter, might not be working on classic?
+	self:Log("SPELL_DURABILITY_DAMAGE", "ClassCall", 23436) -- Hunter, sometimes doesn't work, keeping yell for backup
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 
