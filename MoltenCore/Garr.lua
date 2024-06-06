@@ -32,5 +32,5 @@ end
 
 function mod:Pulse(args)
 	self:Message(args.spellId, "yellow")
-	self:CDBar(args.spellId, 18)
+	self:CDBar(args.spellId, 17)
 end

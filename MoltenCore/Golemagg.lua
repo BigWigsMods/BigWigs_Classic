@@ -32,8 +32,8 @@ function mod:MagmaSplashApplied(args)
 			self:PlaySound(args.spellId, "alert")
 		end
 	elseif self:Player(args.destFlags) and args.amount >= 3 then -- Players, not pets
-		local bossUnit = self:GetUnitIdByGUID(args.sourceGUID)
-		if bossUnit and self:Tanking(bossUnit, args.destName) then
+		local unit = self:GetUnitIdByGUID(args.sourceGUID)
+		if unit and self:Tanking(unit, args.destName) then
 			self:StackMessage(args.spellId, "purple", args.destName, args.amount, 4)
 			if args.amount >= 4 then
 				self:PlaySound(args.spellId, "alert")

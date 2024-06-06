@@ -96,6 +96,6 @@ function mod:DominateMindApplied(args)
 end
 
 function mod:DominateMindRemoved(args)
-	self:CustomIcon(dominateMindMarker, args.destName)
 	self:StopBar(CL.mind_control_short, args.destName)
+	self:CustomIcon(dominateMindMarker, args.destName)
 end

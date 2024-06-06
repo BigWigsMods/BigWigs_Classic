@@ -166,7 +166,7 @@ end
 function mod:BroodAffliction(args)
 	if self:Me(args.destGUID) then
 		if args.spellId == 23170 then -- Brood Affliction: Bronze
-			self:PersonalMessage(23170, false, L.bronze)
+			self:PersonalMessage(23170, nil, L.bronze)
 		end
 		debuffCount = debuffCount + 1
 		if debuffCount == 3 then

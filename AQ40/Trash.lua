@@ -227,9 +227,9 @@ do
 		self:PlaySound(args.spellId, "alert", nil, args.destName)
 	end
 	function mod:CauseInsanityRemoved(args)
+		self:StopBar(CL.mind_control_short, args.destName)
 		if args.destGUID == prevMindControl then
 			prevMindControl = nil
-			self:StopBar(CL.mind_control_short, args.destName)
 			self:PrimaryIcon(args.spellId)
 		end
 	end

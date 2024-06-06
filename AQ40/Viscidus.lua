@@ -133,18 +133,20 @@ else
 end
 
 function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
-	if msg:find(L.freeze_trigger1, nil, true) then
+	-- Happy with the frost & swing warnings on vanilla so no need for the emote warnings also, retail & classic however...
+	if msg:find(L.freeze_trigger1, nil, true) and not self:Vanilla() then
 		self:Message("freeze", "orange", CL.count:format(L.freeze_warn1, frostCount), L.freeze_icon)
-	elseif msg:find(L.freeze_trigger2, nil, true) then
+	elseif msg:find(L.freeze_trigger2, nil, true) and not self:Vanilla() then
 		self:Message("freeze", "orange", CL.count:format(L.freeze_warn2, frostCount), L.freeze_icon)
 	elseif msg:find(L.freeze_trigger3, nil, true) then
 		swingCount = 0
+		self:StopBar(25991) -- Poison Bolt Volley
 		self:Message("freeze", "red", CL.count:format(L.freeze_warn3, frostCount), L.freeze_icon)
 		self:Bar("freeze", 30, L.freeze_warn3, L.freeze_icon)
 		frostCount = 999
-	elseif msg:find(L.freeze_trigger4, nil, true) then
+	elseif msg:find(L.freeze_trigger4, nil, true) and not self:Vanilla() then
 		self:Message("freeze", "orange", CL.count:format(L.freeze_warn4, swingCount), L.freeze_icon)
-	elseif msg:find(L.freeze_trigger5, nil, true) then
+	elseif msg:find(L.freeze_trigger5, nil, true) and not self:Vanilla() then
 		self:Message("freeze", "red", CL.count:format(L.freeze_warn5, swingCount), L.freeze_icon)
 	end
 end
@@ -154,5 +156,6 @@ function mod:UNIT_TARGET(_, unit)
 		swingCount = -1
 		frostCount = 0
 		self:StopBar(L.freeze_warn3)
+		self:StopBar(25991) -- Poison Bolt Volley
 	end
 end

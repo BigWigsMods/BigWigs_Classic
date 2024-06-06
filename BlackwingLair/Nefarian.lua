@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Nefarian Classic", 469, 1536)
 if not mod then return end
-mod:RegisterEnableMob(11583, 10162) -- Nefarian, Lord Victor Nefarius
+mod:RegisterEnableMob(11583, 10162, 14261, 14262, 14263, 14264, 14265, 14302) -- Nefarian, Lord Victor Nefarius, Blue, Green, Bronze, Red, Black, Chromatic
 mod:SetEncounterID(617)
 mod:SetRespawnTime(900)
 mod:SetStage(1)
@@ -112,8 +112,13 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "VeilOfShadow", 22687)
 	self:Log("SPELL_DISPEL", "VeilOfShadowDispelled", "*")
 
-	-- Rogue, Druid, Druid (Retail WoW), Warrior, Priest, Mage, Paladin, Warlock, Demon Hunter
-	self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 350567, 23397, 23401, 23410, 23418, 23427, 204813)
+	if self:Classic() then
+		-- Rogue, Druid, Warrior, Priest, Mage, Paladin, Warlock
+		self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 23397, 23401, 23410, 23418, 23427)
+	else
+		-- Rogue, Druid, Druid (Retail WoW), Warrior, Priest, Mage, Paladin, Warlock, Demon Hunter
+		self:Log("SPELL_AURA_APPLIED", "ClassCall", 23414, 23398, 350567, 23397, 23401, 23410, 23418, 23427, 204813)
+	end
 	self:Log("SPELL_DURABILITY_DAMAGE", "ClassCall", 23436) -- Hunter, might not be working on classic?
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
@@ -143,9 +148,9 @@ do
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
 	function mod:ShadowCommandRemoved(args)
+		self:StopBar(CL.mind_control_short, args.destName)
 		if args.destGUID == prevMindControl then
 			prevMindControl = nil
-			self:StopBar(CL.mind_control_short, args.destName)
 			self:PrimaryIcon(args.spellId)
 		end
 	end
