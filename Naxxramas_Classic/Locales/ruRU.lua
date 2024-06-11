@@ -48,11 +48,6 @@ if L then
 	L.adds_yell_trigger = "Встаньте мои воины" -- Встаньте мои воины! Встаньте и сражайтесь вновь!
 end
 
-L = BigWigs:NewBossLocale("Maexxna", "ruRU")
-if L then
-	L.cocoons = "Коконы"
-end
-
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ruRU")
 if L then
 	L.understudy = "Ученик рыцаря смерти"

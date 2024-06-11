@@ -13,7 +13,6 @@ mod:SetEncounterID(1116)
 
 local L = mod:GetLocale()
 if L then
-	L.cocoons = "Cocoons"
 	L.adds_icon = "inv_misc_monsterspidercarapace_01"
 end
 
@@ -29,7 +28,6 @@ function mod:GetOptions()
 		28776, -- Necrotic Poison
 		28747, -- Enrage
 	},nil,{
-		[28622] = L.cocoons, -- Web Wrap (Cocoons)
 		[28747] = CL.health_percent:format(30), -- Enrage (30% Health)
 	}
 end
@@ -47,7 +45,7 @@ function mod:OnEngage()
 
 	self:DelayedMessage("adds", 30, "yellow", CL.adds, L.adds_icon) -- Spiders
 
-	self:Bar(28622, 18, L.cocoons) -- Web Wrap
+	self:Bar(28622, 18) -- Web Wrap
 	self:Bar("adds", 30, CL.adds, L.adds_icon) -- Spiders
 	self:Bar(29484, 40) -- Web Spray
 end
@@ -65,11 +63,11 @@ do
 		if args.time - prev > 5 then
 			prev = args.time
 			playerList = {}
-			self:StopBar(L.cocoons)
+			self:StopBar(args.spellName)
 			self:PlaySound(args.spellId, "alert")
 		end
 		playerList[#playerList+1] = args.destName
-		self:TargetsMessage(args.spellId, "yellow", playerList, 3, L.cocoons, nil, 1)
+		self:TargetsMessage(args.spellId, "yellow", playerList, 3, nil, nil, 1)
 	end
 end
 
@@ -78,7 +76,7 @@ function mod:WebSpray(args)
 	self:Bar(args.spellId, 40)
 	self:DelayedMessage("adds", 30, "yellow", CL.adds, L.adds_icon) -- Spiders
 
-	self:Bar(28622, 18, L.cocoons) -- Web Wrap
+	self:Bar(28622, 18) -- Web Wrap
 	self:Bar("adds", 30, CL.adds, L.adds_icon) -- Spiders
 	self:PlaySound(args.spellId, "long")
 end

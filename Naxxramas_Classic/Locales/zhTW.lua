@@ -48,11 +48,6 @@ if L then
 	L.adds_yell_trigger = "起來吧，我的戰士們" -- 起來吧，我的戰士們!起來，再為主人盡忠一次!
 end
 
-L = BigWigs:NewBossLocale("Maexxna", "zhTW")
-if L then
-	L.cocoons = "纏繞之網"
-end
-
 L = BigWigs:NewBossLocale("Instructor Razuvious", "zhTW")
 if L then
 	L.understudy = "死亡騎士實習者"

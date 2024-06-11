@@ -15,6 +15,7 @@ local sporeCount = 1
 local doomCount = 1
 local healerList = {}
 local healerDebuffTime = {}
+local numInfoLines = 10
 local UpdateHealerList
 
 --------------------------------------------------------------------------------
@@ -58,6 +59,7 @@ function mod:OnEngage()
 	doomCount = 1
 	healerList = {}
 	healerDebuffTime = {}
+	numInfoLines = 10
 
 	self:CDBar(30281, 3.1) -- Remove Curse
 	self:CDBar(29865, 6.2) -- Poison Aura
@@ -65,7 +67,7 @@ function mod:OnEngage()
 	self:Bar(29204, 120, CL.count:format(self:SpellName(29204), doomCount)) -- Inevitable Doom
 
 	-- Corrupted Mind
-	self:OpenInfo(29184, "BigWigs: |T136122:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(29184), 20)
+	self:OpenInfo(29184, "BigWigs: |T136122:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(29184), numInfoLines)
 	self:SimpleTimer(UpdateHealerList, 0.1)
 end
 
@@ -123,6 +125,10 @@ end
 function mod:InitialCorruptedMindApplied(args)
 	self:DeleteFromTable(healerList, args.destName)
 	healerList[#healerList + 1] = args.destName
+	if #healerList > 10 and numInfoLines ~= 20 then
+		numInfoLines = 20
+		self:OpenInfo(29184, "BigWigs: |T136122:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(29184), numInfoLines)
+	end
 end
 
 function mod:InitialCorruptedMindRemoved(args) -- The player died
@@ -142,7 +148,7 @@ function UpdateHealerList()
 	-- Healer rotation lite
 	local t = GetTime()
 	local line = 1
-	for i = 1, 20 do
+	for i = 1, numInfoLines do
 		local player = healerList[i]
 		if player then
 			local remaining = (healerDebuffTime[player] or 0) - t

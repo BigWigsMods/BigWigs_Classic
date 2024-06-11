@@ -48,11 +48,6 @@ if L then
 	L.adds_yell_trigger = "Erhebt euch, Soldaten" -- Erhebt euch, Soldaten! Erhebt euch und kämpft erneut!
 end
 
-L = BigWigs:NewBossLocale("Maexxna", "deDE")
-if L then
-	L.cocoons = "Fangnetz"
-end
-
 L = BigWigs:NewBossLocale("Instructor Razuvious", "deDE")
 if L then
 	L.understudy = "Reservist der Todesritter"

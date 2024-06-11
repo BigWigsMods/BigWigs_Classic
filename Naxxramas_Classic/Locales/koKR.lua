@@ -48,11 +48,6 @@ if L then
 	L.adds_yell_trigger = "일어나라,병사들이여" -- 일어나라,병사들이여! 다시 일어나 싸워라!
 end
 
-L = BigWigs:NewBossLocale("Maexxna", "koKR")
-if L then
-	L.cocoons = "거미줄 감싸기"
-end
-
 L = BigWigs:NewBossLocale("Instructor Razuvious", "koKR")
 if L then
 	L.understudy = "죽음의 기사 수습생"

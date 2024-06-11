@@ -84,7 +84,13 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Birth", 26586)
-	self:Log("SPELL_CAST_START", "EyeBeam", 26134, self:Vanilla() and 341722 or 32950)
+	self:Log("SPELL_CAST_START", "EyeBeam", 26134)
+	if not self:Vanilla() then
+		self:Log("SPELL_CAST_START", "EyeBeam", 32950)
+	end
+	if not self:Retail() then
+		self:Log("SPELL_CAST_START", "EyeBeam", 341722)
+	end
 	self:Log("SPELL_AURA_APPLIED", "DigestiveAcidApplied", 26476)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "DigestiveAcidAppliedDose", 26476)
 	self:Log("SPELL_AURA_REMOVED", "DigestiveAcidRemoved", 26476)

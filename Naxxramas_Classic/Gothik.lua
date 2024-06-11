@@ -140,23 +140,29 @@ do
 	end
 
 	function mod:NewTrainee(timeTrainee)
-		self:Bar("adds", timeTrainee, CL.count:format(L.trainee, traineeCount), "Achievement_character_human_male")
-		timerList[1] = self:ScheduleTimer(waveWarn, timeTrainee - 3, "yellow", CL.custom_sec:format(L.trainee, 3), "Achievement_character_human_male")
-		timerList[2] = self:ScheduleTimer("NewTrainee", timeTrainee, 20)
-		traineeCount = traineeCount + 1
+		if traineeCount < 12 then
+			self:Bar("adds", timeTrainee, CL.count:format(L.trainee, traineeCount), "Achievement_character_human_male")
+			timerList[1] = self:ScheduleTimer(waveWarn, timeTrainee - 3, "yellow", CL.custom_sec:format(L.trainee, 3), "Achievement_character_human_male")
+			timerList[2] = self:ScheduleTimer("NewTrainee", timeTrainee, 20)
+			traineeCount = traineeCount + 1
+		end
 	end
 
 	function mod:NewDeathKnight(timeDK)
-		self:Bar("adds", timeDK, CL.count:format(L.deathKnight, deathKnightCount), "Spell_deathknight_frostpresence")
-		timerList[3] = self:ScheduleTimer(waveWarn, timeDK - 3, "orange", CL.custom_sec:format(L.deathKnight, 3), "Spell_deathknight_frostpresence")
-		timerList[4] = self:ScheduleTimer("NewDeathKnight", timeDK, 25)
-		deathKnightCount = deathKnightCount + 1
+		if deathKnightCount < 8 then
+			self:Bar("adds", timeDK, CL.count:format(L.deathKnight, deathKnightCount), "Spell_deathknight_frostpresence")
+			timerList[3] = self:ScheduleTimer(waveWarn, timeDK - 3, "orange", CL.custom_sec:format(L.deathKnight, 3), "Spell_deathknight_frostpresence")
+			timerList[4] = self:ScheduleTimer("NewDeathKnight", timeDK, 25)
+			deathKnightCount = deathKnightCount + 1
+		end
 	end
 
 	function mod:NewRider(timeRider)
-		self:Bar("adds", timeRider, CL.count:format(L.rider, riderCount), "ability_mount_undeadhorse")
-		timerList[5] = self:ScheduleTimer(waveWarn, timeRider - 3, "red", CL.custom_sec:format(L.rider, 3), "ability_mount_undeadhorse")
-		timerList[6] = self:ScheduleTimer("NewRider", timeRider, 30)
-		riderCount = riderCount + 1
+		if riderCount < 5 then
+			self:Bar("adds", timeRider, CL.count:format(L.rider, riderCount), "ability_mount_undeadhorse")
+			timerList[5] = self:ScheduleTimer(waveWarn, timeRider - 3, "red", CL.custom_sec:format(L.rider, 3), "ability_mount_undeadhorse")
+			timerList[6] = self:ScheduleTimer("NewRider", timeRider, 30)
+			riderCount = riderCount + 1
+		end
 	end
 end

@@ -43,11 +43,6 @@ if L then
 	--L.adds_yell_trigger = "Very well. Warriors of the frozen wastes, rise up! I command you to fight, kill and die for your master! Let none survive!"
 end
 
-L = BigWigs:NewBossLocale("Maexxna", "esES")
-if L then
-	L.cocoons = "Capullos"
-end
-
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esES")
 if L then
 	L.adds_yell_trigger = "¡Levantaos, soldados míos!" -- Rise, my soldiers! Rise and fight once more!

@@ -48,11 +48,6 @@ if L then
 	L.adds_yell_trigger = "Levez-vous, soldats" -- Levez-vous, soldats ! Levez-vous et combattez une fois encore !
 end
 
-L = BigWigs:NewBossLocale("Maexxna", "frFR")
-if L then
-	L.cocoons = "Entoilage"
-end
-
 L = BigWigs:NewBossLocale("Instructor Razuvious", "frFR")
 if L then
 	L.understudy = "Doublure de chevalier de la mort"
