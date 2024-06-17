@@ -99,7 +99,7 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:Message("stages", "cyan", CL.percent:format(40, CL.stage:format(3)), false)
 		self:PlaySound("stages", "info")
 	elseif msg:find(L.adds_yell_trigger, nil, true) then
-		self:Message("adds", "cyan", CL.spawning:format(CL.adds), L.adds_icon)
+		self:Message("adds", "cyan", CL.adds_spawning, L.adds_icon)
 		self:Bar("adds", 9, CL.adds, L.adds_icon)
 		self:PlaySound("adds", "info")
 	end

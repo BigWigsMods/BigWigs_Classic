@@ -90,7 +90,7 @@ end
 
 do
 	local function CheckInitWeakness()
-		if not mod:IsEngaged() then return end
+		if not mod:IsEngaged() or prevWeakness then return end
 
 		local unit = mod:GetUnitIdByGUID(14020)
 		if unit then

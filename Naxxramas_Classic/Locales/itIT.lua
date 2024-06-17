@@ -4,7 +4,7 @@ if L then
 	--L.add_death = "Add Death Alert"
 	--L.add_death_desc = "Alerts when an add dies."
 
-	--L.wave = "%d/23: %s"
+	--L.wave = "%d/22: %s"
 
 	L.trainee = "Allievo" -- Unrelenting Trainee NPC 16124
 	L.deathKnight = "Cavaliere della Morte" -- Unrelenting Death Knight NPC 16125

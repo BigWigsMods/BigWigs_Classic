@@ -28,7 +28,7 @@ if L then
 	L.add_death = "Add Death Alert"
 	L.add_death_desc = "Alerts when an add dies."
 
-	L.wave = "%d/23: %s"
+	L.wave = "%d/22: %s"
 
 	L.trainee = "Trainee" -- Unrelenting Trainee NPC 16124
 	-- Technically "Deathknight" in classic era but we are using the modern 2 word term
