@@ -219,8 +219,8 @@ do
 	function mod:CThunWeakened()
 		deaths = 0
 		healthList = {}
-		self:Message("weakened", "green", CL.duration:format(CL.weakened, 45), L.weakened_icon)
-		self:Bar("weakened", 45, L.weakened, L.weakened_icon)
+		self:Message("weakened", "green", CL.weakened, L.weakened_icon)
+		self:Bar("weakened", 45, CL.weakened, L.weakened_icon)
 
 		self:Bar("giant_claw_tentacle", 51, L.giant_claw_tentacle, L.giant_claw_tentacle_icon)
 		self:Bar("eye_tentacles", 81, L.eye_tentacles, L.eye_tentacles_icon)

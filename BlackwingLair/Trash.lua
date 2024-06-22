@@ -115,7 +115,7 @@ do
 	end
 	function mod:DetectMagicApplied(args)
 		if args.destGUID == self:UnitGUID("target") then
-			self:SimpleTimer(function() self:CheckTarget() end, 0.01) -- Combat log is sometimes faster than the aura API
+			self:SimpleTimer(function() self:CheckTarget() end, 0.1) -- Combat log is sometimes faster than the aura API
 		end
 	end
 end
