@@ -40,4 +40,3 @@ MoltenCore\modules.xml
 BlackwingLair\modules.xml
 AQ20\modules.xml
 AQ40\modules.xml
-ZulGurub_Classic\modules.xml
