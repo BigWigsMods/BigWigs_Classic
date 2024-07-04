@@ -139,8 +139,8 @@ function mod:GetOptions()
 		{"health", "INFOBOX"},
 		-- Stage 2
 		{28089, "COUNTDOWN"}, -- Polarity Shift
-		{28084, "EMPHASIZE"}, -- Negative Charge
-		{28059, "EMPHASIZE"}, -- Positive Charge
+		{28084, "EMPHASIZE", "SAY"}, -- Negative Charge
+		{28059, "EMPHASIZE", "SAY"}, -- Positive Charge
 		"berserk",
 		-- Extras
 		"custom_off_select_charge_position",
@@ -299,6 +299,7 @@ end
 
 function mod:NegativeCharge(args)
 	if self:Me(args.destGUID) then
+		self:Say(args.spellId, "{rt7}--", true)
 		local opt = self:GetOption("custom_off_select_charge_position")
 		local strategy_first = INITIAL_DIRECTION[opt]
 		local strategy_change, direction
@@ -368,6 +369,7 @@ end
 
 function mod:PositiveCharge(args)
 	if self:Me(args.destGUID) then
+		self:Say(args.spellId, "{rt6}++", true)
 		local opt = self:GetOption("custom_off_select_charge_position")
 		local strategy_first = INITIAL_DIRECTION[opt]
 		local strategy_change, direction
