@@ -2,12 +2,9 @@
 -- Module Declaration
 --
 
-if BigWigsLoader.isSeasonOfDiscovery then return end
-local mod, CL = BigWigs:NewBoss("Lord Kazzak", -1419)
+local mod, CL = BigWigs:NewBoss("Lord Kazzak Season of Discovery", 2789)
 if not mod then return end
 mod:RegisterEnableMob(12397)
-mod.otherMenu = -947
-mod.worldBoss = 12397
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -31,6 +28,7 @@ function mod:GetOptions()
 		21056, -- Mark of Kazzak
 		21063, -- Twisted Reflection
 		"berserk",
+		"stages",
 	},nil,{
 		[21056] = CL.curse, -- Mark of Kazzak (Curse)
 	}
@@ -43,15 +41,11 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "MarkOfKazzak", 21056)
 	self:Log("SPELL_AURA_APPLIED", "TwistedReflection", 21063)
-
-	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-
-	self:Death("Win", 12397)
 end
 
 function mod:OnEngage()
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
+	self:Berserk(180, nil, nil, L.supreme_mode, L.supreme_mode)
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 end
 
 --------------------------------------------------------------------------------
@@ -71,12 +65,5 @@ function mod:TwistedReflection(args)
 	self:TargetMessage(args.spellId, "orange", args.destName)
 	if self:Dispeller("magic") then
 		self:PlaySound(args.spellId, "alarm")
-	end
-end
-
-function mod:CHAT_MSG_MONSTER_YELL(_, msg)
-	if msg:find(L.engage_trigger, nil, true) then
-		self:Engage()
-		self:Berserk(180, nil, nil, L.supreme_mode, L.supreme_mode)
 	end
 end

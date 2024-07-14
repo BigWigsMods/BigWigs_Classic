@@ -2,12 +2,9 @@
 -- Module Declaration
 --
 
-if BigWigsLoader.isSeasonOfDiscovery then return end
-local mod, CL = BigWigs:NewBoss("Azuregos", -1447)
+local mod, CL = BigWigs:NewBoss("Azuregos Season of Discovery", 2791)
 if not mod then return end
 mod:RegisterEnableMob(6109)
-mod.otherMenu = -947
-mod.worldBoss = 6109
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -28,6 +25,7 @@ function mod:GetOptions()
 	return {
 		22067, -- Reflection
 		21147, -- Arcane Vacuum
+		"stages",
 	},nil,{
 		[21147] = CL.teleport, -- Arcane Vacuum (Teleport)
 	}
@@ -38,26 +36,19 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	--self:ScheduleTimer("CheckForEngage", 1)
-	--self:RegisterEvent("BOSS_KILL")
-
 	self:Log("SPELL_AURA_APPLIED", "Reflection", 22067)
 	self:Log("SPELL_AURA_REMOVED", "ReflectionRemoved", 22067)
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+end
 
-	self:Death("Win", 6109)
+function mod:OnEngage()
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
-
---function mod:BOSS_KILL(_, id)
---	if id == 0000 then
---		self:Win()
---	end
---end
 
 function mod:Reflection(args)
 	self:Message(args.spellId, "yellow", CL.duration:format(args.spellName, 10))
