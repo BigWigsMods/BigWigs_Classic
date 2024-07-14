@@ -1,5 +1,4 @@
 
 BigWigs:AddSounds("Azuregos Season of Discovery", {
-	[21056] = "warning",
-	[21063] = "alarm",
+	[22067] = {"info","warning"},
 })
