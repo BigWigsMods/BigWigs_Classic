@@ -13,3 +13,8 @@ if L then
 	L.emerge_message = "Рагнарос появился, 3 минуты до погружения!"
 	L.emerge_bar = "Рагнарос погрузился"
 end
+
+L = BigWigs:NewBossLocale("The Molten Core", "ruRU")
+if L then
+	--L.bossName = "The Molten Core"
+end
