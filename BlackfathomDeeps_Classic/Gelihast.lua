@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Gelihast Discovery", 48, -2704)
+local mod, CL = BigWigs:NewBoss("Gelihast Discovery", 48)
 if not mod then return end
 mod:RegisterEnableMob(204921) -- Gelihast Season of Discovery
 mod:SetEncounterID(2704)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Localization

@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Mekgineer Thermaplugg Discovery", 90, -2940)
+local mod, CL = BigWigs:NewBoss("Mekgineer Thermaplugg Discovery", 90)
 if not mod then return end
 mod:RegisterEnableMob(
 	218537, -- Mekgineer Thermaplugg
@@ -12,6 +12,7 @@ mod:RegisterEnableMob(
 	218974 -- STX-99/XD
 )
 mod:SetEncounterID(2940)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

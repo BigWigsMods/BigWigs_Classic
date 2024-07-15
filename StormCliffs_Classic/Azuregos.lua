@@ -5,6 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Azuregos Season of Discovery", 2791)
 if not mod then return end
 mod:RegisterEnableMob(6109)
+mod:SetEncounterID(3027)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Localization

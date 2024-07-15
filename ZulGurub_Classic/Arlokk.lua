@@ -3,10 +3,11 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("High Priestess Arlokk", 309, -791)
+local mod = BigWigs:NewBoss("High Priestess Arlokk", 309)
 if not mod then return end
 mod:RegisterEnableMob(14515)
 mod:SetEncounterID(791)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Localization

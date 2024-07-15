@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Baron Aquanis Discovery", 48, -2694)
+local mod, CL = BigWigs:NewBoss("Baron Aquanis Discovery", 48)
 if not mod then return end
 mod:RegisterEnableMob(202699) -- Baron Aquanis Season of Discovery
 mod:SetEncounterID(2694)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Locals

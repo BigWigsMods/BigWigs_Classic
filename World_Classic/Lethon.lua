@@ -5,6 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Lethon", -1425)
 if not mod then return end
 mod:RegisterEnableMob(14888)
+mod:SetAllowWin(true)
 mod.otherMenu = -947
 mod.worldBoss = 14888
 

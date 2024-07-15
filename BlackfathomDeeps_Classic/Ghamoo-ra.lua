@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ghamoo-ra Discovery", 48, -2697)
+local mod, CL = BigWigs:NewBoss("Ghamoo-ra Discovery", 48)
 if not mod then return end
 mod:RegisterEnableMob(201722) -- Ghamoo-ra Season of Discovery
 mod:SetEncounterID(2697)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Locals

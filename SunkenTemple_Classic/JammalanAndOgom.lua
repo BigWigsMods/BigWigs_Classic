@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Jammal'an and Ogom Discovery", 109, -2957)
+local mod, CL = BigWigs:NewBoss("Jammal'an and Ogom Discovery", 109)
 if not mod then return end
 mod:RegisterEnableMob(218721, 218718) -- Jammal'an the Prophet, Ogom the Wretched
 mod:SetEncounterID(2957)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

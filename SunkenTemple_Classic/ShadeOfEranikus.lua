@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Shade of Eranikus Discovery", 109, -2959)
+local mod, CL = BigWigs:NewBoss("Shade of Eranikus Discovery", 109)
 if not mod then return end
 mod:RegisterEnableMob(218571) -- Shade of Eranikus
 mod:SetEncounterID(2959)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

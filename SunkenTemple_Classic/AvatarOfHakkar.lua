@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Avatar of Hakkar Discovery", 109, -2956)
+local mod, CL = BigWigs:NewBoss("Avatar of Hakkar Discovery", 109)
 if not mod then return end
 mod:RegisterEnableMob(221426, 221396, 221394) -- Atal'ai Ritualist, Hakkari Bloodkeeper, Avatar of Hakkar
 mod:SetEncounterID(2956)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

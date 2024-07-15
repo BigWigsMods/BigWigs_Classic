@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Crowd Pummeler 9-60 Discovery", 90, -2899)
+local mod, CL = BigWigs:NewBoss("Crowd Pummeler 9-60 Discovery", 90)
 if not mod then return end
 mod:RegisterEnableMob(215728) -- Crowd Pummeler 9-60
 mod:SetEncounterID(2899)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Localization

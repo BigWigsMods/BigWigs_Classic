@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Electrocutioner 6000 Discovery", 90, -2927)
+local mod, CL = BigWigs:NewBoss("Electrocutioner 6000 Discovery", 90)
 if not mod then return end
 mod:RegisterEnableMob(220072) -- Electrocutioner 6000
 mod:SetEncounterID(2927)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Locals

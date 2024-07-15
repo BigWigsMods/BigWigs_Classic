@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Dreamscythe and Weaver Discovery", 109, -2955)
+local mod, CL = BigWigs:NewBoss("Dreamscythe and Weaver Discovery", 109)
 if not mod then return end
 mod:RegisterEnableMob(220833, 220864) -- Dreamscythe, Weaver
 mod:SetEncounterID(2955)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

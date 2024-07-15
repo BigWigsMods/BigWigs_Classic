@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Grubbis Discovery", 90, -2925)
+local mod, CL = BigWigs:NewBoss("Grubbis Discovery", 90)
 if not mod then return end
 mod:RegisterEnableMob(217969, 217280) -- Blastmaster Emi Shortfuse, Grubbis
 mod:SetEncounterID(2925)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

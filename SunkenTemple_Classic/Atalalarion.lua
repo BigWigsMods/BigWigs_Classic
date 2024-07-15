@@ -2,9 +2,10 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Atal'alarion Discovery", 109, -2952)
+local mod, CL = BigWigs:NewBoss("Atal'alarion Discovery", 109)
 if not mod then return end
 mod:RegisterEnableMob(218624) -- Atal'alarion
+mod:SetAllowWin(true)
 mod:SetEncounterID(2952)
 
 --------------------------------------------------------------------------------

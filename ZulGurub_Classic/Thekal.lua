@@ -3,10 +3,11 @@
 -- Module declaration
 --
 
-local mod, CL = BigWigs:NewBoss("High Priest Thekal", 309, -789)
+local mod, CL = BigWigs:NewBoss("High Priest Thekal", 309)
 if not mod then return end
 mod:RegisterEnableMob(14509, 11347, 11348)
 mod:SetEncounterID(789)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Localization

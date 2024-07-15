@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Mechanical Menagerie Discovery", 90, -2935)
+local mod, CL = BigWigs:NewBoss("Mechanical Menagerie Discovery", 90)
 if not mod then return end
 mod:RegisterEnableMob(218242, 218243, 218244, 218245) -- STX-04/BD (Dragon), STX-13/LL (Sheep), STX-25/NB (Squirrel), STX-37/CN (Chicken)
 mod:SetEncounterID(2935)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Locals

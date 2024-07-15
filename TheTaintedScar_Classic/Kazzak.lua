@@ -5,6 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Lord Kazzak Season of Discovery", 2789)
 if not mod then return end
 mod:RegisterEnableMob(12397)
+mod:SetEncounterID(3026)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Localization

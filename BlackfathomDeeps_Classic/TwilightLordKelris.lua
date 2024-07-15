@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Twilight Lord Kelris Discovery", 48, -2825)
+local mod, CL = BigWigs:NewBoss("Twilight Lord Kelris Discovery", 48)
 if not mod then return end
 mod:RegisterEnableMob(209678) -- Twilight Lord Kelris Season of Discovery
 mod:SetEncounterID(2825)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

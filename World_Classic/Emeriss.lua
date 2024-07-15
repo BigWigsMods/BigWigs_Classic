@@ -5,6 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Emeriss", -1440)
 if not mod then return end
 mod:RegisterEnableMob(14889)
+mod:SetAllowWin(true)
 mod.otherMenu = -947
 mod.worldBoss = 14889
 

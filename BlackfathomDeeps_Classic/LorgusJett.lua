@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Lorgus Jett Discovery", 48, -2710)
+local mod, CL = BigWigs:NewBoss("Lorgus Jett Discovery", 48)
 if not mod then return end
 mod:RegisterEnableMob(207356, 207358) -- Lorgus Jett Season of Discovery, Blackfathom Tide Priestess
 mod:SetEncounterID(2710)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

@@ -6,6 +6,7 @@ if BigWigsLoader.isSeasonOfDiscovery then return end
 local mod, CL = BigWigs:NewBoss("Lord Kazzak", -1419)
 if not mod then return end
 mod:RegisterEnableMob(12397)
+mod:SetAllowWin(true)
 mod.otherMenu = -947
 mod.worldBoss = 12397
 

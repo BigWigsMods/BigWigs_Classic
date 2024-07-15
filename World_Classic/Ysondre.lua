@@ -5,6 +5,7 @@
 local mod, CL = BigWigs:NewBoss("Ysondre", -1444)
 if not mod then return end
 mod:RegisterEnableMob(14887)
+mod:SetAllowWin(true)
 mod.otherMenu = -947
 mod.worldBoss = 14887
 

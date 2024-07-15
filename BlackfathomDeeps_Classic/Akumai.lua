@@ -2,11 +2,12 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Aku'mai Discovery", 48, -2891)
+local mod, CL = BigWigs:NewBoss("Aku'mai Discovery", 48)
 if not mod then return end
 mod:RegisterEnableMob(213334) -- Aku'mai Season of Discovery
 mod:SetEncounterID(2891)
 mod:SetRespawnTime(10)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Morphaz and Hazzas Discovery", 109, -2958)
+local mod, CL = BigWigs:NewBoss("Morphaz and Hazzas Discovery", 109)
 if not mod then return end
 mod:RegisterEnableMob(221943, 221942) -- Hazzas, Morphaz
 mod:SetEncounterID(2958)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Locals

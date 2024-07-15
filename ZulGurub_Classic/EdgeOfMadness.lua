@@ -3,10 +3,11 @@
 -- Module declaration
 --
 
-local mod = BigWigs:NewBoss("Edge of Madness", 309, -788)
+local mod = BigWigs:NewBoss("Edge of Madness", 309)
 if not mod then return end
 mod:RegisterEnableMob(15082, 15083, 15084, 15085) -- Gri'lek, Hazza'rah, Renataki, Wushoolay
 mod:SetEncounterID(788)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Localization

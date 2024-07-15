@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Festering Rotslime Discovery", 109, -2953)
+local mod, CL = BigWigs:NewBoss("Festering Rotslime Discovery", 109)
 if not mod then return end
 mod:RegisterEnableMob(218819) -- Festering Rotslime
 mod:SetEncounterID(2953)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Locals

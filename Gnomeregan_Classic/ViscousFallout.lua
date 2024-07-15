@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Viscous Fallout Discovery", 90, -2928)
+local mod, CL = BigWigs:NewBoss("Viscous Fallout Discovery", 90)
 if not mod then return end
 mod:RegisterEnableMob(220007) -- Viscous Fallout
 mod:SetEncounterID(2928)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Localization

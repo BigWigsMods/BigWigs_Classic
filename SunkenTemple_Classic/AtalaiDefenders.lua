@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Atal'ai Defenders Discovery", 109, -2954)
+local mod, CL = BigWigs:NewBoss("Atal'ai Defenders Discovery", 109)
 if not mod then return end
 mod:RegisterEnableMob(
 	221759, 221637, -- Gasher
@@ -13,6 +13,7 @@ mod:RegisterEnableMob(
 	218922 -- Hukku
 )
 mod:SetEncounterID(2954)
+mod:SetAllowWin(true)
 mod:SetStage(1)
 
 --------------------------------------------------------------------------------

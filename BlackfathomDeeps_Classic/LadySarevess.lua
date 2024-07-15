@@ -2,10 +2,11 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Lady Sarevess Discovery", 48, -2699)
+local mod, CL = BigWigs:NewBoss("Lady Sarevess Discovery", 48)
 if not mod then return end
 mod:RegisterEnableMob(204068) -- Lady Sarevess Season of Discovery
 mod:SetEncounterID(2699)
+mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
 -- Localization
