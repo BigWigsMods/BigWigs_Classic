@@ -93,13 +93,13 @@ end
 do
 	local prev = 0
 	function mod:Mark(args)
+		local npcId = self:MobId(args.sourceGUID)
+		local line = bossList[npcId]
+		if not line then return end -- Their spirits keep casting after they die, but the casts are out of sync with the alive ones, so filter them out
+
 		local icon = self:GetIconTexture(self:GetIcon(args.sourceRaidFlags))
 		if icon then
-			local npcId = self:MobId(args.sourceGUID)
-			local line = bossList[npcId]
-			if line then
-				self:SetInfo("health", line, icon.. L[npcId]) -- Add raid icons to the boss names
-			end
+			self:SetInfo("health", line, icon.. L[npcId]) -- Add raid icons to the boss names
 		end
 
 		if args.time - prev > 5 then
