@@ -37,9 +37,9 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "MarkOfKazzakApplied", 21056)
-	self:Log("SPELL_AURA_APPLIED", "MarkOfKazzakRemoved", 21056)
+	self:Log("SPELL_AURA_REMOVED", "MarkOfKazzakRemoved", 21056)
 	self:Log("SPELL_AURA_APPLIED", "TwistedReflectionApplied", 21063)
-	self:Log("SPELL_AURA_APPLIED", "TwistedReflectionRemoved", 21063)
+	self:Log("SPELL_AURA_REMOVED", "TwistedReflectionRemoved", 21063)
 	self:Log("SPELL_DISPEL", "Dispels", "*")
 end
 
