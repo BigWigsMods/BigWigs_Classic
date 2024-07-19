@@ -54,3 +54,7 @@ BigWigs:AddColors("Ragnaros Classic", {
 	["emerge"] = {"green","orange","yellow"},
 	["submerge"] = {"orange","yellow"},
 })
+
+BigWigs:AddColors("The Molten Core", {
+	["stages"] = "cyan",
+})

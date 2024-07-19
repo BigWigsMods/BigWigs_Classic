@@ -47,3 +47,6 @@ BigWigs:AddSounds("Ragnaros Classic", {
 	["emerge"] = {"alarm","long"},
 	["submerge"] = {"alarm","long"},
 })
+
+BigWigs:AddSounds("The Molten Core", {
+})
