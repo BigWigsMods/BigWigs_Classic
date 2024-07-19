@@ -2,8 +2,6 @@ local L = BigWigs:NewBossLocale("Azuregos", "esES")
 if not L then return end
 if L then
 	L.bossName = "Azuregos"
-
-	--L.teleport_trigger = "Come, little ones"
 end
 
 L = BigWigs:NewBossLocale("Lord Kazzak", "esES")
@@ -11,8 +9,6 @@ if L then
 	L.bossName = "Lord Kazzak"
 
 	L.engage_trigger = "¡Por la Legión! ¡Por Kil'Jaeden!"
-
-	L.supreme_mode = "Modo supremo" --is this a spell name?
 end
 
 L = BigWigs:NewBossLocale("Emeriss", "esES")

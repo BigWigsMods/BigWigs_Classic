@@ -19,8 +19,6 @@ if L then
 	L.bossName = "Lord Kazzak"
 
 	L.engage_trigger = "For the Legion! For Kil'Jaeden!"
-
-	L.supreme_mode = "Supreme Mode"
 end
 
 --------------------------------------------------------------------------------
@@ -42,8 +40,8 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_AURA_APPLIED", "MarkOfKazzak", 21056)
-	self:Log("SPELL_AURA_APPLIED", "TwistedReflection", 21063)
+	self:Log("SPELL_AURA_APPLIED", "MarkOfKazzakApplied", 21056)
+	self:Log("SPELL_AURA_APPLIED", "TwistedReflectionApplied", 21063)
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
@@ -53,13 +51,14 @@ end
 
 function mod:OnEngage()
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
+	self:Berserk(180)
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:MarkOfKazzak(args)
+function mod:MarkOfKazzakApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName, CL.curse)
 	if self:Me(args.destGUID) then
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
@@ -68,7 +67,7 @@ function mod:MarkOfKazzak(args)
 	end
 end
 
-function mod:TwistedReflection(args)
+function mod:TwistedReflectionApplied(args)
 	self:TargetMessage(args.spellId, "orange", args.destName)
 	if self:Dispeller("magic") then
 		self:PlaySound(args.spellId, "alarm")
@@ -77,7 +76,9 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.engage_trigger, nil, true) then
+		if self:IsEngaged() then
+			self:Wipe()
+		end
 		self:Engage()
-		self:Berserk(180, nil, nil, L.supreme_mode, L.supreme_mode)
 	end
 end

@@ -2,8 +2,6 @@ local L = BigWigs:NewBossLocale("Azuregos", "frFR")
 if not L then return end
 if L then
 	L.bossName = "Azuregos"
-
-	L.teleport_trigger = "Venez m'affronter, mes petits\194\160"
 end
 
 L = BigWigs:NewBossLocale("Lord Kazzak", "frFR")
@@ -11,8 +9,6 @@ if L then
 	L.bossName = "Seigneur Kazzak"
 
 	L.engage_trigger = "Pour la Légion ! Pour Kil'Jaeden !"
-
-	L.supreme_mode = "Mode suprême"
 end
 
 L = BigWigs:NewBossLocale("Emeriss", "frFR")
