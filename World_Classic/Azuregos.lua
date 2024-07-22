@@ -54,17 +54,22 @@ end
 -- Event Handlers
 --
 
-function mod:ReflectionApplied(args)
-	self:StopBar(args.spellName)
-	self:Message(args.spellId, "red")
-	self:CastBar(args.spellId, 10)
-	self:PlaySound(args.spellId, "warning")
-end
+do
+	local prev = 0
+	function mod:ReflectionApplied(args)
+		prev = args.time
+		self:StopBar(args.spellName)
+		self:Message(args.spellId, "red")
+		self:CastBar(args.spellId, 10)
+		self:PlaySound(args.spellId, "warning")
+	end
 
-function mod:ReflectionRemoved(args)
-	self:StopBar(CL.cast:format(args.spellName))
-	self:Message(args.spellId, "green", CL.over:format(args.spellName), nil, true) -- Disable emphasize
-	self:PlaySound(args.spellId, "info")
+	function mod:ReflectionRemoved(args)
+		self:StopBar(CL.cast:format(args.spellName))
+		self:Message(args.spellId, "green", CL.over:format(args.spellName), nil, true) -- Disable emphasize
+		self:CDBar(args.spellId, prev > 0 and (20 - (args.time-prev)) or 10) -- Show the bar after it ends
+		self:PlaySound(args.spellId, "info")
+	end
 end
 
 function mod:ArcaneVacuum(args)
