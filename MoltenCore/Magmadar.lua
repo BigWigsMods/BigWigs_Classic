@@ -35,6 +35,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 19451)
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
 	self:Log("SPELL_AURA_APPLIED", "Conflagration", 19428)
+	if self:Vanilla() then
+		self:Log("SPELL_CAST_SUCCESS", "Panic", 461125)
+	end
 end
 
 function mod:OnEngage()
@@ -46,10 +49,10 @@ end
 -- Event Handlers
 --
 
-function mod:Panic(args)
-	self:CDBar(args.spellId, 31, CL.fear, L["19408_icon"]) -- 31-50, sometimes even higher
-	self:Message(args.spellId, "orange", CL.fear, L["19408_icon"])
-	self:PlaySound(args.spellId, "long")
+function mod:Panic()
+	self:CDBar(19408, 31, CL.fear, L["19408_icon"]) -- 31-50, sometimes even higher
+	self:Message(19408, "orange", CL.fear, L["19408_icon"])
+	self:PlaySound(19408, "long")
 end
 
 function mod:EnrageFrenzy(args)

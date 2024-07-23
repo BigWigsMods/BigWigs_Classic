@@ -28,6 +28,12 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Inferno", 19695)
 	self:Log("SPELL_CAST_SUCCESS", "Armageddon", 20478)
 	self:Log("SPELL_CAST_SUCCESS", "IgniteMana", 19659)
+	if self:Vanilla() then
+		self:Log("SPELL_AURA_APPLIED", "LivingBomb", 461090, 461105, 462402) -- XXX verify
+		self:Log("SPELL_AURA_REMOVED", "LivingBombRemoved", 461090, 461105, 462402) -- XXX verify
+		self:Log("SPELL_CAST_SUCCESS", "Inferno", 461087, 461110) -- XXX verify
+		self:Log("SPELL_CAST_SUCCESS", "Armageddon", 461862)
+	end
 end
 
 function mod:OnEngage()
@@ -40,33 +46,33 @@ end
 
 function mod:LivingBomb(args)
 	if self:Me(args.destGUID) then
-		self:Say(args.spellId, CL.bomb, nil, "Bomb")
-		self:SayCountdown(args.spellId, 8)
+		self:Say(20475, CL.bomb, nil, "Bomb")
+		self:SayCountdown(20475, 8)
 	end
-	self:TargetMessage(args.spellId, "red", args.destName, CL.bomb)
-	self:TargetBar(args.spellId, 8, args.destName, CL.bomb)
-	self:PrimaryIcon(args.spellId, args.destName)
-	self:PlaySound(args.spellId, "warning")
+	self:TargetMessage(20475, "red", args.destName, CL.bomb)
+	self:TargetBar(20475, 8, args.destName, CL.bomb)
+	self:PrimaryIcon(20475, args.destName)
+	self:PlaySound(20475, "warning")
 end
 
 function mod:LivingBombRemoved(args)
 	if self:Me(args.destGUID) then
-		self:CancelSayCountdown(args.spellId)
+		self:CancelSayCountdown(20475)
 	end
 	self:StopBar(CL.bomb, args.destName)
-	self:PrimaryIcon(args.spellId)
+	self:PrimaryIcon(20475)
 end
 
-function mod:Inferno(args)
-	self:Message(args.spellId, "red")
-	self:CastBar(args.spellId, 8)
-	self:CDBar(args.spellId, 21) -- 21-29
-	self:PlaySound(args.spellId, "long")
+function mod:Inferno()
+	self:Message(19695, "red")
+	self:CastBar(19695, 8)
+	self:CDBar(19695, 21) -- 21-29
+	self:PlaySound(19695, "long")
 end
 
-function mod:Armageddon(args)
-	self:Bar(args.spellId, 8)
-	self:Message(args.spellId, "orange")
+function mod:Armageddon()
+	self:Bar(20478, 8)
+	self:Message(20478, "orange")
 end
 
 function mod:IgniteMana(args)

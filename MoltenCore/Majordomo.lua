@@ -16,7 +16,7 @@ function mod:GetOptions()
 		20619, -- Magic Reflection
 		21075, -- Damage Shield
 		20534, -- Teleport
-	},{
+	},nil,{
 		[20619] = CL.spell_reflection, -- Magic Reflection (Spell Reflection)
 	}
 end

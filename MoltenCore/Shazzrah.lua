@@ -29,6 +29,10 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DISPEL", "MagicGroundingDeadenMagicDispelled", "*")
 	self:Log("SPELL_CAST_SUCCESS", "Counterspell", 19715)
 	self:Log("SPELL_CAST_SUCCESS", "ShazzrahsCurse", 19713)
+	if self:Vanilla() then
+		self:Log("SPELL_CAST_SUCCESS", "GateOfShazzrah", 461344)
+		self:Log("SPELL_CAST_SUCCESS", "ShazzrahsCurse", 461343)
+	end
 end
 
 function mod:OnEngage()
@@ -41,10 +45,10 @@ end
 -- Event Handlers
 --
 
-function mod:GateOfShazzrah(args)
-	self:CDBar(args.spellId, 41, CL.teleport) -- 41-50
-	self:Message(args.spellId, "red", CL.teleport)
-	self:PlaySound(args.spellId, "long")
+function mod:GateOfShazzrah()
+	self:CDBar(23138, 41, CL.teleport) -- 41-50
+	self:Message(23138, "red", CL.teleport)
+	self:PlaySound(23138, "long")
 end
 
 function mod:MagicGroundingDeadenMagicApplied(args)
@@ -66,10 +70,10 @@ function mod:Counterspell(args)
 	self:PlaySound(args.spellId, "info")
 end
 
-function mod:ShazzrahsCurse(args)
-	self:CDBar(args.spellId, 22.6, CL.curse) -- 22.6-25
-	self:Message(args.spellId, "yellow", CL.curse)
+function mod:ShazzrahsCurse()
+	self:CDBar(19713, 22.6, CL.curse) -- 22.6-25
+	self:Message(19713, "yellow", CL.curse)
 	if self:Dispeller("curse") then
-		self:PlaySound(args.spellId, "warning")
+		self:PlaySound(19713, "warning")
 	end
 end

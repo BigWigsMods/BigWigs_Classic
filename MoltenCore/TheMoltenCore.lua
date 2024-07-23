@@ -25,6 +25,8 @@ end
 function mod:GetOptions()
 	return {
 		"stages",
+		{460895, "SAY", "ME_ONLY_EMPHASIZE"}, -- Heart of Cinder
+		{460898, "SAY", "ME_ONLY_EMPHASIZE"}, -- Heart of Ash
 	}
 end
 
@@ -33,7 +35,10 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-
+	self:Log("SPELL_AURA_APPLIED", "HeartOfCinderApplied", 460895)
+	--self:Log("SPELL_AURA_REMOVED", "HeartOfCinderRemoved", 460895)
+	self:Log("SPELL_AURA_APPLIED", "HeartOfAshApplied", 460898)
+	--self:Log("SPELL_AURA_REMOVED", "HeartOfAshRemoved", 460898)
 end
 
 function mod:OnEngage()
@@ -44,4 +49,16 @@ end
 -- Event Handlers
 --
 
+function mod:HeartOfCinderApplied(args)
+	self:TargetMessage(args.spellId, "yellow", args.destName)
+	if self:Me(args.destGUID) then
+		self:Say(args.spellId, nil, nil, "Heart of Cinder")
+	end
+end
 
+function mod:HeartOfAshApplied(args)
+	self:TargetMessage(args.spellId, "yellow", args.destName)
+	if self:Me(args.destGUID) then
+		self:Say(args.spellId, nil, nil, "Heart of Ash")
+	end
+end

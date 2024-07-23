@@ -19,7 +19,7 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "Pulse", 19492)
+	self:Log("SPELL_CAST_SUCCESS", "AntimagicPulse", 19492)
 end
 
 function mod:OnEngage()
@@ -30,7 +30,7 @@ end
 -- Event Handlers
 --
 
-function mod:Pulse(args)
+function mod:AntimagicPulse(args)
 	self:Message(args.spellId, "yellow")
 	self:CDBar(args.spellId, 17)
 end
