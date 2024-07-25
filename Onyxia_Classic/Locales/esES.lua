@@ -1,8 +1,7 @@
 local L = BigWigs:NewBossLocale("Onyxia", "esES")
 if L then
-	L.phase1_trigger = "Qué casualidad"
-	L.phase2_trigger = "desde arriba"
-	L.phase3_trigger = "Parece ser que vais a necesitar otra lección"
+	L.stage2_yell_trigger = "desde arriba"
+	L.stage3_yell_trigger = "Parece ser que vais a necesitar otra lección"
 
 	L.deep_breath = "Aliento profundo"
 end

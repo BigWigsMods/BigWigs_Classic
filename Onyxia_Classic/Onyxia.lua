@@ -15,9 +15,8 @@ mod:SetStage(1)
 
 local L = mod:GetLocale()
 if L then
-	L.phase1_trigger = "How fortuitous"
-	L.phase2_trigger = "from above"
-	L.phase3_trigger = "It seems you'll need another lesson"
+	L.stage2_yell_trigger = "from above"
+	L.stage3_yell_trigger = "It seems you'll need another lesson"
 
 	L.deep_breath = "Deep Breath" -- Preserving the original way it was referred to during classic
 	L["18431_icon"] = "spell_shadow_psychicscream"
@@ -96,11 +95,11 @@ function mod:BellowingRoar(args) -- Stage 3 "Fear"
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(event, msg)
-	if msg:find(L.phase2_trigger, nil, true) then
+	if msg:find(L.stage2_yell_trigger, nil, true) then
 		self:SetStage(2)
 		self:Message("stages", "cyan", CL.percent:format(65, CL.stage:format(2)), false)
 		self:PlaySound("stages", "long")
-	elseif msg:find(L.phase3_trigger, nil, true) then
+	elseif msg:find(L.stage3_yell_trigger, nil, true) then
 		self:UnregisterEvent(event)
 		self:PrimaryIcon(18392) -- Clear Fireball raid icon
 

@@ -78,7 +78,7 @@ function mod:ArcaneVacuum(args)
 end
 
 function mod:FrostBreath(args)
-	self:Message(args.spellId, "orange", CL.extra:format(args.spellName, CL.interruptible))
+	self:Message(args.spellId, "orange", CL.extra:format(CL.breath, CL.interruptible))
 	self:PlaySound(args.spellId, "alert")
 end
 
