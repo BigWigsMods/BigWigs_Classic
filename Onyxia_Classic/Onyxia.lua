@@ -161,6 +161,7 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 	if msg:find(L.stage2_yell_trigger, nil, true) then
 		self:SetStage(2)
+		self:StopBar(CL.frontal_cone) -- Flame Breath
 		if BigWigsLoader.isSeasonOfDiscovery then
 			self:Bar(17086, 28.5, L.deep_breath) -- Stage 2 "Deep Breath"
 		end
