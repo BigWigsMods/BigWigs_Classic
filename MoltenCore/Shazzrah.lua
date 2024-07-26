@@ -23,14 +23,6 @@ function mod:GetOptions()
 	}
 end
 
-function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "GateOfShazzrah", 23138)
-	self:Log("SPELL_AURA_APPLIED", "MagicGroundingDeadenMagicApplied", 19714)
-	self:Log("SPELL_DISPEL", "MagicGroundingDeadenMagicDispelled", "*")
-	self:Log("SPELL_CAST_SUCCESS", "Counterspell", 19715)
-	self:Log("SPELL_CAST_SUCCESS", "ShazzrahsCurse", 19713)
-end
-
 if BigWigsLoader.isSeasonOfDiscovery then
 	function mod:GetOptions()
 		return {
@@ -43,15 +35,16 @@ if BigWigsLoader.isSeasonOfDiscovery then
 			[19713] = CL.curse, -- Shazzrah's Curse (Curse)
 		}
 	end
+end
 
-	function mod:OnBossEnable()
-		self:Log("SPELL_CAST_SUCCESS", "GateOfShazzrah", 23138)
-		self:Log("SPELL_CAST_SUCCESS", "ShazzrahsCurse", 19713)
-
+function mod:OnBossEnable()
+	self:Log("SPELL_CAST_SUCCESS", "GateOfShazzrah", 23138)
+	self:Log("SPELL_AURA_APPLIED", "MagicGroundingDeadenMagicApplied", 19714) -- Normal, Level 1 & 2
+	self:Log("SPELL_DISPEL", "MagicGroundingDeadenMagicDispelled", "*") -- Normal, Level 1 & 2
+	self:Log("SPELL_CAST_SUCCESS", "Counterspell", 19715)
+	self:Log("SPELL_CAST_SUCCESS", "ShazzrahsCurse", 19713)
+	if BigWigsLoader.isSeasonOfDiscovery then
 		self:Log("SPELL_CAST_SUCCESS", "GateOfShazzrah", 461344)
-		self:Log("SPELL_AURA_APPLIED", "MagicGroundingDeadenMagicApplied", 19714) -- Level 1 & 2
-		self:Log("SPELL_DISPEL", "MagicGroundingDeadenMagicDispelled", "*") -- Level 1 & 2
-		self:Log("SPELL_CAST_SUCCESS", "Counterspell", 19715)
 		self:Log("SPELL_CAST_SUCCESS", "ShazzrahsCurse", 461343)
 		self:Log("SPELL_CAST_START", "ReflectMagic", 460856) -- Level 3
 		self:Log("SPELL_AURA_APPLIED", "ReflectMagicApplied", 460856) -- Level 3

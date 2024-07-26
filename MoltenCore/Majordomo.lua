@@ -24,18 +24,6 @@ function mod:GetOptions()
 	}
 end
 
-function mod:VerifyEnable(_, npcId)
-	if npcId ~= 12018 and npcId ~= 228437 then -- Majordomo Executus
-		return true -- Only enable on his adds since he doesn't die, we keep him in enable mobs for his boss frame to trigger engage
-	end
-end
-
-function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "MagicReflection", 20619)
-	self:Log("SPELL_CAST_SUCCESS", "DamageShield", 21075)
-	self:Log("SPELL_CAST_SUCCESS", "Teleport", 20534)
-end
-
 if BigWigsLoader.isSeasonOfDiscovery then
 	function mod:GetOptions()
 		return {
@@ -47,11 +35,19 @@ if BigWigsLoader.isSeasonOfDiscovery then
 			[20619] = CL.spell_reflection, -- Magic Reflection (Spell Reflection)
 		}
 	end
+end
 
-	function mod:OnBossEnable()
-		self:Log("SPELL_CAST_SUCCESS", "MagicReflection", 20619)
-		self:Log("SPELL_CAST_SUCCESS", "DamageShield", 21075)
-		self:Log("SPELL_CAST_SUCCESS", "Teleport", 20534)
+function mod:VerifyEnable(_, npcId)
+	if npcId ~= 12018 and npcId ~= 228437 then -- Majordomo Executus
+		return true -- Only enable on his adds since he doesn't die, we keep him in enable mobs for his boss frame to trigger engage
+	end
+end
+
+function mod:OnBossEnable()
+	self:Log("SPELL_CAST_SUCCESS", "MagicReflection", 20619)
+	self:Log("SPELL_CAST_SUCCESS", "DamageShield", 21075)
+	self:Log("SPELL_CAST_SUCCESS", "Teleport", 20534)
+	if BigWigsLoader.isSeasonOfDiscovery then
 		self:Log("SPELL_CAST_START", "RagingFlareStart", 461056)
 		self:Log("SPELL_CAST_SUCCESS", "RagingFlare", 461056)
 	end
