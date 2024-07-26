@@ -2,7 +2,6 @@
 BigWigs:AddSounds("Lucifron", {
 	[19702] = "long",
 	[19703] = "info",
-	[20604] = "warning",
 })
 
 BigWigs:AddSounds("Magmadar", {
@@ -29,6 +28,7 @@ BigWigs:AddSounds("Shazzrah", {
 	[19714] = "warning",
 	[19715] = "info",
 	[23138] = "long",
+	[460856] = {"info","warning"},
 })
 
 BigWigs:AddSounds("Sulfuron Harbinger", {
@@ -41,6 +41,7 @@ BigWigs:AddSounds("Golemagg the Incinerator", {
 BigWigs:AddSounds("Majordomo Executus", {
 	[20619] = "info",
 	[21075] = "info",
+	[461056] = "warning",
 })
 
 BigWigs:AddSounds("Ragnaros Classic", {
@@ -49,4 +50,6 @@ BigWigs:AddSounds("Ragnaros Classic", {
 })
 
 BigWigs:AddSounds("The Molten Core", {
+	[460895] = "warning",
+	[460898] = "warning",
 })
