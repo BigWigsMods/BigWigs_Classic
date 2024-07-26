@@ -111,6 +111,7 @@ end
 function mod:WrathOfRagnaros(args)
 	self:Message(args.spellId, "red", CL.knockback)
 	self:CDBar(args.spellId, 27, CL.knockback)
+	self:PlaySound(args.spellId, "info")
 end
 
 function mod:SummonRagnarosStart()
@@ -162,7 +163,7 @@ function mod:Submerge()
 	timer = self:ScheduleTimer("Emerge", 90)
 	self:StopBar(CL.knockback)
 	if BigWigsLoader.isSeasonOfDiscovery then
-		self:Message("submerge", "yellow", CL.health_percent:format(50, L.submerge_message), L.submerge_icon)
+		self:Message("submerge", "yellow", CL.percent:format(50, L.submerge_message), L.submerge_icon)
 	else
 		self:Message("submerge", "yellow", L.submerge_message, L.submerge_icon)
 	end

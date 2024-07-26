@@ -6,8 +6,13 @@ local mod, CL = BigWigs:NewBoss("Onyxia", 249, 1651)
 if not mod then return end
 mod:RegisterEnableMob(10184)
 mod:SetEncounterID(1084)
-mod:SetRespawnTime(60)
 mod:SetStage(1)
+
+--------------------------------------------------------------------------------
+-- Locals
+--
+
+local castCollector = {}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -44,6 +49,27 @@ function mod:GetOptions()
 	}
 end
 
+if BigWigsLoader.isSeasonOfDiscovery then
+	function mod:GetOptions()
+		return {
+			"stages",
+			18435, -- Flame Breath
+			{18392, "SAY", "ICON"}, -- Fireball
+			{17086, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Breath
+			364849, -- Summon Onyxian Warder
+			18431, -- Bellowing Roar
+		},{
+			[18435] = CL.stage:format(1),
+			[18392] = CL.stage:format(2),
+			[18431] = CL.stage:format(3),
+		},{
+			[18435] = CL.frontal_cone, -- Flame Breath (Frontal Cone)
+			[17086] = L.deep_breath, -- Breath (Deep Breath)
+			[18431] = CL.fear, -- Bellowing Roar (Fear)
+		}
+	end
+end
+
 function mod:OnBossEnable()
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 
@@ -51,10 +77,18 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Fireball", 18392)
 	self:Log("SPELL_CAST_START", "Breath", 17086, 18351, 18564, 18576, 18584, 18596, 18609, 18617) -- Deep Breath (various directions)
 	self:Log("SPELL_CAST_START", "BellowingRoar", 18431)
+
+	if BigWigsLoader.isSeasonOfDiscovery then
+		self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+		self:RegisterMessage("BigWigs_BossComm")
+	end
 end
 
 function mod:OnEngage()
+	castCollector = {}
 	self:SetStage(1)
+	self:RegisterEvent("UNIT_HEALTH")
+	self:CDBar(18435, 16.2, CL.frontal_cone) -- Flame Breath
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:PlaySound("stages", "long")
 end
@@ -63,8 +97,37 @@ end
 -- Event Handlers
 --
 
+do
+	local prev = 0
+	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
+		if spellId == 364849 and not castCollector[castGUID] then -- Summon Onyxian Warder
+			castCollector[castGUID] = true
+			self:Sync("sumony")
+		end
+	end
+end
+
+do
+	local times = {
+		["sumony"] = 0,
+	}
+	function mod:BigWigs_BossComm(_, msg)
+		if times[msg] then
+			local t = GetTime()
+			if t-times[msg] > 5 then
+				times[msg] = t
+				if msg == "sumony" then
+					self:Message(364849, "cyan", self:SpellName(364849), false)
+					self:PlaySound(364849, "alert")
+				end
+			end
+		end
+	end
+end
+
 function mod:FlameBreath(args) -- Stage 1 Frontal Cone
 	self:Message(args.spellId, "orange", CL.frontal_cone)
+	self:CDBar(args.spellId, 12, CL.frontal_cone) -- 12-19
 	self:PlaySound(args.spellId, "alert")
 end
 
@@ -83,6 +146,7 @@ do
 end
 
 function mod:Breath() -- Stage 2 "Deep Breath"
+	self:StopBar(L.deep_breath)
 	self:Message(17086, "red", L.deep_breath)
 	self:CastBar(17086, 5, L.deep_breath) -- 8s on Wrath, 5s on Classic Era
 	self:PrimaryIcon(18392) -- Clear Fireball raid icon
@@ -97,6 +161,9 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 	if msg:find(L.stage2_yell_trigger, nil, true) then
 		self:SetStage(2)
+		if BigWigsLoader.isSeasonOfDiscovery then
+			self:Bar(17086, 28.5, L.deep_breath) -- Stage 2 "Deep Breath"
+		end
 		self:Message("stages", "cyan", CL.percent:format(65, CL.stage:format(2)), false)
 		self:PlaySound("stages", "long")
 	elseif msg:find(L.stage3_yell_trigger, nil, true) then
@@ -106,5 +173,17 @@ function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 		self:SetStage(3)
 		self:Message("stages", "cyan", CL.stage:format(3), false)
 		self:PlaySound("stages", "long")
+	end
+end
+
+function mod:UNIT_HEALTH(event, unit)
+	if self:MobId(self:UnitGUID(unit)) == 10184 then -- Onyxia
+		local hp = self:GetHealth(unit)
+		if hp < 71 then
+			self:UnregisterEvent(event)
+			if hp > 65 then
+				self:Message("stages", "cyan", CL.soon:format(CL.stage:format(2)), false)
+			end
+		end
 	end
 end

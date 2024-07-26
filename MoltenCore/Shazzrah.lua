@@ -56,7 +56,7 @@ function mod:OnEngage()
 	self:CDBar(19713, 6.4, CL.curse) -- Shazzrah's Curse
 	self:CDBar(19715, 9.7) -- Counterspell
 	self:CDBar(23138, 30, CL.teleport) -- Gate of Shazzrah
-	if BigWigsLoader.isSeasonOfDiscovery then
+	if self:GetPlayerAura(458842) or self:GetPlayerAura(458843) then -- Level 2 & 3 only
 		self:CDBar(460856, 16) -- Reflect Magic
 	end
 end

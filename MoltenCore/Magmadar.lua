@@ -92,6 +92,7 @@ do
 				times[msg] = t
 				if msg == "sum" then
 					self:Message(461131, "cyan", self:SpellName(461131), false)
+					self:PlaySound(364849, "alert")
 				end
 			end
 		end

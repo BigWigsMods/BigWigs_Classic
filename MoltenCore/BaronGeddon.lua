@@ -17,10 +17,11 @@ function mod:GetOptions()
 		{20475, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Living Bomb
 		livingBombMarker,
 		{19695, "CASTBAR"}, -- Inferno
-		{20478, "EMPHASIZE"}, -- Armageddon
+		{20478, "CASTBAR", "EMPHASIZE", "CASTBAR_COUNTDOWN"}, -- Armageddon
 		19659, -- Ignite Mana
 	},nil,{
 		[20475] = CL.bomb, -- Living Bomb (Bomb)
+		[20478] = CL.explosion, -- Armageddon (Explosion)
 	}
 end
 
@@ -35,7 +36,7 @@ function mod:OnBossEnable()
 		self:Log("SPELL_AURA_APPLIED", "LivingBombAppliedSoD", 461090, 461105) -- Level 1, Level 2 & 3
 		self:Log("SPELL_AURA_REMOVED", "LivingBombRemoved", 461090, 461105) -- Level 1, Level 2 & 3
 		self:Log("SPELL_CAST_SUCCESS", "Inferno", 461087, 461110) -- Level 1, Level 2 & 3
-		self:Log("SPELL_CAST_SUCCESS", "Armageddon", 461121)
+		self:Log("SPELL_CAST_SUCCESS", "ArmageddonSoD", 461121)
 	end
 end
 
@@ -60,12 +61,12 @@ do
 		function mod:LivingBombAppliedSoD(args)
 			playerList[#playerList+1] = args.destName
 			self:TargetsMessage(20475, "orange", playerList, args.spellId == 461090 and 2 or 3, CL.bomb)
-			self:TargetBar(20475, 8, args.destName, CL.bomb)
 			self:CustomIcon(livingBombMarker, args.destName, icon)
 			icon = icon - 1
 			if self:Me(args.destGUID) then
 				self:Say(20475, CL.bomb, nil, "Bomb")
 				self:SayCountdown(20475, 8)
+				self:TargetBar(20475, 8, args.destName, CL.bomb)
 			end
 		end
 	end
@@ -94,12 +95,23 @@ function mod:Inferno()
 	self:Message(19695, "red")
 	self:CastBar(19695, 8)
 	self:CDBar(19695, 21) -- 21-29
-	self:PlaySound(19695, "long")
+	self:PlaySound(19695, "alarm")
 end
 
 function mod:Armageddon(args)
-	self:Bar(20478, args.spellId == 20478 and 8 or 15)
-	self:Message(20478, "orange")
+	self:StopBar(19659) -- Ignite Mana
+	self:StopBar(19695) -- Inferno
+	self:CastBar(args.spellId, 8, CL.explosion)
+	self:Message(args.spellId, "orange")
+	self:PlaySound(args.spellId, "long")
+end
+
+function mod:ArmageddonSoD(args)
+	self:StopBar(19659) -- Ignite Mana
+	self:StopBar(19695) -- Inferno
+	self:CastBar(20478, 15, CL.explosion)
+	self:Message(20478, "orange", CL.percent:format(10, args.spellName))
+	self:PlaySound(20478, "long")
 end
 
 function mod:IgniteMana(args)
