@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Lucifron", 409, 1519)
 if not mod then return end
-mod:RegisterEnableMob(12118)
+mod:RegisterEnableMob(12118, 228429) -- Lucifron, Lucifron (Season of Discovery)
 mod:SetEncounterID(663)
 
 --------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ function mod:DominateMindApplied(args)
 	self:TargetBar(args.spellId, 15, args.destName, CL.mind_control_short)
 	self:TargetMessage(args.spellId, "orange", args.destName, CL.mind_control)
 	self:CustomIcon(dominateMindMarker, args.destName, assignMarks[args.sourceGUID])
-	self:PlaySound(args.spellId, "warning")
+	--self:PlaySound(args.spellId, "warning")
 end
 
 function mod:DominateMindRemoved(args)

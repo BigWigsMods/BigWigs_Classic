@@ -4,7 +4,7 @@
 
 local mod = BigWigs:NewBoss("Sulfuron Harbinger", 409, 1525)
 if not mod then return end
-mod:RegisterEnableMob(12098)
+mod:RegisterEnableMob(12098, 228436) -- Sulfuron Harbinger, Sulfuron Harbinger (Season of Discovery)
 mod:SetEncounterID(669)
 
 --------------------------------------------------------------------------------

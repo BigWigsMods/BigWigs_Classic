@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Gehennas", 409, 1521)
 if not mod then return end
-mod:RegisterEnableMob(12259)
+mod:RegisterEnableMob(12259, 228431) -- Gehennas, Gehennas (Season of Discovery)
 mod:SetEncounterID(665)
 
 --------------------------------------------------------------------------------

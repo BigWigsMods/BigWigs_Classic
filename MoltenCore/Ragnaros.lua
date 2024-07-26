@@ -4,7 +4,13 @@
 
 local mod, CL = BigWigs:NewBoss("Ragnaros Classic", 409, 1528)
 if not mod then return end
-mod:RegisterEnableMob(11502, 12018, 54404) -- Ragnaros, Majordomo Executus, Majordomo Executus (Retail)
+mod:RegisterEnableMob(
+	11502, -- Ragnaros
+	12018, -- Majordomo Executus
+	54404, -- Majordomo Executus (Retail)
+	228438, -- Ragnaros (Season of Discovery)
+	228437 -- Majordomo Executus (Season of Discovery)
+)
 mod:SetEncounterID(672)
 mod:SetStage(1)
 
@@ -22,7 +28,6 @@ local warmupTimer = mod:Retail() and 74 or 84
 
 local L = mod:GetLocale()
 if L then
-	--Impudent whelps! You've rushed headlong to your own deaths! See now, the master stirs!\r\n
 	L.submerge_trigger = "COME FORTH,"
 
 	L.warmup_icon = "Achievement_boss_ragnaros"
@@ -56,9 +61,9 @@ function mod:GetOptions()
 end
 
 function mod:VerifyEnable(unit, mobId)
-	if mobId == 11502 then -- Ragnaros
+	if mobId == 11502 or mobId == 228438 then -- Ragnaros
 		return true
-	else -- Majordomo Executus, Majordomo Executus (Retail)
+	else -- Majordomo Executus
 		return not UnitCanAttack(unit, "player")
 	end
 end
@@ -80,13 +85,17 @@ function mod:OnEngage()
 	timer = nil
 	self:SetStage(1)
 	self:CDBar(20566, 26, CL.knockback) -- Wrath of Ragnaros
-	self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
-	self:Message("submerge", "yellow", CL.custom_min:format(L.submerge, 3), L.submerge_icon)
-	self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
-	self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
-	self:DelayedMessage("submerge", 150, "yellow", CL.custom_sec:format(L.submerge, 30))
-	self:DelayedMessage("submerge", 170, "orange", CL.custom_sec:format(L.submerge, 10), false, "alarm")
-	self:DelayedMessage("submerge", 175, "orange", CL.custom_sec:format(L.submerge, 5), false, "alarm")
+	if BigWigsLoader.isSeasonOfDiscovery then
+		self:RegisterEvent("UNIT_HEALTH")
+	else
+		self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
+		self:Message("submerge", "yellow", CL.custom_min:format(L.submerge, 3), L.submerge_icon)
+		self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
+		self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
+		self:DelayedMessage("submerge", 150, "yellow", CL.custom_sec:format(L.submerge, 30))
+		self:DelayedMessage("submerge", 170, "orange", CL.custom_sec:format(L.submerge, 10), false, "alarm")
+		self:DelayedMessage("submerge", 175, "orange", CL.custom_sec:format(L.submerge, 5), false, "alarm")
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -135,13 +144,15 @@ function mod:Emerge()
 	timer = nil
 	self:SetStage(1)
 	self:CDBar(20566, 27, CL.knockback)
-	self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
 	self:Message("emerge", "yellow", L.emerge_message, L.emerge_icon)
-	self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
-	self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
-	self:DelayedMessage("submerge", 150, "yellow", CL.custom_sec:format(L.submerge, 30))
-	self:DelayedMessage("submerge", 170, "orange", CL.custom_sec:format(L.submerge, 10), false, "alarm")
-	self:DelayedMessage("submerge", 175, "orange", CL.custom_sec:format(L.submerge, 5), false, "alarm")
+	if not BigWigsLoader.isSeasonOfDiscovery then
+		self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
+		self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
+		self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
+		self:DelayedMessage("submerge", 150, "yellow", CL.custom_sec:format(L.submerge, 30))
+		self:DelayedMessage("submerge", 170, "orange", CL.custom_sec:format(L.submerge, 10), false, "alarm")
+		self:DelayedMessage("submerge", 175, "orange", CL.custom_sec:format(L.submerge, 5), false, "alarm")
+	end
 	self:PlaySound("emerge", "long")
 end
 
@@ -150,7 +161,11 @@ function mod:Submerge()
 	self:SetStage(2)
 	timer = self:ScheduleTimer("Emerge", 90)
 	self:StopBar(CL.knockback)
-	self:Message("submerge", "yellow", L.submerge_message, L.submerge_icon)
+	if BigWigsLoader.isSeasonOfDiscovery then
+		self:Message("submerge", "yellow", CL.health_percent:format(50, L.submerge_message), L.submerge_icon)
+	else
+		self:Message("submerge", "yellow", L.submerge_message, L.submerge_icon)
+	end
 	self:Bar("emerge", 90, L.emerge_bar, L.emerge_icon)
 	self:DelayedMessage("emerge", 30, "yellow", CL.custom_sec:format(L.emerge, 60))
 	self:DelayedMessage("emerge", 60, "yellow", CL.custom_sec:format(L.emerge, 30))
@@ -172,5 +187,17 @@ function mod:SonDeaths()
 		self:CancelDelayedMessage(CL.custom_sec:format(L.emerge, 10))
 		self:CancelDelayedMessage(CL.custom_sec:format(L.emerge, 5))
 		self:Emerge()
+	end
+end
+
+function mod:UNIT_HEALTH(event, unit)
+	if self:MobId(self:UnitGUID(unit)) == 228438 then -- Ragnaros
+		local hp = self:GetHealth(unit)
+		if hp < 56 then
+			self:UnregisterEvent(event)
+			if hp > 50 then
+				self:Message("submerge", "cyan", CL.soon:format(L.submerge_bar), false)
+			end
+		end
 	end
 end

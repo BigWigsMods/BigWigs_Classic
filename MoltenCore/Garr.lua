@@ -5,7 +5,7 @@
 
 local mod = BigWigs:NewBoss("Garr", 409, 1522)
 if not mod then return end
-mod:RegisterEnableMob(12057)
+mod:RegisterEnableMob(12057, 228432) -- Garr, Garr (Season of Discovery)
 mod:SetEncounterID(666)
 
 --------------------------------------------------------------------------------

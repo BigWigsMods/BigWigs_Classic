@@ -4,8 +4,14 @@
 
 local mod, CL = BigWigs:NewBoss("Magmadar", 409, 1520)
 if not mod then return end
-mod:RegisterEnableMob(11982)
+mod:RegisterEnableMob(11982, 228430) -- Magmadar, Magmadar (Season of Discovery)
 mod:SetEncounterID(664)
+
+--------------------------------------------------------------------------------
+-- Locals
+--
+
+local castCollector = {}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -35,12 +41,34 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 19451)
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
 	self:Log("SPELL_AURA_APPLIED", "Conflagration", 19428)
-	if self:Vanilla() then
+end
+
+if BigWigsLoader.isSeasonOfDiscovery then
+	function mod:GetOptions()
+		return {
+			19408, -- Panic
+			19451, -- Enrage / Frenzy (different name on classic era)
+			19428, -- Conflagration
+			461131, -- Summon Core Hound
+		},nil,{
+			[19408] = CL.fear, -- Panic (Fear)
+		}
+	end
+
+	function mod:OnBossEnable()
+		self:Log("SPELL_CAST_SUCCESS", "Panic", 19408)
+		self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 19451)
+		self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
+		self:Log("SPELL_AURA_APPLIED", "Conflagration", 19428)
+
 		self:Log("SPELL_CAST_SUCCESS", "Panic", 461125)
+		self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+		self:RegisterMessage("BigWigs_BossComm")
 	end
 end
 
 function mod:OnEngage()
+	castCollector = {}
 	self:CDBar(19451, 8.1) -- Enrage / Frenzy
 	self:CDBar(19408, 9.7, CL.fear, L["19408_icon"]) -- Panic
 end
@@ -48,6 +76,33 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+do
+	local prev = 0
+	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
+		if spellId == 461131 and not castCollector[castGUID] then -- Summon Core Hound
+			castCollector[castGUID] = true
+			self:Sync("sum")
+		end
+	end
+end
+
+do
+	local times = {
+		["sum"] = 0,
+	}
+	function mod:BigWigs_BossComm(_, msg)
+		if times[msg] then
+			local t = GetTime()
+			if t-times[msg] > 5 then
+				times[msg] = t
+				if msg == "sum" then
+					self:Message(461131, "cyan", self:SpellName(461131), false)
+				end
+			end
+		end
+	end
+end
 
 function mod:Panic()
 	self:CDBar(19408, 31, CL.fear, L["19408_icon"]) -- 31-50, sometimes even higher
