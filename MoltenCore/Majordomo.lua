@@ -57,7 +57,7 @@ function mod:OnEngage()
 	self:CDBar(20534, 20) -- Teleport
 	self:Bar(self:CheckOption(20619, "BAR") and 20619 or 21075, 27, CL.next_ability, "INV_Misc_QuestionMark")
 	self:DelayedMessage(self:CheckOption(20619, "MESSAGE") and 20619 or 21075, 22, "orange", CL.custom_sec:format(CL.next_ability, 5))
-	if BigWigsLoader.isSeasonOfDiscovery then
+	if self:GetPlayerAura(458843) then -- Level 3 only
 		self:CDBar(461056, 16) -- Raging Flare
 	end
 end

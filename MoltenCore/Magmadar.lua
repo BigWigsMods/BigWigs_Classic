@@ -33,6 +33,7 @@ function mod:GetOptions()
 		19428, -- Conflagration
 	},nil,{
 		[19408] = CL.fear, -- Panic (Fear)
+		[19428] = CL.underyou:format(CL.fire), -- Conflagration (Fire under YOU)
 	}
 end
 
@@ -53,7 +54,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Panic", 19408)
 	self:Log("SPELL_AURA_APPLIED", "EnrageFrenzy", 19451)
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
-	self:Log("SPELL_AURA_APPLIED", "Conflagration", 19428)
+	self:Log("SPELL_AURA_APPLIED", "ConflagrationApplied", 19428)
+	self:Log("SPELL_AURA_REFRESH", "ConflagrationApplied", 19428)
 	if BigWigsLoader.isSeasonOfDiscovery then
 		self:Log("SPELL_CAST_SUCCESS", "Panic", 461125)
 		self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
@@ -119,9 +121,9 @@ function mod:EnrageFrenzyDispelled(args)
 	end
 end
 
-function mod:Conflagration(args)
+function mod:ConflagrationApplied(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, "underyou")
+		self:PersonalMessage(args.spellId, "underyou", CL.fire)
 		self:PlaySound(args.spellId, "underyou")
 	end
 end

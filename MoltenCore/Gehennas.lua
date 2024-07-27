@@ -40,7 +40,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "GehennasCurse", 19716)
 	self:Log("SPELL_AURA_APPLIED", "GehennasCurseApplied", 19716)
 	self:Log("SPELL_AURA_REMOVED", "GehennasCurseRemoved", 19716)
-	self:Log("SPELL_AURA_APPLIED", "RainOfFire", 19717)
+	self:Log("SPELL_AURA_APPLIED", "RainOfFireDamage", 19717)
+	self:Log("SPELL_PERIODIC_DAMAGE", "RainOfFireDamage", 19717)
+	self:Log("SPELL_PERIODIC_MISSED", "RainOfFireDamage", 19717)
 	if self:Vanilla() then
 		self:Log("SPELL_CAST_SUCCESS", "GehennasCurse", 461232)
 		self:Log("SPELL_AURA_APPLIED", "GehennasCurseApplied", 461232)
@@ -79,9 +81,13 @@ function mod:GehennasCurseRemoved(args)
 	end
 end
 
-function mod:RainOfFire(args)
-	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, "aboveyou")
-		self:PlaySound(args.spellId, "underyou")
+do
+	local prev = 0
+	function mod:RainOfFireDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 2 then
+			prev = args.time
+			self:PlaySound(args.spellId, "underyou")
+			self:PersonalMessage(args.spellId, "underyou")
+		end
 	end
 end
