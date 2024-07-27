@@ -23,7 +23,7 @@ function mod:GetOptions()
 	}
 end
 
-if BigWigsLoader.isSeasonOfDiscovery then
+if mod:GetSeason() == 2 then
 	function mod:GetOptions()
 		return {
 			19714, -- Deaden Magic
@@ -44,7 +44,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DISPEL", "MagicGroundingDeadenMagicDispelled", "*") -- Normal, Level 1 & 2
 	self:Log("SPELL_CAST_SUCCESS", "Counterspell", 19715)
 	self:Log("SPELL_CAST_SUCCESS", "ShazzrahsCurse", 19713) -- Normal, Level 1
-	if BigWigsLoader.isSeasonOfDiscovery then
+	if self:GetSeason() == 2 then
 		self:Log("SPELL_CAST_SUCCESS", "ShazzrahsCurse", 461343) -- Level 2 & 3
 		self:Log("SPELL_CAST_START", "ReflectMagic", 460856) -- Level 3
 		self:Log("SPELL_AURA_APPLIED", "ReflectMagicApplied", 460856) -- Level 3
@@ -55,7 +55,7 @@ end
 function mod:OnEngage()
 	self:CDBar(19713, 6.4, CL.curse) -- Shazzrah's Curse
 	self:CDBar(19715, 9.7) -- Counterspell
-	self:CDBar(23138, BigWigsLoader.isSeasonOfDiscovery and 21 or 30, CL.teleport) -- Gate of Shazzrah
+	self:CDBar(23138, self:GetSeason() == 2 and 21 or 30, CL.teleport) -- Gate of Shazzrah
 	if self:GetPlayerAura(458842) or self:GetPlayerAura(458843) then -- Level 2 & 3 only
 		self:CDBar(460856, 16) -- Reflect Magic
 	end
@@ -66,7 +66,7 @@ end
 --
 
 function mod:GateOfShazzrah()
-	self:CDBar(23138, BigWigsLoader.isSeasonOfDiscovery and 21 or 41, CL.teleport) -- 21-30 on SoD, 41-50 elsewhere
+	self:CDBar(23138, self:GetSeason() == 2 and 21 or 41, CL.teleport) -- 21-30 on SoD, 41-50 elsewhere
 	self:Message(23138, "red", CL.teleport)
 	self:PlaySound(23138, "long")
 end
@@ -85,13 +85,13 @@ function mod:MagicGroundingDeadenMagicDispelled(args)
 end
 
 function mod:Counterspell(args)
-	self:CDBar(args.spellId, BigWigsLoader.isSeasonOfDiscovery and 9.6 or 15) -- 9.6-12.9 on SoD, 15-19 elsewhere
+	self:CDBar(args.spellId, self:GetSeason() == 2 and 9.6 or 15) -- 9.6-12.9 on SoD, 15-19 elsewhere
 	self:Message(args.spellId, "yellow")
 	self:PlaySound(args.spellId, "info")
 end
 
 function mod:ShazzrahsCurse()
-	self:CDBar(19713, BigWigsLoader.isSeasonOfDiscovery and 16.2 or 22.6, CL.curse) -- 16.2-21 on SoD, 22.6-25 elsewhere
+	self:CDBar(19713, self:GetSeason() == 2 and 16.2 or 22.6, CL.curse) -- 16.2-21 on SoD, 22.6-25 elsewhere
 	self:Message(19713, "yellow", CL.curse)
 	if self:Dispeller("curse") then
 		self:PlaySound(19713, "warning")

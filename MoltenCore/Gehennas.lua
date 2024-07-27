@@ -13,7 +13,7 @@ mod:SetEncounterID(665)
 
 local L = mod:GetLocale()
 if L then
-	L["19716_desc"] = BigWigsLoader.isSeasonOfDiscovery and 461232 or 19716
+	L["19716_desc"] = mod:GetSeason() == 2 and 461232 or 19716
 end
 
 --------------------------------------------------------------------------------

@@ -37,7 +37,7 @@ function mod:GetOptions()
 	}
 end
 
-if BigWigsLoader.isSeasonOfDiscovery then
+if mod:GetSeason() == 2 then
 	function mod:GetOptions()
 		return {
 			19408, -- Panic
@@ -56,7 +56,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
 	self:Log("SPELL_AURA_APPLIED", "ConflagrationApplied", 19428)
 	self:Log("SPELL_AURA_REFRESH", "ConflagrationApplied", 19428)
-	if BigWigsLoader.isSeasonOfDiscovery then
+	if self:GetSeason() == 2 then
 		self:Log("SPELL_CAST_SUCCESS", "Panic", 461125)
 		self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 		self:RegisterMessage("BigWigs_BossComm")

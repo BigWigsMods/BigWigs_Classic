@@ -49,7 +49,7 @@ function mod:GetOptions()
 	}
 end
 
-if BigWigsLoader.isSeasonOfDiscovery then
+if mod:GetSeason() == 2 then
 	function mod:GetOptions()
 		return {
 			"stages",
@@ -78,7 +78,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Breath", 17086, 18351, 18564, 18576, 18584, 18596, 18609, 18617) -- Deep Breath (various directions)
 	self:Log("SPELL_CAST_START", "BellowingRoar", 18431)
 
-	if BigWigsLoader.isSeasonOfDiscovery then
+	if self:GetSeason() == 2 then
 		self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 		self:RegisterMessage("BigWigs_BossComm")
 	end
@@ -162,7 +162,7 @@ function mod:CHAT_MSG_MONSTER_YELL(event, msg)
 	if msg:find(L.stage2_yell_trigger, nil, true) then
 		self:SetStage(2)
 		self:StopBar(CL.frontal_cone) -- Flame Breath
-		if BigWigsLoader.isSeasonOfDiscovery then
+		if self:GetSeason() == 2 then
 			self:Bar(17086, 28.5, L.deep_breath) -- Stage 2 "Deep Breath"
 		end
 		self:Message("stages", "cyan", CL.percent:format(65, CL.stage:format(2)), false)

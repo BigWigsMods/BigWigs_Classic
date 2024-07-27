@@ -24,7 +24,7 @@ function mod:GetOptions()
 	}
 end
 
-if BigWigsLoader.isSeasonOfDiscovery then
+if mod:GetSeason() == 2 then
 	function mod:GetOptions()
 		return {
 			{20619, "CASTBAR"}, -- Magic Reflection
@@ -47,7 +47,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "MagicReflection", 20619)
 	self:Log("SPELL_CAST_SUCCESS", "DamageShield", 21075)
 	self:Log("SPELL_CAST_SUCCESS", "Teleport", 20534)
-	if BigWigsLoader.isSeasonOfDiscovery then
+	if self:GetSeason() == 2 then
 		self:Log("SPELL_CAST_START", "RagingFlareStart", 461056)
 		self:Log("SPELL_CAST_SUCCESS", "RagingFlare", 461056)
 	end
