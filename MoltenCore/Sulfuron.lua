@@ -32,14 +32,12 @@ function mod:Inspire(args)
 	self:Message(args.spellId, "yellow")
 end
 
-do
-	local prev = 0
-	function mod:DarkMending(args)
-		local t = GetTime()
-		if t - prev > 1 then
-			prev = t
-			self:Bar(args.spellId, 2)
-			self:Message(args.spellId, "red")
-		end
+function mod:DarkMending(args)
+	local isPossible, isReady = self:Interrupter(args.sourceGUID)
+	if isPossible then
+		self:Message(args.spellId, "red")
+		--if isReady then
+		--	self:PlaySound(args.spellId, "alert")
+		--end
 	end
 end
