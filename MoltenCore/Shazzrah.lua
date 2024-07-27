@@ -26,6 +26,7 @@ end
 if BigWigsLoader.isSeasonOfDiscovery then
 	function mod:GetOptions()
 		return {
+			19714, -- Deaden Magic
 			23138, -- Gate of Shazzrah
 			19715, -- Counterspell
 			19713, -- Shazzrah's Curse
