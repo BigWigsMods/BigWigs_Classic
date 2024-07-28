@@ -54,6 +54,7 @@ function mod:GetOptions()
 		"warmup",
 		"submerge",
 		"emerge",
+		"adds",
 		20566, -- Wrath of Ragnaros
 	},nil,{
 		[20566] = CL.knockback, -- Wrath of Ragnaros (Knockback)
@@ -145,8 +146,10 @@ function mod:Emerge()
 	timer = nil
 	self:SetStage(1)
 	self:CDBar(20566, 27, CL.knockback)
-	self:Message("emerge", "yellow", L.emerge_message, L.emerge_icon)
-	if self:GetSeason() ~= 2 then
+	if self:GetSeason() == 2 then
+		self:Message("emerge", "yellow", L.emerge_bar, L.emerge_icon)
+	else
+		self:Message("emerge", "yellow", L.emerge_message, L.emerge_icon)
 		self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
 		self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
 		self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
@@ -163,7 +166,7 @@ function mod:Submerge()
 	timer = self:ScheduleTimer("Emerge", 90)
 	self:StopBar(CL.knockback)
 	if self:GetSeason() == 2 then
-		self:Message("submerge", "yellow", CL.percent:format(50, L.submerge_message), L.submerge_icon)
+		self:Message("submerge", "yellow", CL.percent:format(50, L.submerge_bar), L.submerge_icon)
 	else
 		self:Message("submerge", "yellow", L.submerge_message, L.submerge_icon)
 	end
@@ -178,7 +181,7 @@ end
 function mod:SonDeaths()
 	sonsDead = sonsDead + 1
 	if sonsDead < 9 then
-		self:Message("emerge", "green", CL.add_killed:format(sonsDead, 8), "spell_fire_elemental_totem")
+		self:Message("adds", "green", CL.add_killed:format(sonsDead, 8), "spell_fire_elemental_totem")
 	end
 	if sonsDead == 8 then
 		self:CancelTimer(timer)

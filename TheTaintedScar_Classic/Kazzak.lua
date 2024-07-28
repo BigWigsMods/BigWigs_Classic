@@ -38,6 +38,7 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "MarkOfKazzakApplied", 21056)
 	self:Log("SPELL_AURA_REMOVED", "MarkOfKazzakRemoved", 21056)
+	self:Log("SPELL_CAST_SUCCESS", "CaptureSoul", 21054)
 	self:Log("SPELL_AURA_APPLIED", "TwistedReflectionApplied", 21063)
 	self:Log("SPELL_AURA_REMOVED", "TwistedReflectionRemoved", 21063)
 	self:Log("SPELL_DISPEL", "Dispels", "*")
@@ -61,8 +62,17 @@ function mod:MarkOfKazzakApplied(args)
 	end
 end
 
-function mod:MarkOfKazzakRemoved(args)
-	self:StopBar(CL.curse, args.destName)
+do
+	local prevRemoved = nil
+	function mod:MarkOfKazzakRemoved(args)
+		prevRemoved = args.destName
+		self:StopBar(CL.curse, args.destName)
+	end
+
+	function mod:CaptureSoul() -- Huge heal when someone explodes
+		self:TargetMessage(21056, "red", prevRemoved, CL.explosion)
+		self:PlaySound(21056, "long")
+	end
 end
 
 function mod:TwistedReflectionApplied(args)

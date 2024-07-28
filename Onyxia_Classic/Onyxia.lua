@@ -88,7 +88,7 @@ function mod:OnEngage()
 	castCollector = {}
 	self:SetStage(1)
 	self:RegisterEvent("UNIT_HEALTH")
-	self:CDBar(18435, 16.2, CL.frontal_cone) -- Flame Breath
+	self:CDBar(18435, 13, CL.frontal_cone) -- Flame Breath
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:PlaySound("stages", "long")
 end

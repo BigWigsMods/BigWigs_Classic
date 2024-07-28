@@ -123,8 +123,6 @@ function mod:OnBossEnable()
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 
 	self:Death("AddDied", 14261, 14262, 14263, 14264, 14265, 14302) -- Blue, Green, Bronze, Red, Black, Chromatic
-
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
 
 function mod:OnEngage()
