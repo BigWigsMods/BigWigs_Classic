@@ -169,10 +169,10 @@ function mod:Doomsday(args)
 end
 
 function mod:FrigidCurrentApplied(args)
-	if self:MobId(args.sourceGUID) == 228820 and self:MobId(args.destGUID) == 228820 then
+	if self:MobId(args.sourceGUID) == 228820 and self:MobId(args.destGUID) == 227939 then
 		if not firefighters[args.sourceGUID] and lineCount < 10 then
 			firefighters[args.sourceGUID] = {lineCount, 77700}
-			self:SetInfo("health", 1, args.destName)
+			self:SetInfo("health", 1, args.sourceName)
 			local icon = self:GetIconTexture(self:GetIcon(args.sourceRaidFlags))
 			self:SetInfo("health", lineCount, icon or "")
 			self:SetInfoBar("health", lineCount, 1)
