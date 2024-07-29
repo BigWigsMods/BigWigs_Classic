@@ -37,4 +37,6 @@ end
 L = BigWigs:NewBossLocale("Shade of Eranikus Discovery", "zhTW")
 if L then
 	--L.bossName = "Shade of Eranikus"
+	--L.deep_slumber_clouds = "Clouds" -- Clouds of Slumber
+	--L.deep_slumber_player_debuff = "Player"
 end
