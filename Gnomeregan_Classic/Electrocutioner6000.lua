@@ -68,7 +68,7 @@ function mod:OnEngage()
 	self:CDBar(433251, 6.2) -- Static Arc
 	self:Bar(433398, 30.5, CL.count:format(CL.knockback, knockbackCount)) -- Discombobulation Protocol
 
-	self:OpenInfo(433251, "BigWigs: |T237587:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(433251), 10)
+	self:OpenInfo(433251, CL.other:format("BigWigs", "|T237587:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(433251)), 10)
 	self:SimpleTimer(UpdateInfoBoxList, 0.1)
 end
 

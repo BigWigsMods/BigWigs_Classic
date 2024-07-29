@@ -18,6 +18,8 @@ local heartOfAshTarget = nil
 local heartOfAshOnMe = false
 local heartOfCinderOnMe = false
 local mySaySpamTarget = nil
+local firefighters = {}
+local lineCount = 4
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -47,6 +49,7 @@ function mod:GetOptions()
 		"custom_on_linked_spam",
 		460887, -- Harmonic Tremor
 		{460885, "CASTBAR", "EMPHASIZE", "CASTBAR_COUNTDOWN"}, -- Doomsday
+		{"health", "INFOBOX"},
 	},nil,{
 		[460898] = CL.count:format(CL.link, 1), -- Heart of Ash (Link 1)
 		[460895] = CL.count:format(CL.link, 2), -- Heart of Cinder (Link 2)
@@ -70,6 +73,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "HeartOfCinderRemoved", 460895)
 	self:Log("SPELL_CAST_START", "HarmonicTremor", 460887, 462560, 462563) -- first, second, third
 	self:Log("SPELL_CAST_START", "Doomsday", 460885)
+	self:Log("SPELL_AURA_APPLIED", "FrigidCurrentApplied", 460899)
+	self:Log("SWING_DAMAGE", "SwingDamage", "*")
+	self:Log("SPELL_DAMAGE", "SpellDamage", "*")
 end
 
 function mod:OnEngage()
@@ -77,6 +83,9 @@ function mod:OnEngage()
 	heartOfAshOnMe = false
 	heartOfCinderOnMe = false
 	mySaySpamTarget = nil
+	firefighters = {}
+	lineCount = 3
+	self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
 end
 
 --------------------------------------------------------------------------------
@@ -104,7 +113,7 @@ do
 		if self:Me(args.destGUID) then
 			heartOfAshOnMe = false
 			mySaySpamTarget = nil
-			self:Say(args.spellId, CL.link_removed, nil, "Link removed")
+			self:Say(args.spellId, CL.link_removed, true, "Link removed")
 		end
 		self:CustomIcon(heartOfAshMarker, args.destName)
 	end
@@ -136,7 +145,7 @@ do
 		if self:Me(args.destGUID) then
 			heartOfCinderOnMe = false
 			mySaySpamTarget = nil
-			self:Say(args.spellId, CL.link_removed, nil, "Link removed")
+			self:Say(args.spellId, CL.link_removed, true, "Link removed")
 		end
 		self:CustomIcon(heartOfCinderMarker, args.destName)
 	end
@@ -157,4 +166,52 @@ function mod:Doomsday(args)
 	self:CastBar(args.spellId, 20)
 	self:Message(args.spellId, "red")
 	self:PlaySound(args.spellId, "long")
+end
+
+function mod:FrigidCurrentApplied(args)
+	if self:MobId(args.sourceGUID) == 228820 and self:MobId(args.destGUID) == 228820 then
+		if not firefighters[args.sourceGUID] and lineCount < 10 then
+			firefighters[args.sourceGUID] = {lineCount, 77700}
+			self:SetInfo("health", 1, args.destName)
+			local icon = self:GetIconTexture(self:GetIcon(args.sourceRaidFlags))
+			self:SetInfo("health", lineCount, icon or "")
+			self:SetInfoBar("health", lineCount, 1)
+			self:SetInfo("health", lineCount + 1, "100%")
+			lineCount = lineCount + 2
+		end
+	end
+end
+
+function mod:SwingDamage(args)
+	local tbl = firefighters[args.destGUID]
+	if tbl then
+		local line = tbl[1]
+		local hp = tbl[2]
+		local newHp = hp - args.spellId
+		tbl[2] = newHp
+		local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
+		if icon then
+			self:SetInfo("health", line, icon)
+		end
+		local currentHealthPercent = math.floor((newHp / 77700) * 100)
+		self:SetInfoBar("health", line, currentHealthPercent/100)
+		self:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+	end
+end
+
+function mod:SpellDamage(args)
+	local tbl = firefighters[args.destGUID]
+	if tbl then
+		local line = tbl[1]
+		local hp = tbl[2]
+		local newHp = hp - args.extraSpellId
+		tbl[2] = newHp
+		local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
+		if icon then
+			self:SetInfo("health", line, icon)
+		end
+		local currentHealthPercent = math.floor((newHp / 77700) * 100)
+		self:SetInfoBar("health", line, currentHealthPercent/100)
+		self:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+	end
 end

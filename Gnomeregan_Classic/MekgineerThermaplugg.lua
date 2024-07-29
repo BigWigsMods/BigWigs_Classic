@@ -111,7 +111,7 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 
-	self:OpenInfo(438735, "BigWigs: |T237290:0:0:0:0:64:64:4:60:4:60|t".. L.red_button, 10)
+	self:OpenInfo(438735, CL.other:format("BigWigs", "|T237290:0:0:0:0:64:64:4:60:4:60|t".. L.red_button), 10)
 	self:SimpleTimer(UpdateInfoBoxList, 0.1)
 end
 

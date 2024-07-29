@@ -69,7 +69,7 @@ function mod:OnEngage()
 	markCounter = 1
 	killedBosses = {}
 
-	self:OpenInfo("health", "BigWigs: ".. CL.health)
+	self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
 	for npcId, line in next, bossList do
 		self:SetInfo("health", line, L[npcId])
 		self:SetInfoBar("health", line, 1)

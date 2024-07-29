@@ -127,7 +127,7 @@ function mod:InitialCorruptedMindApplied(args)
 	healerList[#healerList + 1] = args.destName
 	if #healerList > 10 and numInfoLines ~= 20 then
 		numInfoLines = 20
-		self:OpenInfo(29184, "BigWigs: |T136122:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(29184), numInfoLines)
+		self:OpenInfo(29184, CL.other:format("BigWigs", "|T136122:0:0:0:0:64:64:4:60:4:60|t".. self:SpellName(29184)), numInfoLines)
 	end
 end
 

@@ -196,7 +196,7 @@ function mod:OnEngage()
 	firstCharge = true
 	self:SetStage(1)
 
-	self:OpenInfo("health", "BigWigs: ".. CL.health)
+	self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
 	local npcId = 15928
 	for i = 1, 3, 2 do
 		npcId = npcId + 1

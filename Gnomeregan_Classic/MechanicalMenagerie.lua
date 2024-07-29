@@ -103,7 +103,7 @@ function mod:OnEngage()
 	chickenHP = 100
 	repairList = {}
 
-	self:OpenInfo("health", "BigWigs: ".. CL.health)
+	self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
 	local npcId = 218241
 	for i = 1, 7, 2 do
 		npcId = npcId + 1

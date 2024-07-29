@@ -192,7 +192,7 @@ function mod:EyeOfCThunKilled()
 	self:Bar("eye_tentacles", 41.3, L.eye_tentacles, L.eye_tentacles_icon)
 	self:Bar("giant_eye_tentacle", 43.1, L.giant_eye_tentacle, L.giant_eye_tentacle_icon)
 
-	self:OpenInfo("infobox", "BigWigs: ".. L.stomach)
+	self:OpenInfo("infobox", CL.other:format("BigWigs", L.stomach))
 	self:SetInfo("infobox", 1, L.tentacle:format(1))
 	self:SetInfoBar("infobox", 1, 1)
 	self:SetInfo("infobox", 2, "100%")
