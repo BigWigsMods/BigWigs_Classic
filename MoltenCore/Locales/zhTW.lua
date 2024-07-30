@@ -12,6 +12,8 @@ if L then
 	L.emerge_desc = "當拉格納羅斯出現時發出警報。"
 	L.emerge_message = "拉格納羅斯已經進入戰鬥，3分鐘後消失！"
 	L.emerge_bar = "出現"
+
+	--L.son = "Son of Flame" -- NPC ID 12143
 end
 
 L = BigWigs:NewBossLocale("The Molten Core", "zhTW")

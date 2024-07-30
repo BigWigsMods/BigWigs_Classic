@@ -12,6 +12,8 @@ if L then
 	L.emerge_desc = "Предупреждать о всплытии Рагнароса"
 	L.emerge_message = "Рагнарос появился, 3 минуты до погружения!"
 	L.emerge_bar = "Рагнарос погрузился"
+
+	L.son = "Сын пламени" -- NPC ID 12143
 end
 
 L = BigWigs:NewBossLocale("The Molten Core", "ruRU")

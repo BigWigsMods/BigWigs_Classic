@@ -82,12 +82,12 @@ do
 			playerList[#playerList+1] = args.destName
 			self:TargetsMessage(20475, "orange", playerList, args.spellId == 461090 and 2 or 3, CL.bomb)
 			self:CustomIcon(livingBombMarker, args.destName, icon)
-			icon = icon - 1
 			if self:Me(args.destGUID) then
 				self:Say(20475, CL.bomb, nil, "Bomb")
-				self:SayCountdown(20475, 8)
+				self:SayCountdown(20475, 8, icon)
 				self:TargetBar(20475, 8, args.destName, CL.bomb)
 			end
+			icon = icon - 1
 		end
 	end
 end
@@ -95,7 +95,7 @@ end
 function mod:LivingBombApplied(args)
 	if self:Me(args.destGUID) then
 		self:Say(20475, CL.bomb, nil, "Bomb")
-		self:SayCountdown(20475, 8)
+		self:SayCountdown(20475, 8, 8)
 	end
 	self:TargetMessage(20475, "red", args.destName, CL.bomb)
 	self:TargetBar(20475, 8, args.destName, CL.bomb)
@@ -130,7 +130,11 @@ function mod:ArmageddonSoD(args)
 	self:StopBar(19659) -- Ignite Mana
 	self:StopBar(19695) -- Inferno
 	self:CastBar(20478, 15, CL.explosion)
-	self:Message(20478, "orange", CL.percent:format(10, args.spellName))
+	if self:GetPlayerAura(458841) then -- Level 1
+		self:Message(20478, "orange", CL.percent:format(5, args.spellName))
+	else -- Level 2 & 3
+		self:Message(20478, "orange", CL.percent:format(10, args.spellName))
+	end
 	self:PlaySound(20478, "long")
 end
 

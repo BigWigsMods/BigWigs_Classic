@@ -12,6 +12,8 @@ if L then
 	L.emerge_desc = "라그나로스 등장에 대한 경고"
 	L.emerge_message = "라그나로스가 등장했습니다. 3분후 피조물 소환!"
 	L.emerge_bar = "라그나로스 등장"
+
+	L.son = "화염의 피조물" -- NPC ID 12143
 end
 
 L = BigWigs:NewBossLocale("The Molten Core", "koKR")

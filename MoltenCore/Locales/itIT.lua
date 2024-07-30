@@ -12,6 +12,8 @@ if L then
 	--L.emerge_desc = "Warn for Ragnaros' emerge."
 	--L.emerge_message = "Ragnaros emerged, 3 mins until submerge!"
 	--L.emerge_bar = "Emerge"
+
+	L.son = "Figlio delle Fiamme" -- NPC ID 12143
 end
 
 L = BigWigs:NewBossLocale("The Molten Core", "itIT")

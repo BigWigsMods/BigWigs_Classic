@@ -76,6 +76,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "FrigidCurrentApplied", 460899)
 	self:Log("SWING_DAMAGE", "SwingDamage", "*")
 	self:Log("SPELL_DAMAGE", "SpellDamage", "*")
+	self:Death("FirefighterDeaths", 228820)
 end
 
 function mod:OnEngage()
@@ -169,7 +170,7 @@ function mod:Doomsday(args)
 end
 
 function mod:FrigidCurrentApplied(args)
-	if self:MobId(args.sourceGUID) == 228820 and self:MobId(args.destGUID) == 227939 then
+	if self:MobId(args.sourceGUID) == 228820 and self:MobId(args.destGUID) == 227939 then -- Hydraxian Firefighter, The Molten Core
 		if not firefighters[args.sourceGUID] and lineCount < 10 then
 			firefighters[args.sourceGUID] = {lineCount, 77700}
 			self:SetInfo("health", 1, args.sourceName)
@@ -187,12 +188,10 @@ function mod:SwingDamage(args)
 	if tbl then
 		local line = tbl[1]
 		local hp = tbl[2]
-		local newHp = hp - args.spellId
+		local newHp = hp - args.spellId -- spellId = Damage the melee swing did
 		tbl[2] = newHp
 		local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
-		if icon then
-			self:SetInfo("health", line, icon)
-		end
+		self:SetInfo("health", line, icon or "")
 		local currentHealthPercent = math.floor((newHp / 77700) * 100)
 		self:SetInfoBar("health", line, currentHealthPercent/100)
 		self:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
@@ -204,14 +203,22 @@ function mod:SpellDamage(args)
 	if tbl then
 		local line = tbl[1]
 		local hp = tbl[2]
-		local newHp = hp - args.extraSpellId
+		local newHp = hp - args.extraSpellId -- extraSpellId = Damage the spell did
 		tbl[2] = newHp
 		local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
-		if icon then
-			self:SetInfo("health", line, icon)
-		end
+		self:SetInfo("health", line, icon or "")
 		local currentHealthPercent = math.floor((newHp / 77700) * 100)
 		self:SetInfoBar("health", line, currentHealthPercent/100)
 		self:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+	end
+end
+
+function mod:FirefighterDeaths(args)
+	local tbl = firefighters[args.destGUID]
+	if tbl then
+		firefighters[args.destGUID] = nil
+		local line = tbl[1]
+		self:SetInfoBar("health", line, 0)
+		self:SetInfo("health", line + 1, CL.dead)
 	end
 end
