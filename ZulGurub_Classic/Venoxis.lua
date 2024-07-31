@@ -41,7 +41,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_INTERRUPT", "HolyFireStop", "*")
 	self:Log("SPELL_CAST_SUCCESS", "PoisonCloud", 23861)
 
-	self:RegisteEvent("UNIT_HEALTH")
+	self:RegisterEvent("UNIT_HEALTH")
 end
 
 --------------------------------------------------------------------------------
