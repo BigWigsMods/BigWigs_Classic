@@ -16,7 +16,6 @@ mod:SetAllowWin(true)
 
 local heartOfAshTarget = nil
 local heartOfAshOnMe = false
-local heartOfCinderOnMe = false
 local mySaySpamTarget = nil
 local firefighters = {}
 local lineCount = 4
@@ -82,7 +81,6 @@ end
 function mod:OnEngage()
 	heartOfAshTarget = nil
 	heartOfAshOnMe = false
-	heartOfCinderOnMe = false
 	mySaySpamTarget = nil
 	firefighters = {}
 	lineCount = 3
@@ -111,9 +109,9 @@ do
 	end
 
 	function mod:HeartOfAshRemoved(args)
+		mySaySpamTarget = nil -- Sometimes only one of the two has a removed event (player death?) so just nil it for everyone
 		if self:Me(args.destGUID) then
 			heartOfAshOnMe = false
-			mySaySpamTarget = nil
 			self:Say(args.spellId, CL.link_removed, true, "Link removed")
 		end
 		self:CustomIcon(heartOfAshMarker, args.destName)
@@ -124,7 +122,6 @@ do
 		self:TargetMessage(args.spellId, "yellow", args.destName, CL.count_icon:format(CL.link, 2, 6))
 		self:CustomIcon(heartOfCinderMarker, args.destName, 6)
 		if self:Me(args.destGUID) then
-			heartOfCinderOnMe = true
 			if heartOfAshTarget and self:GetOption("custom_on_linked_spam") then
 				mySaySpamTarget = {6, self:Ambiguate(heartOfAshTarget, "short")}
 				self:SimpleTimer(RepeatLinkSay, 1.5)
@@ -143,9 +140,8 @@ do
 	end
 
 	function mod:HeartOfCinderRemoved(args)
+		mySaySpamTarget = nil -- Sometimes only one of the two has a removed event (player death?) so just nil it for everyone
 		if self:Me(args.destGUID) then
-			heartOfCinderOnMe = false
-			mySaySpamTarget = nil
 			self:Say(args.spellId, CL.link_removed, true, "Link removed")
 		end
 		self:CustomIcon(heartOfCinderMarker, args.destName)
