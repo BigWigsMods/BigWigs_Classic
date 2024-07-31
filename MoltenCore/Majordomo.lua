@@ -98,13 +98,14 @@ do
 	end
 
 	function mod:RagingFlareStart(args)
-		self:GetUnitTarget(printTarget, 0.3, args.sourceGUID)
+		self:StopBar(args.spellName)
+		self:GetUnitTarget(printTarget, 0.4, args.sourceGUID)
 		self:CastBar(args.spellId, 4)
 		self:PlaySound(args.spellId, "warning")
 	end
 
 	function mod:RagingFlare(args)
 		self:PrimaryIcon(args.spellId)
-		self:CDBar(args.spellId, 30) -- Time to _START
+		self:CDBar(args.spellId, 26) -- Time to _START
 	end
 end
