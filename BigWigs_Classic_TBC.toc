@@ -35,6 +35,7 @@
 ## X-WoWI-ID: 22095
 ## X-Wago-ID: rNkPgm6a
 ## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531, 533, 309, 249
+## X-BigWigs-Minimum: 350
 
 MoltenCore\modules.xml
 BlackwingLair\modules.xml
