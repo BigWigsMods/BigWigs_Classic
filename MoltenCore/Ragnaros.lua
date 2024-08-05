@@ -37,18 +37,6 @@ if L then
 
 	L.warmup_icon = "Achievement_boss_ragnaros"
 
-	L.submerge = "Submerge"
-	L.submerge_desc = "Warn for Ragnaros' submerge."
-	L.submerge_icon = "Achievement_boss_ragnaros"
-	L.submerge_message = "Ragnaros down for 90 sec!"
-	L.submerge_bar = "Submerge"
-
-	L.emerge = "Emerge"
-	L.emerge_desc = "Warn for Ragnaros' emerge."
-	L.emerge_icon = "Achievement_boss_ragnaros"
-	L.emerge_message = "Ragnaros emerged, 3 mins until submerge!"
-	L.emerge_bar = "Emerge"
-
 	L.son = "Son of Flame" -- NPC ID 12143
 end
 
@@ -60,8 +48,7 @@ local sonOfFlameMarker = mod:AddMarkerOption(true, "npc", 8, "son", 8, 7, 6, 5, 
 function mod:GetOptions()
 	return {
 		"warmup",
-		"submerge",
-		"emerge",
+		"stages",
 		"adds",
 		sonOfFlameMarker,
 		{"health", "INFOBOX"},
@@ -107,13 +94,8 @@ function mod:OnEngage()
 	if self:GetSeason() == 2 then
 		self:RegisterEvent("UNIT_HEALTH")
 	else
-		self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
-		self:Message("submerge", "yellow", CL.custom_min:format(L.submerge, 3), L.submerge_icon)
-		self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
-		self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
-		self:DelayedMessage("submerge", 150, "yellow", CL.custom_sec:format(L.submerge, 30))
-		self:DelayedMessage("submerge", 170, "orange", CL.custom_sec:format(L.submerge, 10), false, "alarm")
-		self:DelayedMessage("submerge", 175, "orange", CL.custom_sec:format(L.submerge, 5), false, "alarm")
+		self:Bar("stages", 180, CL.stage:format(2), L.warmup_icon)
+		self:DelayedMessage("stages", 170, "cyan", CL.custom_sec:format(CL.stage:format(2), 10))
 	end
 end
 
@@ -165,22 +147,16 @@ function mod:Emerge()
 	self:SetStage(1)
 	self:CloseInfo("health")
 	self:CDBar(20566, 27, CL.knockback)
-	if self:GetSeason() == 2 then
-		self:Message("emerge", "yellow", L.emerge_bar, L.emerge_icon)
-	else
-		self:Message("emerge", "yellow", L.emerge_message, L.emerge_icon)
-		self:Bar("submerge", 180, L.submerge_bar, L.submerge_icon)
-		self:DelayedMessage("submerge", 60, "yellow", CL.custom_min:format(L.submerge, 2))
-		self:DelayedMessage("submerge", 120, "yellow", CL.custom_min:format(L.submerge, 1))
-		self:DelayedMessage("submerge", 150, "yellow", CL.custom_sec:format(L.submerge, 30))
-		self:DelayedMessage("submerge", 170, "orange", CL.custom_sec:format(L.submerge, 10), false, "alarm")
-		self:DelayedMessage("submerge", 175, "orange", CL.custom_sec:format(L.submerge, 5), false, "alarm")
+	self:Message("stages", "cyan", CL.stage:format(1), L.warmup_icon)
+	if self:GetSeason() ~= 2 then
+		self:Bar("stages", 180, CL.stage:format(2), L.warmup_icon)
+		self:DelayedMessage("stages", 170, "cyan", CL.custom_sec:format(CL.stage:format(2), 10))
 	end
 	self:RemoveLog("SWING_DAMAGE", "*")
 	self:RemoveLog("RANGE_DAMAGE", "*")
 	self:RemoveLog("SPELL_DAMAGE", "*")
 	self:RemoveLog("SPELL_PERIODIC_DAMAGE", "*")
-	self:PlaySound("emerge", "long")
+	self:PlaySound("stages", "long")
 end
 
 function mod:Submerge()
@@ -199,17 +175,14 @@ function mod:Submerge()
 	timer = self:ScheduleTimer("Emerge", 90)
 	self:StopBar(CL.knockback)
 	if self:GetSeason() == 2 then
-		self:Message("submerge", "yellow", CL.percent:format(50, L.submerge_bar), L.submerge_icon)
+		self:Message("stages", "cyan", CL.percent:format(50, CL.stage:format(2)), L.warmup_icon)
 	else
-		self:Message("submerge", "yellow", L.submerge_message, L.submerge_icon)
+		self:Message("stages", "cyan", CL.stage:format(2), L.warmup_icon)
 	end
-	self:Bar("emerge", 90, L.emerge_bar, L.emerge_icon)
-	self:DelayedMessage("emerge", 30, "yellow", CL.custom_sec:format(L.emerge, 60))
-	self:DelayedMessage("emerge", 60, "yellow", CL.custom_sec:format(L.emerge, 30))
-	self:DelayedMessage("emerge", 80, "orange", CL.custom_sec:format(L.emerge, 10), false, "alarm")
-	self:DelayedMessage("emerge", 85, "orange", CL.custom_sec:format(L.emerge, 5), false, "alarm")
+	self:Bar("stages", 90, CL.stage:format(1), L.warmup_icon)
+	self:DelayedMessage("stages", 80, "cyan", CL.custom_sec:format(CL.stage:format(1), 10))
 	self:SimpleTimer(UpdateInfoBoxList, 1)
-	self:PlaySound("submerge", "long")
+	self:PlaySound("stages", "long")
 end
 
 function mod:SonDeaths(args)
@@ -227,11 +200,8 @@ function mod:SonDeaths(args)
 	end
 	if sonsDead == 8 then
 		self:CancelTimer(timer)
-		self:StopBar(L.emerge_bar)
-		self:CancelDelayedMessage(CL.custom_sec:format(L.emerge, 60))
-		self:CancelDelayedMessage(CL.custom_sec:format(L.emerge, 30))
-		self:CancelDelayedMessage(CL.custom_sec:format(L.emerge, 10))
-		self:CancelDelayedMessage(CL.custom_sec:format(L.emerge, 5))
+		self:StopBar(CL.stage:format(1))
+		self:CancelDelayedMessage(CL.custom_sec:format(CL.stage:format(1), 10))
 		self:Emerge()
 	end
 end
@@ -242,7 +212,7 @@ function mod:UNIT_HEALTH(event, unit)
 		if hp < 56 then
 			self:UnregisterEvent(event)
 			if hp > 50 then
-				self:Message("submerge", "cyan", CL.soon:format(L.submerge_bar), false)
+				self:Message("stages", "cyan", CL.soon:format(CL.stage:format(2)), false)
 			end
 		end
 	end
