@@ -4,7 +4,7 @@
 
 local mod, CL = BigWigs:NewBoss("Onyxia", 249, 1651)
 if not mod then return end
-mod:RegisterEnableMob(10184)
+mod:RegisterEnableMob(10184, 12129) -- Onyxia, Onyxian Warder
 mod:SetEncounterID(1084)
 mod:SetStage(1)
 
@@ -25,6 +25,7 @@ if L then
 
 	L.deep_breath = "Deep Breath" -- Preserving the original way it was referred to during classic
 	L["18431_icon"] = "spell_shadow_psychicscream"
+	L.warder = "Onyxian Warder" -- NPC ID 12129
 end
 
 --------------------------------------------------------------------------------
@@ -38,10 +39,12 @@ function mod:GetOptions()
 		{18392, "SAY", "ICON"}, -- Fireball
 		{17086, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Breath
 		18431, -- Bellowing Roar
+		18958, -- Flame Lash
 	},{
 		[18435] = CL.stage:format(1),
 		[18392] = CL.stage:format(2),
 		[18431] = CL.stage:format(3),
+		[18958] = L.warder,
 	},{
 		[18435] = CL.frontal_cone, -- Flame Breath (Frontal Cone)
 		[17086] = L.deep_breath, -- Breath (Deep Breath)
@@ -58,10 +61,12 @@ if mod:GetSeason() == 2 then
 			{17086, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Breath
 			364849, -- Summon Onyxian Warder
 			18431, -- Bellowing Roar
+			18958, -- Flame Lash
 		},{
 			[18435] = CL.stage:format(1),
 			[18392] = CL.stage:format(2),
 			[18431] = CL.stage:format(3),
+			[18958] = L.warder,
 		},{
 			[18435] = CL.frontal_cone, -- Flame Breath (Frontal Cone)
 			[17086] = L.deep_breath, -- Breath (Deep Breath)
@@ -77,6 +82,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Fireball", 18392)
 	self:Log("SPELL_CAST_START", "Breath", 17086, 18351, 18564, 18576, 18584, 18596, 18609, 18617) -- Deep Breath (various directions)
 	self:Log("SPELL_CAST_START", "BellowingRoar", 18431)
+	self:Log("SPELL_AURA_APPLIED", "FlameLashApplied", 18958)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "FlameLashApplied", 18958)
 
 	if self:GetSeason() == 2 then
 		self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
@@ -186,5 +193,12 @@ function mod:UNIT_HEALTH(event, unit)
 				self:Message("stages", "cyan", CL.soon:format(CL.stage:format(2)), false)
 			end
 		end
+	end
+end
+
+function mod:FlameLashApplied(args)
+	local unit = self:GetUnitIdByGUID(args.sourceGUID)
+	if unit and self:Tanking(unit, args.destName) then
+		self:StackMessage(args.spellId, "purple", args.destName, args.amount, 2)
 	end
 end

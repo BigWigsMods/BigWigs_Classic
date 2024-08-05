@@ -4,4 +4,5 @@ if L then
 	L.stage3_yell_trigger = "看起來需要再給你一次教訓，凡人"
 
 	L.deep_breath = "深呼吸"
+	--L.warder = "Onyxian Warder" -- NPC ID 12129
 end

@@ -4,4 +4,5 @@ if L then
 	L.stage3_yell_trigger = "Parece ser que van a necesitar otra lección"
 
 	L.deep_breath = "Aliento profundo"
+	L.warder = "Guarda de Onyxia" -- NPC ID 12129
 end

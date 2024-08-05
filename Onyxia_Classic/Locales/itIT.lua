@@ -4,4 +4,5 @@ if L then
 	--L.stage3_yell_trigger = "It seems you'll need another lesson"
 
 	L.deep_breath = "Alito del Drago"
+	L.warder = "Custode di Onyxia" -- NPC ID 12129
 end

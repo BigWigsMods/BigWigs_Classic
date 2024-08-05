@@ -4,4 +4,5 @@ if L then
 	L.stage3_yell_trigger = "혼이 더 나야 정신을 차리겠구나!"
 
 	L.deep_breath = "깊은 숨결"
+	L.warder = "오닉시아의 수호병" -- NPC ID 12129
 end
