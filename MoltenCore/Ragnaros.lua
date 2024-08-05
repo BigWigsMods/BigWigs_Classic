@@ -36,6 +36,7 @@ if L then
 	L.submerge_trigger = "COME FORTH,"
 
 	L.warmup_icon = "Achievement_boss_ragnaros"
+	L.adds_icon = "spell_fire_elemental_totem"
 
 	L.son = "Son of Flame" -- NPC ID 12143
 end
@@ -188,7 +189,7 @@ end
 function mod:SonDeaths(args)
 	sonsDead = sonsDead + 1
 	if sonsDead < 9 then
-		self:Message("adds", "green", CL.add_killed:format(sonsDead, 8), "spell_fire_elemental_totem")
+		self:Message("adds", "green", CL.add_killed:format(sonsDead, 8), L.adds_icon)
 		local tbl = sonsTracker[args.destGUID]
 		if tbl then
 			sonsTracker[args.destGUID] = nil
