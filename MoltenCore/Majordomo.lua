@@ -104,7 +104,6 @@ do
 	end
 
 	function mod:RagingFlare(args)
-		self:PrimaryIcon(args.spellId)
 		self:CDBar(args.spellId, 26) -- Time to _START
 	end
 end
