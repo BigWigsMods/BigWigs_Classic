@@ -30,7 +30,7 @@ if mod:GetSeason() == 2 then
 			{20619, "CASTBAR"}, -- Magic Reflection
 			{21075, "CASTBAR"}, -- Damage Shield
 			20534, -- Teleport
-			{461056, "CASTBAR", "SAY", "SAY_COUNTDOWN", "ICON", "ME_ONLY_EMPHASIZE"}, -- Raging Flare
+			{461056, "CASTBAR", "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Raging Flare
 		},nil,{
 			[20619] = CL.spell_reflection, -- Magic Reflection (Spell Reflection)
 		}
@@ -89,7 +89,6 @@ end
 
 do
 	local function printTarget(self, name, guid, elapsed)
-		self:PrimaryIcon(461056, name)
 		self:TargetMessage(461056, "red", name)
 		if self:Me(guid) then
 			self:Yell(461056, nil, nil, "Raging Flare")

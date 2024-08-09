@@ -21,7 +21,7 @@ mod:SetStage(1)
 
 local sonsDead = 0
 local timer = nil
-local warmupTimer = mod:Retail() and 74 or 84
+local warmupTimer = mod:Retail() and 74 or 85
 local sonsTracker = {}
 local sonsMarker = 8
 local lineCount = 3
@@ -92,7 +92,7 @@ function mod:OnEngage()
 	lineCount = 3
 	self:SetStage(1)
 	self:CDBar(20566, 26, CL.knockback) -- Wrath of Ragnaros
-	if self:GetSeason() == 2 then
+	if self:GetSeason() == 2 then -- He doesn't submerge until 50% on SoD
 		self:RegisterEvent("UNIT_HEALTH")
 	else
 		self:Bar("stages", 180, CL.stage:format(2), L.warmup_icon)
@@ -149,7 +149,7 @@ function mod:Emerge()
 	self:CloseInfo("health")
 	self:CDBar(20566, 27, CL.knockback)
 	self:Message("stages", "cyan", CL.stage:format(1), L.warmup_icon)
-	if self:GetSeason() ~= 2 then
+	if not self:GetPlayerAura(458841) then -- He doesn't submerge again on level 1
 		self:Bar("stages", 180, CL.stage:format(2), L.warmup_icon)
 		self:DelayedMessage("stages", 170, "cyan", CL.custom_sec:format(CL.stage:format(2), 10))
 	end
@@ -221,7 +221,7 @@ end
 
 function mod:Damage(args)
 	if not sonsTracker[args.destGUID] and self:MobId(args.destGUID) == 12143 then -- Son of Flame
-		sonsTracker[args.destGUID] = {lineCount, sonsMarker}
+		sonsTracker[args.destGUID] = {lineCount, sonsMarker, 4, "target"}
 		self:SetInfo("health", lineCount, ("%s 99%%"):format(self:GetIconTexture(sonsMarker)))
 		lineCount = lineCount + 1
 		sonsMarker = sonsMarker - 1
@@ -239,18 +239,21 @@ function UpdateInfoBoxList()
 	mod:SimpleTimer(UpdateInfoBoxList, 0.5)
 
 	for guid, tbl in next, sonsTracker do
-		local unitToken = tbl[3]
-		if not unitToken or mod:UnitGUID(unitToken) ~= guid then
+		local unitToken = tbl[4]
+		if mod:UnitGUID(unitToken) ~= guid then
 			unitToken = mod:GetUnitIdByGUID(guid)
-			tbl[3] = unitToken
 		end
 		if unitToken then
+			tbl[4] = unitToken
 			local line = tbl[1]
 			local marker = tbl[2]
+			tbl[3] = tbl[3]+1
 			local currentHealthPercent = math.floor(mod:GetHealth(unitToken))
 			local icon = mod:GetIconTexture(marker)
 			mod:SetInfo("health", line, ("%s %d%%"):format(icon, currentHealthPercent))
-			mod:CustomIcon(sonOfFlameMarker, unitToken, marker)
+			if tbl[3] % 5 == 0 then
+				mod:CustomIcon(sonOfFlameMarker, unitToken, marker)
+			end
 		end
 	end
 end

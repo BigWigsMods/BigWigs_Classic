@@ -89,7 +89,7 @@ function mod:OnEngage()
 	firefighters = {}
 	lineCount = 3
 	self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
-	self:CDBar("adds", 28.8, CL.adds, L.adds_icon)
+	self:CDBar("adds", 28, CL.adds, L.adds_icon)
 end
 
 --------------------------------------------------------------------------------
