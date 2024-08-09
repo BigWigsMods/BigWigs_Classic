@@ -39,6 +39,7 @@ BigWigs:AddColors("Shazzrah", {
 
 BigWigs:AddColors("Sulfuron Harbinger", {
 	[19775] = "red",
+	[19778] = "orange",
 	[19779] = "yellow",
 })
 

@@ -16,6 +16,7 @@ BigWigs:AddSounds("Gehennas", {
 })
 
 BigWigs:AddSounds("Garr", {
+	[19492] = "info",
 })
 
 BigWigs:AddSounds("Baron Geddon", {
@@ -35,6 +36,9 @@ BigWigs:AddSounds("Shazzrah", {
 })
 
 BigWigs:AddSounds("Sulfuron Harbinger", {
+	[19775] = "alert",
+	[19778] = "alarm",
+	[19779] = "info",
 })
 
 BigWigs:AddSounds("Golemagg the Incinerator", {
