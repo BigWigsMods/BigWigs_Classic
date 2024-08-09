@@ -34,7 +34,6 @@ end
 L = BigWigs:NewBossLocale("Nefarian Classic", "ptBR")
 if L then
 	L.engage_yell_trigger = "Que comecem os jogos!"
-	L.landing_soon_trigger = "Muito bem, meus lacaios."
 	--L.stage2_yell_trigger = "BURN! You wretches"
 	L.stage3_yell_trigger = "Impossível! Ergam-se, meus lacaios!"
 

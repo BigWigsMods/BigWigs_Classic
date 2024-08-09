@@ -21,7 +21,7 @@ mod:SetStage(1)
 
 local sonsDead = 0
 local timer = nil
-local warmupTimer = mod:Retail() and 74 or 85
+local warmupTimer = mod:Retail() and 74 or mod:GetSeason() == 2 and 85 or 83
 local sonsTracker = {}
 local sonsMarker = 8
 local lineCount = 3

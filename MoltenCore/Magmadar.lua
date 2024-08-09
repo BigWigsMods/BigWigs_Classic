@@ -46,6 +46,7 @@ if mod:GetSeason() == 2 then
 			461131, -- Summon Core Hound
 		},nil,{
 			[19408] = CL.fear, -- Panic (Fear)
+			[19428] = CL.underyou:format(CL.fire), -- Conflagration (Fire under YOU)
 		}
 	end
 end
