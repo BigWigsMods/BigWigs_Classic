@@ -11,7 +11,7 @@ mod:SetEncounterID(668)
 -- Initialization
 --
 
-local livingBombMarker = mod:AddMarkerOption(true, "player", 8, 20475, 8, 7, 6) -- Living Bomb
+local livingBombMarker = mod:GetSeason() == 2 and mod:AddMarkerOption(true, "player", 8, 20475, 8, 7, 6) or mod:AddMarkerOption(true, "player", 8, 20475, 8) -- Living Bomb
 function mod:GetOptions()
 	return {
 		{20475, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Living Bomb
