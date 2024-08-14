@@ -48,7 +48,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Inferno", 19695)
 	self:Log("SPELL_CAST_SUCCESS", "Armageddon", 20478)
 	self:Log("SPELL_CAST_SUCCESS", "IgniteMana", 19659)
-	if self:Vanilla() then
+	if self:GetSeason() == 2 then
 		self:Log("SPELL_CAST_SUCCESS", "LivingBomb", 465725, 461090, 461105) -- Level 1, Level 2, Level 3
 		self:Log("SPELL_AURA_APPLIED", "LivingBombAppliedSoD", 465725, 461090, 461105) -- Level 1, Level 2, Level 3
 		self:Log("SPELL_AURA_REMOVED", "LivingBombRemoved", 465725, 461090, 461105) -- Level 1, Level 2, Level 3

@@ -33,7 +33,8 @@ if mod:GetSeason() == 2 then
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "Inspire", 19779)
+	self:Log("SPELL_AURA_APPLIED", "InspireApplied", 19779)
+	self:Log("SPELL_AURA_REMOVED", "InspireRemoved", 19779)
 	self:Log("SPELL_CAST_SUCCESS", "DemoralizingShout", 19778)
 	self:Log("SPELL_CAST_START", "DarkMending", 19775)
 	if self:GetSeason() == 2  then
@@ -47,7 +48,7 @@ function mod:OnBossEnable()
 -- Event Handlers
 --
 
-function mod:Inspire(args)
+function mod:InspireApplied(args)
 	local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
 	if icon then
 		self:Bar(args.spellId, 10, CL.other:format(args.spellName, icon))
@@ -57,6 +58,15 @@ function mod:Inspire(args)
 		self:Message(args.spellId, "yellow", CL.other:format(args.spellName, args.destName))
 	end
 	self:PlaySound(args.spellId, "info")
+end
+
+function mod:InspireRemoved(args)
+	local icon = self:GetIconTexture(self:GetIcon(args.destRaidFlags))
+	if icon then
+		self:StopBar(CL.other:format(args.spellName, icon))
+	else
+		self:StopBar(args.spellName)
+	end
 end
 
 function mod:DemoralizingShout(args)

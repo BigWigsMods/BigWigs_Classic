@@ -41,7 +41,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "DominateMind", 20604)
 	self:Log("SPELL_AURA_APPLIED", "DominateMindApplied", 20604)
 	self:Log("SPELL_AURA_REMOVED", "DominateMindRemoved", 20604)
-	if self:Vanilla() then
+	if self:GetSeason() == 2 then
 		self:Log("SPELL_CAST_SUCCESS", "ImpendingDoom", 460931)
 		self:Log("SPELL_CAST_SUCCESS", "LucifronsCurse", 460932)
 		self:Log("SPELL_AURA_APPLIED", "LucifronsCurseApplied", 460932)

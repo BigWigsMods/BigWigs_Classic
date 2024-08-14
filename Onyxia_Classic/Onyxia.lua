@@ -139,16 +139,42 @@ function mod:FlameBreath(args) -- Stage 1 Frontal Cone
 end
 
 do
-	local function printTarget(self, player, guid)
-		self:PrimaryIcon(18392, player)
-		if self:Me(guid) then
-			self:Say(18392, nil, nil, "Fireball")
-			self:PersonalMessage(18392)
-			self:PlaySound(18392, "alarm")
+	local sourceGUID = nil
+	local targetGUID = nil
+	local function scanTarget()
+		if targetGUID and sourceGUID then
+			local unit = mod:GetUnitIdByGUID(sourceGUID)
+			if unit then
+				local newTargetGUID = mod:UnitGUID(unit.."target")
+				if newTargetGUID and newTargetGUID ~= targetGUID then
+					sourceGUID = nil
+					targetGUID = nil
+					local newTargetName = mod:UnitName(unit.."target")
+					mod:PrimaryIcon(18392, newTargetName)
+					if mod:Me(newTargetGUID) then
+						mod:Say(18392, nil, nil, "Fireball")
+						mod:PersonalMessage(18392)
+						mod:PlaySound(18392, "alarm")
+					end
+				else
+					mod:SimpleTimer(scanTarget, 0.05)
+				end
+			else
+				sourceGUID = nil
+				targetGUID = nil
+			end
 		end
 	end
 	function mod:Fireball(args) -- Stage 2 Targetted Fireball threat wipe
-		self:GetUnitTarget(printTarget, 0.1, args.sourceGUID)
+		local unit = self:GetUnitIdByGUID(args.sourceGUID)
+		if unit then
+			sourceGUID = args.sourceGUID
+			targetGUID = self:UnitGUID(unit.."target") or "??"
+			self:SimpleTimer(scanTarget, 0.05)
+		else
+			sourceGUID = nil
+			targetGUID = nil
+		end
 	end
 end
 
