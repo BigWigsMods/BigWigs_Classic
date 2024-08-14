@@ -41,16 +41,20 @@ BigWigs:AddColors("Sulfuron Harbinger", {
 	[19775] = "red",
 	[19778] = "orange",
 	[19779] = "yellow",
+	[461103] = "blue",
 })
 
 BigWigs:AddColors("Golemagg the Incinerator", {
 	[13880] = {"blue","purple"},
+	[461463] = "red",
 })
 
 BigWigs:AddColors("Majordomo Executus", {
 	[20534] = {"blue","yellow"},
-	[20619] = {"orange","red"},
-	[21075] = {"orange","red"},
+	[20619] = "red",
+	[21075] = "yellow",
+	[364895] = "orange",
+	[364908] = "orange",
 	[461056] = {"blue","red"},
 })
 
