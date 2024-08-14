@@ -57,6 +57,7 @@ BigWigs:AddSounds("Majordomo Executus", {
 
 BigWigs:AddSounds("Ragnaros Classic", {
 	[20566] = "info",
+	[461062] = "underyou",
 	["stages"] = "long",
 })
 

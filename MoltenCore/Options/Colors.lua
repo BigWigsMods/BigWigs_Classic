@@ -22,7 +22,7 @@ BigWigs:AddColors("Garr", {
 })
 
 BigWigs:AddColors("Baron Geddon", {
-	[19659] = "yellow",
+	[19659] = {"green","yellow"},
 	[19695] = "red",
 	[20475] = {"blue","orange","red"},
 	[20478] = "orange",
@@ -60,6 +60,7 @@ BigWigs:AddColors("Majordomo Executus", {
 
 BigWigs:AddColors("Ragnaros Classic", {
 	[20566] = "red",
+	[461062] = "blue",
 	["adds"] = "green",
 	["stages"] = "cyan",
 })
