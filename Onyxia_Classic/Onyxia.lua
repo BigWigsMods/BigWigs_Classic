@@ -36,7 +36,7 @@ function mod:GetOptions()
 	return {
 		"stages",
 		18435, -- Flame Breath
-		{18392, "SAY", "ICON"}, -- Fireball
+		{18392, "SAY", "ICON", "ME_ONLY"}, -- Fireball
 		{17086, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Breath
 		18431, -- Bellowing Roar
 		18958, -- Flame Lash
@@ -57,7 +57,7 @@ if mod:GetSeason() == 2 then
 		return {
 			"stages",
 			18435, -- Flame Breath
-			{18392, "SAY", "ICON"}, -- Fireball
+			{18392, "SAY", "ICON", "ME_ONLY"}, -- Fireball
 			{17086, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Breath
 			364849, -- Summon Onyxian Warder
 			18431, -- Bellowing Roar
@@ -151,9 +151,9 @@ do
 					targetGUID = nil
 					local newTargetName = mod:UnitName(unit.."target")
 					mod:PrimaryIcon(18392, newTargetName)
+					mod:TargetMessage(18392, "yellow", newTargetName)
 					if mod:Me(newTargetGUID) then
 						mod:Say(18392, nil, nil, "Fireball")
-						mod:PersonalMessage(18392)
 						mod:PlaySound(18392, "alarm")
 					end
 				else

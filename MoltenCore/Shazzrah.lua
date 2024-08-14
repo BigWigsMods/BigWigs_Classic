@@ -19,6 +19,7 @@ function mod:GetOptions()
 		19713, -- Shazzrah's Curse
 	},nil,{
 		[23138] = CL.teleport, -- Gate of Shazzrah (Teleport)
+		[19715] = CL.frontal_cone, -- Counterspell (Frontal Cone)
 		[19713] = CL.curse, -- Shazzrah's Curse (Curse)
 	}
 end
@@ -33,6 +34,7 @@ if mod:GetSeason() == 2 then
 			{460856, "CASTBAR", "EMPHASIZE"}, -- Reflect Magic
 		},nil,{
 			[23138] = CL.teleport, -- Gate of Shazzrah (Teleport)
+			[19715] = CL.frontal_cone, -- Counterspell (Frontal Cone)
 			[19713] = CL.curse, -- Shazzrah's Curse (Curse)
 		}
 	end
@@ -86,7 +88,7 @@ end
 
 function mod:Counterspell(args)
 	self:CDBar(args.spellId, self:GetSeason() == 2 and 9.6 or 15) -- 9.6-12.9 on SoD, 15-19 elsewhere
-	self:Message(args.spellId, "yellow")
+	self:Message(args.spellId, "yellow", CL.extra:format(args.spellName, CL.frontal_cone))
 	self:PlaySound(args.spellId, "alert")
 end
 

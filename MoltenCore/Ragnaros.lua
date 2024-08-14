@@ -58,6 +58,23 @@ function mod:GetOptions()
 	}
 end
 
+if mod:GetSeason() == 2 then
+	function mod:GetOptions()
+		return {
+			"warmup",
+			"stages",
+			"adds",
+			sonOfFlameMarker,
+			{"health", "INFOBOX"},
+			20566, -- Wrath of Ragnaros
+			461062, -- Pool of Fire
+		},nil,{
+			[20566] = CL.knockback, -- Wrath of Ragnaros (Knockback)
+			[461062] = CL.underyou:format(CL.fire), -- Pool of Fire (Fire under YOU)
+		}
+	end
+end
+
 function mod:OnRegister()
 	-- Delayed for custom locale
 	sonOfFlameMarker = mod:AddMarkerOption(true, "npc", 8, "son", 8, 7, 6, 5, 4, 3, 2, 1) -- Son of Flame
@@ -80,6 +97,12 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "ElementalFire", 19773)
 
 	self:Death("SonDeaths", 12143)
+
+	if self:GetSeason() == 2 then
+		self:Log("SPELL_AURA_APPLIED", "PoolOfFireDamage", 461062)
+		self:Log("SPELL_DAMAGE", "PoolOfFireDamage", 461812) -- Damage is different ID
+		self:Log("SPELL_MISSED", "PoolOfFireDamage", 461812)
+	end
 end
 
 function mod:OnEngage()
@@ -264,6 +287,17 @@ function UpdateInfoBoxList()
 			if tbl[3] % 5 == 0 then
 				mod:CustomIcon(sonOfFlameMarker, unitToken, marker)
 			end
+		end
+	end
+end
+
+do
+	local prev = 0
+	function mod:PoolOfFireDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 2 then
+			prev = args.time
+			self:PersonalMessage(461062, "underyou", CL.fire)
+			self:PlaySound(461062, "underyou")
 		end
 	end
 end
