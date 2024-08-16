@@ -62,6 +62,7 @@ BigWigs:AddSounds("Ragnaros Classic", {
 })
 
 BigWigs:AddSounds("The Molten Core", {
+	[460883] = "alert",
 	[460885] = "long",
 	[460887] = "alarm",
 	[460895] = "warning",
