@@ -142,7 +142,7 @@ do
 	local sourceGUID = nil
 	local targetGUID = nil
 	local function scanTarget()
-		if targetGUID and sourceGUID then
+		if targetGUID and sourceGUID and mod:IsEngaged() and mod:GetStage() == 2 then
 			local unit = mod:GetUnitIdByGUID(sourceGUID)
 			if unit then
 				local newTargetGUID = mod:UnitGUID(unit.."target")
