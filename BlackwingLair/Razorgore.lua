@@ -57,6 +57,7 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:Bar("stages", 45, CL.adds, "Spell_Holy_PrayerOfHealing")
+	self:Bar("stages", 120, CL.big_add, "inv_misc_head_dragon_01")
 end
 
 --------------------------------------------------------------------------------
@@ -84,6 +85,10 @@ function mod:DestroyEgg()
 	if eggs == 30 then
 		self:SetStage(2)
 		self:Message("stages", "cyan", CL.stage:format(2), false)
+		self:PlaySound("stages", "long")
+	elseif eggs == 10 and self:GetSeason() == 2 then
+		self:StopBar(CL.big_add)
+		self:Message("stages", "cyan", CL.big_add, "inv_misc_head_dragon_01")
 		self:PlaySound("stages", "long")
 	end
 end

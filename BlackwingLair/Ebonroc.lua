@@ -19,15 +19,31 @@ function mod:GetOptions()
 	}
 end
 
+if mod:GetSeason() == 2 then
+	function mod:GetOptions()
+		return {
+			23339, -- Wing Buffet
+			22539, -- Shadow Flame
+			23340, -- Shadow of Ebonroc
+			368515, -- Brand of Shadow
+		}
+	end
+end
+
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "WingBuffet", 23339)
 	self:Log("SPELL_CAST_START", "ShadowFlame", 22539)
 	self:Log("SPELL_AURA_APPLIED", "ShadowOfEbonrocApplied", 23340)
 	self:Log("SPELL_AURA_REMOVED", "ShadowOfEbonrocRemoved", 23340)
+	if self:GetSeason() == 2 then
+		self:Log("SPELL_AURA_APPLIED_DOSE", "BrandOfShadowApplied", 368515)
+	end
 end
 
 function mod:OnEngage()
-	self:CDBar(23339, 29) -- Wing Buffet
+	if self:GetSeason() ~= 2 then
+		self:CDBar(23339, 29) -- Wing Buffet
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -57,4 +73,13 @@ end
 
 function mod:ShadowOfEbonrocRemoved(args)
 	self:StopBar(args.spellName, args.destName)
+end
+
+function mod:BrandOfShadowApplied(args)
+	if self:Me(args.destGUID) then
+		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 3)
+		if args.amount >= 3 then
+			self:PlaySound(args.spellId, "alert", nil, args.destName)
+		end
+	end
 end

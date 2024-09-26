@@ -7,7 +7,16 @@ if not mod then return end
 mod.displayName = CL.trash
 mod:RegisterEnableMob(
 	12460, -- Death Talon Wyrmguard
-	12461 -- Death Talon Overseer
+	12461, -- Death Talon Overseer
+	12557, -- Grethok the Controller
+	13020, -- Vaelastrasz
+	12017, -- Broodlord Lashlayer
+	11983, -- Firemaw
+	14601, -- Ebonroc
+	11981, -- Flamegor
+	14020, -- Chromaggus
+	11583, -- Nefarian
+	10162 -- Lord Victor Nefarius
 )
 
 --------------------------------------------------------------------------------
@@ -44,6 +53,18 @@ function mod:GetOptions()
 	}
 end
 
+if mod:GetSeason() == 2 then
+	function mod:GetOptions()
+		return {
+			"target_vulnerability",
+			{466357, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Arcane Bomb
+			{466435, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Nature's Fury
+		},{
+			["target_vulnerability"] = L.wyrmguard_overseer,
+		}
+	end
+end
+
 function mod:OnRegister()
 	buffList = {
 		[22277] = L.target_vulnerability_message:format(CL.fire),
@@ -55,11 +76,15 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	self:RegisterMessage("BigWigs_OnBossEngage", "Disable")
+	--self:RegisterMessage("BigWigs_OnBossEngage", "Disable")
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
 	if self:Vanilla() then
 		self:Log("SPELL_AURA_APPLIED", "DetectMagicApplied", 2855)
+	end
+	if self:GetSeason() == 2 then
+		self:Log("SPELL_AURA_APPLIED", "ArcaneBombApplied", 466357)
+		self:Log("SPELL_AURA_APPLIED", "NaturesFuryApplied", 466435)
 	end
 end
 
@@ -117,5 +142,23 @@ do
 		if args.destGUID == self:UnitGUID("target") then
 			self:SimpleTimer(function() self:CheckTarget() end, 0.1) -- Combat log is sometimes faster than the aura API
 		end
+	end
+end
+
+function mod:ArcaneBombApplied(args)
+	self:TargetMessage(args.spellId, "yellow", args.destName)
+	if self:Me(args.destGUID) then
+		self:Yell(args.spellId)
+		self:YellCountdown(args.spellId, 8, nil, 5)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
+	end
+end
+
+function mod:NaturesFuryApplied(args)
+	self:TargetMessage(args.spellId, "yellow", args.destName)
+	if self:Me(args.destGUID) then
+		self:Say(args.spellId)
+		self:SayCountdown(args.spellId, 8, nil, 5)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
 end
