@@ -148,7 +148,7 @@ end
 function mod:ArcaneBombApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName)
 	if self:Me(args.destGUID) then
-		self:Yell(args.spellId)
+		self:Yell(args.spellId, nil, nil, "Arcane Bomb")
 		self:YellCountdown(args.spellId, 8, nil, 5)
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
@@ -157,7 +157,7 @@ end
 function mod:NaturesFuryApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName)
 	if self:Me(args.destGUID) then
-		self:Say(args.spellId)
+		self:Say(args.spellId, nil, nil, "Natures Fury")
 		self:SayCountdown(args.spellId, 8, nil, 5)
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
