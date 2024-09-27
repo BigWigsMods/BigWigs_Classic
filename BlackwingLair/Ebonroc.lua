@@ -70,8 +70,8 @@ function mod:ShadowFlameSoD(args)
 	if self:MobId(args.sourceGUID) == 14601 then
 		local unit = self:GetUnitIdByGUID(args.sourceGUID)
 		if not unit or self:UnitWithinRange(unit, 35) or args.sourceGUID == self:UnitGUID("target") then
-			self:Message(args.spellId, "red")
-			self:PlaySound(args.spellId, "long")
+			self:Message(22539, "red")
+			self:PlaySound(22539, "long")
 		end
 	end
 end

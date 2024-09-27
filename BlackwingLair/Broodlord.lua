@@ -77,6 +77,6 @@ function mod:UNIT_HEALTH(event, unit)
 end
 
 function mod:Teleport()
-	self:Message("stages", "cyan", CL.percent:format(50, CL.teleport))
+	self:Message("stages", "cyan", CL.percent:format(50, CL.teleport), false)
 	self:PlaySound("stages", "long")
 end
