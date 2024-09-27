@@ -14,6 +14,7 @@ BigWigs:AddColors("Vaelastrasz the Corrupt", {
 BigWigs:AddColors("Broodlord Lashlayer", {
 	[23331] = "orange",
 	[24573] = {"blue","yellow"},
+	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Firemaw", {

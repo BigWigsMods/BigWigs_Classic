@@ -7,12 +7,13 @@ BigWigs:AddSounds("Razorgore the Untamed", {
 
 BigWigs:AddSounds("Vaelastrasz the Corrupt", {
 	[18173] = "warning",
-	[23620] = "long",
+	[23620] = {"long","warning"},
 })
 
 BigWigs:AddSounds("Broodlord Lashlayer", {
 	[23331] = "info",
-	[24573] = "long",
+	[24573] = "alarm",
+	["stages"] = "long",
 })
 
 BigWigs:AddSounds("Firemaw", {
