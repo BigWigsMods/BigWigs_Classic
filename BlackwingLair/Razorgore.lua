@@ -58,7 +58,7 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:Bar("stages", 45, CL.adds, "Spell_Holy_PrayerOfHealing")
-	if self:GetSeason() == 2 then
+	if self:GetPlayerAura(467047) then -- Black Essence
 		self:Bar("stages", 120, CL.big_add, "inv_misc_head_dragon_01")
 		timer = self:ScheduleTimer("BigAdd", 120)
 	end
@@ -100,7 +100,7 @@ function mod:DestroyEgg()
 		self:SetStage(2)
 		self:Message("stages", "cyan", CL.stage:format(2), false)
 		self:PlaySound("stages", "long")
-	elseif eggs == 10 and self:GetSeason() == 2 then
+	elseif eggs == 10 and self:GetPlayerAura(467047) then -- Black Essence
 		self:BigAdd()
 	end
 end

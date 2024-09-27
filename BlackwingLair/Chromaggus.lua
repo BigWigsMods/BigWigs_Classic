@@ -157,7 +157,7 @@ do
 		prevWeakness = nil
 		firstWarning = false
 
-		if self:GetSeason() ~= 2 then
+		if not self:GetPlayerAura(467047) then -- Black Essence
 			self:Bar("breath", 30, CL.count:format(CL.next_ability, 1), "INV_Misc_QuestionMark")
 			self:Bar("breath", 60, CL.count:format(CL.next_ability, 2), "INV_Misc_QuestionMark")
 		end
@@ -226,7 +226,7 @@ function mod:Breaths(args)
 
 	self:CastBar("breath", 2, args.spellName, args.spellId)
 	self:Message("breath", "yellow", CL.casting:format(args.spellName), args.spellId)
-	if self:GetSeason() ~= 2 then
+	if not self:GetPlayerAura(467047) then -- Black Essence
 		self:Bar("breath", 60, args.spellName, args.spellId)
 		self:PlaySound("breath", "long")
 	end

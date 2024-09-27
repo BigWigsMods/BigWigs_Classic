@@ -39,19 +39,18 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DISPEL", "EnrageFrenzyDispelled", "*")
 	if self:GetSeason() == 2 then
 		self:Log("SPELL_CAST_START", "WingBuffet", 369080)
+		self:Log("SPELL_CAST_START", "ShadowFlameSoD", 368942)
 		self:Log("SPELL_AURA_APPLIED_DOSE", "BrandOfFlameApplied", 368521)
-		self:Log("SPELL_AURA_APPLIED", "GoApplied", 467764)
-		self:Log("SPELL_AURA_REMOVED", "GoRemoved", 467764)
+		self:Log("SPELL_AURA_APPLIED", "GoOrStopApplied", 467764, 467732) -- Go, Stop
+		self:Log("SPELL_AURA_REMOVED", "GoOrStopRemoved", 467764, 467732)
 		self:Log("SPELL_CAST_SUCCESS", "GoSuccess", 467764)
-		self:Log("SPELL_AURA_APPLIED", "StopApplied", 467732)
-		self:Log("SPELL_AURA_REMOVED", "StopRemoved", 467732)
 		self:Log("SPELL_CAST_SUCCESS", "StopSuccess", 467732)
 	end
 end
 
 function mod:OnEngage()
-	self:CDBar(23339, self:GetSeason() == 2 and 40 or 29) -- Wing Buffet
-	if self:GetSeason() == 2 then
+	self:CDBar(23339, self:GetSeason() == 2 and 66 or 29) -- Wing Buffet
+	if self:GetPlayerAura(467047) then -- Black Essence
 		self:CDBar(467732, 20) -- Stop
 	end
 end
@@ -72,6 +71,16 @@ function mod:ShadowFlame(args)
 	if self:MobId(args.sourceGUID) == 11981 then
 		self:Message(args.spellId, "red")
 		self:PlaySound(args.spellId, "long")
+	end
+end
+
+function mod:ShadowFlameSoD(args)
+	if self:MobId(args.sourceGUID) == 11981 then
+		local unit = self:GetUnitIdByGUID(args.sourceGUID)
+		if not unit or self:UnitWithinRange(unit, 35) or args.sourceGUID == self:UnitGUID("target") then
+			self:Message(args.spellId, "red")
+			self:PlaySound(args.spellId, "long")
+		end
 	end
 end
 
@@ -97,7 +106,7 @@ function mod:BrandOfFlameApplied(args)
 	end
 end
 
-function mod:GoApplied(args)
+function mod:GoOrStopApplied(args)
 	if self:Me(args.destGUID) then
 		self:PersonalMessage(args.spellId)
 		self:CastBar(args.spellId, 5)
@@ -105,37 +114,18 @@ function mod:GoApplied(args)
 	end
 end
 
-function mod:GoRemoved(args)
+function mod:GoOrStopRemoved(args)
 	if self:Me(args.destGUID) then
 		self:PersonalMessage(args.spellId, "removed")
 	end
 end
 
 function mod:GoSuccess(args)
-	self:StopBar(467764) -- Go!
-	self:StopBar(467732) -- Stop!
+	self:StopBar(args.spellName) -- Go!
 	self:CDBar(467732, 40) -- Stop!
 end
 
-function mod:StopApplied(args)
-	self:StopBar(467764) -- Go!
-	self:StopBar(467732) -- Stop!
-	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId)
-		self:CastBar(args.spellId, 5)
-		self:CDBar(467764, 20) -- Go!
-		self:PlaySound(args.spellId, "warning")
-	end
-end
-
-function mod:StopRemoved(args)
-	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, "removed")
-	end
-end
-
 function mod:StopSuccess(args)
-	self:StopBar(467764) -- Go!
-	self:StopBar(467732) -- Stop!
+	self:StopBar(args.spellName) -- Stop!
 	self:CDBar(467764, 20) -- Go!
 end

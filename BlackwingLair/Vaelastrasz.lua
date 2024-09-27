@@ -8,6 +8,12 @@ mod:RegisterEnableMob(13020)
 mod:SetEncounterID(611)
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local bossGUID = nil
+
+--------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -42,14 +48,17 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "BurningAdrenalineTankApplied", 23620)
 	self:Log("SPELL_AURA_REMOVED", "BurningAdrenalineTankRemoved", 23620)
 	if self:GetSeason() == 2 then
+		self:Log("SPELL_CAST_SUCCESS", "FireNova", 23462)
 		self:Log("SPELL_AURA_APPLIED", "BurningAdrenalineAppliedSoD", 367987)
+		self:Log("SPELL_AURA_APPLIED_DOSE", "BurningAdrenalineAppliedDoseSoD", 367987)
 		self:Log("SPELL_AURA_APPLIED", "BurningAdrenalineTankAppliedSoD", 469261)
 		self:Log("SPELL_AURA_APPLIED_DOSE", "BurningAdrenalineTankAppliedDoseSoD", 469261)
 	end
 end
 
 function mod:OnEngage()
-	self:Bar(18173, self:GetSeason() == 2 and 22 or 16, CL.bomb) -- Burning Adrenaline
+	bossGUID = nil
+	self:Bar(18173, self:GetSeason() == 2 and 21 or 16, CL.bomb) -- Burning Adrenaline
 	self:Bar(23620, self:GetSeason() == 2 and 11 or 45, L.tank_bomb) -- Burning Adrenaline
 end
 
@@ -86,14 +95,6 @@ function mod:BurningAdrenalineRemoved(args)
 	self:StopBar(CL.explosion, args.destName)
 end
 
-function mod:BurningAdrenalineAppliedSoD(args)
-	self:TargetMessage(18173, "yellow", args.destName, CL.bomb)
-	if self:Me(args.destGUID) then
-		self:Say(18173, CL.bomb, nil, "Bomb")
-		self:PlaySound(18173, "warning", nil, args.destName)
-	end
-end
-
 function mod:BurningAdrenalineTank(args)
 	self:Bar(args.spellId, 45, L.tank_bomb)
 end
@@ -115,17 +116,55 @@ function mod:BurningAdrenalineTankRemoved(args)
 	self:StopBar(L.tank_bomb, args.destName)
 end
 
+-- Season of Discovery
+function mod:FireNova(args)
+	bossGUID = args.sourceGUID
+end
+
+function mod:BurningAdrenalineAppliedSoD(args)
+	local unit = bossGUID and self:GetUnitIdByGUID(bossGUID)
+	if unit and self:Tanking(unit, args.destName) then
+		self:TargetMessage(23620, "purple", args.destName, L.tank_bomb)
+		if self:Me(args.destGUID) then
+			self:Say(23620, L.tank_bomb, nil, "Tank Bomb")
+			self:PlaySound(23620, "warning", nil, args.destName)
+		else
+			self:PlaySound(23620, "long", nil, args.destName)
+		end
+	else
+		self:TargetMessage(18173, "yellow", args.destName, CL.bomb)
+		if self:Me(args.destGUID) then
+			self:Say(18173, CL.bomb, nil, "Bomb")
+			self:PlaySound(18173, "warning", nil, args.destName)
+		end
+	end
+end
+
+function mod:BurningAdrenalineAppliedDoseSoD(args)
+	if args.amount % 10 == 0 then
+		if self:Me(args.destGUID) then
+			self:StackMessage(18173, "blue", args.destName, args.amount, 30, CL.bomb)
+		else
+			local unit = bossGUID and self:GetUnitIdByGUID(bossGUID)
+			if unit and self:Tanking(unit, args.destName) then
+				self:StackMessage(23620, "purple", args.destName, args.amount, 30, L.tank_bomb)
+				self:PlaySound(23620, "long", nil, args.destName)
+			end
+		end
+	end
+end
+
 function mod:BurningAdrenalineTankAppliedSoD(args)
 	self:TargetMessage(23620, "purple", args.destName, L.tank_bomb)
 	if self:Me(args.destGUID) then
 		self:Say(23620, L.tank_bomb, nil, "Tank Bomb")
 	end
-	self:PlaySound(23620, "long")
+	self:PlaySound(23620, "long", nil, args.destName)
 end
 
 function mod:BurningAdrenalineTankAppliedDoseSoD(args)
 	if args.amount % 10 == 0 then
-		self:StackMessage(23620, "purple", args.destName, args.amount, 30)
-		self:PlaySound(23620, "long")
+		self:StackMessage(23620, "purple", args.destName, args.amount, 30, L.tank_bomb)
+		self:PlaySound(23620, "long", nil, args.destName)
 	end
 end
