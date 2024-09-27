@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Lord Kazzak Season of Discovery", "esMX")
+local L = BigWigs:NewBossLocale("Thunderaan Season of Discovery", "esMX")
 if L then
 	L.bossName = "Príncipe Thunderaan"
 	--L.mender = "Storm Mender" -- NPC 231858
