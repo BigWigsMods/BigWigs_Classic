@@ -25,7 +25,7 @@ if mod:GetSeason() == 2 then
 			23339, -- Wing Buffet
 			22539, -- Shadow Flame
 			23341, -- Flame Buffet
-			366305, -- Static Electricity
+			{366305, "ME_ONLY_EMPHASIZE"}, -- Static Electricity
 		}
 	end
 end
@@ -73,7 +73,7 @@ end
 
 function mod:StaticElectricityApplied(args)
 	if self:Me(args.destGUID) and args.amount >= 4 and args.amount % 2 == 0 then
-		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 6)
+		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 8)
 		if args.amount >= 6 then
 			self:PlaySound(args.spellId, "warning", nil, args.destName)
 		end

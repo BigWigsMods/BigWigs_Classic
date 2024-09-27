@@ -43,14 +43,13 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "BurningAdrenalineTankRemoved", 23620)
 	if self:GetSeason() == 2 then
 		self:Log("SPELL_AURA_APPLIED", "BurningAdrenalineAppliedSoD", 367987)
-		self:Log("SPELL_AURA_REMOVED", "BurningAdrenalineRemovedSoD", 367987)
 		self:Log("SPELL_AURA_APPLIED", "BurningAdrenalineTankAppliedSoD", 469261)
-		self:Log("SPELL_AURA_REMOVED", "BurningAdrenalineTankRemovedSoD", 469261)
+		self:Log("SPELL_AURA_APPLIED_DOSE", "BurningAdrenalineTankAppliedDoseSoD", 469261)
 	end
 end
 
 function mod:OnEngage()
-	self:CDBar(18173, self:GetSeason() == 2 and 25 or 16, CL.bomb) -- Burning Adrenaline
+	self:Bar(18173, self:GetSeason() == 2 and 22 or 16, CL.bomb) -- Burning Adrenaline
 	self:Bar(23620, self:GetSeason() == 2 and 11 or 45, L.tank_bomb) -- Burning Adrenaline
 end
 
@@ -88,23 +87,11 @@ function mod:BurningAdrenalineRemoved(args)
 end
 
 function mod:BurningAdrenalineAppliedSoD(args)
-	self:CDBar(18173, 17, CL.bomb)
 	self:TargetMessage(18173, "yellow", args.destName, CL.bomb)
-	--self:PrimaryIcon(args.spellId, args.destName)
-	--self:TargetBar(args.spellId, 20, args.destName, CL.explosion)
 	if self:Me(args.destGUID) then
 		self:Say(18173, CL.bomb, nil, "Bomb")
-		--self:SayCountdown(args.spellId, 20, nil, 5)
 		self:PlaySound(18173, "warning", nil, args.destName)
 	end
-end
-
-function mod:BurningAdrenalineRemovedSoD(args)
-	--if self:Me(args.destGUID) then
-	--	self:CancelSayCountdown(args.spellId)
-	--end
-	--self:PrimaryIcon(args.spellId) -- Next one is applied before previous one expires
-	self:StopBar(CL.explosion, args.destName)
 end
 
 function mod:BurningAdrenalineTank(args)
@@ -129,19 +116,16 @@ function mod:BurningAdrenalineTankRemoved(args)
 end
 
 function mod:BurningAdrenalineTankAppliedSoD(args)
-	self:Bar(23620, 30, L.tank_bomb)
 	self:TargetMessage(23620, "purple", args.destName, L.tank_bomb)
 	if self:Me(args.destGUID) then
 		self:Say(23620, L.tank_bomb, nil, "Tank Bomb")
-		--self:SayCountdown(args.spellId, 20, nil, 5)
 	end
-	--self:TargetBar(args.spellId, 20, args.destName, L.tank_bomb)
 	self:PlaySound(23620, "long")
 end
 
-function mod:BurningAdrenalineTankRemovedSoD(args)
-	--if self:Me(args.destGUID) then
-	--	self:CancelSayCountdown(args.spellId)
-	--end
-	self:StopBar(L.tank_bomb, args.destName)
+function mod:BurningAdrenalineTankAppliedDoseSoD(args)
+	if args.amount % 10 == 0 then
+		self:StackMessage(23620, "purple", args.destName, args.amount, 30)
+		self:PlaySound(23620, "long")
+	end
 end

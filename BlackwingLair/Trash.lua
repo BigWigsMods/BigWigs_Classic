@@ -5,19 +5,26 @@
 local mod, CL = BigWigs:NewBoss("Blackwing Lair Trash", 469)
 if not mod then return end
 mod.displayName = CL.trash
-mod:RegisterEnableMob(
-	12460, -- Death Talon Wyrmguard
-	12461, -- Death Talon Overseer
-	12557, -- Grethok the Controller
-	13020, -- Vaelastrasz
-	12017, -- Broodlord Lashlayer
-	11983, -- Firemaw
-	14601, -- Ebonroc
-	11981, -- Flamegor
-	14020, -- Chromaggus
-	11583, -- Nefarian
-	10162 -- Lord Victor Nefarius
-)
+if mod:GetSeason() == 2 then
+	mod:RegisterEnableMob(
+		12460, -- Death Talon Wyrmguard
+		12461, -- Death Talon Overseer
+		12557, -- Grethok the Controller
+		13020, -- Vaelastrasz
+		12017, -- Broodlord Lashlayer
+		11983, -- Firemaw
+		14601, -- Ebonroc
+		11981, -- Flamegor
+		14020, -- Chromaggus
+		11583, -- Nefarian
+		10162 -- Lord Victor Nefarius
+	)
+else
+	mod:RegisterEnableMob(
+		12460, -- Death Talon Wyrmguard
+		12461 -- Death Talon Overseer
+	)
+end
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -61,6 +68,7 @@ if mod:GetSeason() == 2 then
 			{466435, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Nature's Fury
 		},{
 			["target_vulnerability"] = L.wyrmguard_overseer,
+			[466357] = CL.general,
 		}
 	end
 end
@@ -76,15 +84,17 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	--self:RegisterMessage("BigWigs_OnBossEngage", "Disable")
-
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
 	if self:Vanilla() then
 		self:Log("SPELL_AURA_APPLIED", "DetectMagicApplied", 2855)
 	end
 	if self:GetSeason() == 2 then
 		self:Log("SPELL_AURA_APPLIED", "ArcaneBombApplied", 466357)
+		self:Log("SPELL_AURA_REMOVED", "ArcaneBombRemoved", 466357)
 		self:Log("SPELL_AURA_APPLIED", "NaturesFuryApplied", 466435)
+		self:Log("SPELL_AURA_REMOVED", "NaturesFuryRemoved", 466435)
+	else
+		self:RegisterMessage("BigWigs_OnBossEngage", "Disable")
 	end
 end
 
@@ -145,20 +155,38 @@ do
 	end
 end
 
+--[[ Season of Discovery ]]--
+
 function mod:ArcaneBombApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName)
+	self:TargetBar(args.spellId, 8, args.destName)
 	if self:Me(args.destGUID) then
 		self:Yell(args.spellId, nil, nil, "Arcane Bomb")
 		self:YellCountdown(args.spellId, 8, nil, 5)
-		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
+	self:PlaySound(args.spellId, "warning", nil, args.destName)
+end
+
+function mod:ArcaneBombRemoved(args)
+	if self:Me(args.destGUID) then
+		self:CancelYellCountdown(args.spellId)
+	end
+	self:StopBar(args.spellName, args.destName)
 end
 
 function mod:NaturesFuryApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName)
+	self:TargetBar(args.spellId, 8, args.destName)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, nil, nil, "Natures Fury")
 		self:SayCountdown(args.spellId, 8, nil, 5)
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
+end
+
+function mod:NaturesFuryRemoved(args)
+	if self:Me(args.destGUID) then
+		self:CancelSayCountdown(args.spellId)
+	end
+	self:StopBar(args.spellName, args.destName)
 end

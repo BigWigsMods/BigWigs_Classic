@@ -13,6 +13,7 @@ mod:SetStage(1)
 --
 
 local eggs = 0
+local timer = nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -57,7 +58,10 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:Bar("stages", 45, CL.adds, "Spell_Holy_PrayerOfHealing")
-	self:Bar("stages", 120, CL.big_add, "inv_misc_head_dragon_01")
+	if self:GetSeason() == 2 then
+		self:Bar("stages", 120, CL.big_add, "inv_misc_head_dragon_01")
+		timer = self:ScheduleTimer("BigAdd", 120)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -79,6 +83,16 @@ function mod:DominateMind(args)
 	end
 end
 
+function mod:BigAdd()
+	self:StopBar(CL.big_add)
+	if timer then
+		self:CancelTimer(timer)
+		timer = nil
+	end
+	self:Message("stages", "cyan", CL.big_add, "inv_misc_head_dragon_01")
+	self:PlaySound("stages", "long")
+end
+
 function mod:DestroyEgg()
 	eggs = eggs + 1
 	self:Message("eggs", "green", L.eggs_message:format(eggs), L.eggs_icon)
@@ -87,9 +101,7 @@ function mod:DestroyEgg()
 		self:Message("stages", "cyan", CL.stage:format(2), false)
 		self:PlaySound("stages", "long")
 	elseif eggs == 10 and self:GetSeason() == 2 then
-		self:StopBar(CL.big_add)
-		self:Message("stages", "cyan", CL.big_add, "inv_misc_head_dragon_01")
-		self:PlaySound("stages", "long")
+		self:BigAdd()
 	end
 end
 
