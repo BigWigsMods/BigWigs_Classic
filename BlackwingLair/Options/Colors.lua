@@ -20,18 +20,23 @@ BigWigs:AddColors("Firemaw", {
 	[22539] = "red",
 	[23339] = "yellow",
 	[23341] = "blue",
+	[366305] = "blue",
 })
 
 BigWigs:AddColors("Ebonroc", {
 	[22539] = "red",
 	[23339] = "yellow",
 	[23340] = {"blue","orange"},
+	[368515] = "blue",
 })
 
 BigWigs:AddColors("Flamegor", {
 	[22539] = "red",
 	[23339] = "yellow",
 	[23342] = {"green","orange"},
+	[368521] = "blue",
+	[467732] = "blue",
+	[467764] = "blue",
 })
 
 BigWigs:AddColors("Chromaggus", {
@@ -39,6 +44,7 @@ BigWigs:AddColors("Chromaggus", {
 	[23170] = "blue",
 	[23174] = "red",
 	[23537] = "red",
+	[468195] = "yellow",
 	["breath"] = "yellow",
 	["vulnerability"] = {"green","red"},
 })
@@ -54,5 +60,7 @@ BigWigs:AddColors("Nefarian Classic", {
 })
 
 BigWigs:AddColors("Blackwing Lair Trash", {
+	[466357] = {"blue","yellow"},
+	[466435] = {"blue","yellow"},
 	["target_vulnerability"] = {"red","yellow"},
 })

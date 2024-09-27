@@ -18,7 +18,7 @@ BigWigs:AddColors("Gehennas", {
 })
 
 BigWigs:AddColors("Garr", {
-	[19492] = "yellow",
+	[19492] = {"red","yellow"},
 })
 
 BigWigs:AddColors("Baron Geddon", {

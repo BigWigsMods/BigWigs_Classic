@@ -1,5 +1,8 @@
 
-BigWigs:AddColors("Lord Kazzak Season of Discovery", {
-	[21056] = {"blue","green","red","yellow"},
-	[21063] = {"blue","green","orange"},
+BigWigs:AddColors("Thunderaan Season of Discovery", {
+	[11642] = {"green","orange"},
+	[465700] = {"blue","red"},
+	[466211] = {"blue","purple"},
+	[466774] = "yellow",
+	[470866] = "blue",
 })
