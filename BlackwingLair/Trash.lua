@@ -162,7 +162,7 @@ function mod:ArcaneBombApplied(args)
 	self:TargetBar(args.spellId, 8, args.destName)
 	if self:Me(args.destGUID) then
 		self:Yell(args.spellId, nil, nil, "Arcane Bomb")
-		self:YellCountdown(args.spellId, 8, nil, 5)
+		self:YellCountdown(args.spellId, 8, nil, 6)
 	end
 	self:PlaySound(args.spellId, "warning", nil, args.destName)
 end

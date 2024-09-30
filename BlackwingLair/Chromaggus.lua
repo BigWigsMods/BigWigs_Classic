@@ -245,6 +245,6 @@ function mod:ElementalShield(args) -- Weaknesses
 end
 
 function mod:RollOver(args)
-	self:Message(args.spellId, "yellow")
+	self:Message(args.spellId, "cyan")
 	self:PlaySound(args.spellId, "long")
 end
