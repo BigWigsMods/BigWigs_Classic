@@ -2,6 +2,9 @@
 BigWigs:AddColors("Razorgore the Untamed", {
 	[14515] = {"blue","red"},
 	[23023] = {"blue","orange"},
+	[366909] = "blue",
+	[367740] = "blue",
+	[367873] = "blue",
 	["eggs"] = "green",
 	["stages"] = "cyan",
 })
@@ -12,8 +15,10 @@ BigWigs:AddColors("Vaelastrasz the Corrupt", {
 })
 
 BigWigs:AddColors("Broodlord Lashlayer", {
+	[18670] = {"blue","yellow"},
 	[23331] = "orange",
 	[24573] = {"blue","yellow"},
+	[367369] = {"blue","red"},
 	["stages"] = "cyan",
 })
 
@@ -45,7 +50,7 @@ BigWigs:AddColors("Chromaggus", {
 	[23170] = "blue",
 	[23174] = "red",
 	[23537] = "red",
-	[468195] = "yellow",
+	[468195] = "cyan",
 	["breath"] = "yellow",
 	["vulnerability"] = {"green","red"},
 })
