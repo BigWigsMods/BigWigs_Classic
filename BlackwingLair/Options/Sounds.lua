@@ -61,6 +61,9 @@ BigWigs:AddSounds("Nefarian Classic", {
 })
 
 BigWigs:AddSounds("Blackwing Lair Trash", {
+	[19717] = "underyou",
+	[22291] = "warning",
+	[369330] = "underyou",
 	[466357] = "warning",
 	[466435] = "warning",
 })

@@ -66,7 +66,10 @@ BigWigs:AddColors("Nefarian Classic", {
 })
 
 BigWigs:AddColors("Blackwing Lair Trash", {
-	[466357] = {"blue","yellow"},
-	[466435] = {"blue","yellow"},
+	[19717] = "blue",
+	[22291] = {"blue","orange"},
+	[369330] = "blue",
+	[466357] = {"blue","orange"},
+	[466435] = {"blue","orange"},
 	["target_vulnerability"] = {"red","yellow"},
 })
