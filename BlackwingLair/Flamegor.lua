@@ -6,6 +6,9 @@ local mod, CL = BigWigs:NewBoss("Flamegor", 469, 1534)
 if not mod then return end
 mod:RegisterEnableMob(11981)
 mod:SetEncounterID(615)
+if mod:GetSeason() == 2 then
+	mod:SetRespawnTime(30)
+end
 
 --------------------------------------------------------------------------------
 -- Locals

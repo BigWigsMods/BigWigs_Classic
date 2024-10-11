@@ -37,16 +37,29 @@ function mod:GetOptions()
 	return {
 		14515, -- Dominate Mind
 		{23023, "ICON"}, -- Conflagration
-		367873, -- Blinding Ash
-		366909, -- Ruby Flames
-		367740, -- Creeping Chill
 		"eggs",
 		"stages",
 	},nil,{
 		[14515] = CL.mind_control, -- Dominate Mind (Mind Control)
-		[367873] = CL.underyou:format(CL.fire), -- Blinding Ash (Fire under YOU)
-		[366909] = CL.underyou:format(CL.fire), -- Ruby Flames (Fire under YOU)
 	}
+end
+
+if mod:GetSeason() == 2 then
+	function mod:GetOptions()
+		return {
+			14515, -- Dominate Mind
+			{23023, "ICON"}, -- Conflagration
+			367873, -- Blinding Ash
+			366909, -- Ruby Flames
+			367740, -- Creeping Chill
+			"eggs",
+			"stages",
+		},nil,{
+			[14515] = CL.mind_control, -- Dominate Mind (Mind Control)
+			[367873] = CL.underyou:format(CL.fire), -- Blinding Ash (Fire under YOU)
+			[366909] = CL.underyou:format(CL.fire), -- Ruby Flames (Fire under YOU)
+		}
+	end
 end
 
 function mod:OnBossEnable()
@@ -118,10 +131,12 @@ function mod:DestroyEgg()
 end
 
 function mod:Conflagration(args)
-	self:TargetMessage(args.spellId, "orange", args.destName)
-	self:TargetBar(args.spellId, 10, args.destName)
-	self:PrimaryIcon(args.spellId, args.destName)
-	self:PlaySound(args.spellId, "info", nil, args.destName)
+	if self:Player(args.destFlags) then -- Players only, can apply to enemy NPCs
+		self:TargetMessage(args.spellId, "orange", args.destName)
+		self:TargetBar(args.spellId, 10, args.destName)
+		self:PrimaryIcon(args.spellId, args.destName)
+		self:PlaySound(args.spellId, "info", nil, args.destName)
+	end
 end
 
 function mod:ConflagrationOver(args)

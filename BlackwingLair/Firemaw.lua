@@ -72,9 +72,9 @@ function mod:FlameBuffetApplied(args)
 end
 
 function mod:StaticElectricityApplied(args)
-	if self:Me(args.destGUID) and args.amount >= 4 and args.amount % 2 == 0 then
+	if self:Me(args.destGUID) and args.amount >= 6 and (args.amount % 2 == 0 or args.amount > 8) then -- 6,8,9,10
 		self:StackMessage(args.spellId, "blue", args.destName, args.amount, 8)
-		if args.amount >= 6 then
+		if args.amount >= 8 then
 			self:PlaySound(args.spellId, "warning", nil, args.destName)
 		end
 	end
