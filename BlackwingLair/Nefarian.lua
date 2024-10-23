@@ -194,9 +194,6 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.engage_yell_trigger, nil, true) then
-		if self:IsEngaged() then
-			self:Wipe()
-		end
 		self:Engage()
 	elseif msg:find(L.stage3_yell_trigger, nil, true) then
 		self:SetStage(3)

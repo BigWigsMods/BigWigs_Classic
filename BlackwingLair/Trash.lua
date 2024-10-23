@@ -264,7 +264,7 @@ function mod:NaturesFuryApplied(args)
 	self:TargetBar(args.spellId, 8, args.destName)
 	self:CustomIcon(naturesFuryMarker, args.destName, 4)
 	if self:Me(args.destGUID) then
-		self:Say(args.spellId, CL.rticon:format(args.spellName, 4), nil, "Natures Fury ({rt4})")
+		self:Say(args.spellId, CL.rticon:format(args.spellName, 4), nil, "Nature's Fury ({rt4})")
 		self:SayCountdown(args.spellId, 8, 4, 5)
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
