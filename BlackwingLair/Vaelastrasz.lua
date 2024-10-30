@@ -148,7 +148,7 @@ function mod:BurningAdrenalineAppliedDoseSoD(args)
 		else
 			local unit = bossGUID and self:GetUnitIdByGUID(bossGUID)
 			local targetUnit = self:UnitTokenFromGUID(args.destGUID, true)
-			if unit and targetUnit and self:Tanking(unit, args.destName) then
+			if unit and targetUnit and self:Tanking(unit, targetUnit) then
 				self:StackMessage(23620, "purple", args.destName, args.amount, 30, L.tank_bomb)
 				self:PlaySound(23620, "long", nil, args.destName)
 			end
