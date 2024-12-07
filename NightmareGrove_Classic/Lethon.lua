@@ -123,7 +123,7 @@ function mod:UNIT_HEALTH(event, unit)
 		if hp < warnHP then -- 80, 55, 30
 			warnHP = warnHP - 25
 			if hp > warnHP then -- avoid multiple messages when joining mid-fight
-				self:Message(24811, "red", CL.soon:format(self:SpellName(24811)), false) -- Draw Spirit
+				self:Message(1214002, "red", CL.soon:format(self:SpellName(1214002)), false) -- Draw Spirit
 			end
 			if warnHP < 30 then
 				self:UnregisterEvent(event)
