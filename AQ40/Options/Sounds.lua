@@ -20,8 +20,8 @@ BigWigs:AddSounds("Battleguard Sartura", {
 
 BigWigs:AddSounds("Fankriss the Unyielding", {
 	[720] = "alarm",
-	[25646] = "alert",
-	[25832] = "warning",
+	[25646] = "warning",
+	[25832] = "alert",
 })
 
 BigWigs:AddSounds("Viscidus", {
