@@ -168,9 +168,6 @@ end
 function mod:EyeOfCThunKilled()
 	deaths = 0
 	healthList = {}
-	if self:Retail() and not self:IsEngaged() then
-		self:Engage("NoEngage") -- XXX temp until the eye has a boss frame
-	end
 	self:SetStage(2)
 
 	self:StopBar(L.claw_tentacle)
