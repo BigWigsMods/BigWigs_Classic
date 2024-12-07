@@ -33,7 +33,7 @@ function mod:GetOptions()
 	return {
 		-- 24819, -- Lightning Wave
 		24795, -- Summon Demented Druid Spirit
-		1214136, -- Divergent Lightning
+		{1214136, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divergent Lightning
 		divergentLightningMarker,
 		-- Shared
 		24818, -- Noxious Breath
@@ -107,6 +107,7 @@ do
 	function mod:DivergentLightning(args)
 		playerList = {}
 		icon = 8
+		self:Bar(args.spellId, 8, CL.soaks)
 		self:PlaySound(args.spellId, "warning")
 	end
 
@@ -117,7 +118,6 @@ do
 		if self:Me(args.destGUID) then
 			self:Yell(args.spellId, CL.soak, nil, "Soak")
 			self:YellCountdown(args.spellId, 8, icon, 4)
-			self:TargetBar(args.spellId, 8, args.destName, CL.soak)
 		end
 		icon = icon - 1
 	end
@@ -126,7 +126,6 @@ end
 function mod:DivergentLightningRemoved(args)
 	if self:Me(args.destGUID) then
 		self:CancelYellCountdown(args.spellId)
-		self:StopBar(CL.soak, args.destName)
 	end
 	self:CustomIcon(divergentLightningMarker, args.destName)
 end
