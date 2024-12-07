@@ -76,7 +76,7 @@ end
 function mod:Sweep(args)
 	self:Message(args.spellId, "orange", CL.knockback)
 	self:DelayedMessage(args.spellId, 16, "orange", CL.custom_sec:format(CL.knockback, 5))
-	self:Bar(args.spellId, 21, CL.knockback)
+	self:CDBar(args.spellId, 21, CL.knockback)
 	self:PlaySound(args.spellId, "alarm")
 end
 
@@ -122,11 +122,11 @@ do
 
 			-- Sweep
 			self:DelayedMessage(26103, 16, "orange", CL.custom_sec:format(CL.knockback, 5))
-			self:Bar(26103, 21, CL.knockback)
+			self:CDBar(26103, 21, CL.knockback)
 
 			-- Sand Blast
 			self:DelayedMessage(26102, 17, "red", CL.custom_sec:format(self:SpellName(26102), 5))
-			self:Bar(26102, 22)
+			self:CDBar(26102, 22)
 
 			-- Scarab Despawn
 			scarabCount = scarabCount + 1
