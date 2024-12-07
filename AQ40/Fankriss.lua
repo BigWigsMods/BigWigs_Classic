@@ -11,7 +11,7 @@ mod:SetEncounterID(712)
 -- Locals
 --
 
-local wormCount = 0
+local wormCount = 1
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -41,7 +41,10 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	wormCount = 0
+	wormCount = 1
+	if self:GetSeason() == 2 then
+		self:CDBar(25832, 20, CL.count:format(self:SpellName(25832), wormCount), L["25832_icon"])
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -52,14 +55,23 @@ function mod:MortalWound(args)
 	self:StackMessage(args.spellId, "purple", args.destName, args.amount, 5)
 	self:TargetBar(args.spellId, 15, args.destName)
 	if args.amount >= 5 then
-		self:PlaySound(args.spellId, "warning", nil, args.destName)
+		self:PlaySound(args.spellId, "alert", nil, args.destName)
 	end
 end
 
 function mod:SummonWorm(args)
-	wormCount = wormCount + 1
-	self:Message(25832, "cyan", CL.count:format(args.spellName, wormCount), L["25832_icon"])
-	self:PlaySound(25832, "alert")
+	if self:GetSeason() == 2 then
+		if args.spellId == 518 then
+			self:Message(25832, "cyan", CL.count:format(args.spellName, wormCount), L["25832_icon"])
+			wormCount = wormCount + 1
+			self:CDBar(25832, 30, CL.count:format(args.spellName, wormCount), L["25832_icon"])
+			self:PlaySound(25832, "warning")
+		end
+	else
+		self:Message(25832, "cyan", CL.count:format(args.spellName, wormCount), L["25832_icon"])
+		wormCount = wormCount + 1
+		self:PlaySound(25832, "warning")
+	end
 end
 
 function mod:Entangle(args)
