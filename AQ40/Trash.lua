@@ -9,7 +9,9 @@ mod:RegisterEnableMob(
 	15264, -- Anubisath Sentinel
 	15247, -- Qiraji Brainwasher
 	15246, -- Qiraji Mindslayer
+	234762, -- Qiraji Mindslayer (Season of Discovery)
 	15277, -- Anubisath Defender
+	234830, -- Anubisath Defender (Season of Discovery)
 	15240 -- Vekniss Hive Crawler
 )
 
@@ -85,6 +87,10 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_AURA_APPLIED", "CauseInsanityApplied", 26079)
 	self:Log("SPELL_AURA_REMOVED", "CauseInsanityRemoved", 26079)
+	if self:GetSeason() == 2 then
+		self:Log("SPELL_AURA_APPLIED", "CauseInsanityApplied", 474400)
+		self:Log("SPELL_AURA_REMOVED", "CauseInsanityRemoved", 474400)
+	end
 
 	self:Log("SPELL_AURA_APPLIED", "PlagueApplied", 26556)
 	self:Log("SPELL_AURA_REFRESH", "PlagueApplied", 26556)
@@ -105,7 +111,7 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_SUMMON", "SummonAnubisathSwarmguard", 17430)
 	self:Log("SPELL_SUMMON", "SummonAnubisathWarrior", 17431)
-	self:Death("DefenderKilled", 15277)
+	self:Death("DefenderKilled", 15277, 234830)
 
 	self:Log("SPELL_AURA_APPLIED", "SunderArmor", 25051)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "SunderArmor", 25051)
@@ -137,7 +143,7 @@ do
 		local guid = self:UnitGUID("target")
 		if guid ~= prevGUID then
 			local npcId = self:MobId(guid)
-			if npcId == 15264 or npcId == 15277 then -- Anubisath Sentinel, Anubisath Defender
+			if npcId == 15264 or npcId == 15277 or npcId == 234830 then -- Anubisath Sentinel, Anubisath Defender, Anubisath Defender (Season of Discovery)
 				if self:Vanilla() and not self:UnitDebuff("target", 2855) then
 					if not printed then
 						printed = true
@@ -221,16 +227,16 @@ do
 	local prevMindControl = nil
 	function mod:CauseInsanityApplied(args) -- Mind control
 		prevMindControl = args.destGUID
-		self:TargetMessage(args.spellId, "yellow", args.destName, CL.mind_control)
-		self:TargetBar(args.spellId, 10, args.destName, CL.mind_control_short)
-		self:PrimaryIcon(args.spellId, args.destName)
-		self:PlaySound(args.spellId, "alert", nil, args.destName)
+		self:TargetMessage(26079, "yellow", args.destName, CL.mind_control)
+		self:TargetBar(26079, args.spellId == 26079 and 10 or 6, args.destName, CL.mind_control_short)
+		self:PrimaryIcon(26079, args.destName)
+		self:PlaySound(26079, "alert", nil, args.destName)
 	end
 	function mod:CauseInsanityRemoved(args)
 		self:StopBar(CL.mind_control_short, args.destName)
 		if args.destGUID == prevMindControl then
 			prevMindControl = nil
-			self:PrimaryIcon(args.spellId)
+			self:PrimaryIcon(26079)
 		end
 	end
 end

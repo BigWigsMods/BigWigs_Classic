@@ -26,6 +26,9 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "TwinTeleport", 800)
+	if self:GetSeason() == 2 then
+		self:Log("SPELL_AURA_APPLIED", "TwinTeleport", 1217333)
+	end
 	self:Log("SPELL_HEAL", "HealBrother", 7393)
 	self:Log("SPELL_AURA_APPLIED", "MutateBug", 802)
 	self:Log("SPELL_AURA_APPLIED", "ExplodeBug", 804)
@@ -49,9 +52,9 @@ do
 	function mod:TwinTeleport(args)
 		if args.time - prev > 2 then
 			prev = args.time
-			self:Message(args.spellId, "orange")
-			self:CDBar(args.spellId, 30)
-			self:PlaySound(args.spellId, "alert")
+			self:Message(800, "orange")
+			self:CDBar(800, 30)
+			self:PlaySound(800, "alert")
 		end
 	end
 end
