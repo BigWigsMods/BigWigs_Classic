@@ -2,10 +2,16 @@
 -- Module Declaration
 --
 
-local mod = BigWigs:NewBoss("Fankriss the Unyielding", 531, 1545)
+local mod, CL = BigWigs:NewBoss("Fankriss the Unyielding", 531, 1545)
 if not mod then return end
 mod:RegisterEnableMob(15510)
 mod:SetEncounterID(712)
+
+--------------------------------------------------------------------------------
+-- Locals
+--
+
+local wormCount = 0
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -34,6 +40,10 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Entangle", 720, 731, 1121)
 end
 
+function mod:OnEngage()
+	wormCount = 0
+end
+
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
@@ -42,13 +52,14 @@ function mod:MortalWound(args)
 	self:StackMessage(args.spellId, "purple", args.destName, args.amount, 5)
 	self:TargetBar(args.spellId, 15, args.destName)
 	if args.amount >= 5 then
-		self:PlaySound(args.spellId, "alert", nil, args.destName)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
 end
 
 function mod:SummonWorm(args)
-	self:Message(25832, "cyan", args.spellName, L["25832_icon"])
-	self:PlaySound(25832, "warning")
+	wormCount = wormCount + 1
+	self:Message(25832, "cyan", CL.count:format(args.spellName, wormCount), L["25832_icon"])
+	self:PlaySound(25832, "alert")
 end
 
 function mod:Entangle(args)
