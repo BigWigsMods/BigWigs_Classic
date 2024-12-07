@@ -51,7 +51,7 @@ function mod:GetOptions()
 		"target_buffs",
 		26565, -- Heal Brethren
 		8599, -- Enrage
-		{26079, "ICON"}, -- Cause Insanity
+		{26079, "ICON", "SAY", "SAY_COUNTDOWN"}, -- Cause Insanity
 		{26556, "SAY", "ME_ONLY_EMPHASIZE"}, -- Plague
 		8269, -- Frenzy / Enrage (different name on classic era)
 		26554, -- Thunderclap
@@ -227,13 +227,21 @@ do
 	local prevMindControl = nil
 	function mod:CauseInsanityApplied(args) -- Mind control
 		prevMindControl = args.destGUID
+		local duration = args.spellId == 26079 and 10 or 6
 		self:TargetMessage(26079, "yellow", args.destName, CL.mind_control)
-		self:TargetBar(26079, args.spellId == 26079 and 10 or 6, args.destName, CL.mind_control_short)
+		self:TargetBar(26079, duration, args.destName, CL.mind_control_short)
 		self:PrimaryIcon(26079, args.destName)
+		if self:Me(args.destGUID) then
+			self:Say(26079, CL.mind_control, nil, "Mind Control")
+			self:SayCountdown(26079, duration, 8, duration-2)
+		end
 		self:PlaySound(26079, "alert", nil, args.destName)
 	end
 	function mod:CauseInsanityRemoved(args)
 		self:StopBar(CL.mind_control_short, args.destName)
+		if self:Me(args.destGUID) then
+			self:CancelSayCountdown(26079)
+		end
 		if args.destGUID == prevMindControl then
 			prevMindControl = nil
 			self:PrimaryIcon(26079)
