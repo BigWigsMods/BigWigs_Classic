@@ -15,6 +15,7 @@ mod:SetStage(1)
 local digestiveAcidList = {}
 local digestiveAcidListTokens = {}
 local healthList = {}
+local killedTentacles = {}
 local deaths = 0
 local UpdateInfoBoxList
 
@@ -69,7 +70,7 @@ function mod:GetOptions()
 		"stages",
 		"eye_tentacles",
 		{26029, "CASTBAR"}, -- Dark Glare
-		"claw_tentacle",
+		{"claw_tentacle", "OFF"},
 		{26134, "ICON", "SAY", "ME_ONLY_EMPHASIZE"}, -- Eye Beam
 		26476, -- Digestive Acid
 		"giant_claw_tentacle",
@@ -106,6 +107,7 @@ function mod:OnEngage()
 	firstWarning = true
 	digestiveAcidList = {}
 	digestiveAcidListTokens = {}
+	killedTentacles = {}
 	self:SetStage(1)
 
 	self:Message("stages", "cyan", CL.stage:format(1), false)
@@ -168,6 +170,7 @@ end
 function mod:EyeOfCThunKilled()
 	deaths = 0
 	healthList = {}
+	killedTentacles = {}
 	self:SetStage(2)
 
 	self:StopBar(L.claw_tentacle)
@@ -310,6 +313,7 @@ end
 
 function mod:FleshTentacleKilled(args) -- Stomach Tentacle
 	deaths = deaths + 1
+	killedTentacles[args.destGUID] = true
 
 	local line = healthList[args.destGUID]
 	if not line then
@@ -333,7 +337,7 @@ function UpdateInfoBoxList()
 	for playerName, unitToken in next, digestiveAcidListTokens do
 		local unitTarget = unitToken .. "target"
 		local guid = mod:UnitGUID(unitTarget)
-		if mod:MobId(guid) == 15802 then
+		if not killedTentacles[guid] and mod:MobId(guid) == 15802 then
 			local line = healthList[guid]
 			if not line then
 				line = next(healthList) and 3 or 1
@@ -341,9 +345,7 @@ function UpdateInfoBoxList()
 			end
 			local currentHealthPercent = math.floor(mod:GetHealth(unitTarget))
 			mod:SetInfoBar("infobox", line, currentHealthPercent/100)
-			if currentHealthPercent > 0 then
-				mod:SetInfo("infobox", line + 1, ("%d%%"):format(currentHealthPercent))
-			end
+			mod:SetInfo("infobox", line + 1, ("%d%%"):format(currentHealthPercent))
 		end
 	end
 end
