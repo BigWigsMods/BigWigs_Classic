@@ -68,7 +68,8 @@ do
 	end
 
 	function mod:ChainLightningStart(args)
-		self:SimpleTimer(function() self:GetUnitTarget(printTarget, 0.2, args.sourceGUID) end, 1.7) -- He doesn't pick a target until about 1.3s left on the cast
+		local sourceGUID = args.sourceGUID -- Store the GUID as the values on the args table may have changed after the delay
+		self:SimpleTimer(function() self:GetUnitTarget(printTarget, 0.2, sourceGUID) end, 1.7) -- He doesn't pick a target until about 1.3s left on the cast
 		self:Message(args.spellId, "red")
 		self:CastBar(args.spellId, 3)
 	end
