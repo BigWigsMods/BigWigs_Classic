@@ -62,7 +62,9 @@ end
 function mod:SummonWorm(args)
 	if self:GetSeason() == 2 then
 		if args.spellId == 518 then
-			self:Message(25832, "cyan", CL.count:format(args.spellName, wormCount), L["25832_icon"])
+			local msg = CL.count:format(args.spellName, wormCount)
+			self:StopBar(msg)
+			self:Message(25832, "cyan", msg, L["25832_icon"])
 			wormCount = wormCount + 1
 			self:CDBar(25832, 30, CL.count:format(args.spellName, wormCount), L["25832_icon"])
 			self:PlaySound(25832, "warning")
