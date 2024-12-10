@@ -153,7 +153,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 end
 
 function mod:UNIT_TARGET(_, unit)
-	if self:MobId(self:UnitGUID(unit.."target")) == 15667 then -- Glob of Viscidus
+	if self:MobId(self:UnitGUID(unit.."target")) == 15667 and swingCount ~= -1 then -- Glob of Viscidus
 		frostCount = 0
 		self:StopBar(L.freeze_warn3)
 		self:StopBar(25991) -- Poison Bolt Volley
