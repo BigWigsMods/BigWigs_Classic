@@ -166,7 +166,7 @@ function mod:ShieldWall(args)
 	local msg = CL.other:format(args.spellName, L[npcId])
 	self:Bar(args.spellId, 20, msg)
 	local unit = self:GetUnitIdByGUID(args.destGUID)
-	if unit and self:UnitWithinRange(unit, 35) or args.destGUID == self:UnitGUID("target") then
+	if (unit and self:UnitWithinRange(unit, 35)) or args.destGUID == self:UnitGUID("target") then
 		self:Message(args.spellId, "yellow", msg)
 		self:PlaySound(args.spellId, "long")
 	else
