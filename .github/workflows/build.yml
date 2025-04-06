@@ -29,7 +29,7 @@ jobs:
         if: always()
         run: |
           mkdir -p Core/Locales
-          curl -sS https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/Core/Locales/common.enUS.lua > Core/Locales/common.enUS.lua
+          curl -sSf https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/Core/Locales/common.enUS.lua > Core/Locales/common.enUS.lua
 
       - name: Update option files (Retail)
         if: always()
