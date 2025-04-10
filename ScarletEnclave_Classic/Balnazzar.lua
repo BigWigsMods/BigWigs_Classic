@@ -27,6 +27,7 @@ function mod:GetOptions()
 		437834, -- Summon Infernal
 		437472, -- Carrion Swarm
 		{437984, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Circle of Domination
+		"stages",
 	}
 end
 
@@ -42,7 +43,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 end
 
 --------------------------------------------------------------------------------
