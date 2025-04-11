@@ -7,6 +7,13 @@ if not mod then return end
 mod:RegisterEnableMob(240811)
 mod:SetEncounterID(3185)
 mod:SetAllowWin(true)
+mod:SetStage(1)
+
+--------------------------------------------------------------------------------
+-- Locals
+--
+
+local carrionOnMe = false
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -23,11 +30,12 @@ end
 
 function mod:GetOptions()
 	return {
-		437621, -- Prey on the Weak
-		437834, -- Summon Infernal
-		437472, -- Carrion Swarm
-		{437984, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Circle of Domination
+		{1231837, "SAY", "ME_ONLY_EMPHASIZE"}, -- Carrion Swarm
+		{1231844, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Circle of Domination
+		1231901, -- Summon Infernal
 		"stages",
+	},nil,{
+		[1231844] = CL.mind_control, -- Circle of Domination (Mind Control)
 	}
 end
 
@@ -36,45 +44,79 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "PreyOnTheWeak", 437621, 1231636)
-	self:Log("SPELL_CAST_SUCCESS", "SummonInfernal", 437834, 1231899)
-	self:Log("SPELL_CAST_START", "CarrionSwarm", 437472, 1231840)
-	self:Log("SPELL_AURA_APPLIED", "CircleOfDominationApplied", 437984, 1231844)
+	self:Log("SPELL_CAST_SUCCESS", "SuppressingDarkness", 1231776)
+	self:Log("SPELL_CAST_SUCCESS", "SummonInfernal", 1231901)
+	self:Log("SPELL_CAST_START", "CarrionSwarm", 1231840)
+	self:Log("SPELL_AURA_APPLIED", "CarrionSwarmApplied", 1231837)
+	self:Log("SPELL_AURA_REMOVED", "CarrionSwarmRemoved", 1231837)
+	self:Log("SPELL_AURA_APPLIED", "CircleOfDominationApplied", 1231844)
 end
 
 function mod:OnEngage()
+	carrionOnMe = false
+	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:CDBar(1231837, 9.5) -- Carrion Swarm
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
-function mod:PreyOnTheWeak(args)
-	if args.destGUID and self:Me(args.destGUID) then
-		self:Message(437621, "yellow", args.spellName.. " on YOU - Too far from other players")
-		--self:CDBar(args.spellId, 17)
-		--self:PlaySound(args.spellId, "info")
-	end
+function mod:SuppressingDarkness()
+	self:StopBar(1231837) -- Carrion Swarm
+	self:SetStage(2)
+	self:Message("stages", "cyan", CL.percent:format(70, CL.stage:format(2)), false)
+	self:PlaySound("stages", "long")
 end
 
 function mod:SummonInfernal(args)
-	self:Message(437834, "orange")
-	--self:CDBar(args.spellId, 17)
-	--self:PlaySound(args.spellId, "info")
+	self:CDBar(args.spellId, 21)
+	if self:GetStage() == 2 then
+		self:SetStage(3)
+		self:Message("stages", "cyan", CL.percent:format(40, CL.stage:format(3)), false)
+		self:CDBar(1231837, 27) -- Carrion Swarm
+		self:PlaySound("stages", "long")
+	else
+		self:Message(args.spellId, "yellow")
+	end
 end
 
 function mod:CarrionSwarm(args)
-	self:Message(437472, "red", CL.incoming:format(args.spellName))
-	--self:CDBar(args.spellId, 17)
-	--self:PlaySound(args.spellId, "info")
+	self:Message(1231837, "red", CL.incoming:format(args.spellName))
+	self:CDBar(args.spellId, 32.4)
+	self:PlaySound(args.spellId, "alert")
+end
+
+do
+	local function RepeatCarrionSwarmSay()
+		if not mod:IsEngaged() or not carrionOnMe then return end
+		mod:SimpleTimer(RepeatCarrionSwarmSay, 4)
+		mod:Say(1231837, nil, nil, "Carrion Swarm")
+	end
+
+	function mod:CarrionSwarmApplied(args)
+		self:TargetMessage(args.spellId, "orange", args.destName)
+		if self:Me(args.destGUID) then
+			carrionOnMe = true
+			self:Say(args.spellId, nil, nil, "Carrion Swarm")
+			self:SimpleTimer(RepeatCarrionSwarmSay, 4)
+			self:PlaySound(args.spellId, "warning", nil, args.destName)
+		end
+	end
+end
+
+function mod:CarrionSwarmRemoved(args)
+	if self:Me(args.destGUID) then
+		carrionOnMe = false
+	end
 end
 
 function mod:CircleOfDominationApplied(args)
-	self:TargetMessage(437984, "red", args.destName)
+	self:TargetMessage(args.spellId, "red", args.destName, CL.mind_control)
 	if self:Me(args.destGUID) then
-		self:Say(437984, nil, nil, "Circle of Domination")
-		self:SayCountdown(437984, 6)
-		self:PlaySound(437984, "warning", nil, args.destName)
+		self:Say(args.spellId, CL.mind_control, nil, "Mind Control")
+		self:SayCountdown(args.spellId, 6)
+		self:PlaySound(args.spellId, "alarm", nil, args.destName)
 	end
 end
