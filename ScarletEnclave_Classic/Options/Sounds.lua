@@ -23,6 +23,8 @@ BigWigs:AddSounds("Alexei the Beastlord", {
 })
 
 BigWigs:AddSounds("Mason the Echo", {
+	[1231585] = "long",
+	[1231592] = "alert",
 })
 
 BigWigs:AddSounds("Reborn Council", {

@@ -25,7 +25,8 @@ BigWigs:AddColors("Alexei the Beastlord", {
 })
 
 BigWigs:AddColors("Mason the Echo", {
-	["stages"] = "cyan",
+	[1231585] = {"cyan","red"},
+	[1231592] = "orange",
 })
 
 BigWigs:AddColors("Reborn Council", {
