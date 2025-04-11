@@ -9,9 +9,17 @@ BigWigs:AddSounds("High Commander Beatrix", {
 })
 
 BigWigs:AddSounds("Solistrasza", {
+	[1227696] = "alarm",
+	[1228063] = "underyou",
+	["adds"] = "info",
+	["stages"] = "long",
 })
 
 BigWigs:AddSounds("Alexei the Beastlord", {
+	[1228295] = "alert",
+	[1230105] = "alarm",
+	[1230200] = "info",
+	[1230242] = "info",
 })
 
 BigWigs:AddSounds("Mason the Echo", {

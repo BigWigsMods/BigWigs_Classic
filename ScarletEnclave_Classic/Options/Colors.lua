@@ -7,15 +7,20 @@ BigWigs:AddColors("Balnazzar", {
 })
 
 BigWigs:AddColors("High Commander Beatrix", {
-	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Solistrasza", {
-	[1232009] = {"blue","yellow"},
+	[1227696] = "cyan",
+	[1228063] = "blue",
+	["adds"] = "cyan",
 	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Alexei the Beastlord", {
+	[1228295] = "red",
+	[1230105] = "orange",
+	[1230200] = "blue",
+	[1230242] = "blue",
 	["stages"] = "cyan",
 })
 
