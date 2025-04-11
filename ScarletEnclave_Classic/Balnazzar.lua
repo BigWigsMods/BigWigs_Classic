@@ -72,7 +72,7 @@ end
 
 function mod:SummonInfernal(args)
 	self:CDBar(args.spellId, 21)
-	if self:GetStage() == 2 then
+	if self:GetStage() < 3 then
 		self:SetStage(3)
 		self:Message("stages", "cyan", CL.percent:format(40, CL.stage:format(3)), false)
 		self:CDBar(1231837, 27) -- Carrion Swarm
