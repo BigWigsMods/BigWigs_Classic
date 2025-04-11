@@ -1,9 +1,8 @@
 
 BigWigs:AddColors("Balnazzar", {
-	[437472] = "red",
-	[437621] = "yellow",
-	[437834] = "orange",
-	[437984] = {"blue","red"},
+	[1231837] = {"blue","orange","red"},
+	[1231844] = {"blue","red"},
+	[1231901] = "yellow",
 	["stages"] = "cyan",
 })
 

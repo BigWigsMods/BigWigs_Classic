@@ -1,6 +1,8 @@
 
 BigWigs:AddSounds("Balnazzar", {
-	[437984] = "warning",
+	[1231837] = {"alert","warning"},
+	[1231844] = "alarm",
+	["stages"] = "long",
 })
 
 BigWigs:AddSounds("High Commander Beatrix", {
