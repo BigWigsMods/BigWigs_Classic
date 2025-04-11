@@ -34,6 +34,7 @@ function mod:GetOptions()
 		{1231844, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Circle of Domination
 		1231901, -- Summon Infernal
 		"stages",
+		"berserk",
 	},nil,{
 		[1231844] = CL.mind_control, -- Circle of Domination (Mind Control)
 	}
@@ -57,6 +58,7 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:CDBar(1231837, 9.5) -- Carrion Swarm
+	self:Berserk(480, true) -- No engage message
 end
 
 --------------------------------------------------------------------------------

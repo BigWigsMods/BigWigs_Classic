@@ -23,11 +23,11 @@ end
 
 function mod:GetOptions()
 	return {
-		"stages",
 		1230105, -- Wild Aperture
 		1228295, -- Stomp
 		1230200, -- Enervate
 		1230242, -- Enkindle
+		"berserk",
 	}
 end
 
@@ -44,10 +44,10 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:CDBar(1230105, 6.8) -- Wild Aperture
 	self:CDBar(1230200, 16.1) -- Enervate
 	self:CDBar(1228295, 21.4) -- Stomp
+	self:Berserk(360)
 end
 
 --------------------------------------------------------------------------------

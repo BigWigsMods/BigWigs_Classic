@@ -28,6 +28,7 @@ function mod:GetOptions()
 		"adds",
 		1227696, -- Hallowed Dive
 		1228063, -- Cremation
+		"berserk",
 	},nil,{
 		[1228063] = CL.underyou:format(mod:SpellName(1228063)), -- Cremation (Cremation under YOU)
 	}
@@ -49,6 +50,7 @@ end
 function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:Berserk(480, true) -- No engage message
 end
 
 --------------------------------------------------------------------------------
