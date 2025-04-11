@@ -38,7 +38,7 @@ end
 
 function mod:OnEngage()
 	--self:Message("stages", "cyan", CL.stage:format(1), false)
-	self:Bar("stages", 120, CL.stage:format(2), false)
+	self:Bar("stages", 120, CL.stage:format(2), "ability_mount_charger")
 	self:Berserk(420)
 end
 
