@@ -84,8 +84,8 @@ end
 
 function mod:CarrionSwarm(args)
 	self:Message(1231837, "red", CL.incoming:format(args.spellName))
-	self:CDBar(args.spellId, 32.4)
-	self:PlaySound(args.spellId, "alert")
+	self:CDBar(1231837, 32.4)
+	self:PlaySound(1231837, "alert")
 end
 
 do
