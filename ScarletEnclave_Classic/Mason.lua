@@ -9,6 +9,12 @@ mod:SetEncounterID(3197)
 mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local nextTidal = 75
+
+--------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -23,7 +29,9 @@ end
 
 function mod:GetOptions()
 	return {
-		"stages",
+		1231592, -- Drowning Shallows
+		1231585, -- Tidal Force
+		"berserk",
 	}
 end
 
@@ -32,14 +40,37 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-
+	self:Log("SPELL_CAST_SUCCESS", "DrowningShallows", 1231592)
+	self:Log("SPELL_AURA_APPLIED", "TidalForceApplied", 1231585)
+	self:Log("SPELL_AURA_REMOVED", "TidalForceRemoved", 1231585)
 end
 
 function mod:OnEngage()
-	self:Message("stages", "cyan", CL.stage:format(1), false)
+	nextTidal = 75
+	self:Berserk(360)
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
+function mod:DrowningShallows(args)
+	self:Message(args.spellId, "orange")
+	self:PlaySound(args.spellId, "alert")
+end
+
+do
+	local appliedTime = 0
+	function mod:TidalForceApplied(args)
+		appliedTime = args.time
+		self:Message(args.spellId, "red", CL.percent:format(nextTidal, args.spellName))
+		nextTidal = nextTidal - 25
+		self:Bar(args.spellId, 60)
+		self:PlaySound(args.spellId, "long")
+	end
+
+	function mod:TidalForceRemoved(args)
+		self:StopBar(args.spellName)
+		self:Message(args.spellId, "cyan", CL.removed_after:format(args.spellName, args.time-appliedTime))
+	end
+end
