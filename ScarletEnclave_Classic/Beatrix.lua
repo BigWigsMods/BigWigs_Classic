@@ -24,6 +24,7 @@ end
 function mod:GetOptions()
 	return {
 		"stages",
+		"berserk",
 	}
 end
 
@@ -37,6 +38,7 @@ end
 
 function mod:OnEngage()
 	self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:Berserk(420)
 end
 
 --------------------------------------------------------------------------------
