@@ -27,7 +27,7 @@ function mod:GetOptions()
 		{1233901, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Noxious Poison
 		{1233849, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Unstable Concoction
 		1233883, -- Intoxicating Venom
-		--"stages",
+		1234540, -- Ignite
 		"berserk",
 	}
 end
@@ -40,14 +40,16 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "DebilitateApplied", 1232192)
 	self:Log("SPELL_AURA_APPLIED", "NoxiousPoisonApplied", 1233901)
 	self:Log("SPELL_AURA_REMOVED", "NoxiousPoisonRemoved", 1233901)
+	self:Log("SPELL_CAST_SUCCESS", "UnstableConcoction", 1233849)
 	self:Log("SPELL_AURA_APPLIED", "UnstableConcoctionApplied", 1233849)
 	self:Log("SPELL_AURA_REMOVED", "UnstableConcoctionRemoved", 1233849)
 	self:Log("SPELL_AURA_APPLIED", "IntoxicatingVenomApplied", 1233883)
 	self:Log("SPELL_AURA_REMOVED", "IntoxicatingVenomRemoved", 1233883)
+	self:Log("SPELL_CAST_SUCCESS", "Ignite", 1234540)
 end
 
 function mod:OnEngage()
-	--self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:CDBar(1233849, 30) -- Unstable Concoction
 	self:Berserk(180)
 end
 
@@ -56,7 +58,7 @@ end
 --
 
 function mod:DebilitateApplied(args)
-	self:TargetMessage(1232192, "yellow", args.destName)
+	self:TargetMessage(1232192, "orange", args.destName)
 end
 
 function mod:NoxiousPoisonApplied(args)
@@ -72,6 +74,10 @@ function mod:NoxiousPoisonRemoved(args)
 	if self:Me(args.destGUID) then
 		self:CancelSayCountdown(args.spellId)
 	end
+end
+
+function mod:UnstableConcoction(args)
+	self:CDBar(args.spellId, 30)
 end
 
 function mod:UnstableConcoctionApplied(args)
@@ -100,4 +106,9 @@ function mod:IntoxicatingVenomRemoved(args)
 	if self:Me(args.destGUID) then
 		self:PersonalMessage(args.spellId, "removed", "Keep Running")
 	end
+end
+
+function mod:Ignite(args)
+	self:Message(args.spellId, "yellow")
+	self:PlaySound(args.spellId, "long")
 end
