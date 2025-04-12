@@ -24,7 +24,8 @@ end
 function mod:GetOptions()
 	return {
 		1232192, -- Debilitate
-		"stages",
+		--"stages",
+		"berserk",
 	}
 end
 
@@ -37,7 +38,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:Message("stages", "cyan", CL.stage:format(1), false)
+	--self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:Berserk(180)
 end
 
 --------------------------------------------------------------------------------

@@ -17,6 +17,8 @@ end
 L = BigWigs:NewBossLocale("Alexei the Beastlord", "zhTW")
 if L then
 	--L.bossName = "Alexei the Beastlord"
+	--L[240794] = "Alexei"
+	--L[241906] = "Sir Dornel"
 end
 
 L = BigWigs:NewBossLocale("Mason the Echo", "zhTW")
@@ -27,6 +29,9 @@ end
 L = BigWigs:NewBossLocale("Reborn Council", "zhTW")
 if L then
 	L.bossName = "重生議會"
+	--L[240795] = "Herod"
+	--L[240809] = "Vishas"
+	--L[240810] = "Doan"
 end
 
 L = BigWigs:NewBossLocale("Lillian Voss", "zhTW")
