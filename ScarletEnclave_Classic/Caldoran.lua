@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Grand Crusader Caldoran", 2856)
 if not mod then return end
 mod:RegisterEnableMob(241006)
 mod:SetEncounterID(3189)
+mod:SetRespawnTime(12)
 mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
@@ -24,6 +25,10 @@ end
 function mod:GetOptions()
 	return {
 		--"stages",
+		1229714, -- Blinding Flare
+		1229114, -- Devoted Offering
+		{1229272, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divine Conflagration
+		1229503, -- Execution Sentence
 		"berserk",
 	}
 end
@@ -33,7 +38,11 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-
+	self:Log("SPELL_CAST_START", "BlindingFlare", 1229714)
+	self:Log("SPELL_CAST_START", "DevotedOffering", 1229114)
+	self:Log("SPELL_AURA_APPLIED", "DivineConflagrationApplied", 1229272)
+	self:Log("SPELL_AURA_REMOVED", "DivineConflagrationRemoved", 1229272)
+	self:Log("SPELL_AURA_APPLIED", "ExecutionSentenceApplied", 1229503)
 end
 
 function mod:OnEngage()
@@ -45,3 +54,38 @@ end
 -- Event Handlers
 --
 
+function mod:BlindingFlare(args)
+	self:Message(args.spellId, "red", CL.extra:format(args.spellName, "Face Away"))
+	self:PlaySound(args.spellId, "warning")
+end
+
+do
+	local prev = 0
+	function mod:DevotedOffering(args)
+		if args.time - prev > 2 then
+			prev = args.time
+			self:Message(args.spellId, "yellow")
+			self:PlaySound(args.spellId, "long")
+		end
+	end
+end
+
+function mod:DivineConflagrationApplied(args)
+	self:TargetMessage(args.spellId, "orange", args.destName)
+	if self:Me(args.destGUID) then
+		self:Say(args.spellId, nil, nil, "Divine Conflagration")
+		self:SayCountdown(args.spellId, 5)
+		self:PlaySound(args.spellId, "alarm", nil, args.destName)
+	end
+end
+
+function mod:DivineConflagrationRemoved(args)
+	if self:Me(args.destGUID) then
+		self:CancelSayCountdown(args.spellId)
+	end
+end
+
+function mod:ExecutionSentenceApplied(args)
+	self:TargetMessage(args.spellId, "purple", args.destName)
+	self:PlaySound(args.spellId, "info")
+end
