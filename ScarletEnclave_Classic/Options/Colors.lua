@@ -10,8 +10,9 @@ BigWigs:AddColors("High Commander Beatrix", {
 })
 
 BigWigs:AddColors("Solistrasza", {
-	[1227696] = "cyan",
-	[1228063] = "blue",
+	[1227696] = "red",
+	[1228063] = {"blue","green","yellow"},
+	[1231993] = {"blue","purple"},
 	["adds"] = "cyan",
 	["stages"] = "cyan",
 })
@@ -31,14 +32,13 @@ BigWigs:AddColors("Mason the Echo", {
 
 BigWigs:AddColors("Reborn Council", {
 	[1231010] = "blue",
+	[1231095] = {"green","orange"},
 	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Lillian Voss", {
 	[1232192] = {"blue","yellow"},
-	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Grand Crusader Caldoran", {
-	["stages"] = "cyan",
 })

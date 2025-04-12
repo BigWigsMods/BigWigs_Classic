@@ -10,7 +10,8 @@ BigWigs:AddSounds("High Commander Beatrix", {
 
 BigWigs:AddSounds("Solistrasza", {
 	[1227696] = "alarm",
-	[1228063] = "underyou",
+	[1228063] = {"underyou","warning"},
+	[1231993] = "alert",
 	["adds"] = "info",
 	["stages"] = "long",
 })
@@ -29,6 +30,7 @@ BigWigs:AddSounds("Mason the Echo", {
 
 BigWigs:AddSounds("Reborn Council", {
 	[1231010] = "warning",
+	[1231095] = "info",
 })
 
 BigWigs:AddSounds("Lillian Voss", {
