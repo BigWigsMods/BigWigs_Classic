@@ -24,8 +24,10 @@ BigWigs:AddSounds("Alexei the Beastlord", {
 })
 
 BigWigs:AddSounds("Mason the Echo", {
+	[1229005] = "alarm",
 	[1231585] = "long",
 	[1231592] = "alert",
+	[1234347] = "info",
 })
 
 BigWigs:AddSounds("Reborn Council", {
@@ -34,7 +36,16 @@ BigWigs:AddSounds("Reborn Council", {
 })
 
 BigWigs:AddSounds("Lillian Voss", {
+	[1233847] = "long",
+	[1233849] = "alert",
+	[1233883] = "warning",
+	[1233901] = "alarm",
+	[1234540] = "info",
 })
 
 BigWigs:AddSounds("Grand Crusader Caldoran", {
+	[1229114] = "long",
+	[1229272] = "alarm",
+	[1229503] = "info",
+	[1229714] = "warning",
 })

@@ -22,12 +22,13 @@ BigWigs:AddColors("Alexei the Beastlord", {
 	[1230105] = "orange",
 	[1230200] = "blue",
 	[1230242] = "blue",
-	["stages"] = "cyan",
 })
 
 BigWigs:AddColors("Mason the Echo", {
+	[1229005] = {"blue","purple"},
 	[1231585] = {"cyan","red"},
-	[1231592] = "orange",
+	[1231592] = {"green","orange"},
+	[1234347] = {"green","yellow"},
 })
 
 BigWigs:AddColors("Reborn Council", {
@@ -37,8 +38,17 @@ BigWigs:AddColors("Reborn Council", {
 })
 
 BigWigs:AddColors("Lillian Voss", {
-	[1232192] = {"blue","yellow"},
+	[1232192] = {"blue","orange"},
+	[1233847] = "red",
+	[1233849] = "blue",
+	[1233883] = "blue",
+	[1233901] = "blue",
+	[1234540] = "yellow",
 })
 
 BigWigs:AddColors("Grand Crusader Caldoran", {
+	[1229114] = "yellow",
+	[1229272] = {"blue","orange"},
+	[1229503] = {"blue","purple"},
+	[1229714] = "red",
 })
