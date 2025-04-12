@@ -24,6 +24,9 @@ end
 function mod:GetOptions()
 	return {
 		1232192, -- Debilitate
+		{1233901, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Noxious Poison
+		{1233849, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Unstable Concoction
+		1233883, -- Intoxicating Venom
 		--"stages",
 		"berserk",
 	}
@@ -35,6 +38,12 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "DebilitateApplied", 1232192)
+	self:Log("SPELL_AURA_APPLIED", "NoxiousPoisonApplied", 1233901)
+	self:Log("SPELL_AURA_REMOVED", "NoxiousPoisonRemoved", 1233901)
+	self:Log("SPELL_AURA_APPLIED", "UnstableConcoctionApplied", 1233849)
+	self:Log("SPELL_AURA_REMOVED", "UnstableConcoctionRemoved", 1233849)
+	self:Log("SPELL_AURA_APPLIED", "IntoxicatingVenomApplied", 1233883)
+	self:Log("SPELL_AURA_REMOVED", "IntoxicatingVenomRemoved", 1233883)
 end
 
 function mod:OnEngage()
@@ -48,4 +57,47 @@ end
 
 function mod:DebilitateApplied(args)
 	self:TargetMessage(1232192, "yellow", args.destName)
+end
+
+function mod:NoxiousPoisonApplied(args)
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId)
+		self:Say(args.spellId, nil, nil, "Noxious Poison")
+		self:SayCountdown(args.spellId, 8)
+		self:PlaySound(args.spellId, "alarm", nil, args.destName)
+	end
+end
+
+function mod:NoxiousPoisonRemoved(args)
+	if self:Me(args.destGUID) then
+		self:CancelSayCountdown(args.spellId)
+	end
+end
+
+function mod:UnstableConcoctionApplied(args)
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId)
+		self:Say(args.spellId, nil, nil, "Unstable Concoction")
+		self:SayCountdown(args.spellId, 7)
+		self:PlaySound(args.spellId, "alert", nil, args.destName)
+	end
+end
+
+function mod:UnstableConcoctionRemoved(args)
+	if self:Me(args.destGUID) then
+		self:CancelSayCountdown(args.spellId)
+	end
+end
+
+function mod:IntoxicatingVenomApplied(args)
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId, false, "Keep Running")
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
+	end
+end
+
+function mod:IntoxicatingVenomRemoved(args)
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId, "removed", "Keep Running")
+	end
 end
