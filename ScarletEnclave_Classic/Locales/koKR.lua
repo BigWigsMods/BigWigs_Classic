@@ -17,8 +17,6 @@ end
 L = BigWigs:NewBossLocale("Alexei the Beastlord", "koKR")
 if L then
 	--L.bossName = "Alexei the Beastlord"
-	--L[240794] = "Alexei"
-	--L[241906] = "Sir Dornel"
 end
 
 L = BigWigs:NewBossLocale("Mason the Echo", "koKR")

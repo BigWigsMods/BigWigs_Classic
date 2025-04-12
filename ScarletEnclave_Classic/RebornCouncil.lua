@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Reborn Council", 2856)
 if not mod then return end
 mod:RegisterEnableMob(240795, 240809, 240810) -- Herod, Vishas, Doan
 mod:SetEncounterID(3188)
+mod:SetRespawnTime(12)
 mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
@@ -82,17 +83,23 @@ function mod:TortuousRebukeApplied(args)
 	end
 end
 
-function mod:PeeledSecrets(args)
-	local unit = self:GetUnitIdByGUID(args.sourceGUID)
-	if not unit or self:UnitWithinRange(unit, 10) or args.sourceGUID == self:UnitGUID("target") then
-		self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
-		self:PlaySound(args.spellId, "info")
+do
+	local inRange = false
+	function mod:PeeledSecrets(args)
+		local unit = self:GetUnitIdByGUID(args.sourceGUID)
+		if not unit or self:UnitWithinRange(unit, 10) or args.sourceGUID == self:UnitGUID("target") then
+			inRange = true
+			self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
+			self:PlaySound(args.spellId, "info")
+		else
+			inRange = false
+		end
 	end
-end
 
-function mod:PeeledSecretsInterrupted(args)
-	if args.extraSpellName == self:SpellName(1231095) then
-		self:Message(1231095, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+	function mod:PeeledSecretsInterrupted(args)
+		if inRange and args.extraSpellName == self:SpellName(1231095) then
+			self:Message(1231095, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+		end
 	end
 end
 
