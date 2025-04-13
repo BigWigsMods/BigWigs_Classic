@@ -28,7 +28,7 @@ function mod:GetOptions()
 		1232192, -- Debilitate
 		{1233901, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Noxious Poison
 		{1233849, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Unstable Concoction
-		{1233883, "ME_ONLY_EMPHASIZE"}, -- Intoxicating Venom
+		{1233883, "EMPHASIZE"}, -- Intoxicating Venom
 		1234540, -- Ignite
 		"berserk",
 	},nil,{
@@ -110,16 +110,24 @@ function mod:UnstableConcoctionRemoved(args)
 	end
 end
 
-function mod:IntoxicatingVenomApplied(args)
-	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, false, CL.keep_moving)
-		self:PlaySound(args.spellId, "warning", nil, args.destName)
+do
+	local prev = 0
+	function mod:IntoxicatingVenomApplied(args)
+		if self:Me(args.destGUID) then
+			local disableEmphasize = true
+			if args.time - prev > 10 then -- Only emphasize the first as it gets applied/removed a lot in a short period of time
+				prev = args.time
+				disableEmphasize = false
+			end
+			self:Message(args.spellId, "blue", CL.keep_moving, nil, disableEmphasize)
+			self:PlaySound(args.spellId, "warning", nil, args.destName)
+		end
 	end
 end
 
 function mod:IntoxicatingVenomRemoved(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "green", CL.safe_to_stop)
+		self:Message(args.spellId, "green", CL.safe_to_stop, nil, true) -- Disable emphasize
 	end
 end
 
