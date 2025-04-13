@@ -28,16 +28,19 @@ function mod:GetOptions()
 		1232192, -- Debilitate
 		{1233901, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Noxious Poison
 		{1233849, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Unstable Concoction
-		1233883, -- Intoxicating Venom
+		{1233883, "ME_ONLY_EMPHASIZE"}, -- Intoxicating Venom
 		1234540, -- Ignite
 		"berserk",
 	},nil,{
-		[1233847] = "Pull In", -- Scarlet Grasp (Pull In)
+		[1233847] = CL.pull_in, -- Scarlet Grasp (Pull In)
+		[1233883] = CL.keep_moving, -- Intoxicating Venom (Keep moving)
+		[1234540] = CL.spread, -- Ignite (Spread)
 	}
 end
 
 function mod:OnRegister()
 	self.displayName = L.bossName
+	self:SetSpellRename(1233847, CL.pull_in) -- Scarlet Grasp (Pull In)
 end
 
 function mod:OnBossEnable()
@@ -55,7 +58,7 @@ end
 
 function mod:OnEngage()
 	self:CDBar(1233849, 30) -- Unstable Concoction
-	self:CDBar(1233847, 34, "Pull In") -- Scarlet Grasp
+	self:CDBar(1233847, 34, CL.pull_in) -- Scarlet Grasp
 	self:Berserk(180)
 end
 
@@ -64,8 +67,8 @@ end
 --
 
 function mod:ScarletGrasp(args)
-	self:CDBar(args.spellId, 30, "Pull In")
-	self:Message(args.spellId, "red", CL.extra:format(args.spellName, "Pull In"))
+	self:CDBar(args.spellId, 30, CL.pull_in)
+	self:Message(args.spellId, "red", CL.extra:format(args.spellName, CL.pull_in))
 	self:PlaySound(args.spellId, "long")
 end
 
@@ -109,18 +112,18 @@ end
 
 function mod:IntoxicatingVenomApplied(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, false, "Keep Running")
+		self:PersonalMessage(args.spellId, false, CL.keep_moving)
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
 end
 
 function mod:IntoxicatingVenomRemoved(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, "removed", "Keep Running")
+		self:Message(args.spellId, "green", CL.safe_to_stop)
 	end
 end
 
 function mod:Ignite(args)
-	self:Message(args.spellId, "yellow", CL.extra:format(args.spellName, "Spread"))
+	self:Message(args.spellId, "yellow", CL.extra:format(args.spellName, CL.spread))
 	self:PlaySound(args.spellId, "info")
 end

@@ -25,16 +25,19 @@ end
 function mod:GetOptions()
 	return {
 		--"stages",
-		1229714, -- Blinding Flare
+		{1229714, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Blinding Flare
 		1229114, -- Devoted Offering
 		{1229272, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divine Conflagration
 		1229503, -- Execution Sentence
 		"berserk",
+	},nil,{
+		[1229714] = CL.blind, -- Blinding Flare (Blind)
 	}
 end
 
 function mod:OnRegister()
 	self.displayName = L.bossName
+	self:SetSpellRename(1229714, CL.blind) -- Blinding Flare (Blind)
 end
 
 function mod:OnBossEnable()
@@ -55,7 +58,8 @@ end
 --
 
 function mod:BlindingFlare(args)
-	self:Message(args.spellId, "red", CL.extra:format(args.spellName, "Face Away"))
+	self:Message(args.spellId, "red", CL.blind)
+	self:CastBar(args.spellId, 3)
 	self:PlaySound(args.spellId, "warning")
 end
 
