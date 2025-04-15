@@ -32,6 +32,7 @@ end
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Lillian Voss"
+	L.note = ("%s/%s/%s/%s"):format(directions[1], directions[2], directions[3], directions[4])
 end
 
 --------------------------------------------------------------------------------
@@ -51,7 +52,7 @@ function mod:GetOptions()
 		"berserk",
 	},nil,{
 		[1233847] = CL.pull_in, -- Scarlet Grasp (Pull In)
-		[1233849] = ("%s/%s/%s/%s"):format(directions[1], directions[2], directions[3], directions[4]), -- Unstable Concoction (Top Right/Bottom Right/Bottom Left/Top Left)
+		[1233849] = L.note, -- Unstable Concoction (Top Right/Bottom Right/Bottom Left/Top Left)
 		[1233883] = CL.keep_moving, -- Intoxicating Venom (Keep moving)
 		[1234540] = CL.spread, -- Ignite (Spread)
 	}
