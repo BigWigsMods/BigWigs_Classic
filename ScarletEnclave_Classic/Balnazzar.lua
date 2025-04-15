@@ -58,7 +58,7 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:CDBar(1231837, 9.5) -- Carrion Swarm
-	self:Berserk(480, true) -- No engage message
+	self:Berserk(600, true) -- No engage message
 end
 
 --------------------------------------------------------------------------------
