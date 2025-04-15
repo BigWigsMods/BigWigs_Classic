@@ -43,6 +43,9 @@ if mod:GetSeason() == 2 then
 			{467764, "CASTBAR", "CASTBAR_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Go!
 			{467732, "CASTBAR", "CASTBAR_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Stop!
 			{"health", "INFOBOX"},
+		},nil,{
+			[467764] = CL.keep_moving, -- Go! (Keep moving)
+			[467732] = CL.stand_still, -- Stop! (Stand still)
 		}
 	end
 end
@@ -56,8 +59,10 @@ function mod:OnBossEnable()
 		self:Log("SPELL_CAST_START", "WingBuffet", 369080)
 		self:Log("SPELL_CAST_START", "ShadowFlameSoD", 368942)
 		self:Log("SPELL_AURA_APPLIED_DOSE", "BrandOfFlameApplied", 368521)
-		self:Log("SPELL_AURA_APPLIED", "GoOrStopApplied", 467764, 467732) -- Go, Stop
-		self:Log("SPELL_AURA_REMOVED", "GoOrStopRemoved", 467764, 467732)
+		self:Log("SPELL_AURA_APPLIED", "GoApplied", 467764)
+		self:Log("SPELL_AURA_REMOVED", "GoRemoved", 467764)
+		self:Log("SPELL_AURA_APPLIED", "StopApplied", 467732)
+		self:Log("SPELL_AURA_REMOVED", "StopRemoved", 467732)
 		self:Log("SPELL_CAST_SUCCESS", "GoSuccess", 467764)
 		self:Log("SPELL_CAST_SUCCESS", "StopSuccess", 467732)
 		self:Death("Deaths", 11981, 14601) -- Flamegor, Ebonroc
@@ -133,17 +138,31 @@ function mod:BrandOfFlameApplied(args)
 	end
 end
 
-function mod:GoOrStopApplied(args)
+function mod:GoApplied(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId)
+		self:PersonalMessage(args.spellId, false, CL.keep_moving)
 		self:CastBar(args.spellId, 5)
 		self:PlaySound(args.spellId, "warning")
 	end
 end
 
-function mod:GoOrStopRemoved(args)
+function mod:GoRemoved(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, "removed")
+		self:PersonalMessage(args.spellId, false, CL.safe_to_stop)
+	end
+end
+
+function mod:StopApplied(args)
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId, false, CL.stand_still)
+		self:CastBar(args.spellId, 5)
+		self:PlaySound(args.spellId, "warning")
+	end
+end
+
+function mod:StopRemoved(args)
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId, false, CL.safe_to_move)
 	end
 end
 
