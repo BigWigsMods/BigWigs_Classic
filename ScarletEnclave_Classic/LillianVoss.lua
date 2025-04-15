@@ -10,6 +10,12 @@ mod:SetRespawnTime(15)
 mod:SetAllowWin(true)
 
 --------------------------------------------------------------------------------
+-- Locals
+--
+
+local markerCount = 0
+
+--------------------------------------------------------------------------------
 -- Localization
 --
 
@@ -22,12 +28,14 @@ end
 -- Initialization
 --
 
+local unstableConcoctionMarker = mod:AddMarkerOption(true, "player", 1, 1233849, 1, 2, 3, 4) -- Unstable Concoction
 function mod:GetOptions()
 	return {
 		1233847, -- Scarlet Grasp
 		1232192, -- Debilitate
 		{1233901, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Noxious Poison
 		{1233849, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Unstable Concoction
+		unstableConcoctionMarker,
 		{1233883, "EMPHASIZE"}, -- Intoxicating Venom
 		1234540, -- Ignite
 		"berserk",
@@ -52,11 +60,12 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "UnstableConcoctionApplied", 1233849)
 	self:Log("SPELL_AURA_REMOVED", "UnstableConcoctionRemoved", 1233849)
 	self:Log("SPELL_AURA_APPLIED", "IntoxicatingVenomApplied", 1233883)
-	self:Log("SPELL_AURA_REMOVED", "IntoxicatingVenomRemoved", 1233883)
+	--self:Log("SPELL_AURA_REMOVED", "IntoxicatingVenomRemoved", 1233883)
 	self:Log("SPELL_CAST_SUCCESS", "Ignite", 1234540)
 end
 
 function mod:OnEngage()
+	markerCount = 0
 	self:CDBar(1233849, 30) -- Unstable Concoction
 	self:CDBar(1233847, 34, CL.pull_in) -- Scarlet Grasp
 	self:Berserk(180)
@@ -92,14 +101,17 @@ function mod:NoxiousPoisonRemoved(args)
 end
 
 function mod:UnstableConcoction(args)
+	markerCount = 0
 	self:CDBar(args.spellId, 30)
 end
 
 function mod:UnstableConcoctionApplied(args)
+	markerCount = markerCount + 1
+	self:CustomIcon(unstableConcoctionMarker, args.destName, markerCount)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId)
-		self:Say(args.spellId, nil, nil, "Unstable Concoction")
-		self:SayCountdown(args.spellId, 7)
+		self:PersonalMessage(args.spellId, false, CL.you_icon:format(args.spellName, markerCount))
+		self:Say(args.spellId, CL.rticon:format(args.spellName, markerCount), nil, ("Unstable Concoction ({rt%d})"):format(markerCount))
+		self:SayCountdown(args.spellId, 7, markerCount)
 		self:PlaySound(args.spellId, "alert", nil, args.destName)
 	end
 end
@@ -108,28 +120,37 @@ function mod:UnstableConcoctionRemoved(args)
 	if self:Me(args.destGUID) then
 		self:CancelSayCountdown(args.spellId)
 	end
+	self:CustomIcon(unstableConcoctionMarker, args.destName)
 end
 
 do
 	local prev = 0
+	local function KeepMoving()
+		if mod:IsEngaged() then
+			mod:Message(1233883, "blue", CL.keep_moving)
+			mod:PlaySound(1233883, "warning")
+		end
+	end
+	local function StopMoving()
+		if mod:IsEngaged() then
+			mod:Message(1233883, "green", CL.safe_to_stop)
+		end
+	end
 	function mod:IntoxicatingVenomApplied(args)
-		if self:Me(args.destGUID) then
-			local disableEmphasize = true
-			if args.time - prev > 10 then -- Only emphasize the first as it gets applied/removed a lot in a short period of time
-				prev = args.time
-				disableEmphasize = false
-			end
-			self:Message(args.spellId, "blue", CL.keep_moving, nil, disableEmphasize)
-			self:PlaySound(args.spellId, "warning", nil, args.destName)
+		if args.time - prev > 17 then
+			prev = args.time
+			KeepMoving()
+			self:SimpleTimer(KeepMoving, 8)
+			self:SimpleTimer(StopMoving, 15)
 		end
 	end
 end
 
-function mod:IntoxicatingVenomRemoved(args)
-	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "green", CL.safe_to_stop, nil, true) -- Disable emphasize
-	end
-end
+--function mod:IntoxicatingVenomRemoved(args)
+--	if self:Me(args.destGUID) then
+--		self:Message(args.spellId, "green", CL.safe_to_stop, nil, true) -- Disable emphasize
+--	end
+--end
 
 function mod:Ignite(args)
 	self:Message(args.spellId, "yellow", CL.extra:format(args.spellName, CL.spread))
