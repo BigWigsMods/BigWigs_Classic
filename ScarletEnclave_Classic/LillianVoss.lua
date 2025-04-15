@@ -14,6 +14,16 @@ mod:SetAllowWin(true)
 --
 
 local markerCount = 0
+local directions
+do
+	local BW_L = BigWigsAPI:GetLocale("BigWigs")
+	directions = { -- Clockwise
+		BW_L.TOPRIGHT,
+		BW_L.BOTTOMRIGHT,
+		BW_L.BOTTOMLEFT,
+		BW_L.TOPLEFT,
+	}
+end
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -41,6 +51,7 @@ function mod:GetOptions()
 		"berserk",
 	},nil,{
 		[1233847] = CL.pull_in, -- Scarlet Grasp (Pull In)
+		[1233849] = ("%s/%s/%s/%s"):format(directions[1], directions[2], directions[3], directions[4]), -- Unstable Concoction (Top Right/Bottom Right/Bottom Left/Top Left)
 		[1233883] = CL.keep_moving, -- Intoxicating Venom (Keep moving)
 		[1234540] = CL.spread, -- Ignite (Spread)
 	}
@@ -105,14 +116,22 @@ function mod:UnstableConcoction(args)
 	self:CDBar(args.spellId, 30)
 end
 
-function mod:UnstableConcoctionApplied(args)
-	markerCount = markerCount + 1
-	self:CustomIcon(unstableConcoctionMarker, args.destName, markerCount)
-	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, false, CL.you_icon:format(args.spellName, markerCount))
-		self:Say(args.spellId, CL.rticon:format(args.spellName, markerCount), nil, ("Unstable Concoction ({rt%d})"):format(markerCount))
-		self:SayCountdown(args.spellId, 7, markerCount)
-		self:PlaySound(args.spellId, "alert", nil, args.destName)
+do
+	local englishDirections = { -- Clockwise
+		"Top Right",
+		"Bottom Right",
+		"Bottom Left",
+		"Top Left",
+	}
+	function mod:UnstableConcoctionApplied(args)
+		markerCount = markerCount + 1
+		self:CustomIcon(unstableConcoctionMarker, args.destName, markerCount)
+		if self:Me(args.destGUID) then
+			self:PersonalMessage(args.spellId, false, CL.you_icon:format(directions[markerCount], markerCount))
+			self:Say(args.spellId, CL.rticon:format(directions[markerCount], markerCount), nil, ("%s ({rt%d})"):format(englishDirections, markerCount))
+			self:SayCountdown(args.spellId, 7, CL.rticon:format(directions[markerCount], markerCount), nil, ("%s ({rt%d})"):format(englishDirections, markerCount))
+			self:PlaySound(args.spellId, "alert", nil, args.destName)
+		end
 	end
 end
 
