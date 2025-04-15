@@ -17,12 +17,14 @@ mod:SetStage(1)
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Solistrasza"
+	L.whelp = "Whelps" -- XXX CL
 end
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
 
+local whelpMarker = mod:AddMarkerOption(true, "npc", 8, "whelp", 8, 7, 6) -- Whelp
 function mod:GetOptions()
 	return {
 		"stages",
@@ -30,6 +32,7 @@ function mod:GetOptions()
 		1231993, -- Tarnished Breath
 		1227696, -- Hallowed Dive
 		1228063, -- Cremation
+		whelpMarker,
 		"berserk",
 	}
 end
@@ -88,12 +91,34 @@ function mod:HallowedDive(args)
 end
 
 do
-	local prev = 0
+	local guidCollector = {}
+	function mod:WhelpMarking(_, unit, guid)
+		if guidCollector[guid] then
+			self:CustomIcon(whelpMarker, unit, guidCollector[guid])
+			guidCollector[guid] = nil
+			if not next(guidCollector) then
+				self:UnregisterTargetEvents()
+			end
+		end
+	end
+
+	local prev, iconToUse = 0, 8
 	function mod:AberrantBloat(args)
-		if args.time - prev > 10 and self:IsEngaged() then -- Cast by trash
-			prev = args.time
-			self:Message("adds", "cyan", CL.adds_spawned, false)
-			self:PlaySound("adds", "info")
+		if self:IsEngaged() then -- Cast by trash
+			if args.time - prev > 10 then
+				prev = args.time
+				guidCollector = {}
+				iconToUse = 8
+			end
+			if self:GetOption(whelpMarker) then
+				guidCollector[args.sourceGUID] = iconToUse
+				self:RegisterTargetEvents("WhelpMarking")
+			end
+			iconToUse = iconToUse - 1
+			if iconToUse == 7 then
+				self:Message("adds", "cyan", CL.adds_spawned, false)
+				self:PlaySound("adds", "info")
+			end
 		end
 	end
 end
