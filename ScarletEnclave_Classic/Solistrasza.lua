@@ -31,8 +31,6 @@ function mod:GetOptions()
 		1227696, -- Hallowed Dive
 		1228063, -- Cremation
 		"berserk",
-	},nil,{
-		[1228063] = CL.interruptible, -- Cremation (Interruptible)
 	}
 end
 
@@ -47,7 +45,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "HallowedDive", 1227696)
 	self:Log("SPELL_CAST_SUCCESS", "AberrantBloat", 1232333)
 	self:Log("SPELL_CAST_START", "Cremation", 1228044)
-	self:Log("SPELL_INTERRUPT", "CremationInterrupted", "*")
 	self:Log("SPELL_AURA_APPLIED", "CremationDamage", 1228063)
 	self:Log("SPELL_PERIODIC_DAMAGE", "CremationDamage", 1228063)
 	self:Log("SPELL_PERIODIC_MISSED", "CremationDamage", 1228063)
@@ -102,14 +99,8 @@ do
 end
 
 function mod:Cremation(args)
-	self:Message(1228063, "yellow", CL.extra:format(args.spellName, CL.interruptible))
+	self:Message(1228063, "yellow", CL.incoming:format(args.spellName))
 	self:PlaySound(1228063, "warning")
-end
-
-function mod:CremationInterrupted(args)
-	if args.extraSpellName == self:SpellName(1228044) then
-		self:Message(1228063, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
-	end
 end
 
 do
