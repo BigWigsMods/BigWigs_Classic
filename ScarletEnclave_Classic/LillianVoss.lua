@@ -16,12 +16,12 @@ mod:SetAllowWin(true)
 local markerCount = 0
 local directions
 do
-	local BW_L = BigWigsAPI:GetLocale("BigWigs")
+	local LBW = BigWigsAPI:GetLocale("BigWigs")
 	directions = { -- Clockwise
-		BW_L.TOPRIGHT,
-		BW_L.BOTTOMRIGHT,
-		BW_L.BOTTOMLEFT,
-		BW_L.TOPLEFT,
+		LBW.TOPRIGHT,
+		LBW.BOTTOMRIGHT,
+		LBW.BOTTOMLEFT,
+		LBW.TOPLEFT,
 	}
 end
 
