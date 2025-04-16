@@ -50,7 +50,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "CarrionSwarm", 1231840)
 	self:Log("SPELL_AURA_APPLIED", "CarrionSwarmApplied", 1231837)
 	self:Log("SPELL_AURA_REFRESH", "CarrionSwarmApplied", 1231837)
-	self:Log("SPELL_AURA_REMOVED", "CarrionSwarmRemoved", 1231837)
 	self:Log("SPELL_AURA_APPLIED", "CircleOfDominationApplied", 1231844)
 end
 
