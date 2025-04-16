@@ -17,14 +17,14 @@ mod:SetStage(1)
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Solistrasza"
-	L.whelp = "Whelps" -- XXX CL
+	L.whelps = CL.whelps
 end
 
 --------------------------------------------------------------------------------
 -- Initialization
 --
 
-local whelpMarker = mod:AddMarkerOption(true, "npc", 8, "whelp", 8, 7, 6) -- Whelp
+local whelpMarker = mod:AddMarkerOption(true, "npc", 8, "whelps", 8, 7, 6) -- Whelp
 function mod:GetOptions()
 	return {
 		"stages",
