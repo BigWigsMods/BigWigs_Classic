@@ -49,6 +49,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "SummonInfernal", 1231901)
 	self:Log("SPELL_CAST_START", "CarrionSwarm", 1231840)
 	self:Log("SPELL_AURA_APPLIED", "CarrionSwarmApplied", 1231837)
+	self:Log("SPELL_AURA_REFRESH", "CarrionSwarmApplied", 1231837)
 	self:Log("SPELL_AURA_REMOVED", "CarrionSwarmRemoved", 1231837)
 	self:Log("SPELL_AURA_APPLIED", "CircleOfDominationApplied", 1231844)
 end
@@ -91,26 +92,25 @@ function mod:CarrionSwarm(args)
 end
 
 do
-	local function RepeatCarrionSwarmSay()
-		if not mod:IsEngaged() or not carrionOnMe then return end
-		mod:SimpleTimer(RepeatCarrionSwarmSay, 4)
-		mod:Say(1231837, nil, nil, "Carrion Swarm")
-	end
-
+	local timer = nil
 	function mod:CarrionSwarmApplied(args)
-		self:TargetMessage(args.spellId, "orange", args.destName)
 		if self:Me(args.destGUID) then
-			carrionOnMe = true
+			if timer then
+				self:CancelTimer(timer)
+				timer = nil
+			end
+			self:PersonalMessage(args.spellId)
 			self:Say(args.spellId, nil, nil, "Carrion Swarm")
-			self:SimpleTimer(RepeatCarrionSwarmSay, 4)
+			timer = self:ScheduleRepeatingTimer("Say", 8, 1231837, nil, nil, "Carrion Swarm")
 			self:PlaySound(args.spellId, "warning", nil, args.destName)
 		end
 	end
-end
 
-function mod:CarrionSwarmRemoved(args)
-	if self:Me(args.destGUID) then
-		carrionOnMe = false
+	function mod:CarrionSwarmRemoved(args)
+		if self:Me(args.destGUID) and timer then
+			self:CancelTimer(timer)
+			timer = nil
+		end
 	end
 end
 
