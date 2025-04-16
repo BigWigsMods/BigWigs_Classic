@@ -30,7 +30,7 @@ end
 
 function mod:GetOptions()
 	return {
-		{1231837, "SAY", "ME_ONLY_EMPHASIZE"}, -- Carrion Swarm
+		{1231837, "SAY"}, -- Carrion Swarm
 		{1231844, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Circle of Domination
 		1231901, -- Summon Infernal
 		"stages",
