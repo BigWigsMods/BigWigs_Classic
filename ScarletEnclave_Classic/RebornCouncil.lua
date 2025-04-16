@@ -13,6 +13,7 @@ mod:SetAllowWin(true)
 -- Locals
 --
 
+local peeledSecretsCount = 1
 local killedBosses = {}
 local UpdateInfoBoxList
 local bossList = {
@@ -31,6 +32,14 @@ if L then
 	L[240795] = "Herod"
 	L[240809] = "Vishas"
 	L[240810] = "Doan"
+
+	L.custom_select_interrupt_counter = "Interrupt Counter"
+	L.custom_select_interrupt_counter_desc = "Choose when the interrupt counter should reset back to 1."
+	L.custom_select_interrupt_counter_icon = "ability_kick"
+	L.custom_select_interrupt_counter_value1 = "Count to 2. 1,2,1,2, etc."
+	L.custom_select_interrupt_counter_value2 = "Count to 3. 1,2,3,1,2,3, etc."
+	L.custom_select_interrupt_counter_value3 = "Count to 4. 1,2,3,4,1,2,3,4, etc."
+	L.custom_select_interrupt_counter_value4 = "Count to 5. 1,2,3,4,5,1,2,3,4,5, etc."
 end
 
 --------------------------------------------------------------------------------
@@ -40,7 +49,8 @@ end
 function mod:GetOptions()
 	return {
 		1231010, -- Tortuous Rebuke
-		1231095, -- Peeled Secrets
+		{1231095, "NAMEPLATE"}, -- Peeled Secrets
+		"custom_select_interrupt_counter",
 		"stages",
 		{"health", "INFOBOX"},
 		"berserk",
@@ -54,22 +64,35 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "TortuousRebukeApplied", 1231010)
 	self:Log("SPELL_CAST_START", "PeeledSecrets", 1231095)
+	self:Log("SPELL_CAST_SUCCESS", "PeeledSecretsSuccess", 1231095)
 	self:Log("SPELL_INTERRUPT", "PeeledSecretsInterrupted", "*")
 	self:Death("Deaths", 240795, 240809, 240810)
 end
 
-function mod:OnEngage()
-	killedBosses = {}
+do
+	local function UpdateNameplate()
+		UpdateInfoBoxList() -- Just re-using this function as we want both UpdateNameplate and UpdateInfoBoxList on a 1sec delay from engage
 
-	self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
-	for npcId, line in next, bossList do
-		self:SetInfo("health", line, L[npcId])
-		self:SetInfoBar("health", line, 1)
-		self:SetInfo("health", line + 1, "100%")
+		local guid = mod:GetUnitIdByGUID(240809)
+		if guid then
+			mod:Nameplate(1231095, 20, guid, (">%d<"):format(peeledSecretsCount))
+		end
 	end
-	self:SimpleTimer(UpdateInfoBoxList, 1)
 
-	self:Berserk(330)
+	function mod:OnEngage()
+		peeledSecretsCount = 1
+		killedBosses = {}
+
+		self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
+		for npcId, line in next, bossList do
+			self:SetInfo("health", line, L[npcId])
+			self:SetInfoBar("health", line, 1)
+			self:SetInfo("health", line + 1, "100%")
+		end
+		self:SimpleTimer(UpdateNameplate, 1)
+
+		self:Berserk(330)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -89,16 +112,30 @@ do
 		local unit = self:GetUnitIdByGUID(args.sourceGUID)
 		if not unit or self:UnitWithinRange(unit, 10) or args.sourceGUID == self:UnitGUID("target") then
 			inRange = true
-			self:Message(args.spellId, "orange", CL.casting:format(args.spellName))
+			self:Message(args.spellId, "orange", CL.count:format(args.spellName, peeledSecretsCount))
 			self:PlaySound(args.spellId, "info")
 		else
 			inRange = false
 		end
+		self:Nameplate(args.spellId, 20, args.sourceGUID, (">%d<"):format(peeledSecretsCount))
+	end
+
+	function mod:PeeledSecretsSuccess(args)
+		peeledSecretsCount = peeledSecretsCount + 1
+		local option = self:GetOption("custom_select_interrupt_counter") + 1
+		if peeledSecretsCount == option then peeledSecretsCount = 1 end
+		self:Nameplate(args.spellId, 20, args.sourceGUID, (">%d<"):format(peeledSecretsCount))
 	end
 
 	function mod:PeeledSecretsInterrupted(args)
-		if inRange and args.extraSpellName == self:SpellName(1231095) then
-			self:Message(1231095, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+		if args.extraSpellName == self:SpellName(1231095) then
+			if inRange then
+				self:Message(1231095, "green", CL.interrupted_by:format(CL.count:format(args.extraSpellName, peeledSecretsCount), self:ColorName(args.sourceName)))
+			end
+			peeledSecretsCount = peeledSecretsCount + 1
+			local option = self:GetOption("custom_select_interrupt_counter") + 1
+			if peeledSecretsCount == option then peeledSecretsCount = 1 end
+			self:Nameplate(1231095, 20, args.destGUID, (">%d<"):format(peeledSecretsCount))
 		end
 	end
 end
