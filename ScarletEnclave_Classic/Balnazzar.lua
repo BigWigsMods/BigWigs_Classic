@@ -30,7 +30,7 @@ end
 
 function mod:GetOptions()
 	return {
-		{1231837, "SAY"}, -- Carrion Swarm
+		1231837, -- Carrion Swarm
 		{1231844, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Circle of Domination
 		1231901, -- Summon Infernal
 		"stages",
@@ -82,6 +82,7 @@ function mod:SummonInfernal(args)
 		self:PlaySound("stages", "long")
 	else
 		self:Message(args.spellId, "yellow")
+		self:PlaySound(args.spellId, "info")
 	end
 end
 
@@ -91,26 +92,9 @@ function mod:CarrionSwarm(args)
 	self:PlaySound(1231837, "alert")
 end
 
-do
-	local timer = nil
-	function mod:CarrionSwarmApplied(args)
-		if self:Me(args.destGUID) then
-			if timer then
-				self:CancelTimer(timer)
-				timer = nil
-			end
-			self:PersonalMessage(args.spellId)
-			self:Say(args.spellId, nil, nil, "Carrion Swarm")
-			timer = self:ScheduleRepeatingTimer("Say", 8, 1231837, nil, nil, "Carrion Swarm")
-			self:PlaySound(args.spellId, "warning", nil, args.destName)
-		end
-	end
-
-	function mod:CarrionSwarmRemoved(args)
-		if self:Me(args.destGUID) and timer then
-			self:CancelTimer(timer)
-			timer = nil
-		end
+function mod:CarrionSwarmApplied(args)
+	if self:Me(args.destGUID) then
+		self:PersonalMessage(args.spellId)
 	end
 end
 
@@ -119,6 +103,6 @@ function mod:CircleOfDominationApplied(args)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, CL.mind_control, nil, "Mind Control")
 		self:SayCountdown(args.spellId, 6)
-		self:PlaySound(args.spellId, "alarm", nil, args.destName)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
 end
