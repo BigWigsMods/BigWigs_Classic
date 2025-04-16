@@ -24,7 +24,7 @@ end
 
 function mod:GetOptions()
 	return {
-		--"stages",
+		"stages",
 		{1229714, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Blinding Flare
 		1229114, -- Devoted Offering
 		{1229272, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divine Conflagration
@@ -49,8 +49,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	--self:Message("stages", "cyan", CL.stage:format(1), false)
-	self:Berserk(720)
+	self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:Berserk(720, true) -- XXX FIXME starts in stage 2
 end
 
 --------------------------------------------------------------------------------
