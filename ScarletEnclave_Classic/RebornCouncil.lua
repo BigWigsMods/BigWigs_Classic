@@ -62,6 +62,7 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
+	self:Log("SPELL_CAST_SUCCESS", "UpdateMarks", 1231227, 1231200) -- Reborn Inspiration, Fireball
 	self:Log("SPELL_AURA_APPLIED", "TortuousRebukeApplied", 1231010)
 	self:Log("SPELL_CAST_START", "PeeledSecrets", 1231095)
 	self:Log("SPELL_CAST_SUCCESS", "PeeledSecretsSuccess", 1231095)
@@ -99,6 +100,17 @@ end
 -- Event Handlers
 --
 
+function mod:UpdateMarks(args)
+	self:RemoveLog("SPELL_CAST_SUCCESS", args.spellId)
+
+	local icon = self:GetIconTexture(self:GetIcon(args.sourceRaidFlags))
+	if icon then
+		local npcId = self:MobId(args.sourceGUID)
+		local line = bossList[npcId]
+		self:SetInfo("health", line, icon.. L[npcId]) -- Add raid icons to the boss names
+	end
+end
+
 function mod:TortuousRebukeApplied(args)
 	if self:Me(args.destGUID) then
 		self:Message(1231010, "blue", args.spellName.. " on YOU - Try avoid casting!")
@@ -109,6 +121,11 @@ end
 do
 	local inRange = false
 	function mod:PeeledSecrets(args)
+		local icon = self:GetIconTexture(self:GetIcon(args.sourceRaidFlags))
+		if icon then
+			self:SetInfo("health", 3, icon.. L[240809]) -- Add raid icons to the boss names
+		end
+
 		local unit = self:GetUnitIdByGUID(args.sourceGUID)
 		if not unit or self:UnitWithinRange(unit, 10) or args.sourceGUID == self:UnitGUID("target") then
 			inRange = true
