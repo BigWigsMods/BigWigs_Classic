@@ -6,6 +6,7 @@ local mod, CL = BigWigs:NewBoss("Balnazzar", 2856)
 if not mod then return end
 mod:RegisterEnableMob(240811)
 mod:SetEncounterID(3185)
+mod:SetRespawnTime(10)
 mod:SetAllowWin(true)
 mod:SetStage(1)
 
