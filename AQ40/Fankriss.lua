@@ -104,7 +104,7 @@ end
 do
 	local prev = 0
 	function mod:ToxicPoolDamage(args)
-		if self:Me(args.destGUID) and args.time - prev > 2 then
+		if self:Me(args.destGUID) and args.time - prev > 3 then
 			prev = args.time
 			self:PersonalMessage(args.spellId, "underyou")
 			self:PlaySound(args.spellId, "underyou")
