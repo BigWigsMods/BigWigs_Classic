@@ -68,7 +68,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "UnstableConcoctionApplied", 1233849)
 	self:Log("SPELL_AURA_REMOVED", "UnstableConcoctionRemoved", 1233849)
 	self:Log("SPELL_AURA_APPLIED", "IntoxicatingVenomApplied", 1233883)
-	--self:Log("SPELL_AURA_REMOVED", "IntoxicatingVenomRemoved", 1233883)
 	self:Log("SPELL_CAST_SUCCESS", "Ignite", 1234540)
 end
 
@@ -149,24 +148,18 @@ do
 	end
 	local function StopMoving()
 		if mod:IsEngaged() then
-			mod:Message(1233883, "green", CL.safe_to_stop)
+			mod:Message(1233883, "green", CL.safe_to_stop, nil, true) -- Disable emphasize
 		end
 	end
 	function mod:IntoxicatingVenomApplied(args)
 		if args.time - prev > 17 then
 			prev = args.time
 			KeepMoving()
-			self:SimpleTimer(KeepMoving, 8)
-			self:SimpleTimer(StopMoving, 15)
+			self:SimpleTimer(KeepMoving, 8) -- Midway reminder
+			self:SimpleTimer(StopMoving, 15) -- Safe
 		end
 	end
 end
-
---function mod:IntoxicatingVenomRemoved(args)
---	if self:Me(args.destGUID) then
---		self:Message(args.spellId, "green", CL.safe_to_stop, nil, true) -- Disable emphasize
---	end
---end
 
 function mod:Ignite(args)
 	self:Message(args.spellId, "yellow", CL.extra:format(args.spellName, CL.spread))
