@@ -137,8 +137,9 @@ end
 function mod:NoxiousBreathApplied(args)
 	local unit, targetUnit = self:GetUnitIdByGUID(args.sourceGUID), self:UnitTokenFromGUID(args.destGUID)
 	if unit and targetUnit and self:Tanking(unit, targetUnit) then
-		self:StackMessage(args.spellId, "purple", args.destName, args.amount, 4, CL.breath)
-		if args.amount >= 4 then
+		local amount = args.amount or 1
+		self:StackMessage(args.spellId, "purple", args.destName, amount, 4, CL.breath)
+		if amount >= 4 then
 			self:PlaySound(args.spellId, "warning", nil, args.destName)
 		end
 	end
