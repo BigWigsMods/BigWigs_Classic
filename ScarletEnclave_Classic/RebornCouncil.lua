@@ -159,6 +159,7 @@ end
 
 do
 	local unitTracker = {}
+	local currentHealth = {}
 	function mod:Deaths(args)
 		unitTracker[args.mobId] = nil
 		killedBosses[args.mobId] = true
@@ -171,6 +172,8 @@ do
 
 		if count < 3 then
 			self:Message("stages", "cyan", CL.mob_killed:format(args.destName, count, 3), false)
+		else
+			unitTracker, currentHealth = {}, {}
 		end
 	end
 
@@ -187,8 +190,11 @@ do
 		for npcId, unitToken in next, unitTracker do
 			local line = bossList[npcId]
 			local currentHealthPercent = math.floor(mod:GetHealth(unitToken))
-			mod:SetInfoBar("health", line, currentHealthPercent/100)
-			mod:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+			if currentHealthPercent ~= currentHealth[npcId] then
+				currentHealth[npcId] = currentHealthPercent
+				mod:SetInfoBar("health", line, currentHealthPercent/100)
+				mod:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+			end
 		end
 	end
 end
