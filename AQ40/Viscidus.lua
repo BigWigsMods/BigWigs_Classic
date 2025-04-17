@@ -13,6 +13,7 @@ mod:SetEncounterID(713)
 
 local swingCount = -1
 local frostCount = 0
+local frostLimit = 170
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -67,6 +68,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
+	frostLimit = self:GetSeason() == 2 and 50 or 170
 	self:CDBar(25991, 8.8) -- Poison Bolt Volley
 end
 
@@ -99,8 +101,8 @@ if mod:Vanilla() then
 	function mod:FrostDamage(args)
 		if bit.band(args.spellSchool, 0x10) == 0x10 and self:MobId(args.destGUID) == 15299 then -- 0x10 is Frost
 			frostCount = frostCount + 1
-			if frostCount < 170 and frostCount % 20 == 0 then
-				self:Message("freeze", "green", L.freeze_warn_frost:format(frostCount, 170-frostCount), L.freeze_icon)
+			if frostCount < frostLimit and frostCount % 20 == 0 then
+				self:Message("freeze", "green", L.freeze_warn_frost:format(frostCount, frostLimit-frostCount), L.freeze_icon)
 			end
 		end
 	end
@@ -155,6 +157,7 @@ end
 function mod:UNIT_TARGET(_, unit)
 	if self:MobId(self:UnitGUID(unit.."target")) == 15667 and swingCount ~= -1 then -- Glob of Viscidus
 		frostCount = 0
+		frostLimit = 170
 		self:StopBar(L.freeze_warn3)
 		self:StopBar(25991) -- Poison Bolt Volley
 		self:Message("freeze", "green", tostring(swingCount), false)
