@@ -19,6 +19,13 @@ if L then
 	L.freeze_warn_frost = "%d 冰霜攻击 - 还需%d下！"
 end
 
+L = BigWigs:NewBossLocale("Silithid Royalty", "zhCN")
+if L then
+	L[15543] = "亚尔基"
+	L[15544] = "维姆"
+	L[15511] = "克里"
+end
+
 L = BigWigs:NewBossLocale("Ouro", "zhCN")
 if L then
 	L.engage_message = "奥罗已进入战斗！90秒后可能下潜！"
