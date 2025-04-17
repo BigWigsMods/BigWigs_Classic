@@ -64,7 +64,7 @@ function mod:OnBossEnable()
 	self:Log("SWING_DAMAGE", "SwingDamage", "*")
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_EMOTE")
-	self:RegisterEvent("UNIT_TARGET")
+	self:RegisterMessage("BigWigs_UNIT_TARGET")
 end
 
 function mod:OnEngage()
@@ -154,8 +154,8 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 	end
 end
 
-function mod:UNIT_TARGET(_, unit)
-	if self:MobId(self:UnitGUID(unit.."target")) == 15667 and swingCount ~= -1 then -- Glob of Viscidus
+function mod:BigWigs_UNIT_TARGET(_, mobId)
+	if mobId == 15667 and swingCount ~= -1 then -- Glob of Viscidus
 		frostCount = 0
 		frostLimit = 170
 		self:StopBar(L.freeze_warn3)
