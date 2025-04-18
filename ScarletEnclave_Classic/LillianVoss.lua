@@ -48,6 +48,7 @@ function mod:GetOptions()
 		"berserk",
 	},nil,{
 		[1233847] = CL.pull_in, -- Scarlet Grasp (Pull In)
+		[1233901] = CL.poison, -- Noxious Poison (Poison)
 		[1233849] = L.unstableConcoctionNote, -- Unstable Concoction (Top Right/Bottom Right/Bottom Left/Top Left)
 		[1233883] = CL.keep_moving, -- Intoxicating Venom (Keep moving)
 		[1234540] = CL.spread, -- Ignite (Spread)
@@ -94,8 +95,8 @@ end
 
 function mod:NoxiousPoisonApplied(args)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId)
-		self:Say(args.spellId, nil, nil, "Noxious Poison")
+		self:PersonalMessage(args.spellId, nil, CL.poison)
+		self:Say(args.spellId, CL.poison, nil, "Poison")
 		self:SayCountdown(args.spellId, 8)
 		self:PlaySound(args.spellId, "alarm", nil, args.destName)
 	end
