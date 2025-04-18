@@ -29,11 +29,14 @@ function mod:GetOptions()
 		1230200, -- Enervate
 		1230242, -- Enkindle
 		"berserk",
+	},nil,{
+		[1230105] = CL.frontal_cone, -- Wild Aperture (Frontal Cone)
 	}
 end
 
 function mod:OnRegister()
 	self.displayName = L.bossName
+	self:SetSpellRename(1230105, CL.frontal_cone) -- Wild Aperture (Frontal Cone)
 end
 
 function mod:OnBossEnable()
@@ -45,7 +48,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:CDBar(1230105, 6.8) -- Wild Aperture
+	self:CDBar(1230105, 6.8, CL.frontal_cone) -- Wild Aperture
 	self:CDBar(1230200, 16.1) -- Enervate
 	self:CDBar(1228295, 21.4) -- Stomp
 	self:Berserk(360)
@@ -56,9 +59,9 @@ end
 --
 
 function mod:WildAperture(args)
-	self:CDBar(args.spellId, 17.8)
-	self:Message(args.spellId, "orange")
-	self:PlaySound(args.spellId, "alarm")
+	self:CDBar(args.spellId, 17.8, CL.frontal_cone)
+	self:Message(args.spellId, "orange", CL.frontal_cone)
+	self:PlaySound(args.spellId, "warning")
 end
 
 function mod:Enervate(args)
@@ -69,15 +72,19 @@ function mod:EnervateOrEnkindleApplied(args)
 	if self:Me(args.destGUID) then
 		if args.amount then
 			self:StackMessage(args.spellId, "blue", args.destName, args.amount, 1)
+			self:PlaySound(args.spellId, "info", nil, args.destName)
 		else
 			self:PersonalMessage(args.spellId)
 		end
-		self:PlaySound(args.spellId, "info", nil, args.destName)
 	end
 end
 
 function mod:Stomp(args)
 	self:CDBar(args.spellId, 21)
-	self:Message(args.spellId, "red")
-	self:PlaySound(args.spellId, "alert")
+
+	local unit = self:GetUnitIdByGUID(args.sourceGUID)
+	if not unit or self:UnitWithinRange(unit, 20) then
+		self:Message(args.spellId, "red")
+		self:PlaySound(args.spellId, "alert")
+	end
 end
