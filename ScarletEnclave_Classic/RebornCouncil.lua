@@ -48,7 +48,6 @@ end
 
 function mod:GetOptions()
 	return {
-		1231010, -- Tortuous Rebuke
 		{1231095, "NAMEPLATE"}, -- Peeled Secrets
 		"custom_select_interrupt_counter",
 		"stages",
@@ -62,8 +61,7 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "UpdateMarks", 1231227, 1231200) -- Reborn Inspiration, Fireball
-	self:Log("SPELL_AURA_APPLIED", "TortuousRebukeApplied", 1231010)
+	self:Log("SPELL_CAST_SUCCESS", "UpdateMarks", 1231227, 1231200, 1236220) -- Reborn Inspiration, Fireball, Slow
 	self:Log("SPELL_CAST_START", "PeeledSecrets", 1231095)
 	self:Log("SPELL_CAST_SUCCESS", "PeeledSecretsSuccess", 1231095)
 	self:Log("SPELL_INTERRUPT", "PeeledSecretsInterrupted", "*")
@@ -108,13 +106,6 @@ function mod:UpdateMarks(args)
 		local npcId = self:MobId(args.sourceGUID)
 		local line = bossList[npcId]
 		self:SetInfo("health", line, icon.. L[npcId]) -- Add raid icons to the boss names
-	end
-end
-
-function mod:TortuousRebukeApplied(args)
-	if self:Me(args.destGUID) then
-		self:Message(1231010, "blue", args.spellName.. " on YOU - Try avoid casting!")
-		self:PlaySound(1231010, "warning", nil, args.destName)
 	end
 end
 
