@@ -139,7 +139,7 @@ do
 
 	function mod:PeeledSecretsSuccess(args)
 		peeledSecretsCount = peeledSecretsCount + 1
-		local option = self:GetOption("custom_select_interrupt_counter") + 1
+		local option = self:GetOption("custom_select_interrupt_counter") + 2
 		if peeledSecretsCount == option then peeledSecretsCount = 1 end
 		self:Nameplate(args.spellId, 20, args.sourceGUID, (">%d<"):format(peeledSecretsCount))
 	end
@@ -150,7 +150,7 @@ do
 				self:Message(1231095, "green", CL.interrupted_by:format(CL.count:format(args.extraSpellName, peeledSecretsCount), self:ColorName(args.sourceName)))
 			end
 			peeledSecretsCount = peeledSecretsCount + 1
-			local option = self:GetOption("custom_select_interrupt_counter") + 1
+			local option = self:GetOption("custom_select_interrupt_counter") + 2
 			if peeledSecretsCount == option then peeledSecretsCount = 1 end
 			self:Nameplate(1231095, 20, args.destGUID, (">%d<"):format(peeledSecretsCount))
 		end
