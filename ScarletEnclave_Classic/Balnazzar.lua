@@ -31,18 +31,28 @@ end
 
 function mod:GetOptions()
 	return {
+		-- Balnazzar
 		1231837, -- Carrion Swarm
 		{1231844, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Circle of Domination
 		1231901, -- Summon Infernal
 		"stages",
 		"berserk",
-	},nil,{
+		-- Screeching Terror
+		{1231885, "NAMEPLATE"}, -- Screeching Fear
+	},{
+		[1231837] = L.bossName, -- Balnazzar
+		[1231885] = 1231842, -- Screeching Terror
+	},{
 		[1231844] = CL.mind_control, -- Circle of Domination (Mind Control)
 	}
 end
 
 function mod:OnRegister()
 	self.displayName = L.bossName
+end
+
+function mod:VerifyEnable(unit)
+	return self:GetHealth(unit) > 8
 end
 
 function mod:OnBossEnable()
@@ -52,6 +62,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "CarrionSwarmApplied", 1231837)
 	self:Log("SPELL_AURA_REFRESH", "CarrionSwarmApplied", 1231837)
 	self:Log("SPELL_AURA_APPLIED", "CircleOfDominationApplied", 1231844)
+	self:Log("SPELL_CAST_START", "ScreechingFear", 1231885)
 end
 
 function mod:OnEngage()
@@ -105,4 +116,8 @@ function mod:CircleOfDominationApplied(args)
 		self:SayCountdown(args.spellId, 6)
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
+end
+
+function mod:ScreechingFear(args)
+	self:Nameplate(args.spellId, 11.3, args.sourceGUID)
 end
