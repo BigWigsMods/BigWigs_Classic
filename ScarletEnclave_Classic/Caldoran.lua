@@ -29,15 +29,18 @@ function mod:GetOptions()
 		1229114, -- Devoted Offering
 		{1229272, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divine Conflagration
 		1229503, -- Execution Sentence
+		1231027, -- Darkgraven Blade
 		"berserk",
 	},nil,{
 		[1229714] = CL.blind, -- Blinding Flare (Blind)
+		[1231027] = CL.you_die, -- Darkgraven Blade (You die)
 	}
 end
 
 function mod:OnRegister()
 	self.displayName = L.bossName
 	self:SetSpellRename(1229714, CL.blind) -- Blinding Flare (Blind)
+	--self:SetSpellRename(1231027, CL.you_die) -- Darkgraven Blade (You die)
 end
 
 function mod:OnBossEnable()
@@ -46,11 +49,13 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "DivineConflagrationApplied", 1229272)
 	self:Log("SPELL_AURA_REMOVED", "DivineConflagrationRemoved", 1229272)
 	self:Log("SPELL_AURA_APPLIED", "ExecutionSentenceApplied", 1229503)
+	self:Log("SPELL_CAST_SUCCESS", "ConjurePortal", 1230333)
+	self:Log("SPELL_CAST_START", "DarkgravenBlade", 1231027)
 end
 
 function mod:OnEngage()
 	self:Message("stages", "cyan", CL.stage:format(1), false)
-	self:Berserk(720, true) -- XXX FIXME starts in stage 2
+	self:CDBar(1229714, 27) -- Blinding Flare
 end
 
 --------------------------------------------------------------------------------
@@ -60,6 +65,7 @@ end
 function mod:BlindingFlare(args)
 	self:Message(args.spellId, "red", CL.blind)
 	self:CastBar(args.spellId, 3)
+	self:CDBar(args.spellId, 29.1)
 	self:PlaySound(args.spellId, "warning")
 end
 
@@ -92,4 +98,15 @@ end
 function mod:ExecutionSentenceApplied(args)
 	self:TargetMessage(args.spellId, "purple", args.destName)
 	self:PlaySound(args.spellId, "info")
+end
+
+function mod:ConjurePortal()
+	self:StopBar(1229714) -- Blinding Flare
+	self:Berserk(330, true) -- XXX FIXME, starts in stage 2 but we need a better event than this
+end
+
+function mod:DarkgravenBlade(args)
+	self:Message(args.spellId, "yellow", CL.you_die_sec:format(60))
+	self:Bar(args.spellId, 60, CL.you_die)
+	self:PlaySound(args.spellId, "long")
 end
