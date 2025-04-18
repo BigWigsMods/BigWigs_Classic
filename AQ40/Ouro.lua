@@ -13,6 +13,7 @@ mod:SetRespawnTime(70)
 --
 
 local scarabCount = 0
+local earlySubmergeCheck = GetTime()
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -20,14 +21,12 @@ local scarabCount = 0
 
 local L = mod:GetLocale()
 if L then
-	L.engage_message = "Ouro engaged! Possible Submerge in 90sec!"
-	L.possible_submerge_bar = "Possible submerge"
-
 	L.emerge_message = "Ouro has emerged"
 	L.emerge_bar = "Emerge"
 
 	L.submerge_message = "Ouro has submerged"
 	L.submerge_bar = "Submerge"
+	L.submerge_early_message = "Early Submerge - No one was in range"
 
 	L.scarab = "Scarab Despawn"
 	L.scarab_desc = "Warn for Scarab Despawn."
@@ -80,9 +79,8 @@ end
 
 function mod:OnEngage()
 	scarabCount = 0
+	earlySubmergeCheck = GetTime()
 	self:RegisterEvent("UNIT_HEALTH")
-	self:Message("stages", "yellow", L.engage_message, false)
-	self:Bar("stages", 90, L.possible_submerge_bar, "misc_arrowdown")
 	self:Bar("stages", 180, L.submerge_bar, "misc_arrowdown")
 	self:CDBar(26103, 22.6, CL.knockback) -- Sweep
 	self:CDBar(26102, 24.2) -- Sand Blast
@@ -110,7 +108,6 @@ function mod:SandBlast(args)
 end
 
 function mod:BerserkApplied(args)
-	self:StopBar(L.possible_submerge_bar)
 	self:StopBar(L.submerge_bar)
 	self:RemoveLog("SPELL_SUMMON", 26060) -- Summon Ouro Scarabs (Emerge) | He summons scarabs regularly after berserk without submerging
 	self:Message(args.spellId, "yellow", CL.percent:format(20, args.spellName))
@@ -120,7 +117,6 @@ end
 function mod:SummonOuroMounds() -- Submerge
 	self:CancelDelayedMessage(CL.custom_sec:format(CL.knockback, 5)) -- Sweep
 	self:CancelDelayedMessage(CL.custom_sec:format(self:SpellName(26102), 5)) -- Sand Blast
-	self:StopBar(L.possible_submerge_bar)
 	self:StopBar(L.submerge_bar)
 	self:StopBar(CL.knockback) -- Sweep
 	self:StopBar(26102) -- Sand Blast
@@ -128,9 +124,14 @@ function mod:SummonOuroMounds() -- Submerge
 		self:StopBar(CL.fear) -- Blinding Admiration
 	end
 
-	self:Message("stages", "cyan", L.submerge_message, "misc_arrowdown")
-	self:Bar("stages", 30, L.emerge_bar, "misc_arrowlup")
+	local t = GetTime()
+	if t - earlySubmergeCheck > 170 then
+		self:Message("stages", "cyan", L.submerge_message, "misc_arrowdown")
+	else
+		self:Message("stages", "cyan", L.submerge_early_message, "misc_arrowdown")
+	end
 
+	self:Bar("stages", 30, L.emerge_bar, "misc_arrowlup")
 	self:PlaySound("stages", "long")
 end
 
@@ -139,10 +140,10 @@ do
 	function mod:SummonOuroScarabs(args) -- Emerge
 		if args.time - prev > 5 then
 			prev = args.time
+			earlySubmergeCheck = GetTime()
 			self:StopBar(L.emerge_bar)
 
 			self:Message("stages", "cyan", L.emerge_message, "misc_arrowlup")
-			self:Bar("stages", 90, L.possible_submerge_bar, "misc_arrowdown")
 			self:Bar("stages", 180, L.submerge_bar, "misc_arrowdown")
 
 			-- Sweep

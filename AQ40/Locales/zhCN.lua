@@ -28,14 +28,12 @@ end
 
 L = BigWigs:NewBossLocale("Ouro", "zhCN")
 if L then
-	L.engage_message = "奥罗已进入战斗！90秒后可能下潜！"
-	L.possible_submerge_bar = "可能下潜"
-
 	L.emerge_message = "奥罗已出现"
 	L.emerge_bar = "奥罗出现"
 
 	L.submerge_message = "奥罗已下潜"
 	L.submerge_bar = "奥罗下潜"
+	--L.submerge_early_message = "Early Submerge - No one was in range"
 
 	L.scarab = "甲虫消失"
 	L.scarab_desc = "当甲虫消失时发出警报。"
