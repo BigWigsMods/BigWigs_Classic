@@ -111,7 +111,7 @@ do
 	local inRange = false
 	function mod:IgniteFlesh(args)
 		local unit = self:GetUnitIdByGUID(args.sourceGUID)
-		if not unit or self:UnitWithinRange(unit, 10) or args.sourceGUID == self:UnitGUID("target") then
+		if (unit and self:UnitWithinRange(unit, 10)) or args.sourceGUID == self:UnitGUID("target") then
 			inRange = true
 			self:Message(args.spellId, "yellow", CL.casting:format(args.spellName))
 			self:PlaySound(args.spellId, "info")
