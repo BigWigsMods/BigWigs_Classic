@@ -145,7 +145,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 		swingCount = 0
 		self:StopBar(25991) -- Poison Bolt Volley
 		self:Message("freeze", "red", CL.count:format(L.freeze_warn3, frostCount), L.freeze_icon)
-		self:Bar("freeze", 30, L.freeze_warn3, L.freeze_icon)
+		self:Bar("freeze", 15, L.freeze_warn3, L.freeze_icon)
 		frostCount = 999
 	elseif msg:find(L.freeze_trigger4, nil, true) and not self:Vanilla() then
 		self:Message("freeze", "orange", CL.count:format(L.freeze_warn4, swingCount), L.freeze_icon)
