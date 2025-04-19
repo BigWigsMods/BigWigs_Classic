@@ -178,8 +178,10 @@ end
 
 do
 	local unitTracker = {}
+	local currentHealth = {}
 	function mod:Deaths(args)
 		unitTracker[args.mobId] = nil
+		currentHealth[args.mobId] = nil
 		killedBosses[args.mobId] = true
 
 		local line = bossList[args.mobId]
@@ -203,8 +205,11 @@ do
 		for npcId, unitToken in next, unitTracker do
 			local line = bossList[npcId]
 			local currentHealthPercent = math.floor(mod:GetHealth(unitToken))
-			mod:SetInfoBar("health", line, currentHealthPercent/100)
-			mod:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+			if currentHealthPercent ~= currentHealth[npcId] then
+				currentHealth[npcId] = currentHealthPercent
+				mod:SetInfoBar("health", line, currentHealthPercent/100)
+				mod:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+			end
 		end
 	end
 end
