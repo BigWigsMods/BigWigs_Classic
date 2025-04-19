@@ -34,14 +34,18 @@ function mod:GetOptions()
 		1228063, -- Cremation
 		whelpMarker,
 		"berserk",
+	},nil,{
+		[1231993] = CL.breath, -- Tarnished Breath (Breath)
 	}
 end
 
 function mod:OnRegister()
 	self.displayName = L.bossName
+	self:SetSpellRename(1231993, CL.breath) -- Tarnished Breath (Breath)
 end
 
 function mod:OnBossEnable()
+	self:Log("SPELL_CAST_START", "TarnishedBreath", 1231993)
 	self:Log("SPELL_AURA_APPLIED", "TarnishedBreathApplied", 1231993)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "TarnishedBreathApplied", 1231993)
 	self:Log("SPELL_CAST_START", "Lightforge", 1227520)
@@ -57,23 +61,28 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:Berserk(480, true) -- No engage message
+	self:CDBar(1231993, 11.2, CL.breath) -- Tarnished Breath
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
 
+function mod:TarnishedBreath(args)
+	self:CDBar(args.spellId, 13, CL.breath)
+end
+
 function mod:TarnishedBreathApplied(args)
 	if self:Me(args.destGUID) then
 		local amount = args.amount or 1
-		self:StackMessage(args.spellId, "blue", args.destName, amount, 2)
+		self:StackMessage(args.spellId, "blue", args.destName, amount, 2, CL.breath)
 		if amount >= 2 then
 			self:PlaySound(args.spellId, "alert")
 		end
 	elseif self:Player(args.destFlags) then -- Players, not pets
 		local bossUnit, targetUnit = self:GetUnitIdByGUID(args.sourceGUID), self:UnitTokenFromGUID(args.destGUID)
 		if bossUnit and targetUnit and self:Tanking(bossUnit, targetUnit) then
-			self:StackMessage(args.spellId, "purple", args.destName, args.amount, 2)
+			self:StackMessage(args.spellId, "purple", args.destName, args.amount, 2, CL.breath)
 		end
 	end
 end
