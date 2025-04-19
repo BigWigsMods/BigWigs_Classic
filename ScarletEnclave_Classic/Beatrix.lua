@@ -16,6 +16,16 @@ mod:SetStage(1)
 local L = mod:GetLocale()
 if L then
 	L.bossName = "High Commander Beatrix"
+
+	L.meteor = CL.meteor
+	L.meteor_desc = 28884
+	L.meteor_icon = "spell_fire_meteorstorm"
+	L.meteor_yell_trigger = "As you wish" -- As you wish, High Commander!
+
+	L.waves = CL.waves
+	L.waves_icon = "spell_holy_prayerofhealing"
+	L.waves_footmen_yell_trigger = "Form up" -- Form up and hold the line!
+	L.waves_cavalry_yell_trigger = "Ready your lances" -- Understod! Ready your lances!
 end
 
 --------------------------------------------------------------------------------
@@ -24,6 +34,8 @@ end
 
 function mod:GetOptions()
 	return {
+		"meteor",
+		"waves",
 		{1232390, "ME_ONLY_EMPHASIZE"}, -- Rose's Thorn
 		1232389, -- Unwavering Blade
 		"stages",
@@ -40,6 +52,7 @@ end
 function mod:OnBossEnable()
 	self:RegisterMessage("BigWigs_UNIT_TARGET")
 	self:RegisterEvent("NAME_PLATE_UNIT_ADDED")
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	self:Log("SPELL_CAST_SUCCESS", "RosesThorn", 1232390)
 	self:Log("SPELL_AURA_APPLIED", "RosesThornApplied", 1232390)
 	self:Log("SPELL_CAST_SUCCESS", "UnwaveringBlade", 1232389)
@@ -59,10 +72,11 @@ end
 --
 
 function mod:BigWigs_UNIT_TARGET(_, mobId, unitTarget)
-	if mobId == 240812 and self:GetStage() ~= 2 and UnitAffectingCombat(unitTarget) then -- High Commander Beatrix
+	if mobId == 240812 and self:GetStage() ~= 2 and UnitCanAttack(unitTarget, "player") then -- High Commander Beatrix
 		self:SetStage(2)
 		local msg = CL.stage:format(2)
 		self:StopBar(msg)
+		self:CDBar(1232389, 16, CL.tank_debuff) -- Unwavering Blade
 		self:Message("stages", "cyan", msg, false)
 		self:PlaySound("stages", "long")
 	end
@@ -73,8 +87,25 @@ function mod:NAME_PLATE_UNIT_ADDED(_, unit)
 		self:SetStage(2)
 		local msg = CL.stage:format(2)
 		self:StopBar(msg)
+		self:CDBar(1232389, 16, CL.tank_debuff) -- Unwavering Blade
 		self:Message("stages", "cyan", msg, false)
 		self:PlaySound("stages", "long")
+	end
+end
+
+function mod:CHAT_MSG_MONSTER_YELL(_, msg)
+	if msg:find(L.meteor_yell_trigger, nil, true) then
+		self:Message("meteor", "orange", L.meteor, L.meteor_icon)
+		self:Bar("meteor", 16, L.meteor, L.meteor_icon)
+		self:PlaySound("meteor", "alert")
+	elseif msg:find(L.waves_footmen_yell_trigger, nil, true) then
+		self:Message("waves", "yellow", L.waves, L.waves_icon)
+		self:Bar("waves", 30, L.waves, L.waves_icon)
+		self:PlaySound("waves", "info")
+	elseif msg:find(L.waves_cavalry_yell_trigger, nil, true) then
+		self:Message("waves", "yellow", L.waves, L.waves_icon)
+		self:Bar("waves", 18, L.waves, L.waves_icon)
+		self:PlaySound("waves", "info")
 	end
 end
 
