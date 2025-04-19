@@ -63,6 +63,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REFRESH", "CarrionSwarmApplied", 1231837)
 	self:Log("SPELL_AURA_APPLIED", "CircleOfDominationApplied", 1231844)
 	self:Log("SPELL_CAST_START", "ScreechingFear", 1231885)
+	self:Death("ScreechingTerrorDeath", 243007)
 end
 
 function mod:OnEngage()
@@ -120,4 +121,8 @@ end
 
 function mod:ScreechingFear(args)
 	self:Nameplate(args.spellId, 11.3, args.sourceGUID)
+end
+
+function mod:ScreechingTerrorDeath(args)
+	self:StopNameplate(1231885, args.destGUID)
 end
