@@ -18,6 +18,7 @@ local L = mod:GetLocale()
 if L then
 	L.bossName = "Solistrasza"
 	L.whelps = CL.whelps
+	L.adds_icon = "inv_misc_head_dragon_01"
 end
 
 --------------------------------------------------------------------------------
@@ -51,6 +52,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Lightforge", 1227520)
 	self:Log("SPELL_CAST_START", "HallowedDive", 1227696)
 	self:Log("SPELL_CAST_SUCCESS", "AberrantBloat", 1232333)
+	self:Log("SPELL_CAST_SUCCESS", "UnstableDetonation", 1232332)
 	self:Log("SPELL_CAST_START", "Cremation", 1228044)
 	self:Log("SPELL_AURA_APPLIED", "CremationDamage", 1228063)
 	self:Log("SPELL_PERIODIC_DAMAGE", "CremationDamage", 1228063)
@@ -111,13 +113,14 @@ do
 		end
 	end
 
-	local prev, iconToUse = 0, 8
+	local prev, iconToUse, addsAlive = 0, 8, 3
 	function mod:AberrantBloat(args)
 		if self:IsEngaged() then -- Cast by trash
 			if args.time - prev > 10 then
 				prev = args.time
 				guidCollector = {}
 				iconToUse = 8
+				addsAlive = 3
 			end
 			if self:GetOption(whelpMarker) then
 				guidCollector[args.sourceGUID] = iconToUse
@@ -125,8 +128,18 @@ do
 			end
 			iconToUse = iconToUse - 1
 			if iconToUse == 7 then
-				self:Message("adds", "cyan", CL.adds_spawned, false)
+				self:Message("adds", "cyan", CL.adds_spawned, L.adds_icon)
+				self:Bar("adds", 30, CL.extra:format(CL.explosion, CL.adds), L.adds_icon)
 				self:PlaySound("adds", "info")
+			end
+		end
+	end
+
+	function mod:UnstableDetonation(args)
+		if self:IsEngaged() then -- Cast by trash
+			addsAlive = addsAlive - 1
+			if addsAlive == 0 then
+				self:StopBar(CL.extra:format(CL.explosion, CL.adds))
 			end
 		end
 	end
