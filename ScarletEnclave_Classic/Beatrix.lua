@@ -99,11 +99,11 @@ function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 		self:Bar("meteor", 16, L.meteor, L.meteor_icon)
 		self:PlaySound("meteor", "alert")
 	elseif msg:find(L.waves_footmen_yell_trigger, nil, true) then
-		self:Message("waves", "yellow", L.waves, L.waves_icon)
+		self:Message("waves", "yellow", CL.incoming:format(L.waves), L.waves_icon)
 		self:Bar("waves", 30, L.waves, L.waves_icon)
 		self:PlaySound("waves", "info")
 	elseif msg:find(L.waves_cavalry_yell_trigger, nil, true) then
-		self:Message("waves", "yellow", L.waves, L.waves_icon)
+		self:Message("waves", "yellow", CL.incoming:format(L.waves), L.waves_icon)
 		self:Bar("waves", 18, L.waves, L.waves_icon)
 		self:PlaySound("waves", "info")
 	end
