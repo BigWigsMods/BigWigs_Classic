@@ -63,7 +63,7 @@ function mod:OnEngage()
 	nextTidal = 75
 	curseCount = 0
 	curseTime = 0
-	self:Berserk(360)
+	self:Berserk(420)
 end
 
 --------------------------------------------------------------------------------
