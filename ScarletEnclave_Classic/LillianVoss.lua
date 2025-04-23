@@ -126,7 +126,7 @@ do
 		if self:Me(args.destGUID) then
 			self:PersonalMessage(args.spellId, false, CL.you_icon:format(directions[markerCount], markerCount))
 			self:Say(args.spellId, CL.rticon:format(directions[markerCount], markerCount), nil, ("%s ({rt%d})"):format(englishDirections[markerCount], markerCount))
-			self:SayCountdown(args.spellId, 7)
+			self:SayCountdown(args.spellId, 7, markerCount)
 			self:PlaySound(args.spellId, "alert", nil, args.destName)
 		end
 	end
