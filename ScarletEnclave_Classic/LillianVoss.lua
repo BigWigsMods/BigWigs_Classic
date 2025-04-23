@@ -76,7 +76,7 @@ function mod:OnEngage()
 	markerCount = 0
 	self:CDBar(1233849, 30) -- Unstable Concoction
 	self:CDBar(1233847, 34, CL.pull_in) -- Scarlet Grasp
-	self:Berserk(180)
+	self:Berserk(240)
 end
 
 --------------------------------------------------------------------------------
@@ -125,8 +125,8 @@ do
 		self:CustomIcon(unstableConcoctionMarker, args.destName, markerCount)
 		if self:Me(args.destGUID) then
 			self:PersonalMessage(args.spellId, false, CL.you_icon:format(directions[markerCount], markerCount))
-			self:Say(args.spellId, CL.rticon:format(directions[markerCount], markerCount), nil, ("%s ({rt%d})"):format(englishDirections, markerCount))
-			self:SayCountdown(args.spellId, 7, CL.rticon:format(directions[markerCount], markerCount), nil, ("%s ({rt%d})"):format(englishDirections, markerCount))
+			self:Say(args.spellId, CL.rticon:format(directions[markerCount], markerCount), nil, ("%s ({rt%d})"):format(englishDirections[markerCount], markerCount))
+			self:SayCountdown(args.spellId, 7)
 			self:PlaySound(args.spellId, "alert", nil, args.destName)
 		end
 	end
