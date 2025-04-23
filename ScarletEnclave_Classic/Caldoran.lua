@@ -114,11 +114,11 @@ end
 
 function mod:DyingLight(args)
 	self:SetStage(2.5)
-	self:CDBar("stages", 20, CL.intermission, args.spellId)
+	self:Bar("stages", 20, CL.intermission, args.spellId)
 end
 
 function mod:DyingLightSuccess(args)
-	self:CDBar("stages", 20, CL.stage:format(3), args.spellId)
+	self:Bar("stages", 20, CL.stage:format(3), args.spellId)
 end
 
 function mod:ConjurePortal()
