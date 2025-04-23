@@ -97,7 +97,7 @@ BigWigs:AddColors("Ouro", {
 	[26103] = "orange",
 	[26615] = {"green","yellow"},
 	[1215744] = "yellow",
-	["stages"] = {"cyan","yellow"},
+	["stages"] = "cyan",
 })
 
 BigWigs:AddSounds("Ouro", {
