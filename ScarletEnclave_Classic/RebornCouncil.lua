@@ -13,6 +13,7 @@ mod:SetAllowWin(true)
 -- Locals
 --
 
+local wwThrottle = false
 local peeledSecretsCount = 1
 local killedBosses = {}
 local UpdateInfoBoxList
@@ -50,9 +51,12 @@ function mod:GetOptions()
 	return {
 		{1231095, "NAMEPLATE"}, -- Peeled Secrets
 		"custom_select_interrupt_counter",
+		{1231264, "CASTBAR"}, -- Blades of Light
 		"stages",
 		{"health", "INFOBOX"},
 		"berserk",
+	},nil,{
+		[1231264] = mod:SpellName(1680), -- Blades of Light (Whirlwind)
 	}
 end
 
@@ -62,6 +66,8 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "UpdateMarks", 1231227, 1231200, 1236220) -- Reborn Inspiration, Fireball, Slow
+	self:Log("SPELL_CAST_START", "BladesOfLight", 1231264)
+	self:Log("SPELL_CAST_SUCCESS", "BladesOfLightSuccess", 1231264)
 	self:Log("SPELL_CAST_START", "PeeledSecrets", 1231095)
 	self:Log("SPELL_CAST_SUCCESS", "PeeledSecretsSuccess", 1231095)
 	self:Log("SPELL_INTERRUPT", "PeeledSecretsInterrupted", "*")
@@ -79,6 +85,7 @@ do
 	end
 
 	function mod:OnEngage()
+		wwThrottle = false
 		peeledSecretsCount = 1
 		killedBosses = {}
 
@@ -106,6 +113,23 @@ function mod:UpdateMarks(args)
 		local npcId = self:MobId(args.sourceGUID)
 		local line = bossList[npcId]
 		self:SetInfo("health", line, icon.. L[npcId]) -- Add raid icons to the boss names
+	end
+end
+
+function mod:BladesOfLight(args)
+	self:StopBar(mod:SpellName(1680))
+	local unit = self:GetUnitIdByGUID(args.sourceGUID)
+	if unit and self:UnitWithinRange(unit, 10) then
+		self:Message(args.spellId, "yellow", self:SpellName(1680))
+		self:PlaySound(args.spellId, "warning")
+	end
+end
+
+function mod:BladesOfLightSuccess(args)
+	wwThrottle = false
+	local unit = self:GetUnitIdByGUID(args.sourceGUID)
+	if unit and self:UnitWithinRange(unit, 10) then
+		self:CastBar(args.spellId, 6, self:SpellName(1680))
 	end
 end
 
@@ -185,6 +209,15 @@ do
 				currentHealth[npcId] = currentHealthPercent
 				mod:SetInfoBar("health", line, currentHealthPercent/100)
 				mod:SetInfo("health", line + 1, ("%d%%"):format(currentHealthPercent))
+			end
+
+			-- Sticking the rage check into the health check
+			if npcId == 240795 and not wwThrottle then
+				local power = UnitPower(unitToken) / UnitPowerMax(unitToken) * 100
+				if power >= 85 then
+					wwThrottle = true
+					mod:CDBar(1231264, 5, mod:SpellName(1680)) -- Blades of Light (Whirlwind)
+				end
 			end
 		end
 	end
