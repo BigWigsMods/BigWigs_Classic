@@ -128,10 +128,25 @@ function mod:ConjurePortal()
 	self:PlaySound("stages", "long")
 end
 
-function mod:DarkgravenBlade(args)
-	self:SetStage(4)
-	self:StopBar(CL.blind) -- Blinding Flare
-	self:Message(args.spellId, "yellow", CL.you_die_sec:format(60))
-	self:Bar(args.spellId, 60, CL.you_die)
-	self:PlaySound(args.spellId, "long")
+do
+	local function RegisterYell()
+		mod:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+	end
+
+	function mod:DarkgravenBlade(args)
+		self:SetStage(4)
+		self:StopBar(CL.blind) -- Blinding Flare
+		self:Message(args.spellId, "yellow", CL.you_die_sec:format(60))
+		self:Bar(args.spellId, 60, CL.you_die)
+		self:ScheduleTimer(RegisterYell, 2)
+		self:PlaySound(args.spellId, "long")
+	end
+end
+
+function mod:CHAT_MSG_MONSTER_YELL(event)
+	self:UnregisterEvent(event)
+	self:SetStage(5)
+	self:StopBar(CL.you_die)
+	self:Message("stages", "cyan", CL.stage:format(5), false)
+	self:PlaySound("stages", "long")
 end
