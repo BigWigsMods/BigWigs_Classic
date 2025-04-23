@@ -90,7 +90,7 @@ do
 		end
 		self:SimpleTimer(UpdateNameplate, 1)
 
-		self:Berserk(330)
+		self:Berserk(420)
 	end
 end
 
