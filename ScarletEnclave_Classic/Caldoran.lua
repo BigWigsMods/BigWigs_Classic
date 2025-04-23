@@ -8,6 +8,7 @@ mod:RegisterEnableMob(241006)
 mod:SetEncounterID(3189)
 mod:SetRespawnTime(12)
 mod:SetAllowWin(true)
+mod:SetStage(1)
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -49,13 +50,17 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "DivineConflagrationApplied", 1229272)
 	self:Log("SPELL_AURA_REMOVED", "DivineConflagrationRemoved", 1229272)
 	self:Log("SPELL_AURA_APPLIED", "ExecutionSentenceApplied", 1229503)
+	self:Log("SPELL_CAST_SUCCESS", "WrathOfTheCrusade", 1230125)
+	self:Log("SPELL_CAST_START", "DyingLight", 1230271)
+	self:Log("SPELL_CAST_SUCCESS", "DyingLightSuccess", 1230271)
 	self:Log("SPELL_CAST_SUCCESS", "ConjurePortal", 1230333)
 	self:Log("SPELL_CAST_START", "DarkgravenBlade", 1231027)
 end
 
 function mod:OnEngage()
+	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
-	self:CDBar(1229714, 27) -- Blinding Flare
+	self:CDBar(1229714, 27, CL.blind) -- Blinding Flare
 end
 
 --------------------------------------------------------------------------------
@@ -64,8 +69,8 @@ end
 
 function mod:BlindingFlare(args)
 	self:Message(args.spellId, "red", CL.blind)
-	self:CastBar(args.spellId, 3)
-	self:CDBar(args.spellId, 29.1)
+	self:CastBar(args.spellId, 3, CL.blind)
+	self:CDBar(args.spellId, 29.1, CL.blind)
 	self:PlaySound(args.spellId, "warning")
 end
 
@@ -75,7 +80,7 @@ do
 		if args.time - prev > 2 then
 			prev = args.time
 			self:Message(args.spellId, "yellow")
-			self:PlaySound(args.spellId, "long")
+			self:PlaySound(args.spellId, "alert")
 		end
 	end
 end
@@ -100,12 +105,32 @@ function mod:ExecutionSentenceApplied(args)
 	self:PlaySound(args.spellId, "info")
 end
 
+function mod:WrathOfTheCrusade()
+	self:SetStage(2)
+	self:StopBar(CL.blind) -- Blinding Flare
+	self:Message("stages", "cyan", CL.percent:format(55, CL.stage:format(2)), false)
+	self:PlaySound("stages", "long")
+end
+
+function mod:DyingLight(args)
+	self:SetStage(2.5)
+	self:CDBar("stages", 20, CL.intermission, args.spellId)
+end
+
+function mod:DyingLightSuccess(args)
+	self:CDBar("stages", 20, CL.stage:format(3), args.spellId)
+end
+
 function mod:ConjurePortal()
-	self:StopBar(1229714) -- Blinding Flare
+	self:SetStage(3)
 	self:Berserk(330, true) -- XXX FIXME, starts in stage 2 but we need a better event than this
+	self:Message("stages", "cyan", CL.stage:format(3), false)
+	self:PlaySound("stages", "long")
 end
 
 function mod:DarkgravenBlade(args)
+	self:SetStage(4)
+	self:StopBar(CL.blind) -- Blinding Flare
 	self:Message(args.spellId, "yellow", CL.you_die_sec:format(60))
 	self:Bar(args.spellId, 60, CL.you_die)
 	self:PlaySound(args.spellId, "long")
