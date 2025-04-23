@@ -38,8 +38,6 @@ end
 L = BigWigs:NewBossLocale("Hakkar", "itIT")
 if L then
 	L.bossName = "Hakkar"
-
-	-- L.mc_bar = "MC: %s"
 end
 
 L = BigWigs:NewBossLocale("Bloodlord Mandokir", "itIT")
