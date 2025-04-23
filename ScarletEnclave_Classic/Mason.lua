@@ -72,6 +72,7 @@ end
 
 function mod:DrowningShallows(args)
 	curseTime = args.time
+	curseCount = 0
 	self:Message(args.spellId, "orange", CL.curse)
 	self:PlaySound(args.spellId, "alert")
 end
