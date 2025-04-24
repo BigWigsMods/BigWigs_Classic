@@ -84,7 +84,7 @@ function mod:OnEngage()
 	self:Bar("stages", 180, L.submerge_bar, "misc_arrowdown")
 	self:CDBar(26103, 22.6, CL.knockback) -- Sweep
 	self:CDBar(26102, 24.2) -- Sand Blast
-	if self:GetSeason() == 2 then
+	if self:GetPlayerAura(1213261) then -- Curse of Madness
 		self:Bar(1215744, 30, CL.fear) -- Blinding Admiration
 	end
 end
@@ -95,7 +95,6 @@ end
 
 function mod:Sweep(args)
 	self:Message(args.spellId, "orange", CL.knockback)
-	self:DelayedMessage(args.spellId, 16, "orange", CL.custom_sec:format(CL.knockback, 5))
 	self:CDBar(args.spellId, 21, CL.knockback)
 	self:PlaySound(args.spellId, "alarm")
 end
@@ -115,7 +114,6 @@ function mod:BerserkApplied(args)
 end
 
 function mod:SummonOuroMounds() -- Submerge
-	self:CancelDelayedMessage(CL.custom_sec:format(CL.knockback, 5)) -- Sweep
 	self:CancelDelayedMessage(CL.custom_sec:format(self:SpellName(26102), 5)) -- Sand Blast
 	self:StopBar(L.submerge_bar)
 	self:StopBar(CL.knockback) -- Sweep
@@ -147,7 +145,6 @@ do
 			self:Bar("stages", 180, L.submerge_bar, "misc_arrowdown")
 
 			-- Sweep
-			self:DelayedMessage(26103, 16, "orange", CL.custom_sec:format(CL.knockback, 5))
 			self:CDBar(26103, 21, CL.knockback)
 
 			-- Sand Blast
