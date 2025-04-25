@@ -62,6 +62,7 @@ end
 
 function mod:OnRegister()
 	self.displayName = L.bossName
+	self:SetSpellRename(1231264, mod:SpellName(1680)) -- Blades of Light (Whirlwind)
 end
 
 function mod:OnBossEnable()
@@ -214,9 +215,9 @@ do
 			-- Sticking the rage check into the health check
 			if npcId == 240795 and not wwThrottle then
 				local power = UnitPower(unitToken) / UnitPowerMax(unitToken) * 100
-				if power >= 85 then
+				if power >= 80 then
 					wwThrottle = true
-					mod:CDBar(1231264, 5, mod:SpellName(1680)) -- Blades of Light (Whirlwind)
+					mod:CDBar(1231264, 6, mod:SpellName(1680)) -- Blades of Light (Whirlwind)
 				end
 			end
 		end
