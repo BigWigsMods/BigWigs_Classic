@@ -95,8 +95,7 @@ function mod:OnEngage()
 	self:CDBar(28542, 12.5, CL.curse) -- Life Drain
 	self:CDBar("stages", 32, CL.stage:format(2), L.stages_icon)
 	self:ScheduleTimer(CheckAirPhase, 20)
-	local tbl = self:GetPlayerAura(1218283) -- Authority of the Frozen Wastes
-	if tbl and tbl.applications == 4 then
+	if self:GetPlayerAura(1218283) then -- Authority of the Frozen Wastes
 		isHardMode = true
 		self:CDBar(1219728, 30, CL.soak) -- Glacial Crash
 	end
