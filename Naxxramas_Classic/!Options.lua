@@ -181,6 +181,7 @@ BigWigs:AddColors("Sapphiron", {
 	[28524] = "red",
 	[28542] = {"green","orange"},
 	[28547] = "blue",
+	[1219728] = {"blue","yellow"},
 	["stages"] = "cyan",
 })
 
@@ -188,6 +189,7 @@ BigWigs:AddSounds("Sapphiron", {
 	[28524] = "warning",
 	[28542] = "alert",
 	[28547] = "underyou",
+	[1219728] = "warning",
 	["stages"] = "long",
 })
 

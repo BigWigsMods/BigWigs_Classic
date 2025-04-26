@@ -44,14 +44,12 @@ BigWigs:AddColors("Fankriss the Unyielding", {
 	[720] = {"blue","red"},
 	[25646] = {"blue","purple"},
 	[25832] = "cyan",
-	[1215421] = "blue",
 })
 
 BigWigs:AddSounds("Fankriss the Unyielding", {
 	[720] = "alarm",
 	[25646] = "alert",
 	[25832] = "warning",
-	[1215421] = "underyou",
 })
 
 BigWigs:AddColors("Viscidus", {
@@ -142,6 +140,9 @@ BigWigs:AddColors("Ahn'Qiraj Trash", {
 	[26556] = {"blue","yellow"},
 	[26558] = "red",
 	[26565] = "orange",
+	[1214956] = "yellow",
+	[1215202] = "blue",
+	[1215421] = "blue",
 	["stages"] = "cyan",
 	["target_buffs"] = {"red","yellow"},
 })
@@ -155,4 +156,6 @@ BigWigs:AddSounds("Ahn'Qiraj Trash", {
 	[26556] = "warning",
 	[26558] = "info",
 	[26565] = "info",
+	[1215202] = "warning",
+	[1215421] = "underyou",
 })

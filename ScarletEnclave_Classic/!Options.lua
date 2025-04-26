@@ -34,6 +34,7 @@ BigWigs:AddColors("Solistrasza", {
 	[1227696] = "red",
 	[1228063] = {"blue","yellow"},
 	[1231993] = {"blue","purple"},
+	[1232097] = {"blue","orange"},
 	["adds"] = "cyan",
 	["stages"] = "cyan",
 })
@@ -42,6 +43,7 @@ BigWigs:AddSounds("Solistrasza", {
 	[1227696] = "alarm",
 	[1228063] = {"underyou","warning"},
 	[1231993] = "alert",
+	[1232097] = "warning",
 	["adds"] = "info",
 	["stages"] = "long",
 })
