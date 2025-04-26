@@ -34,7 +34,7 @@ end
 
 function mod:GetOptions()
 	return {
-		"meteor",
+		{"meteor", "COUNTDOWN"},
 		"waves",
 		{1232390, "ME_ONLY_EMPHASIZE"}, -- Rose's Thorn
 		1232389, -- Unwavering Blade
@@ -71,22 +71,26 @@ end
 -- Event Handlers
 --
 
-function mod:BigWigs_UNIT_TARGET(_, mobId, unitTarget)
-	if mobId == 240812 and self:GetStage() ~= 2 and UnitCanAttack(unitTarget, "player") then -- High Commander Beatrix
+function mod:BigWigs_UNIT_TARGET(event, mobId, unitTarget)
+	if mobId == 240812 and UnitCanAttack(unitTarget, "player") then -- High Commander Beatrix
 		self:SetStage(2)
 		local msg = CL.stage:format(2)
 		self:StopBar(msg)
+		self:UnregisterMessage(event)
+		self:UnregisterEvent("NAME_PLATE_UNIT_ADDED")
 		self:CDBar(1232389, 16, CL.tank_debuff) -- Unwavering Blade
 		self:Message("stages", "cyan", msg, false)
 		self:PlaySound("stages", "long")
 	end
 end
 
-function mod:NAME_PLATE_UNIT_ADDED(_, unit)
-	if self:GetStage() ~= 2 and self:MobId(self:UnitGUID(unit)) == 240812 then -- High Commander Beatrix
+function mod:NAME_PLATE_UNIT_ADDED(event, unit)
+	if self:MobId(self:UnitGUID(unit)) == 240812 then -- High Commander Beatrix
 		self:SetStage(2)
 		local msg = CL.stage:format(2)
 		self:StopBar(msg)
+		self:UnregisterMessage("BigWigs_UNIT_TARGET")
+		self:UnregisterEvent(event)
 		self:CDBar(1232389, 16, CL.tank_debuff) -- Unwavering Blade
 		self:Message("stages", "cyan", msg, false)
 		self:PlaySound("stages", "long")
