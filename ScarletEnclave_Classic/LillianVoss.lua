@@ -44,7 +44,7 @@ function mod:GetOptions()
 		{1233849, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Unstable Concoction
 		unstableConcoctionMarker,
 		{1233883, "EMPHASIZE"}, -- Intoxicating Venom
-		1234540, -- Ignite
+		{1234540, "EMPHASIZE"}, -- Ignite
 		"berserk",
 	},nil,{
 		[1233847] = CL.pull_in, -- Scarlet Grasp (Pull In)
@@ -74,7 +74,6 @@ end
 
 function mod:OnEngage()
 	markerCount = 0
-	self:CDBar(1233849, 30) -- Unstable Concoction
 	self:CDBar(1233847, 34, CL.pull_in) -- Scarlet Grasp
 	self:Berserk(240)
 end
@@ -108,9 +107,8 @@ function mod:NoxiousPoisonRemoved(args)
 	end
 end
 
-function mod:UnstableConcoction(args)
+function mod:UnstableConcoction()
 	markerCount = 0
-	self:CDBar(args.spellId, 30)
 end
 
 do
@@ -163,6 +161,6 @@ do
 end
 
 function mod:Ignite(args)
-	self:Message(args.spellId, "yellow", CL.extra:format(args.spellName, CL.spread))
+	self:Message(args.spellId, "yellow", CL.spread)
 	self:PlaySound(args.spellId, "info")
 end
