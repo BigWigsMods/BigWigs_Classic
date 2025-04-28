@@ -377,7 +377,7 @@ end
 
 function mod:DefenderKilled()
 	defendersAlive = defendersAlive - 1
-	self:Message("stages", "cyan", CL.mob_remaining:format(L.defender, defendersAlive), false)
+	self:Message("stages", "cyan", CL.mob_remaining:format(L.defender, defendersAlive), false, nil, 5) -- Stay onscreen for 5s
 end
 
 --[[ Vekniss Hive Crawler ]]--

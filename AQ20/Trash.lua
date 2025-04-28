@@ -155,5 +155,5 @@ end
 
 function mod:GuardianKilled()
 	guardiansAlive = guardiansAlive - 1
-	self:Message("stages", "cyan", CL.mob_remaining:format(L.guardian, guardiansAlive), false)
+	self:Message("stages", "cyan", CL.mob_remaining:format(L.guardian, guardiansAlive), false, nil, 5) -- Stay onscreen for 5s
 end
