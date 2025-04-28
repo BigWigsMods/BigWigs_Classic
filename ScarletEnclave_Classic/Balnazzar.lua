@@ -56,7 +56,7 @@ function mod:VerifyEnable(unit)
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "SuppressingDarkness", 1231776)
+	self:Log("SPELL_CAST_SUCCESS", "LightsHope", 1232177)
 	self:Log("SPELL_CAST_SUCCESS", "SummonInfernal", 1231901)
 	self:Log("SPELL_CAST_START", "CarrionSwarm", 1231840)
 	self:Log("SPELL_AURA_APPLIED", "CarrionSwarmApplied", 1231837)
@@ -78,11 +78,13 @@ end
 -- Event Handlers
 --
 
-function mod:SuppressingDarkness()
-	self:StopBar(1231837) -- Carrion Swarm
-	self:SetStage(2)
-	self:Message("stages", "cyan", CL.percent:format(70, CL.stage:format(2)), false)
-	self:PlaySound("stages", "long")
+function mod:LightsHope()
+	if self:GetStage() == 1 then
+		self:StopBar(1231837) -- Carrion Swarm
+		self:SetStage(2)
+		self:Message("stages", "cyan", CL.percent:format(70, CL.stage:format(2)), false)
+		self:PlaySound("stages", "long")
+	end
 end
 
 function mod:SummonInfernal(args)
