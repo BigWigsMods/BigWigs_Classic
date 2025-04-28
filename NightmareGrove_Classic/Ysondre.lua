@@ -14,6 +14,7 @@ mod:SetAllowWin(true)
 
 local warnHP = 80
 local castCollector = {}
+local tankDebuffOnMe = false
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -36,14 +37,14 @@ function mod:GetOptions()
 		{1214136, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divergent Lightning
 		divergentLightningMarker,
 		-- Shared
-		24818, -- Noxious Breath
+		1213170, -- Noxious Breath
 		24814, -- Seeping Fog
 	},{
-		[24818] = CL.general,
+		[1213170] = CL.general,
 	},{
 		[24795] = CL.adds, -- Summon Demented Druid Spirit (Adds)
 		[1214136] = CL.soaks, -- Divergent Lightning (Soaks)
-		[24818] = CL.breath, -- Noxious Breath (Breath)
+		[1213170] = CL.breath, -- Noxious Breath (Breath)
 	}
 end
 
@@ -55,11 +56,11 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "DivergentLightning", 1214136)
 	self:Log("SPELL_AURA_APPLIED", "DivergentLightningApplied", 1214136)
 	self:Log("SPELL_AURA_REMOVED", "DivergentLightningRemoved", 1214136)
-	self:Log("SPELL_CAST_SUCCESS", "NoxiousBreath", 24818)
-	self:Log("SPELL_AURA_APPLIED", "NoxiousBreathApplied", 24818)
-	self:Log("SPELL_AURA_APPLIED_DOSE", "NoxiousBreathApplied", 24818)
+	self:Log("SPELL_CAST_SUCCESS", "NoxiousBreath", 1213170, 24818)
+	self:Log("SPELL_AURA_APPLIED", "NoxiousBreathApplied", 1213170, 24818)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "NoxiousBreathApplied", 1213170, 24818)
+	self:Log("SPELL_AURA_REMOVED", "NoxiousBreathRemoved", 1213170, 24818)
 	self:Log("SPELL_CAST_SUCCESS", "SeepingFog", 24814)
-	self:Log("SPELL_CAST_SUCCESS", "SummonDementedDruidSpirit", 24795, 1214086)
 	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 	self:RegisterMessage("BigWigs_BossComm")
 end
@@ -67,9 +68,10 @@ end
 function mod:OnEngage()
 	warnHP = 80
 	castCollector = {}
+	tankDebuffOnMe = false
 	self:RegisterEvent("UNIT_HEALTH")
-	self:Message(24818, "yellow", CL.custom_start_s:format(self.displayName, CL.breath, 10), false)
-	self:Bar(24818, 10, CL.breath) -- Noxious Breath
+	self:Message(1213170, "yellow", CL.custom_start_s:format(self.displayName, CL.breath, 10), false)
+	self:Bar(1213170, 10, CL.breath) -- Noxious Breath
 end
 
 --------------------------------------------------------------------------------
@@ -77,9 +79,10 @@ end
 --
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
-	if (spellId == 24795 or spellId == 1214086) and not castCollector[castGUID] then -- Summon Demented Druid Spirit (Normal, Season of Discovery)
+	if (spellId == 24795 or spellId == 24796 or spellId == 1214082 or spellId == 1214086) and not castCollector[castGUID] then -- Summon Demented Druid Spirit (Normal, Season of Discovery)
 		castCollector[castGUID] = true
 		self:Sync("summ")
+		self:Message(24795, "cyan", tostring(spellId), false)
 	end
 end
 
@@ -131,17 +134,32 @@ function mod:DivergentLightningRemoved(args)
 end
 
 function mod:NoxiousBreath(args)
-	self:Bar(args.spellId, 10, CL.breath)
+	self:Bar(1213170, 10, CL.breath)
 end
 
 function mod:NoxiousBreathApplied(args)
 	local unit, targetUnit = self:GetUnitIdByGUID(args.sourceGUID), self:UnitTokenFromGUID(args.destGUID)
-	if unit and targetUnit and self:Tanking(unit, targetUnit) then
-		local amount = args.amount or 1
-		self:StackMessage(args.spellId, "purple", args.destName, amount, 4, CL.breath)
-		if amount >= 4 then
-			self:PlaySound(args.spellId, "warning", nil, args.destName)
+	if unit and targetUnit then
+		local tanking = self:Tanking(unit, targetUnit)
+		if self:Me(args.destGUID) then
+			tankDebuffOnMe = true
+			if not tanking then -- Not tanking, 1+
+				self:StackMessage(1213170, "purple", args.destName, args.amount, 1, CL.breath)
+			elseif args.amount then -- Tanking, 2+
+				self:StackMessage(1213170, "purple", args.destName, args.amount, 100, CL.breath) -- No emphasize when on you
+			end
+		elseif tanking and args.amount then -- On a tank that isn't me, 2+
+			self:StackMessage(1213170, "purple", args.destName, args.amount, tankDebuffOnMe and 100 or 3, CL.breath)
+			if not tankDebuffOnMe and args.amount >= 3 then
+				self:PlaySound(1213170, "warning", nil, args.destName)
+			end
 		end
+	end
+end
+
+function mod:NoxiousBreathRemoved(args)
+	if self:Me(args.destGUID) then
+		tankDebuffOnMe = false
 	end
 end
 
@@ -152,13 +170,9 @@ do
 			prev = args.time
 			self:Message(args.spellId, "green")
 			self:PlaySound(args.spellId, "info")
-			-- self:CDBar(24818, 20)
+			-- self:CDBar(1213170, 20)
 		end
 	end
-end
-
-function mod:SummonDementedDruidSpirit() -- Seems to be hidden
-	self:Sync("summ")
 end
 
 function mod:UNIT_HEALTH(event, unit)
