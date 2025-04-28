@@ -95,19 +95,16 @@ function mod:Stomp(args)
 	self:CDBar(args.spellId, 21)
 
 	local unit = self:GetUnitIdByGUID(args.sourceGUID)
-	if not unit or self:UnitWithinRange(unit, 20) then
+	if not unit or self:UnitWithinRange(unit, 10) then
 		self:Message(args.spellId, "red")
 		self:PlaySound(args.spellId, "alert")
 	end
 end
 
-do
-	local prev = 0
-	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
-		if spellId == 1230899 and not castCollector[castGUID] then -- Immolation Trap
-			castCollector[castGUID] = true
-			self:Sync("frtraps")
-		end
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
+	if spellId == 1230899 and not castCollector[castGUID] then -- Immolation Trap
+		castCollector[castGUID] = true
+		self:Sync("frtraps")
 	end
 end
 
