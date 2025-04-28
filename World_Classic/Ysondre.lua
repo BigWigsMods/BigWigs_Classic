@@ -15,6 +15,7 @@ mod.worldBoss = 14887
 --
 
 local warnHP = 80
+local castCollector = {}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -57,15 +58,17 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "NoxiousBreathApplied", 24818)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "NoxiousBreathApplied", 24818)
 	self:Log("SPELL_CAST_SUCCESS", "SeepingFog", 24814)
-	self:Log("SPELL_CAST_SUCCESS", "SummonDementedDruidSpirit", 24795)
 
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
+	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+	self:RegisterMessage("BigWigs_BossComm")
 
 	self:Death("Win", 14887)
 end
 
 function mod:OnEngage()
 	warnHP = 80
+	castCollector = {}
 	self:RegisterEvent("UNIT_HEALTH")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
@@ -73,6 +76,32 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
+	if (spellId == 24795 or spellId == 24796 or spellId == 1214082 or spellId == 1214086) and not castCollector[castGUID] then -- Summon Demented Druid Spirit (Normal, Season of Discovery)
+		castCollector[castGUID] = true
+		self:Sync("summ")
+		self:Message(24795, "cyan", tostring(spellId), false)
+	end
+end
+
+do
+	local times = {
+		["summ"] = 0,
+	}
+	function mod:BigWigs_BossComm(_, msg)
+		if times[msg] then
+			local t = GetTime()
+			if t-times[msg] > 5 then
+				times[msg] = t
+				if msg == "summ" then
+					self:Message(24795, "cyan", CL.incoming:format(CL.adds), false)
+					self:PlaySound(24795, "long")
+				end
+			end
+		end
+	end
+end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
 	if msg:find(L.engage_trigger, nil, true) then
@@ -107,11 +136,6 @@ do
 			-- self:CDBar(24818, 20)
 		end
 	end
-end
-
-function mod:SummonDementedDruidSpirit(args)
-	self:Message(args.spellId, "cyan", CL.incoming:format(CL.adds), false)
-	self:PlaySound(args.spellId, "long")
 end
 
 function mod:UNIT_HEALTH(event, unit)
