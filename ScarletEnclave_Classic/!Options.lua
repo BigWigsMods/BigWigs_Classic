@@ -17,6 +17,10 @@ BigWigs:AddSounds("Balnazzar", {
 BigWigs:AddColors("High Commander Beatrix", {
 	[1232389] = {"blue","purple"},
 	[1232390] = {"blue","red"},
+	[1232637] = {"blue","red"},
+	[1237324] = "blue",
+	["arrows"] = "yellow",
+	["bombing"] = "yellow",
 	["meteor"] = "orange",
 	["stages"] = "cyan",
 	["waves"] = "yellow",
@@ -25,6 +29,10 @@ BigWigs:AddColors("High Commander Beatrix", {
 BigWigs:AddSounds("High Commander Beatrix", {
 	[1232389] = "alarm",
 	[1232390] = "warning",
+	[1232637] = "warning",
+	[1237324] = "underyou",
+	["arrows"] = "info",
+	["bombing"] = "info",
 	["meteor"] = "alert",
 	["stages"] = "long",
 	["waves"] = "info",
@@ -122,4 +130,11 @@ BigWigs:AddSounds("Grand Crusader Caldoran", {
 	[1229714] = "warning",
 	[1231027] = "long",
 	["stages"] = "long",
+})
+
+BigWigs:AddColors("Scarlet Enclave Trash", {
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Scarlet Enclave Trash", {
 })

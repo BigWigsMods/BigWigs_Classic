@@ -32,27 +32,27 @@ BigWigs:AddSounds("Lethon Season of Discovery", {
 
 BigWigs:AddColors("Taerar Season of Discovery", {
 	[24814] = "green",
-	[24818] = {"blue","purple","yellow"},
+	[1213170] = {"blue","purple","yellow"},
 	[1214008] = "cyan",
 	[1214028] = "orange",
 })
 
 BigWigs:AddSounds("Taerar Season of Discovery", {
 	[24814] = "info",
-	[24818] = "warning",
+	[1213170] = "warning",
 	[1214008] = "long",
 })
 
 BigWigs:AddColors("Ysondre Season of Discovery", {
 	[24795] = "cyan",
 	[24814] = "green",
-	[24818] = {"blue","purple","yellow"},
+	[1213170] = {"blue","purple","yellow"},
 	[1214136] = {"blue","orange"},
 })
 
 BigWigs:AddSounds("Ysondre Season of Discovery", {
 	[24795] = "long",
 	[24814] = "info",
-	[24818] = "warning",
+	[1213170] = "warning",
 	[1214136] = "warning",
 })
