@@ -108,11 +108,7 @@ do
 
 		if args.time - prev > 5 then
 			prev = args.time
-			local markMsg = CL.count:format(CL.mark, markCounter)
-			if markCounter % 2 == 0 then -- Try reduce the amount of overall messages
-				self:Message("mark", "red", markMsg, L.mark_icon)
-			end
-			self:StopBar(markMsg)
+			self:StopBar(CL.count:format(CL.mark, markCounter))
 			markCounter = markCounter + 1
 			self:CDBar("mark", 12.9, CL.count:format(CL.mark, markCounter), L.mark_icon)
 		end
