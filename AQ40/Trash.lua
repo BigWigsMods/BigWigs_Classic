@@ -14,6 +14,9 @@ mod:RegisterEnableMob(
 	234830, -- Anubisath Defender (Season of Discovery)
 	15240 -- Vekniss Hive Crawler
 )
+if mod:GetSeason() == 2 then
+	mod:RegisterEnableMob(15516, 15510, 15299) -- Sartura, Fankriss, Viscidus
+end
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -409,7 +412,7 @@ end
 do
 	local prev = 0
 	function mod:ToxicPoolDamage(args)
-		if self:Me(args.destGUID) and args.time - prev > 3 then
+		if self:Me(args.destGUID) and args.time - prev > 4 then
 			prev = args.time
 			self:PersonalMessage(args.spellId, "underyou")
 			self:PlaySound(args.spellId, "underyou")
