@@ -32,7 +32,7 @@ function mod:GetOptions()
 		{1229714, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Blinding Flare
 		1229114, -- Devoted Offering
 		{1229272, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divine Conflagration
-		1229503, -- Execution Sentence
+		{1229503, "CASTBAR"}, -- Execution Sentence
 		1231027, -- Darkgraven Blade
 		{"run", "EMPHASIZE", "COUNTDOWN"},
 		"berserk",
