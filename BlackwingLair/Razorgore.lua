@@ -120,7 +120,7 @@ end
 
 function mod:DestroyEgg()
 	eggs = eggs + 1
-	self:Message("eggs", "green", L.eggs_message:format(eggs), L.eggs_icon)
+	self:Message("eggs", "green", L.eggs_message:format(eggs), L.eggs_icon, nil, eggs < 30 and self:Classic() and 3) -- Stay onscreen for 3s
 	if eggs == 30 then
 		self:SetStage(2)
 		self:Message("stages", "cyan", CL.stage:format(2), false)
