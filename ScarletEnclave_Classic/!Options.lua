@@ -120,6 +120,7 @@ BigWigs:AddColors("Grand Crusader Caldoran", {
 	[1229503] = {"blue","purple"},
 	[1229714] = "red",
 	[1231027] = "yellow",
+	["run"] = "blue",
 	["stages"] = "cyan",
 })
 

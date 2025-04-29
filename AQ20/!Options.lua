@@ -93,6 +93,9 @@ BigWigs:AddColors("Ruins of Ahn'Qiraj Trash", {
 	[22997] = {"blue","yellow"},
 	[24340] = "red",
 	[25698] = "orange",
+	[1214956] = "yellow",
+	[1215202] = "blue",
+	[1215421] = "blue",
 	["stages"] = "cyan",
 })
 
@@ -103,4 +106,6 @@ BigWigs:AddSounds("Ruins of Ahn'Qiraj Trash", {
 	[22997] = "warning",
 	[24340] = "info",
 	[25698] = "long",
+	[1215202] = "warning",
+	[1215421] = "underyou",
 })
