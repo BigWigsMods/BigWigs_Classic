@@ -139,7 +139,7 @@ do
 	end
 	local function Cavalry()
 		mod:Message("waves", "yellow", CL.incoming:format(L.waves), L.waves_icon)
-		mod:Bar("waves", 16, L.waves, L.waves_icon)
+		mod:Bar("waves", 17, L.waves, L.waves_icon)
 		mod:PlaySound("waves", "info")
 	end
 
@@ -162,7 +162,7 @@ do
 				elseif msg == "foot" then
 					self:ScheduleTimer(Footmen, 3)
 				elseif msg == "horse" then
-					self:ScheduleTimer(Cavalry, 5)
+					self:ScheduleTimer(Cavalry, 3)
 				elseif msg == "arrow" then
 					self:Message("arrows", "yellow", L.arrows, L.arrows_icon)
 					self:Bar("arrows", 12, L.arrows, L.arrows_icon)
