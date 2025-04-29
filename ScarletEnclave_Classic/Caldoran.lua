@@ -17,6 +17,9 @@ mod:SetStage(1)
 local L = mod:GetLocale()
 if L then
 	L.bossName = "Grand Crusader Caldoran"
+	L.run = "Run to the door"
+	L.run_desc = "Show a message after stage 2 ends reminding you to run to the door."
+	L.run_icon = "ability_rogue_sprint"
 end
 
 --------------------------------------------------------------------------------
@@ -31,9 +34,11 @@ function mod:GetOptions()
 		{1229272, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divine Conflagration
 		1229503, -- Execution Sentence
 		1231027, -- Darkgraven Blade
+		{"run", "EMPHASIZE", "COUNTDOWN"},
 		"berserk",
 	},nil,{
 		[1229714] = CL.blind, -- Blinding Flare (Blind)
+		[1229503] = CL.tank_debuff, -- Execution Sentence (Tank Debuff)
 		[1231027] = CL.you_die, -- Darkgraven Blade (You die)
 	}
 end
@@ -41,7 +46,7 @@ end
 function mod:OnRegister()
 	self.displayName = L.bossName
 	self:SetSpellRename(1229714, CL.blind) -- Blinding Flare (Blind)
-	--self:SetSpellRename(1231027, CL.you_die) -- Darkgraven Blade (You die)
+	self:SetSpellRename(1231027, CL.you_die) -- Darkgraven Blade (You die)
 end
 
 function mod:OnBossEnable()
@@ -68,10 +73,12 @@ end
 --
 
 function mod:BlindingFlare(args)
-	self:Message(args.spellId, "red", CL.blind)
-	self:CastBar(args.spellId, 3, CL.blind)
-	self:CDBar(args.spellId, 29.1, CL.blind)
-	self:PlaySound(args.spellId, "warning")
+	if self:GetStage() == 1 or self:GetStage() == 3 then -- He casts it in Stage 2.5 after he takes the portal, when you are still stunned
+		self:Message(args.spellId, "red", CL.blind)
+		self:CastBar(args.spellId, 3, CL.blind)
+		self:CDBar(args.spellId, 29.1, CL.blind)
+		self:PlaySound(args.spellId, "warning")
+	end
 end
 
 do
@@ -101,7 +108,8 @@ function mod:DivineConflagrationRemoved(args)
 end
 
 function mod:ExecutionSentenceApplied(args)
-	self:TargetMessage(args.spellId, "purple", args.destName)
+	self:TargetMessage(args.spellId, "purple", args.destName, CL.tank_debuff)
+	self:CastBar(args.spellId, 8, CL.tank_debuff)
 	self:PlaySound(args.spellId, "info")
 end
 
@@ -112,20 +120,27 @@ function mod:WrathOfTheCrusade()
 	self:PlaySound("stages", "long")
 end
 
-function mod:DyingLight(args)
+function mod:DyingLight()
 	self:SetStage(2.5)
-	self:Bar("stages", 20, CL.intermission, args.spellId)
+	self:Message("run", "blue", L.run, L.run_icon, nil, 3) -- Stay onscreen for 3s
+	self:Bar("run", 20, L.run, L.run_icon)
 end
 
-function mod:DyingLightSuccess(args)
-	self:Bar("stages", 20, CL.stage:format(3), args.spellId)
+do
+	local function SetStage3()
+		mod:SetStage(3)
+		mod:Message("stages", "cyan", CL.stage:format(3), false)
+		mod:PlaySound("stages", "long")
+	end
+
+	function mod:DyingLightSuccess(args)
+		self:Bar("stages", 20, CL.intermission, args.spellId)
+		self:ScheduleTimer(SetStage3, 20)
+	end
 end
 
 function mod:ConjurePortal()
-	self:SetStage(3)
 	self:Berserk(330, true) -- XXX FIXME, starts in stage 2 but we need a better event than this
-	self:Message("stages", "cyan", CL.stage:format(3), false)
-	self:PlaySound("stages", "long")
 end
 
 do
