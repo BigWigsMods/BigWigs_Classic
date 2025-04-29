@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Balnazzar", 2856)
+local mod, CL = BigWigs:NewBoss("Balnazzar Scarlet Enclave", 2856)
 if not mod then return end
 mod:RegisterEnableMob(240811)
 mod:SetEncounterID(3185)

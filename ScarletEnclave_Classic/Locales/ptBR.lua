@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Balnazzar", "ptBR")
+local L = BigWigs:NewBossLocale("Balnazzar Scarlet Enclave", "ptBR")
 if not L then return end
 if L then
 	--L.bossName = "Balnazzar"
