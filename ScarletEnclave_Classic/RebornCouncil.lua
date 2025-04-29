@@ -101,7 +101,7 @@ do
 		self:ScheduleTimer(UpdateNameplate, 3)
 
 		self:CDBar(1231264, 26, self:SpellName(1680)) -- Blades of Light (Whirlwind)
-		self:Berserk(420)
+		self:Berserk(600)
 	end
 end
 

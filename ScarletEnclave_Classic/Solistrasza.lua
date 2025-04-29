@@ -68,7 +68,7 @@ end
 function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
-	self:Berserk(480, true) -- No engage message
+	self:Berserk(600, true) -- No engage message
 	self:CDBar(1231993, 11.2, CL.breath) -- Tarnished Breath
 end
 

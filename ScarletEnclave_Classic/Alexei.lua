@@ -63,7 +63,7 @@ function mod:OnEngage()
 	self:CDBar(1230105, 6.8, CL.frontal_cone) -- Wild Aperture
 	self:CDBar(1230200, 16.1) -- Enervate
 	self:CDBar(1228295, 21.4) -- Stomp
-	self:Berserk(360)
+	self:Berserk(600)
 end
 
 --------------------------------------------------------------------------------

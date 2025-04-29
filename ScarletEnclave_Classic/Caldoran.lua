@@ -140,7 +140,7 @@ do
 end
 
 function mod:ConjurePortal()
-	self:Berserk(330, true) -- XXX FIXME, starts in stage 2 but we need a better event than this
+	self:Berserk(430, true) -- XXX FIXME, starts in stage 2 but we need a better event than this
 end
 
 do

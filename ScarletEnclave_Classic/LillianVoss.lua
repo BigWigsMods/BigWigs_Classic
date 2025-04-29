@@ -75,7 +75,7 @@ end
 function mod:OnEngage()
 	markerCount = 0
 	self:CDBar(1233847, 34, CL.pull_in) -- Scarlet Grasp
-	self:Berserk(240)
+	self:Berserk(600)
 end
 
 --------------------------------------------------------------------------------
