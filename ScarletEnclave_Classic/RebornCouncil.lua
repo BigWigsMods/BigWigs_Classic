@@ -68,6 +68,7 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "UpdateMarks", 1231227, 1231200, 1236220) -- Reborn Inspiration, Fireball, Slow
 	self:Log("SPELL_CAST_START", "BladesOfLight", 1231264)
+	self:Log("SPELL_AURA_REMOVED", "BladesOfLightRemoved", 1231264)
 	self:Log("SPELL_CAST_SUCCESS", "BladesOfLightSuccess", 1231264)
 	self:Log("SPELL_CAST_START", "PeeledSecrets", 1231095)
 	self:Log("SPELL_CAST_SUCCESS", "PeeledSecretsSuccess", 1231095)
@@ -82,6 +83,7 @@ do
 		local guid = mod:GetUnitIdByGUID(240809)
 		if guid then
 			mod:Nameplate(1231095, 20, guid, (">%d<"):format(peeledSecretsCount))
+			mod:SetSpellRename(1231095, CL.count:format(mod:SpellName(1231095), peeledSecretsCount))
 		end
 	end
 
@@ -96,8 +98,9 @@ do
 			self:SetInfoBar("health", line, 1)
 			self:SetInfo("health", line + 1, "100%")
 		end
-		self:SimpleTimer(UpdateNameplate, 1)
+		self:ScheduleTimer(UpdateNameplate, 3)
 
+		self:CDBar(1231264, 26, self:SpellName(1680)) -- Blades of Light (Whirlwind)
 		self:Berserk(420)
 	end
 end
@@ -117,12 +120,21 @@ function mod:UpdateMarks(args)
 	end
 end
 
-function mod:BladesOfLight(args)
-	self:StopBar(mod:SpellName(1680))
-	local unit = self:GetUnitIdByGUID(args.sourceGUID)
-	if unit and self:UnitWithinRange(unit, 10) then
-		self:Message(args.spellId, "yellow", self:SpellName(1680))
-		self:PlaySound(args.spellId, "warning")
+do
+	local prev = 0
+	function mod:BladesOfLight(args)
+		self:StopBar(mod:SpellName(1680))
+		local unit = self:GetUnitIdByGUID(args.sourceGUID)
+		if unit and self:UnitWithinRange(unit, 10) then
+			self:Message(args.spellId, "yellow", self:SpellName(1680))
+			self:PlaySound(args.spellId, "warning")
+		end
+	end
+
+	function mod:BladesOfLightRemoved(args)
+		self:StopCastBar(mod:SpellName(1680))
+		local duration = 26-(args.time-prev) -- Takes around 26s to go from 0% to 100% power, then cast at random
+		self:CDBar(args.spellId, duration > 0 and duration or 18.5, self:SpellName(1680)) -- Fallback for safety
 	end
 end
 
@@ -150,7 +162,6 @@ do
 		else
 			inRange = false
 		end
-		self:Nameplate(args.spellId, 20, args.sourceGUID, (">%d<"):format(peeledSecretsCount))
 	end
 
 	function mod:PeeledSecretsSuccess(args)
@@ -158,6 +169,7 @@ do
 		local option = self:GetOption("custom_select_interrupt_counter") + 2
 		if peeledSecretsCount == option then peeledSecretsCount = 1 end
 		self:Nameplate(args.spellId, 20, args.sourceGUID, (">%d<"):format(peeledSecretsCount))
+		self:SetSpellRename(args.spellId, CL.count:format(args.spellName, peeledSecretsCount))
 	end
 
 	function mod:PeeledSecretsInterrupted(args)
@@ -169,6 +181,7 @@ do
 			local option = self:GetOption("custom_select_interrupt_counter") + 2
 			if peeledSecretsCount == option then peeledSecretsCount = 1 end
 			self:Nameplate(1231095, 20, args.destGUID, (">%d<"):format(peeledSecretsCount))
+			self:SetSpellRename(args.spellId, CL.count:format(args.spellName, peeledSecretsCount))
 		end
 	end
 end
@@ -217,7 +230,7 @@ do
 				local power = UnitPower(unitToken) / UnitPowerMax(unitToken) * 100
 				if power >= 80 then
 					wwThrottle = true
-					mod:CDBar(1231264, 6, mod:SpellName(1680)) -- Blades of Light (Whirlwind)
+					mod:CDBar(1231264, {6, 26}, mod:SpellName(1680)) -- Blades of Light (Whirlwind)
 				end
 			end
 		end
