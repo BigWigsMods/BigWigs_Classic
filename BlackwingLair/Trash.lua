@@ -82,7 +82,7 @@ if mod:GetSeason() == 2 then
 			369330, -- Rain of Fire
 			{466357, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Arcane Bomb
 			arcaneBombMarker,
-			{466435, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Nature's Fury
+			{466435, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE", "ME_ONLY"}, -- Nature's Fury
 			naturesFuryMarker,
 		},{
 			[22291] = L.wyrmguard_overseer,
@@ -90,6 +90,7 @@ if mod:GetSeason() == 2 then
 			[466357] = CL.general,
 		},{
 			[22291] = L.sandstorm, -- Brood Power: Bronze (Sandstorm)
+			[466357] = CL.soak, -- Arcane Bomb (Soak)
 		}
 	end
 elseif mod:Vanilla() then
@@ -241,21 +242,21 @@ end
 --[[ Season of Discovery ]]--
 
 function mod:ArcaneBombApplied(args)
-	self:TargetMessage(args.spellId, "orange", args.destName)
-	self:TargetBar(args.spellId, 8, args.destName)
+	self:TargetMessage(args.spellId, "orange", args.destName, CL.soak)
+	self:TargetBar(args.spellId, 8, args.destName, CL.soak)
 	self:CustomIcon(arcaneBombMarker, args.destName, 6)
 	if self:Me(args.destGUID) then
-		self:Yell(args.spellId, CL.rticon:format(args.spellName, 6), nil, "Arcane Bomb ({rt6})")
-		self:YellCountdown(args.spellId, 8, 6, 6)
+		self:Yell(args.spellId, CL.rticon:format(CL.soak, 6), nil, "Soak ({rt6})")
+		self:YellCountdown(args.spellId, 8, 6, 5)
+		self:PlaySound(args.spellId, "warning", nil, args.destName)
 	end
-	self:PlaySound(args.spellId, "warning", nil, args.destName)
 end
 
 function mod:ArcaneBombRemoved(args)
 	if self:Me(args.destGUID) then
 		self:CancelYellCountdown(args.spellId)
 	end
-	self:StopBar(args.spellName, args.destName)
+	self:StopBar(CL.soak, args.destName)
 	self:CustomIcon(arcaneBombMarker, args.destName)
 end
 
