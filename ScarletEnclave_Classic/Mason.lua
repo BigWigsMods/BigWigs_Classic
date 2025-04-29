@@ -51,6 +51,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "DrowningShallows", 1231592)
 	self:Log("SPELL_AURA_APPLIED", "DrowningShallowsApplied", 1231592)
 	self:Log("SPELL_AURA_REMOVED", "DrowningShallowsRemoved", 1231592)
+	self:Log("SPELL_CAST_START", "TidalForce", 1231585)
 	self:Log("SPELL_AURA_APPLIED", "TidalForceApplied", 1231585)
 	self:Log("SPELL_AURA_REMOVED", "TidalForceRemoved", 1231585)
 	self:Log("SPELL_CAST_START", "IgniteFlesh", 1234347)
@@ -92,14 +93,17 @@ function mod:DrowningShallowsRemoved(args)
 	end
 end
 
+function mod:TidalForce(args)
+	self:Message(args.spellId, "red", CL.percent:format(nextTidal, CL.shield))
+	self:PlaySound(args.spellId, "long")
+end
+
 do
 	local appliedTime = 0
 	function mod:TidalForceApplied(args)
 		appliedTime = args.time
-		self:Message(args.spellId, "red", CL.percent:format(nextTidal, CL.shield))
 		nextTidal = nextTidal - 25
 		self:Bar(args.spellId, 60, CL.shield)
-		self:PlaySound(args.spellId, "long")
 	end
 
 	function mod:TidalForceRemoved(args)
