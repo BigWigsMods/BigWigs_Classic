@@ -48,12 +48,14 @@ function mod:GetOptions()
 		"bombing",
 		1237324, -- Explosive Shell
 		{1232390, "ME_ONLY_EMPHASIZE"}, -- Rose's Thorn
+		{1231873, "EMPHASIZE"}, -- Confession
 		1232389, -- Unwavering Blade
 		{1232637, "CASTBAR"}, -- Stock Break
 		"stages",
 		"berserk",
 	},nil,{
 		[1237324] = CL.underyou:format(CL.fire), -- Explosive Shell (Fire under YOU)
+		[1231873] = CL.spread, -- Confession (Spread)
 		[1232389] = CL.tank_debuff, -- Unwavering Blade (Tank Debuff)
 	}
 end
@@ -69,6 +71,7 @@ function mod:OnBossEnable()
 	self:RegisterMessage("BigWigs_BossComm")
 	self:Log("SPELL_CAST_SUCCESS", "RosesThorn", 1232390)
 	self:Log("SPELL_AURA_APPLIED", "RosesThornApplied", 1232390)
+	self:Log("SPELL_AURA_APPLIED", "ConfessionApplied", 1231873)
 	self:Log("SPELL_CAST_SUCCESS", "UnwaveringBlade", 1232389)
 	self:Log("SPELL_AURA_APPLIED", "UnwaveringBladeApplied", 1232389)
 	self:Log("SPELL_AURA_REFRESH", "UnwaveringBladeApplied", 1232389)
@@ -186,8 +189,22 @@ do
 	function mod:RosesThornApplied(args)
 		playerList[#playerList + 1] = args.destName
 		self:TargetsMessage(args.spellId, "red", playerList)
-		if self:Me(args.destGUID) then
-			self:PlaySound(args.spellId, "warning", nil, args.destName)
+	end
+end
+
+do
+	local prev = 0
+	local function PrintSafe()
+		if mod:IsEngaged() then
+			mod:Message(1231873, "green", CL.safe)
+		end
+	end
+	function mod:ConfessionApplied(args)
+		if args.time - prev > 17 then
+			prev = args.time
+			self:SimpleTimer(PrintSafe, 10) -- Safe
+			self:Message(args.spellId, "blue", CL.spread)
+			self:PlaySound(args.spellId, "warning")
 		end
 	end
 end
