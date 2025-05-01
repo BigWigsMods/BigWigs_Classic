@@ -15,6 +15,7 @@ mod:SetAllowWin(true)
 local warnHP = 80
 local whirlCount = 0
 local tankDebuffOnMe = false
+local drawSpiritPercent = 100
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -62,6 +63,7 @@ function mod:OnEngage()
 	warnHP = 80
 	whirlCount = 0
 	tankDebuffOnMe = false
+	drawSpiritPercent = 100
 	self:RegisterEvent("UNIT_HEALTH")
 	self:Message(1213170, "yellow", CL.custom_start_s:format(self.displayName, CL.breath, 10), false)
 	self:Bar(1213170, 10, CL.breath) -- Noxious Breath
@@ -88,8 +90,8 @@ function mod:NoxiousBreathApplied(args)
 				self:StackMessage(args.spellId, "purple", args.destName, args.amount, 100, CL.breath) -- No emphasize when on you
 			end
 		elseif tanking and args.amount then -- On a tank that isn't me, 2+
-			self:StackMessage(args.spellId, "purple", args.destName, args.amount, tankDebuffOnMe and 100 or 3, CL.breath)
-			if not tankDebuffOnMe and args.amount >= 3 then
+			self:StackMessage(args.spellId, "purple", args.destName, args.amount, tankDebuffOnMe or args.amount >= 6 and 100 or 3, CL.breath)
+			if not tankDebuffOnMe and args.amount >= 3 and args.amount <= 5 then
 				self:PlaySound(args.spellId, "warning", nil, args.destName)
 			end
 		end
@@ -115,14 +117,15 @@ do
 end
 
 function mod:DrawSpirit(args)
-	self:Message(args.spellId, "red")
+	drawSpiritPercent = drawSpiritPercent - 25
+	self:Message(args.spellId, "red", CL.percent:format(drawSpiritPercent, args.spellName))
 	self:Bar(args.spellId, 5)
 	self:PlaySound(args.spellId, "long")
 end
 
 do
 	local prev = 0
-	function mod:ShadowBoltWhirlDamage(args) -- Bolts are fired 4x on left side then 4x on right side of the dragon, repeating
+	function mod:ShadowBoltWhirlDamage(args) -- Bolts are fired 4x on left side then 4x on right side of the dragon, we warn on the 4th to turn the dragon 180 degrees
 		if args.time-prev > 4 then
 			prev = args.time
 			whirlCount = whirlCount + 1

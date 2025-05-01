@@ -14,6 +14,7 @@ mod:SetAllowWin(true)
 
 local warnHP = 80
 local tankDebuffOnMe = false
+local addsPercent = 100
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -63,6 +64,7 @@ end
 function mod:OnEngage()
 	warnHP = 80
 	tankDebuffOnMe = false
+	addsPercent = 100
 	self:RegisterEvent("UNIT_HEALTH")
 	self:Message(1213170, "yellow", CL.custom_start_s:format(self.displayName, CL.breath, 10), false)
 	self:Bar(1213170, 10, CL.breath) -- Noxious Breath
@@ -88,8 +90,8 @@ function mod:NoxiousBreathApplied(args)
 				self:StackMessage(1213170, "purple", args.destName, args.amount, 100, CL.breath) -- No emphasize when on you
 			end
 		elseif tanking and args.amount then -- On a tank that isn't me, 2+
-			self:StackMessage(1213170, "purple", args.destName, args.amount, tankDebuffOnMe and 100 or 3, CL.breath)
-			if not tankDebuffOnMe and args.amount >= 3 then
+			self:StackMessage(1213170, "purple", args.destName, args.amount, tankDebuffOnMe or args.amount >= 6 and 100 or 3, CL.breath)
+			if not tankDebuffOnMe and args.amount >= 3 and args.amount <= 5 then
 				self:PlaySound(1213170, "warning", nil, args.destName)
 			end
 		end
@@ -120,7 +122,8 @@ function mod:BellowingRoar(args)
 end
 
 function mod:SummonShadeOfTaerar(args)
-	self:Message(args.spellId, "cyan", CL.incoming:format(CL.adds), false)
+	addsPercent = addsPercent - 25
+	self:Message(args.spellId, "cyan", CL.percent:format(addsPercent, CL.adds), false)
 	self:PlaySound(args.spellId, "long")
 end
 

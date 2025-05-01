@@ -15,6 +15,7 @@ mod:SetAllowWin(true)
 local warnHP = 80
 local castCollector = {}
 local tankDebuffOnMe = false
+local addsPercent = 100
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -32,7 +33,6 @@ end
 local divergentLightningMarker = mod:AddMarkerOption(true, "player", 8, 1214136, 8, 7, 6) -- Divergent Lightning
 function mod:GetOptions()
 	return {
-		-- 24819, -- Lightning Wave
 		24795, -- Summon Demented Druid Spirit
 		{1214136, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divergent Lightning
 		divergentLightningMarker,
@@ -43,7 +43,7 @@ function mod:GetOptions()
 		[1213170] = CL.general,
 	},{
 		[24795] = CL.adds, -- Summon Demented Druid Spirit (Adds)
-		[1214136] = CL.soaks, -- Divergent Lightning (Soaks)
+		[1214136] = CL.soak, -- Divergent Lightning (Soak)
 		[1213170] = CL.breath, -- Noxious Breath (Breath)
 	}
 end
@@ -69,6 +69,7 @@ function mod:OnEngage()
 	warnHP = 80
 	castCollector = {}
 	tankDebuffOnMe = false
+	addsPercent = 100
 	self:RegisterEvent("UNIT_HEALTH")
 	self:Message(1213170, "yellow", CL.custom_start_s:format(self.displayName, CL.breath, 10), false)
 	self:Bar(1213170, 10, CL.breath) -- Noxious Breath
@@ -79,10 +80,9 @@ end
 --
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
-	if (spellId == 24795 or spellId == 24796 or spellId == 1214082 or spellId == 1214086) and not castCollector[castGUID] then -- Summon Demented Druid Spirit (Normal, Season of Discovery)
+	if spellId == 1214082 and not castCollector[castGUID] then -- Summon Demented Druid Spirit
 		castCollector[castGUID] = true
 		self:Sync("summ")
-		self:Message(24795, "cyan", tostring(spellId), false)
 	end
 end
 
@@ -96,7 +96,8 @@ do
 			if t-times[msg] > 5 then
 				times[msg] = t
 				if msg == "summ" then
-					self:Message(24795, "cyan", CL.incoming:format(CL.adds), false)
+					addsPercent = addsPercent - 25
+					self:Message(24795, "cyan", CL.percent:format(addsPercent, CL.adds), false)
 					self:PlaySound(24795, "long")
 				end
 			end
@@ -110,13 +111,13 @@ do
 	function mod:DivergentLightning(args)
 		playerList = {}
 		icon = 8
-		self:Bar(args.spellId, 8, CL.soaks)
+		self:Bar(args.spellId, 8, CL.soak)
 		self:PlaySound(args.spellId, "warning")
 	end
 
 	function mod:DivergentLightningApplied(args)
 		playerList[#playerList+1] = args.destName
-		self:TargetsMessage(args.spellId, "orange", playerList, 3, CL.soaks)
+		self:TargetsMessage(args.spellId, "orange", playerList, 3, CL.soak)
 		self:CustomIcon(divergentLightningMarker, args.destName, icon)
 		if self:Me(args.destGUID) then
 			self:Yell(args.spellId, CL.soak, nil, "Soak")
@@ -149,8 +150,8 @@ function mod:NoxiousBreathApplied(args)
 				self:StackMessage(1213170, "purple", args.destName, args.amount, 100, CL.breath) -- No emphasize when on you
 			end
 		elseif tanking and args.amount then -- On a tank that isn't me, 2+
-			self:StackMessage(1213170, "purple", args.destName, args.amount, tankDebuffOnMe and 100 or 3, CL.breath)
-			if not tankDebuffOnMe and args.amount >= 3 then
+			self:StackMessage(1213170, "purple", args.destName, args.amount, tankDebuffOnMe or args.amount >= 6 and 100 or 3, CL.breath)
+			if not tankDebuffOnMe and args.amount >= 3 and args.amount <= 5 then
 				self:PlaySound(1213170, "warning", nil, args.destName)
 			end
 		end

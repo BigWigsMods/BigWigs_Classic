@@ -14,6 +14,7 @@ mod:SetAllowWin(true)
 
 local warnHP = 80
 local tankDebuffOnMe = false
+local corruptionOfTheEarthPercent = 100
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -28,9 +29,11 @@ end
 -- Initialization
 --
 
+local volatileInfectionMarker = mod:AddMarkerOption(true, "player", 8, 1213155, 8) -- Volatile Infection
 function mod:GetOptions()
 	return {
-		{1213155, "ICON"}, -- Volatile Infection
+		1213155, -- Volatile Infection
+		volatileInfectionMarker,
 		24910, -- Corruption of the Earth
 		1213169, -- Spore Cloud
 		-- Shared
@@ -39,6 +42,7 @@ function mod:GetOptions()
 	},{
 		[1213170] = CL.general,
 	},{
+		[1213155] = CL.disease, -- Volatile Infection (Disease)
 		[1213170] = CL.breath, -- Noxious Breath (Breath)
 	}
 end
@@ -53,7 +57,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED_DOSE", "NoxiousBreathApplied", 1213170)
 	self:Log("SPELL_AURA_REMOVED", "NoxiousBreathRemoved", 1213170)
 	self:Log("SPELL_CAST_SUCCESS", "SeepingFog", 24814)
-	self:Log("SPELL_AURA_APPLIED", "VolatileInfection", 1213155)
+	self:Log("SPELL_AURA_APPLIED", "VolatileInfectionApplied", 1213155)
+	self:Log("SPELL_AURA_REMOVED", "VolatileInfectionRemoved", 1213155)
 	self:Log("SPELL_CAST_SUCCESS", "CorruptionOfTheEarth", 24910)
 	self:Log("SPELL_AURA_APPLIED", "SporeCloudDamage", 1213169)
 	self:Log("SPELL_PERIODIC_DAMAGE", "SporeCloudDamage", 1213169)
@@ -63,6 +68,7 @@ end
 function mod:OnEngage()
 	warnHP = 80
 	tankDebuffOnMe = false
+	corruptionOfTheEarthPercent = 100
 	self:RegisterEvent("UNIT_HEALTH")
 	self:Message(1213170, "yellow", CL.custom_start_s:format(self.displayName, CL.breath, 10), false)
 	self:Bar(1213170, 10, CL.breath) -- Noxious Breath
@@ -88,8 +94,8 @@ function mod:NoxiousBreathApplied(args)
 				self:StackMessage(args.spellId, "purple", args.destName, args.amount, 100, CL.breath) -- No emphasize when on you
 			end
 		elseif tanking and args.amount then -- On a tank that isn't me, 2+
-			self:StackMessage(args.spellId, "purple", args.destName, args.amount, tankDebuffOnMe and 100 or 3, CL.breath)
-			if not tankDebuffOnMe and args.amount >= 3 then
+			self:StackMessage(args.spellId, "purple", args.destName, args.amount, tankDebuffOnMe or args.amount >= 6 and 100 or 3, CL.breath)
+			if not tankDebuffOnMe and args.amount >= 3 and args.amount <= 5 then
 				self:PlaySound(args.spellId, "warning", nil, args.destName)
 			end
 		end
@@ -114,14 +120,26 @@ do
 	end
 end
 
-function mod:VolatileInfection(args)
-	self:TargetMessage(args.spellId, "orange", args.destName)
-	self:PrimaryIcon(args.spellId, args.destName)
-	self:PlaySound(args.spellId, "alert", nil, args.destName)
+do
+	local prev
+	function mod:VolatileInfectionApplied(args)
+		prev = args.destGUID
+		self:TargetMessage(args.spellId, "orange", args.destName, CL.disease)
+		self:CustomIcon(volatileInfectionMarker, args.destName, 8)
+		self:PlaySound(args.spellId, "alert", nil, args.destName)
+	end
+
+	function mod:VolatileInfectionRemoved(args)
+		if prev and args.destGUID == prev then
+			prev = nil
+			self:CustomIcon(volatileInfectionMarker, args.destName)
+		end
+	end
 end
 
 function mod:CorruptionOfTheEarth(args)
-	self:Message(args.spellId, "red")
+	corruptionOfTheEarthPercent = corruptionOfTheEarthPercent - 25
+	self:Message(args.spellId, "red", CL.percent:format(corruptionOfTheEarthPercent, args.spellName))
 	self:Bar(args.spellId, 10)
 	self:PlaySound(args.spellId, "long")
 end
