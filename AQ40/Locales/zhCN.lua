@@ -33,7 +33,7 @@ if L then
 
 	L.submerge_message = "奥罗已下潜"
 	L.submerge_bar = "奥罗下潜"
-	--L.submerge_early_message = "Early Submerge - No one was in range"
+	L.submerge_early_message = "提前下潜 - 无人在攻击范围内"
 
 	L.scarab = "甲虫消失"
 	L.scarab_desc = "当甲虫消失时发出警报。"
@@ -57,7 +57,7 @@ if L then
 	L.weakened_desc = "虚弱状态警报。"
 
 	L.dark_glare_message = "%s: %s (队伍 %s)" -- Dark Glare: PLAYER_NAME (Group 1)
-	L.stomach = "胃"
+	L.stomach = "内场"
 end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "zhCN")
