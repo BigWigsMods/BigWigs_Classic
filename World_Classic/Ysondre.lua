@@ -16,6 +16,8 @@ mod.worldBoss = 14887
 
 local warnHP = 80
 local castCollector = {}
+local tankDebuffOnMe = false
+local addsPercent = 100
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -34,7 +36,6 @@ end
 
 function mod:GetOptions()
 	return {
-		-- 24819, -- Lightning Wave
 		24795, -- Summon Demented Druid Spirit
 		-- Shared
 		24818, -- Noxious Breath
@@ -69,6 +70,8 @@ end
 function mod:OnEngage()
 	warnHP = 80
 	castCollector = {}
+	tankDebuffOnMe = false
+	addsPercent = 100
 	self:RegisterEvent("UNIT_HEALTH")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 end
@@ -78,10 +81,9 @@ end
 --
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
-	if (spellId == 24795 or spellId == 24796 or spellId == 1214082 or spellId == 1214086) and not castCollector[castGUID] then -- Summon Demented Druid Spirit (Normal, Season of Discovery)
+	if spellId == 24796 and not castCollector[castGUID] then -- Summon Demented Druid Spirit (Normal, Season of Discovery)
 		castCollector[castGUID] = true
 		self:Sync("summ")
-		self:Message(24795, "cyan", tostring(spellId), false)
 	end
 end
 
@@ -95,7 +97,8 @@ do
 			if t-times[msg] > 5 then
 				times[msg] = t
 				if msg == "summ" then
-					self:Message(24795, "cyan", CL.incoming:format(CL.adds), false)
+					addsPercent = addsPercent - 25
+					self:Message(24795, "cyan", CL.percent:format(addsPercent, CL.adds), false)
 					self:PlaySound(24795, "long")
 				end
 			end
@@ -117,12 +120,27 @@ end
 
 function mod:NoxiousBreathApplied(args)
 	local unit, targetUnit = self:GetUnitIdByGUID(args.sourceGUID), self:UnitTokenFromGUID(args.destGUID)
-	if unit and targetUnit and self:Tanking(unit, targetUnit) then
-		local amount = args.amount or 1
-		self:StackMessage(args.spellId, "purple", args.destName, amount, 4, CL.breath)
-		if amount >= 4 then
-			self:PlaySound(args.spellId, "warning", nil, args.destName)
+	if unit and targetUnit then
+		local tanking = self:Tanking(unit, targetUnit)
+		if self:Me(args.destGUID) then
+			tankDebuffOnMe = true
+			if not tanking then -- Not tanking, 1+
+				self:StackMessage(args.spellId, "purple", args.destName, args.amount, 1, CL.breath)
+			elseif args.amount then -- Tanking, 2+
+				self:StackMessage(args.spellId, "purple", args.destName, args.amount, 100, CL.breath) -- No emphasize when on you
+			end
+		elseif tanking and args.amount then -- On a tank that isn't me, 2+
+			self:StackMessage(args.spellId, "purple", args.destName, args.amount, tankDebuffOnMe or args.amount >= 6 and 100 or 3, CL.breath)
+			if not tankDebuffOnMe and args.amount >= 3 and args.amount <= 5 then
+				self:PlaySound(args.spellId, "warning", nil, args.destName)
+			end
 		end
+	end
+end
+
+function mod:NoxiousBreathRemoved(args)
+	if self:Me(args.destGUID) then
+		tankDebuffOnMe = false
 	end
 end
 
