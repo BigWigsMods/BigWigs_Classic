@@ -15,6 +15,7 @@ BigWigs:AddSounds("Balnazzar Scarlet Enclave", {
 })
 
 BigWigs:AddColors("High Commander Beatrix", {
+	[1231873] = {"blue","green"},
 	[1232389] = {"blue","purple"},
 	[1232390] = {"blue","red"},
 	[1232637] = {"blue","red"},
@@ -27,8 +28,8 @@ BigWigs:AddColors("High Commander Beatrix", {
 })
 
 BigWigs:AddSounds("High Commander Beatrix", {
+	[1231873] = "warning",
 	[1232389] = "alarm",
-	[1232390] = "warning",
 	[1232637] = "warning",
 	[1237324] = "underyou",
 	["arrows"] = "info",
@@ -89,12 +90,16 @@ BigWigs:AddSounds("Mason the Echo", {
 BigWigs:AddColors("Reborn Council", {
 	[1231095] = {"green","orange"},
 	[1231264] = "yellow",
+	[1231282] = "cyan",
+	[1231383] = "red",
 	["stages"] = "cyan",
 })
 
 BigWigs:AddSounds("Reborn Council", {
 	[1231095] = "info",
 	[1231264] = "warning",
+	[1231282] = "long",
+	[1231383] = "alarm",
 })
 
 BigWigs:AddColors("Lillian Voss", {
