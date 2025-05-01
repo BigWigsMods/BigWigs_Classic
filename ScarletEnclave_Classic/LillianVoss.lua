@@ -42,6 +42,7 @@ function mod:GetOptions()
 	},nil,{
 		[1233847] = CL.pull_in, -- Scarlet Grasp (Pull In)
 		[1233901] = CL.poison, -- Noxious Poison (Poison)
+		[1233849] = CL.bomb, -- Unstable Concoction (Bomb)
 		[1233883] = CL.keep_moving, -- Intoxicating Venom (Keep moving)
 		[1234540] = CL.spread, -- Ignite (Spread)
 	}
@@ -107,8 +108,8 @@ function mod:UnstableConcoctionApplied(args)
 	markerCount = markerCount + 1
 	self:CustomIcon(unstableConcoctionMarker, args.destName, markerCount)
 	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, false, CL.you_icon:format(args.spellName, markerCount))
-		self:Say(args.spellId, CL.rticon:format(args.spellName, markerCount), nil, ("Unstable Concoction ({rt%d})"):format(markerCount))
+		self:PersonalMessage(args.spellId, false, CL.you_icon:format(CL.bomb, markerCount))
+		self:Say(args.spellId, CL.rticon:format(CL.bomb, markerCount), nil, ("Bomb ({rt%d})"):format(markerCount))
 		self:SayCountdown(args.spellId, 7, markerCount)
 		self:PlaySound(args.spellId, "alert", nil, args.destName)
 	end
