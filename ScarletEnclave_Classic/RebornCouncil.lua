@@ -51,7 +51,9 @@ function mod:GetOptions()
 	return {
 		{1231095, "NAMEPLATE"}, -- Peeled Secrets
 		"custom_select_interrupt_counter",
+		1231282, -- Molten Basin
 		{1231264, "CASTBAR"}, -- Blades of Light
+		{1231383, "CASTBAR"}, -- Divine Avatar
 		"stages",
 		{"health", "INFOBOX"},
 		"berserk",
@@ -67,12 +69,15 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "UpdateMarks", 1231227, 1231200, 1236220) -- Reborn Inspiration, Fireball, Slow
+	self:Log("SPELL_CAST_START", "MoltenBasin", 1231282)
 	self:Log("SPELL_CAST_START", "BladesOfLight", 1231264)
 	self:Log("SPELL_AURA_REMOVED", "BladesOfLightRemoved", 1231264)
 	self:Log("SPELL_CAST_SUCCESS", "BladesOfLightSuccess", 1231264)
 	self:Log("SPELL_CAST_START", "PeeledSecrets", 1231095)
 	self:Log("SPELL_CAST_SUCCESS", "PeeledSecretsSuccess", 1231095)
 	self:Log("SPELL_INTERRUPT", "PeeledSecretsInterrupted", "*")
+	self:Log("SPELL_CAST_START", "DivineAvatar", 1231383)
+	self:Log("SPELL_CAST_SUCCESS", "DivineAvatarSuccess", 1231383)
 	self:Death("Deaths", 240795, 240809, 240810)
 end
 
@@ -118,6 +123,12 @@ function mod:UpdateMarks(args)
 		local line = bossList[npcId]
 		self:SetInfo("health", line, icon.. L[npcId]) -- Add raid icons to the boss names
 	end
+end
+
+function mod:MoltenBasin(args)
+	self:Message(args.spellId, "cyan", CL.incoming:format(args.spellName))
+	self:Bar(args.spellId, 33)
+	self:PlaySound(args.spellId, "long")
 end
 
 do
@@ -183,6 +194,23 @@ do
 			self:Nameplate(1231095, 20, args.destGUID, (">%d<"):format(peeledSecretsCount))
 			self:SetSpellRename(args.spellId, CL.count:format(args.spellName, peeledSecretsCount))
 		end
+	end
+end
+
+function mod:DivineAvatar(args)
+	local unit = self:GetUnitIdByGUID(args.sourceGUID)
+	if unit and self:UnitWithinRange(unit, 10) then
+		self:Message(args.spellId, "red")
+		if self:Tanking(unit) then
+			self:PlaySound(args.spellId, "alarm")
+		end
+	end
+end
+
+function mod:DivineAvatarSuccess(args)
+	local unit = self:GetUnitIdByGUID(args.sourceGUID)
+	if unit and self:Tanking(unit) then
+		self:CastBar(args.spellId, 15)
 	end
 end
 
