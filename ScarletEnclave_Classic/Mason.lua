@@ -108,7 +108,7 @@ do
 
 	function mod:TidalForceRemoved(args)
 		self:StopBar(CL.shield)
-		self:Message(args.spellId, "cyan", CL.removed_after:format(CL.shield, args.time-appliedTime))
+		self:Message(args.spellId, "cyan", CL.removed_after:format(CL.shield, args.time-appliedTime), nil, nil, 3) -- Stay onscreen for 3s
 	end
 end
 
