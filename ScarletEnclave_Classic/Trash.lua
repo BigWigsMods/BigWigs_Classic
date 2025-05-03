@@ -23,12 +23,23 @@ local guardiansDefeated = {}
 local nameCollector = {}
 
 --------------------------------------------------------------------------------
+-- Localization
+--
+
+local L = mod:GetLocale()
+if L then
+	L.big_adds = CL.big_adds
+end
+
+--------------------------------------------------------------------------------
 -- Initialization
 --
 
+local guardianMarker = mod:AddMarkerOption(true, "npc", 8, "big_adds", 8)
 function mod:GetOptions()
 	return {
 		"stages",
+		guardianMarker,
 	}
 end
 
@@ -68,6 +79,7 @@ do
 	function mod:BigWigs_UNIT_TARGET(_, mobId, unitTarget)
 		if guardians[mobId] and not nameCollector[mobId] then
 			nameCollector[mobId] = self:UnitName(unitTarget)
+			self:CustomIcon(guardianMarker, unitTarget, 8)
 		end
 	end
 end
