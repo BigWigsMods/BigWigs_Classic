@@ -127,7 +127,7 @@ end
 
 function mod:MoltenBasin(args)
 	self:Message(args.spellId, "cyan", CL.incoming:format(args.spellName))
-	self:Bar(args.spellId, 33)
+	self:Bar(args.spellId, 38)
 	self:PlaySound(args.spellId, "long")
 end
 
@@ -229,6 +229,9 @@ do
 
 		if count < 3 then
 			self:Message("stages", "cyan", CL.mob_killed:format(args.destName, count, 3), false)
+			if args.mobId == 240810 then -- Doan
+				self:StopBar(1231282) -- Molten Basin
+			end
 		else
 			unitTracker, currentHealth = {}, {}
 		end
