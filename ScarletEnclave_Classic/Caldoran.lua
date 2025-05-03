@@ -67,11 +67,12 @@ function mod:OnRegister()
 	self:SetSpellRename(1230697, CL.adds) -- Cessation (Adds)
 	self:SetSpellRename(1231651, CL.frontal_cone) -- Quietus (Frontal Cone)
 	self:SetSpellRename(1231027, CL.you_die) -- Darkgraven Blade (You die)
+	self:SetSpellRename(1231654, CL.frontal_cone) -- Wake of Ashes (Frontal Cone)
 end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "BlindingFlare", 1229714)
-	self:Log("SPELL_CAST_START", "WakeOAshes", 1231651, 1231654) -- Stage 1, Stage 5
+	self:Log("SPELL_CAST_START", "WakeOfAshes", 1231618, 1231654) -- Stage 1, Stage 5
 	self:Log("SPELL_CAST_START", "DevotedOffering", 1229114)
 	self:Log("SPELL_AURA_APPLIED", "DivineConflagrationApplied", 1229272)
 	self:Log("SPELL_AURA_REMOVED", "DivineConflagrationRemoved", 1229272)
@@ -105,7 +106,7 @@ function mod:BlindingFlare(args)
 	end
 end
 
-function mod:WakeOAshes(args)
+function mod:WakeOfAshes(args)
 	self:Message(args.spellId, "orange", CL.frontal_cone)
 	self:CDBar(args.spellId, args.spellId == 1231654 and 21 or 24.2, CL.frontal_cone)
 	self:PlaySound(args.spellId, "alert")
