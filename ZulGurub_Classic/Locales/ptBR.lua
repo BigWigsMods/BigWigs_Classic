@@ -48,8 +48,6 @@ end
 L = BigWigs:NewBossLocale("Jin'do the Hexxer", "ptBR")
 if L then
 	L.bossName = "Jin'do, o Bagateiro"
-
-	L.brain_wash_message = "Totem de Lavagem Cerebral"
 end
 
 L = BigWigs:NewBossLocale("Gahz'ranka", "ptBR")
