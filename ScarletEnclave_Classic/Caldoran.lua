@@ -28,29 +28,50 @@ end
 
 function mod:GetOptions()
 	return {
+		-- Stage 1
 		"stages",
 		{1229714, "EMPHASIZE", "CASTBAR", "CASTBAR_COUNTDOWN"}, -- Blinding Flare
+		1231618, -- Wake of Ashes
 		1229114, -- Devoted Offering
 		{1229272, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Divine Conflagration
 		{1229503, "CASTBAR"}, -- Execution Sentence
-		1231027, -- Darkgraven Blade
+		-- Stage 2
 		{"run", "EMPHASIZE", "COUNTDOWN"},
+		-- Stage 3
+		1230697, -- Cessation
+		1231651, -- Quietus
+		1231027, -- Darkgraven Blade
 		"berserk",
-	},nil,{
+		-- Stage 5
+		1231654, -- Wake of Ashes
+	},{
+		["stages"] = CL.stage:format(1),
+		["run"] = CL.stage:format(2),
+		[1230697] = CL.stage:format(3),
+		[1231654] = CL.stage:format(5),
+	},{
 		[1229714] = CL.blind, -- Blinding Flare (Blind)
+		[1231618] = CL.frontal_cone, -- Wake of Ashes (Frontal Cone)
 		[1229503] = CL.tank_debuff, -- Execution Sentence (Tank Debuff)
+		[1230697] = CL.adds, -- Cessation (Adds)
+		[1231651] = CL.frontal_cone, -- Quietus (Frontal Cone)
 		[1231027] = CL.you_die, -- Darkgraven Blade (You die)
+		[1231654] = CL.frontal_cone, -- Wake of Ashes (Frontal Cone)
 	}
 end
 
 function mod:OnRegister()
 	self.displayName = L.bossName
 	self:SetSpellRename(1229714, CL.blind) -- Blinding Flare (Blind)
+	self:SetSpellRename(1231618, CL.frontal_cone) -- Wake of Ashes (Frontal Cone)
+	self:SetSpellRename(1230697, CL.adds) -- Cessation (Adds)
+	self:SetSpellRename(1231651, CL.frontal_cone) -- Quietus (Frontal Cone)
 	self:SetSpellRename(1231027, CL.you_die) -- Darkgraven Blade (You die)
 end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "BlindingFlare", 1229714)
+	self:Log("SPELL_CAST_START", "WakeOAshes", 1231651, 1231654) -- Stage 1, Stage 5
 	self:Log("SPELL_CAST_START", "DevotedOffering", 1229114)
 	self:Log("SPELL_AURA_APPLIED", "DivineConflagrationApplied", 1229272)
 	self:Log("SPELL_AURA_REMOVED", "DivineConflagrationRemoved", 1229272)
@@ -59,6 +80,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "DyingLight", 1230271)
 	self:Log("SPELL_CAST_SUCCESS", "DyingLightSuccess", 1230271)
 	self:Log("SPELL_CAST_SUCCESS", "ConjurePortal", 1230333)
+	self:Log("SPELL_CAST_START", "Quietus", 1231651)
+	self:Log("SPELL_CAST_START", "Cessation", 1230697)
 	self:Log("SPELL_CAST_START", "DarkgravenBlade", 1231027)
 end
 
@@ -66,6 +89,7 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:CDBar(1229714, 27, CL.blind) -- Blinding Flare
+	self:CDBar(1231651, 21.4, CL.frontal_cone)
 end
 
 --------------------------------------------------------------------------------
@@ -81,10 +105,16 @@ function mod:BlindingFlare(args)
 	end
 end
 
+function mod:WakeOAshes(args)
+	self:Message(args.spellId, "orange", CL.frontal_cone)
+	self:CDBar(args.spellId, args.spellId == 1231654 and 21 or 24.2, CL.frontal_cone)
+	self:PlaySound(args.spellId, "alert")
+end
+
 do
 	local prev = 0
 	function mod:DevotedOffering(args)
-		if args.time - prev > 2 then
+		if args.time - prev > 3 then
 			prev = args.time
 			self:Message(args.spellId, "yellow")
 			self:PlaySound(args.spellId, "alert")
@@ -93,7 +123,7 @@ do
 end
 
 function mod:DivineConflagrationApplied(args)
-	self:TargetMessage(args.spellId, "orange", args.destName)
+	self:TargetMessage(args.spellId, "yellow", args.destName)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, nil, nil, "Divine Conflagration")
 		self:SayCountdown(args.spellId, 5)
@@ -116,6 +146,7 @@ end
 function mod:WrathOfTheCrusade()
 	self:SetStage(2)
 	self:StopBar(CL.blind) -- Blinding Flare
+	self:StopBar(CL.frontal_cone) -- Wake of Ashes
 	self:Message("stages", "cyan", CL.percent:format(55, CL.stage:format(2)), false)
 	self:PlaySound("stages", "long")
 end
@@ -140,7 +171,18 @@ do
 end
 
 function mod:ConjurePortal()
-	self:Berserk(430, true) -- XXX FIXME, starts in stage 2 but we need a better event than this
+	self:Berserk(390, true) -- XXX completely broken since hotfix
+end
+
+function mod:Cessation(args)
+	self:Message(args.spellId, "cyan", CL.incoming:format(CL.adds))
+	self:PlaySound(args.spellId, "alarm")
+end
+
+function mod:Quietus(args)
+	self:Message(args.spellId, "orange", CL.frontal_cone)
+	self:CDBar(args.spellId, 24.2, CL.frontal_cone)
+	self:PlaySound(args.spellId, "alert")
 end
 
 do
@@ -151,6 +193,7 @@ do
 	function mod:DarkgravenBlade(args)
 		self:SetStage(4)
 		self:StopBar(CL.blind) -- Blinding Flare
+		self:StopBar(CL.frontal_cone) -- Quietus
 		self:Message(args.spellId, "yellow", CL.you_die_sec:format(60))
 		self:Bar(args.spellId, 60, CL.you_die)
 		self:ScheduleTimer(RegisterYell, 2)
@@ -163,5 +206,6 @@ function mod:CHAT_MSG_MONSTER_YELL(event)
 	self:SetStage(5)
 	self:StopBar(CL.you_die)
 	self:Message("stages", "cyan", CL.stage:format(5), false)
+	self:CDBar(1231654, 20.7, CL.frontal_cone) -- Wake of Ashes
 	self:PlaySound("stages", "long")
 end
