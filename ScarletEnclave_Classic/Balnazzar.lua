@@ -33,7 +33,7 @@ function mod:GetOptions()
 	return {
 		-- Balnazzar
 		1231837, -- Carrion Swarm
-		{1231844, "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Circle of Domination
+		{1231844, "ME_ONLY", "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Circle of Domination
 		1231901, -- Summon Infernal
 		"stages",
 		"berserk",
@@ -56,7 +56,7 @@ function mod:VerifyEnable(unit)
 end
 
 function mod:OnBossEnable()
-	self:Log("SPELL_CAST_SUCCESS", "LightsHope", 1232177)
+	self:Log("SPELL_CAST_SUCCESS", "LightsHopeOrSuppressingDarkness", 1232177, 1231776) -- Light's Hope, Suppressing Darkness
 	self:Log("SPELL_CAST_SUCCESS", "SummonInfernal", 1231901)
 	self:Log("SPELL_CAST_START", "CarrionSwarm", 1231840)
 	self:Log("SPELL_AURA_APPLIED", "CarrionSwarmApplied", 1231837)
@@ -78,7 +78,7 @@ end
 -- Event Handlers
 --
 
-function mod:LightsHope()
+function mod:LightsHopeOrSuppressingDarkness() -- Light's Hope or Suppressing Darkness, whichever comes first
 	if self:GetStage() == 1 then
 		self:StopBar(1231837) -- Carrion Swarm
 		self:SetStage(2)
