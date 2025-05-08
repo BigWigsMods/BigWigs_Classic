@@ -90,7 +90,7 @@ function mod:OnEngage()
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
 	self:CDBar(1229714, 27, CL.blind) -- Blinding Flare
-	self:CDBar(1231651, 21.4, CL.frontal_cone)
+	self:CDBar(1231618, 21.4, CL.frontal_cone) -- Wake of Ashes
 end
 
 --------------------------------------------------------------------------------
