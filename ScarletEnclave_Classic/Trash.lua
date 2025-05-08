@@ -76,10 +76,15 @@ do
 		end
 	end
 
-	function mod:BigWigs_UNIT_TARGET(_, mobId, unitTarget)
-		if guardians[mobId] and not nameCollector[mobId] then
-			nameCollector[mobId] = self:UnitName(unitTarget)
-			self:CustomIcon(guardianMarker, unitTarget, 8)
+	function mod:BigWigs_UNIT_TARGET(_, mobId, unitTarget, guid)
+		if guardians[mobId] then
+			if not nameCollector[mobId] then
+				nameCollector[mobId] = self:UnitName(unitTarget)
+			end
+			if nameCollector.prev ~= guid then
+				nameCollector.prev = guid
+				self:CustomIcon(guardianMarker, unitTarget, 8)
+			end
 		end
 	end
 end
