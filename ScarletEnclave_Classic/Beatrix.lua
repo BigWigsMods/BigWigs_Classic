@@ -196,7 +196,7 @@ do
 	local prev = 0
 	local function PrintSafe()
 		if mod:IsEngaged() then
-			mod:Message(1231873, "green", CL.safe)
+			mod:Message(1231873, "blue", CL.safe)
 		end
 	end
 	function mod:ConfessionApplied(args)
