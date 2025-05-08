@@ -56,12 +56,12 @@ end
 
 function mod:DelusionsOfJindo(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName)
-	self:PlaySound(args.spellId, "alarm")
+	self:PlaySound(args.spellId, "alarm", nil, args.destName)
 end
 
 function mod:Hex(args)
 	self:TargetMessage(args.spellId, "purple", args.destName)
-	self:PlaySound(args.spellId, "alert")
+	self:PlaySound(args.spellId, "alert", nil, args.destName)
 end
 
 do
@@ -110,5 +110,5 @@ end
 
 function mod:Banish(args)
 	self:TargetMessage(args.spellId, "cyan", args.destName, CL.teleport)
-	self:PlaySound(args.spellId, "long")
+	self:PlaySound(args.spellId, "long", nil, args.destName)
 end
