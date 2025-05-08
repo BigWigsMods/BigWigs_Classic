@@ -82,7 +82,7 @@ function mod:ScarletGrasp(args)
 end
 
 function mod:DebilitateApplied(args)
-	self:TargetMessage(1232192, "orange", args.destName)
+	self:TargetMessage(1232192, "purple", args.destName)
 end
 
 function mod:NoxiousPoisonApplied(args)
