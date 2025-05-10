@@ -117,6 +117,7 @@ do
 
 	function mod:DivergentLightningApplied(args)
 		playerList[#playerList+1] = args.destName
+		playerList[args.destName] = icon -- Set raid marker
 		self:TargetsMessage(args.spellId, "orange", playerList, 3, CL.soak)
 		self:CustomIcon(divergentLightningMarker, args.destName, icon)
 		if self:Me(args.destGUID) then
