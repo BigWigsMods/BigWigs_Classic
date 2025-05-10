@@ -85,10 +85,13 @@ do
 	local function UpdateNameplate()
 		UpdateInfoBoxList() -- Just re-using this function as we want both UpdateNameplate and UpdateInfoBoxList on a 1sec delay from engage
 
-		local guid = mod:GetUnitIdByGUID(240809)
-		if guid then
-			mod:Nameplate(1231095, 20, guid, (">%d<"):format(peeledSecretsCount))
-			mod:SetSpellRename(1231095, CL.count:format(mod:SpellName(1231095), peeledSecretsCount))
+		local unit = mod:GetUnitIdByGUID(240809)
+		if unit then
+			local guid = mod:UnitGUID(unit)
+			if guid then
+				mod:Nameplate(1231095, 20, guid, (">%d<"):format(peeledSecretsCount))
+				mod:SetSpellRename(1231095, CL.count:format(mod:SpellName(1231095), peeledSecretsCount))
+			end
 		end
 	end
 
@@ -192,7 +195,7 @@ do
 			local option = self:GetOption("custom_select_interrupt_counter") + 2
 			if peeledSecretsCount == option then peeledSecretsCount = 1 end
 			self:Nameplate(1231095, 20, args.destGUID, (">%d<"):format(peeledSecretsCount))
-			self:SetSpellRename(args.spellId, CL.count:format(args.spellName, peeledSecretsCount))
+			self:SetSpellRename(1231095, CL.count:format(args.spellName, peeledSecretsCount))
 		end
 	end
 end
