@@ -44,6 +44,7 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "BloodSiphon", 24324)
+	self:Log("SPELL_CAST_SUCCESS", "CauseInsanity", 24327)
 	self:Log("SPELL_AURA_APPLIED", "CauseInsanityApplied", 24327)
 	self:Log("SPELL_AURA_REMOVED", "CauseInsanityRemoved", 24327)
 end
@@ -77,10 +78,13 @@ do
 	end
 end
 
+function mod:CauseInsanity(args)
+	self:CDBar(args.spellId, 20, CL.mind_control)
+end
+
 function mod:CauseInsanityApplied(args)
 	self:TargetMessage(args.spellId, "yellow", args.destName, CL.mind_control)
 	self:TargetBar(args.spellId, 10, args.destName, CL.mind_control_short)
-	self:CDBar(args.spellId, 20, CL.mind_control)
 	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, CL.mind_control, nil, "Mind Control")
