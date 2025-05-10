@@ -40,7 +40,7 @@ function mod:GetOptions()
 		-- Stage 3
 		1230697, -- Cessation
 		1231651, -- Quietus
-		1231027, -- Darkgraven Blade
+		{1231027, "COUNTDOWN"}, -- Darkgraven Blade
 		"berserk",
 		-- Stage 5
 		1231654, -- Wake of Ashes
@@ -107,9 +107,11 @@ function mod:BlindingFlare(args)
 end
 
 function mod:WakeOfAshes(args)
-	self:Message(args.spellId, "orange", CL.frontal_cone)
-	self:CDBar(args.spellId, args.spellId == 1231654 and 21 or 24.2, CL.frontal_cone)
-	self:PlaySound(args.spellId, "alert")
+	if self:GetStage() == 1 or self:GetStage() == 5 then -- He casts it in Stage 2.5 after he takes the portal, when you are still stunned
+		self:Message(args.spellId, "orange", CL.frontal_cone)
+		self:CDBar(args.spellId, args.spellId == 1231654 and 21 or 24.2, CL.frontal_cone)
+		self:PlaySound(args.spellId, "alert")
+	end
 end
 
 do
@@ -189,9 +191,13 @@ end
 do
 	local function RegisterYell()
 		mod:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+		mod:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED")
+		mod:RegisterMessage("BigWigs_BossComm")
 	end
 
+	local castCollector = {}
 	function mod:DarkgravenBlade(args)
+		castCollector = {}
 		self:SetStage(4)
 		self:StopBar(CL.blind) -- Blinding Flare
 		self:StopBar(CL.frontal_cone) -- Quietus
@@ -200,10 +206,41 @@ do
 		self:ScheduleTimer(RegisterYell, 2)
 		self:PlaySound(args.spellId, "long")
 	end
+
+	function mod:UNIT_SPELLCAST_INTERRUPTED(event, _, castGUID, spellId) -- Earlier than CHAT_MSG_MONSTER_YELL but requires nameplates/target
+		if spellId == 1231027 and not castCollector[castGUID] then -- Darkgraven Blade
+			castCollector[castGUID] = true
+			self:Sync("s5")
+		end
+	end
+end
+
+do
+	local times = {
+		["s5"] = 0,
+	}
+	function mod:BigWigs_BossComm(event, msg)
+		if times[msg] then
+			local t = GetTime()
+			if t-times[msg] > 5 then
+				times[msg] = t
+				self:UnregisterEvent("UNIT_SPELLCAST_INTERRUPTED")
+				self:UnregisterEvent("CHAT_MSG_MONSTER_YELL")
+				self:UnregisterMessage(event)
+				self:SetStage(5)
+				self:StopBar(CL.you_die)
+				self:Message("stages", "cyan", CL.stage:format(5), false)
+				self:CDBar(1231654, 23.7, CL.frontal_cone) -- Wake of Ashes
+				self:PlaySound("stages", "long")
+			end
+		end
+	end
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(event)
 	self:UnregisterEvent(event)
+	self:UnregisterEvent("UNIT_SPELLCAST_INTERRUPTED")
+	self:UnregisterMessage("BigWigs_BossComm")
 	self:SetStage(5)
 	self:StopBar(CL.you_die)
 	self:Message("stages", "cyan", CL.stage:format(5), false)
