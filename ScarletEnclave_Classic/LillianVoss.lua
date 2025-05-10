@@ -28,7 +28,7 @@ end
 -- Initialization
 --
 
-local unstableConcoctionMarker = mod:AddMarkerOption(true, "player", 1, 1233849, 1, 2, 3, 4) -- Unstable Concoction
+local unstableConcoctionMarker = mod:AddMarkerOption(false, "player", 1, 1233849, 1, 2, 3, 4) -- Unstable Concoction
 function mod:GetOptions()
 	return {
 		1233847, -- Scarlet Grasp
@@ -41,6 +41,7 @@ function mod:GetOptions()
 		"berserk",
 	},nil,{
 		[1233847] = CL.pull_in, -- Scarlet Grasp (Pull In)
+		[1232192] = CL.tank_debuff, -- Debilitate (Tank Debuff)
 		[1233901] = CL.poison, -- Noxious Poison (Poison)
 		[1233849] = CL.bomb, -- Unstable Concoction (Bomb)
 		[1233883] = CL.keep_moving, -- Intoxicating Venom (Keep moving)
@@ -55,7 +56,7 @@ end
 
 function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "ScarletGrasp", 1233847)
-	self:Log("SPELL_AURA_APPLIED", "DebilitateApplied", 1232192)
+	self:Log("SPELL_AURA_REMOVED", "DebilitatingStrikeRemoved", 1232190)
 	self:Log("SPELL_AURA_APPLIED", "NoxiousPoisonApplied", 1233901)
 	self:Log("SPELL_AURA_REMOVED", "NoxiousPoisonRemoved", 1233901)
 	self:Log("SPELL_CAST_SUCCESS", "UnstableConcoction", 1233849)
@@ -81,8 +82,14 @@ function mod:ScarletGrasp(args)
 	self:PlaySound(args.spellId, "long")
 end
 
-function mod:DebilitateApplied(args)
-	self:TargetMessage(1232192, "purple", args.destName)
+function mod:DebilitatingStrikeRemoved(args)
+	-- Debilitating Strike (1232190) applies to the current target >> Debilitate (1232192) instantly applies
+	-- 0.6 seconds elapses
+	-- Debilitating Strike expires from the player >> 2nd stack of Debilitate instantly applies
+	-- Generally you should only taunt after the 2nd stack applies, but we use this REMOVED event as we can't guarantee the same person will get 2 stacks
+	-- This is because some guilds have a DPS or other tank take a stack, so warning after 2 stacks wouldn't work
+	-- We could show 2 messages (1 for 1st stack, and another for 2nd stack) but if 99% of guilds have the tank take both stacks, then 2 messages would be spam
+	self:TargetMessage(1232192, "purple", args.destName, CL.tank_debuff)
 end
 
 function mod:NoxiousPoisonApplied(args)
