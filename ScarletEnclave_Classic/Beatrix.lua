@@ -42,12 +42,12 @@ end
 
 function mod:GetOptions()
 	return {
-		{"meteor", "COUNTDOWN"},
+		{"meteor", "EMPHASIZE", "COUNTDOWN"},
 		"waves",
 		"arrows",
 		"bombing",
 		1237324, -- Explosive Shell
-		{1232390, "ME_ONLY_EMPHASIZE"}, -- Rose's Thorn
+		1232390, -- Rose's Thorn
 		{1231873, "EMPHASIZE"}, -- Confession
 		1232389, -- Unwavering Blade
 		{1232637, "CASTBAR"}, -- Stock Break
@@ -168,7 +168,7 @@ do
 					self:ScheduleTimer(Cavalry, 3)
 				elseif msg == "arrow" then
 					self:Message("arrows", "yellow", L.arrows, L.arrows_icon)
-					self:Bar("arrows", 12, L.arrows, L.arrows_icon)
+					self:Bar("arrows", 13, L.arrows, L.arrows_icon)
 					self:PlaySound("arrows", "info")
 				elseif msg == "bombing" then
 					self:Message("bombing", "yellow", L.bombing, L.bombing_icon)
@@ -186,9 +186,20 @@ do
 		playerList = {}
 	end
 
+	local function PrintThorns()
+		if #playerList > 3 then
+			mod:Message(1232390, "red", CL.on_group:format(mod:SpellName(1232390)))
+		else
+			mod:TargetsMessage(1232390, "red", playerList, nil, nil, nil, 0) -- Force the delay to 0s as we've already had a 0.3s delay
+		end
+	end
+
 	function mod:RosesThornApplied(args)
-		playerList[#playerList + 1] = args.destName
-		self:TargetsMessage(args.spellId, "red", playerList)
+		local count = #playerList + 1
+		playerList[count] = args.destName
+		if count == 1 then
+			self:ScheduleTimer(PrintThorns, 0.3)
+		end
 	end
 end
 
