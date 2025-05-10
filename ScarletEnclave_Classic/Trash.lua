@@ -105,7 +105,10 @@ do
 				times[msg] = t
 				local id = tonumber(msg)
 				guardiansAlive = guardiansAlive - 1
-				self:Message("stages", "cyan", CL.mob_killed:format(nameCollector[id] or "??", 6-guardiansAlive, 6), false, nil, 5) -- Stay onscreen for 5s
+				self:Message("stages", "cyan", CL.mob_killed:format(nameCollector[id] or "??", 6-guardiansAlive, 6), false, nil, 8) -- Stay onscreen for 8s
+				if guardiansAlive == 0 then
+					self:PlayVictorySound()
+				end
 			end
 		end
 	end
@@ -114,6 +117,9 @@ end
 function mod:GuardianKilled(args)
 	if not guardiansDefeated[args.mobId] then
 		guardiansAlive = guardiansAlive - 1
-		self:Message("stages", "cyan", CL.mob_killed:format(args.destName, 6-guardiansAlive, 6), false, nil, 5) -- Stay onscreen for 5s
+		self:Message("stages", "cyan", CL.mob_killed:format(args.destName, 6-guardiansAlive, 6), false, nil, 8) -- Stay onscreen for 8s
+		if guardiansAlive == 0 then
+			self:PlayVictorySound()
+		end
 	end
 end
