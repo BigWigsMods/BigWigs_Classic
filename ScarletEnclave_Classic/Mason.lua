@@ -127,23 +127,16 @@ do
 	end
 end
 
-do
-	local inRange = false
-	function mod:IgniteFlesh(args)
-		local unit = self:GetUnitIdByGUID(args.sourceGUID)
-		if (unit and self:UnitWithinRange(unit, 10)) or args.sourceGUID == self:UnitGUID("target") then
-			inRange = true
-			self:Message(args.spellId, "yellow", CL.casting:format(args.spellName))
-			self:PlaySound(args.spellId, "info")
-		else
-			inRange = false
-		end
+function mod:IgniteFlesh(args)
+	if args.sourceGUID == self:UnitGUID("target") then
+		self:Message(args.spellId, "yellow", CL.extra:format(CL.casting:format(args.spellName), CL.interruptible))
+		self:PlaySound(args.spellId, "info")
 	end
+end
 
-	function mod:IgniteFleshInterrupted(args)
-		if inRange and args.extraSpellName == self:SpellName(1234347) then
-			self:Message(1234347, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
-		end
+function mod:IgniteFleshInterrupted(args)
+	if args.destGUID == self:UnitGUID("target") and args.extraSpellName == self:SpellName(1234347) then
+		self:Message(1234347, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end
 
