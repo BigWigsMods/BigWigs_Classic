@@ -21,6 +21,8 @@
 <Script file="Sapphiron.lua"/>
 <Script file="Kelthuzad.lua"/>
 
+<Script file="Trash.lua"/>
+
 <Include file="Locales\locales.xml"/>
 <Script file="!Options.lua"/>
 
