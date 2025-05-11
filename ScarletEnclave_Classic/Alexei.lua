@@ -60,6 +60,7 @@ end
 
 function mod:OnEngage()
 	trapPercent = 100
+	castCollector = {}
 	self:CDBar(1230105, 6.8, CL.frontal_cone) -- Wild Aperture
 	self:CDBar(1230200, 16.1) -- Enervate
 	self:CDBar(1228295, 21.4) -- Stomp
@@ -117,11 +118,9 @@ do
 			local t = GetTime()
 			if t-times[msg] > 5 then
 				times[msg] = t
-				if msg == "frtraps" then
-					trapPercent = trapPercent - 25
-					self:Message(1230899, "orange", CL.percent:format(trapPercent, self:SpellName(1230899)))
-					self:PlaySound(1230899, "long")
-				end
+				trapPercent = trapPercent - 25
+				self:Message(1230899, "orange", CL.percent:format(trapPercent, self:SpellName(1230899)))
+				self:PlaySound(1230899, "long")
 			end
 		end
 	end
