@@ -1,6 +1,5 @@
-
 --------------------------------------------------------------------------------
--- Module declaration
+-- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("High Priestess Jeklik", 309)
@@ -8,12 +7,19 @@ if not mod then return end
 mod:RegisterEnableMob(14517)
 mod:SetEncounterID(785)
 mod:SetAllowWin(true)
+mod:SetStage(1)
+
+--------------------------------------------------------------------------------
+-- Locals
+--
+
+local castCollector = {}
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.bossName = "High Priestess Jeklik"
 
@@ -29,7 +35,6 @@ if L then
 	L.bomb_trigger = "I command you to rain fire down upon these invaders!"
 	L.bomb_message = "Incoming bomb bats!"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -39,8 +44,10 @@ function mod:GetOptions()
 	return {
 		"swarm",
 		{23954, "CASTBAR"}, -- Great Heal
-		26044, -- Mind Flay
+		12097, -- Pierce Armor
+		23953, -- Mind Flay
 		"bomb",
+		"stages",
 	}
 end
 
@@ -49,17 +56,52 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
+	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+	self:RegisterMessage("BigWigs_BossComm")
+
 	self:Log("SPELL_CAST_SUCCESS", "Screech", 22884) -- Haven't actually seen Terrifying Screech or Psychic Scream in logs
 	self:Log("SPELL_CAST_START", "GreatHeal", 23954)
-	self:Log("SPELL_INTERRUPT", "GreatHealStop", "*")
-	self:Log("SPELL_CAST_START", "MindFlay", 26044)
+	self:Log("SPELL_INTERRUPT", "Interrupted", "*")
+	self:Log("SPELL_AURA_APPLIED", "PierceArmorApplied", 12097)
+	self:Log("SPELL_CAST_SUCCESS", "MindFlay", 23953)
 
 	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+end
+
+function mod:OnEngage()
+	castCollector = {}
+	self:SetStage(1)
+	self:Message("stages", "cyan", CL.stage:format(1), false)
 end
 
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, castGUID, spellId)
+	if spellId == 24085 and not castCollector[castGUID] then -- Transform Visual
+		castCollector[castGUID] = true
+		self:Sync("s2")
+	end
+end
+
+do
+	local times = {
+		["s2"] = 0,
+	}
+	function mod:BigWigs_BossComm(_, msg)
+		if times[msg] then
+			local t = GetTime()
+			if t-times[msg] > 5 then
+				times[msg] = t
+				self:SetStage(2)
+				self:CDBar(23954, 22) -- Great Heal
+				self:Message("stages", "cyan", CL.stage:format(2), false)
+				self:PlaySound("stages", "info")
+			end
+		end
+	end
+end
 
 function mod:Screech(args)
 	self:Message("swarm", "orange", L.swarm_message, L.swarm_icon)
@@ -67,23 +109,30 @@ function mod:Screech(args)
 end
 
 function mod:GreatHeal(args)
-	self:Message(23954, "red", CL.casting:format(args.spellName))
-	self:CastBar(23954, 4)
-	if self:Interrupter() then
-		self:PlaySound(23954, "long")
+	self:StopBar(args.spellName)
+	self:Message(args.spellId, "red", CL.extra:format(args.spellName, CL.interruptible))
+	self:CastBar(args.spellId, 4)
+	self:PlaySound(args.spellId, "warning")
+end
+
+function mod:Interrupted(args)
+	if self:MobId(args.destGUID) == 14517 then
+		if args.extraSpellName == self:SpellName(23954) then -- Great Heal
+			self:StopCastBar(args.extraSpellName)
+			self:Message(23954, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+		elseif args.extraSpellName == self:SpellName(23953) then -- Mind Flay
+			self:Message(23953, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+		end
 	end
 end
 
-function mod:GreatHealStop(args)
-	if args.extraSpellName == self:SpellName(23954) then
-		self:StopBar(CL.cast:format(args.extraSpellName))
-		self:Message(23954, "green", CL.interrupted:format(args.extraSpellName))
-	end
+function mod:PierceArmorApplied(args)
+	self:TargetMessage(args.spellId, "purple", args.destName)
 end
 
 function mod:MindFlay(args)
-	self:Message(26044, "yellow")
-	self:PlaySound(26044, "info")
+	self:Message(args.spellId, "red", CL.extra:format(args.spellName, CL.interruptible))
+	self:PlaySound(args.spellId, "warning")
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
