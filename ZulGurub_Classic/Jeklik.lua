@@ -43,11 +43,17 @@ end
 function mod:GetOptions()
 	return {
 		"swarm",
-		{23954, "CASTBAR"}, -- Great Heal
 		12097, -- Pierce Armor
+		{23954, "CASTBAR"}, -- Great Heal
 		23953, -- Mind Flay
-		"bomb",
+		16098, -- Curse of Blood
+		23970, -- Throw Liquid Fire
 		"stages",
+	},nil,{
+		[23954] = CL.interruptible, -- Great Heal (Interruptible)
+		[23953] = CL.interruptible, -- Mind Flay (Interruptible)
+		[16098] = CL.interruptible, -- Curse of Blood (Interruptible)
+		[23970] = CL.underyou:format(CL.fire), -- Throw Liquid Fire (Fire under YOU)
 	}
 end
 
@@ -64,8 +70,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_INTERRUPT", "Interrupted", "*")
 	self:Log("SPELL_AURA_APPLIED", "PierceArmorApplied", 12097)
 	self:Log("SPELL_CAST_SUCCESS", "MindFlay", 23953)
-
-	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+	self:Log("SPELL_CAST_START", "CurseOfBlood", 16098)
+	self:Log("SPELL_DAMAGE", "BlazeDamage", 23972) -- Different ID to Throw Liquid Fire
+	self:Log("SPELL_MISSED", "BlazeDamage", 23972)
 end
 
 function mod:OnEngage()
@@ -109,9 +116,9 @@ function mod:Screech(args)
 end
 
 function mod:GreatHeal(args)
-	self:StopBar(args.spellName)
 	self:Message(args.spellId, "red", CL.extra:format(args.spellName, CL.interruptible))
 	self:CastBar(args.spellId, 4)
+	self:CDBar(args.spellId, 20.5)
 	self:PlaySound(args.spellId, "warning")
 end
 
@@ -122,6 +129,8 @@ function mod:Interrupted(args)
 			self:Message(23954, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 		elseif args.extraSpellName == self:SpellName(23953) then -- Mind Flay
 			self:Message(23953, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
+		elseif args.extraSpellName == self:SpellName(16098) then -- Curse of Blood
+			self:Message(16098, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 		end
 	end
 end
@@ -131,13 +140,23 @@ function mod:PierceArmorApplied(args)
 end
 
 function mod:MindFlay(args)
+	self:Message(args.spellId, "yellow", CL.extra:format(args.spellName, CL.interruptible))
+	self:PlaySound(args.spellId, "alert")
+end
+
+function mod:CurseOfBlood(args)
 	self:Message(args.spellId, "red", CL.extra:format(args.spellName, CL.interruptible))
+	self:CDBar(args.spellId, 21)
 	self:PlaySound(args.spellId, "warning")
 end
 
-function mod:CHAT_MSG_MONSTER_YELL(_, msg)
-	if msg:find(L.bomb_trigger, nil, true) then
-		self:Message("bomb", "orange", L.bomb_message, L.bomb_icon)
-		self:PlaySound("bomb", "alarm")
+do
+	local prev = 0
+	function mod:BlazeDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 3 then
+			prev = args.time
+			self:PersonalMessage(23970, "underyou", CL.fire)
+			self:PlaySound(23970, "underyou")
+		end
 	end
 end
