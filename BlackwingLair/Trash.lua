@@ -231,7 +231,7 @@ end
 do
 	local prev = 0
 	function mod:RainOfFireDamage(args)
-		if self:Me(args.destGUID) and args.time - prev > 2 then
+		if self:Me(args.destGUID) and args.time - prev > 3 then
 			prev = args.time
 			self:PersonalMessage(args.spellId, "aboveyou")
 			self:PlaySound(args.spellId, "underyou")
