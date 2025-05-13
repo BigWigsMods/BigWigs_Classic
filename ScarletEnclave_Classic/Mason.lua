@@ -120,9 +120,9 @@ do
 		self:StopBar(CL.shield)
 		self:Message(args.spellId, "cyan", CL.removed_after:format(CL.shield, args.time-appliedTime), nil, nil, 4) -- Stay onscreen for 4s
 		if nextTidal == 50 then -- The first one at 75% doesn't need extra text
-			self:Message(args.spellId, "cyan", CL.stack:format(currentStacks, args.spellName, CL.boss), nil, nil, 4) -- Stay onscreen for 4s
+			self:Message(args.spellId, "cyan", CL.stackboss:format(currentStacks, args.spellName), nil, nil, 4) -- Stay onscreen for 4s
 		else
-			self:Message(args.spellId, "cyan", CL.extra:format(CL.stack:format(currentStacks, args.spellName, CL.boss), "+".. diff), nil, nil, 4) -- Stay onscreen for 4s
+			self:Message(args.spellId, "cyan", CL.extra:format(CL.stackboss:format(currentStacks, args.spellName), CL.stack_gained:format(diff)), nil, nil, 4) -- Stay onscreen for 4s
 		end
 	end
 end
