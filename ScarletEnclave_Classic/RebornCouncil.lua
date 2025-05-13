@@ -195,7 +195,7 @@ do
 			local option = self:GetOption("custom_select_interrupt_counter") + 2
 			if peeledSecretsCount == option then peeledSecretsCount = 1 end
 			self:Nameplate(1231095, 20, args.destGUID, (">%d<"):format(peeledSecretsCount))
-			self:SetSpellRename(1231095, CL.count:format(args.spellName, peeledSecretsCount))
+			self:SetSpellRename(1231095, CL.count:format(args.extraSpellName, peeledSecretsCount))
 		end
 	end
 end
