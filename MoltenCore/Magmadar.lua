@@ -68,8 +68,8 @@ end
 function mod:OnEngage()
 	castCollector = {}
 	fireThrottle = 2
-	self:CDBar(19451, 8.1) -- Enrage / Frenzy
-	self:CDBar(19408, 9.7, CL.fear, L["19408_icon"]) -- Panic
+	self:CDBar(19451, 7.1) -- Enrage / Frenzy
+	self:CDBar(19408, 8.7, CL.fear, L["19408_icon"]) -- Panic
 end
 
 --------------------------------------------------------------------------------
