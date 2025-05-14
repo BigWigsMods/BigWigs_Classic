@@ -39,6 +39,7 @@ function mod:GetOptions()
 		{23023, "ICON"}, -- Conflagration
 		"eggs",
 		"stages",
+		"adds",
 	},nil,{
 		[14515] = CL.mind_control, -- Dominate Mind (Mind Control)
 	}
@@ -82,9 +83,10 @@ function mod:OnEngage()
 	eggs = 0
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
-	self:Bar("stages", 45, CL.adds, "Spell_Holy_PrayerOfHealing")
+	self:Bar("adds", 45, CL.adds, "Spell_Holy_PrayerOfHealing")
+	self:ScheduleTimer(function() self:Message("adds", "cyan", CL.adds_spawning, false) end, 45)
 	if self:GetPlayerAura(467047) then -- Black Essence
-		self:Bar("stages", 120, CL.big_add, "inv_misc_head_dragon_01")
+		self:Bar("adds", 120, CL.big_add, "inv_misc_head_dragon_01")
 		timer = self:ScheduleTimer("BigAdd", 120)
 	end
 end
@@ -114,8 +116,8 @@ function mod:BigAdd()
 		self:CancelTimer(timer)
 		timer = nil
 	end
-	self:Message("stages", "cyan", CL.big_add, "inv_misc_head_dragon_01")
-	self:PlaySound("stages", "long")
+	self:Message("adds", "cyan", CL.big_add, "inv_misc_head_dragon_01")
+	self:PlaySound("adds", "long")
 end
 
 function mod:DestroyEgg()
