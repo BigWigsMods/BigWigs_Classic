@@ -149,30 +149,43 @@ end
 
 --[[ Death Talon Wyrmguard / Death Talon Overseer ]]--
 
-function mod:BroodPowerBronzeApplied(args)
-	self:TargetBar(args.spellId, 5, args.destName, L.sandstorm)
-	if self:Me(args.destGUID) then
-		self:PersonalMessage(args.spellId, nil, L.sandstorm)
-		self:Say(args.spellId, L.sandstorm, nil, "Sandstorm")
-		self:CancelSayCountdown(args.spellId)
-		self:SayCountdown(args.spellId, 5)
-		self:PlaySound(args.spellId, "warning", nil, args.destName)
-	else
-		local unit = self:GetUnitIdByGUID(args.sourceGUID)
-		if unit and self:UnitWithinRange(unit, 10) then
-			self:PersonalMessage(args.spellId, "near", L.sandstorm)
-			self:PlaySound(args.spellId, "warning")
+do
+	local playerList = {}
+	function mod:BroodPowerBronzeApplied(args)
+		local throttle = false
+		if playerList[args.destGUID] and args.time - playerList[args.destGUID] < 3 then
+			throttle = true
 		else
-			self:TargetMessage(args.spellId, "orange", args.destName, L.sandstorm)
+			playerList[args.destGUID] = args.time
+		end
+
+		self:TargetBar(args.spellId, 5, args.destName, L.sandstorm)
+		if self:Me(args.destGUID) then
+			self:CancelSayCountdown(args.spellId)
+			self:SayCountdown(args.spellId, 5)
+			if not throttle then
+				self:PersonalMessage(args.spellId, nil, L.sandstorm)
+				self:Say(args.spellId, L.sandstorm, nil, "Sandstorm")
+				self:PlaySound(args.spellId, "warning", nil, args.destName)
+			end
+		elseif not throttle then
+			local unit = self:GetUnitIdByGUID(args.sourceGUID)
+			if unit and self:UnitWithinRange(unit, 10) then
+				self:PersonalMessage(args.spellId, "near", L.sandstorm)
+				self:PlaySound(args.spellId, "warning")
+			else
+				self:TargetMessage(args.spellId, "orange", args.destName, L.sandstorm)
+			end
 		end
 	end
-end
 
-function mod:BroodPowerBronzeRemoved(args)
-	if self:Me(args.destGUID) then
-		self:CancelSayCountdown(args.spellId)
+	function mod:BroodPowerBronzeRemoved(args)
+		playerList[args.destGUID] = nil
+		if self:Me(args.destGUID) then
+			self:CancelSayCountdown(args.spellId)
+		end
+		self:StopBar(L.sandstorm, args.destName)
 	end
-	self:StopBar(L.sandstorm, args.destName)
 end
 
 do
