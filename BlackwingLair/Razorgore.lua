@@ -36,7 +36,7 @@ end
 function mod:GetOptions()
 	return {
 		14515, -- Dominate Mind
-		{23023, "ICON"}, -- Conflagration
+		23023, -- Conflagration
 		"eggs",
 		"stages",
 		"adds",
@@ -49,7 +49,7 @@ if mod:GetSeason() == 2 then
 	function mod:GetOptions()
 		return {
 			14515, -- Dominate Mind
-			{23023, "ICON"}, -- Conflagration
+			23023, -- Conflagration
 			367873, -- Blinding Ash
 			366909, -- Ruby Flames
 			367740, -- Creeping Chill
@@ -68,8 +68,8 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_AURA_APPLIED", "DominateMind", 14515)
 	self:Log("SPELL_CAST_SUCCESS", "DestroyEgg", 19873)
-	self:Log("SPELL_AURA_APPLIED", "Conflagration", 23023)
-	self:Log("SPELL_AURA_REMOVED", "ConflagrationOver", 23023)
+	self:Log("SPELL_CAST_SUCCESS", "Conflagration", 23023)
+	self:Log("SPELL_AURA_APPLIED", "ConflagrationApplied", 23023)
 	if self:GetSeason() == 2 then
 		self:Log("SPELL_AURA_APPLIED", "GroundDamage", 367873, 366909) -- Blinding Ash, Ruby Flames
 		self:Log("SPELL_PERIODIC_DAMAGE", "GroundDamage", 367873, 366909)
@@ -103,10 +103,8 @@ end
 
 function mod:DominateMind(args)
 	self:TargetMessage(args.spellId, "red", args.destName, CL.mind_control)
-	if self:Me(args.destGUID) then
+	if self:Me(args.destGUID) or self:Dispeller("magic") then
 		self:PlaySound(args.spellId, "alert", nil, args.destName)
-	elseif self:Dispeller("magic") then
-		self:PlaySound(args.spellId, "alert")
 	end
 end
 
@@ -132,18 +130,19 @@ function mod:DestroyEgg()
 	end
 end
 
-function mod:Conflagration(args)
-	if self:Player(args.destFlags) then -- Players only, can apply to enemy NPCs
-		self:TargetMessage(args.spellId, "orange", args.destName)
-		self:TargetBar(args.spellId, 10, args.destName)
-		self:PrimaryIcon(args.spellId, args.destName)
-		self:PlaySound(args.spellId, "info", nil, args.destName)
+do
+	local playerList = {}
+	function mod:Conflagration()
+		playerList = {}
 	end
-end
 
-function mod:ConflagrationOver(args)
-	self:StopBar(args.spellName, args.destName)
-	self:PrimaryIcon(args.spellId)
+	function mod:ConflagrationApplied(args)
+		if self:Player(args.destFlags) then -- Players only, can apply to enemy NPCs
+			playerList[#playerList+1] = args.destName
+			self:TargetsMessage(args.spellId, "orange", playerList)
+			self:PlaySound(args.spellId, "info", nil, playerList)
+		end
+	end
 end
 
 do
