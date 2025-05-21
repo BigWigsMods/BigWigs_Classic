@@ -34,7 +34,7 @@ end
 function mod:GetOptions()
 	return {
 		{29107, "COUNTDOWN"}, -- Disrupting Shout
-		29060, -- Taunt
+		{29060, "OFF"}, -- Taunt
 		29061, -- Shield Wall
 		{29051, "INFOBOX"}, -- Mind Exhaustion
 	}, {
@@ -43,9 +43,9 @@ function mod:GetOptions()
 end
 
 function mod:VerifyEnable(unit, mobId)
-	if mobId == 16061 then
+	if mobId == 16061 then -- Instructor Razuvious
 		return true
-	elseif mobId == 16803 then
+	elseif mobId == 16803 then -- Deathknight Understudy
 		return self:GetHealth(unit) == 100
 	end
 end
