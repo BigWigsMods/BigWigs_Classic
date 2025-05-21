@@ -103,7 +103,7 @@ do
 				times[msg] = t
 				self:SetStage(2)
 				self:CDBar(23954, 22) -- Great Heal
-				self:Message("stages", "cyan", CL.stage:format(2), false)
+				self:Message("stages", "cyan", CL.percent:format(50, CL.stage:format(2)), false)
 				self:PlaySound("stages", "info")
 			end
 		end
