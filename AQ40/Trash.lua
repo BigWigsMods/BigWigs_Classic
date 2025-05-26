@@ -157,7 +157,7 @@ function mod:OnBossEnable()
 
 	self:Log("SPELL_SUMMON", "SummonAnubisathSwarmguard", 17430)
 	self:Log("SPELL_SUMMON", "SummonAnubisathWarrior", 17431)
-	self:Death("DefenderKilled", 15277, 234830)
+	self:Death("DefenderKilled", 15277, 234830) -- Anubisath Defender, Anubisath Defender (Season of Discovery)
 
 	self:Log("SPELL_AURA_APPLIED", "SunderArmor", 25051)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "SunderArmor", 25051)
@@ -356,8 +356,11 @@ do
 end
 
 function mod:FrenzyEnrage(args)
-	self:Message(args.spellId, "red")
-	self:PlaySound(args.spellId, "long")
+	local id = self:MobId(args.destGUID) -- Battleguard Sartura also gains this, lock to trash only
+	if id == 15277 or id == 234830 then -- Anubisath Defender, Anubisath Defender (Season of Discovery)
+		self:Message(args.spellId, "red")
+		self:PlaySound(args.spellId, "long")
+	end
 end
 
 function mod:ExplodeApplied(args)
