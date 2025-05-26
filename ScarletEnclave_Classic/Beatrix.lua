@@ -100,7 +100,7 @@ function mod:BigWigs_UNIT_TARGET(event, mobId, unitTarget)
 		self:UnregisterMessage(event)
 		self:UnregisterEvent("NAME_PLATE_UNIT_ADDED")
 		self:CDBar(1232389, 16, CL.tank_debuff) -- Unwavering Blade
-		self:CDBar(1232637, 45) -- Stock Break
+		self:Bar(1232637, 45) -- Stock Break, Bar instead of CBBar because sometimes it isn't used
 		self:Message("stages", "cyan", msg, false)
 		self:PlaySound("stages", "long")
 	end
@@ -114,7 +114,7 @@ function mod:NAME_PLATE_UNIT_ADDED(event, unit)
 		self:UnregisterMessage("BigWigs_UNIT_TARGET")
 		self:UnregisterEvent(event)
 		self:CDBar(1232389, 16, CL.tank_debuff) -- Unwavering Blade
-		self:CDBar(1232637, 45) -- Stock Break
+		self:Bar(1232637, 45) -- Stock Break, Bar instead of CBBar because sometimes it isn't used
 		self:Message("stages", "cyan", msg, false)
 		self:PlaySound("stages", "long")
 	end

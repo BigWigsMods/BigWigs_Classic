@@ -234,7 +234,7 @@ do
 		if count < 3 then
 			self:Message("stages", "cyan", CL.mob_killed:format(args.destName, count, 3), false)
 			if args.mobId == 240810 then -- Doan
-				self:StopBar(1231282) -- Molten Basin
+				self:StopBar(1231282) -- Molten Basin, this becomes permanent after death
 			end
 		else
 			unitTracker, currentHealth = {}, {}
