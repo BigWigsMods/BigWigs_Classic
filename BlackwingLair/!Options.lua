@@ -6,6 +6,7 @@ BigWigs:AddColors("Razorgore the Untamed", {
 	[366909] = "blue",
 	[367740] = "blue",
 	[367873] = "blue",
+	["adds"] = "cyan",
 	["eggs"] = "green",
 	["stages"] = "cyan",
 })
@@ -16,6 +17,7 @@ BigWigs:AddSounds("Razorgore the Untamed", {
 	[366909] = "underyou",
 	[367740] = "alarm",
 	[367873] = "underyou",
+	["adds"] = "long",
 	["stages"] = "long",
 })
 
@@ -32,7 +34,7 @@ BigWigs:AddSounds("Vaelastrasz the Corrupt", {
 BigWigs:AddColors("Broodlord Lashlayer", {
 	[18670] = {"blue","yellow"},
 	[23331] = "orange",
-	[24573] = {"blue","yellow"},
+	[24573] = {"blue","purple"},
 	[367369] = {"blue","red"},
 	["stages"] = "cyan",
 })
@@ -62,7 +64,7 @@ BigWigs:AddSounds("Firemaw", {
 BigWigs:AddColors("Ebonroc", {
 	[22539] = "red",
 	[23339] = "yellow",
-	[23340] = {"blue","orange"},
+	[23340] = {"blue","purple"},
 	[368515] = "blue",
 })
 

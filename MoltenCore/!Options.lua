@@ -91,12 +91,13 @@ BigWigs:AddSounds("Sulfuron Harbinger", {
 BigWigs:AddColors("Golemagg the Incinerator", {
 	[13880] = {"blue","purple"},
 	[20228] = {"blue","orange"},
+	[460858] = {"blue","orange"},
 	[461463] = "red",
 })
 
 BigWigs:AddSounds("Golemagg the Incinerator", {
 	[13880] = "alert",
-	[20228] = "alarm",
+	[460858] = "alarm",
 	[461463] = "warning",
 })
 

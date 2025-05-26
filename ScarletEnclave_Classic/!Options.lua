@@ -15,7 +15,7 @@ BigWigs:AddSounds("Balnazzar Scarlet Enclave", {
 })
 
 BigWigs:AddColors("High Commander Beatrix", {
-	[1231873] = {"blue","green"},
+	[1231873] = "blue",
 	[1232389] = {"blue","purple"},
 	[1232390] = {"blue","red"},
 	[1232637] = {"blue","red"},
@@ -103,7 +103,7 @@ BigWigs:AddSounds("Reborn Council", {
 })
 
 BigWigs:AddColors("Lillian Voss", {
-	[1232192] = {"blue","orange"},
+	[1232192] = {"blue","purple"},
 	[1233847] = "red",
 	[1233849] = "blue",
 	[1233883] = {"blue","green"},
@@ -121,10 +121,14 @@ BigWigs:AddSounds("Lillian Voss", {
 
 BigWigs:AddColors("Grand Crusader Caldoran", {
 	[1229114] = "yellow",
-	[1229272] = {"blue","orange"},
+	[1229272] = {"blue","yellow"},
 	[1229503] = {"blue","purple"},
 	[1229714] = "red",
+	[1230697] = "cyan",
 	[1231027] = "yellow",
+	[1231618] = "orange",
+	[1231651] = "orange",
+	[1231654] = "orange",
 	["run"] = "blue",
 	["stages"] = "cyan",
 })
@@ -134,7 +138,11 @@ BigWigs:AddSounds("Grand Crusader Caldoran", {
 	[1229272] = "alarm",
 	[1229503] = "info",
 	[1229714] = "warning",
+	[1230697] = "alarm",
 	[1231027] = "long",
+	[1231618] = "alert",
+	[1231651] = "alert",
+	[1231654] = "alert",
 	["stages"] = "long",
 })
 

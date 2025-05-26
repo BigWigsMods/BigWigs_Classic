@@ -211,3 +211,11 @@ BigWigs:AddSounds("Kel'Thuzad", {
 	["adds"] = "info",
 	["stages"] = {"info","long"},
 })
+
+BigWigs:AddColors("Naxxramas Trash", {
+	[1219235] = {"blue","yellow"},
+})
+
+BigWigs:AddSounds("Naxxramas Trash", {
+	[1219235] = "warning",
+})
