@@ -2,13 +2,6 @@ local L = BigWigs:NewBossLocale("High Priestess Jeklik", "koKR")
 if not L then return end
 if L then
 	L.bossName = "대여사제 제클릭"
-
-	L.swarm_desc = "박쥐 떼에 대한 경고"
-	L.swarm_message = "박쥐 떼 소환!"
-
-	L.bomb_desc = "폭탄 박쥐에 대한 경고"
-	L.bomb_trigger = "침략자들에게 뜨거운 맛을 보여줘라!"
-	L.bomb_message = "폭탄 박쥐 소환!"
 end
 
 L = BigWigs:NewBossLocale("High Priest Venoxis", "koKR")

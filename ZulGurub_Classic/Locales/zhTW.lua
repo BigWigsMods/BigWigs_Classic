@@ -2,13 +2,6 @@ local L = BigWigs:NewBossLocale("High Priestess Jeklik", "zhTW")
 if not L then return end
 if L then
 	L.bossName = "高階祭司耶克里克"
-
-	L.swarm_desc = "蝙蝠群出現時發出警報"
-	L.swarm_message = "蝙蝠群來了！"
-
-	L.bomb_desc = "炸彈蝙蝠出現時發出警報"
-	L.bomb_trigger = "我命令你把這些入侵者燒成灰燼！"
-	L.bomb_message = "火焰投擲！ 注意閃躲！"
 end
 
 L = BigWigs:NewBossLocale("High Priest Venoxis", "zhTW")

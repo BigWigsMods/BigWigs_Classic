@@ -22,18 +22,6 @@ local castCollector = {}
 local L = mod:GetLocale()
 if L then
 	L.bossName = "High Priestess Jeklik"
-
-	L.swarm = 6605 -- Terrifying Screech
-	L.swarm_desc = "Warn for the Bat swarms"
-	L.swarm_icon = 24423
-	-- L.swarm_trigger = "emits a deafening shriek"
-	L.swarm_message = "Incoming bat swarm!"
-
-	L.bomb = 23970 -- Throw Liquid Fire
-	L.bomb_desc = "Warn for Bomb Bats"
-	L.bomb_icon = 23970
-	L.bomb_trigger = "I command you to rain fire down upon these invaders!"
-	L.bomb_message = "Incoming bomb bats!"
 end
 
 --------------------------------------------------------------------------------
@@ -42,14 +30,19 @@ end
 
 function mod:GetOptions()
 	return {
-		"swarm",
+		"stages",
+		-- Stage 1
 		12097, -- Pierce Armor
+		-- Stage 2
 		{23954, "CASTBAR"}, -- Great Heal
 		23953, -- Mind Flay
 		16098, -- Curse of Blood
 		23970, -- Throw Liquid Fire
-		"stages",
-	},nil,{
+		23952, -- Shadow Word: Pain
+	},{
+		[12097] = CL.stage:format(1),
+		[23954] = CL.stage:format(2),
+	},{
 		[23954] = CL.interruptible, -- Great Heal (Interruptible)
 		[23953] = CL.interruptible, -- Mind Flay (Interruptible)
 		[16098] = CL.interruptible, -- Curse of Blood (Interruptible)
@@ -65,10 +58,10 @@ function mod:OnBossEnable()
 	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 	self:RegisterMessage("BigWigs_BossComm")
 
-	self:Log("SPELL_CAST_SUCCESS", "Screech", 22884) -- Haven't actually seen Terrifying Screech or Psychic Scream in logs
+	self:Log("SPELL_AURA_APPLIED", "PierceArmorApplied", 12097)
+	self:Log("SPELL_AURA_APPLIED", "ShadowWordPain", 23952)
 	self:Log("SPELL_CAST_START", "GreatHeal", 23954)
 	self:Log("SPELL_INTERRUPT", "Interrupted", "*")
-	self:Log("SPELL_AURA_APPLIED", "PierceArmorApplied", 12097)
 	self:Log("SPELL_CAST_SUCCESS", "MindFlay", 23953)
 	self:Log("SPELL_CAST_START", "CurseOfBlood", 16098)
 	self:Log("SPELL_DAMAGE", "BlazeDamage", 23972) -- Different ID to Throw Liquid Fire
@@ -79,6 +72,7 @@ function mod:OnEngage()
 	castCollector = {}
 	self:SetStage(1)
 	self:Message("stages", "cyan", CL.stage:format(1), false)
+	self:RegisterEvent("UNIT_HEALTH")
 end
 
 --------------------------------------------------------------------------------
@@ -110,9 +104,12 @@ do
 	end
 end
 
-function mod:Screech(args)
-	self:Message("swarm", "orange", L.swarm_message, L.swarm_icon)
-	self:PlaySound("swarm", "alarm")
+function mod:PierceArmorApplied(args)
+	self:TargetMessage(args.spellId, "purple", args.destName)
+end
+
+function mod:ShadowWordPain(args)
+	self:TargetMessage(args.spellId, "orange", args.destName)
 end
 
 function mod:GreatHeal(args)
@@ -135,10 +132,6 @@ function mod:Interrupted(args)
 	end
 end
 
-function mod:PierceArmorApplied(args)
-	self:TargetMessage(args.spellId, "purple", args.destName)
-end
-
 function mod:MindFlay(args)
 	self:Message(args.spellId, "yellow", CL.extra:format(args.spellName, CL.interruptible))
 	self:PlaySound(args.spellId, "alert")
@@ -157,6 +150,18 @@ do
 			prev = args.time
 			self:PersonalMessage(23970, "underyou", CL.fire)
 			self:PlaySound(23970, "underyou")
+		end
+	end
+end
+
+function mod:UNIT_HEALTH(event, unit)
+	if not self:UnitIsPlayer(unit) and self:MobId(self:UnitGUID(unit)) == 14517 then
+		local hp = self:GetHealth(unit)
+		if hp < 56 then
+			self:UnregisterEvent(event)
+			if hp > 50 then -- Make sure we're not too late
+				self:Message("stages", "cyan", CL.soon:format(CL.stage:format(2)), false)
+			end
 		end
 	end
 end

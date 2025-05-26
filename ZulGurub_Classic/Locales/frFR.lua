@@ -2,13 +2,6 @@ local L = BigWigs:NewBossLocale("High Priestess Jeklik", "frFR")
 if not L then return end
 if L then
 	L.bossName = "Grande prêtresse Jeklik"
-
-	L.swarm_desc = "Prêviens des pops de pack de chauve-souris"
-	L.swarm_message = "Pack de Chauve-souris en approche !"
-
-	L.bomb_desc = "Préviens des pops de chauve-souris bombardier"
-	L.bomb_trigger = "Qu'une pluie de feu s'abatte sur les envahisseurs !"
-	L.bomb_message = "Chauve-souris bombardier en approche !"
 end
 
 L = BigWigs:NewBossLocale("High Priest Venoxis", "frFR")
