@@ -109,6 +109,6 @@ do
 end
 
 function mod:Banish(args)
-	self:TargetMessage(args.spellId, "cyan", args.destName, CL.teleport)
+	self:TargetMessage(args.spellId, "yellow", args.destName, CL.teleport)
 	self:PlaySound(args.spellId, "long", nil, args.destName)
 end
