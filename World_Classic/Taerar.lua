@@ -106,7 +106,7 @@ function mod:NoxiousBreathApplied(args)
 				self:StackMessage(args.spellId, "purple", args.destName, args.amount, 100, CL.breath) -- No emphasize when on you
 			end
 		elseif tanking and args.amount then -- On a tank that isn't me, 2+
-			self:StackMessage(args.spellId, "purple", args.destName, args.amount, tankDebuffOnMe or args.amount >= 6 and 100 or 3, CL.breath)
+			self:StackMessage(args.spellId, "purple", args.destName, args.amount, (tankDebuffOnMe or args.amount >= 6) and 100 or 3, CL.breath)
 			if not tankDebuffOnMe and args.amount >= 3 and args.amount <= 5 then
 				self:PlaySound(args.spellId, "warning", nil, args.destName)
 			end
