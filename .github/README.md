@@ -9,7 +9,6 @@ A collection of BigWigs modules from the **Classic** era, including:
 * Onyxia *[Vanilla & TBC WoW only]*
 * Naxxramas *[Vanilla & TBC WoW only]*
 * World Bosses *[Vanilla WoW only]*
-* Season of Discovery *[Vanilla WoW only]*
 
 ## Download
 * <https://www.curseforge.com/wow/addons/bigwigs_classic>
