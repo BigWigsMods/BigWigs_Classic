@@ -47,7 +47,7 @@ function mod:OnBossEnable()
 	guardiansAlive = 6
 	guardiansDefeated = {}
 	nameCollector = {}
-	self:RegisterMessage("BigWigs_OnBossEngage", "Disable")
+	self:RegisterMessage("BigWigs_OnBossWin", "Disable") -- Not using Engage because of false ENCOUNTER_START for Beatrix that I doubt will ever be fixed
 	self:RegisterEvent("UNIT_TARGETABLE_CHANGED")
 	self:RegisterMessage("BigWigs_UNIT_TARGET")
 	self:RegisterMessage("BigWigs_BossComm")
@@ -106,8 +106,8 @@ do
 				local id = tonumber(msg)
 				guardiansAlive = guardiansAlive - 1
 				self:Message("stages", "cyan", CL.mob_killed:format(nameCollector[id] or "??", 6-guardiansAlive, 6), false, nil, 8) -- Stay onscreen for 8s
-				if guardiansAlive == 0 and self:CheckOption("stages", "MESSAGE") then
-					self:PlayVictorySound()
+				if guardiansAlive == 0 then
+					self:Disable()
 				end
 			end
 		end
@@ -118,8 +118,8 @@ function mod:GuardianKilled(args)
 	if not guardiansDefeated[args.mobId] then
 		guardiansAlive = guardiansAlive - 1
 		self:Message("stages", "cyan", CL.mob_killed:format(args.destName, 6-guardiansAlive, 6), false, nil, 8) -- Stay onscreen for 8s
-		if guardiansAlive == 0 and self:CheckOption("stages", "MESSAGE") then
-			self:PlayVictorySound()
+		if guardiansAlive == 0 then
+			self:Disable()
 		end
 	end
 end
