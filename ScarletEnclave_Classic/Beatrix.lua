@@ -142,8 +142,13 @@ do
 	end
 	local function Cavalry()
 		mod:Message("waves", "yellow", CL.incoming:format(L.waves), L.waves_icon)
-		mod:Bar("waves", 17, L.waves, L.waves_icon)
+		mod:Bar("waves", 16, L.waves, L.waves_icon)
 		mod:PlaySound("waves", "info")
+	end
+	local function Bombing()
+		mod:Message("bombing", "yellow", L.bombing, L.bombing_icon)
+		mod:Bar("bombing", 16, L.bombing, L.bombing_icon)
+		mod:PlaySound("bombing", "info")
 	end
 
 	local times = {
@@ -171,9 +176,7 @@ do
 					self:Bar("arrows", 13, L.arrows, L.arrows_icon)
 					self:PlaySound("arrows", "info")
 				elseif msg == "bombing" then
-					self:Message("bombing", "yellow", L.bombing, L.bombing_icon)
-					self:Bar("bombing", 18, L.bombing, L.bombing_icon)
-					self:PlaySound("bombing", "info")
+					self:ScheduleTimer(Bombing, 2)
 				end
 			end
 		end
