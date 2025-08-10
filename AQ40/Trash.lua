@@ -206,8 +206,9 @@ do
 						printed = true
 						BigWigs:Print(L.detect_magic_warning)
 					end
-					if GetTime() - prevMsg > 40 and self:GetHealth("target") > 5 then
-						prevMsg = GetTime()
+					local t = GetTime()
+					if t - prevMsg > 40 and self:GetHealth("target") > 5 then
+						prevMsg = t
 						local icon = self:GetIconTexture(self:GetIcon("target"))
 						if icon then
 							self:Message("target_buffs", "red", icon.. L.detect_magic_missing_message, 2855)
@@ -233,7 +234,7 @@ do
 						msg = L.target_buffs_message:format(msg)
 					end
 					local t = GetTime()
-					if not defenderBuffThrottle[guid] or msg ~= defenderBuffThrottle[guid][1] or (t - defenderBuffThrottle[guid][2]) > 5 then
+					if not defenderBuffThrottle[guid] or msg ~= defenderBuffThrottle[guid][1] or (t - defenderBuffThrottle[guid][2]) > 4 then
 						defenderBuffThrottle[guid] = {msg, t}
 						self:Message("target_buffs", "yellow", msg, false)
 					end
