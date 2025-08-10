@@ -23,6 +23,7 @@ end
 --
 
 local defendersAlive = 5
+local defenderBuffThrottle = {}
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -121,6 +122,7 @@ end
 
 function mod:OnBossEnable()
 	defendersAlive = 5
+	defenderBuffThrottle = {}
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
@@ -226,9 +228,14 @@ do
 					local msg = self:TableToString(total, #total)
 					local icon = self:GetIconTexture(self:GetIcon("target"))
 					if icon then
-						self:Message("target_buffs", "yellow", icon.. L.target_buffs_message:format(msg), false)
+						msg = icon.. L.target_buffs_message:format(msg)
 					else
-						self:Message("target_buffs", "yellow", L.target_buffs_message:format(msg), false)
+						msg = L.target_buffs_message:format(msg)
+					end
+					local t = GetTime()
+					if not defenderBuffThrottle[guid] or msg ~= defenderBuffThrottle[guid][1] or (t - defenderBuffThrottle[guid][2]) > 5 then
+						defenderBuffThrottle[guid] = {msg, t}
+						self:Message("target_buffs", "yellow", msg, false)
 					end
 				end
 			end
