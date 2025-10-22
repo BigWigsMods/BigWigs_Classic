@@ -201,7 +201,7 @@ do
 		if guid ~= prevGUID then
 			local npcId = self:MobId(guid)
 			if npcId == 15264 or npcId == 15277 or npcId == 234830 then -- Anubisath Sentinel, Anubisath Defender, Anubisath Defender (Season of Discovery)
-				if self:Vanilla() and not self:UnitDebuff("target", 2855) then
+				if self:Vanilla() and not self:GetPlayerAura(2855, "target") then
 					if not printed then
 						printed = true
 						BigWigs:Print(L.detect_magic_warning)
@@ -220,7 +220,7 @@ do
 				end
 				local total = {}
 				for buffId, message in next, buffList do
-					if self:UnitBuff("target", buffId) then
+					if self:GetPlayerAura(buffId, "target") then
 						prevGUID = guid
 						total[#total+1] = message
 					end

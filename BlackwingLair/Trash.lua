@@ -199,7 +199,7 @@ do
 		if guid ~= prevGUID then
 			local npcId = self:MobId(guid)
 			if npcId == 12460 or npcId == 12461 then -- Death Talon Wyrmguard, Death Talon Overseer
-				if self:Vanilla() and not self:UnitDebuff("target", 2855) then
+				if self:Vanilla() and not self:GetPlayerAura(2855, "target") then
 					if not printed then
 						printed = true
 						BigWigs:Print(L.detect_magic_warning)
@@ -217,7 +217,7 @@ do
 					return
 				end
 				for buffId, message in next, buffList do
-					if self:UnitBuff("target", buffId) then
+					if self:GetPlayerAura(buffId, "target") then
 						prevGUID = guid
 						local icon = self:GetIconTexture(self:GetIcon("target"))
 						local msg
