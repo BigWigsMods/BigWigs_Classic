@@ -1,4 +1,4 @@
-## Interface: 20504
+## Interface: 20505
 
 ## Title: BigWigs [|cffeda55fClassic|r]
 ## Title-zhCN: BigWigs [|cffeda55f经典旧世|r]
