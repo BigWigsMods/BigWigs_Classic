@@ -47,8 +47,9 @@ function mod:GetOptions()
 	}
 end
 
-local glacialCrashMarker = mod:AddMarkerOption(true, "player", 1, 1219728, 1, 2) -- Glacial Crash
+local glacialCrashMarker
 if mod:GetSeason() == 2 then
+	glacialCrashMarker = mod:AddMarkerOption(true, "player", 1, 1219728, 1, 2) -- Glacial Crash
 	function mod:GetOptions()
 		return {
 			28542, -- Life Drain
