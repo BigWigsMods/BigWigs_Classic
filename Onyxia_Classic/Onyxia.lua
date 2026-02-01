@@ -32,6 +32,11 @@ end
 -- Initialization
 --
 
+function mod:OnRegister()
+	self:SetSpellRename(17086, L.deep_breath) -- Breath (Deep Breath)
+	self:SetSpellRename(18431, CL.fear) -- Bellowing Roar (Fear)
+end
+
 function mod:GetOptions()
 	return {
 		"stages",

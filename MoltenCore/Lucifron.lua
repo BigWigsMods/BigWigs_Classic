@@ -20,6 +20,10 @@ local markerCount = 1
 -- Initialization
 --
 
+function mod:OnRegister()
+	self:SetSpellRename(20604, CL.mind_control) -- Dominate Mind (Mind Control)
+end
+
 local dominateMindMarker = mod:GetSeason() == 2 and mod:AddMarkerOption(true, "player", 1, 20604, 1, 2, 3) or mod:AddMarkerOption(true, "player", 1, 20604, 1, 2) -- Dominate Mind
 function mod:GetOptions()
 	return {

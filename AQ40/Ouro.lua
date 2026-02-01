@@ -38,6 +38,10 @@ end
 -- Initialization
 --
 
+function mod:OnRegister()
+	self:SetSpellRename(26103, CL.knockback) -- Sweep (Knockback)
+end
+
 function mod:GetOptions()
 	return {
 		26103, -- Sweep

@@ -59,6 +59,10 @@ end
 -- Initialization
 --
 
+function mod:OnRegister()
+	self:SetSpellRename(22686, CL.fear) -- Bellowing Roar (Fear)
+end
+
 function mod:GetOptions()
 	return {
 		"stages",
