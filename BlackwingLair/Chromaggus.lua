@@ -17,6 +17,9 @@ local prevWeakness = nil
 local buffList = {}
 local firstWarning = false
 
+local prevWeaknessBackup = nil
+local blockBackup = false
+
 --------------------------------------------------------------------------------
 -- Localization
 --
@@ -139,6 +142,7 @@ do
 				for buffId, message in next, buffList do
 					if mod:GetPlayerAura(buffId, unit) then
 						prevWeakness = buffId
+						prevWeaknessBackup = buffId
 						mod:Message("vulnerability", "green", message, buffId)
 						mod:CDBar("vulnerability", 0.1, message, buffId)
 						mod:PlaySound("vulnerability", "info")
@@ -151,11 +155,37 @@ do
 		end
 	end
 
+	local function CheckWeaknessBackupRepeater() -- Backup function that only runs when weakness auras aren't showing in the combat log
+		if not mod:IsEngaged() or blockBackup then return end
+		mod:SimpleTimer(CheckWeaknessBackupRepeater, 1)
+
+		local unit = mod:GetUnitIdByGUID(14020)
+		if unit then
+			for buffId, message in next, buffList do
+				if mod:GetPlayerAura(buffId, unit) then
+					if prevWeaknessBackup ~= buffId then
+						if buffList[prevWeaknessBackup] then
+							mod:StopBar(buffList[prevWeaknessBackup])
+						end
+						prevWeaknessBackup = buffId
+						mod:Message("vulnerability", "green", message, buffId)
+						mod:CDBar("vulnerability", 0.1, message, buffId)
+						mod:PlaySound("vulnerability", "info")
+					end
+					return
+				end
+			end
+		end
+	end
+
 	function mod:OnEngage()
 		barcount = 2
 		debuffCount = 0
 		prevWeakness = nil
 		firstWarning = false
+
+		prevWeaknessBackup = nil
+		blockBackup = false
 
 		if not self:GetPlayerAura(467047) then -- Black Essence
 			self:Bar("breath", 30, CL.count:format(CL.next_ability, 1), "INV_Misc_QuestionMark")
@@ -163,6 +193,9 @@ do
 		end
 
 		self:SimpleTimer(CheckInitWeakness, 1)
+		if not self:Vanilla() and not self:Retail() then -- Some flavors of WoW haven't fixed the hidden weakness auras (TBC)
+			self:ScheduleTimer(CheckWeaknessBackupRepeater, 12)
+		end
 	end
 end
 
@@ -234,6 +267,7 @@ end
 
 function mod:ElementalShield(args) -- Weaknesses
 	if self:MobId(args.destGUID) == 14020 then
+		blockBackup = true
 		if buffList[prevWeakness] then
 			self:StopBar(buffList[prevWeakness])
 		end
