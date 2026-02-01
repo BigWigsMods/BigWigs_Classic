@@ -64,7 +64,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "VoidZone", 28863)
 	self:Log("SPELL_CAST_SUCCESS", "HolyWrath", 28883)
 	self:Log("SPELL_AURA_APPLIED", "ShieldWall", 29061)
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
 
 	self:Death("Deaths", 16062, 16063, 16064, 16065)
 end
@@ -142,8 +141,13 @@ function mod:VoidZone(args)
 	else
 		local unit = self:GetUnitIdByGUID(args.sourceGUID)
 		if not unit or self:UnitWithinRange(unit, 35) or args.sourceGUID == self:UnitGUID("target") then
-			self:TargetMessage(args.spellId, "orange", args.destName)
-			self:PlaySound(args.spellId, "alarm", nil, args.destName)
+			if args.destName then
+				self:TargetMessage(args.spellId, "orange", args.destName)
+				self:PlaySound(args.spellId, "alarm", nil, args.destName)
+			else -- Some flavors of WoW don't define the target (TBC)
+				self:Message(args.spellId, "orange")
+				self:PlaySound(args.spellId, "alarm")
+			end
 		end
 	end
 end
