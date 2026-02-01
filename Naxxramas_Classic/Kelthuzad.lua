@@ -116,7 +116,11 @@ function mod:MortalWoundApplied(args)
 end
 
 function mod:ShadowFissure(args)
-	self:TargetMessage(args.spellId, "red", args.destName)
+	if args.destName then
+		self:TargetMessage(args.spellId, "red", args.destName)
+	else -- Some flavors of WoW don't define the target (TBC)
+		self:Message(args.spellId, "red")
+	end
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId, nil, nil, "Shadow Fissure")
 		self:PlaySound(args.spellId, "warning", nil, args.destName)
