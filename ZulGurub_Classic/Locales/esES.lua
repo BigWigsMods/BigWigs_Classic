@@ -17,8 +17,8 @@ end
 L = BigWigs:NewBossLocale("High Priest Thekal", "esES")
 if L then
 	L.bossName = "Sumo Sacerdote Thekal"
-	L.lorkhan = "Zelote Lor'Khan"
-	L.zath = "Zelote Zath"
+	L.lorkhan = "Integrista Lor'Khan"
+	L.zath = "Integrista Zath"
 
 	L.tigers_message = "¡Tigres entrantes!"
 end
@@ -40,7 +40,7 @@ end
 
 L = BigWigs:NewBossLocale("Jin'do the Hexxer", "esES")
 if L then
-	L.bossName = "Jin'do el Aojador"
+	L.bossName = "Jin'do el Malhechor"
 end
 
 L = BigWigs:NewBossLocale("Gahz'ranka", "esES")

@@ -33,7 +33,7 @@ L = BigWigs:NewBossLocale("Kel'Thuzad", "esMX")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Cámara de Kel'Thuzad"
 
-	--L.engage_yell_trigger = "Minions, servants, soldiers of the cold dark! Obey the call of Kel'Thuzad!"
+	L.engage_yell_trigger = "¡Esbirros, sirvientes, soldados de la fría oscuridad! ¡Obedezcan la llamada de Kel'Thuzad!"
 	--L.stage2_yell_trigger1 = "Pray for mercy!"
 	--L.stage2_yell_trigger2 = "Scream your dying breath!"
 	--L.stage2_yell_trigger3 = "The end is upon you!"
@@ -43,7 +43,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esMX")
 if L then
-	--L.adds_yell_trigger = "Rise, my soldiers" -- Rise, my soldiers! Rise and fight once more!
+	L.adds_yell_trigger = "¡Levántense, soldados míos!" -- Rise, my soldiers! Rise and fight once more!
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "esMX")

@@ -1,7 +1,7 @@
 local L = BigWigs:NewBossLocale("Razorgore the Untamed", "esES")
 if not L then return end
 if L then
-	L.start_trigger = "¡Tenemos intrusos en El Criadero!"
+	L.start_trigger = "¡Los invasores han penetrado en El Criadero!"
 
 	L.eggs = "Contar huevos"
 	L.eggs_desc = "Cuenta los huevos destruídos."
@@ -31,7 +31,7 @@ end
 
 L = BigWigs:NewBossLocale("Nefarian Classic", "esES")
 if L then
-	--L.engage_yell_trigger = "Let the games begin"
+	L.engage_yell_trigger = "¡Que comiencen los juegos!"
 	L.stage3_yell_trigger = "¡Imposible! ¡Levantaos, esbirros!"
 
 	L.shaman_class_call_yell_trigger = "Chamanes"
