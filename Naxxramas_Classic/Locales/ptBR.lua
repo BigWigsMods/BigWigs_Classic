@@ -33,7 +33,7 @@ L = BigWigs:NewBossLocale("Kel'Thuzad", "ptBR")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Câmara de Kel'Thuzad"
 
-	--L.engage_yell_trigger = "Minions, servants, soldiers of the cold dark! Obey the call of Kel'Thuzad!"
+	L.engage_yell_trigger = "Lacaios, serviçais, soldados das gélidas trevas! Atendam ao chamado de Kel'Thuzad!"
 	--L.stage2_yell_trigger1 = "Pray for mercy!"
 	--L.stage2_yell_trigger2 = "Scream your dying breath!"
 	--L.stage2_yell_trigger3 = "The end is upon you!"
@@ -43,7 +43,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ptBR")
 if L then
-	--L.adds_yell_trigger = "Rise, my soldiers" -- Rise, my soldiers! Rise and fight once more!
+	L.adds_yell_trigger = "Ergam-se, meus soldados!" -- Rise, my soldiers! Rise and fight once more!
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ptBR")
@@ -61,7 +61,7 @@ if L then
 	--L.stage2_yell_trigger3 = "Kill..."
 
 	--L.add_death_emote_trigger = "%s dies."
-	--L.overload_emote_trigger = "%s overloads!"
+	L.overload_emote_trigger = "%s se sobrecarrega!"
 	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
 	L.polarity_extras = "Avisos adicionais para posicionamento da mudança de polaridade"

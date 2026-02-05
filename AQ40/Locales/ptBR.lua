@@ -33,7 +33,7 @@ if L then
 
 	L.submerge_message = "Ouro submergiu"
 	L.submerge_bar = "Submersão"
-	--L.submerge_early_message = "Early Submerge - No one was in range"
+	L.submerge_early_message = "Submersão precoce - Ninguém estava no alcance"
 
 	L.scarab = "Desaparecimento de escaravelho"
 	L.scarab_desc = "Aviso para desaparecimento de escaravelho."
@@ -57,7 +57,7 @@ if L then
 	L.weakened_desc = "Aviso para estado enfraquecido."
 
 	L.dark_glare_message = "%s: %s (Grupo %s)" -- Dark Glare: PLAYER_NAME (Group 1)
-	--L.stomach = "Stomach"
+	L.stomach = "Estômago"
 end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "ptBR")

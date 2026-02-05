@@ -7,5 +7,5 @@ end
 
 L = BigWigs:NewBossLocale("The Molten Core", "esES")
 if L then
-	--L.bossName = "The Molten Core"
+	L.bossName = "El Núcleo de Magma"
 end

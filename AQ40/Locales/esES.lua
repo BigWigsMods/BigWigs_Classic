@@ -4,10 +4,10 @@ if L then
 	L.freeze = "Estados de congelación"
 	L.freeze_desc = "Anunciar los diferentes estados de congelación."
 
-	L.freeze_trigger1 = "%s comienza a ir más despacio!"
-	L.freeze_trigger2 = "%s se está congelando!"
-	L.freeze_trigger3 = "%s no se puede mover!"
-	L.freeze_trigger4 = "%s comienza a desmoronarse!"
+	L.freeze_trigger1 = "%s comienza a remitir!"
+	L.freeze_trigger2 = "%s se queda inmóvil!"
+	L.freeze_trigger3 = "%s está !"
+	L.freeze_trigger4 = "%s empieza a desmoronarse!"
 	L.freeze_trigger5 = "%s parece a punto de hacerse añicos!"
 
 	L.freeze_warn1 = "¡Primera fase de congelación!"
@@ -33,7 +33,7 @@ if L then
 
 	L.submerge_message = "Ouro se ha sumergido"
 	L.submerge_bar = "Sumersión"
-	--L.submerge_early_message = "Early Submerge - No one was in range"
+	L.submerge_early_message = "Sumersión temprana - Nadie estaba en rango"
 
 	L.scarab = "Desaparición de escarabajo"
 	L.scarab_desc = "Anuncio para desaparición de escarabajo."
@@ -57,7 +57,7 @@ if L then
 	L.weakened_desc = "Anunciar debilidad."
 
 	L.dark_glare_message = "%s: %s (Grupo %s)" -- Dark Glare: PLAYER_NAME (Group 1)
-	--L.stomach = "Stomach"
+	L.stomach = "Estómago"
 end
 
 L = BigWigs:NewBossLocale("Ahn'Qiraj Trash", "esES")
