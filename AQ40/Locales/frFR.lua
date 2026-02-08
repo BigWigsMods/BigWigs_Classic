@@ -2,7 +2,7 @@ local L = BigWigs:NewBossLocale("Viscidus", "frFR")
 if not L then return end
 if L then
 	L.freeze = "États de Gel"
-	L.freeze_desc = "Annoncer des différents états gelés."
+	L.freeze_desc = "Annonce des différents états de gel"
 
 	L.freeze_trigger1 = "%s commence à ralentir !"
 	L.freeze_trigger2 = "%s est gelé !"
@@ -54,7 +54,7 @@ if L then
 	L.giant_eye_tentacle = "Tentacule oculaire géant"
 	L.giant_eye_tentacle_desc = "Chronomètres pour le tentacule oculaire géant."
 
-	L.weakened_desc = "Annoncer affaiblissement."
+	L.weakened_desc = "Annonce le affaiblissement."
 
 	L.dark_glare_message = "%s: %s (Groupe %s)" -- Dark Glare: PLAYER_NAME (Group 1)
 	L.stomach = "Estomac"

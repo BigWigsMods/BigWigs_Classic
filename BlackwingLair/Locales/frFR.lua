@@ -56,7 +56,7 @@ if L then
 	L.classcall_desc = "Préviens de l'arrivée des appels de classe."
 
 	L.add = "Morts de drakônides"
-	L.add_desc = "Annoncer le nombre de serviteurs tués en phase 1 avant l'atterrissage de Nefarian"
+	L.add_desc = "Annonce le nombre de serviteurs tués en phase 1 avant l'atterrissage de Nefarian"
 end
 
 L = BigWigs:NewBossLocale("Blackwing Lair Trash", "frFR")

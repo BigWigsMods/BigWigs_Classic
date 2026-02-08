@@ -17,7 +17,7 @@ end
 L = BigWigs:NewBossLocale("Chromaggus", "ptBR")
 if L then
 	L.breath = "Respirações"
-	L.breath_desc = "Avisar sobre as respirações."
+	L.breath_desc = "Aviso para as respirações."
 
 	L.debuffs_message = "3/5 penalidades, cuidado!"
 	L.debuffs_warning = "4/5 penalidades, %s na 5ª!"
@@ -57,7 +57,7 @@ if L then
 	L.classcall_desc = "Aviso para chamadas de classe."
 
 	L.add = "Mortes de draconídeo"
-	L.add_desc = "Anunciar o número de draconídeos mortos na fase 1 antes de Nefarian aterrissar."
+	L.add_desc = "Anuncia o número de draconídeos mortos na fase 1 antes de Nefarian aterrissar."
 end
 
 L = BigWigs:NewBossLocale("Blackwing Lair Trash", "ptBR")
