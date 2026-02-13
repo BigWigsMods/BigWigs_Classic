@@ -36,9 +36,9 @@ if L then
 	L.engage_yell_trigger = "Lacaios, serviçais, soldados das gélidas trevas! Atendam ao chamado de Kel'Thuzad!"
 	--L.stage2_yell_trigger1 = "Pray for mercy!"
 	--L.stage2_yell_trigger2 = "Scream your dying breath!"
-	--L.stage2_yell_trigger3 = "The end is upon you!"
+	L.stage2_yell_trigger3 = "O fim está próximo!"
 	--L.stage3_yell_trigger = "Master, I require aid!"
-	--L.adds_yell_trigger = "Very well. Warriors of the frozen wastes, rise up! I command you to fight, kill and die for your master! Let none survive!"
+	L.adds_yell_trigger = "Muito bem. Guerreiros dos ermos gélidos, ergam-se! Ordeno que lutem, matem e morram por seu senhor! Não deixem sobreviventes!"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ptBR")
@@ -56,7 +56,7 @@ if L then
 	L[15929] = "Stalagg"
 	L[15930] = "Feugen"
 
-	--L.stage2_yell_trigger1 = "Eat... your... bones..."
+	L.stage2_yell_trigger1 = "Comer... seus... osso..."
 	--L.stage2_yell_trigger2 = "Break... you!!"
 	--L.stage2_yell_trigger3 = "Kill..."
 
