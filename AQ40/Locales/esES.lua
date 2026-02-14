@@ -4,11 +4,11 @@ if L then
 	L.freeze = "Estados de congelación"
 	L.freeze_desc = "Anuncia los diferentes estados de congelación."
 
-	L.freeze_trigger1 = "%s comienza a remitir!"
-	L.freeze_trigger2 = "%s se queda inmóvil!"
-	L.freeze_trigger3 = "%s está !"
-	L.freeze_trigger4 = "%s empieza a desmoronarse!"
-	L.freeze_trigger5 = "%s parece a punto de hacerse añicos!"
+	L.freeze_trigger1 = "¡%s comienza a remitir!"
+	L.freeze_trigger2 = "¡%s se queda inmóvil!"
+	L.freeze_trigger3 = "¡%s está !"
+	L.freeze_trigger4 = "¡%s empieza a desmoronarse!"
+	L.freeze_trigger5 = "¡%s parece a punto de hacerse añicos!"
 
 	L.freeze_warn1 = "¡Primera fase de congelación!"
 	L.freeze_warn2 = "¡Segunda fase de congelación!"
