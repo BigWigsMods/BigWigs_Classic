@@ -60,7 +60,7 @@ if L then
 	--L.stage2_yell_trigger2 = "Break... you!!"
 	--L.stage2_yell_trigger3 = "Kill..."
 
-	--L.add_death_emote_trigger = "%s dies."
+	L.add_death_emote_trigger = "%s morre."
 	L.overload_emote_trigger = "%s se sobrecarrega!"
 	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
