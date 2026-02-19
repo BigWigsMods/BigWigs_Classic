@@ -107,7 +107,7 @@ end
 
 function mod:GreatHealInterrupted(args)
 	if args.extraSpellName == self:SpellName(25807) then
-		self:StopBar(CL.cast:format(args.extraSpellName))
+		self:StopCastBar(args.extraSpellName)
 		self:Message(25807, "green", CL.interrupted_by:format(args.extraSpellName, self:ColorName(args.sourceName)))
 	end
 end
@@ -135,7 +135,7 @@ do
 end
 
 function mod:YaujDies(args)
-	self:StopBar(CL.cast:format(self:SpellName(25807))) -- Great Heal
+	self:StopCastBar(25807) -- Great Heal
 	self:StopBar(25807) -- Great Heal
 	self:StopBar(CL.fear) -- Fear
 	self:Deaths(args)
