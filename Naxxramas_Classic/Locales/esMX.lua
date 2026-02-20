@@ -16,7 +16,7 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "esMX")
 if L then
-	--L.teleport_yell_trigger = "The end is upon you."
+	L.teleport_yell_trigger = "Ha llegado tu fin."
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "esMX")
@@ -34,16 +34,16 @@ if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Cámara de Kel'Thuzad"
 
 	L.engage_yell_trigger = "¡Esbirros, sirvientes, soldados de la fría oscuridad! ¡Obedezcan la llamada de Kel'Thuzad!"
-	--L.stage2_yell_trigger1 = "Pray for mercy!"
+	L.stage2_yell_trigger1 = "¡Pide misericordia!"
 	--L.stage2_yell_trigger2 = "Scream your dying breath!"
 	--L.stage2_yell_trigger3 = "The end is upon you!"
-	--L.stage3_yell_trigger = "Master, I require aid!"
-	--L.adds_yell_trigger = "Very well. Warriors of the frozen wastes, rise up! I command you to fight, kill and die for your master! Let none survive!"
+	L.stage3_yell_trigger = "¡Amo, necesito ayuda!"
+	L.adds_yell_trigger = "Muy bien. Guerreros de los páramos helados, ¡levántense! ¡Les ordeno luchar, matar y morir por su amo! ¡Que nadie sobreviva!"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esMX")
 if L then
-	L.adds_yell_trigger = "¡Levántense, soldados míos!" -- Rise, my soldiers! Rise and fight once more!
+	L.adds_yell_trigger = "¡Levántense, soldados míos!" -- ¡Levántense, soldados míos! ¡Levántense y luchen una vez más!
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "esMX")
@@ -57,10 +57,10 @@ if L then
 	L[15930] = "Feugen"
 
 	--L.stage2_yell_trigger1 = "Eat... your... bones..."
-	--L.stage2_yell_trigger2 = "Break... you!!"
+	L.stage2_yell_trigger2 = "¡¡Yo Destrozarlos!!"
 	--L.stage2_yell_trigger3 = "Kill..."
 
-	--L.add_death_emote_trigger = "%s dies."
+	L.add_death_emote_trigger = "%s muere."
 	L.overload_emote_trigger = "¡%s se sobrecarga!"
 	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
