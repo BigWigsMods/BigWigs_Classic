@@ -114,7 +114,7 @@ do
 	end
 
 	function mod:ReflectMagicRemoved(args)
-		self:StopBar(CL.cast:format(args.spellName))
+		self:StopCastBar(args.spellName)
 		self:Message(args.spellId, "green", CL.over:format(args.spellName), nil, true) -- Disable emphasize
 		self:CDBar(args.spellId, prev > 0 and (21.6 - (args.time-prev)) or 16.6) -- Show the bar after it ends
 		self:PlaySound(args.spellId, "info")

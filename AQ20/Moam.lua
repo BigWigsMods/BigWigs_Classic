@@ -45,7 +45,7 @@ function mod:Energize(args)
 end
 
 function mod:EnergizeRemoved(args)
-	self:StopBar(CL.cast:format(args.spellName))
+	self:StopCastBar(args.spellName)
 
 	self:Message(args.spellId, "yellow", CL.over:format(args.spellName))
 	self:Bar(args.spellId, 90)

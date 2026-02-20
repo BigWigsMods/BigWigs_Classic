@@ -177,7 +177,7 @@ function mod:EyeOfCThunKilled()
 
 	local darkGlare = self:SpellName(26029)
 	self:StopBar(darkGlare) -- Dark Glare
-	self:StopBar(CL.cast:format(darkGlare)) -- Cast: Dark Glare
+	self:StopCastBar(darkGlare) -- Cast: Dark Glare
 	self:CancelDelayedMessage(darkGlare) -- Dark Glare
 	self:CancelDelayedMessage(CL.custom_sec:format(darkGlare, 5)) -- Dark Glare in 5 sec
 	self:CancelDelayedMessage(CL.over:format(darkGlare)) -- Dark Glare Over

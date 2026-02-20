@@ -170,7 +170,7 @@ function mod:TroggRageApplied(args)
 end
 
 function mod:TroggRageRemoved(args)
-	self:StopBar(CL.cast:format(args.spellName))
+	self:StopCastBar(args.spellName)
 end
 
 function mod:GrubbisMad(args)

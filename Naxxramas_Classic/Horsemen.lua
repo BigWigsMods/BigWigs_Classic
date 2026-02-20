@@ -126,7 +126,7 @@ end
 function mod:Meteor(args)
 	self:CDBar(args.spellId, 12) -- 11~14
 	local unit = self:GetUnitIdByGUID(args.sourceGUID)
-	if not unit or self:UnitWithinRange(unit, 35) or args.sourceGUID == self:UnitGUID("target") then
+	if not unit or self:UnitWithinRange(unit, 40) or args.sourceGUID == self:UnitGUID("target") then
 		self:Message(args.spellId, "red")
 		self:PlaySound(args.spellId, "info")
 	end
@@ -140,7 +140,7 @@ function mod:VoidZone(args)
 		self:PlaySound(args.spellId, "underyou")
 	else
 		local unit = self:GetUnitIdByGUID(args.sourceGUID)
-		if not unit or self:UnitWithinRange(unit, 35) or args.sourceGUID == self:UnitGUID("target") then
+		if not unit or self:UnitWithinRange(unit, 40) or args.sourceGUID == self:UnitGUID("target") then
 			if args.destName then
 				self:TargetMessage(args.spellId, "orange", args.destName)
 				self:PlaySound(args.spellId, "alarm", nil, args.destName)
@@ -155,7 +155,7 @@ end
 function mod:HolyWrath(args)
 	self:CDBar(args.spellId, 12) -- 11~14
 	local unit = self:GetUnitIdByGUID(args.sourceGUID)
-	if not unit or self:UnitWithinRange(unit, 35) or args.sourceGUID == self:UnitGUID("target") then
+	if not unit or self:UnitWithinRange(unit, 40) or args.sourceGUID == self:UnitGUID("target") then
 		self:Message(args.spellId, "yellow")
 		self:PlaySound(args.spellId, "alert")
 	end
@@ -166,7 +166,7 @@ function mod:ShieldWall(args)
 	local msg = CL.other:format(args.spellName, L[npcId])
 	self:Bar(args.spellId, 20, msg)
 	local unit = self:GetUnitIdByGUID(args.destGUID)
-	if (unit and self:UnitWithinRange(unit, 35)) or args.destGUID == self:UnitGUID("target") then
+	if (unit and self:UnitWithinRange(unit, 40)) or args.destGUID == self:UnitGUID("target") then
 		self:Message(args.spellId, "yellow", msg)
 		self:PlaySound(args.spellId, "long")
 	else
