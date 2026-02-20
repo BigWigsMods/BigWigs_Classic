@@ -16,7 +16,7 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "esMX")
 if L then
-	--L.teleport_yell_trigger = "The end is upon you."
+	L.teleport_yell_trigger = "Ha llegado tu fin."
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "esMX")
