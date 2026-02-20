@@ -34,7 +34,7 @@ if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Câmara de Kel'Thuzad"
 
 	L.engage_yell_trigger = "Lacaios, serviçais, soldados das gélidas trevas! Atendam ao chamado de Kel'Thuzad!"
-	--L.stage2_yell_trigger1 = "Pray for mercy!"
+	L.stage2_yell_trigger1 = "Supliquem por misericórdia!"
 	--L.stage2_yell_trigger2 = "Scream your dying breath!"
 	L.stage2_yell_trigger3 = "O fim está próximo!"
 	--L.stage3_yell_trigger = "Master, I require aid!"
@@ -58,7 +58,7 @@ if L then
 
 	L.stage2_yell_trigger1 = "Comer... seus... osso..."
 	--L.stage2_yell_trigger2 = "Break... you!!"
-	--L.stage2_yell_trigger3 = "Kill..."
+	L.stage2_yell_trigger3 = "Matar... Vocês...!"
 
 	L.add_death_emote_trigger = "%s morre."
 	L.overload_emote_trigger = "%s se sobrecarrega!"
