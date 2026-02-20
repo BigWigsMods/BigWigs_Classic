@@ -16,7 +16,7 @@ end
 
 L = BigWigs:NewBossLocale("Heigan the Unclean", "ptBR")
 if L then
-	--L.teleport_yell_trigger = "The end is upon you."
+	L.teleport_yell_trigger = "Seu fim se aproxima."
 end
 
 L = BigWigs:NewBossLocale("The Four Horsemen", "ptBR")
@@ -43,7 +43,7 @@ end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "ptBR")
 if L then
-	L.adds_yell_trigger = "Ergam-se, meus soldados!" -- Rise, my soldiers! Rise and fight once more!
+	L.adds_yell_trigger = "Ergam-se, meus soldados!" -- Ergam-se, meus soldados! Ergam-se e lutem uma vez mais!
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "ptBR")

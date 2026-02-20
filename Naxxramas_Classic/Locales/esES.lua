@@ -34,16 +34,16 @@ if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Cámara de Kel'Thuzad"
 
 	L.engage_yell_trigger = "¡Esbirros, sirvientes, soldados de la fría oscuridad! ¡Obedeced la llamada de Kel'Thuzad!"
-	--L.stage2_yell_trigger1 = "Pray for mercy!"
+	L.stage2_yell_trigger1 = "¡Suplicad clemencia!"
 	--L.stage2_yell_trigger2 = "Scream your dying breath!"
 	--L.stage2_yell_trigger3 = "The end is upon you!"
-	--L.stage3_yell_trigger = "Master, I require aid!"
-	--L.adds_yell_trigger = "Very well. Warriors of the frozen wastes, rise up! I command you to fight, kill and die for your master! Let none survive!"
+	L.stage3_yell_trigger = "¡Maestro, necesito ayuda!"
+	L.adds_yell_trigger = "Muy bien. ¡Alzaos, guerreros de las inmensidades heladas! ¡Os ordeno que luchéis, matéis y muráis por vuestro maestro! ¡Que no quede nadie con vida!"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esES")
 if L then
-	L.adds_yell_trigger = "¡Levantaos, soldados míos!" -- Rise, my soldiers! Rise and fight once more!
+	L.adds_yell_trigger = "¡Adelante, mis soldados!" -- ¡Adelante, mis soldados! ¡Luchad una vez más!
 end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "esES")
@@ -56,11 +56,11 @@ if L then
 	L[15929] = "Stalagg"
 	L[15930] = "Feugen"
 
-	--L.stage2_yell_trigger1 = "Eat... your... bones..."
+	L.stage2_yell_trigger1 = "Comer... tus... huesos..."
 	--L.stage2_yell_trigger2 = "Break... you!!"
-	--L.stage2_yell_trigger3 = "Kill..."
+	L.stage2_yell_trigger3 = "Matar..."
 
-	--L.add_death_emote_trigger = "%s dies."
+	L.add_death_emote_trigger = "%s muere."
 	L.overload_emote_trigger = "¡%s se sobrecarga!"
 	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
