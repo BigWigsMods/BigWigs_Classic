@@ -2,7 +2,7 @@
 
 ## Title: BigWigs [|cffeda55fClassic|r]
 ## Title-zhCN: BigWigs [|cffeda55f经典旧世|r]
-## Title-zhTW: BigWigs [|cffeda55fClassic|r]
+## Title-zhTW: BigWigs [|cffeda55f艾澤拉斯|r]
 ## Title-deDE: BigWigs [|cffeda55fClassic|r]
 ## Title-frFR: BigWigs [|cffeda55fClassique|r]
 ## Title-itIT: BigWigs [|cffeda55fClassic|r]
@@ -13,7 +13,7 @@
 ## Title-esMX: BigWigs [|cffeda55fClásico|r]
 ## Notes: A collection of BigWigs modules from the Classic era.
 ## Notes-zhCN: BigWigs 经典旧世模块。
-## Notes-zhTW: A collection of BigWigs modules from the Classic era.
+## Notes-zhTW: BigWigs 艾澤拉斯模組。
 ## Notes-deDE: Eine Sammlung von BigWigs-Modulen aus der Ära Classic.
 ## Notes-frFR: Une collection de modules BigWigs de l'ère Classique.
 ## Notes-itIT: A collection of BigWigs modules from the Classic era.
@@ -35,7 +35,7 @@
 ## X-WoWI-ID: 22095
 ## X-Wago-ID: rNkPgm6a
 ## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531
-## X-BigWigs-Minimum: 401
+## X-BigWigs-Minimum: 406
 
 MoltenCore\modules.xml
 BlackwingLair\modules.xml
