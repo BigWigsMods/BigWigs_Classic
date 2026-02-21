@@ -4,11 +4,11 @@ if L then
 	L.freeze = "Замораживающие состояния"
 	L.freeze_desc = "Предупреждать о различных замороженных состояниях."
 
-	L.freeze_trigger1 = "%s замедлен!"
-	L.freeze_trigger2 = "%s замерзает!"
-	L.freeze_trigger3 = "%s заморожен!"
-	L.freeze_trigger4 = "%s Начинает трескаться!"
-	L.freeze_trigger5 = "%s Скоро разобьётся на части!"
+	L.freeze_trigger1 = "%s начинает замедляться!"
+	L.freeze_trigger2 = "%s замораживается!"
+	L.freeze_trigger3 = "%s застывает!"
+	L.freeze_trigger4 = "%s начинает раскалываться!"
+	L.freeze_trigger5 = "%s едва держится!"
 
 	L.freeze_warn1 = "Первая фаза заморозки!"
 	L.freeze_warn2 = "Вторая фаза заморозки!"
