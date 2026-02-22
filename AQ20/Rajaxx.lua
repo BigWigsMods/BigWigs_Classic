@@ -99,7 +99,7 @@ end
 --
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg)
-	if msg:find(L.wave_trigger1a, nil, true) or msg:find(L.wave_trigger1b, nil, true) then
+	if not self:IsSecret(msg) and (msg:find(L.wave_trigger1a, nil, true) or msg:find(L.wave_trigger1b, nil, true)) then
 		addsAlive = 7
 		self:SetStage(1)
 		self:Message("stages", "cyan", CL.wave_count:format(1, 8), false)
