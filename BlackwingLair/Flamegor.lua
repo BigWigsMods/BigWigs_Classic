@@ -75,7 +75,7 @@ function mod:OnEngage()
 	end
 	if self:GetSeason() == 2 then
 		self:CDBar(23339, 66) -- Wing Buffet
-		self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
+		self:OpenInfo("health", CL.health)
 		for npcId, line in next, bossList do
 			self:SetInfo("health", line, self:BossName(npcId == 11981 and 1534 or 1533)) -- Flamegor, Ebonroc
 			self:SetInfoBar("health", line, 1)
