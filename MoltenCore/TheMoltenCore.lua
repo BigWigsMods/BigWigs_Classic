@@ -91,7 +91,7 @@ function mod:OnEngage()
 	mySaySpamTarget = nil
 	firefighters = {}
 	lineCount = 3
-	self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
+	self:OpenInfo("health", CL.health)
 	self:CDBar("adds", 28, CL.adds, L.adds_icon)
 end
 

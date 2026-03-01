@@ -213,7 +213,7 @@ function mod:Submerge()
 	sonsTracker = {}
 	sonsMarker = 8
 	lineCount = 3
-	self:OpenInfo("health", CL.other:format("BigWigs", CL.health))
+	self:OpenInfo("health", CL.health)
 	self:SetInfo("health", 1, L.son)
 	-- No SUMMON events unfortunately, using CLEU damage events so that everyone assigns markers in the same (combat log) order
 	self:Log("SWING_DAMAGE", "Damage", "*")

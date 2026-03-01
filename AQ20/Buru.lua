@@ -45,7 +45,7 @@ end
 --
 
 function mod:CHAT_MSG_MONSTER_EMOTE(_, _, sender, _, _, player)
-	if sender == mod.displayName then
+	if not self:IsSecret(sender) and sender == mod.displayName then
 		self:TargetMessage("fixate", "yellow", player, CL.fixate, L.fixate_icon)
 		self:SecondaryIcon("fixate", player) -- Secondary, since skull often used for egg targets
 		local guid = self:UnitGUID(player)
