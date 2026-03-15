@@ -4,7 +4,7 @@ if L then
 	L.add_death = "Aviso de muerte de esbirros"
 	L.add_death_desc = "Avisa cuando muere un esbirro."
 
-	L.trainee = "Practicante" -- Unrelenting Trainee NPC 16124
+	L.trainee = "Aprendiz" -- Unrelenting Trainee NPC 16124
 	L.deathKnight = "Caballero de la Muerte" -- Unrelenting Death Knight NPC 16125
 	L.rider = "Jinete" -- Unrelenting Rider NPC 16126
 end
@@ -35,7 +35,7 @@ if L then
 
 	L.engage_yell_trigger = "¡Esbirros, sirvientes, soldados de la fría oscuridad! ¡Obedeced la llamada de Kel'Thuzad!"
 	L.stage2_yell_trigger1 = "¡Suplicad clemencia!"
-	--L.stage2_yell_trigger2 = "Scream your dying breath!"
+	L.stage2_yell_trigger2 = "¡Exhalad el último suspiro de vida!"
 	--L.stage2_yell_trigger3 = "The end is upon you!"
 	L.stage3_yell_trigger = "¡Maestro, necesito ayuda!"
 	L.adds_yell_trigger = "Muy bien. ¡Alzaos, guerreros de las inmensidades heladas! ¡Os ordeno que luchéis, matéis y muráis por vuestro maestro! ¡Que no quede nadie con vida!"
