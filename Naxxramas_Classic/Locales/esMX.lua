@@ -35,7 +35,7 @@ if L then
 
 	L.engage_yell_trigger = "¡Esbirros, sirvientes, soldados de la fría oscuridad! ¡Obedezcan la llamada de Kel'Thuzad!"
 	L.stage2_yell_trigger1 = "¡Pide misericordia!"
-	--L.stage2_yell_trigger2 = "Scream your dying breath!"
+	L.stage2_yell_trigger2 = "¡Grita antes de tu último suspiro!"
 	--L.stage2_yell_trigger3 = "The end is upon you!"
 	L.stage3_yell_trigger = "¡Amo, necesito ayuda!"
 	L.adds_yell_trigger = "Muy bien. Guerreros de los páramos helados, ¡levántense! ¡Les ordeno luchar, matar y morir por su amo! ¡Que nadie sobreviva!"
@@ -58,7 +58,7 @@ if L then
 
 	--L.stage2_yell_trigger1 = "Eat... your... bones..."
 	L.stage2_yell_trigger2 = "¡¡Yo Destrozarlos!!"
-	--L.stage2_yell_trigger3 = "Kill..."
+	L.stage2_yell_trigger3 = "Matar..."
 
 	L.add_death_emote_trigger = "%s muere."
 	L.overload_emote_trigger = "¡%s se sobrecarga!"
