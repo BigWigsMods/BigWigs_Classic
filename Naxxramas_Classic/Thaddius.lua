@@ -97,18 +97,18 @@ if L then
 	-- BigWigs_ThaddiusArrows
 	L.polarity_extras = "Additional alerts for Polarity Shift positioning"
 
-	L.custom_off_select_charge_position = "First position"
-	L.custom_off_select_charge_position_desc = "Where to move to after the first Polarity Shift."
-	L.custom_off_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
-	L.custom_off_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
+	L.custom_select_charge_position = "First position"
+	L.custom_select_charge_position_desc = "Where to move to after the first Polarity Shift."
+	L.custom_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
+	L.custom_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
 
-	L.custom_off_select_charge_movement = "Movement"
-	L.custom_off_select_charge_movement_desc = "The movement strategy your group uses."
-	L.custom_off_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
-	L.custom_off_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
-	L.custom_off_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
-	L.custom_off_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
-	L.custom_off_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
+	L.custom_select_charge_movement = "Movement"
+	L.custom_select_charge_movement_desc = "The movement strategy your group uses."
+	L.custom_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
+	L.custom_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
+	L.custom_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
+	L.custom_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
+	L.custom_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
 
 	L.custom_off_charge_graphic = "Graphical arrow"
 	L.custom_off_charge_graphic_desc = "Show an arrow graphic."
@@ -143,15 +143,15 @@ function mod:GetOptions()
 		{28059, "EMPHASIZE", "SAY"}, -- Positive Charge
 		"berserk",
 		-- Extras
-		"custom_off_select_charge_position",
-		"custom_off_select_charge_movement",
+		"custom_select_charge_position",
+		"custom_select_charge_movement",
 		"custom_off_charge_graphic",
 		"custom_off_charge_text",
 		"custom_off_charge_voice",
 	},{
 		[28338] = CL.stage:format(1),
 		[28089] = CL.stage:format(2),
-		["custom_off_select_charge_position"] = L.polarity_extras,
+		["custom_select_charge_position"] = L.polarity_extras,
 	}
 end
 
@@ -302,10 +302,10 @@ function mod:NegativeCharge(args)
 		self:Say(args.spellId, "{rt7}--", true)
 		self:Message(args.spellId, "blue", args.spellName, ICON_NEGATIVE)
 
-		local opt = self:GetOption("custom_off_select_charge_position")
+		local opt = self:GetOption("custom_select_charge_position")
 		local strategy_first = INITIAL_DIRECTION[opt]
 		local strategy_change, direction
-		opt = self:GetOption("custom_off_select_charge_movement")
+		opt = self:GetOption("custom_select_charge_movement")
 		if opt == 1 then -- through
 			strategy_change = "swap"
 		elseif opt == 2 then -- cw
@@ -347,7 +347,7 @@ function mod:NegativeChargeRefresh(args)
 		self:Message(args.spellId, "blue", args.spellName, ICON_NEGATIVE, true) -- Disable emphasize
 
 		local strategy_nochange
-		local opt = self:GetOption("custom_off_select_charge_movement")
+		local opt = self:GetOption("custom_select_charge_movement")
 		if opt == 1 then -- through
 			strategy_nochange = "stay"
 		elseif opt == 2 then -- cw
@@ -380,10 +380,10 @@ function mod:PositiveCharge(args)
 		self:Say(args.spellId, "{rt6}++", true)
 		self:Message(args.spellId, "blue", args.spellName, ICON_POSITIVE)
 
-		local opt = self:GetOption("custom_off_select_charge_position")
+		local opt = self:GetOption("custom_select_charge_position")
 		local strategy_first = INITIAL_DIRECTION[opt]
 		local strategy_change, direction
-		opt = self:GetOption("custom_off_select_charge_movement")
+		opt = self:GetOption("custom_select_charge_movement")
 		if opt == 1 then -- through
 			strategy_change = "swap"
 		elseif opt == 2 then -- cw
@@ -425,7 +425,7 @@ function mod:PositiveChargeRefresh(args)
 		self:Message(args.spellId, "blue", args.spellName, ICON_POSITIVE, true) -- Disable emphasize
 
 		local strategy_nochange
-		local opt = self:GetOption("custom_off_select_charge_movement")
+		local opt = self:GetOption("custom_select_charge_movement")
 		if opt == 1 then -- through
 			strategy_nochange = "stay"
 		elseif opt == 2 then -- cw
