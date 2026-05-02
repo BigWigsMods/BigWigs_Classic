@@ -7,7 +7,7 @@ if L then
 	L.freeze_trigger1 = "wird langsamer!"
 	L.freeze_trigger2 = "friert ein!"
 	L.freeze_trigger3 = "ist tiefgefroren!"
-	L.freeze_trigger4 = "geht die Puste aus!" --CHECK
+	L.freeze_trigger4 = "beginnt zu splittern!"
 	L.freeze_trigger5 = "ist kurz davor, zu zerspringen!"
 
 	--L.freeze_warn1 = "First freeze phase!"
