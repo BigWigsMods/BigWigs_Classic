@@ -17,8 +17,8 @@ end
 L = BigWigs:NewBossLocale("High Priest Thekal", "zhTW")
 if L then
 	L.bossName = "高階祭司塞卡爾"
-	-- L.lorkhan = "Zealot Lor'Khan"
-	-- L.zath = "Zealot Zath"
+	L.lorkhan = "狂熱者洛卡恩"
+	L.zath = "狂熱者札斯"
 
 	L.tigers_message = "老虎出現！"
 end
@@ -51,8 +51,8 @@ end
 L = BigWigs:NewBossLocale("Edge of Madness", "zhTW")
 if L then
 	L.bossName = "瘋狂之緣"
-	-- L.grilek = "Gri'lek"
-	-- L.hazzarah = "Hazza'rah"
-	-- L.renataki = "Renataki"
-	-- L.wushoolay = "Wushoolay"
+	L.grilek = "格里雷克"
+	L.hazzarah = "哈札拉爾"
+	L.renataki = "雷納塔基"
+	L.wushoolay = "烏蘇雷"
 end
