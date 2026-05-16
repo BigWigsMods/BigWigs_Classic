@@ -17,12 +17,12 @@ jobs:
 
     steps:
       - name: Checkout addon
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Run luacheck
-        uses: BigWigsMods/actions/luacheck@master
+        uses: BigWigsMods/luacheck@main
         with:
           args: -q
           config: https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/.luacheckrc
@@ -33,17 +33,16 @@ jobs:
           mkdir -p Locales
           curl -sSf https://raw.githubusercontent.com/BigWigsMods/BigWigs/master/Locales/enUS_common.lua > Locales/enUS_common.lua
 
-      - name: Update option files (Retail)
+      - name: Update option files
         if: always()
-        uses: BigWigsMods/actions/gen-options@master
+        uses: BigWigsMods/luacheck@main
         with:
-          path: BigWigs_Classic_Mainline.toc
+          run_luacheck: false
+          custom_script: https://raw.githubusercontent.com/BigWigsMods/BigWigs/refs/heads/master/gen_option_values.lua
+          custom_args: BigWigs_Classic_Vanilla.toc BigWigs_Classic_TBC.toc BigWigs_Classic_Wrath.toc BigWigs_Classic_Cata.toc BigWigs_Classic_Mists.toc BigWigs_Classic_Mainline.toc
 
-      - name: Update option files (Classic)
-        if: always()
-        uses: BigWigsMods/actions/gen-options@master
-        with:
-          path: BigWigs_Classic_Vanilla.toc
+      - name: Clean up common locale
+        run: rm -rf Locales
 
       - name: Package
         uses: BigWigsMods/packager@master
