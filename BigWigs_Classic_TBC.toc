@@ -48,7 +48,6 @@ MoltenCore\Golemagg.lua
 MoltenCore\Majordomo.lua
 MoltenCore\Ragnaros.lua
 MoltenCore\TheMoltenCore.lua
-MoltenCore\Locales\locales.xml
 BlackwingLair\Razorgore.lua
 BlackwingLair\Vaelastrasz.lua
 BlackwingLair\Broodlord.lua
@@ -58,7 +57,6 @@ BlackwingLair\Flamegor.lua
 BlackwingLair\Chromaggus.lua
 BlackwingLair\Nefarian.lua
 BlackwingLair\Trash.lua
-BlackwingLair\Locales\locales.xml
 AQ20\Kurinnaxx.lua
 AQ20\Rajaxx.lua
 AQ20\Moam.lua
@@ -66,7 +64,6 @@ AQ20\Buru.lua
 AQ20\Ayamiss.lua
 AQ20\Ossirian.lua
 AQ20\Trash.lua
-AQ20\Locales\locales.xml
 AQ40\Skeram.lua
 AQ40\BugFamily.lua
 AQ40\Sartura.lua
@@ -77,7 +74,6 @@ AQ40\Twins.lua
 AQ40\Ouro.lua
 AQ40\Cthun.lua
 AQ40\Trash.lua
-AQ40\Locales\locales.xml
 ZulGurub_Classic\Jeklik.lua
 ZulGurub_Classic\Venoxis.lua
 ZulGurub_Classic\Marli.lua
@@ -88,7 +84,6 @@ ZulGurub_Classic\Mandokir.lua
 ZulGurub_Classic\Jindo.lua
 ZulGurub_Classic\Gahzranka.lua
 ZulGurub_Classic\EdgeOfMadness.lua
-ZulGurub_Classic\Locales\locales.xml
 Naxxramas_Classic\Patchwerk.lua
 Naxxramas_Classic\Grobbulus.lua
 Naxxramas_Classic\Gluth.lua
@@ -105,8 +100,9 @@ Naxxramas_Classic\Horsemen.lua
 Naxxramas_Classic\Sapphiron.lua
 Naxxramas_Classic\Kelthuzad.lua
 Naxxramas_Classic\Trash.lua
-Naxxramas_Classic\Locales\locales.xml
 Onyxia_Classic\Onyxia.lua
-Onyxia_Classic\Locales\locales.xml
 
+!Locales\[TextLocale].lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
+!Locales\[TextLocale]_Classic.lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
+!Locales\[TextLocale]_ZG.lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
 !Options_TBC.lua

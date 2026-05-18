@@ -1,0 +1,108 @@
+-- Naxxramas
+
+local L = BigWigs:NewBossLocale("Gothik the Harvester", "esES")
+if L then
+	L.add_death = "Aviso de muerte de esbirros"
+	L.add_death_desc = "Avisa cuando muere un esbirro."
+
+	L.trainee = "Aprendiz" -- Unrelenting Trainee NPC 16124
+	L.deathKnight = "Caballero de la Muerte" -- Unrelenting Death Knight NPC 16125
+	L.rider = "Jinete" -- Unrelenting Rider NPC 16126
+end
+
+L = BigWigs:NewBossLocale("Grobbulus", "esES")
+if L then
+	L.injection = "Inyección"
+end
+
+L = BigWigs:NewBossLocale("Heigan the Unclean", "esES")
+if L then
+	L.teleport_yell_trigger = "El final está cerca."
+end
+
+L = BigWigs:NewBossLocale("The Four Horsemen", "esES")
+if L then
+	L.mark_desc = "Aviso para marcas."
+
+	L[16062] = "Mograine" -- Surname of Highlord Mograine
+	L[16063] = "Zeliek" -- Surname of Sir Zeliek
+	L[16064] = "Korth'azz" -- Surname of Thane Korth'azz
+	L[16065] = "Blaumeux" -- Surname of Lady Blaumeux
+end
+
+L = BigWigs:NewBossLocale("Kel'Thuzad", "esES")
+if L then
+	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "Cámara de Kel'Thuzad"
+
+	L.engage_yell_trigger = "¡Esbirros, sirvientes, soldados de la fría oscuridad! ¡Obedeced la llamada de Kel'Thuzad!"
+	L.stage2_yell_trigger1 = "¡Suplicad clemencia!"
+	L.stage2_yell_trigger2 = "¡Exhalad el último suspiro de vida!"
+	L.stage2_yell_trigger3 = "¡Vuestro final está cerca!"
+	L.stage3_yell_trigger = "¡Maestro, necesito ayuda!"
+	L.adds_yell_trigger = "Muy bien. ¡Alzaos, guerreros de las inmensidades heladas! ¡Os ordeno que luchéis, matéis y muráis por vuestro maestro! ¡Que no quede nadie con vida!"
+end
+
+L = BigWigs:NewBossLocale("Noth the Plaguebringer", "esES")
+if L then
+	L.adds_yell_trigger = "¡Adelante, mis soldados!" -- ¡Adelante, mis soldados! ¡Luchad una vez más!
+end
+
+L = BigWigs:NewBossLocale("Instructor Razuvious", "esES")
+if L then
+	L.understudy = "Suplente Caballero de la Muerte"
+end
+
+L = BigWigs:NewBossLocale("Thaddius", "esES")
+if L then
+	L[15929] = "Stalagg"
+	L[15930] = "Feugen"
+
+	L.stage2_yell_trigger1 = "Comer... tus... huesos..."
+	L.stage2_yell_trigger2 = "¡¡Despedazarte!!"
+	L.stage2_yell_trigger3 = "Matar..."
+
+	L.add_death_emote_trigger = "%s muere."
+	L.overload_emote_trigger = "¡%s se sobrecarga!"
+	--L.add_revive_emote_trigger = "%s is jolted back to life!"
+
+	L.polarity_extras = "Avisos adicionales para el posicionamiento del cambio de polaridad"
+
+	L.custom_select_charge_position = "Primera posición"
+	L.custom_select_charge_position_desc = "Posicionamiento después del primer cambio de polaridad."
+	L.custom_select_charge_position_value1 = "|cffff2020Carga negativa (-)|r a la IZQUIERDA, |cff2020ffCarga positiva (+)|r a la DERECHA"
+	L.custom_select_charge_position_value2 = "|cff2020ffCarga positiva (+)|r a la IZQUIERDA, |cffff2020Carga negativa (-)|r a la DERECHA"
+
+	L.custom_select_charge_movement = "Movimiento"
+	L.custom_select_charge_movement_desc = "La estrategia de movimiento que se utiliza tu grupo."
+	L.custom_select_charge_movement_value1 = "Corre |cff20ff20A TRAVÉS|r del jefe"
+	L.custom_select_charge_movement_value2 = "Corre |cff20ff20EN SENTIDO HORARIO|r alrededor del jefe."
+	L.custom_select_charge_movement_value3 = "Corre |cff20ff20EN SENTIDO ANTIHORARIO|r alrededor del jefe."
+	L.custom_select_charge_movement_value4 = "Cuatro grupos 1: Cambio de polaridad hacia la |cff20ff20DERECHA|r, misma polaridad hacia la |cff20ff20IZQUIERDA|r."
+	L.custom_select_charge_movement_value5 = "Cuatro grupos 2: Cambio de polaridad hacia la |cff20ff20IZQUIERDA|r, misma polaridad hacia la |cff20ff20DERECHA|r."
+
+	L.custom_off_charge_graphic = "Flecha gráfica"
+	L.custom_off_charge_graphic_desc = "Muestra una flecha gráfica."
+	L.custom_off_charge_text = "Flecha de texto"
+	L.custom_off_charge_text_desc = "Muestra un mensaje adicional."
+	L.custom_off_charge_voice = "Alerta de voz"
+	L.custom_off_charge_voice_desc = "Reproduce una alerta de voz."
+
+	--Translate these to get locale sound files!
+	L.left = "<--- VE A LA IZQUIERDA <--- VE A LA IZQUIERDA <---"
+	L.right = "---> VE A LA DERECHA ---> VE A LA DERECHA --->"
+	L.swap = "^^^^ CAMBIA DE LADO ^^^^ CAMBIA DE LADO ^^^^"
+	L.stay = "==== NO TE MUEVES ==== NO TE MUEVES ===="
+
+	L.chat_message = "El módulo de Thaddius admite mostrar flechas direccionales y reproducir voces. Abre las opciones para configurarlas."
+end
+
+-- Onyxia's Lair
+
+L = BigWigs:NewBossLocale("Onyxia", "esES")
+if L then
+	L.stage2_yell_trigger = "desde arriba"
+	L.stage3_yell_trigger = "Parece ser que vais a necesitar otra lección"
+
+	L.deep_breath = "Aliento profundo"
+	L.warder = "Guarda de Onyxia" -- NPC ID 12129
+end
