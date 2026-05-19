@@ -35,7 +35,7 @@ if L then
 
 	L.engage_yell_trigger = "Lacaios, serviçais, soldados das gélidas trevas! Atendam ao chamado de Kel'Thuzad!"
 	L.stage2_yell_trigger1 = "Supliquem por misericórdia!"
-	--L.stage2_yell_trigger2 = "Scream your dying breath!"
+	L.stage2_yell_trigger2 = "Exalem o último suspiro!"
 	L.stage2_yell_trigger3 = "O fim está próximo!"
 	L.stage3_yell_trigger = "Meu senhor, preciso de ajuda!"
 	L.adds_yell_trigger = "Muito bem. Guerreiros dos ermos gélidos, ergam-se! Ordeno que lutem, matem e morram por seu senhor! Não deixem sobreviventes!"
