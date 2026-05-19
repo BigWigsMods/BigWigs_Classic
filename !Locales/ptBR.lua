@@ -114,7 +114,6 @@ if L then
 	L.warmup_trigger = "É tarde demais, meus amigos!"
 end
 
-
 L = BigWigs:NewBossLocale("Chromaggus", "ptBR")
 if L then
 	L.breath = "Respirações"
