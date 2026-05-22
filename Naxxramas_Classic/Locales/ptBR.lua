@@ -57,8 +57,8 @@ if L then
 	L[15930] = "Feugen"
 
 	L.stage2_yell_trigger1 = "Comer... seus... osso..."
-	--L.stage2_yell_trigger2 = "Break... you!!"
-	L.stage2_yell_trigger3 = "Matar... Vocês...!"
+	L.stage2_yell_trigger2 = "Matar... Vocês...!"
+	L.stage2_yell_trigger3 = "Matar..."
 
 	L.add_death_emote_trigger = "%s morre."
 	L.overload_emote_trigger = "%s se sobrecarrega!"
