@@ -63,36 +63,36 @@ if L then
 
 	L.add_death_emote_trigger = "%s|1이;가; 죽습니다."
 	L.overload_emote_trigger = "%s|1이;가; 과부하 상태가 됩니다."
-	--L.add_revive_emote_trigger = "%s is jolted back to life!"
+	L.add_revive_emote_trigger = "%s|1이;가; 다시 살아납니다!"
 
-	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
+	L.polarity_extras = "극성 변환 위치 잡기 추가 경고"
 
-	--L.custom_select_charge_position = "First position"
-	--L.custom_select_charge_position_desc = "Where to move to after the first Polarity Shift."
-	--L.custom_select_charge_position_value1 = "|cffff2020Negative (-)|r are LEFT, |cff2020ffPositive (+)|r are RIGHT"
-	--L.custom_select_charge_position_value2 = "|cff2020ffPositive (+)|r are LEFT, |cffff2020Negative (-)|r are RIGHT"
+	L.custom_select_charge_position = "첫 이동 위치"
+	L.custom_select_charge_position_desc = "첫 극성 변환 후 이동할 위치입니다."
+	L.custom_select_charge_position_value1 = "|cffff2020음극(-)|r 왼쪽, |cff2020ff양극(+)|r 오른쪽"
+	L.custom_select_charge_position_value2 = "|cff2020ff양극(+)|r 왼쪽, |cffff2020음극(-)|r 오른쪽"
 
-	--L.custom_select_charge_movement = "Movement"
-	--L.custom_select_charge_movement_desc = "The movement strategy your group uses."
-	--L.custom_select_charge_movement_value1 = "Run |cff20ff20THROUGH|r the boss"
-	--L.custom_select_charge_movement_value2 = "Run |cff20ff20CLOCKWISE|r around the boss"
-	--L.custom_select_charge_movement_value3 = "Run |cff20ff20COUNTER-CLOCKWISE|r around the boss"
-	--L.custom_select_charge_movement_value4 = "Four camps 1: Polarity changed moves |cff20ff20RIGHT|r, same polarity moves |cff20ff20LEFT|r"
-	--L.custom_select_charge_movement_value5 = "Four camps 2: Polarity changed moves |cff20ff20LEFT|r, same polarity moves |cff20ff20RIGHT|r"
+	L.custom_select_charge_movement = "이동 방식"
+	L.custom_select_charge_movement_desc = "공격대가 사용하는 이동 전략입니다."
+	L.custom_select_charge_movement_value1 = "보스를 |cff20ff20관통|r하여 이동"
+	L.custom_select_charge_movement_value2 = "보스 주위를 |cff20ff20시계방향|r으로 이동"
+	L.custom_select_charge_movement_value3 = "보스 주위를 |cff20ff20반시계방향|r으로 이동"
+	L.custom_select_charge_movement_value4 = "4지점 1: 극성 변경 시 |cff20ff20오른쪽|r, 동일 극성 시 |cff20ff20왼쪽|r"
+	L.custom_select_charge_movement_value5 = "4지점 2: 극성 변경 시 |cff20ff20왼쪽|r, 동일 극성 시 |cff20ff20오른쪽|r"
 
-	--L.custom_off_charge_graphic = "Graphical arrow"
-	--L.custom_off_charge_graphic_desc = "Show an arrow graphic."
-	--L.custom_off_charge_text = "Text arrows"
-	--L.custom_off_charge_text_desc = "Show an additional message."
-	--L.custom_off_charge_voice = "Voice alert"
-	--L.custom_off_charge_voice_desc = "Play a voice alert."
+	L.custom_off_charge_graphic = "화살표 그래픽"
+	L.custom_off_charge_graphic_desc = "화살표 그래픽을 표시합니다."
+	L.custom_off_charge_text = "텍스트 화살표"
+	L.custom_off_charge_text_desc = "추가 메시지를 표시합니다."
+	L.custom_off_charge_voice = "음성 경고"
+	L.custom_off_charge_voice_desc = "음성 경고를 재생합니다."
 
 	L.left = "<--- 왼쪽으로 <--- 왼쪽으로 <---"
 	L.right = "---> 오른쪽으로 ---> 오른쪽으로 --->"
 	L.swap = "^^^^ 방향 전환 ^^^^ 방향 전환 ^^^^"
 	L.stay = "==== 움직 이지마 ==== 움직 이지마 ===="
 
-	--L.chat_message = "The Thaddius mod supports showing you directional arrows and playing voices. Open the options to configure them."
+	L.chat_message = "타디우스 모듈은 방향 화살표와 음성 알림을 지원합니다. 옵션에서 설정하세요."
 end
 
 -- Onyxia's Lair

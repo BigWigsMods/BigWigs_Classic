@@ -43,7 +43,7 @@ end
 L = BigWigs:NewBossLocale("Thunderaan Season of Discovery", "koKR")
 if L then
 	L.bossName = "왕자 썬더란"
-	--L.mender = "Storm Mender" -- NPC 231858
+	L.mender = "폭풍 치유사" -- NPC 231858
 end
 
 -- Gnomeregan
@@ -51,10 +51,10 @@ end
 L = BigWigs:NewBossLocale("Grubbis Discovery", "koKR")
 if L then
 	L.bossName = "그루비스"
-	--L.aoe = "AoE melee damage"
-	--L.cloud = "A cloud reached the boss"
-	--L.cone = "\"Frontal\" cone" -- "Frontal" Cone, it's a rear cone (he's farting)
-	--L.warmup_say_chat_trigger = "Gnomeregan" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
+	L.aoe = "광역 근접 피해"
+	L.cloud = "구름이 보스에게 도달"
+	L.cone = "\"전방\" 부채꼴" -- "Frontal" Cone, it's a rear cone (he's farting)
+	L.warmup_say_chat_trigger = "놈리건" -- There are still ventilation shafts actively spewing radioactive material throughout Gnomeregan.
 end
 
 L = BigWigs:NewBossLocale("Viscous Fallout Discovery", "koKR")
@@ -76,24 +76,24 @@ end
 L = BigWigs:NewBossLocale("Mechanical Menagerie Discovery", "koKR")
 if L then
 	L.bossName = "기계 동물원"
-	--L.attack_buff = "+50% attack speed"
-	--L.boss_at_hp = "%s at %d%%" -- BOSS_NAME at 50%
-	--L.red_button = "Red Button"
+	L.attack_buff = "공격 속도 +50%"
+	L.boss_at_hp = "%s 생명력 %d%%" -- BOSS_NAME at 50%
+	L.red_button = "빨간 버튼"
 
 	L[218242] = "|T134153:0:0:0:0:64:64:4:60:4:60|t용"
 	L[218243] = "|T136071:0:0:0:0:64:64:4:60:4:60|t양"
 	L[218244] = "|T133944:0:0:0:0:64:64:4:60:4:60|t다람쥐"
 	L[218245] = "|T135996:0:0:0:0:64:64:4:60:4:60|t닭"
 
-	--L.run = "Run to the door"
-	--L.run_desc = "Show a message when you defeat this boss to run to the door. This is intended to help you avoid accidentally engaging the next boss."
+	L.run = "문으로 이동"
+	L.run_desc = "이 보스를 처치하면 문으로 이동하라는 메시지를 표시합니다. 다음 보스와 우발적으로 전투하는 것을 피하기 위한 기능입니다."
 end
 
 L = BigWigs:NewBossLocale("Mekgineer Thermaplugg Discovery", "koKR")
 if L then
 	L.bossName = "멕기니어 텔마플러그"
-	--L.red_button = "Red Button"
-	--L.position = "Position %d" -- Position 5
+	L.red_button = "빨간 버튼"
+	L.position = "위치 %d" -- Position 5
 end
 
 -- Nightmare Grove
@@ -122,50 +122,50 @@ end
 
 L = BigWigs:NewBossLocale("Balnazzar Scarlet Enclave", "koKR")
 if L then
-	--L.bossName = "Balnazzar"
+	L.bossName = "발나자르"
 end
 
 L = BigWigs:NewBossLocale("High Commander Beatrix", "koKR")
 if L then
-	--L.bossName = "High Commander Beatrix"
-	--L.meteor_yell_trigger = "As you wish" -- As you wish, High Commander!
-	--L.waves_footmen_yell_trigger = "Form up" -- Form up and hold the line!
-	--L.waves_cavalry_yell_trigger = "Ready your lances" -- Understod! Ready your lances!
-	--L.arrows_yell_trigger = "Archers," -- Archers, unleash hell!
-	--L.bombing_yell_trigger = "At once," -- At once, Beatrix!
+	L.bossName = "총사령관 베아트릭스"
+	L.meteor_yell_trigger = "분부대로" -- As you wish, High Commander!
+	L.waves_footmen_yell_trigger = "진열" -- Form up and hold the line!
+	L.waves_cavalry_yell_trigger = "기병" -- Understod! Ready your lances!
+	L.arrows_yell_trigger = "명사수," -- Archers, unleash hell!
+	L.bombing_yell_trigger = "당장," -- At once, Beatrix!
 end
 
 L = BigWigs:NewBossLocale("Solistrasza", "koKR")
 if L then
-	--L.bossName = "Solistrasza"
+	L.bossName = "솔리스트라자"
 end
 
 L = BigWigs:NewBossLocale("Alexei the Beastlord", "koKR")
 if L then
-	--L.bossName = "Alexei the Beastlord"
+	L.bossName = "야수군주 알렉세이"
 end
 
 L = BigWigs:NewBossLocale("Mason the Echo", "koKR")
 if L then
-	--L.bossName = "Mason the Echo"
+	L.bossName = "메아리의 메이슨"
 end
 
 L = BigWigs:NewBossLocale("Reborn Council", "koKR")
 if L then
 	L.bossName = "부활의 의회"
-	--L[240795] = "Herod"
-	--L[240809] = "Vishas"
-	--L[240810] = "Doan"
+	L[240795] = "헤로드"
+	L[240809] = "비샤"
+	L[240810] = "도안"
 end
 
 L = BigWigs:NewBossLocale("Lillian Voss", "koKR")
 if L then
-	--L.bossName = "Lillian Voss"
+	L.bossName = "릴리안 보스"
 end
 
 L = BigWigs:NewBossLocale("Grand Crusader Caldoran", "koKR")
 if L then
-	--L.bossName = "Grand Crusader Caldoran"
+	L.bossName = "십자군 사령관 칼도란"
 end
 
 -- Storm Cliffs
@@ -179,44 +179,44 @@ end
 
 L = BigWigs:NewBossLocale("Atal'alarion Discovery", "koKR")
 if L then
-	--L.bossName = "Atal'alarion"
+	L.bossName = "아탈알라리온"
 end
 
 L = BigWigs:NewBossLocale("Festering Rotslime Discovery", "koKR")
 if L then
-	--L.bossName = "Festering Rotslime"
+	L.bossName = "곪아가는 부식수액"
 end
 
 L = BigWigs:NewBossLocale("Atal'ai Defenders Discovery", "koKR")
 if L then
-	--L.bossName = "Atal'ai Defenders"
+	L.bossName = "아탈라이 수호병"
 end
 
 L = BigWigs:NewBossLocale("Dreamscythe and Weaver Discovery", "koKR")
 if L then
-	--L.bossName = "Dreamscythe and Weaver"
+	L.bossName = "드림스사이드와 위버"
 end
 
 L = BigWigs:NewBossLocale("Avatar of Hakkar Discovery", "koKR")
 if L then
-	--L.bossName = "Avatar of Hakkar"
+	L.bossName = "학카르의 화신"
 end
 
 L = BigWigs:NewBossLocale("Jammal'an and Ogom Discovery", "koKR")
 if L then
-	--L.bossName = "Jammal'an and Ogom"
+	L.bossName = "예언자 잠말란"
 end
 
 L = BigWigs:NewBossLocale("Morphaz and Hazzas Discovery", "koKR")
 if L then
-	--L.bossName = "Morphaz and Hazzas"
+	L.bossName = "몰파즈와 하자스"
 end
 
 L = BigWigs:NewBossLocale("Shade of Eranikus Discovery", "koKR")
 if L then
-	--L.bossName = "Shade of Eranikus"
-	--L.deep_slumber_clouds = "Clouds" -- Clouds of Slumber
-	--L.deep_slumber_player_debuff = "Player"
+	L.bossName = "에라니쿠스의 사령"
+	L.deep_slumber_clouds = "구름" -- Clouds of Slumber
+	L.deep_slumber_player_debuff = "플레이어"
 end
 
 -- The Tainted Scar
