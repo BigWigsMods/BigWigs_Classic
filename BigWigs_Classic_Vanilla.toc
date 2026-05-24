@@ -50,7 +50,6 @@ MoltenCore\Golemagg.lua
 MoltenCore\Majordomo.lua
 MoltenCore\Ragnaros.lua
 MoltenCore\TheMoltenCore.lua
-MoltenCore\Locales\locales.xml
 BlackwingLair\Razorgore.lua
 BlackwingLair\Vaelastrasz.lua
 BlackwingLair\Broodlord.lua
@@ -60,7 +59,6 @@ BlackwingLair\Flamegor.lua
 BlackwingLair\Chromaggus.lua
 BlackwingLair\Nefarian.lua
 BlackwingLair\Trash.lua
-BlackwingLair\Locales\locales.xml
 AQ20\Kurinnaxx.lua
 AQ20\Rajaxx.lua
 AQ20\Moam.lua
@@ -68,7 +66,6 @@ AQ20\Buru.lua
 AQ20\Ayamiss.lua
 AQ20\Ossirian.lua
 AQ20\Trash.lua
-AQ20\Locales\locales.xml
 AQ40\Skeram.lua
 AQ40\BugFamily.lua
 AQ40\Sartura.lua
@@ -79,7 +76,6 @@ AQ40\Twins.lua
 AQ40\Ouro.lua
 AQ40\Cthun.lua
 AQ40\Trash.lua
-AQ40\Locales\locales.xml
 ZulGurub_Classic\Jeklik.lua
 ZulGurub_Classic\Venoxis.lua
 ZulGurub_Classic\Marli.lua
@@ -90,7 +86,6 @@ ZulGurub_Classic\Mandokir.lua
 ZulGurub_Classic\Jindo.lua
 ZulGurub_Classic\Gahzranka.lua
 ZulGurub_Classic\EdgeOfMadness.lua
-ZulGurub_Classic\Locales\locales.xml
 Naxxramas_Classic\Patchwerk.lua
 Naxxramas_Classic\Grobbulus.lua
 Naxxramas_Classic\Gluth.lua
@@ -107,16 +102,13 @@ Naxxramas_Classic\Horsemen.lua
 Naxxramas_Classic\Sapphiron.lua
 Naxxramas_Classic\Kelthuzad.lua
 Naxxramas_Classic\Trash.lua
-Naxxramas_Classic\Locales\locales.xml
 Onyxia_Classic\Onyxia.lua
-Onyxia_Classic\Locales\locales.xml
 World_Classic\Azuregos.lua
 World_Classic\Kazzak.lua
 World_Classic\Emeriss.lua
 World_Classic\Lethon.lua
 World_Classic\Taerar.lua
 World_Classic\Ysondre.lua
-World_Classic\Locales\locales.xml
 BlackfathomDeeps_Classic\BaronAquanis.lua
 BlackfathomDeeps_Classic\Ghamoo-ra.lua
 BlackfathomDeeps_Classic\LadySarevess.lua
@@ -124,14 +116,12 @@ BlackfathomDeeps_Classic\Gelihast.lua
 BlackfathomDeeps_Classic\LorgusJett.lua
 BlackfathomDeeps_Classic\TwilightLordKelris.lua
 BlackfathomDeeps_Classic\Akumai.lua
-BlackfathomDeeps_Classic\Locales\locales.xml
 Gnomeregan_Classic\Grubbis.lua
 Gnomeregan_Classic\ViscousFallout.lua
 Gnomeregan_Classic\CrowdPummeler9-60.lua
 Gnomeregan_Classic\Electrocutioner6000.lua
 Gnomeregan_Classic\MechanicalMenagerie.lua
 Gnomeregan_Classic\MekgineerThermaplugg.lua
-Gnomeregan_Classic\Locales\locales.xml
 SunkenTemple_Classic\Atalalarion.lua
 SunkenTemple_Classic\FesteringRotslime.lua
 SunkenTemple_Classic\AtalaiDefenders.lua
@@ -140,18 +130,13 @@ SunkenTemple_Classic\JammalanAndOgom.lua
 SunkenTemple_Classic\MorphazAndHazzas.lua
 SunkenTemple_Classic\ShadeOfEranikus.lua
 SunkenTemple_Classic\AvatarOfHakkar.lua
-SunkenTemple_Classic\Locales\locales.xml
 TheTaintedScar_Classic\Kazzak.lua
-TheTaintedScar_Classic\Locales\locales.xml
 StormCliffs_Classic\Azuregos.lua
-StormCliffs_Classic\Locales\locales.xml
 CrystalVale_Classic\Thunderaan.lua
-CrystalVale_Classic\Locales\locales.xml
 NightmareGrove_Classic\Emeriss.lua
 NightmareGrove_Classic\Lethon.lua
 NightmareGrove_Classic\Taerar.lua
 NightmareGrove_Classic\Ysondre.lua
-NightmareGrove_Classic\Locales\locales.xml
 ScarletEnclave_Classic\Balnazzar.lua
 ScarletEnclave_Classic\Beatrix.lua
 ScarletEnclave_Classic\Solistrasza.lua
@@ -161,6 +146,9 @@ ScarletEnclave_Classic\RebornCouncil.lua
 ScarletEnclave_Classic\LillianVoss.lua
 ScarletEnclave_Classic\Caldoran.lua
 ScarletEnclave_Classic\Trash.lua
-ScarletEnclave_Classic\Locales\locales.xml
 
+!Locales\[TextLocale].lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
+!Locales\[TextLocale]_Classic.lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
+!Locales\[TextLocale]_Vanilla.lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
+!Locales\[TextLocale]_ZG.lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
 !Options_Vanilla.lua
