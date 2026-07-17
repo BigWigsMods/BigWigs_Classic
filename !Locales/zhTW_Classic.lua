@@ -61,8 +61,8 @@ if L then
 	L.stage2_yell_trigger2 = "打…碎…你……"
 	L.stage2_yell_trigger3 = "殺……"
 
-	L.add_death_emote_trigger = "%s死亡了。"
-	L.overload_emote_trigger = "%s超負荷！"
+	L.add_death_emote_trigger = "%s死了。"
+	L.overload_emote_trigger = "%s超過負荷！"
 	--L.add_revive_emote_trigger = "%s is jolted back to life!"
 
 	--L.polarity_extras = "Additional alerts for Polarity Shift positioning"
