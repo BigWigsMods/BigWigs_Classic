@@ -49,7 +49,7 @@ end
 
 L = BigWigs:NewBossLocale("Instructor Razuvious", "esMX")
 if L then
-	L.understudy = "Suplente Caballero de la Muerte"
+	L.understudy = "Discípulo caballero de la muerte"
 end
 
 L = BigWigs:NewBossLocale("Thaddius", "esMX")
