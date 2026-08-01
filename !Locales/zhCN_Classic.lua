@@ -63,7 +63,7 @@ if L then
 
 	L.add_death_emote_trigger = "%s死了。"
 	L.overload_emote_trigger = "%s超载了！"
-	--L.add_revive_emote_trigger = "%s is jolted back to life!"
+	L.add_revive_emote_trigger = "%s被猛烈的电击复活了！"
 
 	L.polarity_extras = "有关极性转化后需要跑位的警报"
 
