@@ -39,7 +39,7 @@ if L then
 	L.stage2_yell_trigger2 = "呼出你的最後一口氣！"
 	L.stage2_yell_trigger3 = "你的末日臨近了！"
 	L.stage3_yell_trigger = "主人，我需要幫助！"
-	L.adds_yell_trigger = "非常好，凍原的戰士們，起來吧！我命令你們作戰，為你們的主人殺戮或獻身吧！不要留下活口！"
+	L.adds_yell_trigger = "很好，冰凍荒地的戰士們，起來吧！我命令你們為主人而戰鬥，殺戮，直到死亡！一個活口都不要留！"
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "zhTW")
