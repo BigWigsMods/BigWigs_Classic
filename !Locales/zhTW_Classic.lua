@@ -37,7 +37,7 @@ if L then
 	L.engage_yell_trigger = "僕從們，侍衛們，隸屬於黑暗與寒冷的戰士們！聽從科爾蘇加德的召喚！"
 	L.stage2_yell_trigger1 = "祈禱我的慈悲吧！"
 	L.stage2_yell_trigger2 = "呼出你的最後一口氣！"
-	L.stage2_yell_trigger3 = "你的末日臨近了！"
+	L.stage2_yell_trigger3 = "你的末日來臨了！"
 	L.stage3_yell_trigger = "主人，我需要幫助！"
 	L.adds_yell_trigger = "很好，冰凍荒地的戰士們，起來吧！我命令你們為主人而戰鬥，殺戮，直到死亡！一個活口都不要留！"
 end
