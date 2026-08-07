@@ -34,12 +34,12 @@ L = BigWigs:NewBossLocale("Kel'Thuzad", "koKR")
 if L then
 	L.KELTHUZADCHAMBERLOCALIZEDLOLHAX = "켈투자드의 방"
 
-	L.engage_yell_trigger = "어둠의 문지기와 하수인, 그리고 병사들이여! 나 켈투자드가 부르니 명을 받들라!"
-	L.stage2_yell_trigger1 = "자비를 구하라!" -- CHECK
+	L.engage_yell_trigger = "어둠의 문지기와 하수인, 그리고 병사들이여, 나 켈투자드가 부르니 명을 받들라!"
+	L.stage2_yell_trigger1 = "자비를 구하라!"
 	L.stage2_yell_trigger2 = "마지막 숨이나 쉬어라!"
 	L.stage2_yell_trigger3 = "최후를 맞이하라!"
 	L.stage3_yell_trigger = "주인님, 도와주소서!"
-	L.adds_yell_trigger = "좋다. 얼어붙은 땅의 전사들이여, 일어나라! 너희에게 싸울 것을 명하노라. 날 위해 죽고, 날 위해 죽여라! 한 놈도 살려두지 마라!"
+	L.adds_yell_trigger = "좋다. 얼어붙은 땅의 전사들이여, 일어나 싸워라! 쓰러질 때까지! 나를 위해! 한 놈도 살려두지 마라."
 end
 
 L = BigWigs:NewBossLocale("Noth the Plaguebringer", "koKR")
