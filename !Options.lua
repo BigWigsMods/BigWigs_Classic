@@ -568,3 +568,1097 @@ BigWigs:AddSounds("Ahn'Qiraj Trash", {
 	[1215202] = "warning",
 	[1215421] = "underyou",
 })
+
+BigWigs:AddColors("High Priestess Jeklik", {
+	[12097] = {"blue","purple"},
+	[16098] = {"green","red"},
+	[23952] = {"blue","orange"},
+	[23953] = {"green","yellow"},
+	[23954] = {"green","red"},
+	[23970] = "blue",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("High Priestess Jeklik", {
+	[16098] = "warning",
+	[23953] = "alert",
+	[23954] = "warning",
+	[23970] = "underyou",
+	["stages"] = "info",
+})
+
+BigWigs:AddColors("High Priest Venoxis", {
+	[8269] = "orange",
+	[23860] = "yellow",
+	[23861] = {"blue","red"},
+	[23865] = {"blue","yellow"},
+	[23895] = {"green","orange"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("High Priest Venoxis", {
+	[8269] = "long",
+	[23861] = {"alarm","underyou"},
+	[23895] = "alert",
+	["stages"] = "info",
+})
+
+BigWigs:AddColors("High Priestess Mar'li", {
+	[24083] = "yellow",
+	[24099] = "yellow",
+	[24300] = {"blue","orange"},
+})
+
+BigWigs:AddSounds("High Priestess Mar'li", {
+	[24083] = "info",
+	[24099] = "alarm",
+	[24300] = "alert",
+})
+
+BigWigs:AddColors("High Priest Thekal", {
+	[8269] = "red",
+	[12540] = {"blue","purple"},
+	[21060] = {"blue","purple"},
+	[22666] = {"blue","yellow"},
+	[22859] = {"blue","purple"},
+	[24183] = "yellow",
+	[24185] = "orange",
+	[24189] = "orange",
+	[24208] = "red",
+})
+
+BigWigs:AddSounds("High Priest Thekal", {
+	[8269] = "alarm",
+	[12540] = "warning",
+	[21060] = "warning",
+	[22666] = "alert",
+	[22859] = "alarm",
+	[24183] = "info",
+	[24185] = "alert",
+	[24208] = "alert",
+})
+
+BigWigs:AddColors("High Priestess Arlokk", {
+	[12540] = {"blue","purple"},
+	[24210] = {"blue","red"},
+	[24212] = {"blue","orange"},
+})
+
+BigWigs:AddSounds("High Priestess Arlokk", {
+	[12540] = "warning",
+	[24210] = "alarm",
+	[24212] = "alert",
+})
+
+BigWigs:AddColors("Hakkar", {
+	[24324] = {"orange","red"},
+	[24327] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
+})
+
+BigWigs:AddSounds("Hakkar", {
+	[24324] = {"alarm","long"},
+	[24327] = "info",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Bloodlord Mandokir", {
+	[16856] = {"blue","purple"},
+	[24314] = {"blue","yellow"},
+	[24318] = {"blue","red"},
+})
+
+BigWigs:AddSounds("Bloodlord Mandokir", {
+	[16856] = "warning",
+	[24314] = "info",
+	[24318] = "alarm",
+})
+
+BigWigs:AddColors("Jin'do the Hexxer", {
+	[17172] = {"blue","purple"},
+	[24262] = "red",
+	[24306] = {"blue","yellow"},
+	[24309] = "orange",
+	[24466] = {"blue","yellow"},
+})
+
+BigWigs:AddSounds("Jin'do the Hexxer", {
+	[17172] = "alert",
+	[24262] = "warning",
+	[24306] = "alarm",
+	[24309] = "info",
+	[24466] = "long",
+})
+
+BigWigs:AddColors("Gahz'ranka", {
+	[21099] = "yellow",
+	[22421] = "orange",
+})
+
+BigWigs:AddSounds("Gahz'ranka", {
+	[21099] = "info",
+	[22421] = "alarm",
+})
+
+BigWigs:AddColors("Edge of Madness", {
+	[24646] = "orange",
+	[24699] = "orange",
+	[24729] = "orange",
+	[26550] = "yellow",
+})
+
+BigWigs:AddSounds("Edge of Madness", {
+	[24646] = "alarm",
+	[24699] = "alert",
+	[24729] = "alarm",
+	[26550] = "info",
+})
+
+BigWigs:AddColors("Patchwerk", {
+	[28131] = "orange",
+	["berserk"] = {"orange","red","yellow"},
+})
+
+BigWigs:AddSounds("Patchwerk", {
+	[28131] = "long",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Grobbulus", {
+	[28169] = {"blue","red"},
+	[28240] = "yellow",
+	["adds"] = "orange",
+	["berserk"] = {"orange","red","yellow"},
+})
+
+BigWigs:AddSounds("Grobbulus", {
+	[28169] = "warning",
+	[28240] = "info",
+	["adds"] = "long",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Gluth", {
+	[25646] = {"blue","purple"},
+	[28371] = {"green","orange"},
+	[28375] = "red",
+	[29306] = "blue",
+	[29685] = "yellow",
+	["berserk"] = {"orange","red"},
+})
+
+BigWigs:AddSounds("Gluth", {
+	[25646] = "info",
+	[28371] = "alert",
+	[28375] = "warning",
+	[29685] = "long",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Thaddius", {
+	[28059] = "blue",
+	[28084] = "blue",
+	[28089] = "orange",
+	[28134] = "red",
+	[28338] = "red",
+	["berserk"] = {"orange","red"},
+	["stages"] = {"cyan","green"},
+})
+
+BigWigs:AddSounds("Thaddius", {
+	[28059] = "warning",
+	[28084] = "warning",
+	[28089] = "long",
+	[28338] = "alert",
+	["berserk"] = "alarm",
+	["stages"] = {"info","long"},
+})
+
+BigWigs:AddColors("Noth the Plaguebringer", {
+	[29208] = "yellow",
+	[29212] = "blue",
+	[29213] = {"green","red"},
+	[29214] = "red",
+	["adds"] = "orange",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Noth the Plaguebringer", {
+	[29208] = "alert",
+	[29213] = "warning",
+	[29214] = "alarm",
+	["adds"] = "info",
+	["stages"] = "long",
+})
+
+BigWigs:AddColors("Heigan the Unclean", {
+	[29998] = {"green","yellow"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Heigan the Unclean", {
+	[29998] = "alert",
+	["stages"] = {"info","long"},
+})
+
+BigWigs:AddColors("Loatheb", {
+	[29184] = "blue",
+	[29204] = "red",
+	[29232] = "blue",
+	[29234] = "red",
+	[29865] = "yellow",
+	[30281] = "orange",
+	[1225419] = "blue",
+})
+
+BigWigs:AddSounds("Loatheb", {
+	[29184] = "long",
+	[29204] = "warning",
+	[29234] = "info",
+	[30281] = "alert",
+	[1225419] = "long",
+})
+
+BigWigs:AddColors("Anub'Rekhan", {
+	[28783] = {"blue","yellow"},
+	[28785] = {"green","orange","red","yellow"},
+})
+
+BigWigs:AddSounds("Anub'Rekhan", {
+	[28783] = {"alert","warning"},
+	[28785] = {"info","long"},
+})
+
+BigWigs:AddColors("Grand Widow Faerlina", {
+	[28732] = "yellow",
+	[28794] = "blue",
+	[28796] = "orange",
+	[28798] = {"green","red"},
+	[30225] = "blue",
+})
+
+BigWigs:AddSounds("Grand Widow Faerlina", {
+	[28732] = "info",
+	[28794] = "underyou",
+	[28796] = "alert",
+	[28798] = "warning",
+})
+
+BigWigs:AddColors("Maexxna", {
+	[28622] = {"blue","yellow"},
+	[28747] = "orange",
+	[28776] = {"blue","green","purple"},
+	[29484] = "red",
+	["adds"] = "yellow",
+})
+
+BigWigs:AddSounds("Maexxna", {
+	[28622] = "alert",
+	[28747] = "warning",
+	[28776] = "info",
+	[29484] = "long",
+})
+
+BigWigs:AddColors("Instructor Razuvious", {
+	[29060] = "orange",
+	[29061] = "yellow",
+	[29107] = "red",
+})
+
+BigWigs:AddSounds("Instructor Razuvious", {
+	[29060] = "info",
+	[29061] = "long",
+	[29107] = "warning",
+})
+
+BigWigs:AddColors("Gothik the Harvester", {
+	["add_death"] = "green",
+	["adds"] = {"orange","red","yellow"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Gothik the Harvester", {
+	["stages"] = {"info","long"},
+})
+
+BigWigs:AddColors("The Four Horsemen", {
+	[28863] = {"blue","orange"},
+	[28883] = "yellow",
+	[28884] = "red",
+	[29061] = "yellow",
+	["mark"] = {"blue","yellow"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("The Four Horsemen", {
+	[28863] = {"alarm","underyou"},
+	[28883] = "alert",
+	[28884] = "info",
+	[29061] = "long",
+	["mark"] = "warning",
+})
+
+BigWigs:AddColors("Sapphiron", {
+	[28522] = {"blue","yellow"},
+	[28524] = "red",
+	[28542] = {"green","orange"},
+	[28547] = "blue",
+	[1219728] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Sapphiron", {
+	[28524] = "warning",
+	[28542] = "alert",
+	[28547] = "underyou",
+	[1219728] = "warning",
+	["berserk"] = "alarm",
+	["stages"] = "long",
+})
+
+BigWigs:AddColors("Kel'Thuzad", {
+	[27808] = {"blue","yellow"},
+	[27810] = {"blue","red"},
+	[27819] = {"blue","yellow"},
+	[28410] = {"blue","orange"},
+	[28467] = {"blue","purple"},
+	["adds"] = "cyan",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Kel'Thuzad", {
+	[27808] = "alert",
+	[27810] = "warning",
+	[27819] = "warning",
+	[28410] = "long",
+	["adds"] = "info",
+	["stages"] = {"info","long"},
+})
+
+BigWigs:AddColors("Naxxramas Trash", {
+	[1219235] = {"blue","yellow"},
+})
+
+BigWigs:AddSounds("Naxxramas Trash", {
+	[1219235] = "warning",
+})
+
+BigWigs:AddColors("Onyxia", {
+	[17086] = "red",
+	[18392] = {"blue","yellow"},
+	[18431] = "yellow",
+	[18435] = "orange",
+	[18958] = {"blue","purple"},
+	[364849] = "cyan",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Onyxia", {
+	[17086] = "warning",
+	[18392] = "alarm",
+	[18431] = "info",
+	[18435] = "alert",
+	[364849] = "alert",
+	["stages"] = "long",
+})
+
+BigWigs:AddColors("Azuregos", {
+	[21097] = "orange",
+	[21099] = "orange",
+	[21147] = "yellow",
+	[22067] = {"green","red"},
+})
+
+BigWigs:AddSounds("Azuregos", {
+	[21097] = "alert",
+	[21099] = "alert",
+	[21147] = "alarm",
+	[22067] = {"info","warning"},
+})
+
+BigWigs:AddColors("Lord Kazzak", {
+	[21056] = {"blue","yellow"},
+	[21063] = {"blue","orange"},
+	["berserk"] = {"orange","red","yellow"},
+})
+
+BigWigs:AddSounds("Lord Kazzak", {
+	[21056] = "warning",
+	[21063] = "alarm",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Emeriss", {
+	[24814] = "green",
+	[24818] = {"blue","purple","yellow"},
+	[24871] = "blue",
+	[24910] = "red",
+	[24928] = {"blue","orange"},
+})
+
+BigWigs:AddSounds("Emeriss", {
+	[24814] = "info",
+	[24818] = "warning",
+	[24871] = "underyou",
+	[24910] = {"alarm","long"},
+	[24928] = "alert",
+})
+
+BigWigs:AddColors("Lethon", {
+	[24811] = "red",
+	[24814] = "green",
+	[24818] = {"blue","purple","yellow"},
+	[24821] = "yellow",
+})
+
+BigWigs:AddSounds("Lethon", {
+	[24811] = "long",
+	[24814] = "info",
+	[24818] = "warning",
+	[24821] = "alert",
+})
+
+BigWigs:AddColors("Taerar", {
+	[22686] = "orange",
+	[24814] = "green",
+	[24818] = {"blue","purple","yellow"},
+	[24841] = "cyan",
+})
+
+BigWigs:AddSounds("Taerar", {
+	[24814] = "info",
+	[24818] = "warning",
+	[24841] = "long",
+})
+
+BigWigs:AddColors("Ysondre", {
+	[24795] = "cyan",
+	[24814] = "green",
+	[24818] = {"blue","purple","yellow"},
+})
+
+BigWigs:AddSounds("Ysondre", {
+	[24795] = "long",
+	[24814] = "info",
+	[24818] = "warning",
+})
+
+BigWigs:AddColors("Baron Aquanis Discovery", {
+	[404806] = {"blue","yellow"},
+	[405953] = "blue",
+	[413664] = "orange",
+})
+
+BigWigs:AddSounds("Baron Aquanis Discovery", {
+	[404806] = "warning",
+	[405953] = "underyou",
+	[413664] = "long",
+})
+
+BigWigs:AddColors("Ghamoo-ra Discovery", {
+	[406970] = "orange",
+	[407025] = {"red","yellow"},
+	[407077] = "purple",
+	[407095] = {"blue","purple"},
+})
+
+BigWigs:AddSounds("Ghamoo-ra Discovery", {
+	[406970] = "warning",
+	[407025] = {"info","long"},
+	[407095] = "alert",
+})
+
+BigWigs:AddColors("Lady Sarevess Discovery", {
+	[367741] = {"blue","green","red"},
+	[407568] = {"blue","orange"},
+	[407653] = {"blue","yellow"},
+	[407791] = {"blue","green","red"},
+})
+
+BigWigs:AddSounds("Lady Sarevess Discovery", {
+	[367741] = "alarm",
+	[407568] = {"alert","underyou"},
+	[407653] = "warning",
+	[407791] = "alarm",
+})
+
+BigWigs:AddColors("Gelihast Discovery", {
+	[411956] = {"blue","yellow"},
+	[411959] = {"blue","red"},
+	[412072] = {"blue","purple"},
+	[412456] = "cyan",
+})
+
+BigWigs:AddSounds("Gelihast Discovery", {
+	[411956] = "alert",
+	[411959] = "alert",
+	[412072] = "warning",
+	[412456] = "long",
+})
+
+BigWigs:AddColors("Lorgus Jett Discovery", {
+	[22883] = {"green","orange"},
+	[414691] = "yellow",
+	[414763] = "red",
+	[419636] = "orange",
+	[419649] = "cyan",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Lorgus Jett Discovery", {
+	[22883] = "alert",
+	[414691] = "alert",
+	[414763] = "warning",
+	[419636] = "info",
+})
+
+BigWigs:AddColors("Twilight Lord Kelris Discovery", {
+	[423135] = {"blue","yellow"},
+	[425265] = {"blue","green","orange","red"},
+	[425460] = "blue",
+	[426489] = {"blue","cyan"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Twilight Lord Kelris Discovery", {
+	[425265] = {"alert","info"},
+	[425460] = "warning",
+	["stages"] = "long",
+})
+
+BigWigs:AddColors("Aku'mai Discovery", {
+	[427625] = {"blue","green"},
+	[428482] = {"blue","green"},
+	[429168] = "red",
+	[429356] = "red",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Aku'mai Discovery", {
+	[427625] = "alarm",
+	[428482] = "alarm",
+	[429168] = "warning",
+	[429356] = "warning",
+	["stages"] = {"info","long"},
+})
+
+BigWigs:AddColors("Grubbis Discovery", {
+	[3019] = {"green","red"},
+	[434168] = "cyan",
+	[434724] = {"blue","yellow"},
+	[434941] = "orange",
+	[436027] = "yellow",
+	[436059] = "yellow",
+	[436074] = {"green","red"},
+	[436100] = {"blue","green","orange","yellow"},
+	[439956] = "orange",
+	["adds"] = "cyan",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Grubbis Discovery", {
+	[434941] = "info",
+	[436027] = "long",
+	[436059] = "long",
+	[436074] = "alarm",
+	[436100] = {"alert","warning"},
+	[439956] = "warning",
+	["adds"] = "info",
+	["stages"] = "info",
+})
+
+BigWigs:AddColors("Viscous Fallout Discovery", {
+	[433546] = "orange",
+	[434358] = "cyan",
+	[434434] = {"blue","red"},
+})
+
+BigWigs:AddSounds("Viscous Fallout Discovery", {
+	[433546] = {"info","warning"},
+	[434358] = "long",
+	[434434] = {"alarm","underyou"},
+})
+
+BigWigs:AddColors("Crowd Pummeler 9-60 Discovery", {
+	[431839] = "blue",
+	[432062] = {"blue","yellow"},
+	[432423] = "orange",
+})
+
+BigWigs:AddSounds("Crowd Pummeler 9-60 Discovery", {
+	[432062] = "alarm",
+	[432423] = "warning",
+})
+
+BigWigs:AddColors("Electrocutioner 6000 Discovery", {
+	[433251] = {"blue","red"},
+	[433359] = {"blue","yellow"},
+	[433398] = "orange",
+})
+
+BigWigs:AddSounds("Electrocutioner 6000 Discovery", {
+	[433251] = "warning",
+	[433359] = "alarm",
+	[433398] = "info",
+})
+
+BigWigs:AddColors("Mechanical Menagerie Discovery", {
+	[436570] = "orange",
+	[436692] = "cyan",
+	[436695] = "red",
+	[436816] = {"blue","yellow"},
+	[436825] = {"green","red"},
+	[436833] = "orange",
+	[436836] = "yellow",
+	[438735] = "blue",
+	[440073] = {"blue","cyan"},
+	["run"] = "blue",
+})
+
+BigWigs:AddSounds("Mechanical Menagerie Discovery", {
+	[436692] = "info",
+	[436695] = "warning",
+	[436816] = "alarm",
+	[436833] = "alert",
+	[436836] = {"info","long"},
+	[438735] = "long",
+	[440073] = "long",
+})
+
+BigWigs:AddColors("Mekgineer Thermaplugg Discovery", {
+	[437853] = "cyan",
+	[438683] = "purple",
+	[438710] = {"blue","orange"},
+	[438713] = "yellow",
+	[438719] = "purple",
+	[438720] = {"blue","orange"},
+	[438723] = "yellow",
+	[438726] = "purple",
+	[438727] = {"blue","orange"},
+	[438732] = {"green","yellow"},
+	[438735] = "blue",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Mekgineer Thermaplugg Discovery", {
+	[437853] = "info",
+	[438683] = "alarm",
+	[438713] = "alert",
+	[438719] = "alarm",
+	[438723] = "alert",
+	[438726] = "alarm",
+	[438732] = "alert",
+	[438735] = "long",
+})
+
+BigWigs:AddColors("Atal'alarion Discovery", {
+	[437503] = "yellow",
+	[437597] = "red",
+})
+
+BigWigs:AddSounds("Atal'alarion Discovery", {
+	[437503] = "info",
+	[437597] = "warning",
+})
+
+BigWigs:AddColors("Festering Rotslime Discovery", {
+	[438136] = "blue",
+	[438142] = {"green","yellow"},
+})
+
+BigWigs:AddSounds("Festering Rotslime Discovery", {
+	[438136] = "underyou",
+	[438142] = "alert",
+})
+
+BigWigs:AddColors("Atal'ai Defenders Discovery", {
+	[23511] = "red",
+	[438294] = "orange",
+	[438335] = "red",
+	[438341] = {"green","red"},
+	[438350] = "red",
+	[445284] = {"blue","yellow"},
+	[445289] = "orange",
+	[446338] = "red",
+	[446360] = "orange",
+	[446364] = {"green","yellow"},
+	[446372] = "red",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Atal'ai Defenders Discovery", {
+	[23511] = "warning",
+	[438335] = "alert",
+	[438341] = "warning",
+	[438350] = "warning",
+	[445289] = "alarm",
+	[446338] = "warning",
+	[446360] = "alarm",
+	[446364] = "alert",
+	[446372] = "long",
+	["stages"] = "info",
+})
+
+BigWigs:AddColors("Dreamscythe and Weaver Discovery", {
+	[442622] = {"blue","purple"},
+	[443766] = "yellow",
+	[443856] = "blue",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Dreamscythe and Weaver Discovery", {
+	[442622] = "alert",
+	[443766] = "info",
+	[443856] = "underyou",
+	["stages"] = "long",
+})
+
+BigWigs:AddColors("Jammal'an and Ogom Discovery", {
+	[437809] = "yellow",
+	[437817] = "red",
+	[437847] = {"blue","orange"},
+	[437868] = {"green","red"},
+	[437921] = "orange",
+	[437927] = "red",
+	[437928] = "yellow",
+	[437930] = {"green","yellow"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Jammal'an and Ogom Discovery", {
+	[437809] = "alarm",
+	[437817] = "warning",
+	[437847] = "info",
+	[437868] = "alert",
+	[437921] = "alert",
+	[437927] = "alarm",
+	[437928] = "long",
+	[437930] = "warning",
+	["stages"] = "long",
+})
+
+BigWigs:AddColors("Morphaz and Hazzas Discovery", {
+	[446468] = "orange",
+	[446487] = {"blue","purple"},
+	[446489] = "red",
+	[446661] = "cyan",
+})
+
+BigWigs:AddSounds("Morphaz and Hazzas Discovery", {
+	[446468] = "alert",
+	[446487] = "alert",
+	[446489] = "alarm",
+	[446661] = "info",
+})
+
+BigWigs:AddColors("Shade of Eranikus Discovery", {
+	[3391] = "purple",
+	[437301] = "cyan",
+	[437324] = {"blue","green"},
+	[437353] = {"blue","purple"},
+	[437390] = {"blue","green","yellow"},
+	[437398] = "orange",
+	[437416] = "cyan",
+	[445498] = "red",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Shade of Eranikus Discovery", {
+	[3391] = "info",
+	[437301] = "info",
+	[437324] = {"alarm","info"},
+	[437353] = {"alarm","alert"},
+	[437390] = {"alarm","alert","info"},
+	[437398] = "warning",
+	[437416] = "long",
+	[445498] = "warning",
+})
+
+BigWigs:AddColors("Avatar of Hakkar Discovery", {
+	[443953] = "blue",
+	[443990] = {"green","red"},
+	[444039] = {"blue","red"},
+	[444046] = {"green","orange"},
+	[444132] = "yellow",
+	[444255] = "blue",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Avatar of Hakkar Discovery", {
+	[443953] = "underyou",
+	[443990] = "warning",
+	[444039] = "warning",
+	[444046] = "alarm",
+	[444132] = "long",
+	[444255] = "alarm",
+	["stages"] = "info",
+})
+
+BigWigs:AddColors("Lord Kazzak Season of Discovery", {
+	[21056] = {"blue","green","red","yellow"},
+	[21063] = {"blue","green","orange"},
+	["berserk"] = {"orange","red","yellow"},
+})
+
+BigWigs:AddSounds("Lord Kazzak Season of Discovery", {
+	[21056] = {"long","warning"},
+	[21063] = "alarm",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Azuregos Season of Discovery", {
+	[21097] = "orange",
+	[21099] = "orange",
+	[21147] = "yellow",
+	[22067] = {"green","red"},
+})
+
+BigWigs:AddSounds("Azuregos Season of Discovery", {
+	[21097] = "alert",
+	[21099] = "alert",
+	[21147] = "alarm",
+	[22067] = {"info","warning"},
+})
+
+BigWigs:AddColors("Thunderaan Season of Discovery", {
+	[11642] = {"green","orange"},
+	[465700] = {"blue","red"},
+	[466211] = {"blue","purple"},
+	[466774] = "yellow",
+	[470866] = "blue",
+})
+
+BigWigs:AddSounds("Thunderaan Season of Discovery", {
+	[11642] = "alert",
+	[465700] = "warning",
+	[466211] = "alarm",
+	[466774] = "info",
+	[470866] = "underyou",
+})
+
+BigWigs:AddColors("Emeriss Season of Discovery", {
+	[24814] = "green",
+	[24910] = "red",
+	[1213155] = {"blue","orange"},
+	[1213169] = "blue",
+	[1213170] = {"blue","purple","yellow"},
+})
+
+BigWigs:AddSounds("Emeriss Season of Discovery", {
+	[24814] = "info",
+	[24910] = {"alarm","long"},
+	[1213155] = "alert",
+	[1213169] = "underyou",
+	[1213170] = "warning",
+})
+
+BigWigs:AddColors("Lethon Season of Discovery", {
+	[24814] = "green",
+	[24821] = "yellow",
+	[1213170] = {"blue","purple","yellow"},
+	[1214002] = "red",
+})
+
+BigWigs:AddSounds("Lethon Season of Discovery", {
+	[24814] = "info",
+	[24821] = "alert",
+	[1213170] = "warning",
+	[1214002] = "long",
+})
+
+BigWigs:AddColors("Taerar Season of Discovery", {
+	[24814] = "green",
+	[1213170] = {"blue","purple","yellow"},
+	[1214008] = "cyan",
+	[1214028] = "orange",
+})
+
+BigWigs:AddSounds("Taerar Season of Discovery", {
+	[24814] = "info",
+	[1213170] = "warning",
+	[1214008] = "long",
+})
+
+BigWigs:AddColors("Ysondre Season of Discovery", {
+	[24795] = "cyan",
+	[24814] = "green",
+	[1213170] = {"blue","purple","yellow"},
+	[1214136] = {"blue","orange"},
+})
+
+BigWigs:AddSounds("Ysondre Season of Discovery", {
+	[24795] = "long",
+	[24814] = "info",
+	[1213170] = "warning",
+	[1214136] = "warning",
+})
+
+BigWigs:AddColors("Balnazzar Scarlet Enclave", {
+	[1231837] = {"blue","red"},
+	[1231844] = {"blue","red"},
+	[1231901] = "yellow",
+	["berserk"] = {"orange","red"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Balnazzar Scarlet Enclave", {
+	[1231837] = "alert",
+	[1231844] = "warning",
+	[1231901] = "info",
+	["berserk"] = "alarm",
+	["stages"] = "long",
+})
+
+BigWigs:AddColors("High Commander Beatrix", {
+	[1231873] = "blue",
+	[1232389] = {"blue","purple"},
+	[1232390] = {"blue","red"},
+	[1232637] = {"blue","red"},
+	[1237324] = "blue",
+	["arrows"] = "yellow",
+	["berserk"] = {"orange","red"},
+	["bombing"] = "yellow",
+	["meteor"] = "orange",
+	["stages"] = "cyan",
+	["waves"] = "yellow",
+})
+
+BigWigs:AddSounds("High Commander Beatrix", {
+	[1231873] = "warning",
+	[1232389] = "alarm",
+	[1232637] = "warning",
+	[1237324] = "underyou",
+	["arrows"] = "info",
+	["berserk"] = "alarm",
+	["bombing"] = "info",
+	["meteor"] = "alert",
+	["stages"] = "long",
+	["waves"] = "info",
+})
+
+BigWigs:AddColors("Solistrasza", {
+	[1227696] = "red",
+	[1228063] = {"blue","yellow"},
+	[1231993] = {"blue","purple"},
+	[1232097] = {"blue","orange"},
+	["adds"] = "cyan",
+	["berserk"] = {"orange","red"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Solistrasza", {
+	[1227696] = "alarm",
+	[1228063] = {"underyou","warning"},
+	[1231993] = "alert",
+	[1232097] = "warning",
+	["adds"] = "info",
+	["berserk"] = "alarm",
+	["stages"] = "long",
+})
+
+BigWigs:AddColors("Alexei the Beastlord", {
+	[1228295] = "red",
+	[1230105] = "yellow",
+	[1230200] = "blue",
+	[1230242] = "blue",
+	[1230899] = "orange",
+	["berserk"] = {"orange","red","yellow"},
+})
+
+BigWigs:AddSounds("Alexei the Beastlord", {
+	[1228295] = "alert",
+	[1230105] = "warning",
+	[1230200] = "info",
+	[1230242] = "info",
+	[1230899] = "long",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Mason the Echo", {
+	[1229005] = {"blue","purple"},
+	[1231585] = {"cyan","red"},
+	[1231592] = {"green","orange"},
+	[1234347] = {"green","yellow"},
+	["berserk"] = {"orange","red","yellow"},
+})
+
+BigWigs:AddSounds("Mason the Echo", {
+	[1229005] = "alarm",
+	[1231585] = "long",
+	[1231592] = "alert",
+	[1234347] = "info",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Reborn Council", {
+	[1231095] = {"green","orange"},
+	[1231264] = "yellow",
+	[1231282] = "cyan",
+	[1231383] = "red",
+	["berserk"] = {"orange","red","yellow"},
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Reborn Council", {
+	[1231095] = "info",
+	[1231264] = "warning",
+	[1231282] = "long",
+	[1231383] = "alarm",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Lillian Voss", {
+	[1232192] = {"blue","purple"},
+	[1233847] = "red",
+	[1233849] = "blue",
+	[1233883] = {"blue","green"},
+	[1233901] = "blue",
+	[1234540] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
+})
+
+BigWigs:AddSounds("Lillian Voss", {
+	[1233847] = "long",
+	[1233849] = "alert",
+	[1233883] = "warning",
+	[1233901] = "alarm",
+	[1234540] = "info",
+	["berserk"] = "alarm",
+})
+
+BigWigs:AddColors("Grand Crusader Caldoran", {
+	[1229114] = "yellow",
+	[1229272] = {"blue","yellow"},
+	[1229503] = {"blue","purple"},
+	[1229714] = "red",
+	[1230697] = "cyan",
+	[1231027] = "yellow",
+	[1231618] = "orange",
+	[1231651] = "orange",
+	[1231654] = "orange",
+	["berserk"] = {"orange","red"},
+	["run"] = "blue",
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Grand Crusader Caldoran", {
+	[1229114] = "alert",
+	[1229272] = "alarm",
+	[1229503] = "info",
+	[1229714] = "warning",
+	[1230697] = "alarm",
+	[1231027] = "long",
+	[1231618] = "alert",
+	[1231651] = "alert",
+	[1231654] = "alert",
+	["berserk"] = "alarm",
+	["stages"] = "long",
+})
+
+BigWigs:AddColors("Scarlet Enclave Trash", {
+	["stages"] = "cyan",
+})
+
+BigWigs:AddSounds("Scarlet Enclave Trash", {
+})
