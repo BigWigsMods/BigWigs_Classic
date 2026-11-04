@@ -1,4 +1,5 @@
 ## Interface: 120100, 120105, 120107
+## AllowLoadGameType: classic, standard
 
 ## Title: BigWigs [|cffeda55fClassic|r]
 ## Title-zhCN: BigWigs [|cffeda55f经典旧世|r]
