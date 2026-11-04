@@ -1,4 +1,4 @@
-## Interface: 120100, 120105, 120107
+## Interface: 11508, 11509, 20505, 20506, 30405, 38002, 40402, 50503, 50504, 120100, 120105, 120107
 ## AllowLoadGameType: classic, standard
 
 ## Title: BigWigs [|cffeda55fClassic|r]
@@ -35,7 +35,12 @@
 ## X-Curse-Project-ID: 50625
 ## X-WoWI-ID: 22095
 ## X-Wago-ID: rNkPgm6a
-## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531
+## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531 [AllowLoadGameType cata, mists, standard]
+## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531, 309 [AllowLoadGameType wrath]
+## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531, 533, 309, 249 [AllowLoadGameType tbc]
+## X-BigWigs-LoadOn-InstanceId: 409, 469, 509, 531, 533, 309, 249, 48, 90, 109, 2789, 2791, 2804, 2832, 2856 [AllowLoadGameType vanilla]
+## X-BigWigs-ExtraMenu: -947 [AllowLoadGameType vanilla]
+## X-BigWigs-LoadOn-WorldBoss: -1447, 6109, -1419, 12397, -1440, 14889, -1425, 14888, -1431, 14890, -1444, 14887 [AllowLoadGameType vanilla]
 ## X-BigWigs-Minimum: 417
 
 MoltenCore\Lucifron.lua
@@ -75,6 +80,79 @@ AQ40\Twins.lua
 AQ40\Ouro.lua
 AQ40\Cthun.lua
 AQ40\Trash.lua
+ZulGurub_Classic\Jeklik.lua [AllowLoadGameType vanilla, tbc, wrath]
+ZulGurub_Classic\Venoxis.lua [AllowLoadGameType vanilla, tbc, wrath]
+ZulGurub_Classic\Marli.lua [AllowLoadGameType vanilla, tbc, wrath]
+ZulGurub_Classic\Thekal.lua [AllowLoadGameType vanilla, tbc, wrath]
+ZulGurub_Classic\Arlokk.lua [AllowLoadGameType vanilla, tbc, wrath]
+ZulGurub_Classic\Hakkar.lua [AllowLoadGameType vanilla, tbc, wrath]
+ZulGurub_Classic\Mandokir.lua [AllowLoadGameType vanilla, tbc, wrath]
+ZulGurub_Classic\Jindo.lua [AllowLoadGameType vanilla, tbc, wrath]
+ZulGurub_Classic\Gahzranka.lua [AllowLoadGameType vanilla, tbc, wrath]
+ZulGurub_Classic\EdgeOfMadness.lua [AllowLoadGameType vanilla, tbc, wrath]
+Naxxramas_Classic\Patchwerk.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Grobbulus.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Gluth.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Thaddius.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Noth.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Heigan.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Loatheb.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Anubrekhan.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Faerlina.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Maexxna.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Razuvious.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Gothik.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Horsemen.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Sapphiron.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Kelthuzad.lua [AllowLoadGameType vanilla, tbc]
+Naxxramas_Classic\Trash.lua [AllowLoadGameType vanilla, tbc]
+Onyxia_Classic\Onyxia.lua [AllowLoadGameType vanilla, tbc]
+World_Classic\Azuregos.lua [AllowLoadGameType vanilla]
+World_Classic\Kazzak.lua [AllowLoadGameType vanilla]
+World_Classic\Emeriss.lua [AllowLoadGameType vanilla]
+World_Classic\Lethon.lua [AllowLoadGameType vanilla]
+World_Classic\Taerar.lua [AllowLoadGameType vanilla]
+World_Classic\Ysondre.lua [AllowLoadGameType vanilla]
+BlackfathomDeeps_Classic\BaronAquanis.lua [AllowLoadGameType vanilla]
+BlackfathomDeeps_Classic\Ghamoo-ra.lua [AllowLoadGameType vanilla]
+BlackfathomDeeps_Classic\LadySarevess.lua [AllowLoadGameType vanilla]
+BlackfathomDeeps_Classic\Gelihast.lua [AllowLoadGameType vanilla]
+BlackfathomDeeps_Classic\LorgusJett.lua [AllowLoadGameType vanilla]
+BlackfathomDeeps_Classic\TwilightLordKelris.lua [AllowLoadGameType vanilla]
+BlackfathomDeeps_Classic\Akumai.lua [AllowLoadGameType vanilla]
+Gnomeregan_Classic\Grubbis.lua [AllowLoadGameType vanilla]
+Gnomeregan_Classic\ViscousFall [AllowLoadGameType vanilla]out.lua
+Gnomeregan_Classic\CrowdPummeler9-60.lua [AllowLoadGameType vanilla]
+Gnomeregan_Classic\Electrocutioner6000.lua [AllowLoadGameType vanilla]
+Gnomeregan_Classic\MechanicalMenagerie.lua [AllowLoadGameType vanilla]
+Gnomeregan_Classic\MekgineerThermaplugg.lua [AllowLoadGameType vanilla]
+SunkenTemple_Classic\Atalalarion.lua [AllowLoadGameType vanilla]
+SunkenTemple_Classic\FesteringRotslime.lua [AllowLoadGameType vanilla]
+SunkenTemple_Classic\AtalaiDefenders.lua [AllowLoadGameType vanilla]
+SunkenTemple_Classic\DreamscytheAndWeaver.lua [AllowLoadGameType vanilla]
+SunkenTemple_Classic\JammalanAndOgom.lua [AllowLoadGameType vanilla]
+SunkenTemple_Classic\MorphazAndHazzas.lua [AllowLoadGameType vanilla]
+SunkenTemple_Classic\ShadeOfEranikus.lua [AllowLoadGameType vanilla]
+SunkenTemple_Classic\AvatarOfHakkar.lua [AllowLoadGameType vanilla]
+TheTaintedScar_Classic\Kazzak.lua [AllowLoadGameType vanilla]
+StormCliffs_Classic\Azuregos.lua [AllowLoadGameType vanilla]
+CrystalVale_Classic\Thunderaan.lua [AllowLoadGameType vanilla]
+NightmareGrove_Classic\Emeriss.lua [AllowLoadGameType vanilla]
+NightmareGrove_Classic\Lethon.lua [AllowLoadGameType vanilla]
+NightmareGrove_Classic\Taerar.lua [AllowLoadGameType vanilla]
+NightmareGrove_Classic\Ysondre.lua [AllowLoadGameType vanilla]
+ScarletEnclave_Classic\Balnazzar.lua [AllowLoadGameType vanilla]
+ScarletEnclave_Classic\Beatrix.lua [AllowLoadGameType vanilla]
+ScarletEnclave_Classic\Solistrasza.lua [AllowLoadGameType vanilla]
+ScarletEnclave_Classic\Alexei.lua [AllowLoadGameType vanilla]
+ScarletEnclave_Classic\Mason.lua [AllowLoadGameType vanilla]
+ScarletEnclave_Classic\RebornCouncil.lua [AllowLoadGameType vanilla]
+ScarletEnclave_Classic\LillianVoss.lua [AllowLoadGameType vanilla]
+ScarletEnclave_Classic\Caldoran.lua [AllowLoadGameType vanilla]
+ScarletEnclave_Classic\Trash.lua [AllowLoadGameType vanilla]
 
 !Locales\[TextLocale].lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
+!Locales\[TextLocale]_Classic.lua [AllowLoadGameType vanilla, tbc][AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
+!Locales\[TextLocale]_Vanilla.lua [AllowLoadGameType vanilla][AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
+!Locales\[TextLocale]_ZG.lua [AllowLoadGameType vanilla, tbc, wrath][AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
 !Options.lua
