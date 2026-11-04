@@ -121,7 +121,7 @@ BlackfathomDeeps_Classic\LorgusJett.lua [AllowLoadGameType vanilla]
 BlackfathomDeeps_Classic\TwilightLordKelris.lua [AllowLoadGameType vanilla]
 BlackfathomDeeps_Classic\Akumai.lua [AllowLoadGameType vanilla]
 Gnomeregan_Classic\Grubbis.lua [AllowLoadGameType vanilla]
-Gnomeregan_Classic\ViscousFall [AllowLoadGameType vanilla]out.lua
+Gnomeregan_Classic\ViscousFallout.lua [AllowLoadGameType vanilla]
 Gnomeregan_Classic\CrowdPummeler9-60.lua [AllowLoadGameType vanilla]
 Gnomeregan_Classic\Electrocutioner6000.lua [AllowLoadGameType vanilla]
 Gnomeregan_Classic\MechanicalMenagerie.lua [AllowLoadGameType vanilla]
